@@ -27,7 +27,7 @@ public class Request extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private String		description;
 	private String		tags;
-	private Category	categorty;
+	private Category	category;
 
 
 	@NotBlank
@@ -47,11 +47,12 @@ public class Request extends DomainEntity {
 	}
 
 	@NotNull
-	public Category getCategorty() {
-		return this.categorty;
+	public Category getCategory() {
+		return this.category;
 	}
-	public void setCategorty(final Category categorty) {
-		this.categorty = categorty;
+
+	public void setCategory(final Category category) {
+		this.category = category;
 	}
 
 

@@ -451,4 +451,278 @@
 		<property name="userAccount" ref="userAccount13" />
 	</bean>
 	
+	<!-- Customer -->
+	<bean id="customer1" class="domain.Customer">
+		<property name="name" value="Name Customer1" />
+		<property name="surname" value="Surname Customer1" />
+		<property name="nid" value="326598T" />
+		<property name="email" value="customer1@gmail.com" />
+		<property name="phone" value="1250" />
+		<property name="coordinates" ref="coordinates8" />
+		<property name="picture">
+			<list>
+				<value>0x42</value>
+				<value>0x49</value>
+			</list>
+		</property>
+		<property name="avgRating" value="15.4" />
+		<property name="userAccount" ref="userAccount2" />
+	</bean>
+	
+	<bean id="customer2" class="domain.Customer">
+		<property name="name" value="Name Customer2" />
+		<property name="surname" value="Surname Customer2" />
+		<property name="nid" value="300598T" />
+		<property name="email" value="customer2@gmail.com" />
+		<property name="phone" value="1259" />
+		<property name="coordinates" ref="coordinates9" />
+		<property name="picture">
+			<list>
+				<value>0x40</value>
+				<value>0x40</value>
+			</list>
+		</property>
+		<property name="avgRating" value="1.2" />
+		<property name="userAccount" ref="userAccount3" />
+	</bean>
+	
+	<bean id="customer3" class="domain.Customer">
+		<property name="name" value="Name Customer3" />
+		<property name="surname" value="Surname Customer3" />
+		<property name="nid" value="326500T" />
+		<property name="email" value="customer3@gmail.com" />
+		<property name="phone" value="1299" />
+		<property name="coordinates" ref="coordinates10" />
+		<property name="picture">
+			<list>
+				<value>0x42</value>
+				<value>0x49</value>
+			</list>
+		</property>
+		<property name="avgRating" value="98.4" />
+		<property name="userAccount" ref="userAccount4" />
+	</bean>
+	
+	<!-- Trainer -->
+	<bean id="trainer1" class="domain.Trainer">
+		<property name="name" value="Name Trainer1" />
+		<property name="surname" value="Surname Trainer1" />
+		<property name="nid" value="116598T" />
+		<property name="email" value="trainer1@gmail.com" />
+		<property name="phone" value="1990" />
+		<property name="coordinates" ref="coordinates11" />
+		<property name="picture">
+			<list>
+				<value>0x42</value>
+				<value>0x20</value>
+			</list>
+		</property>
+		<property name="avgRating" value="114.4" />
+		<property name="receipts">
+			<list>
+
+			</list>
+		</property>
+		<property name="offers">
+			<list>
+
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount8" />
+	</bean>
+	
+	<bean id="trainer2" class="domain.Trainer">
+		<property name="name" value="Name Trainer2" />
+		<property name="surname" value="Surname Trainer2" />
+		<property name="nid" value="116698T" />
+		<property name="email" value="trainer2@gmail.com" />
+		<property name="phone" value="1555" />
+		<property name="coordinates" ref="coordinates12" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x20</value>
+			</list>
+		</property>
+		<property name="avgRating" value="16.4" />
+		<property name="receipts">
+			<list>
+
+			</list>
+		</property>
+		<property name="offers">
+			<list>
+
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount9" />
+	</bean>
+	
+	<bean id="trainer3" class="domain.Trainer">
+		<property name="name" value="Name Trainer3" />
+		<property name="surname" value="Surname Trainer3" />
+		<property name="nid" value="886598T" />
+		<property name="email" value="trainer3@gmail.com" />
+		<property name="phone" value="1110" />
+		<property name="coordinates" ref="coordinates13" />
+		<property name="picture">
+			<list>
+				<value>0x42</value>
+				<value>0x20</value>
+			</list>
+		</property>
+		<property name="avgRating" value="42.9" />
+		<property name="receipts">
+			<list>
+
+			</list>
+		</property>
+		<property name="offers">
+			<list>
+
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount10" />
+	</bean>
+	
+	<!-- Specie -->
+	<bean id="specie1" class="domain.Specie">
+		<property name="type" value="Perro" />
+	</bean>
+	
+	<bean id="specie2" class="domain.Specie">
+		<property name="type" value="Gato" />
+	</bean>
+	
+	<bean id="specie3" class="domain.Specie">
+		<property name="type" value="Reptil" />
+	</bean>
+	
+	<bean id="specie4" class="domain.Specie">
+		<property name="type" value="Perro" />
+	</bean>
+	
+	
+	<!-- Breed -->
+	<bean id="breed1" class="domain.Breed">
+		<property name="breed" value="Mastin" />
+		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed2" class="domain.Breed">
+		<property name="breed" value="Siames" />
+		<property name="specie" ref="specie2" />
+	</bean>
+	
+	<bean id="breed3" class="domain.Breed">
+		<property name="breed" value="Iguana" />
+		<property name="specie" ref="specie3" />
+	</bean>
+	
+	<bean id="breed4" class="domain.Breed">
+		<property name="breed" value="Bulldog" />
+		<property name="specie" ref="specie4" />
+	</bean>
+	
+	
+	<!-- Animal -->
+	<bean id="animal1" class="domain.Animal">
+		<property name="name" value="Name Animal 1" />
+		<property name="chipNumber" value="554784P" />
+		<property name="age" value="2" />
+		<property name="sex" value="MALE" />
+		<property name="picture">
+			<list>
+				<value>0x42</value>
+				<value>0x49</value>
+			</list>
+		</property>
+		<property name="breeds">
+			<list>
+				<ref bean="breed1" />
+				<ref bean="breed2" />
+			</list>
+		</property>
+		<property name="customer" ref="customer1" />
+		<property name="animalShelter" ref="animalshelter1" />
+	</bean>
+	
+	<bean id="animal2" class="domain.Animal">
+		<property name="name" value="Name Animal 2" />
+		<property name="chipNumber" value="550084P" />
+		<property name="age" value="5" />
+		<property name="sex" value="FEMALE" />
+		<property name="picture">
+			<list>
+				<value>0x42</value>
+				<value>0x50</value>
+			</list>
+		</property>
+		<property name="breeds">
+			<list>
+				<ref bean="breed3" />
+			</list>
+		</property>
+		<property name="customer" ref="customer1" />
+		<property name="animalShelter" ref="animalshelter1" />
+	</bean>
+	
+	<bean id="animal3" class="domain.Animal">
+		<property name="name" value="Name Animal 3" />
+		<property name="chipNumber" value="554711P" />
+		<property name="age" value="8" />
+		<property name="sex" value="MALE" />
+		<property name="picture">
+			<list>
+				<value>0x40</value>
+				<value>0x49</value>
+			</list>
+		</property>
+		<property name="breeds">
+			<list>
+				<ref bean="breed4" />
+			</list>
+		</property>
+		<property name="customer" ref="customer2" />
+		<property name="animalShelter" ref="animalshelter2" />
+	</bean>
+	
+	<!-- Request -->
+	<bean id="request1" class="domain.Request">
+		<property name="description" value="Description Request 1" />
+		<property name="tags" value="Tag Request 1" />
+		<property name="category" value="ABUSE" />
+		<property name="customer" ref="customer1" />
+		<property name="animal" ref="animal1" />
+		<property name="receipts">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="request2" class="domain.Request">
+		<property name="description" value="Description Request 2" />
+		<property name="tags" value="Tag Request 2" />
+		<property name="category" value="GENERAL" />
+		<property name="customer" ref="customer1" />
+		<property name="receipts">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="request3" class="domain.Request">
+		<property name="description" value="Description Request 3" />
+		<property name="tags" value="Tag Request 3" />
+		<property name="category" value="ADDICTION" />
+		<property name="customer" ref="customer2" />
+		<property name="receipts">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
 </beans>
