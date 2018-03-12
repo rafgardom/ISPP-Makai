@@ -263,7 +263,7 @@
 		<property name="zip_code" value="34454" />
 	</bean>
 	
-		<bean id="coordinates12" class="domain.Coordinates">
+	<bean id="coordinates12" class="domain.Coordinates">
 		<property name="country" value="Spain" />
 		<property name="state" value="Catalunya" />
 		<property name="province" value="Barcelona" />
@@ -271,12 +271,36 @@
 		<property name="zip_code" value="37754" />
 	</bean>
 	
-		<bean id="coordinates13" class="domain.Coordinates">
+	<bean id="coordinates13" class="domain.Coordinates">
 		<property name="country" value="Spain" />
 		<property name="state" value="Comunidad Valenciana" />
 		<property name="province" value="Valencia" />
 		<property name="city" value="Valencia" />
 		<property name="zip_code" value="32554" />
+	</bean>
+	
+	<bean id="coordinates14" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Cordoba" />
+		<property name="province" value="Cordoba" />
+		<property name="city" value="Cordoba" />
+		<property name="zip_code" value="38854" />
+	</bean>
+	
+	<bean id="coordinates15" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Jaen" />
+		<property name="province" value="Jaen" />
+		<property name="city" value="Jaen" />
+		<property name="zip_code" value="32500" />
+	</bean>
+	
+	<bean id="coordinates16" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Granada" />
+		<property name="province" value="Granada" />
+		<property name="city" value="granada" />
+		<property name="zip_code" value="31154" />
 	</bean>
 	
 	<!-- Banner -->	
@@ -313,8 +337,8 @@
 		<property name="currentViews" value="6" />
 	</bean>
 	
-	<!-- Prices -->	
-	<bean id="prices1" class="domain.Prices">
+	<!-- Price -->	
+	<bean id="price1" class="domain.Price">
 		<property name="bannerPrice" value="0.02" />
 		<property name="adoptionFee" value="15" />
 		<property name="travelFee" value="10" />
@@ -336,6 +360,27 @@
 	</bean>
 	
 	<bean id="duration3" class="domain.Duration">
+		<property name="year" value="0" />
+		<property name="month" value="2" />
+		<property name="week" value="1" />
+		<property name="day" value="4" />
+	</bean>
+	
+		<bean id="duration4" class="domain.Duration">
+		<property name="year" value="0" />
+		<property name="month" value="8" />
+		<property name="week" value="2" />
+		<property name="day" value="1" />
+	</bean>
+	
+	<bean id="duration5" class="domain.Duration">
+		<property name="year" value="1" />
+		<property name="month" value="2" />
+		<property name="week" value="0" />
+		<property name="day" value="0" />
+	</bean>
+	
+	<bean id="duration6" class="domain.Duration">
 		<property name="year" value="0" />
 		<property name="month" value="2" />
 		<property name="week" value="1" />
@@ -525,7 +570,8 @@
 		</property>
 		<property name="offers">
 			<list>
-
+				<ref bean="offer1"/>
+				<ref bean="offer2"/>
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount8" />
@@ -547,12 +593,12 @@
 		<property name="avgRating" value="16.4" />
 		<property name="receipts">
 			<list>
-
+				<ref bean="receipt1" />
 			</list>
 		</property>
 		<property name="offers">
 			<list>
-
+				<ref bean="offer3"/>
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount9" />
@@ -720,9 +766,81 @@
 		<property name="customer" ref="customer2" />
 		<property name="receipts">
 			<list>
-				
+				<ref bean="receipt1" />
 			</list>
 		</property>
 	</bean>
+	
+	<!-- Training -->
+	<bean id="training1" class="domain.Training">
+		<property name="category" value="ABUSE" />
+		<property name="duration" ref="duration1" />
+		<property name="price" value="1580" />
+		<property name="description" value="Description training 1" />
+		<property name="trainer" ref="trainer1" />
+	</bean>
+	
+	<bean id="training2" class="domain.Training">
+		<property name="category" value="GENERAL" />
+		<property name="duration" ref="duration2" />
+		<property name="price" value="180" />
+		<property name="description" value="Description training 2" />
+		<property name="trainer" ref="trainer1" />
+	</bean>
+	
+	<bean id="training3" class="domain.Training">
+		<property name="category" value="ADDICTION" />
+		<property name="duration" ref="duration3" />
+		<property name="price" value="259" />
+		<property name="description" value="Description training 3" />
+		<property name="trainer" ref="trainer2" />
+	</bean>
+	
+	<!-- Offer -->
+	<bean id="offer1" class="domain.Offer">
+		<property name="destination" ref="coordinates14" />
+		<property name="startMoment" value="11/24/2018 9:00" />
+		<property name="isAccepted" value="false" />
+		<property name="price" value="1580" />
+		<property name="comment" value="Comment Offer 1" />
+		<property name="duration" ref="duration4" />
+		<property name="request" ref="request1" />
+		<property name="trainer" ref="trainer1" />
+		<property name="animal" ref="animal1" />
+	</bean>
+	
+	<bean id="offer2" class="domain.Offer">
+		<property name="destination" ref="coordinates15" />
+		<property name="startMoment" value="10/26/2018 10:00" />
+		<property name="isAccepted" value="false" />
+		<property name="price" value="180" />
+		<property name="comment" value="Comment Offer 2" />
+		<property name="duration" ref="duration5" />
+		<property name="request" ref="request2" />
+		<property name="trainer" ref="trainer1" />
+		<property name="animal" ref="animal2" />
+	</bean>
+	
+	<bean id="offer3" class="domain.Offer">
+		<property name="destination" ref="coordinates16" />
+		<property name="startMoment" value="05/14/2018 6:00" />
+		<property name="isAccepted" value="true" />
+		<property name="price" value="259" />
+		<property name="comment" value="Comment Offer 3" />
+		<property name="duration" ref="duration6" />
+		<property name="request" ref="request3" />
+		<property name="trainer" ref="trainer2" />
+		<property name="animal" ref="animal3" />
+	</bean>
+	
+	<!-- Receipt -->
+	<bean id="receipt1" class="domain.Receipt">
+		<property name="moment" value="04/20/2018 9:00" />
+		<property name="amount" value="259" />
+		<property name="commission" value="15" />
+		<property name="trainer" ref="trainer2" />
+		<property name="request" ref="request3" />
+	</bean>
+	
 	
 </beans>
