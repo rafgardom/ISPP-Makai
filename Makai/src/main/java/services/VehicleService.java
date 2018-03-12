@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,10 @@ public class VehicleService {
 	@Autowired
 	private VehicleRepository	vehicleRepository;
 
-
 	// Supporting services ----------------------------------------------------
+	@Autowired
+	private TransporterService	transporterService;
+
 
 	// Constructors------------------------------------------------------------
 	public VehicleService() {
@@ -59,16 +62,20 @@ public class VehicleService {
 		return result;
 	}
 
+	@SuppressWarnings("deprecation")
 	public Vehicle save(final Vehicle vehicle) {
 		Assert.notNull(vehicle);
 		Vehicle result;
 		Transporter principal;
+		Calendar today;
 
 		principal = this.transporterService.findByPrincipal();
 		Assert.notNull(principal);
 		Assert.isTrue(vehicle.getTransporter().getId() == principal.getId());
 
 		// Hacer comprobacion del año
+		today = Calendar.getInstance();
+		Assert.isTrue(today.getTime().getYear() <= vehicle.getYear());
 
 		result = this.vehicleRepository.save(vehicle);
 
