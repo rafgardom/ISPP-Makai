@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.Access;
@@ -12,101 +13,101 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Vehicle extends DomainEntity{
-	
+public class Vehicle extends DomainEntity {
+
 	// Constructors ----------------------------------------------------------
-	public Vehicle(){
+	public Vehicle() {
 		super();
 	}
-	
+
+
 	// Attributes -------------------------------------------------------------
-	
-	private Brand brand;
-	private Integer seats;
-	private CarType carType;
-	private String accommodation;
-	private Integer year;
-	private String description;
-	private Byte picture;
-	private String color;
-	
+
+	private Brand	brand;
+	private Integer	seats;
+	private CarType	carType;
+	private String	accommodation;
+	private Integer	year;
+	private String	description;
+	private Byte[]	picture;
+	private String	color;
+
+
 	@NotNull
 	public Brand getBrand() {
-		return brand;
+		return this.brand;
 	}
-	public void setBrand(Brand brand) {
+	public void setBrand(final Brand brand) {
 		this.brand = brand;
 	}
-	
+
 	@Min(0)
 	public Integer getSeats() {
-		return seats;
+		return this.seats;
 	}
-	public void setSeats(Integer seats) {
+	public void setSeats(final Integer seats) {
 		this.seats = seats;
 	}
-	
+
 	@NotNull
 	public CarType getCarType() {
-		return carType;
+		return this.carType;
 	}
-	public void setCarType(CarType carType) {
+	public void setCarType(final CarType carType) {
 		this.carType = carType;
 	}
-	
-	
+
 	public String getAccommodation() {
-		return accommodation;
+		return this.accommodation;
 	}
-	public void setAccommodation(String accommodation) {
+	public void setAccommodation(final String accommodation) {
 		this.accommodation = accommodation;
 	}
-	
+
 	@Min(0)
 	public Integer getYear() {
-		return year;
+		return this.year;
 	}
-	public void setYear(Integer year) {
+	public void setYear(final Integer year) {
 		this.year = year;
 	}
-	
+
 	@NotBlank
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
-	public Byte getPicture() {
-		return picture;
+
+	public Byte[] getPicture() {
+		return this.picture;
 	}
-	public void setPicture(Byte picture) {
+
+	public void setPicture(final Byte[] picture) {
 		this.picture = picture;
 	}
-	
 	@NotBlank
 	public String getColor() {
-		return color;
+		return this.color;
 	}
-	public void setColor(String color) {
+	public void setColor(final String color) {
 		this.color = color;
 	}
-	
+
+
 	// Relationships ----------------------------------------------------------
-	private Transporter transporter;
+	private Transporter	transporter;
+
 
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)
 	public Transporter getTransporter() {
-		return transporter;
+		return this.transporter;
 	}
-	public void setTransporter(Transporter transporter) {
+	public void setTransporter(final Transporter transporter) {
 		this.transporter = transporter;
 	}
-	
-	
-	
-	
 
 }
