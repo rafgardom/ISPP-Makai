@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.SpecieRepository;
+import repositories.BannerRepository;
 import domain.Administrator;
-import domain.Specie;
+import domain.Banner;
 
 @Service
 @Transactional
-public class SpecieService {
+public class BannerService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private SpecieRepository		specieRepository;
+	private BannerRepository		bannerRepository;
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
@@ -26,64 +26,64 @@ public class SpecieService {
 
 
 	// Constructors------------------------------------------------------------
-	public SpecieService() {
+	public BannerService() {
 		super();
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-	public Specie findOne(final int specieId) {
-		Specie result;
+	public Banner findOne(final int bannerId) {
+		Banner result;
 
-		result = this.specieRepository.findOne(specieId);
+		result = this.bannerRepository.findOne(bannerId);
 		Assert.notNull(result);
 
 		return result;
 	}
 
-	public Collection<Specie> findAll() {
-		Collection<Specie> result;
+	public Collection<Banner> findAll() {
+		Collection<Banner> result;
 
-		result = this.specieRepository.findAll();
+		result = this.bannerRepository.findAll();
 
 		return result;
 	}
 
-	public Specie create() {
-		Specie result;
+	public Banner create() {
+		Banner result;
 		Administrator principal;
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 
-		result = new Specie();
+		result = new Banner();
+		result.setTotalViews(0);
 
 		return result;
 	}
 
-	public Specie save(final Specie specie) {
-		Assert.notNull(specie);
-		Specie result;
+	public Banner save(final Banner banner) {
+		Assert.notNull(banner);
+		Banner result;
 		Administrator principal;
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 
-		result = this.specieRepository.save(specie);
+		result = this.bannerRepository.save(banner);
 
 		return result;
 	}
 
-	public void delete(final Specie specie) {
+	public void delete(final Banner banner) {
 		Administrator principal;
 
-		Assert.notNull(specie);
-		Assert.isTrue(specie.getId() != 0);
+		Assert.notNull(banner);
+		Assert.isTrue(banner.getId() != 0);
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 
-		//Comprobar de que ningún Animal tiene asociada ninguna Breed de esta Specie
-
-		this.specieRepository.delete(specie);
+		this.bannerRepository.delete(banner);
 	}
+
 }

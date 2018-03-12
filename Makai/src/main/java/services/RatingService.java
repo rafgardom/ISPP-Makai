@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 import repositories.RatingRepository;
 import domain.Customer;
 import domain.Rating;
-import domain.Request;
 import domain.Trainer;
 import domain.Travel;
 
@@ -105,18 +104,18 @@ public class RatingService {
 		return result;
 	}
 
-	public void delete(final Request request) {
+	public void delete(final Rating rating) {
 		Customer principal;
 
-		Assert.notNull(request);
-		Assert.isTrue(request.getId() != 0);
+		Assert.notNull(rating);
+		Assert.isTrue(rating.getId() != 0);
 
 		principal = this.customerService.findByPrincipal();
 		Assert.notNull(principal);
-		Assert.isTrue(request.getCustomer().getId() == principal.getId());
+		Assert.isTrue(rating.getCustomer().getId() == principal.getId());
 
 		//Comprobar de que no tiene ninguna oferta aceptada
 
-		this.requestRepository.delete(request);
+		this.ratingRepository.delete(rating);
 	}
 }
