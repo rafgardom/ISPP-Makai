@@ -76,7 +76,7 @@ public class TravelService {
 		Assert.isTrue(travel.getTransporterOwner().getId() == principal.getId());
 
 		today = Calendar.getInstance();
-		Assert.isTrue(today.getTime().after(travel.getStartMoment()));
+		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
 
 		result = this.travelRepository.save(travel);
 

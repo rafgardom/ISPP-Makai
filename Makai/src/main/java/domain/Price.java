@@ -8,10 +8,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Prices extends DomainEntity{
+public class Price extends DomainEntity{
 	
 	// Constructors ----------------------------------------------------------
-	public Prices(){
+	public Price(){
 		super();
 	}
 	
