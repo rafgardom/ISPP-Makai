@@ -280,15 +280,95 @@
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 
-	<!-- Professional 
+	<!-- Professional -->
 	<bean id="professional1" class="domain.Professional">
-		<property name="name" value="administrator" />
-		<property name="email" value="administrator@gmail.com" />
-		<property name="phone" value="0000" />
-		<property name="coordinates" ref="coordinates1" />
-		<property name="picture" value=" " />
-		<property name="avgRating" value="8.0" />
+		<property name="name" value="Name Profesional1" />
+		<property name="email" value="profesional1@gmail.com" />
+		<property name="phone" value="0025" />
+		<property name="coordinates" ref="coordinates3" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="avgRating" value="2.5" />
 		<property name="userAccount" ref="userAccount5" />
 	</bean>
-	-->
+	
+		
+	<bean id="professional2" class="domain.Professional">
+		<property name="name" value="Name Professional2" />
+		<property name="email" value="profesional2@gmail.com" />
+		<property name="phone" value="7800" />
+		<property name="coordinates" ref="coordinates1" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="avgRating" value="26.6" />
+		<property name="userAccount" ref="userAccount6" />
+	</bean>
+	
+	
+	<bean id="professional3" class="domain.Professional">
+		<property name="name" value="Name Professional3" />
+		<property name="email" value="professional3@gmail.com" />
+		<property name="phone" value="0250" />
+		<property name="coordinates" ref="coordinates2" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="avgRating" value="32.4" />
+		<property name="userAccount" ref="userAccount7" />
+	</bean>
+	
+	<!-- Professional -->
+	<bean id="animalshelter1" class="domain.AnimalShelter">
+		<property name="name" value="Name Animal Shelter1" />
+		<property name="email" value="animalShelter1@gmail.com" />
+		<property name="phone" value="0025" />
+		<property name="coordinates" ref="coordinates3" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount11" />
+	</bean>
+	
+	<bean id="animalshelter2" class="domain.AnimalShelter">
+		<property name="name" value="Name Animal Shelter2" />
+		<property name="email" value="animalShelter2@gmail.com" />
+		<property name="phone" value="0555" />
+		<property name="coordinates" ref="coordinates3" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount12" />
+	</bean>
+	
+	<bean id="animalshelter3" class="domain.AnimalShelter">
+		<property name="name" value="Name Animal Shelter3" />
+		<property name="email" value="animalShelter3@gmail.com" />
+		<property name="phone" value="0885" />
+		<property name="coordinates" ref="coordinates3" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount13" />
+	</bean>
+	
 </beans>
