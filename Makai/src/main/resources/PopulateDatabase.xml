@@ -174,6 +174,121 @@
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<!-- Coordinates 	-->	
+	<bean id="coordinates1" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Andalucia" />
+		<property name="province" value="Cadiz" />
+		<property name="city" value="Jerez" />
+		<property name="zip_code" value="11598" />
+	</bean>
 	
+	<bean id="coordinates2" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Islas Baleares" />
+		<property name="province" value="Mallorca" />
+		<property name="city" value="Palma de Mallorca" />
+		<property name="zip_code" value="65897" />
+	</bean>
+	
+	<bean id="coordinates3" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Galicia" />
+		<property name="province" value="Coruña" />
+		<property name="city" value="Ferrol" />
+		<property name="zip_code" value="32154" />
+	</bean>
+	
+	<!-- Banner -->	
+	<bean id="banner1" class="domain.Banner">
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="totalViews" value="250" />
+		<property name="currentViews" value="198" />
+	</bean>
+	
+	<bean id="banner2" class="domain.Banner">
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="totalViews" value="125" />
+		<property name="currentViews" value="125" />
+	</bean>
+	
+	<bean id="banner3" class="domain.Banner">
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="totalViews" value="10" />
+		<property name="currentViews" value="6" />
+	</bean>
+	
+	<!-- Prices -->	
+	<bean id="prices1" class="domain.Prices">
+		<property name="bannerPrice" value="0.02" />
+		<property name="adoptionFee" value="15" />
+		<property name="travelFee" value="10" />
+	</bean>
+	
+	<!-- Duration -->	
+	<bean id="duration1" class="domain.Duration">
+		<property name="year" value="0" />
+		<property name="month" value="8" />
+		<property name="week" value="2" />
+		<property name="day" value="1" />
+	</bean>
+	
+	<bean id="duration2" class="domain.Duration">
+		<property name="year" value="1" />
+		<property name="month" value="2" />
+		<property name="week" value="0" />
+		<property name="day" value="0" />
+	</bean>
+	
+	<bean id="duration3" class="domain.Duration">
+		<property name="year" value="0" />
+		<property name="month" value="2" />
+		<property name="week" value="1" />
+		<property name="day" value="4" />
+	</bean>
+
+	
+	<!-- Administrator 	-->
+	<bean id="administrator" class="domain.Administrator">
+		<property name="name" value="administrator" />
+		<property name="email" value="admin@gmail.com" />
+		<property name="phone" value="0000" />
+		<property name="coordinates" ref="coordinates1" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="surname" value="SurnameAdmin" />
+		<property name="nid" value="98698525D" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+
+	<!-- Professional 
+	<bean id="professional1" class="domain.Professional">
+		<property name="name" value="administrator" />
+		<property name="email" value="administrator@gmail.com" />
+		<property name="phone" value="0000" />
+		<property name="coordinates" ref="coordinates1" />
+		<property name="picture" value=" " />
+		<property name="avgRating" value="8.0" />
+		<property name="userAccount" ref="userAccount5" />
+	</bean>
+	-->
 </beans>
