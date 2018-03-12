@@ -41,7 +41,7 @@ public class Authority implements GrantedAuthority {
 	public static final String	CUSTOMER		= "CUSTOMER";
 	public static final String	TRAINER			= "TRAINER";
 	public static final String	ANIMALSHELTER	= "ANIMALSHELTER";
-	public static final String	PROFESSIONAL	= "CUSPROFESSIONALTOMER";
+	public static final String	PROFESSIONAL	= "PROFESSIONAL";
 
 	// Attributes -------------------------------------------------------------
 
@@ -72,15 +72,15 @@ public class Authority implements GrantedAuthority {
 		authority = new Authority();
 		authority.setAuthority(Authority.CUSTOMER);
 		result.add(authority);
-		
+
 		authority = new Authority();
 		authority.setAuthority(Authority.TRAINER);
 		result.add(authority);
-		
+
 		authority = new Authority();
 		authority.setAuthority(Authority.ANIMALSHELTER);
 		result.add(authority);
-		
+
 		authority = new Authority();
 		authority.setAuthority(Authority.PROFESSIONAL);
 		result.add(authority);
