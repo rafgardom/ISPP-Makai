@@ -299,8 +299,72 @@
 		<property name="country" value="Spain" />
 		<property name="state" value="Granada" />
 		<property name="province" value="Granada" />
-		<property name="city" value="granada" />
+		<property name="city" value="Granada" />
 		<property name="zip_code" value="31154" />
+	</bean>
+	
+	<bean id="coordinates17" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Cadiz" />
+		<property name="province" value="Cadiz" />
+		<property name="city" value="Cadiz" />
+		<property name="zip_code" value="11487" />
+	</bean>
+	
+	<bean id="coordinates18" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Sevilla" />
+		<property name="province" value="Sevilla" />
+		<property name="city" value="Sevilla" />
+		<property name="zip_code" value="31004" />
+	</bean>
+	
+	<bean id="coordinates19" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Huelva" />
+		<property name="province" value="Huelva" />
+		<property name="city" value="Huelva" />
+		<property name="zip_code" value="31199" />
+	</bean>
+	
+	<bean id="coordinates20" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Malaga" />
+		<property name="province" value="Malaga" />
+		<property name="city" value="Malaga" />
+		<property name="zip_code" value="30054" />
+	</bean>
+	
+	<bean id="coordinates21" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Granada" />
+		<property name="province" value="Granada" />
+		<property name="city" value="Granada" />
+		<property name="zip_code" value="31100" />
+	</bean>
+	
+	<bean id="coordinates22" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Almeria" />
+		<property name="province" value="Almeria" />
+		<property name="city" value="Almeria" />
+		<property name="zip_code" value="55154" />
+	</bean>
+	
+	<bean id="coordinates23" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Almeria" />
+		<property name="province" value="Almeria" />
+		<property name="city" value="Almeria" />
+		<property name="zip_code" value="55100" />
+	</bean>
+	
+	<bean id="coordinates24" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Sevilla" />
+		<property name="province" value="Sevilla" />
+		<property name="city" value="Sevilla" />
+		<property name="zip_code" value="51114" />
 	</bean>
 	
 	<!-- Notification 	-->	
@@ -564,6 +628,7 @@
 			</list>
 		</property>
 		<property name="avgRating" value="15.4" />
+		<property name="travelPassenger" ref="travel2" />
 		<property name="userAccount" ref="userAccount2" />
 	</bean>
 	
@@ -581,6 +646,7 @@
 			</list>
 		</property>
 		<property name="avgRating" value="1.2" />
+		<property name="travelPassenger" ref="travel3" />
 		<property name="userAccount" ref="userAccount3" />
 	</bean>
 	
@@ -947,5 +1013,66 @@
 		<property name="transporter" ref="customer1" />
 	</bean>
 	
+	<!-- Travel -->
+	<bean id="travel1" class="domain.Travel">
+		<property name="origin" ref="coordinates17" />
+		<property name="destination" ref="coordinates18" />
+		<property name="startMoment" value="04/20/2018 9:00" />
+		<property name="endMoment" value="04/20/2018 11:00" />
+		<property name="animalSeats" value="1" />
+		<property name="humanSeats" value="2" />
+		<property name="vehicle" ref="vehicle1" />
+		<property name="transporterOwner" ref="professional1" />
+	</bean>
+	
+	<bean id="travel2" class="domain.Travel">
+		<property name="origin" ref="coordinates19" />
+		<property name="destination" ref="coordinates20" />
+		<property name="startMoment" value="02/20/2018 9:00" />
+		<property name="endMoment" value="02/20/2018 11:00" />
+		<property name="animalSeats" value="1" />
+		<property name="humanSeats" value="3" />
+		<property name="vehicle" ref="vehicle2" />
+		<property name="transporterOwner" ref="professional1" />
+	</bean>
+	
+	<bean id="travel3" class="domain.Travel">
+		<property name="origin" ref="coordinates21" />
+		<property name="destination" ref="coordinates22" />
+		<property name="startMoment" value="01/20/2018 9:00" />
+		<property name="endMoment" value="01/20/2018 11:00" />
+		<property name="animalSeats" value="2" />
+		<property name="humanSeats" value="4" />
+		<property name="vehicle" ref="vehicle3" />
+		<property name="transporterOwner" ref="customer1" />
+	</bean>
+	
+	<bean id="travel4" class="domain.Travel">
+		<property name="origin" ref="coordinates23" />
+		<property name="destination" ref="coordinates24" />
+		<property name="startMoment" value="04/26/2018 9:00" />
+		<property name="endMoment" value="04/26/2018 11:30" />
+		<property name="animalSeats" value="1" />
+		<property name="humanSeats" value="1" />
+		<property name="vehicle" ref="vehicle2" />
+		<property name="transporterOwner" ref="professional1" />
+	</bean>
+	
+	<!-- Rating -->
+	<bean id="rating1" class="domain.Rating">
+		<property name="stars" value="2" />
+		<property name="comment" value="Muchas curvas" />
+		<property name="moment" value="01/20/2018 9:00" />
+		<property name="travel" ref="travel2" />
+		<property name="customer" ref="customer1" />
+	</bean>
+	
+	<bean id="rating2" class="domain.Rating">
+		<property name="stars" value="5" />
+		<property name="comment" value="Muy amable" />
+		<property name="moment" value="01/20/2018 9:00" />
+		<property name="travel" ref="travel3" />
+		<property name="customer" ref="customer2" />
+	</bean>
 	
 </beans>
