@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Date;
@@ -5,79 +6,115 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Offer extends DomainEntity{
-	
+public class Offer extends DomainEntity {
+
 	// Constructors ----------------------------------------------------------
-	public Offer(){
+	public Offer() {
 		super();
 	}
-	
+
+
 	// Attributes -------------------------------------------------------------
-	private Coordinates destination;
-	private Date startMoment;
-	private Boolean isAccepted;
-	private Double price;
-	private String comment;
-	private Duration duration;
-	
+	private Coordinates	destination;
+	private Date		startMoment;
+	private Boolean		isAccepted;
+	private Double		price;
+	private String		comment;
+	private Duration	duration;
+
+
 	@NotNull
 	public Coordinates getDestination() {
-		return destination;
+		return this.destination;
 	}
-	public void setDestination(Coordinates destination) {
+	public void setDestination(final Coordinates destination) {
 		this.destination = destination;
 	}
-	
+
 	@NotNull
 	public Date getStartMoment() {
-		return startMoment;
+		return this.startMoment;
 	}
-	public void setStartMoment(Date startMoment) {
+	public void setStartMoment(final Date startMoment) {
 		this.startMoment = startMoment;
 	}
-	
+
 	@NotNull
 	public Boolean getIsAccepted() {
-		return isAccepted;
+		return this.isAccepted;
 	}
-	public void setIsAccepted(Boolean isAccepted) {
+	public void setIsAccepted(final Boolean isAccepted) {
 		this.isAccepted = isAccepted;
 	}
-	
+
 	@Min(0)
 	public Double getPrice() {
-		return price;
+		return this.price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(final Double price) {
 		this.price = price;
 	}
-	
-	
+
 	public String getComment() {
-		return comment;
+		return this.comment;
 	}
-	public void setComment(String comment) {
+	public void setComment(final String comment) {
 		this.comment = comment;
 	}
-	
+
 	@NotNull
 	public Duration getDuration() {
-		return duration;
+		return this.duration;
 	}
-	public void setDuration(Duration duration) {
+	public void setDuration(final Duration duration) {
 		this.duration = duration;
 	}
-	
+
+
 	// Relationships ----------------------------------------------------------
-	/**Completar**/
-	private Request request;
-	private Trainer trainer;
-	private Animal animal;
-	
+	private Request	request;
+	private Trainer	trainer;
+	private Animal	animal;
+
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Request getRequest() {
+		return this.request;
+	}
+
+	public void setRequest(final Request request) {
+		this.request = request;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Trainer getTrainer() {
+		return this.trainer;
+	}
+
+	public void setTrainer(final Trainer trainer) {
+		this.trainer = trainer;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Animal getAnimal() {
+		return this.animal;
+	}
+
+	public void setAnimal(final Animal animal) {
+		this.animal = animal;
+	}
 
 }

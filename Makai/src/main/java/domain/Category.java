@@ -7,7 +7,7 @@ public enum Category {
 	ABUSE("ABUSE", "ABUSO"),
 	ADDICTION("ADDICTION", "ADICCION"),
 	GERENTOLOGY("GERENTOLOGY", "GERONTOLOGIA"),
-	DISEASES("DISEASES", "DOLENCIA");
+	DISEASES("DISEASES", "DOLENCIA"); 
 	
 	private final String  name;
 	private final String  spanishName;
