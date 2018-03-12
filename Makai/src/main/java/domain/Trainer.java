@@ -61,7 +61,7 @@ public class Trainer extends Actor {
 
 	@Valid
 	@NotNull
-	@OneToMany()
+	@OneToMany(mappedBy = "trainer")
 	public Collection<Receipt> getReceipts() {
 		return this.receipts;
 	}
@@ -73,7 +73,7 @@ public class Trainer extends Actor {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "trainer")
-	public Collection<Offer> getOffer() {
+	public Collection<Offer> getOffers() {
 		return this.offers;
 	}
 

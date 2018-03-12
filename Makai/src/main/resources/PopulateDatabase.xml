@@ -199,6 +199,86 @@
 		<property name="zip_code" value="32154" />
 	</bean>
 	
+	<bean id="coordinates4" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Madrid" />
+		<property name="province" value="Madrid" />
+		<property name="city" value="Madrir" />
+		<property name="zip_code" value="32784" />
+	</bean>
+	
+	<bean id="coordinates5" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Islas Canarias" />
+		<property name="province" value="Tenerife" />
+		<property name="city" value="Tenerife" />
+		<property name="zip_code" value="66154" />
+	</bean>
+	
+	<bean id="coordinates6" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Andalucia" />
+		<property name="province" value="Sevilla" />
+		<property name="city" value="Sevilla" />
+		<property name="zip_code" value="410013" />
+	</bean>
+	
+	<bean id="coordinates7" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Andalucia" />
+		<property name="province" value="Almeria" />
+		<property name="city" value="Almeria" />
+		<property name="zip_code" value="39954" />
+	</bean>
+	
+	<bean id="coordinates8" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Andalucia" />
+		<property name="province" value="Huelva" />
+		<property name="city" value="Huelva" />
+		<property name="zip_code" value="32004" />
+	</bean>
+	
+	<bean id="coordinates9" class="domain.Coordinates">
+		<property name="country" value="Portugal" />
+		<property name="state" value="Lisboa" />
+		<property name="province" value="Lisboa" />
+		<property name="city" value="Lisboa" />
+		<property name="zip_code" value="87201" />
+	</bean>
+	
+	<bean id="coordinates10" class="domain.Coordinates">
+		<property name="country" value="Italy" />
+		<property name="state" value="Rome" />
+		<property name="province" value="Rome" />
+		<property name="city" value="Rome" />
+		<property name="zip_code" value="32664" />
+	</bean>
+	
+	<bean id="coordinates11" class="domain.Coordinates">
+		<property name="country" value="France" />
+		<property name="state" value="Paris" />
+		<property name="province" value="Paris" />
+		<property name="city" value="Paris" />
+		<property name="zip_code" value="34454" />
+	</bean>
+	
+		<bean id="coordinates12" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Catalunya" />
+		<property name="province" value="Barcelona" />
+		<property name="city" value="Barcelona" />
+		<property name="zip_code" value="37754" />
+	</bean>
+	
+		<bean id="coordinates13" class="domain.Coordinates">
+		<property name="country" value="Spain" />
+		<property name="state" value="Comunidad Valenciana" />
+		<property name="province" value="Valencia" />
+		<property name="city" value="Valencia" />
+		<property name="zip_code" value="32554" />
+	</bean>
+	
 	<!-- Banner -->	
 	<bean id="banner1" class="domain.Banner">
 		<property name="picture">
@@ -285,7 +365,7 @@
 		<property name="name" value="Name Profesional1" />
 		<property name="email" value="profesional1@gmail.com" />
 		<property name="phone" value="0025" />
-		<property name="coordinates" ref="coordinates3" />
+		<property name="coordinates" ref="coordinates2" />
 		<property name="picture">
 			<list>
 				<value>0x41</value>
@@ -301,7 +381,7 @@
 		<property name="name" value="Name Professional2" />
 		<property name="email" value="profesional2@gmail.com" />
 		<property name="phone" value="7800" />
-		<property name="coordinates" ref="coordinates1" />
+		<property name="coordinates" ref="coordinates3" />
 		<property name="picture">
 			<list>
 				<value>0x41</value>
@@ -317,7 +397,7 @@
 		<property name="name" value="Name Professional3" />
 		<property name="email" value="professional3@gmail.com" />
 		<property name="phone" value="0250" />
-		<property name="coordinates" ref="coordinates2" />
+		<property name="coordinates" ref="coordinates4" />
 		<property name="picture">
 			<list>
 				<value>0x41</value>
@@ -328,12 +408,12 @@
 		<property name="userAccount" ref="userAccount7" />
 	</bean>
 	
-	<!-- Professional -->
+	<!-- Animal Shelter -->
 	<bean id="animalshelter1" class="domain.AnimalShelter">
 		<property name="name" value="Name Animal Shelter1" />
 		<property name="email" value="animalShelter1@gmail.com" />
 		<property name="phone" value="0025" />
-		<property name="coordinates" ref="coordinates3" />
+		<property name="coordinates" ref="coordinates5" />
 		<property name="picture">
 			<list>
 				<value>0x41</value>
@@ -347,7 +427,7 @@
 		<property name="name" value="Name Animal Shelter2" />
 		<property name="email" value="animalShelter2@gmail.com" />
 		<property name="phone" value="0555" />
-		<property name="coordinates" ref="coordinates3" />
+		<property name="coordinates" ref="coordinates6" />
 		<property name="picture">
 			<list>
 				<value>0x41</value>
@@ -361,7 +441,7 @@
 		<property name="name" value="Name Animal Shelter3" />
 		<property name="email" value="animalShelter3@gmail.com" />
 		<property name="phone" value="0885" />
-		<property name="coordinates" ref="coordinates3" />
+		<property name="coordinates" ref="coordinates7" />
 		<property name="picture">
 			<list>
 				<value>0x41</value>
