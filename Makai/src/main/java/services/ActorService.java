@@ -111,4 +111,15 @@ public class ActorService {
 
 		return result;
 	}
+
+	public String hashPassword(final String password) {
+		String result;
+		Md5PasswordEncoder encoder;
+
+		encoder = new Md5PasswordEncoder();
+		result = encoder.encodePassword(password, null);
+
+		return result;
+	}
+
 }

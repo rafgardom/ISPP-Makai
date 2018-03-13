@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 
 import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Customer;
+import forms.CustomerForm;
 
 @Service
 @Transactional
@@ -23,8 +25,13 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository	customerRepository;
 
-
 	// Supporting services ----------------------------------------------------
+	@Autowired
+	private ActorService		actorService;
+
+
+	//	@Autowired
+	//	private Validator			validator;
 
 	// Constructors------------------------------------------------------------
 	public CustomerService() {
@@ -61,6 +68,14 @@ public class CustomerService {
 		final Customer result = new Customer();
 
 		result.setUserAccount(userAccount);
+		result.setAvgRating(0.0);
+
+		return result;
+	}
+
+	public CustomerForm createForm() {
+		CustomerForm result;
+		result = new CustomerForm();
 
 		return result;
 	}
@@ -93,6 +108,52 @@ public class CustomerService {
 		Customer result;
 
 		result = this.customerRepository.findByUserAccountId(userAccountId);
+
+		return result;
+	}
+
+	public Customer reconstruct(final CustomerForm customerForm, final BindingResult binding) {
+		Assert.notNull(customerForm);
+		Customer result;
+		String password;
+
+		if (customerForm.getId() == 0) {
+			result = this.create();
+
+			if (customerForm.getPassword() == customerForm.getRepeatPassword() && customerForm.getPassword() != null && !customerForm.getPassword().isEmpty()) {
+				password = this.actorService.hashPassword(customerForm.getPassword());
+				result.getUserAccount().setPassword(password);
+			}
+
+		} else
+			result = this.findOne(customerForm.getId());
+
+		result.setCoordinates(customerForm.getCoordinates());
+		result.setEmail(customerForm.getEmail());
+		result.setName(customerForm.getName());
+		result.setNid(customerForm.getNid());
+		result.setPhone(customerForm.getPhone());
+		result.setPicture(customerForm.getPicture());
+		result.setSurname(customerForm.getSurname());
+
+		//		this.validator.validate(result, binding);
+
+		return result;
+
+	}
+
+	public CustomerForm toFormObject(final Customer customer) {
+		Assert.notNull(customer);
+		final CustomerForm result = new CustomerForm();
+
+		result.setCoordinates(customer.getCoordinates());
+		result.setEmail(customer.getEmail());
+		result.setId(customer.getId());
+		result.setName(customer.getName());
+		result.setNid(customer.getNid());
+		result.setPhone(customer.getPhone());
+		result.setPicture(customer.getPicture());
+		result.setSurname(customer.getSurname());
 
 		return result;
 	}
