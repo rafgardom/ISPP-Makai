@@ -1078,4 +1078,12 @@
 		<property name="customer" ref="customer2" />
 	</bean>
 	
+	<bean id="rating3" class="domain.Rating">
+		<property name="stars" value="4" />
+		<property name="comment" value="Me adiestro el perro flama" />
+		<property name="moment" value="01/20/2018 9:00" />
+		<property name="request" ref="request3" />
+		<property name="customer" ref="customer2" />
+	</bean>
+	
 </beans>

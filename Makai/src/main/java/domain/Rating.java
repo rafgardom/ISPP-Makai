@@ -7,11 +7,15 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -48,6 +52,8 @@ public class Rating extends DomainEntity {
 	}
 
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return this.moment;
 	}
@@ -59,7 +65,7 @@ public class Rating extends DomainEntity {
 	// Relationships ----------------------------------------------------------
 	private Customer	customer;
 	private Travel		travel;
-	private Trainer		trainer;
+	private Request		request;
 
 
 	@Valid
@@ -82,12 +88,13 @@ public class Rating extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToOne(optional = true)
-	public Trainer getTrainer() {
-		return this.trainer;
+	@OneToOne(optional = true)
+	public Request getRequest() {
+		return this.request;
 	}
-	public void setTrainer(final Trainer trainer) {
-		this.trainer = trainer;
+
+	public void setRequest(final Request request) {
+		this.request = request;
 	}
 
 }

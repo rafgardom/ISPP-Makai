@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Collection;
@@ -7,62 +8,70 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Notification extends DomainEntity{
+public class Notification extends DomainEntity {
+
 	// Constructors ----------------------------------------------------------
-	public Notification(){
+	public Notification() {
 		super();
 	}
-	
+
+
 	// Attributes -------------------------------------------------------------
-	
-	private Date moment;
-	private String reason;
-	private String description;
-	
+
+	private Date	moment;
+	private String	reason;
+	private String	description;
+
+
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
-		return moment;
+		return this.moment;
 	}
-	public void setMoment(Date moment) {
+	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
-	
+
 	@NotBlank
 	public String getReason() {
-		return reason;
+		return this.reason;
 	}
-	public void setReason(String reason) {
+	public void setReason(final String reason) {
 		this.reason = reason;
 	}
-	
+
 	@NotBlank
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
-	
+
+
 	// Relationships ----------------------------------------------------------
-	private Collection<Actor> actors;
+	private Collection<Actor>	actors;
+
 
 	@Valid
 	@NotNull
 	@ManyToMany()
 	public Collection<Actor> getActors() {
-		return actors;
+		return this.actors;
 	}
-	public void setActors(Collection<Actor> actors) {
+	public void setActors(final Collection<Actor> actors) {
 		this.actors = actors;
 	}
-	
-	
 
 }

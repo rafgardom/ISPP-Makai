@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 import repositories.RatingRepository;
 import domain.Customer;
 import domain.Rating;
-import domain.Trainer;
+import domain.Request;
 import domain.Travel;
 
 @Service
@@ -74,7 +74,7 @@ public class RatingService {
 		return result;
 	}
 
-	public Rating createToTrainer(final Trainer trainer) {
+	public Rating createToRequest(final Request request) {
 		Rating result;
 		Customer principal;
 
@@ -85,7 +85,7 @@ public class RatingService {
 
 		result = new Rating();
 		result.setCustomer(principal);
-		result.setTrainer(trainer);
+		result.setRequest(request);
 
 		return result;
 	}
