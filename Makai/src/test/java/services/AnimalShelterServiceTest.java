@@ -11,9 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import utilities.AbstractTest;
+import domain.AnimalShelter;
 import domain.Coordinates;
-import domain.Customer;
-import forms.CustomerForm;
+import forms.AnimalShelterForm;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -21,20 +21,19 @@ import forms.CustomerForm;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
-public class CustomerServiceTest extends AbstractTest {
+public class AnimalShelterServiceTest extends AbstractTest {
 
 	//Services under test
 	@Autowired
-	private CustomerService	customerService;
+	private AnimalShelterService	animalShelterService;
 
 
 	//Tests 
-
 	@Test
 	public void create() {
-		final CustomerForm customerForm = this.customerService.createForm();
+		final AnimalShelterForm animalShelterForm = this.animalShelterService.createForm();
 
-		customerForm.setAcceptCondition(true);
+		animalShelterForm.setAcceptCondition(true);
 
 		final Coordinates coordinates = new Coordinates();
 		coordinates.setCity("City");
@@ -43,22 +42,20 @@ public class CustomerServiceTest extends AbstractTest {
 		coordinates.setState("State");
 		coordinates.setZip_code("zip code");
 
-		customerForm.setCoordinates(coordinates);
-		customerForm.setEmail("testing@test.com");
-		customerForm.setName("name");
-		customerForm.setNid("nid");
-		customerForm.setPhone("phone");
-		customerForm.setPassword("password");
+		animalShelterForm.setCoordinates(coordinates);
+		animalShelterForm.setEmail("testing@test.com");
+		animalShelterForm.setName("name");
+		animalShelterForm.setPhone("phone");
+		animalShelterForm.setPassword("password");
 
 		final Byte[] picture = {
 			new Byte((byte) 2), new Byte((byte) 3)
 		};
-		customerForm.setPicture(picture);
-		customerForm.setRepeatPassword("password");
-		customerForm.setSurname("surname");
+		animalShelterForm.setPicture(picture);
+		animalShelterForm.setRepeatPassword("password");
 
-		final Customer customer = this.customerService.reconstruct(customerForm, null);
-		this.customerService.save(customer);
+		final AnimalShelter animalShelter = this.animalShelterService.reconstruct(animalShelterForm, null);
+		this.animalShelterService.save(animalShelter);
 
 	}
 }

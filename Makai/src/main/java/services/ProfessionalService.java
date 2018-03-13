@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 
 import repositories.ProfessionalRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Professional;
+import forms.ProfessionalForm;
 
 @Service
 @Transactional
@@ -23,8 +25,14 @@ public class ProfessionalService {
 	@Autowired
 	private ProfessionalRepository	professionalRepository;
 
-
 	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private ActorService			actorService;
+
+
+	//	@Autowired
+	//	private Validator			validator;
 
 	// Constructors------------------------------------------------------------
 	public ProfessionalService() {
@@ -61,6 +69,14 @@ public class ProfessionalService {
 		final Professional result = new Professional();
 
 		result.setUserAccount(userAccount);
+		result.setAvgRating(0.0);
+
+		return result;
+	}
+
+	public ProfessionalForm createForm() {
+		ProfessionalForm result;
+		result = new ProfessionalForm();
 
 		return result;
 	}
@@ -93,6 +109,46 @@ public class ProfessionalService {
 		Professional result;
 
 		result = this.professionalRepository.findByUserAccountId(userAccountId);
+
+		return result;
+	}
+
+	public Professional reconstruct(final ProfessionalForm professionalForm, final BindingResult binding) {
+		Assert.notNull(professionalForm);
+		Professional result;
+		String password;
+
+		if (professionalForm.getId() == 0) {
+			result = this.create();
+
+			if (professionalForm.getPassword() == professionalForm.getRepeatPassword() && professionalForm.getPassword() != null && !professionalForm.getPassword().isEmpty()) {
+				password = this.actorService.hashPassword(professionalForm.getPassword());
+				result.getUserAccount().setPassword(password);
+			}
+		} else
+			result = this.findOne(professionalForm.getId());
+
+		result.setCoordinates(professionalForm.getCoordinates());
+		result.setEmail(professionalForm.getEmail());
+		result.setName(professionalForm.getName());
+		result.setPhone(professionalForm.getPhone());
+		result.setPicture(professionalForm.getPicture());
+
+		//		this.validator.validate(result, binding);
+
+		return result;
+	}
+
+	public ProfessionalForm toFormObject(final Professional professional) {
+		Assert.notNull(professional);
+		final ProfessionalForm result = new ProfessionalForm();
+
+		result.setCoordinates(professional.getCoordinates());
+		result.setEmail(professional.getEmail());
+		result.setId(professional.getId());
+		result.setName(professional.getName());
+		result.setPhone(professional.getPhone());
+		result.setPicture(professional.getPicture());
 
 		return result;
 	}

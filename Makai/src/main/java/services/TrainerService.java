@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 
 import repositories.TrainerRepository;
 import security.Authority;
@@ -16,6 +17,7 @@ import security.UserAccount;
 import domain.Offer;
 import domain.Receipt;
 import domain.Trainer;
+import forms.TrainerForm;
 
 @Service
 @Transactional
@@ -25,8 +27,14 @@ public class TrainerService {
 	@Autowired
 	private TrainerRepository	trainerRepository;
 
-
 	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private ActorService		actorService;
+
+
+	//	@Autowired
+	//	private Validator			validator;
 
 	// Constructors------------------------------------------------------------
 	public TrainerService() {
@@ -75,6 +83,12 @@ public class TrainerService {
 		return result;
 	}
 
+	public TrainerForm createForm() {
+		final TrainerForm result = new TrainerForm();
+
+		return result;
+	}
+
 	public Trainer save(final Trainer trainer) {
 		Assert.notNull(trainer);
 		Trainer result;
@@ -103,6 +117,52 @@ public class TrainerService {
 		Trainer result;
 
 		result = this.trainerRepository.findByUserAccountId(userAccountId);
+
+		return result;
+	}
+
+	public Trainer reconstruct(final TrainerForm trainerForm, final BindingResult binding) {
+		Assert.notNull(trainerForm);
+		Trainer result;
+		String password;
+
+		if (trainerForm.getId() == 0) {
+			result = this.create();
+
+			if (trainerForm.getPassword() == trainerForm.getRepeatPassword() && trainerForm.getPassword() != null && !trainerForm.getPassword().isEmpty()) {
+				password = this.actorService.hashPassword(trainerForm.getPassword());
+				result.getUserAccount().setPassword(password);
+			}
+		} else
+			result = this.findOne(trainerForm.getId());
+
+		result.setCoordinates(trainerForm.getCoordinates());
+		result.setEmail(trainerForm.getEmail());
+		result.setName(trainerForm.getName());
+		result.setNid(trainerForm.getNid());
+		result.setPhone(trainerForm.getPhone());
+		result.setPicture(trainerForm.getPicture());
+		result.setSurname(trainerForm.getSurname());
+
+		//		this.validator.validate(result, binding);
+
+		return result;
+	}
+
+	public TrainerForm toFormObject(final Trainer trainer) {
+		Assert.notNull(trainer);
+		final TrainerForm result = new TrainerForm();
+
+		result.setCoordinates(trainer.getCoordinates());
+		result.setEmail(trainer.getEmail());
+		result.setId(trainer.getId());
+		result.setName(trainer.getName());
+		result.setNid(trainer.getNid());
+		result.setPhone(trainer.getPhone());
+		result.setPicture(trainer.getPicture());
+		result.setSurname(trainer.getSurname());
+		result.setReceipts(trainer.getReceipts());
+		result.setOffers(result.getOffers());
 
 		return result;
 	}
