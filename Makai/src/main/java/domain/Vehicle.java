@@ -31,8 +31,17 @@ public class Vehicle extends DomainEntity {
 	private String	description;
 	private Byte[]	picture;
 	private String	color;
+	private Boolean	isActived;
 
 
+	@NotNull
+	public Boolean getIsActived() {
+		return this.isActived;
+	}
+
+	public void setIsActived(final Boolean isActived) {
+		this.isActived = isActived;
+	}
 	@NotNull
 	public Brand getBrand() {
 		return this.brand;

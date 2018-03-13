@@ -969,6 +969,7 @@
 		<property name="accommodation" value="Tengo un cinturon para perros" />
 		<property name="year" value="2012" />
 		<property name="description" value="Climatizado" />
+		<property name="isActived" value="true" />
 		<property name="picture">
 			<list>
 				<value>0x41</value>
@@ -986,6 +987,7 @@
 		<property name="accommodation" value="Tengo una jaula." />
 		<property name="year" value="2016" />
 		<property name="description" value="Climatizado" />
+		<property name="isActived" value="true" />
 		<property name="picture">
 			<list>
 				<value>0x41</value>
@@ -1003,6 +1005,7 @@
 		<property name="accommodation" value="Tengo un remolque adicional" />
 		<property name="year" value="2015" />
 		<property name="description" value="Climatizado" />
+		<property name="isActived" value="true" />
 		<property name="picture">
 			<list>
 				<value>0x41</value>
