@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.Validator;
 
 import repositories.CustomerRepository;
 import security.Authority;
@@ -29,9 +31,9 @@ public class CustomerService {
 	@Autowired
 	private ActorService		actorService;
 
+	@Autowired
+	private Validator			validator;
 
-	//	@Autowired
-	//	private Validator			validator;
 
 	// Constructors------------------------------------------------------------
 	public CustomerService() {
@@ -120,9 +122,18 @@ public class CustomerService {
 		if (customerForm.getId() == 0) {
 			result = this.create();
 
-			if (customerForm.getPassword() == customerForm.getRepeatPassword() && customerForm.getPassword() != null && !customerForm.getPassword().isEmpty()) {
+			if (customerForm.getPassword().equals(customerForm.getRepeatPassword()) && customerForm.getPassword() != null && !customerForm.getPassword().isEmpty()) {
 				password = this.actorService.hashPassword(customerForm.getPassword());
 				result.getUserAccount().setPassword(password);
+				result.getUserAccount().setUsername(customerForm.getUserName());
+			} else {
+				FieldError fieldError;
+				final String[] codes = {
+					"customer.password.error"
+				};
+				fieldError = new FieldError("customerForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
+
 			}
 
 		} else
@@ -136,7 +147,14 @@ public class CustomerService {
 		result.setPicture(customerForm.getPicture());
 		result.setSurname(customerForm.getSurname());
 
-		//		this.validator.validate(result, binding);
+		if (customerForm.getPicture() == null) {
+			final Byte[] picture = {
+				new Byte((byte) 2), new Byte((byte) 3)
+			};
+			result.setPicture(picture);
+		}
+
+		this.validator.validate(result, binding);
 
 		return result;
 

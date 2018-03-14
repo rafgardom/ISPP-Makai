@@ -28,6 +28,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
@@ -40,6 +41,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount3" class="security.UserAccount">
@@ -52,6 +54,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount4" class="security.UserAccount">
@@ -64,6 +67,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount5" class="security.UserAccount">
@@ -76,6 +80,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount6" class="security.UserAccount">
@@ -88,6 +93,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount7" class="security.UserAccount">
@@ -100,6 +106,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount8" class="security.UserAccount">
@@ -112,6 +119,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount9" class="security.UserAccount">
@@ -124,6 +132,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount10" class="security.UserAccount">
@@ -136,6 +145,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount11" class="security.UserAccount">
@@ -148,6 +158,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount12" class="security.UserAccount">
@@ -160,6 +171,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<bean id="userAccount13" class="security.UserAccount">
@@ -172,6 +184,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="enabled" value="true" />
 	</bean>
 	
 	<!-- Coordinates 	-->	

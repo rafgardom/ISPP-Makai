@@ -1,7 +1,11 @@
 
 package forms;
 
+import javax.persistence.Column;
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import domain.Coordinates;
 
@@ -20,6 +24,7 @@ public class CustomerForm {
 	private String		password;
 	private String		repeatPassword;
 	private boolean		acceptCondition;
+	private String		userName;
 
 
 	// Constructor 
@@ -62,6 +67,7 @@ public class CustomerForm {
 		this.phone = phone;
 	}
 
+	@Valid
 	public Coordinates getCoordinates() {
 		return this.coordinates;
 	}
@@ -94,6 +100,16 @@ public class CustomerForm {
 		this.surname = surname;
 	}
 
+	@AssertTrue
+	public boolean isAcceptCondition() {
+		return this.acceptCondition;
+	}
+
+	public void setAcceptCondition(final boolean acceptCondition) {
+		this.acceptCondition = acceptCondition;
+	}
+
+	@NotBlank
 	public String getPassword() {
 		return this.password;
 	}
@@ -102,6 +118,7 @@ public class CustomerForm {
 		this.password = password;
 	}
 
+	@NotBlank
 	public String getRepeatPassword() {
 		return this.repeatPassword;
 	}
@@ -110,13 +127,14 @@ public class CustomerForm {
 		this.repeatPassword = repeatPassword;
 	}
 
-	@AssertTrue
-	public boolean isAcceptCondition() {
-		return this.acceptCondition;
+	@Column(unique = true)
+	@NotBlank
+	public String getUserName() {
+		return this.userName;
 	}
 
-	public void setAcceptCondition(final boolean acceptCondition) {
-		this.acceptCondition = acceptCondition;
+	public void setUserName(final String userName) {
+		this.userName = userName;
 	}
 
 }

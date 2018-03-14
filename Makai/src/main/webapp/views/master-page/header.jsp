@@ -42,6 +42,19 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li>
+				<a class="fNiv"> 
+					<spring:message code="master.page.register" /> 
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="customer/register.do"><spring:message code="master.page.customer.register" /></a></li>
+					<li><a href="professional/register.do"><spring:message code="master.page.professional.register" /></a></li>
+					<li><a href="trainer/register.do"><spring:message code="master.page.trainer.register" /></a></li>					
+					<li><a href="animalShelter/register.do"><spring:message code="master.page.animalShelter.register" /> </a></li>
+				</ul>
+			</li>
+			
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

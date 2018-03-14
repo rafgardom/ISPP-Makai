@@ -120,7 +120,6 @@ public class UserAccount extends DomainEntity implements UserDetails {
 		return true;
 	}
 
-	@Transient
 	@Override
 	public boolean isEnabled() {
 		return this.isEnabled;
