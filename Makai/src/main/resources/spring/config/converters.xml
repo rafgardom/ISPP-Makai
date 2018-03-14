@@ -22,6 +22,48 @@
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 
 		-->
-	</util:list>
+		
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.AnimalShelterToStringConverter" />
+		<bean class="converters.AnimalToStringConverter" />
+		<bean class="converters.BannerToStringConverter" />
+		<bean class="converters.BreedToStringConverter" />
+		<bean class="converters.CustomerToStringConverter" />
+		<bean class="converters.NotificationToStringConverter" />
+		<bean class="converters.OfferToStringConverter" />
+		<bean class="converters.PriceToStringConverter" />
+		<bean class="converters.ProfessionalToStringConverter" />
+		<bean class="converters.RatingToStringConverter" />
+		<bean class="converters.ReceiptToStringConverter" />
+		<bean class="converters.RequestToStringConverter" />
+		<bean class="converters.SpecieToStringConverter" />
+		<bean class="converters.TrainerToStringConverter" />
+		<bean class="converters.TrainingToStringConverter" />
+		<bean class="converters.TransporterToStringConverter" />
+		<bean class="converters.TravelToStringConverter" />
+		<bean class="converters.VehicleToStringConverter" />
+		
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.StringToAnimalShelterConverter" />
+		<bean class="converters.StringToAnimalConverter" />
+		<bean class="converters.StringToBannerConverter" />
+		<bean class="converters.StringToBreedConverter" />
+		<bean class="converters.StringToCustomerConverter" />
+		<bean class="converters.StringToNotificationConverter" />
+		<bean class="converters.StringToOfferConverter" />
+		<bean class="converters.StringToPriceConverter" />
+		<bean class="converters.StringToProfessionalConverter" />
+		<bean class="converters.StringToRatingConverter" />
+		<bean class="converters.StringToReceiptConverter" />
+		<bean class="converters.StringToRequestConverter" />
+		<bean class="converters.StringToSpecieConverter" />
+		<bean class="converters.StringToTrainerConverter" />
+		<bean class="converters.StringToTrainingConverter" />
+		<bean class="converters.StringToTransporterConverter" />
+		<bean class="converters.StringToTravelConverter" />
+		<bean class="converters.StringToVehicleConverter" />
 	
+</util:list>
 </beans>
