@@ -1096,6 +1096,7 @@
 		<property name="comment" value="Me adiestro el perro flama" />
 		<property name="moment" value="01/20/2018 9:00" />
 		<property name="request" ref="request3" />
+		<property name="trainer" ref="trainer2" />
 		<property name="customer" ref="customer2" />
 	</bean>
 	

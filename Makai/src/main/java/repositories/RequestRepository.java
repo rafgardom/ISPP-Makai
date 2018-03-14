@@ -1,12 +1,22 @@
 
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Offer;
 import domain.Request;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Integer> {
+
+	@Query("select o from Offer o where o.request.id=?1")
+	Collection<Offer> findOfferWithThisRequest(int request);
+
+	@Query("select o from Offer o where o.request.id=?1 and o.isAccepted=true")
+	Offer findOfferWithThisRequestTrue(int request);
 
 }

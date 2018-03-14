@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.OfferRepository;
+import repositories.RequestRepository;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
@@ -19,11 +20,14 @@ public class OfferService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private OfferRepository	offerRepository;
+	private OfferRepository		offerRepository;
+
+	@Autowired
+	private RequestRepository	requestRepository;
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
-	private TrainerService	trainerService;
+	private TrainerService		trainerService;
 
 
 	// Constructors------------------------------------------------------------
@@ -64,6 +68,7 @@ public class OfferService {
 			result.setAnimal(request.getAnimal());
 
 		//Comprobar de que no tiene ninguna oferta aceptada
+		Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
 
 		return result;
 	}

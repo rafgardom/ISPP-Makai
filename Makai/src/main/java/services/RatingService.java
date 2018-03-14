@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.RatingRepository;
+import repositories.RequestRepository;
 import domain.Customer;
+import domain.Offer;
 import domain.Rating;
 import domain.Request;
 import domain.Travel;
@@ -22,6 +24,9 @@ public class RatingService {
 	// Managed repository -----------------------------------------------------
 	@Autowired
 	private RatingRepository	ratingRepository;
+
+	@Autowired
+	private RequestRepository	requestRepository;
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
@@ -63,6 +68,7 @@ public class RatingService {
 		Assert.notNull(principal);
 
 		//Comprobar que un customer esta en un viaje
+		Assert.isTrue(principal.getTravelPassenger().equals(travel));
 
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().after(travel.getEndMoment()));
@@ -81,11 +87,19 @@ public class RatingService {
 		principal = this.customerService.findByPrincipal();
 		Assert.notNull(principal);
 
+		//Comprobamos que la request es del principal
+		Assert.isTrue(request.getCustomer().equals(principal));
+
 		//Comprobar de que ha sido aceptada la oferta
+		Assert.isTrue(!this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
 
 		result = new Rating();
 		result.setCustomer(principal);
 		result.setRequest(request);
+
+		//Sacamos la offer de nuestro request y a partir de la offer (aceptada) sacamos el trainer que la ha creado.
+		final Offer offer = this.requestRepository.findOfferWithThisRequestTrue(request.getId());
+		result.setTrainer(offer.getTrainer());
 
 		return result;
 	}

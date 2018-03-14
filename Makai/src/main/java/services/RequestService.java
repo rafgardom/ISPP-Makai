@@ -79,7 +79,8 @@ public class RequestService {
 		Assert.notNull(principal);
 		Assert.isTrue(request.getCustomer().getId() == principal.getId());
 
-		//Comprobar de que no tiene ninguna oferta aceptada
+		//Comprobar de que no tiene ninguna oferta ¿aceptada?
+		Assert.isTrue(!this.tieneOfferUnRequest(request));
 
 		result = this.requestRepository.save(request);
 
@@ -97,7 +98,17 @@ public class RequestService {
 		Assert.isTrue(request.getCustomer().getId() == principal.getId());
 
 		//Comprobar de que no tiene ninguna oferta aceptada
+		Assert.isTrue(!this.tieneOfferUnRequest(request));
 
 		this.requestRepository.delete(request);
+	}
+
+	public Boolean tieneOfferUnRequest(final Request request) {
+		Boolean res = true;
+
+		if (this.requestRepository.findOfferWithThisRequest(request.getId()).isEmpty())
+			res = false;
+
+		return res;
 	}
 }

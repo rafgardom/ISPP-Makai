@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ReceiptRepository;
+import repositories.RequestRepository;
 import domain.Customer;
+import domain.Offer;
 import domain.Receipt;
 import domain.Request;
 
@@ -20,6 +22,9 @@ public class ReceiptService {
 	// Managed repository -----------------------------------------------------
 	@Autowired
 	private ReceiptRepository	receiptRepository;
+
+	@Autowired
+	private RequestRepository	requestRepository;
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
@@ -66,6 +71,7 @@ public class ReceiptService {
 		result.setRequest(request);
 
 		//Mostrar la Oferta aceptada de una Request dada
+		final Offer offer = this.requestRepository.findOfferWithThisRequestTrue(request.getId());
 
 		return result;
 	}

@@ -66,8 +66,18 @@ public class Rating extends DomainEntity {
 	private Customer	customer;
 	private Travel		travel;
 	private Request		request;
+	private Trainer		trainer;
 
 
+	@Valid
+	@ManyToOne(optional = true)
+	public Trainer getTrainer() {
+		return this.trainer;
+	}
+
+	public void setTrainer(final Trainer trainer) {
+		this.trainer = trainer;
+	}
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)
