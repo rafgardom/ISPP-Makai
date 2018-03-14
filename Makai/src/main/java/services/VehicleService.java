@@ -75,11 +75,23 @@ public class VehicleService {
 
 		// Hacer comprobacion del año
 		today = Calendar.getInstance();
-		Assert.isTrue(today.getTime().getYear() <= vehicle.getYear());
+		Assert.isTrue(today.getTime().getYear() >= vehicle.getYear());
 
 		result = this.vehicleRepository.save(vehicle);
 
 		return result;
+	}
+
+	public void delete(final Vehicle vehicle) {
+		Assert.notNull(vehicle);
+		Transporter principal;
+
+		principal = this.transporterService.findByPrincipal();
+		Assert.notNull(principal);
+		Assert.isTrue(vehicle.getTransporter().getId() == principal.getId());
+		Assert.isTrue(!vehicle.getIsActived());
+
+		this.vehicleRepository.delete(vehicle);
 	}
 
 }
