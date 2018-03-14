@@ -69,6 +69,9 @@ public class BannerService {
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 
+		//Solo se puede modificar si el current y el total view son iguales
+		Assert.isTrue(banner.getCurrentViews().equals(banner.getTotalViews()));
+
 		result = this.bannerRepository.save(banner);
 
 		return result;

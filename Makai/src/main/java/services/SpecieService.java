@@ -83,7 +83,17 @@ public class SpecieService {
 		Assert.notNull(principal);
 
 		//Comprobar de que ningún Animal tiene asociada ninguna Breed de esta Specie
+		Assert.isTrue(!this.tieneBreedUnaSpecie(specie));
 
 		this.specieRepository.delete(specie);
+	}
+
+	public Boolean tieneBreedUnaSpecie(final Specie specie) {
+		Boolean res = true;
+
+		if (this.specieRepository.findBreedWithThisSpecie(specie.getType()).isEmpty())
+			res = false;
+
+		return res;
 	}
 }

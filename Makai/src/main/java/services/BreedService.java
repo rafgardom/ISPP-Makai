@@ -88,7 +88,17 @@ public class BreedService {
 		Assert.notNull(principal);
 
 		//Comprobar de que ningún Animal tiene asociada a esta Breed
+		Assert.isTrue(!this.tieneBreedUnAnimal(breed));
 
 		this.breedRepository.delete(breed);
+	}
+
+	public Boolean tieneBreedUnAnimal(final Breed breed) {
+		Boolean res = true;
+
+		if (this.breedRepository.findAnimalWithThisBreed(breed.getBreed()).isEmpty())
+			res = false;
+
+		return res;
 	}
 }
