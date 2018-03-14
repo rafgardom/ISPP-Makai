@@ -13,6 +13,7 @@
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
@@ -24,7 +25,7 @@
 	<div class="alert alert-success"><spring:message code="${successMessage}" /></div>
 </jstl:if>
 
-<form:form action="${RequestURI}" modelAttribute="customerForm">
+<form:form action="${RequestURI}" modelAttribute="customerForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 		
 	<fieldset>
@@ -90,14 +91,31 @@
 				<br />
 				<acme:password code="customer.repeatPassword" path="repeatPassword"
 					mandatory="true" />
-				<br>
+				<br/>
+				<br/>
+					<spring:message code="image.formats" var="formats" />
+					<spring:message code="customer.picture" var="picture" />
+					<jstl:out value="${picture}"/>
+					<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
+					class="form:input-large" enctype="multipart/form-data" code="customer.picture"></form:input>
+					<jstl:out value="${formats}"/>
+				<br/>
+				<br/>
 				<acme:checkbox code="customer.acceptCondition" path="acceptCondition"
 					mandatory="true" />
 			</fieldset>
 	</security:authorize>
+	<br/>
 	
+	<jstl:if test="${errorMessage != null}">
+		<spring:message code="${errorMessage}" var="error" />
+		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
+	</jstl:if>
+	<br/>
 	<br/>
 	
 		<acme:submit code="customer.register" name="save" />
 		<acme:cancel code="customer.cancel" url="" />
+	<br/>
+	
 </form:form>

@@ -1,6 +1,8 @@
 
 package services;
 
+import java.io.IOException;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -31,7 +33,7 @@ public class CustomerServiceTest extends AbstractTest {
 	//Tests 
 
 	@Test
-	public void create() {
+	public void create() throws IOException {
 		final CustomerForm customerForm = this.customerService.createForm();
 
 		customerForm.setAcceptCondition(true);
@@ -50,7 +52,7 @@ public class CustomerServiceTest extends AbstractTest {
 		customerForm.setPhone("phone");
 		customerForm.setPassword("password");
 
-		final Byte[] picture = {
+		final byte[] picture = {
 			new Byte((byte) 2), new Byte((byte) 3)
 		};
 		customerForm.setPicture(picture);

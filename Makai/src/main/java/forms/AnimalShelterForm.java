@@ -14,7 +14,7 @@ public class AnimalShelterForm {
 	private String		email;
 	private String		phone;
 	private Coordinates	coordinates;
-	private Byte[]		picture;
+	private byte[]		picture;
 	private String		password;
 	private String		repeatPassword;
 	private boolean		acceptCondition;
@@ -68,11 +68,11 @@ public class AnimalShelterForm {
 		this.coordinates = coordinates;
 	}
 
-	public Byte[] getPicture() {
+	public byte[] getPicture() {
 		return this.picture;
 	}
 
-	public void setPicture(final Byte[] picture) {
+	public void setPicture(final byte[] picture) {
 		this.picture = picture;
 	}
 

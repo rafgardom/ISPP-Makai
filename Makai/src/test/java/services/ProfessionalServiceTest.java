@@ -48,7 +48,7 @@ public class ProfessionalServiceTest extends AbstractTest {
 		professionalForm.setPhone("phone");
 		professionalForm.setPassword("password");
 
-		final Byte[] picture = {
+		final byte[] picture = {
 			new Byte((byte) 2), new Byte((byte) 3)
 		};
 		professionalForm.setPicture(picture);

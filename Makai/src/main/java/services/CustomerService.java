@@ -1,6 +1,7 @@
 
 package services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -11,6 +12,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
 import repositories.CustomerRepository;
 import security.Authority;
@@ -114,7 +116,7 @@ public class CustomerService {
 		return result;
 	}
 
-	public Customer reconstruct(final CustomerForm customerForm, final BindingResult binding) {
+	public Customer reconstruct(final CustomerForm customerForm, final BindingResult binding) throws IOException {
 		Assert.notNull(customerForm);
 		Customer result;
 		String password;
@@ -147,11 +149,16 @@ public class CustomerService {
 		result.setPicture(customerForm.getPicture());
 		result.setSurname(customerForm.getSurname());
 
-		if (customerForm.getPicture() == null) {
-			final Byte[] picture = {
-				new Byte((byte) 2), new Byte((byte) 3)
+		final MultipartFile userImage = customerForm.getUserImage();
+		result.setPicture(userImage.getBytes());
+
+		if (result.getPicture().length == 0) {
+			FieldError fieldError;
+			final String[] codes = {
+				"customer.register.picture.empty.error"
 			};
-			result.setPicture(picture);
+			fieldError = new FieldError("customerForm", "userImage", customerForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
 		}
 
 		this.validator.validate(result, binding);

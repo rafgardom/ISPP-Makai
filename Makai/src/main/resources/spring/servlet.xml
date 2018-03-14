@@ -41,6 +41,14 @@
 		<property name="converters" ref="converters" />
 	</bean>
 
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		 <!-- setting maximum upload size -->
+		<!-- <property name="maxUploadSize" value="5242880" /> -->
+
+	</bean>
+
 	<!-- Data -->
 
 	<import resource="datasource.xml" />

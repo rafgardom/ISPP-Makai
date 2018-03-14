@@ -10,6 +10,8 @@
 
 package controllers;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,20 +52,31 @@ public class CustomerController extends AbstractController {
 
 	//Save register
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveRegister(@Valid final CustomerForm customerForm, final BindingResult binding) {
+	public ModelAndView saveRegister(@Valid final CustomerForm customerForm, final BindingResult binding) throws IOException {
 		ModelAndView result;
 		Customer customer;
-
+		boolean pictureTooLong = false;
 		customer = this.customerService.reconstruct(customerForm, binding);
 		if (binding.hasErrors())
 			result = this.createModelAndView(customerForm, "customer.register.error");
 		else
 			try {
+				//				final MultipartFile userImage = customerForm.getUserImage();
+
+				if (customerForm.getUserImage().getSize() > 5242880 || !customerForm.getUserImage().getContentType().contains("image")) {
+					pictureTooLong = true;
+					throw new IllegalArgumentException();
+				}
+				//				customer.setPicture(userImage.getBytes());
 				this.customerService.save(customer);
 				result = new ModelAndView("redirect:/security/login.do");
 
 			} catch (final Throwable oops) {
-				result = this.createModelAndView(customerForm, "customer.register.error");
+				if (pictureTooLong == false)
+					result = this.createModelAndView(customerForm, "customer.register.error");
+				else
+					result = this.createModelAndView(customerForm, "customer.register.picture.error");
+
 			}
 		return result;
 	}

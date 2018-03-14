@@ -4,7 +4,9 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -31,7 +33,7 @@ public class Actor extends DomainEntity {
 	private String		email;
 	private String		phone;
 	private Coordinates	coordinates;
-	private Byte[]		picture;
+	private byte[]		picture;
 
 
 	@NotBlank
@@ -69,11 +71,13 @@ public class Actor extends DomainEntity {
 	}
 
 	@NotNull
-	public Byte[] getPicture() {
+	@Lob
+	@Column(length = 16777215)
+	public byte[] getPicture() {
 		return this.picture;
 	}
-	public void setPicture(final Byte[] picture) {
-		this.picture = picture;
+	public void setPicture(final byte[] bs) {
+		this.picture = bs;
 	}
 
 
