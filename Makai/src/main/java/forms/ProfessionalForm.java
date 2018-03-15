@@ -1,7 +1,12 @@
 
 package forms;
 
+import javax.persistence.Column;
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 import domain.Coordinates;
 
@@ -9,17 +14,19 @@ public class ProfessionalForm {
 
 	// Attributes 
 
-	private int			id;
-	private String		name;
-	private String		email;
-	private String		phone;
-	private Coordinates	coordinates;
-	private byte[]		picture;
-	private String		nid;
-	private String		surname;
-	private String		password;
-	private String		repeatPassword;
-	private boolean		acceptCondition;
+	private int				id;
+	private String			name;
+	private String			email;
+	private String			phone;
+	private Coordinates		coordinates;
+	private byte[]			picture;
+	private String			nid;
+	private String			surname;
+	private String			password;
+	private String			repeatPassword;
+	private boolean			acceptCondition;
+	private String			userName;
+	private MultipartFile	userImage;
 
 
 	//Constructor
@@ -60,6 +67,7 @@ public class ProfessionalForm {
 		this.phone = phone;
 	}
 
+	@Valid
 	public Coordinates getCoordinates() {
 		return this.coordinates;
 	}
@@ -115,6 +123,24 @@ public class ProfessionalForm {
 
 	public void setAcceptCondition(final boolean acceptCondition) {
 		this.acceptCondition = acceptCondition;
+	}
+
+	@Column(unique = true)
+	@NotBlank
+	public String getUserName() {
+		return this.userName;
+	}
+
+	public void setUserName(final String userName) {
+		this.userName = userName;
+	}
+
+	public MultipartFile getUserImage() {
+		return this.userImage;
+	}
+
+	public void setUserImage(final MultipartFile userImage) {
+		this.userImage = userImage;
 	}
 
 }

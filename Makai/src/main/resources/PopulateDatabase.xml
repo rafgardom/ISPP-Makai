@@ -522,7 +522,7 @@
 	<bean id="administrator" class="domain.Administrator">
 		<property name="name" value="administrator" />
 		<property name="email" value="admin@gmail.com" />
-		<property name="phone" value="0000" />
+		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates1" />
 		<property name="picture">
 			<list>
@@ -539,7 +539,7 @@
 	<bean id="professional1" class="domain.Professional">
 		<property name="name" value="Name Profesional1" />
 		<property name="email" value="profesional1@gmail.com" />
-		<property name="phone" value="0025" />
+		<property name="phone" value="+34666944487" />
 		<property name="coordinates" ref="coordinates2" />
 		<property name="picture">
 			<list>
@@ -555,7 +555,7 @@
 	<bean id="professional2" class="domain.Professional">
 		<property name="name" value="Name Professional2" />
 		<property name="email" value="profesional2@gmail.com" />
-		<property name="phone" value="7800" />
+		<property name="phone" value="+38 632165112" />
 		<property name="coordinates" ref="coordinates3" />
 		<property name="picture">
 			<list>
@@ -571,7 +571,7 @@
 	<bean id="professional3" class="domain.Professional">
 		<property name="name" value="Name Professional3" />
 		<property name="email" value="professional3@gmail.com" />
-		<property name="phone" value="0250" />
+		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates4" />
 		<property name="picture">
 			<list>
@@ -587,7 +587,7 @@
 	<bean id="animalshelter1" class="domain.AnimalShelter">
 		<property name="name" value="Name Animal Shelter1" />
 		<property name="email" value="animalShelter1@gmail.com" />
-		<property name="phone" value="0025" />
+		<property name="phone" value="+35632144487" />
 		<property name="coordinates" ref="coordinates5" />
 		<property name="picture">
 			<list>
@@ -601,7 +601,7 @@
 	<bean id="animalshelter2" class="domain.AnimalShelter">
 		<property name="name" value="Name Animal Shelter2" />
 		<property name="email" value="animalShelter2@gmail.com" />
-		<property name="phone" value="0555" />
+		<property name="phone" value="+34 632887487" />
 		<property name="coordinates" ref="coordinates6" />
 		<property name="picture">
 			<list>
@@ -615,7 +615,7 @@
 	<bean id="animalshelter3" class="domain.AnimalShelter">
 		<property name="name" value="Name Animal Shelter3" />
 		<property name="email" value="animalShelter3@gmail.com" />
-		<property name="phone" value="0885" />
+		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates7" />
 		<property name="picture">
 			<list>
@@ -632,7 +632,7 @@
 		<property name="surname" value="Surname Customer1" />
 		<property name="nid" value="326598T" />
 		<property name="email" value="customer1@gmail.com" />
-		<property name="phone" value="1250" />
+		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates8" />
 		<property name="picture">
 			<list>
@@ -650,7 +650,7 @@
 		<property name="surname" value="Surname Customer2" />
 		<property name="nid" value="300598T" />
 		<property name="email" value="customer2@gmail.com" />
-		<property name="phone" value="1259" />
+		<property name="phone" value="+39632144487" />
 		<property name="coordinates" ref="coordinates9" />
 		<property name="picture">
 			<list>
@@ -668,7 +668,7 @@
 		<property name="surname" value="Surname Customer3" />
 		<property name="nid" value="326500T" />
 		<property name="email" value="customer3@gmail.com" />
-		<property name="phone" value="1299" />
+		<property name="phone" value="+34 699655654" />
 		<property name="coordinates" ref="coordinates10" />
 		<property name="picture">
 			<list>
@@ -686,7 +686,7 @@
 		<property name="surname" value="Surname Trainer1" />
 		<property name="nid" value="116598T" />
 		<property name="email" value="trainer1@gmail.com" />
-		<property name="phone" value="1990" />
+		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates11" />
 		<property name="picture">
 			<list>
@@ -714,7 +714,7 @@
 		<property name="surname" value="Surname Trainer2" />
 		<property name="nid" value="116698T" />
 		<property name="email" value="trainer2@gmail.com" />
-		<property name="phone" value="1555" />
+		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates12" />
 		<property name="picture">
 			<list>
@@ -741,7 +741,7 @@
 		<property name="surname" value="Surname Trainer3" />
 		<property name="nid" value="886598T" />
 		<property name="email" value="trainer3@gmail.com" />
-		<property name="phone" value="1110" />
+		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates13" />
 		<property name="picture">
 			<list>

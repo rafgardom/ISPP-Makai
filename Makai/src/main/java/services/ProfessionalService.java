@@ -1,6 +1,7 @@
 
 package services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
 import repositories.ProfessionalRepository;
 import security.Authority;
@@ -30,9 +34,9 @@ public class ProfessionalService {
 	@Autowired
 	private ActorService			actorService;
 
+	@Autowired
+	private Validator				validator;
 
-	//	@Autowired
-	//	private Validator			validator;
 
 	// Constructors------------------------------------------------------------
 	public ProfessionalService() {
@@ -113,7 +117,7 @@ public class ProfessionalService {
 		return result;
 	}
 
-	public Professional reconstruct(final ProfessionalForm professionalForm, final BindingResult binding) {
+	public Professional reconstruct(final ProfessionalForm professionalForm, final BindingResult binding) throws IOException {
 		Assert.notNull(professionalForm);
 		Professional result;
 		String password;
@@ -121,10 +125,19 @@ public class ProfessionalService {
 		if (professionalForm.getId() == 0) {
 			result = this.create();
 
-			if (professionalForm.getPassword() == professionalForm.getRepeatPassword() && professionalForm.getPassword() != null && !professionalForm.getPassword().isEmpty()) {
+			if (professionalForm.getPassword().equals(professionalForm.getRepeatPassword()) && professionalForm.getPassword() != null && !professionalForm.getPassword().isEmpty()) {
 				password = this.actorService.hashPassword(professionalForm.getPassword());
 				result.getUserAccount().setPassword(password);
+				result.getUserAccount().setUsername(professionalForm.getUserName());
+			} else {
+				FieldError fieldError;
+				final String[] codes = {
+					"professional.password.error"
+				};
+				fieldError = new FieldError("professionalForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
 			}
+
 		} else
 			result = this.findOne(professionalForm.getId());
 
@@ -134,7 +147,19 @@ public class ProfessionalService {
 		result.setPhone(professionalForm.getPhone());
 		result.setPicture(professionalForm.getPicture());
 
-		//		this.validator.validate(result, binding);
+		final MultipartFile userImage = professionalForm.getUserImage();
+		result.setPicture(userImage.getBytes());
+
+		if (result.getPicture().length == 0) {
+			FieldError fieldError;
+			final String[] codes = {
+				"professional.register.picture.empty.error"
+			};
+			fieldError = new FieldError("professionalForm", "userImage", professionalForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
+		this.validator.validate(result, binding);
 
 		return result;
 	}

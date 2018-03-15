@@ -1,6 +1,7 @@
 
 package services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
 import repositories.AnimalShelterRepository;
 import security.Authority;
@@ -30,9 +34,9 @@ public class AnimalShelterService {
 	@Autowired
 	private ActorService			actorService;
 
+	@Autowired
+	private Validator				validator;
 
-	//	@Autowired
-	//	private Validator			validator;
 
 	// Constructors------------------------------------------------------------
 	public AnimalShelterService() {
@@ -112,7 +116,7 @@ public class AnimalShelterService {
 		return result;
 	}
 
-	public AnimalShelter reconstruct(final AnimalShelterForm animalShelterForm, final BindingResult binding) {
+	public AnimalShelter reconstruct(final AnimalShelterForm animalShelterForm, final BindingResult binding) throws IOException {
 		Assert.notNull(animalShelterForm);
 		AnimalShelter result;
 		String password;
@@ -120,9 +124,18 @@ public class AnimalShelterService {
 		if (animalShelterForm.getId() == 0) {
 			result = this.create();
 
-			if (animalShelterForm.getPassword() == animalShelterForm.getRepeatPassword() && animalShelterForm.getPassword() != null && !animalShelterForm.getPassword().isEmpty()) {
+			if (animalShelterForm.getPassword().equals(animalShelterForm.getRepeatPassword()) && animalShelterForm.getPassword() != null && !animalShelterForm.getPassword().isEmpty()) {
 				password = this.actorService.hashPassword(animalShelterForm.getPassword());
 				result.getUserAccount().setPassword(password);
+				result.getUserAccount().setUsername(animalShelterForm.getUserName());
+			} else {
+				FieldError fieldError;
+				final String[] codes = {
+					"animalShelter.password.error"
+				};
+				fieldError = new FieldError("animalShelterForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
+
 			}
 
 		} else
@@ -134,7 +147,19 @@ public class AnimalShelterService {
 		result.setPhone(animalShelterForm.getPhone());
 		result.setPicture(animalShelterForm.getPicture());
 
-		//		this.validator.validate(result, binding);
+		final MultipartFile userImage = animalShelterForm.getUserImage();
+		result.setPicture(userImage.getBytes());
+
+		if (result.getPicture().length == 0) {
+			FieldError fieldError;
+			final String[] codes = {
+				"customer.register.picture.empty.error"
+			};
+			fieldError = new FieldError("animalShelterForm", "userImage", animalShelterForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
+		this.validator.validate(result, binding);
 
 		return result;
 	}

@@ -1,7 +1,12 @@
 
 package forms;
 
+import javax.persistence.Column;
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 import domain.Coordinates;
 
@@ -9,15 +14,17 @@ public class AnimalShelterForm {
 
 	// Attributes 
 
-	private int			id;
-	private String		name;
-	private String		email;
-	private String		phone;
-	private Coordinates	coordinates;
-	private byte[]		picture;
-	private String		password;
-	private String		repeatPassword;
-	private boolean		acceptCondition;
+	private int				id;
+	private String			name;
+	private String			email;
+	private String			phone;
+	private Coordinates		coordinates;
+	private byte[]			picture;
+	private String			password;
+	private String			repeatPassword;
+	private boolean			acceptCondition;
+	private String			userName;
+	private MultipartFile	userImage;
 
 
 	//Constructor
@@ -60,6 +67,7 @@ public class AnimalShelterForm {
 		this.phone = phone;
 	}
 
+	@Valid
 	public Coordinates getCoordinates() {
 		return this.coordinates;
 	}
@@ -76,6 +84,7 @@ public class AnimalShelterForm {
 		this.picture = picture;
 	}
 
+	@NotBlank
 	public String getPassword() {
 		return this.password;
 	}
@@ -84,6 +93,7 @@ public class AnimalShelterForm {
 		this.password = password;
 	}
 
+	@NotBlank
 	public String getRepeatPassword() {
 		return this.repeatPassword;
 	}
@@ -99,6 +109,24 @@ public class AnimalShelterForm {
 
 	public void setAcceptCondition(final boolean acceptCondition) {
 		this.acceptCondition = acceptCondition;
+	}
+
+	@Column(unique = true)
+	@NotBlank
+	public String getUserName() {
+		return this.userName;
+	}
+
+	public void setUserName(final String userName) {
+		this.userName = userName;
+	}
+
+	public MultipartFile getUserImage() {
+		return this.userImage;
+	}
+
+	public void setUserImage(final MultipartFile userImage) {
+		this.userImage = userImage;
 	}
 
 }

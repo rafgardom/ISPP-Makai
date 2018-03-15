@@ -1,6 +1,7 @@
 
 package services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
 import repositories.TrainerRepository;
 import security.Authority;
@@ -32,9 +36,9 @@ public class TrainerService {
 	@Autowired
 	private ActorService		actorService;
 
+	@Autowired
+	private Validator			validator;
 
-	//	@Autowired
-	//	private Validator			validator;
 
 	// Constructors------------------------------------------------------------
 	public TrainerService() {
@@ -121,7 +125,7 @@ public class TrainerService {
 		return result;
 	}
 
-	public Trainer reconstruct(final TrainerForm trainerForm, final BindingResult binding) {
+	public Trainer reconstruct(final TrainerForm trainerForm, final BindingResult binding) throws IOException {
 		Assert.notNull(trainerForm);
 		Trainer result;
 		String password;
@@ -129,9 +133,18 @@ public class TrainerService {
 		if (trainerForm.getId() == 0) {
 			result = this.create();
 
-			if (trainerForm.getPassword() == trainerForm.getRepeatPassword() && trainerForm.getPassword() != null && !trainerForm.getPassword().isEmpty()) {
+			if (trainerForm.getPassword().equals(trainerForm.getRepeatPassword()) && trainerForm.getPassword() != null && !trainerForm.getPassword().isEmpty()) {
 				password = this.actorService.hashPassword(trainerForm.getPassword());
 				result.getUserAccount().setPassword(password);
+				result.getUserAccount().setUsername(trainerForm.getUserName());
+			} else {
+				FieldError fieldError;
+				final String[] codes = {
+					"trainer.password.error"
+				};
+				fieldError = new FieldError("trainerForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
+
 			}
 		} else
 			result = this.findOne(trainerForm.getId());
@@ -144,7 +157,19 @@ public class TrainerService {
 		result.setPicture(trainerForm.getPicture());
 		result.setSurname(trainerForm.getSurname());
 
-		//		this.validator.validate(result, binding);
+		final MultipartFile userImage = trainerForm.getUserImage();
+		result.setPicture(userImage.getBytes());
+
+		if (result.getPicture().length == 0) {
+			FieldError fieldError;
+			final String[] codes = {
+				"trainer.register.picture.empty.error"
+			};
+			fieldError = new FieldError("trainerForm", "userImage", trainerForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
+		this.validator.validate(result, binding);
 
 		return result;
 	}
@@ -163,6 +188,7 @@ public class TrainerService {
 		result.setSurname(trainer.getSurname());
 		result.setReceipts(trainer.getReceipts());
 		result.setOffers(result.getOffers());
+		result.setAvgRating(trainer.getAvgRating());
 
 		return result;
 	}

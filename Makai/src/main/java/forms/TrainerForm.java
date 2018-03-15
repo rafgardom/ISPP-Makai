@@ -3,7 +3,12 @@ package forms;
 
 import java.util.Collection;
 
+import javax.persistence.Column;
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 import domain.Coordinates;
 import domain.Offer;
@@ -26,6 +31,9 @@ public class TrainerForm {
 	private boolean				acceptCondition;
 	private Collection<Receipt>	receipts;
 	private Collection<Offer>	offers;
+	private String				userName;
+	private MultipartFile		userImage;
+	private double				avgRating;
 
 
 	//Constructor
@@ -68,6 +76,7 @@ public class TrainerForm {
 		this.phone = phone;
 	}
 
+	@Valid
 	public Coordinates getCoordinates() {
 		return this.coordinates;
 	}
@@ -100,6 +109,7 @@ public class TrainerForm {
 		this.surname = surname;
 	}
 
+	@NotBlank
 	public String getPassword() {
 		return this.password;
 	}
@@ -108,6 +118,7 @@ public class TrainerForm {
 		this.password = password;
 	}
 
+	@NotBlank
 	public String getRepeatPassword() {
 		return this.repeatPassword;
 	}
@@ -139,6 +150,32 @@ public class TrainerForm {
 
 	public void setOffers(final Collection<Offer> offers) {
 		this.offers = offers;
+	}
+
+	@Column(unique = true)
+	@NotBlank
+	public String getUserName() {
+		return this.userName;
+	}
+
+	public void setUserName(final String userName) {
+		this.userName = userName;
+	}
+
+	public MultipartFile getUserImage() {
+		return this.userImage;
+	}
+
+	public void setUserImage(final MultipartFile userImage) {
+		this.userImage = userImage;
+	}
+
+	public double getAvgRating() {
+		return this.avgRating;
+	}
+
+	public void setAvgRating(final double avgRating) {
+		this.avgRating = avgRating;
 	}
 
 }

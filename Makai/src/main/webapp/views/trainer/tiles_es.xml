@@ -16,9 +16,9 @@
       
 <tiles-definitions>
 
-	<definition name="customer/register" extends="master.page">
-		<put-attribute name="title" value="Registro de cliente" />
-		<put-attribute name="body" value="/views/customer/register.jsp" />
+	<definition name="trainer/register" extends="master.page">
+		<put-attribute name="title" value="Registro de adiestrador" />
+		<put-attribute name="body" value="/views/trainer/register.jsp" />
 	</definition>
 	
 </tiles-definitions>

@@ -53,6 +53,9 @@
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 		
 		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/professional/register.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/trainer/register.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/animalShelter/register.do" access="isAnonymous()" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

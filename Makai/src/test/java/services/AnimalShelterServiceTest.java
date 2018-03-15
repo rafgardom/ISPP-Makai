@@ -1,6 +1,8 @@
 
 package services;
 
+import java.io.IOException;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -30,7 +32,7 @@ public class AnimalShelterServiceTest extends AbstractTest {
 
 	//Tests 
 	@Test
-	public void create() {
+	public void create() throws IOException {
 		final AnimalShelterForm animalShelterForm = this.animalShelterService.createForm();
 
 		animalShelterForm.setAcceptCondition(true);
