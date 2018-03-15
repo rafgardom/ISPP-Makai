@@ -103,4 +103,25 @@ public class OfferService {
 
 		this.offerRepository.delete(offer);
 	}
+
+	//Other business service
+
+	public Offer findOfferAccepted(final Request request) {
+		return this.offerRepository.findAcceptedOffer(request.getId());
+	}
+
+	public Collection<Offer> findNonAcceptedOffers(final Request request) {
+		return this.offerRepository.findNonAcceptedOffers(request.getId());
+	}
+
+	//Erase all offers not accepted that are linked to a request which has already an accepted offer
+	public void eraseNonAcceptedOffers(final Request request) {
+		final Offer acceptedOffer = this.findOfferAccepted(request);
+		Assert.notNull(acceptedOffer);
+
+		final Collection<Offer> nonAcceptedOffers = this.findNonAcceptedOffers(request);
+		if (!nonAcceptedOffers.isEmpty())
+			this.offerRepository.delete(nonAcceptedOffers);
+
+	}
 }
