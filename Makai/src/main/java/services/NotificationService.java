@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,12 +52,17 @@ public class NotificationService {
 	public Notification create(final Collection<Actor> actors) {
 		Notification result;
 		Actor principal;
+		Calendar calendar;
 
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
 
+		calendar = Calendar.getInstance();
+		calendar.set(Calendar.MILLISECOND, -10);
+
 		result = new Notification();
 		result.setActors(actors);
+		result.setMoment(calendar.getTime());
 
 		return result;
 	}
