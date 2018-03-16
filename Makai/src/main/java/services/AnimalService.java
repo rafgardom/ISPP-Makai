@@ -83,6 +83,7 @@ public class AnimalService {
 
 		breeds = new ArrayList<Breed>();
 		result.setBreeds(breeds);
+		result.setIsHidden(false);
 
 		return result;
 	}
@@ -133,8 +134,8 @@ public class AnimalService {
 			Assert.isTrue(animal.getCustomer().getId() == customer.getId());
 		}
 
-		//Comprobar de que no haya una request asociada a el
-
-		this.animalRepository.delete(animal);
+		//Cambiamos el atributo isHidden a true cuando el animal es eliminado
+		animal.setIsHidden(true);
+		this.save(animal);
 	}
 }

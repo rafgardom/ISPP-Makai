@@ -30,8 +30,17 @@ public class Animal extends DomainEntity {
 	private Integer	age;
 	private Sex		sex;
 	private Byte[]	picture;
+	private Boolean	isHidden;
 
 
+	@NotNull
+	public Boolean getIsHidden() {
+		return this.isHidden;
+	}
+
+	public void setIsHidden(final Boolean isHidden) {
+		this.isHidden = isHidden;
+	}
 	@NotBlank
 	public String getName() {
 		return this.name;
