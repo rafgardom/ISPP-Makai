@@ -40,6 +40,16 @@
 			</li>
 		</security:authorize>
 		
+		<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">
+			<li><a class="fNiv"><spring:message	code="master.page.travel" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="travel/create.do"><spring:message code="master.page.travel.create" /></a></li>
+					<li><a href="travel/list.do"><spring:message code="master.page.travel.list" /></a></li>					
+				</ul>
+			</li>
+		</security:authorize>
+		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li>

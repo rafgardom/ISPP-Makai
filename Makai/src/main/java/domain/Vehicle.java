@@ -32,7 +32,16 @@ public class Vehicle extends DomainEntity {
 	private Byte[]	picture;
 	private String	color;
 	private Boolean	isActived;
+	private String	license;
 
+
+	@NotNull
+	public String getLicense() {
+		return this.license;
+	}
+	public void setLicense(final String license) {
+		this.license = license;
+	}
 
 	@NotNull
 	public Boolean getIsActived() {
