@@ -392,6 +392,7 @@
 				<ref bean="customer3"/>
 			</list>
 		</property>
+		<property name="type" value="GENERAL" />
 	</bean>
 	
 	<bean id="notification2" class="domain.Notification">
@@ -405,6 +406,7 @@
 				<ref bean="trainer3"/>
 			</list>
 		</property>
+		<property name="type" value="GENERAL" />
 	</bean>
 	
 	<bean id="notification3" class="domain.Notification">
@@ -418,6 +420,7 @@
 				<ref bean="professional3"/>
 			</list>
 		</property>
+		<property name="type" value="GENERAL" />
 	</bean>
 	
 	<bean id="notification4" class="domain.Notification">
@@ -431,6 +434,7 @@
 				<ref bean="animalshelter3"/>
 			</list>
 		</property>
+		<property name="type" value="GENERAL" />
 	</bean>
 	
 	<!-- Banner -->	

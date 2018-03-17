@@ -28,9 +28,10 @@ public class Notification extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	private Date	moment;
-	private String	reason;
-	private String	description;
+	private Date				moment;
+	private String				reason;
+	private String				description;
+	private NotificationType	type;
 
 
 	@NotNull
@@ -57,6 +58,15 @@ public class Notification extends DomainEntity {
 	}
 	public void setDescription(final String description) {
 		this.description = description;
+	}
+
+	@NotNull
+	public NotificationType getType() {
+		return this.type;
+	}
+
+	public void setType(final NotificationType type) {
+		this.type = type;
 	}
 
 
