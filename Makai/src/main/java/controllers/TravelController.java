@@ -2,6 +2,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.validation.Valid;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.TravelService;
@@ -61,6 +63,50 @@ public class TravelController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView edit(@RequestParam final int travelId) {
+		ModelAndView result;
+		Travel travel;
+
+		travel = this.travelService.findOne(travelId);
+		try {
+			this.travelService.delete(travel);
+			result = new ModelAndView("redirect:create.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int travelId) {
+		ModelAndView result;
+		Travel travel;
+
+		travel = this.travelService.findOne(travelId);
+		try {
+			this.travelService.delete(travel);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		final Collection<Travel> travels;
+		travels = this.travelService.findAll();
+		result = new ModelAndView("travel/list");
+		result.addObject("travels", travels);
+		result.addObject("requestURI", "travel/list.do");
+
+		return result;
+	}
+
 	// Ancillary methods
 
 	protected ModelAndView createModelAndView(final TravelForm travelForm) {
@@ -76,4 +122,5 @@ public class TravelController extends AbstractController {
 
 		return result;
 	}
+
 }

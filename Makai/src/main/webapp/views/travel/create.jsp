@@ -28,32 +28,39 @@
 <form:form action="${RequestURI}" modelAttribute="travelForm" enctype="multipart/form-data">
 		
 	<fieldset>
-		<legend>
-			<spring:message code="travel.createTravel" />
-		</legend>
-
+		<br />
+		<p><b>
+			<spring:message code="travel.origin" />
+		</b></p>
+		<br />
 		<acme:textbox code="travel.country" path="countryOrigin" mandatory="true" />
 		<br />
-		<acme:textbox code="travel.state" path="stateOrigin" mandatory="true" />
+		<acme:textbox code="travel.state" path="stateOrigin" mandatory="false" />
 		<br />	
-		<acme:textbox code="travel.province" path="provinceOrigin" mandatory="true" />
+		<acme:textbox code="travel.province" path="provinceOrigin" mandatory="false" />
 		<br />
 		<acme:textbox code="travel.city" path="cityOrigin" mandatory="true" />
 		<br />
 		<acme:textbox code="travel.zipcode" path="zip_codeOrigin" mandatory="true" />
 		<br />
-		
+		<p><b>
+			<spring:message code="travel.destination" />
+		</b></p>
+		<br />
 		<acme:textbox code="travel.country" path="countryDestination" mandatory="true" />
 		<br />
-		<acme:textbox code="travel.state" path="stateDestination" mandatory="true" />
+		<acme:textbox code="travel.state" path="stateDestination" mandatory="false" />
 		<br />	
-		<acme:textbox code="travel.province" path="provinceDestination" mandatory="true" />
+		<acme:textbox code="travel.province" path="provinceDestination" mandatory="false" />
 		<br />
 		<acme:textbox code="travel.city" path="cityDestination" mandatory="true" />
 		<br />
 		<acme:textbox code="travel.zipcode" path="zip_codeDestination" mandatory="true" />
 		<br />
-		
+		<p><b>
+			<spring:message code="travel.details" />
+		</b></p>
+		<br />
 		<acme:textbox code="travel.startMoment" path="startMoment" mandatory="true" />
 		<br />
 
@@ -68,23 +75,18 @@
 		
 		<%-- itemLabel="vehicle.name"
 		<acme:select code="travel.vehicle" path="vehicle" items="vehicles" itemLabel="vehicle" />
-		<br />--%>
-		
-		
+		<br />--%>	
 
 	</fieldset>
-	<br />
 	<br/>
 	
 	<security:authorize access="isAnonymous()">
 	</security:authorize>
-	<br/>
 	
 	<jstl:if test="${errorMessage != null}">
 		<spring:message code="${errorMessage}" var="error" />
 		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
 	</jstl:if>
-	<br/>
 	<br/>
 	
 		<acme:submit code="travel.create" name="save" />
