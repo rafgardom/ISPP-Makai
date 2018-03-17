@@ -3,6 +3,7 @@ package services;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.NotificationRepository;
 import domain.Actor;
+import domain.Administrator;
 import domain.Notification;
 
 @Service
@@ -24,6 +26,9 @@ public class NotificationService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	// Constructors------------------------------------------------------------
@@ -45,6 +50,27 @@ public class NotificationService {
 		Collection<Notification> result;
 
 		result = this.notificationRepository.findAll();
+
+		return result;
+	}
+
+	public Notification create() {
+		Notification result;
+		Administrator principal;
+		Calendar calendar;
+		Collection<Actor> actors;
+
+		principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+
+		calendar = Calendar.getInstance();
+		calendar.set(Calendar.MILLISECOND, -10);
+
+		actors = new HashSet<Actor>();
+
+		result = new Notification();
+		result.setActors(actors);
+		result.setMoment(calendar.getTime());
 
 		return result;
 	}

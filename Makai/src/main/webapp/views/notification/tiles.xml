@@ -21,4 +21,9 @@
 		<put-attribute name="body" value="/views/notification/list.jsp" />
 	</definition>
 	
+	<definition name="notification/create" extends="master.page">
+		<put-attribute name="title" value="Create notification" />
+		<put-attribute name="body" value="/views/notification/create.jsp" />
+	</definition>
+	
 </tiles-definitions>
