@@ -47,7 +47,10 @@
 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
-
+		
+		<security:intercept-url pattern="/notification/actor/list.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/notification/actor/delete.do" access="isAuthenticated()" /> 
+		
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 

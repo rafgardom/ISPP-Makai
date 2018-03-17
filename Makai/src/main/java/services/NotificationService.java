@@ -103,4 +103,14 @@ public class NotificationService {
 
 	}
 
+	// Other business methods -------------------------------------------------
+
+	public Collection<Notification> findByActorId(final int actorId) {
+		Collection<Notification> result;
+
+		result = this.notificationRepository.findByActorId(actorId);
+
+		return result;
+	}
+
 }

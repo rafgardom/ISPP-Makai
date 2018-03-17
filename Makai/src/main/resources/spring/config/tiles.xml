@@ -26,6 +26,7 @@
 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/animalShelter/tiles.xml</value>
 		<value>/views/customer/tiles.xml</value>
+		<value>/views/notification/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
 		<value>/views/professional/tiles.xml</value>
 		<value>/views/travel/tiles.xml</value>
