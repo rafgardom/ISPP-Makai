@@ -1,0 +1,17 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.settings/
+*.project
+
+# Maven
+log/
+target/
+/rebel.xml
+/.classpath
+/bin/
