@@ -138,6 +138,8 @@ public class AnimalShelterService {
 
 			}
 
+			result.getUserAccount().setEnabled(true);
+
 		} else
 			result = this.findOne(animalShelterForm.getId());
 
