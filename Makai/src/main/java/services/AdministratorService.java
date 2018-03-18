@@ -44,6 +44,16 @@ public class AdministratorService {
 
 		return result;
 	}
+	
+	public Administrator findOne() {
+		Collection<Administrator> administrators;
+		Administrator[] result;
+
+		administrators = this.administratorRepository.findAll();
+		result = (Administrator[]) administrators.toArray();
+
+		return result[0];
+	}
 
 	public Collection<Administrator> findAll() {
 		Collection<Administrator> result;
