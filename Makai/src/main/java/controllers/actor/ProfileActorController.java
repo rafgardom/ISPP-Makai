@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +45,7 @@ public class ProfileActorController extends AbstractController {
 		String image;
 
 		actor = this.actorService.findByPrincipal();
-		
+
 		base64 = Base64.encode(actor.getPicture());
 		imageString = new StringBuilder();
 		imageString.append("data:image/png;base64,");
