@@ -29,7 +29,7 @@ public class Animal extends DomainEntity {
 	private String	chipNumber;
 	private Integer	age;
 	private Sex		sex;
-	private Byte[]	picture;
+	private byte[]	picture;
 	private Boolean	isHidden;
 
 
@@ -72,10 +72,10 @@ public class Animal extends DomainEntity {
 		this.sex = sex;
 	}
 
-	public Byte[] getPicture() {
+	public byte[] getPicture() {
 		return this.picture;
 	}
-	public void setPicture(final Byte[] picture) {
+	public void setPicture(final byte[] picture) {
 		this.picture = picture;
 	}
 
@@ -87,7 +87,6 @@ public class Animal extends DomainEntity {
 
 
 	@Valid
-	@NotNull
 	@ManyToOne(optional = true)
 	public Customer getCustomer() {
 		return this.customer;
@@ -98,7 +97,6 @@ public class Animal extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@ManyToOne(optional = true)
 	public AnimalShelter getAnimalShelter() {
 		return this.animalShelter;

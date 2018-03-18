@@ -10,22 +10,17 @@
 <form:form action="animal/customer/edit.do" modelAttribute="animal">
 	
 	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="breeds" />
-	<form:hidden path="customer" />
-	<form:hidden path="animalShelter" />
-	<form:hidden path="sex" />
-	<form:hidden path="isHidden" />
 
 	<acme:input code="animal.name" path="name" />
 	<acme:input code="animal.chipNumber" path="chipNumber"/>
-	<acme:input code="animal.age" path="age" />
+	<acme:input code="animal.age" path="age" type="number" min="0" />
+	
 	<form:select path="sex">
-    <form:option value="${null }" label="----" />    
-    <jstl:forEach items="${sexs }" var="sex">
-      <form:option value="${sex}" label="${sex}" />
-    </jstl:forEach>
-  </form:select>
+		<form:option value="${null }" label="----" />    
+		<jstl:forEach items="${sexs }" var="sex">
+			<form:option value="${sex}" label="${sex}" />
+		</jstl:forEach>
+	</form:select>
 	
 	<jstl:out value="${picture}"/>
 					<form:input type="file" path="picture" id="picture" name="picture" mandatory="true"

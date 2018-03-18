@@ -9,7 +9,7 @@ import domain.Coordinates;
 
 public class ProfileForm {
 
-	// Attributes 
+	// Attributes -------------------------------------------------------------
 
 	private String			name;
 	private String			email;
@@ -23,13 +23,13 @@ public class ProfileForm {
 	private MultipartFile	userImage;
 
 
-	// Constructor 
+	// Constructor ------------------------------------------------------------
 
 	public ProfileForm() {
 		super();
 	}
 
-	//Getter & setter
+	// Getters & setters ------------------------------------------------------
 
 	public String getName() {
 		return this.name;

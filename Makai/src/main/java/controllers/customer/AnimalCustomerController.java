@@ -16,6 +16,7 @@ import services.CustomerService;
 import controllers.AbstractController;
 import domain.Animal;
 import domain.Sex;
+import forms.AnimalForm;
 
 @Controller
 @RequestMapping("/animal/customer")
@@ -58,10 +59,12 @@ public class AnimalCustomerController extends AbstractController {
 	public ModelAndView register() {
 		ModelAndView result;
 		Animal animal;
+		AnimalForm animalForm;
 
 		animal = this.animalService.create();
+		animalForm = this.animalService.animalToFormObject(animal);
 
-		result = this.createEditModelAndView(animal);
+		result = this.createEditModelAndView(animalForm);
 
 		return result;
 	}
@@ -71,32 +74,51 @@ public class AnimalCustomerController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int animalId) {
 		ModelAndView result;
 		Animal animal;
+		AnimalForm animalForm;
 
 		animal = this.animalService.findOne(animalId);
+		animalForm = this.animalService.animalToFormObject(animal);
 
-		result = this.createEditModelAndView(animal);
+		result = this.createEditModelAndView(animalForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Animal animal, final BindingResult binding) {
+	public ModelAndView save(@Valid final AnimalForm animalForm, final BindingResult binding) {
 
 		ModelAndView result;
+		Animal animal;
+		byte[] savedFile;
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
-			result = this.createEditModelAndView(animal);
+			result = this.createEditModelAndView(animalForm);
 
 		} else
 			try {
+
+				if (animalForm.getAnimalImage().getSize() > 0) {
+
+					savedFile = animalForm.getAnimalImage().getBytes();
+					animalForm.setPicture(savedFile);
+
+				} else if (animalForm.getAnimalImage().getSize() > 5242880) {
+					//					pictureTooLong = true;
+					System.out.println("La imagen es demasiado larga");
+					throw new IllegalArgumentException();
+				} else
+					animalForm.setPicture(null);
+
+				animal = this.animalService.reconstruct(animalForm, binding);
+
 				animal = this.animalService.save(animal);
 				result = new ModelAndView("master.page");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
 
-				result = this.createEditModelAndView(animal, "animal.commit.error");
+				result = this.createEditModelAndView(animalForm, "animal.commit.error");
 
 			}
 		return result;
@@ -118,24 +140,24 @@ public class AnimalCustomerController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final Animal animal) {
+	protected ModelAndView createEditModelAndView(final AnimalForm animalForm) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(animal, null);
+		result = this.createEditModelAndView(animalForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Animal animal, final String message) {
+	protected ModelAndView createEditModelAndView(final AnimalForm animalForm, final String message) {
 		ModelAndView result;
 		Sex[] sexs;
 		sexs = Sex.values();
 
-		if (animal.getId() == 0)
+		if (animalForm.getId() == 0)
 			result = new ModelAndView("animal/customer/register");
 		else
 			result = new ModelAndView("animal/customer/edit");
-		result.addObject("animal", animal);
+		result.addObject("animal", animalForm);
 		result.addObject("sexs", sexs);
 		result.addObject("message", message);
 

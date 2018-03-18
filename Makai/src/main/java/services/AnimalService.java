@@ -1,13 +1,18 @@
 
 package services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import repositories.AnimalRepository;
 import security.Authority;
@@ -16,6 +21,7 @@ import domain.Animal;
 import domain.AnimalShelter;
 import domain.Breed;
 import domain.Customer;
+import forms.AnimalForm;
 
 @Service
 @Transactional
@@ -34,6 +40,9 @@ public class AnimalService {
 
 	@Autowired
 	private CustomerService			customerService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	// Constructors------------------------------------------------------------
@@ -137,5 +146,56 @@ public class AnimalService {
 		//Cambiamos el atributo isHidden a true cuando el animal es eliminado
 		animal.setIsHidden(true);
 		this.save(animal);
+	}
+
+	// Other business methods -------------------------------------------------
+
+	@Bean(name = "multipartResolver")
+	public CommonsMultipartResolver getCommonsMultipartResolver() {
+		final CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(20971520);   // 20MB
+		multipartResolver.setMaxInMemorySize(1048576);  // 1MB
+		return multipartResolver;
+	}
+
+	public Animal reconstruct(final AnimalForm animalForm, final BindingResult binding) throws IOException {
+
+		Assert.notNull(animalForm);
+
+		Animal result;
+
+		if (animalForm.getId() == 0)
+			result = this.create();
+		else
+			result = this.findOne(animalForm.getId());
+
+		result.setName(animalForm.getName());
+		result.setChipNumber(animalForm.getChipNumber());
+		result.setAge(animalForm.getAge());
+		result.setSex(animalForm.getSex());
+
+		if (animalForm.getPicture() != null)
+			result.setPicture(animalForm.getPicture());
+
+		this.validator.validate(result, binding);
+
+		return result;
+
+	}
+	public AnimalForm animalToFormObject(final Animal animal) {
+		final AnimalForm result;
+
+		Assert.notNull(animal);
+
+		result = new AnimalForm();
+
+		result.setId(animal.getId());
+		result.setName(animal.getName());
+		result.setChipNumber(animal.getChipNumber());
+		result.setAge(animal.getAge());
+		result.setSex(animal.getSex());
+		result.setPicture(animal.getPicture());
+
+		return result;
 	}
 }
