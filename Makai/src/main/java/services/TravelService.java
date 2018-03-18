@@ -116,7 +116,6 @@ public class TravelService {
 			result = this.create();
 		else
 			result = this.findOne(travelForm.getId());
-		;
 
 		result.setOrigin(new Coordinates(travelForm.getCountryOrigin(), travelForm.getCityOrigin(), travelForm.getStateOrigin(), travelForm.getProvinceOrigin(), travelForm.getZip_codeOrigin()));
 		result.setDestination(new Coordinates(travelForm.getCountryDestination(), travelForm.getCityDestination(), travelForm.getStateDestination(), travelForm.getProvinceDestination(), travelForm.getZip_codeDestination()));

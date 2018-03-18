@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import repositories.VehicleRepository;
 import domain.Transporter;
 import domain.Vehicle;
+import forms.VehicleForm;
 
 @Service
 @Transactional
@@ -45,6 +46,12 @@ public class VehicleService {
 		Collection<Vehicle> result;
 
 		result = this.vehicleRepository.findAll();
+
+		return result;
+	}
+
+	public VehicleForm createForm() {
+		final VehicleForm result = new VehicleForm();
 
 		return result;
 	}
@@ -92,6 +99,47 @@ public class VehicleService {
 		Assert.isTrue(!vehicle.getIsActived());
 
 		this.vehicleRepository.delete(vehicle);
+	}
+
+	public Vehicle reconstruct(final VehicleForm vehicleForm) {
+		Assert.notNull(vehicleForm);
+		Vehicle result;
+
+		if (vehicleForm.getId() == 0)
+			result = this.create();
+		else
+			result = this.findOne(vehicleForm.getId());
+
+		result.setAccommodation(vehicleForm.getAccommodation());
+		result.setBrand(vehicleForm.getBrand());
+		result.setCarType(vehicleForm.getCarType());
+		result.setColor(vehicleForm.getColor());
+		result.setDescription(vehicleForm.getDescription());
+		result.setId(vehicleForm.getId());
+		result.setLicense(vehicleForm.getLicense());
+		result.setPicture(vehicleForm.getPicture());
+		result.setSeats(vehicleForm.getSeats());
+		result.setYear(vehicleForm.getYear());
+
+		return result;
+	}
+
+	public VehicleForm toFormObject(final Vehicle vehicle) {
+		Assert.notNull(vehicle);
+		final VehicleForm result = new VehicleForm();
+
+		result.setAccommodation(vehicle.getAccommodation());
+		result.setBrand(vehicle.getBrand());
+		result.setCarType(vehicle.getCarType());
+		result.setColor(vehicle.getColor());
+		result.setDescription(vehicle.getDescription());
+		result.setId(vehicle.getId());
+		result.setLicense(vehicle.getLicense());
+		result.setPicture(vehicle.getPicture());
+		result.setSeats(vehicle.getSeats());
+		result.setYear(vehicle.getYear());
+
+		return result;
 	}
 
 }
