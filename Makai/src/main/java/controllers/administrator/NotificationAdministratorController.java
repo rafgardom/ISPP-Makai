@@ -44,8 +44,12 @@ public class NotificationAdministratorController extends AbstractController {
 	public ModelAndView create() {
 		final ModelAndView result;
 		Notification notification;
+		Collection<Actor> actors;
 
 		notification = this.notificationService.create();
+
+		actors = this.actorService.findAllNotAdmin();
+		notification.setActors(actors);
 
 		result = this.createEditModelAndView(notification);
 

@@ -21,6 +21,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="moment" />
+	<form:hidden path="actors" />
 	
 	<form:label path="type"><spring:message code="notification.type"/></form:label>
 	<form:select path="type">
@@ -30,7 +31,6 @@
 	
 	<acme:textbox code="notification.reason" path="reason" />
 	<acme:textarea code="notification.description" path="description"/>
-	<acme:select items="${actors}" itemLabel="name" code="notification.actors" path="actors" />
 	
 	<acme:submit name="save" code="notification.save" />
 	<acme:cancel url="./notification/actor/list.do" code="notification.cancel"/>

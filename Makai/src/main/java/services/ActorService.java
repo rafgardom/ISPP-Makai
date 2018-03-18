@@ -121,6 +121,14 @@ public class ActorService {
 		return result;
 	}
 
+	public Collection<Actor> findAllNotAdmin() {
+		Collection<Actor> result;
+
+		result = this.actorRepository.findAllNotAdmin();
+
+		return result;
+	}
+
 	public Boolean checkAuthority(final Actor actor, final String authority) {
 		Boolean result;
 		Collection<Authority> authorities;
