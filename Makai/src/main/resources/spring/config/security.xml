@@ -50,9 +50,8 @@
 		<security:intercept-url pattern="/notification/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/notification/actor/delete.do" access="isAuthenticated()" /> 
 		
-		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profile/edit.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profile/display.do" access="isAuthenticated()" /> 
 		
 		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/professional/register.do" access="isAnonymous()" /> 
