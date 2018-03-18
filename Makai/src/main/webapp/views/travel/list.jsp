@@ -7,22 +7,23 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+
 <display:table name="travels" id="row" requestURI="${requestURI}" class="displaytag">
-	
-	<acme:column code="travel.country" property="countryOrigin" />
-	<acme:column code="travel.state" property="stateOrigin" />
-	<acme:column code="travel.province" property="provinceOrigin" />
-	<acme:column code="travel.city" property="cityOrigin" />
-	<acme:column code="travel.zipcode" property="zip_codeOrigin" />
-	<acme:column code="travel.country" property="countryDestination" />
-	<acme:column code="travel.state" property="stateDestination" />
-	<acme:column code="travel.province" property="provinceDestination" />
-	<acme:column code="travel.city" property="cityDestination" />
-	<acme:column code="travel.zipcode" property="zip_codeDestination" />
+
+	<acme:column code="travel.country" property="origin.country" />
+	<acme:column code="travel.state" property="origin.state" />
+	<acme:column code="travel.province" property="origin.province" />
+	<acme:column code="travel.city" property="origin.city" />
+	<acme:column code="travel.zipcode" property="origin.zip_code" />
+	<acme:column code="travel.country" property="destination.country" />
+	<acme:column code="travel.state" property="destination.state" />
+	<acme:column code="travel.province" property="destination.province" />
+	<acme:column code="travel.city" property="destination.city" />
+	<acme:column code="travel.zipcode" property="destination.zip_code" />
 	<acme:column code="travel.startMoment" property="startMoment" />
 	<acme:column code="travel.endMoment" property="endMoment" />
 	<acme:column code="travel.animalSeats" property="animalSeats" />
-	<acme:column code="travel.humanSeats" property="HumanSeats" />
+	<acme:column code="travel.humanSeats" property="humanSeats" />
 	
 	<display:column>
 		<a href="travel/delete.do?travelId=${row.id}">
@@ -32,12 +33,8 @@
 			<spring:message	code="travel.edit" />
 		</a>
 	</display:column>
-	
-</display:table>
 
+</display:table>
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
 	<a href="travel/create.do"><spring:message	code="travel.create" /></a>
 </security:authorize>
-
-
-

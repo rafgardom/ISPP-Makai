@@ -33,7 +33,7 @@
 		<br />
 		<acme:textbox code="vehicle.seats" path="seats" mandatory="false" />
 		<br />	
-		<acme:textbox code="vehicle.carType" path="carType" mandatory="false" />
+		<acme:textbox code="vehicle.carType" path="carType" mandatory="true" />
 		<br />
 		<acme:textbox code="vehicle.accommodation" path="accommodation" mandatory="false" />
 		<br />

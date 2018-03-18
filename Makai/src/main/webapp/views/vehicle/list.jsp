@@ -15,7 +15,6 @@
 	<acme:column code="vehicle.accommodation" property="accommodation" />
 	<acme:column code="vehicle.year" property="year" />
 	<acme:column code="vehicle.description" property="description" />
-	<acme:column code="vehicle.state" property="state" />
 	<acme:column code="vehicle.picture" property="picture" />
 	<acme:column code="vehicle.color" property="color" />
 	<acme:column code="vehicle.license" property="license" />
@@ -30,7 +29,6 @@
 	</display:column>
 	
 </display:table>
-
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
 	<a href="vehicle/register.do"><spring:message	code="vehicle.register" /></a>
 </security:authorize>

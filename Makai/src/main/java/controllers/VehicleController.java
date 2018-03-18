@@ -47,19 +47,24 @@ public class VehicleController extends AbstractController {
 	public ModelAndView register(@Valid final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
 		ModelAndView result;
 		final Vehicle vehicle;
+		boolean pictureTooLong = false;
+		vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
 		if (binding.hasErrors())
-			result = this.createModelAndView(vehicleForm);
+			result = this.createModelAndView(vehicleForm, "vehicle.register.error");
 		else
 			try {
-
-				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
+				if (vehicleForm.getUserImage().getSize() > 5242880 || !vehicleForm.getUserImage().getContentType().contains("image")) {
+					pictureTooLong = true;
+					throw new IllegalArgumentException();
+				}
 				this.vehicleService.save(vehicle);
 				result = new ModelAndView("redirect:/welcome/index.do");
 
 			} catch (final Throwable oops) {
-
-				result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
-
+				if (pictureTooLong == false)
+					result = this.createModelAndView(vehicleForm, "vehicleForm.register.error");
+				else
+					result = this.createModelAndView(vehicleForm, "vehicleForm.register.picture.error");
 			}
 		return result;
 	}
