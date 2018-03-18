@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.Validator;
 
 import repositories.AdministratorRepository;
 import security.LoginService;
@@ -21,8 +22,13 @@ public class AdministratorService {
 	@Autowired
 	private AdministratorRepository	administratorRepository;
 
-
 	// Supporting services ----------------------------------------------------
+	@Autowired
+	private ActorService			actorService;
+
+	@Autowired
+	private Validator				validator;
+
 
 	// Constructors------------------------------------------------------------
 	public AdministratorService() {
@@ -78,4 +84,5 @@ public class AdministratorService {
 
 		return result;
 	}
+
 }

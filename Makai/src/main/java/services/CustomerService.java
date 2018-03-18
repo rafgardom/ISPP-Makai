@@ -137,6 +137,7 @@ public class CustomerService {
 				binding.addError(fieldError);
 
 			}
+			result.getUserAccount().setEnabled(true);
 
 		} else
 			result = this.findOne(customerForm.getId());

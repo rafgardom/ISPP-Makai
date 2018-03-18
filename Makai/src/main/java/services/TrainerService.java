@@ -144,8 +144,10 @@ public class TrainerService {
 				};
 				fieldError = new FieldError("trainerForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
 				binding.addError(fieldError);
-
 			}
+
+			result.getUserAccount().setEnabled(true);
+
 		} else
 			result = this.findOne(trainerForm.getId());
 

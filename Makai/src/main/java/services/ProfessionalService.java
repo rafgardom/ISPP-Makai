@@ -138,6 +138,8 @@ public class ProfessionalService {
 				binding.addError(fieldError);
 			}
 
+			result.getUserAccount().setEnabled(true);
+
 		} else
 			result = this.findOne(professionalForm.getId());
 
