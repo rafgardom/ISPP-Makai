@@ -15,6 +15,7 @@ import services.AnimalService;
 import services.CustomerService;
 import controllers.AbstractController;
 import domain.Animal;
+import domain.Sex;
 
 @Controller
 @RequestMapping("/animal/customer")
@@ -127,12 +128,15 @@ public class AnimalCustomerController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Animal animal, final String message) {
 		ModelAndView result;
+		Sex[] sexs;
+		sexs = Sex.values();
 
 		if (animal.getId() == 0)
 			result = new ModelAndView("animal/customer/register");
 		else
 			result = new ModelAndView("animal/customer/edit");
 		result.addObject("animal", animal);
+		result.addObject("sexs", sexs);
 		result.addObject("message", message);
 
 		return result;

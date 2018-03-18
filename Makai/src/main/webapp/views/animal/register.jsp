@@ -20,7 +20,13 @@
 	<acme:input code="animal.name" path="name" />
 	<acme:input code="animal.chipNumber" path="chipNumber"/>
 	<acme:input code="animal.age" path="age" />
-
+	<form:select path="sex">
+    <form:option value="${null }" label="----" />    
+    <jstl:forEach items="${sexs }" var="sex">
+      <form:option value="${sex}" label="${sex}" />
+    </jstl:forEach>
+  </form:select>
+	
 	<jstl:out value="${picture}"/>
 					<form:input type="file" path="picture" id="picture" name="picture" mandatory="true"
 					class="form:input-large" enctype="multipart/form-data" code="animal.picture"></form:input>
