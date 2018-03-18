@@ -3,6 +3,7 @@ package services;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,10 @@ import org.springframework.util.Assert;
 
 import repositories.RatingRepository;
 import repositories.RequestRepository;
+import domain.Actor;
 import domain.Customer;
+import domain.Notification;
+import domain.NotificationType;
 import domain.Offer;
 import domain.Rating;
 import domain.Request;
@@ -23,17 +27,20 @@ public class RatingService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private RatingRepository	ratingRepository;
+	private RatingRepository		ratingRepository;
 
 	@Autowired
-	private RequestRepository	requestRepository;
+	private RequestRepository		requestRepository;
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
-	private CustomerService		customerService;
+	private CustomerService			customerService;
 
 	@Autowired
-	private OfferService		offerService;
+	private AdministratorService	administratorService;
+
+	@Autowired
+	private NotificationService		notificationService;
 
 
 	// Constructors------------------------------------------------------------
@@ -115,6 +122,35 @@ public class RatingService {
 
 		result = this.ratingRepository.save(rating);
 
+		if (result.getStars() == 0) {
+			Integer count;
+			String message;
+
+			if (result.getTrainer() != null) {
+				count = this.count0starsByTrainerId(result.getTrainer().getId());
+				message = "El entrenador " + result.getTrainer().getName() + ", tiene " + count + " voto(s) negativo(s).";
+			} else {
+				count = this.count0starsByTravelId(result.getTravel().getId());
+				message = "El viaje " + result.getTravel().getId() + ", tiene " + count + " voto(s) negativo(s).";
+			}
+
+			// comprobamos si tiene alguno mas a 0, y si es asi, se crea una notificacion al admin
+			if (count >= 2) {
+				Collection<Actor> actors;
+				Notification notification;
+
+				actors = new HashSet<Actor>();
+				actors.add(this.administratorService.findOne());
+
+				notification = this.notificationService.create(actors);
+				notification.setType(NotificationType.RATING);
+				notification.setReason("Demasiadas puntuaciones negativas.");
+				notification.setDescription(message);
+
+				this.notificationService.save(notification);
+			}
+		}
+
 		return result;
 	}
 
@@ -131,5 +167,23 @@ public class RatingService {
 		//Comprobar de que no tiene ninguna oferta aceptada
 
 		this.ratingRepository.delete(rating);
+	}
+
+	// Other business methods -------------------------------------------------
+
+	public Integer count0starsByTrainerId(final int trainerId) {
+		Integer result;
+
+		result = this.ratingRepository.count0starsByTrainerId(trainerId);
+
+		return result;
+	}
+
+	public Integer count0starsByTravelId(final int travelId) {
+		Integer result;
+
+		result = this.ratingRepository.count0starsByTravelId(travelId);
+
+		return result;
 	}
 }
