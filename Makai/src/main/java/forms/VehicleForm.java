@@ -6,6 +6,7 @@ import javax.validation.constraints.Min;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
+import org.springframework.web.multipart.MultipartFile;
 
 import domain.Brand;
 import domain.CarType;
@@ -14,16 +15,17 @@ public class VehicleForm {
 
 	// Attributes 
 
-	private int		id;
-	private Brand	brand;
-	private Integer	seats;
-	private CarType	carType;
-	private String	accommodation;
-	private Integer	year;
-	private String	description;
-	private Byte[]	picture;
-	private String	color;
-	private String	license;
+	private int				id;
+	private Brand			brand;
+	private Integer			seats;
+	private CarType			carType;
+	private String			accommodation;
+	private Integer			year;
+	private String			description;
+	private byte[]			picture;
+	private String			color;
+	private String			license;
+	private MultipartFile	userImage;
 
 
 	//Constructor
@@ -89,11 +91,11 @@ public class VehicleForm {
 		this.description = description;
 	}
 
-	public Byte[] getPicture() {
+	public byte[] getPicture() {
 		return this.picture;
 	}
-	public void setPicture(final Byte[] picture) {
-		this.picture = picture;
+	public void setPicture(final byte[] bs) {
+		this.picture = bs;
 	}
 
 	@NotBlank
@@ -112,6 +114,14 @@ public class VehicleForm {
 	}
 	public void setLicense(final String license) {
 		this.license = license;
+	}
+
+	public MultipartFile getUserImage() {
+		return this.userImage;
+	}
+
+	public void setUserImage(final MultipartFile userImage) {
+		this.userImage = userImage;
 	}
 
 }

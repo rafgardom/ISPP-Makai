@@ -52,7 +52,7 @@ public class VehicleController extends AbstractController {
 		else
 			try {
 
-				vehicle = this.vehicleService.reconstruct(vehicleForm);
+				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
 				this.vehicleService.save(vehicle);
 				result = new ModelAndView("redirect:/welcome/index.do");
 

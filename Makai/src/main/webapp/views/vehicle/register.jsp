@@ -41,12 +41,14 @@
 		<br />
 		<acme:textbox code="vehicle.description" path="description" mandatory="true" />
 		<br />
-		<acme:textbox code="vehicle.picture" path="picture" mandatory="false" />
-		<br />	
 		<acme:textbox code="vehicle.color" path="color" mandatory="true" />
 		<br />
 		<acme:textbox code="vehicle.license" path="license" mandatory="true" />
 		<br />
+		<jstl:out value="${picture}"/>
+					<form:input type="file" path="picture" id="picture" name="picture" mandatory="false"
+					class="form:input-large" enctype="multipart/form-data" code="vehicle.picture"></form:input>
+		<jstl:out value="${formats}"/>
 
 	</fieldset>
 	<br/>

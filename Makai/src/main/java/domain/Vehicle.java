@@ -29,7 +29,7 @@ public class Vehicle extends DomainEntity {
 	private String	accommodation;
 	private Integer	year;
 	private String	description;
-	private Byte[]	picture;
+	private byte[]	picture;
 	private String	color;
 	private Boolean	isActived;
 	private String	license;
@@ -98,12 +98,12 @@ public class Vehicle extends DomainEntity {
 		this.description = description;
 	}
 
-	public Byte[] getPicture() {
+	public byte[] getPicture() {
 		return this.picture;
 	}
 
-	public void setPicture(final Byte[] picture) {
-		this.picture = picture;
+	public void setPicture(final byte[] bs) {
+		this.picture = bs;
 	}
 	@NotBlank
 	public String getColor() {

@@ -1,6 +1,7 @@
 
 package services;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -8,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
 import repositories.VehicleRepository;
 import domain.Transporter;
@@ -25,6 +30,9 @@ public class VehicleService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private TransporterService	transporterService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	// Constructors------------------------------------------------------------
@@ -101,7 +109,7 @@ public class VehicleService {
 		this.vehicleRepository.delete(vehicle);
 	}
 
-	public Vehicle reconstruct(final VehicleForm vehicleForm) {
+	public Vehicle reconstruct(final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
 		Assert.notNull(vehicleForm);
 		Vehicle result;
 
@@ -117,9 +125,22 @@ public class VehicleService {
 		result.setDescription(vehicleForm.getDescription());
 		result.setId(vehicleForm.getId());
 		result.setLicense(vehicleForm.getLicense());
-		result.setPicture(vehicleForm.getPicture());
 		result.setSeats(vehicleForm.getSeats());
 		result.setYear(vehicleForm.getYear());
+
+		final MultipartFile userImage = vehicleForm.getUserImage();
+		result.setPicture(userImage.getBytes());
+
+		if (result.getPicture().length == 0) {
+			FieldError fieldError;
+			final String[] codes = {
+				"customer.register.picture.empty.error"
+			};
+			fieldError = new FieldError("vehicleForm", "userImage", vehicleForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
+		this.validator.validate(result, binding);
 
 		return result;
 	}
