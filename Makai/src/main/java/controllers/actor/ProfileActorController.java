@@ -39,11 +39,21 @@ public class ProfileActorController extends AbstractController {
 	public ModelAndView display() {
 		ModelAndView result;
 		Actor actor;
+		byte[] base64;
+		StringBuilder imageString;
+		String image;
 
 		actor = this.actorService.findByPrincipal();
+		
+		base64 = Base64.encode(actor.getPicture());
+		imageString = new StringBuilder();
+		imageString.append("data:image/png;base64,");
+		imageString.append(new String(base64));
+		image = imageString.toString();
 
 		result = new ModelAndView("profile/display");
 		result.addObject("actor", actor);
+		result.addObject("pictureImage", image);
 		result.addObject("requestURI", "profile/display.do");
 
 		return result;

@@ -21,7 +21,7 @@
 	<ul>
 		<li>
 			<b><spring:message code="profile.picture" />:</b>
-			<img src="data:image/jpg;base64,${actor.picture}" alt="<spring:message code='profile.no.picture' />">
+			<img src="${pictureImage}" alt="<spring:message code='profile.no.picture' />" width="200px" height="200px" >
 		</li>
 		<li>
 			<b><spring:message code="profile.name" />:</b>
