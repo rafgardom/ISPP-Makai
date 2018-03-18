@@ -31,7 +31,7 @@ public class NotificationService {
 	private AdministratorService	administratorService;
 
 
-	// Constructors------------------------------------------------------------
+	// Constructors -----------------------------------------------------------
 	public NotificationService() {
 		super();
 	}
