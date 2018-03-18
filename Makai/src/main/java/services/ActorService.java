@@ -192,7 +192,7 @@ public class ActorService {
 
 		System.out.println(profileForm.getPicture());
 
-		if (profileForm.getPicture() != null || profileForm.getPicture().length != 0 || !principal.getPicture().equals(result.getPicture()))
+		if (profileForm.getPicture() != null)
 			result.setPicture(profileForm.getPicture());
 
 		if (profileForm.getPassword() != null && profileForm.getPassword() != profileForm.getRepeatPassword()) {
@@ -244,6 +244,7 @@ public class ActorService {
 		result.setName(actor.getName());
 		result.setPhone(actor.getPhone());
 		result.setPicture(actor.getPicture());
+		result.setUserImage(null);
 
 		return result;
 	}
