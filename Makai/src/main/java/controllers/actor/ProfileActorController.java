@@ -90,14 +90,18 @@ public class ProfileActorController extends AbstractController {
 			try {
 
 				//				final MultipartFile userImage = profileForm.getUserImage();
-				savedFile = profileForm.getUserImage().getBytes();
 
-				if (savedFile.length > 5242880) {
+				if (profileForm.getUserImage().getSize() > 0) {
+
+					savedFile = profileForm.getUserImage().getBytes();
+					profileForm.setPicture(savedFile);
+
+				} else if (profileForm.getUserImage().getSize() > 5242880) {
 					pictureTooLong = true;
 					System.out.println("La imagen es demasiado larga");
 					throw new IllegalArgumentException();
-				}
-				profileForm.setPicture(savedFile);
+				} else
+					profileForm.setPicture(null);
 
 				actor = this.actorService.reconstructEdit(profileForm, binding);
 				this.actorService.save(actor);
