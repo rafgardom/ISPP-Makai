@@ -69,20 +69,57 @@ public class VehicleController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int vehicleId) {
+		ModelAndView result;
+		final Vehicle vehicle;
+		VehicleForm vehicleForm;
+
+		vehicle = this.vehicleService.findOne(vehicleId);
+		vehicleForm = this.vehicleService.toFormObject(vehicle);
+
+		result = this.createModelAndView(vehicleForm);
+
+		return result;
+	}
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
+
 		ModelAndView result;
 		Vehicle vehicle;
 
-		vehicle = this.vehicleService.findOne(vehicleId);
-		try {
-			this.vehicleService.delete(vehicle);
-			result = new ModelAndView("redirect:register.do");
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:list.do");
-		}
+		if (binding.hasErrors()) {
+			System.out.println(binding.toString());
+			result = this.createModelAndView(vehicleForm);
+
+		} else
+			try {
+
+				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
+				vehicle = this.vehicleService.save(vehicle);
+				result = new ModelAndView("master.page");
+
+			} catch (final Throwable oops) {
+				System.out.println(oops);
+
+				result = this.createModelAndView(vehicleForm, "travel.commit.error");
+
+			}
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Vehicle vehicle, final BindingResult binding) {
+
+		ModelAndView result;
+
+		this.vehicleService.delete(vehicle);
+
+		result = new ModelAndView("redirect:list.do");
 
 		return result;
+
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

@@ -51,7 +51,7 @@ public class TravelController extends AbstractController {
 			result = this.createModelAndView(travelForm);
 		else
 			try {
-				travel = this.travelService.reconstruct(travelForm);
+				travel = this.travelService.reconstruct(travelForm, binding);
 				this.travelService.save(travel);
 				result = new ModelAndView("redirect:/welcome/index.do");
 
@@ -63,20 +63,58 @@ public class TravelController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int travelId) {
 		ModelAndView result;
 		Travel travel;
+		TravelForm travelForm;
 
 		travel = this.travelService.findOne(travelId);
-		try {
-			this.travelService.delete(travel);
-			result = new ModelAndView("redirect:create.do");
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:list.do");
-		}
+		travelForm = this.travelService.toFormObject(travel);
+
+		result = this.createModelAndView(travelForm);
 
 		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final TravelForm travelForm, final BindingResult binding) throws IOException {
+
+		ModelAndView result;
+		Travel travel;
+
+		if (binding.hasErrors()) {
+			System.out.println(binding.toString());
+			result = this.createModelAndView(travelForm);
+
+		} else
+			try {
+
+				travel = this.travelService.reconstruct(travelForm, binding);
+				travel = this.travelService.save(travel);
+				result = new ModelAndView("master.page");
+
+			} catch (final Throwable oops) {
+				System.out.println(oops);
+
+				result = this.createModelAndView(travelForm, "travel.commit.error");
+
+			}
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Travel travel, final BindingResult binding) {
+
+		ModelAndView result;
+
+		this.travelService.delete(travel);
+
+		result = new ModelAndView("redirect:list.do");
+
+		return result;
+
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

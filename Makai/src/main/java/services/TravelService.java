@@ -1,6 +1,7 @@
 
 package services;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 
 import repositories.TravelRepository;
 import domain.Coordinates;
@@ -108,7 +110,7 @@ public class TravelService {
 		this.travelRepository.delete(travel);
 	}
 
-	public Travel reconstruct(final TravelForm travelForm) {
+	public Travel reconstruct(final TravelForm travelForm, final BindingResult binding) throws IOException {
 		Assert.notNull(travelForm);
 		Travel result;
 

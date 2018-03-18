@@ -20,10 +20,10 @@
 	<acme:column code="vehicle.license" property="license" />
 	
 	<display:column>
-		<a href="vehicle/delete.do?travelId=${row.id}">
+		<a href="vehicle/delete.do?vehicleId=${row.id}">
 			<spring:message	code="travel.delete" />
 		</a>
-		<a href="vehicle/edit.do?travelId=${row.id}">
+		<a href="vehicle/edit.do?vehicleId=${row.id}">
 			<spring:message	code="travel.edit" />
 		</a>
 	</display:column>
