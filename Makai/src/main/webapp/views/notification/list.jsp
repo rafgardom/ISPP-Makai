@@ -22,5 +22,5 @@
 </display:table>
 
 <security:authorize access="hasRole('ADMIN')">
-	<a href="notification/admin/create.do"><spring:message	code="notification.create" /></a>
+	<a href="notification/admin/create.do"><spring:message code="notification.create" /></a>
 </security:authorize>

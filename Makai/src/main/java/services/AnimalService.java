@@ -173,6 +173,7 @@ public class AnimalService {
 		result.setChipNumber(animalForm.getChipNumber());
 		result.setAge(animalForm.getAge());
 		result.setSex(animalForm.getSex());
+		result.setBreeds(animalForm.getBreeds());
 
 		if (animalForm.getPicture() != null)
 			result.setPicture(animalForm.getPicture());
@@ -195,6 +196,7 @@ public class AnimalService {
 		result.setAge(animal.getAge());
 		result.setSex(animal.getSex());
 		result.setPicture(animal.getPicture());
+		result.setBreeds(animal.getBreeds());
 
 		return result;
 	}

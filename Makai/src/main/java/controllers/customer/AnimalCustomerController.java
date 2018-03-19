@@ -1,6 +1,8 @@
 
 package controllers.customer;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AnimalService;
+import services.BreedService;
 import services.CustomerService;
+import services.SpecieService;
+
+import com.google.gson.Gson;
+
 import controllers.AbstractController;
 import domain.Animal;
+import domain.Breed;
 import domain.Sex;
+import domain.Specie;
 import forms.AnimalForm;
 
 @Controller
@@ -28,6 +37,12 @@ public class AnimalCustomerController extends AbstractController {
 
 	@Autowired
 	private CustomerService	customerService;
+
+	@Autowired
+	private SpecieService	specieService;
+
+	@Autowired
+	private BreedService	breedService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -151,7 +166,14 @@ public class AnimalCustomerController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final AnimalForm animalForm, final String message) {
 		ModelAndView result;
 		Sex[] sexs;
+		final Collection<Specie> species;
+		final Collection<Breed> breeds;
+		String json;
+
 		sexs = Sex.values();
+		species = this.specieService.findAll();
+		breeds = this.breedService.findAll();
+		json = new Gson().toJson(breeds);
 
 		if (animalForm.getId() == 0)
 			result = new ModelAndView("animal/customer/register");
@@ -159,9 +181,11 @@ public class AnimalCustomerController extends AbstractController {
 			result = new ModelAndView("animal/customer/edit");
 		result.addObject("animal", animalForm);
 		result.addObject("sexs", sexs);
+		result.addObject("species", species);
+		result.addObject("breeds", breeds);
+		result.addObject("jsonBreeds", json);
 		result.addObject("message", message);
 
 		return result;
 	}
-
 }

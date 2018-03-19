@@ -5,7 +5,9 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
@@ -72,6 +74,9 @@ public class Animal extends DomainEntity {
 		this.sex = sex;
 	}
 
+	@NotNull
+	@Lob
+	@Column(length = 16777215)
 	public byte[] getPicture() {
 		return this.picture;
 	}

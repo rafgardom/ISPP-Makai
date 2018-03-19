@@ -1,24 +1,29 @@
 
 package forms;
 
+import java.util.Collection;
+
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
+import domain.Breed;
 import domain.Sex;
 
 public class AnimalForm {
 
 	// Attributes -------------------------------------------------------------
 
-	private int				id;
-	private String			name;
-	private String			chipNumber;
-	private Integer			age;
-	private Sex				sex;
-	private byte[]			picture;
-	private MultipartFile	animalImage;
+	private int					id;
+	private String				name;
+	private String				chipNumber;
+	private Integer				age;
+	private Sex					sex;
+	private byte[]				picture;
+	private MultipartFile		animalImage;
+	private Collection<Breed>	breeds;
 
 
 	// Constructor ------------------------------------------------------------
@@ -85,6 +90,15 @@ public class AnimalForm {
 
 	public void setAnimalImage(final MultipartFile animalImage) {
 		this.animalImage = animalImage;
+	}
+
+	@Valid
+	public Collection<Breed> getBreeds() {
+		return this.breeds;
+	}
+
+	public void setBreeds(final Collection<Breed> breeds) {
+		this.breeds = breeds;
 	}
 
 }

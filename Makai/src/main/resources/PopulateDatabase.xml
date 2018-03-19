@@ -780,10 +780,6 @@
 		<property name="type" value="Reptil" />
 	</bean>
 	
-	<bean id="specie4" class="domain.Specie">
-		<property name="type" value="Perro" />
-	</bean>
-	
 	
 	<!-- Breed -->
 	<bean id="breed1" class="domain.Breed">
@@ -803,7 +799,7 @@
 	
 	<bean id="breed4" class="domain.Breed">
 		<property name="breed" value="Bulldog" />
-		<property name="specie" ref="specie4" />
+		<property name="specie" ref="specie1" />
 	</bean>
 	
 	
