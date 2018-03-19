@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.Access;
@@ -8,50 +9,59 @@ import javax.validation.constraints.Min;
 @Embeddable
 @Access(AccessType.PROPERTY)
 public class Duration {
+
 	// Constructors -----------------------------------------------------------
-	public Duration(){
+	public Duration() {
 		super();
 	}
-	
-	// Attributes -------------------------------------------------------------
-	
-	private Integer year;
-	private Integer month;
-	private Integer week;
-	private Integer day;
-	
-	@Min(0)
-	public Integer getYear() {
-		return year;
-	}
-	public void setYear(Integer year) {
+
+	public Duration(final Integer year, final Integer month, final Integer week, final Integer day) {
+		super();
 		this.year = year;
-	}
-	
-	@Min(0)
-	public Integer getMonth() {
-		return month;
-	}
-	public void setMonth(Integer month) {
 		this.month = month;
-	}
-	
-	@Min(0)
-	public Integer getWeek() {
-		return week;
-	}
-	public void setWeek(Integer week) {
 		this.week = week;
-	}
-	
-	@Min(0)
-	public Integer getDay() {
-		return day;
-	}
-	public void setDay(Integer day) {
 		this.day = day;
 	}
-	
-	
+
+
+	// Attributes -------------------------------------------------------------
+
+	private Integer	year;
+	private Integer	month;
+	private Integer	week;
+	private Integer	day;
+
+
+	@Min(0)
+	public Integer getYear() {
+		return this.year;
+	}
+	public void setYear(final Integer year) {
+		this.year = year;
+	}
+
+	@Min(0)
+	public Integer getMonth() {
+		return this.month;
+	}
+	public void setMonth(final Integer month) {
+		this.month = month;
+	}
+
+	@Min(0)
+	public Integer getWeek() {
+		return this.week;
+	}
+	public void setWeek(final Integer week) {
+		this.week = week;
+	}
+
+	@Min(0)
+	public Integer getDay() {
+		return this.day;
+	}
+	public void setDay(final Integer day) {
+		this.day = day;
+	}
 
 }

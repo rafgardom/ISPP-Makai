@@ -1,18 +1,21 @@
 
 package services;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 
 import repositories.OfferRepository;
 import repositories.RequestRepository;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
+import forms.OfferForm;
 
 @Service
 @Transactional
@@ -53,7 +56,8 @@ public class OfferService {
 		return result;
 	}
 
-	public Offer create(final Request request) {
+	//Creamos una offer a partir de una request que ya tiene asignado un animal
+	public Offer createWithAnimal(final Request request) {
 		Offer result;
 		Trainer principal;
 
@@ -66,6 +70,24 @@ public class OfferService {
 
 		if (request.getAnimal() != null)	//Si el cliente ya ha seleccionado un animal
 			result.setAnimal(request.getAnimal());
+
+		//Comprobar de que no tiene ninguna oferta aceptada
+		//		Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
+
+		return result;
+	}
+
+	//Creamos una offer a partir de una request que no tiene asignado un animal
+	public Offer createWithoutAnimal(final Request request) {
+		Offer result;
+		Trainer principal;
+
+		principal = this.trainerService.findByPrincipal();
+		Assert.notNull(principal);
+
+		result = new Offer();
+		result.setTrainer(principal);
+		result.setRequest(request);
 
 		//Comprobar de que no tiene ninguna oferta aceptada
 		Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
@@ -127,5 +149,43 @@ public class OfferService {
 		if (!nonAcceptedOffers.isEmpty())
 			this.offerRepository.delete(nonAcceptedOffers);
 
+	}
+
+	public Offer reconstruct(final OfferForm offerForm, final BindingResult binding) throws IOException {
+		Assert.notNull(offerForm);
+		Offer result;
+
+		if (offerForm.getId() == 0)
+			if (offerForm.getRequest().getAnimal() == null)
+				result = this.createWithoutAnimal(offerForm.getRequest());
+			else
+				result = this.createWithAnimal(offerForm.getRequest());
+		else
+			result = this.findOne(offerForm.getId());
+
+		result.setDestination(offerForm.getDestination());
+		result.setStartMoment(offerForm.getStartMoment());
+		result.setPrice(offerForm.getPrice());
+		result.setComment(offerForm.getComment());
+		result.setDuration(offerForm.getDuration());
+		result.setAnimal(offerForm.getAnimal());
+		result.setRequest(offerForm.getRequest());
+
+		return result;
+	}
+
+	public OfferForm offerToFormObject(final Offer offer) {
+		Assert.notNull(offer);
+		final OfferForm result = new OfferForm();
+
+		result.setDestination(offer.getDestination());
+		result.setStartMoment(offer.getStartMoment());
+		result.setPrice(offer.getPrice());
+		result.setComment(offer.getComment());
+		result.setDuration(offer.getDuration());
+		result.setAnimal(offer.getAnimal());
+		result.setRequest(offer.getRequest());
+
+		return result;
 	}
 }

@@ -155,6 +155,7 @@
 		</security:authorize>
 
 		<security:authorize access="hasRole('CUSTOMER')">
+<<<<<<< HEAD
 			<li><a class="fNiv"><spring:message
 						code="master.page.customer" /></a>
 				<ul>
@@ -164,6 +165,12 @@
 				</ul></li>
 			<li><a class="fNiv"><spring:message
 						code="master.page.request" /></a>
+=======
+			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+				
+			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.request" /></a>
+>>>>>>> ad3511022bc24f687799586123e983e0ad98cd87
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="request/customer/create.do"><spring:message
@@ -184,7 +191,21 @@
 								code="master.page.travel.list" /></a></li>
 				</ul></li>
 		</security:authorize>
+<<<<<<< HEAD
 
+=======
+		
+		<security:authorize access="hasAnyRole('CUSTOMER,ANIMALSHELTER')">
+			<li><a class="fNiv"><spring:message	code="master.page.animal" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="animal/register.do"><spring:message code="master.page.animal.register" /></a></li>
+					<li><a href="animal/list.do"><spring:message code="master.page.animal.list" /></a></li>
+				</ul>
+			</li>	
+		</security:authorize>
+		
+>>>>>>> ad3511022bc24f687799586123e983e0ad98cd87
 		<security:authorize access="hasRole('TRAINER')">
 			<li><a class="fNiv" href="offer/trainer/list.do"><spring:message
 						code="master.page.offer" /></a></li>

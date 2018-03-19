@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
@@ -13,7 +14,9 @@ import org.springframework.util.Assert;
 import repositories.NotificationRepository;
 import domain.Actor;
 import domain.Administrator;
+import domain.Customer;
 import domain.Notification;
+import domain.Request;
 
 @Service
 @Transactional
@@ -139,4 +142,19 @@ public class NotificationService {
 		return result;
 	}
 
+	public void createNotificationForRequestWithOffer(final Request request) {
+		Assert.notNull(request);
+		Notification notification;
+		Customer customer;
+		final Collection<Actor> actors = new ArrayList<Actor>();
+
+		customer = request.getCustomer();
+		actors.add(customer);
+		notification = this.create(actors);
+		notification.setReason("Nueva oferta en su solicitud" + request.getTags());
+		notification.setDescription("A un entrenador le interesa su solicitud" + request.getTags());
+
+		this.save(notification);
+
+	}
 }

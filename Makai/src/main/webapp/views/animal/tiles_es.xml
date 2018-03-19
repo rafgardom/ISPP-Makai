@@ -16,14 +16,14 @@
       
 <tiles-definitions>
 	
-	<definition name="animal/customer/register" extends="master.page">	
+	<definition name="animal/register" extends="master.page">	
 		<put-attribute name="title" value="Animal: Registro" />
 		<put-attribute name="body" value="/views/animal/register.jsp" />
 	</definition>
 	
-	<definition name="animal/animalShelter/register" extends="master.page">	
-		<put-attribute name="title" value="Animal: Registro" />
-		<put-attribute name="body" value="/views/animal/register.jsp" />
+	<definition name="animal/list" extends="master.page">	
+		<put-attribute name="title" value="Animal: Listar" />
+		<put-attribute name="body" value="/views/animal/list.jsp" />
 	</definition>
 	
 </tiles-definitions>

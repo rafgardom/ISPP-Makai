@@ -51,14 +51,10 @@
 		<security:intercept-url pattern="/request/customer/delete.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/request/customer/list.do" access="hasRole('CUSTOMER')" />
 		
-		<security:intercept-url pattern="/animal/customer/register.do" access="hasRole('CUSTOMER')" />
-		<security:intercept-url pattern="/animal/customer/edit.do" access="hasRole('CUSTOMER')" /> 
-		
 		<security:intercept-url pattern="/offer/trainer/list.do" access="hasRole('TRAINER')" /> 
-		<security:intercept-url pattern="/offer/trainer/delete.do" access="hasRole('TRAINER')" /> 
-		
-		<security:intercept-url pattern="/animal/animalShelter/register.do" access="hasRole('ANIMALSHELTER')" />
-		<security:intercept-url pattern="/animal/animalShelter/edit.do" access="hasRole('ANIMALSHELTER')" /> 
+		<security:intercept-url pattern="/offer/trainer/delete.do" access="hasRole('TRAINER')" />
+		<security:intercept-url pattern="/offer/trainer/create.do" access="hasRole('TRAINER')" />
+		<security:intercept-url pattern="/offer/trainer/display.do" access="hasAnyRole('CUSTOMER','TRAINER')" />
 		
 		<security:intercept-url pattern="/notification/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/notification/actor/delete.do" access="isAuthenticated()" /> 
@@ -70,6 +66,10 @@
 		<security:intercept-url pattern="/professional/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/trainer/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/animalShelter/register.do" access="isAnonymous()" />
+		
+		<security:intercept-url pattern="/animal/register.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
+		<security:intercept-url pattern="/animal/edit.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
+		<security:intercept-url pattern="/animal/list.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
 		
 		<security:intercept-url pattern="/travel/create.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
 		<security:intercept-url pattern="/travel/list.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
