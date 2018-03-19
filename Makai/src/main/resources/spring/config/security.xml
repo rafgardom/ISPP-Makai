@@ -53,6 +53,9 @@
 		
 		<security:intercept-url pattern="/animal/customer/register.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/animal/customer/edit.do" access="hasRole('CUSTOMER')" /> 
+		
+		<security:intercept-url pattern="/offer/trainer/list.do" access="hasRole('TRAINER')" /> 
+		
 		<security:intercept-url pattern="/animal/animalShelter/register.do" access="hasRole('ANIMALSHELTER')" />
 		<security:intercept-url pattern="/animal/animalShelter/edit.do" access="hasRole('ANIMALSHELTER')" /> 
 		

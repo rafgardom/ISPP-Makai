@@ -34,6 +34,7 @@
 		<value>/views/travel/tiles.xml</value>
 		<value>/views/vehicle/tiles.xml</value>
 		<value>/views/trainer/tiles.xml</value>
+		<value>/views/offer/tiles.xml</value>
 		
 	</util:list>
 

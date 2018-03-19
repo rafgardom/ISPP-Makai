@@ -106,6 +106,10 @@ public class OfferService {
 
 	//Other business service
 
+	public Collection<Offer> findOffersByTrainer(final Trainer trainer) {
+		return trainer.getOffers();
+	}
+
 	public Offer findOfferAccepted(final Request request) {
 		return this.offerRepository.findAcceptedOffer(request.getId());
 	}

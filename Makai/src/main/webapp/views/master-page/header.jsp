@@ -56,6 +56,10 @@
 			</li>	
 		</security:authorize>
 		
+		<security:authorize access="hasRole('TRAINER')">
+			<li><a class="fNiv" href="offer/trainer/list.do"><spring:message	code="master.page.offer" /></a></li>	
+		</security:authorize>
+		
 		<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">
 		<li><a class="fNiv"><spring:message	code="master.page.vehicle" /></a>
 				<ul>
