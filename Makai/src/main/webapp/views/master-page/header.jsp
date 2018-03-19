@@ -58,6 +58,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="animal/register.do"><spring:message code="master.page.animal.register" /></a></li>
+					<li><a href="animal/list.do"><spring:message code="master.page.animal.list" /></a></li>
 				</ul>
 			</li>	
 		</security:authorize>

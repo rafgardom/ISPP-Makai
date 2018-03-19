@@ -200,4 +200,12 @@ public class AnimalService {
 
 		return result;
 	}
+
+	public Collection<Animal> findByActorId(final int actorId) {
+		Collection<Animal> animals;
+
+		animals = this.animalRepository.findByActorId(actorId);
+
+		return animals;
+	}
 }

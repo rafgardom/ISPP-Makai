@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.AnimalService;
 import services.BreedService;
-import services.CustomerService;
 import services.SpecieService;
 
 import com.google.gson.Gson;
 
+import domain.Actor;
 import domain.Animal;
 import domain.Breed;
 import domain.Sex;
@@ -35,7 +36,7 @@ public class AnimalController extends AbstractController {
 	private AnimalService	animalService;
 
 	@Autowired
-	private CustomerService	customerService;
+	private ActorService	actorService;
 
 	@Autowired
 	private SpecieService	specieService;
@@ -51,22 +52,22 @@ public class AnimalController extends AbstractController {
 	}
 
 	// ListingByCustomer -------------------------------------------------------		
-	//	@RequestMapping(value = "/listByCustomer", method = RequestMethod.GET)
-	//	public ModelAndView listByCustomer() {
-	//		ModelAndView result;
-	//		Collection<Animal> animals;
-	//		Customer customer;
-	//
-	//		customer = this.customerService.findByPrincipal();
-	//
-	//		animals = this.animalService.findByCustomerId(customer.getId());
-	//
-	//		result = new ModelAndView("animal/list");
-	//		result.addObject("requestURI", "animal/listByCustomer.do");
-	//		result.addObject("animals", animals);
-	//
-	//		return result;
-	//	}
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView listByCustomer() {
+		ModelAndView result;
+		Collection<Animal> animals;
+		Actor actor;
+
+		actor = this.actorService.findByPrincipal();
+
+		animals = this.animalService.findByActorId(actor.getId());
+
+		result = new ModelAndView("animal/list");
+		result.addObject("requestURI", "animal/list.do");
+		result.addObject("animals", animals);
+
+		return result;
+	}
 
 	// Creation ---------------------------------------------------------------		
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
