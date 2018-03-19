@@ -32,10 +32,7 @@
 		
 		<security:authorize access="hasRole('CUSTOMER')">
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="animal/customer/register.do"><spring:message code="master.page.customer.animal" /></a></li>
-				</ul>
+				
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.request" /></a>
 				<ul>
@@ -52,6 +49,15 @@
 					<li class="arrow"></li>
 					<li><a href="travel/create.do"><spring:message code="master.page.travel.create" /></a></li>
 					<li><a href="travel/list.do"><spring:message code="master.page.travel.list" /></a></li>					
+				</ul>
+			</li>	
+		</security:authorize>
+		
+		<security:authorize access="hasAnyRole('CUSTOMER,ANIMALSHELTER')">
+			<li><a class="fNiv"><spring:message	code="master.page.animal" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="animal/register.do"><spring:message code="master.page.animal.register" /></a></li>
 				</ul>
 			</li>	
 		</security:authorize>

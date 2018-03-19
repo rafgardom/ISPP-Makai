@@ -1,5 +1,5 @@
 
-package controllers.customer;
+package controllers;
 
 import java.util.Collection;
 
@@ -20,7 +20,6 @@ import services.SpecieService;
 
 import com.google.gson.Gson;
 
-import controllers.AbstractController;
 import domain.Animal;
 import domain.Breed;
 import domain.Sex;
@@ -28,8 +27,8 @@ import domain.Specie;
 import forms.AnimalForm;
 
 @Controller
-@RequestMapping("/animal/customer")
-public class AnimalCustomerController extends AbstractController {
+@RequestMapping("/animal")
+public class AnimalController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
@@ -47,7 +46,7 @@ public class AnimalCustomerController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public AnimalCustomerController() {
+	public AnimalController() {
 		super();
 	}
 
@@ -176,9 +175,9 @@ public class AnimalCustomerController extends AbstractController {
 		json = new Gson().toJson(breeds);
 
 		if (animalForm.getId() == 0)
-			result = new ModelAndView("animal/customer/register");
+			result = new ModelAndView("animal/register");
 		else
-			result = new ModelAndView("animal/customer/edit");
+			result = new ModelAndView("animal/edit");
 		result.addObject("animal", animalForm);
 		result.addObject("sexs", sexs);
 		result.addObject("species", species);

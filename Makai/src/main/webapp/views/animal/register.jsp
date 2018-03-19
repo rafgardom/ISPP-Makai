@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="animal/customer/edit.do" modelAttribute="animal" enctype="multipart/form-data">
+<form:form action="animal/edit.do" modelAttribute="animal" enctype="multipart/form-data">
 	
 	<form:hidden path="id" />
 
