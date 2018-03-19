@@ -14,16 +14,22 @@
 	<acme:column code="offer.coordinates.city" property="destination.city" />
 	<acme:column code="offer.price" property="price" />
 	
+	
+	
 	<display:column>
-		<a href="offer/trainer/delete.do?offerId=${row.id}">
-			<spring:message	code="offer.delete" />
-		</a>
+		<jstl:if test="${row.isAccepted==false}">
+			<a href="offer/trainer/delete.do?offerId=${row.id}">
+				<spring:message	code="offer.delete" />
+			</a>
+		</jstl:if>
 	</display:column>
 	
 	<display:column>
-		<a href="offer/trainer/edit.do?offerId=${row.id}">
-			<spring:message	code="offer.edit" />
-		</a>
+		<jstl:if test="${row.isAccepted==false}">
+			<a href="offer/trainer/edit.do?offerId=${row.id}">
+				<spring:message	code="offer.edit" />
+			</a>
+		</jstl:if>
 	</display:column>
 	
 </display:table>
