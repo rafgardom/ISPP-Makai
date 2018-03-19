@@ -80,9 +80,10 @@
 	</fieldset>
 	<br/>
 	
-	<spring:message code="profile.editPassword"/><br> 
- 	<input type="radio" id="radioPasswordY" name="answerPw" onclick="editPasswordYes()" /><spring:message code="profile.Yes"/>
-	<input type="radio" id="radioPasswordN" name="answerPw" onclick="editPasswordNo()" checked="checked" /><spring:message code="profile.No"/>
+	<h6 class="alert alert-info col-sm-7"><spring:message code="profile.editPassword"/><br> 
+ 	<strong><input type="radio" id="radioPasswordY" name="answerPw" onclick="editPasswordYes()" /><spring:message code="profile.Yes"/>
+	<input type="radio" id="radioPasswordN" name="answerPw" onclick="editPasswordNo()" checked="checked" /><spring:message code="profile.No"/></strong>
+	</h6>
 	<fieldset id="fieldsetPassword" disabled>
 		
 		<legend>

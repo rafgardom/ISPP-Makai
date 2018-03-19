@@ -27,7 +27,7 @@
 
 <%-- Definition --%>
 
-<button type="button" onclick="location='${url}'" >
+<button type="button" class="btn btn-danger" onclick="location='${url}'" >
 	<spring:message code="${code}" />
 </button>
 

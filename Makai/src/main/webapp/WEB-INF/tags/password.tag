@@ -42,7 +42,7 @@
 				<a class="error">(*)</a>
 			</jstl:if>
 		</form:label>
-		<form:password path="${path}" class="form-control" placeholder="${placeholder}" />
+		<form:password path="${path}" class="form-control col-sm-7" placeholder="${placeholder}" />
 		<form:errors path="${path}" cssClass="error" />
 	</div>
 </spring:bind>

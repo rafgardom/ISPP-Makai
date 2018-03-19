@@ -47,7 +47,7 @@
 				<a class="error">(*)</a>
 			</jstl:if>
 		</form:label>
-		<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" />	
+		<form:input path="${path}" readonly="${readonly}" class="form-control col-sm-7" placeholder="${placeholder}" />	
 		<form:errors path="${path}" cssClass="error" />
 	</div>
 </spring:bind>
