@@ -151,7 +151,7 @@ public class NotificationService {
 		customer = request.getCustomer();
 		actors.add(customer);
 		notification = this.create(actors);
-		notification.setReason("Nueva oferta en su request" + request.getTags());
+		notification.setReason("Nueva oferta en su solicitud" + request.getTags());
 		notification.setDescription("A un entrenador le interesa su solicitud" + request.getTags());
 
 		this.save(notification);

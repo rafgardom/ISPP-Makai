@@ -11,27 +11,22 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import domain.Animal;
+import domain.Coordinates;
+import domain.Duration;
 import domain.Request;
 
 public class OfferForm {
 
 	// Attributes ------------------------------------------------------------- 
 
-	private int		id;
-	private String	country;
-	private String	state;
-	private String	province;
-	private String	city;
-	private String	zip_code;
-	private Date	startMoment;
-	private Double	price;
-	private String	comment;
-	private Integer	year;
-	private Integer	month;
-	private Integer	week;
-	private Integer	day;
-	private Animal	animal;
-	private Request	request;
+	private int			id;
+	private Coordinates	destination;
+	private Date		startMoment;
+	private Double		price;
+	private String		comment;
+	private Duration	duration;
+	private Animal		animal;
+	private Request		request;
 
 
 	// Constructor ------------------------------------------------------------
@@ -49,54 +44,13 @@ public class OfferForm {
 		this.id = id;
 	}
 
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	public String getCountry() {
-		return this.country;
+	@NotNull
+	public Coordinates getDestination() {
+		return this.destination;
 	}
 
-	public void setCountry(final String country) {
-		this.country = country;
-	}
-
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	public String getState() {
-		return this.state;
-	}
-
-	public void setState(final String state) {
-		this.state = state;
-	}
-
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	public String getProvince() {
-		return this.province;
-	}
-
-	public void setProvince(final String province) {
-		this.province = province;
-	}
-
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	public String getCity() {
-		return this.city;
-	}
-
-	public void setCity(final String city) {
-		this.city = city;
-	}
-
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	public String getZip_code() {
-		return this.zip_code;
-	}
-
-	public void setZip_code(final String zip_code) {
-		this.zip_code = zip_code;
+	public void setDestination(final Coordinates destination) {
+		this.destination = destination;
 	}
 
 	@NotNull
@@ -127,40 +81,13 @@ public class OfferForm {
 		this.comment = comment;
 	}
 
-	@Min(0)
-	public Integer getYear() {
-		return this.year;
+	@NotNull
+	public Duration getDuration() {
+		return this.duration;
 	}
 
-	public void setYear(final Integer year) {
-		this.year = year;
-	}
-
-	@Min(0)
-	public Integer getMonth() {
-		return this.month;
-	}
-
-	public void setMonth(final Integer month) {
-		this.month = month;
-	}
-
-	@Min(0)
-	public Integer getWeek() {
-		return this.week;
-	}
-
-	public void setWeek(final Integer week) {
-		this.week = week;
-	}
-
-	@Min(0)
-	public Integer getDay() {
-		return this.day;
-	}
-
-	public void setDay(final Integer day) {
-		this.day = day;
+	public void setDuration(final Duration duration) {
+		this.duration = duration;
 	}
 
 	@NotNull

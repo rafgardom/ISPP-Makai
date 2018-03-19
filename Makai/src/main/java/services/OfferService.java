@@ -12,8 +12,6 @@ import org.springframework.validation.BindingResult;
 
 import repositories.OfferRepository;
 import repositories.RequestRepository;
-import domain.Coordinates;
-import domain.Duration;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
@@ -74,7 +72,7 @@ public class OfferService {
 			result.setAnimal(request.getAnimal());
 
 		//Comprobar de que no tiene ninguna oferta aceptada
-		Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
+		//		Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
 
 		return result;
 	}
@@ -165,34 +163,26 @@ public class OfferService {
 		else
 			result = this.findOne(offerForm.getId());
 
-		result.setDestination(new Coordinates(offerForm.getCountry(), offerForm.getCity(), offerForm.getState(), offerForm.getProvince(), offerForm.getZip_code()));
+		result.setDestination(offerForm.getDestination());
 		result.setStartMoment(offerForm.getStartMoment());
 		result.setPrice(offerForm.getPrice());
 		result.setComment(offerForm.getComment());
-		result.setDuration(new Duration(offerForm.getYear(), offerForm.getMonth(), offerForm.getWeek(), offerForm.getDay()));
+		result.setDuration(offerForm.getDuration());
 		result.setAnimal(offerForm.getAnimal());
 		result.setRequest(offerForm.getRequest());
 
 		return result;
 	}
 
-	public OfferForm toFormObject(final Offer offer) {
+	public OfferForm offerToFormObject(final Offer offer) {
 		Assert.notNull(offer);
 		final OfferForm result = new OfferForm();
 
-		result.setCountry(offer.getDestination().getCountry());
-		result.setState(offer.getDestination().getState());
-		result.setProvince(offer.getDestination().getProvince());
-		result.setCity(offer.getDestination().getCity());
-		result.setZip_code(offer.getDestination().getZip_code());
+		result.setDestination(offer.getDestination());
 		result.setStartMoment(offer.getStartMoment());
 		result.setPrice(offer.getPrice());
 		result.setComment(offer.getComment());
-		result.setPrice(offer.getPrice());
-		result.setYear(offer.getDuration().getYear());
-		result.setMonth(offer.getDuration().getMonth());
-		result.setWeek(offer.getDuration().getWeek());
-		result.setDay(offer.getDuration().getDay());
+		result.setDuration(offer.getDuration());
 		result.setAnimal(offer.getAnimal());
 		result.setRequest(offer.getRequest());
 

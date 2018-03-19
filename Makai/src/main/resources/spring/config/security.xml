@@ -53,6 +53,7 @@
 		
 		<security:intercept-url pattern="/offer/trainer/list.do" access="hasRole('TRAINER')" /> 
 		<security:intercept-url pattern="/offer/trainer/delete.do" access="hasRole('TRAINER')" />
+		<security:intercept-url pattern="/offer/trainer/create.do" access="hasRole('TRAINER')" />
 		<security:intercept-url pattern="/offer/trainer/display.do" access="hasAnyRole('CUSTOMER','TRAINER')" />
 		
 		<security:intercept-url pattern="/notification/actor/list.do" access="isAuthenticated()" /> 

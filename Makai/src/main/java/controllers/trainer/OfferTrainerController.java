@@ -3,8 +3,11 @@ package controllers.trainer;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,11 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.OfferService;
+import services.RequestService;
 import services.TrainerService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Offer;
+import domain.Request;
 import domain.Trainer;
+import forms.OfferForm;
 
 @Controller
 @RequestMapping("/offer/trainer")
@@ -32,6 +38,9 @@ public class OfferTrainerController extends AbstractController {
 
 	@Autowired
 	private ActorService	actorService;
+
+	@Autowired
+	private RequestService	requestService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -89,6 +98,69 @@ public class OfferTrainerController extends AbstractController {
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:list.do");
 		}
+
+		return result;
+	}
+
+	// Creation ---------------------------------------------------------------		
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam final int requestId) {
+		ModelAndView result;
+		Offer offer;
+		Request request;
+		OfferForm offerForm;
+
+		request = this.requestService.findOne(requestId);
+
+		offer = this.offerService.createWithAnimal(request);
+		offerForm = this.offerService.offerToFormObject(offer);
+
+		result = this.createEditModelAndView(offerForm);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final OfferForm offerForm, final BindingResult binding) {
+
+		ModelAndView result;
+		Offer offer;
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(offerForm);
+		else
+			try {
+				offer = this.offerService.reconstruct(offerForm, binding);
+
+				offer = this.offerService.save(offer);
+				result = new ModelAndView("master.page");
+
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(offerForm, "animal.commit.error");
+
+			}
+		return result;
+
+	}
+
+	// Ancillary methods ------------------------------------------------------
+
+	protected ModelAndView createEditModelAndView(final OfferForm offerForm) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(offerForm, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final OfferForm offerForm, final String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("offer/create");
+
+		result.addObject("offerForm", offerForm);
+		result.addObject("message", message);
 
 		return result;
 	}
