@@ -37,6 +37,13 @@
 					<li><a href="animal/customer/register.do"><spring:message code="master.page.customer.animal" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.request" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="request/customer/create.do"><spring:message code="master.page.request.create" /></a></li>
+					<li><a href="request/customer/list.do"><spring:message code="master.page.request.list" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">

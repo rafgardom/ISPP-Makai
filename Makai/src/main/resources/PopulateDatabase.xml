@@ -877,6 +877,7 @@
 		<property name="description" value="Description Request 1" />
 		<property name="tags" value="Tag Request 1" />
 		<property name="category" value="ABUSE" />
+		<property name="isCancelled" value="false" />
 		<property name="customer" ref="customer1" />
 		<property name="animal" ref="animal1" />
 		<property name="receipts">
@@ -890,6 +891,7 @@
 		<property name="description" value="Description Request 2" />
 		<property name="tags" value="Tag Request 2" />
 		<property name="category" value="GENERAL" />
+		<property name="isCancelled" value="false" />
 		<property name="customer" ref="customer1" />
 		<property name="receipts">
 			<list>
@@ -902,6 +904,7 @@
 		<property name="description" value="Description Request 3" />
 		<property name="tags" value="Tag Request 3" />
 		<property name="category" value="ADDICTION" />
+		<property name="isCancelled" value="false" />
 		<property name="customer" ref="customer2" />
 		<property name="receipts">
 			<list>

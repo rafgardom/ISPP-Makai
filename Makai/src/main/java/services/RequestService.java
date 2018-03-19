@@ -1,6 +1,7 @@
 
 package services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.RequestRepository;
 import domain.Customer;
 import domain.Receipt;
 import domain.Request;
+import forms.RequestForm;
 
 @Service
 @Transactional
@@ -27,7 +31,7 @@ public class RequestService {
 	private CustomerService		customerService;
 
 	@Autowired
-	private OfferService		offerService;
+	private Validator			validator;
 
 
 	// Constructors------------------------------------------------------------
@@ -63,6 +67,7 @@ public class RequestService {
 
 		result = new Request();
 		result.setCustomer(principal);
+		result.setIsCancelled(false);
 
 		receipts = new ArrayList<Receipt>();
 		result.setReceipts(receipts);
@@ -79,7 +84,7 @@ public class RequestService {
 		Assert.notNull(principal);
 		Assert.isTrue(request.getCustomer().getId() == principal.getId());
 
-		//Comprobar de que no tiene ninguna oferta ¿aceptada?
+		//Comprobar de que no tiene ninguna oferta
 		Assert.isTrue(!this.tieneOfferUnRequest(request));
 
 		result = this.requestRepository.save(request);
@@ -97,11 +102,18 @@ public class RequestService {
 		Assert.notNull(principal);
 		Assert.isTrue(request.getCustomer().getId() == principal.getId());
 
-		//Comprobar de que no tiene ninguna oferta aceptada
-		Assert.isTrue(!this.tieneOfferUnRequest(request));
+		Assert.isTrue(request.getIsCancelled() == false);
 
-		this.requestRepository.delete(request);
+		//Comprobar de que no tiene ninguna oferta aceptada
+		if (this.tieneOfferAceptadaUnRequest(request)) {
+			request.setIsCancelled(true);
+			this.requestRepository.save(request);
+		} else
+			this.requestRepository.delete(request);
+
 	}
+
+	// Other business methods -------------------------------------------------
 
 	public Boolean tieneOfferUnRequest(final Request request) {
 		Boolean res = true;
@@ -110,5 +122,51 @@ public class RequestService {
 			res = false;
 
 		return res;
+	}
+
+	public Boolean tieneOfferAceptadaUnRequest(final Request request) {
+		Boolean res = true;
+
+		if (this.requestRepository.findOfferWithThisRequestTrue(request.getId()) == null)
+			res = false;
+
+		return res;
+	}
+
+	public Request reconstruct(final RequestForm requestForm, final BindingResult binding) throws IOException {
+
+		Assert.notNull(requestForm);
+
+		Request result;
+
+		//if (requestForm.getId() == 0)
+		result = this.create();
+		//else
+		//	result = this.findOne(requestForm.getId());
+
+		result.setDescription(requestForm.getDescription());
+		result.setTags(requestForm.getTags());
+		result.setCategory(requestForm.getCategory());
+		result.setAnimal(requestForm.getAnimal());
+
+		this.validator.validate(result, binding);
+
+		return result;
+
+	}
+	public RequestForm requestToFormObject(final Request request) {
+		final RequestForm result;
+
+		Assert.notNull(request);
+
+		result = new RequestForm();
+
+		//result.setId(animal.getId());
+		result.setDescription(request.getDescription());
+		result.setTags(request.getTags());
+		result.setCategory(request.getCategory());
+		result.setAnimal(request.getAnimal());
+
+		return result;
 	}
 }

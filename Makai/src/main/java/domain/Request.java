@@ -28,6 +28,7 @@ public class Request extends DomainEntity {
 	private String		description;
 	private String		tags;
 	private Category	category;
+	private Boolean		isCancelled;
 
 
 	@NotBlank
@@ -53,6 +54,15 @@ public class Request extends DomainEntity {
 
 	public void setCategory(final Category category) {
 		this.category = category;
+	}
+
+	@NotNull
+	public Boolean getIsCancelled() {
+		return this.isCancelled;
+	}
+
+	public void setIsCancelled(final Boolean isCancelled) {
+		this.isCancelled = isCancelled;
 	}
 
 
