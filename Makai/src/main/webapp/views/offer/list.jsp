@@ -32,5 +32,11 @@
 		</jstl:if>
 	</display:column>
 	
+	<display:column>
+			<a href="offer/trainer/display.do?offerId=${row.id}">
+				<spring:message	code="offer.display" />
+			</a>
+	</display:column>
+	
 </display:table>
 

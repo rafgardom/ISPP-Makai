@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.OfferService;
 import services.TrainerService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Offer;
 import domain.Trainer;
 
@@ -27,6 +29,9 @@ public class OfferTrainerController extends AbstractController {
 
 	@Autowired
 	private OfferService	offerService;
+
+	@Autowired
+	private ActorService	actorService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -48,6 +53,24 @@ public class OfferTrainerController extends AbstractController {
 		result = new ModelAndView("offer/list");
 		result.addObject("offers", offers);
 		result.addObject("requestURI", "offer/trainer/list.do");
+
+		return result;
+	}
+
+	// List -------------------------------------------------------------------	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int offerId) {
+		ModelAndView result;
+		Actor actor;
+		Offer offer;
+
+		actor = this.actorService.findByPrincipal();
+		offer = this.offerService.findOne(offerId);
+
+		result = new ModelAndView("offer/display");
+		result.addObject("offer", offer);
+		result.addObject("principal", actor);
+		result.addObject("requestURI", "offer/trainer/display.do?" + offer.getId());
 
 		return result;
 	}

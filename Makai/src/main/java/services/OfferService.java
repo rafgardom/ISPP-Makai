@@ -53,7 +53,8 @@ public class OfferService {
 		return result;
 	}
 
-	public Offer create(final Request request) {
+	//Creamos una offer a partir de una request que ya tiene asignado un animal
+	public Offer createWithAnimal(final Request request) {
 		Offer result;
 		Trainer principal;
 
@@ -66,6 +67,24 @@ public class OfferService {
 
 		if (request.getAnimal() != null)	//Si el cliente ya ha seleccionado un animal
 			result.setAnimal(request.getAnimal());
+
+		//Comprobar de que no tiene ninguna oferta aceptada
+		Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
+
+		return result;
+	}
+
+	//Creamos una offer a partir de una request que no tiene asignado un animal
+	public Offer createWithoutAnimal(final Request request) {
+		Offer result;
+		Trainer principal;
+
+		principal = this.trainerService.findByPrincipal();
+		Assert.notNull(principal);
+
+		result = new Offer();
+		result.setTrainer(principal);
+		result.setRequest(request);
 
 		//Comprobar de que no tiene ninguna oferta aceptada
 		Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
