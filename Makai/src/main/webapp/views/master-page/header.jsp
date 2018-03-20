@@ -31,24 +31,21 @@
 		<ul class="navbar-nav mr-auto">
 
 			<security:authorize access="hasAnyRole('CUSTOMER')">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
-							code="master.page.customer" /></a>
-					<div class="dropdown-menu" x-placement="bottom-start"
-						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-						<a class="dropdown-item" href="animal/customer/register.do"><spring:message
-								code="master.page.customer.animal" /></a>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<spring:message code="master.page.customer" /></a>
+					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+						<a class="dropdown-item" href="#">EMPTY</a>
 					</div></li>
 
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
-							code="master.page.request" /></a>
-					<div class="dropdown-menu" x-placement="bottom-start"
-						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-						<a class="dropdown-item" href="request/customer/create.do"><spring:message
-								code="master.page.request.create" /></a> <a class="dropdown-item"
-							href="request/customer/list.do"><spring:message
-								code="master.page.request.list" /></a>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<spring:message code="master.page.request" /></a>
+					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+						<a class="dropdown-item" href="request/customer/create.do">
+							<spring:message code="master.page.request.create" /></a> 
+						<a class="dropdown-item" href="request/customer/list.do">
+							<spring:message code="master.page.request.list" /></a>
 					</div></li>
 
 
@@ -56,16 +53,29 @@
 
 			<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">
 
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
-							code="master.page.travel" /></a>
-					<div class="dropdown-menu" x-placement="bottom-start"
-						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-						<a class="dropdown-item" href="travel/create.do"><spring:message
-								code="master.page.travel.create" /></a> <a class="dropdown-item"
-							href="travel/list.do"><spring:message
-								code="master.page.travel.list" /></a>
-					</div></li>
+				<li class="nav-item dropdown"> 
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<spring:message code="master.page.travel" /></a>
+					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+						<a class="dropdown-item" href="travel/create.do">
+							<spring:message code="master.page.travel.create" /></a> 
+						<a class="dropdown-item" href="travel/list.do">
+							<spring:message code="master.page.travel.list" /></a>
+					</div>
+				</li>
+			</security:authorize>
+			
+			<security:authorize access="hasAnyRole('CUSTOMER,ANIMALSHELTER')">
+				<li class="nav-item dropdown"> 
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<spring:message	code="master.page.animal" /></a>
+					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+						<a class="dropdown-item" href="animal/register.do">
+							<spring:message code="master.page.animal.register" /></a> 
+						<a class="dropdown-item" href="animal/list.do">
+							<spring:message code="master.page.animal.list" /></a>
+					</div>
+				</li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('TRAINER')">
@@ -155,22 +165,12 @@
 		</security:authorize>
 
 		<security:authorize access="hasRole('CUSTOMER')">
-<<<<<<< HEAD
-			<li><a class="fNiv"><spring:message
-						code="master.page.customer" /></a>
+			<li><a class="fNiv"><spring:message code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="animal/customer/register.do"><spring:message
-								code="master.page.customer.animal" /></a></li>
-				</ul></li>
-			<li><a class="fNiv"><spring:message
-						code="master.page.request" /></a>
-=======
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				
-			</li>
+					EMPTY
+			</ul></li>
 			<li><a class="fNiv"><spring:message	code="master.page.request" /></a>
->>>>>>> ad3511022bc24f687799586123e983e0ad98cd87
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="request/customer/create.do"><spring:message
@@ -191,9 +191,6 @@
 								code="master.page.travel.list" /></a></li>
 				</ul></li>
 		</security:authorize>
-<<<<<<< HEAD
-
-=======
 		
 		<security:authorize access="hasAnyRole('CUSTOMER,ANIMALSHELTER')">
 			<li><a class="fNiv"><spring:message	code="master.page.animal" /></a>
@@ -205,7 +202,6 @@
 			</li>	
 		</security:authorize>
 		
->>>>>>> ad3511022bc24f687799586123e983e0ad98cd87
 		<security:authorize access="hasRole('TRAINER')">
 			<li><a class="fNiv" href="offer/trainer/list.do"><spring:message
 						code="master.page.offer" /></a></li>
