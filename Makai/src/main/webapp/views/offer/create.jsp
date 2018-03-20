@@ -30,9 +30,9 @@
 		<form:hidden path="request"/>
 	<fieldset>
 		<br />
-		<p><b>
-			<spring:message code="offer.destination" />
-		</b></p>
+		<legend>
+			<b><spring:message code="offer.destination" />:</b>
+		</legend>
 		<br />
 		<acme:textbox code="offer.coordinates.country" path="destination.country" mandatory="true" />
 		<br />
@@ -44,12 +44,19 @@
 		<br />
 		<acme:textbox code="offer.coordinates.zipCode" path="destination.zip_code" mandatory="true" />
 		<br />
+		</fieldset>
+		
 		<acme:textbox code="offer.startMoment" path="startMoment" mandatory="true" />
 		<br />
 		<acme:textbox code="offer.price" path="price" mandatory="true" />
 		<br />
 		<acme:textbox code="offer.comment" path="comment" mandatory="false" />
 		<br />
+		
+		<fieldset>
+		<legend>
+			<b><spring:message code="offer.duration" />:</b>
+		</legend>
 		<acme:textbox code="offer.duration.year" path="duration.year" mandatory="false" />
 		<br />
 		<acme:textbox code="offer.duration.month" path="duration.month" mandatory="false" />
@@ -58,6 +65,7 @@
 		<br />
 		<acme:textbox code="offer.duration.day" path="duration.day" mandatory="false" />
 		<br />
+		</fieldset>
 		
 		<jstl:if test="${offerForm.request.animal==null}">
 			<acme:select items="${animals}" itemLabel="name" code="offer.animal" path="animal"/>
