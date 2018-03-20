@@ -34,6 +34,9 @@ public class RequestService {
 	private ReceiptService		receiptService;
 
 	@Autowired
+	private NotificationService	notificationService;
+
+	@Autowired
 	private Validator			validator;
 
 
@@ -89,6 +92,9 @@ public class RequestService {
 
 		//Comprobar de que no tiene ninguna oferta
 		Assert.isTrue(!this.tieneOfferUnRequest(request));
+
+		//SOLO PARA EL CREATE
+		this.notificationService.createNotificationToTrainerWithTraining(request);
 
 		result = this.requestRepository.save(request);
 

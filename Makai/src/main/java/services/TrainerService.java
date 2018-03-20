@@ -18,6 +18,7 @@ import repositories.TrainerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Category;
 import domain.Offer;
 import domain.Receipt;
 import domain.Trainer;
@@ -193,5 +194,9 @@ public class TrainerService {
 		result.setAvgRating(trainer.getAvgRating());
 
 		return result;
+	}
+
+	public Collection<Trainer> findTrainerSameCategory(final Category category) {
+		return this.trainerRepository.findTrainerSameCategory(category);
 	}
 }

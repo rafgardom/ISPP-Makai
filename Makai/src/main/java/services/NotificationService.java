@@ -16,7 +16,9 @@ import domain.Actor;
 import domain.Administrator;
 import domain.Customer;
 import domain.Notification;
+import domain.NotificationType;
 import domain.Request;
+import domain.Trainer;
 
 @Service
 @Transactional
@@ -32,6 +34,9 @@ public class NotificationService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private TrainerService			trainerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -153,6 +158,24 @@ public class NotificationService {
 		notification = this.create(actors);
 		notification.setReason("Nueva oferta en su solicitud" + request.getTags());
 		notification.setDescription("A un entrenador le interesa su solicitud" + request.getTags());
+
+		this.save(notification);
+
+	}
+
+	public void createNotificationToTrainerWithTraining(final Request request) {
+		Assert.notNull(request);
+		Notification notification;
+		Collection<Trainer> trainers;
+		final Collection<Actor> actors = new ArrayList<Actor>();
+
+		trainers = this.trainerService.findTrainerSameCategory(request.getCategory());
+		for (final Trainer t : trainers)
+			actors.add(t);
+		notification = this.create(actors);
+		notification.setReason("Nueva solicitud con su misma categoría" + request.getCategory());
+		notification.setDescription("Podría interesarle crear una oferta a dicha solicitud" + request.getTags());
+		notification.setType(NotificationType.REQUEST);
 
 		this.save(notification);
 
