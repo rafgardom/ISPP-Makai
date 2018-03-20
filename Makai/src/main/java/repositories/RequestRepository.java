@@ -22,7 +22,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select r from Request r where r.customer.id=?1")
 	Collection<Request> findRequestsByCustomer(int customer);
 
-	@Query("select o.request from Offer o where o.isAccepted=false")
+	@Query("select distinct o.request from Offer o where o.isAccepted=false")
 	Collection<Request> findRequestsNotAccepted();
 
 }

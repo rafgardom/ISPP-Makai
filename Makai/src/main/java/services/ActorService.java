@@ -23,6 +23,8 @@ import domain.Actor;
 import domain.Administrator;
 import domain.Customer;
 import domain.Trainer;
+import domain.Training;
+import domain.Travel;
 import forms.ProfileForm;
 
 @Service
@@ -43,6 +45,12 @@ public class ActorService {
 
 	@Autowired
 	private TrainerService			trainerService;
+
+	@Autowired
+	private TrainingService			trainingService;
+
+	@Autowired
+	private TravelService			travelService;
 
 	@Autowired
 	private Validator				validator;
@@ -266,4 +274,45 @@ public class ActorService {
 		return result;
 	}
 
+	public Actor ban(Actor actor) {
+		Assert.notNull(actor);
+
+		final Administrator administrator;
+
+		if (this.checkAuthority(actor, "TRAINER")) {
+			Collection<Training> trainings;
+			trainings = this.trainingService.findByTrainerId(actor.getId());
+			for (final Training tr : trainings)
+				this.trainingService.delete(tr);
+		} else if (this.checkAuthority(actor, "TRANSPORTER")) {
+			Collection<Travel> travels;
+			travels = this.travelService.findTravelByTransporterId(actor.getId());
+			for (final Travel tr : travels)
+				this.travelService.delete(tr);
+		}
+
+		administrator = this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
+
+		actor.getUserAccount().setEnabled(false);
+
+		actor = this.actorRepository.save(actor);
+
+		return actor;
+	}
+
+	public Actor unban(Actor actor) {
+		Assert.notNull(actor);
+
+		Administrator administrator;
+
+		administrator = this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
+
+		actor.getUserAccount().setEnabled(true);
+
+		actor = this.actorRepository.save(actor);
+
+		return actor;
+	}
 }
