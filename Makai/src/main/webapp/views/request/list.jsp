@@ -15,6 +15,12 @@
 	<acme:column code="request.category" property="category.name" />
 	<acme:column code="request.animal" property="animal.name" />
 	
+	<display:column>
+		<a href="request/actor/display.do?requestId=${row.id}">
+			<spring:message	code="request.display" />
+		</a>
+	</display:column>
+	
 	<security:authorize access="hasRole('CUSTOMER')">
 		<%--
 		<display:column>
