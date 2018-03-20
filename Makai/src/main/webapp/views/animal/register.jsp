@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="animal/edit.do" modelAttribute="animal" enctype="multipart/form-data">
+<form:form action="${RequestURI}" modelAttribute="animalForm" enctype="multipart/form-data">
 	
 	<form:hidden path="id" />
 
@@ -15,13 +15,7 @@
 	<acme:textbox code="animal.chipNumber" path="chipNumber" mandatory="true"/>
 	<acme:textbox code="animal.age" path="age" mandatory="true"/>
 	
-	<spring:message code="animal.sex" />
-	<form:select path="sex">
-		<form:option value="${null }" label="----" />    
-		<jstl:forEach items="${sexs }" var="sex">
-			<form:option value="${sex}" label="${sex}" />
-		</jstl:forEach>
-	</form:select>
+	<acme:selectNotEntity items="${sexs }" code="animal.sex" path="sex"/>
 	<br />
 	<br />
 	
@@ -45,9 +39,16 @@
 	<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/>
 	<br />
 	
+	<jstl:if test="${errorMessage != null}">
+		<spring:message code="${errorMessage}" var="error" />
+		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
+	</jstl:if>
+	<br/>
+	<br/>
+	
 	<acme:submit name="save" code="animal.save" />
 	
-	<acme:cancel url="/" code="animal.cancel" />
+	<acme:cancel url="./animal/list.do" code="animal.cancel" />
 		
 </form:form>
 

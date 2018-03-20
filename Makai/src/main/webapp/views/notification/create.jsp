@@ -23,11 +23,7 @@
 	<form:hidden path="moment" />
 	<form:hidden path="actors" />
 	
-	<form:label path="type"><spring:message code="notification.type"/></form:label>
-	<form:select path="type">
-		<form:option value="-" label="----" />
-		<form:options items="${notificationTypes}" />
-	</form:select>
+	<acme:selectNotEntity items="${notificationTypes}" code="notification.type" path="type" />
 	
 	<acme:textbox code="notification.reason" path="reason" />
 	<acme:textarea code="notification.description" path="description"/>
