@@ -107,7 +107,6 @@ public class RequestCustomerController extends AbstractController {
 				result = new ModelAndView("redirect:myList.do");
 
 			} catch (final Throwable oops) {
-				System.out.println(oops);
 				result = this.createEditModelAndView(requestForm, "request.commit.error");
 			}
 		return result;
