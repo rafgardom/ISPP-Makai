@@ -47,6 +47,20 @@
 						<a class="dropdown-item" href="request/customer/list.do">
 							<spring:message code="master.page.request.list" /></a>
 					</div></li>
+					
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<spring:message code="master.page.receipt" />
+					</a>
+					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+						<a class="dropdown-item" href="receipt/customer/pending.do">
+							<spring:message code="master.page.receipt.pending" />
+						</a>
+						<a class="dropdown-item" href="receipt/customer/paid.do">
+							<spring:message code="master.page.receipt.paid" />
+						</a>
+					</div>
+				</li>
 
 
 			</security:authorize>
@@ -178,6 +192,13 @@
 					<li><a href="request/customer/list.do"><spring:message
 								code="master.page.request.list" /></a></li>
 				</ul></li>
+			<li><a class="fNiv"><spring:message	code="master.page.receipt" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="receipt/customer/pending.do"><spring:message code="master.page.receipt.pending" /></a></li>
+					<li><a href="receipt/customer/paid.do"><spring:message code="master.page.receipt.paid" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 
 		<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">

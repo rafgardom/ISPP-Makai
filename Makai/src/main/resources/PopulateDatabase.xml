@@ -973,11 +973,13 @@
 	
 	<!-- Receipt -->
 	<bean id="receipt1" class="domain.Receipt">
-		<property name="moment" value="04/20/2018 9:00" />
+		<property name="moment"><null/></property>
 		<property name="amount" value="259" />
 		<property name="commission" value="15" />
+		<property name="isPaid" value="false"/>
 		<property name="trainer" ref="trainer2" />
 		<property name="request" ref="request3" />
+		
 	</bean>
 	
 	<!-- Vehicle -->

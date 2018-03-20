@@ -89,4 +89,12 @@ public class ReceiptService {
 		return result;
 	}
 
+	public Collection<Receipt> getPendingReceipts(final Customer customer) {
+		return this.receiptRepository.getPendingReceipts(customer.getId());
+	}
+
+	public Collection<Receipt> getPaidReceipts(final Customer customer) {
+		return this.receiptRepository.getPaidReceipts(customer.getId());
+	}
+
 }

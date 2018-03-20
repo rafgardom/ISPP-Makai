@@ -12,6 +12,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,9 +30,10 @@ public class Receipt extends DomainEntity {
 	private Date	moment;
 	private Double	amount;
 	private Double	commission;
+	private boolean	isPaid;
 
 
-	@NotNull
+	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
@@ -55,6 +57,14 @@ public class Receipt extends DomainEntity {
 	}
 	public void setCommission(final Double commission) {
 		this.commission = commission;
+	}
+
+	public boolean getIsPaid() {
+		return this.isPaid;
+	}
+
+	public void setIsPaid(final boolean isPaid) {
+		this.isPaid = isPaid;
 	}
 
 

@@ -30,6 +30,7 @@
 		<value>/views/notification/messages</value>
 		<value>/views/profile/messages</value>
 		<value>/views/professional/messages</value>
+		<value>/views/receipt/messages</value>
 		<value>/views/request/messages</value>
 		<value>/views/trainer/messages</value>
 		<value>/views/travel/messages</value>
