@@ -12,7 +12,7 @@ public class RequestForm {
 
 	// Attributes -------------------------------------------------------------
 
-	//private int			id;
+	private int			id;
 	private String		description;
 	private String		tags;
 	private Category	category;
@@ -26,15 +26,15 @@ public class RequestForm {
 	}
 
 	// Getters & setters ------------------------------------------------------
-	/*
-	 * public int getId() {
-	 * return this.id;
-	 * }
-	 * 
-	 * public void setId(final int id) {
-	 * this.id = id;
-	 * }
-	 */
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(final int id) {
+		this.id = id;
+	}
+
 	@NotBlank
 	public String getDescription() {
 		return this.description;

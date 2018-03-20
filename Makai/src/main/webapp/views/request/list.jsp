@@ -15,11 +15,20 @@
 	<acme:column code="request.category" property="category.name" />
 	<acme:column code="request.animal" property="animal.name" />
 	
-	<display:column>
-		<a href="request/customer/delete.do?requestId=${row.id}">
-			<spring:message	code="request.delete" />
-		</a>
-	</display:column>
+	<security:authorize access="hasRole('CUSTOMER')">
+		<%--
+		<display:column>
+			<a href="request/customer/edit.do?requestId=${row.id}">
+				<spring:message	code="request.edit" />
+			</a>
+		</display:column>
+		--%>
+		<display:column>
+			<a href="request/customer/delete.do?requestId=${row.id}">
+				<spring:message	code="request.delete" />
+			</a>
+		</display:column>
+	</security:authorize>
 
 </display:table>
 <security:authorize access="hasRole('CUSTOMER')">

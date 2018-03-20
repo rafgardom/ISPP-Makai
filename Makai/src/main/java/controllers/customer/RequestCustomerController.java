@@ -44,6 +44,8 @@ public class RequestCustomerController extends AbstractController {
 		super();
 	}
 
+	// List ---------------------------------------------------------------
+
 	@RequestMapping(value = "/myList", method = RequestMethod.GET)
 	public ModelAndView listByCustomer() {
 		ModelAndView result;
@@ -61,6 +63,8 @@ public class RequestCustomerController extends AbstractController {
 		return result;
 	}
 
+	// Create  ---------------------------------------------------------------
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -68,33 +72,48 @@ public class RequestCustomerController extends AbstractController {
 
 		requestForm = new RequestForm();
 
-		result = this.createModelAndView(requestForm);
+		result = this.createEditModelAndView(requestForm);
 
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final RequestForm requestForm, final BindingResult binding) {
+	// Edit ---------------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int requestId) {
+		ModelAndView result;
+		RequestForm requestForm;
+		Request request;
+
+		request = this.requestService.findOne(requestId);
+		requestForm = this.requestService.requestToFormObject(request);
+		result = this.createEditModelAndView(requestForm);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveEdit(@Valid final RequestForm requestForm, final BindingResult binding) {
 
 		ModelAndView result;
 		Request request;
 
 		if (binding.hasErrors())
-			result = this.createModelAndView(requestForm);
+			result = this.createEditModelAndView(requestForm);
 		else
 			try {
 				request = this.requestService.reconstruct(requestForm, binding);
-
-				request = this.requestService.save(request);
+				this.requestService.save(request);
 				result = new ModelAndView("redirect:myList.do");
 
 			} catch (final Throwable oops) {
-				result = this.createModelAndView(requestForm, "animal.commit.error");
-
+				System.out.println(oops);
+				result = this.createEditModelAndView(requestForm, "request.commit.error");
 			}
 		return result;
-
 	}
+
+	// Delete ---------------------------------------------------------------
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int requestId) {
@@ -104,7 +123,7 @@ public class RequestCustomerController extends AbstractController {
 		request = this.requestService.findOne(requestId);
 		this.requestService.delete(request);
 
-		result = new ModelAndView("redirect:list.do");
+		result = new ModelAndView("redirect:myList.do");
 
 		return result;
 
@@ -112,33 +131,34 @@ public class RequestCustomerController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createModelAndView(final RequestForm requestForm) {
+	protected ModelAndView createEditModelAndView(final RequestForm requestForm) {
 		ModelAndView result;
 
-		result = this.createModelAndView(requestForm, null);
+		result = this.createEditModelAndView(requestForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView createModelAndView(final RequestForm requestForm, final String message) {
+	protected ModelAndView createEditModelAndView(final RequestForm requestForm, final String message) {
 		ModelAndView result;
 		Customer principal;
-		Collection<Animal> myAnimals;
-		Collection<Animal> otherAnimals;
+		Collection<Animal> animals;
 		Category[] categories;
 
 		principal = this.customerService.findByPrincipal();
-		myAnimals = this.animalService.findByActorId(principal.getId());
-		otherAnimals = this.animalService.findAnimalFromAnimalShelter();
+		animals = this.animalService.findByActorId(principal.getId());
 
 		categories = Category.values();
 
-		result = new ModelAndView("request/create");
-		result.addObject("RequestURI", "request/customer/create.do");
+		if (requestForm.getId() == 0) {
+			result = new ModelAndView("request/create");
+			result.addObject("RequestURI", "request/customer/create.do");
+		} else {
+			result = new ModelAndView("request/edit");
+			result.addObject("RequestURI", "request/customer/edit.do");
+		}
 		result.addObject("requestForm", requestForm);
-		result.addObject("myAnimals", myAnimals);
-		result.addObject("otherAnimals", otherAnimals);
-
+		result.addObject("animals", animals);
 		result.addObject("categoriesList", categories);
 		result.addObject("message", message);
 

@@ -52,6 +52,7 @@
 		<security:intercept-url pattern="/receipt/customer/payment.do" access="hasRole('CUSTOMER')" />
 		
 		<security:intercept-url pattern="/request/customer/create.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/request/customer/edit.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/request/customer/delete.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/request/customer/myList.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/request/trainer/list.do" access="hasRole('TRAINER')" />

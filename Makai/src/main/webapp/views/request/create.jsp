@@ -26,6 +26,7 @@
 </jstl:if>
 
 <form:form action="${RequestURI}" modelAttribute="requestForm" enctype="multipart/form-data">
+	<form:hidden path="id" />
 		
 	<fieldset>
 		<acme:textbox code="request.description" path="description" mandatory="true" />
@@ -34,26 +35,8 @@
 		<br />
 		<acme:selectNotEntity code="request.category" path="category" items="${categories}" />
 		<br />
-		<%--
-		<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" />
-		<br />
-		 --%>
-		 
-		 <spring:message code="request.myAnimals" var="myA"/>
-		 <spring:message code="request.otherAnimals" var="otherA"/>
-		 
-		 <form:label path="animal">
-			<spring:message code="request.animal" />
-		</form:label>	
-		<form:select id="${UUID.randomUUID().toString()}" path="animal" onchange="javascript: return true;">
-			<form:option value="0" label="----" selected="selected" disabled="true"/>
-			<form:option value="0" label="${myA}" disabled="true"/>		
-			<form:options items="${myAnimals}" itemValue="id" itemLabel="name" />
-			<form:option value="0" label="${otherA}" disabled="true"/>
-			<form:options items="${otherAnimals}" itemValue="id" itemLabel="name" />
-		</form:select>
-		<form:errors path="animal" cssClass="error" />
-		 
+		<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
+		<br />	 
 	</fieldset>
 	<br/>
 	
@@ -63,7 +46,7 @@
 	</jstl:if>
 	<br/>
 	
-		<acme:submit code="request.create" name="save" />
+		<acme:submit code="request.save" name="save" />
 		<acme:cancel code="request.cancel" url="" />
 	<br/>
 	

@@ -31,6 +31,9 @@ public class RequestService {
 	private CustomerService		customerService;
 
 	@Autowired
+	private ReceiptService		receiptService;
+
+	@Autowired
 	private Validator			validator;
 
 
@@ -106,6 +109,7 @@ public class RequestService {
 
 		//Comprobar de que no tiene ninguna oferta aceptada
 		if (this.tieneOfferAceptadaUnRequest(request)) {
+			Assert.isTrue(this.receiptService.getPendingReceipts(principal).isEmpty());
 			request.setIsCancelled(true);
 			this.requestRepository.save(request);
 		} else
@@ -147,10 +151,10 @@ public class RequestService {
 
 		Request result;
 
-		//if (requestForm.getId() == 0)
-		result = this.create();
-		//else
-		//	result = this.findOne(requestForm.getId());
+		if (requestForm.getId() == 0)
+			result = this.create();
+		else
+			result = this.findOne(requestForm.getId());
 
 		result.setDescription(requestForm.getDescription());
 		result.setTags(requestForm.getTags());
@@ -162,21 +166,21 @@ public class RequestService {
 		return result;
 
 	}
-	/*
-	 * public RequestForm requestToFormObject(final Request request) {
-	 * final RequestForm result;
-	 * 
-	 * Assert.notNull(request);
-	 * 
-	 * result = new RequestForm();
-	 * 
-	 * //result.setId(animal.getId());
-	 * result.setDescription(request.getDescription());
-	 * result.setTags(request.getTags());
-	 * result.setCategory(request.getCategory());
-	 * result.setAnimal(request.getAnimal());
-	 * 
-	 * return result;
-	 * }
-	 */
+
+	public RequestForm requestToFormObject(final Request request) {
+		RequestForm result;
+
+		Assert.notNull(request);
+
+		result = new RequestForm();
+
+		result.setId(request.getId());
+		result.setDescription(request.getDescription());
+		result.setTags(request.getTags());
+		result.setCategory(request.getCategory());
+		result.setAnimal(request.getAnimal());
+
+		return result;
+	}
+
 }
