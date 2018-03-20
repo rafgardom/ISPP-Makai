@@ -3,8 +3,6 @@ package forms;
 
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -74,8 +72,6 @@ public class AnimalForm {
 		this.sex = sex;
 	}
 
-	@NotNull
-	@Column(length = 16777215)
 	public byte[] getPicture() {
 		return this.picture;
 	}
@@ -84,6 +80,7 @@ public class AnimalForm {
 		this.picture = picture;
 	}
 
+	@NotNull
 	public MultipartFile getAnimalImage() {
 		return this.animalImage;
 	}
@@ -92,8 +89,6 @@ public class AnimalForm {
 		this.animalImage = animalImage;
 	}
 
-	@Valid
-	@NotNull
 	public Collection<Breed> getBreeds() {
 		return this.breeds;
 	}

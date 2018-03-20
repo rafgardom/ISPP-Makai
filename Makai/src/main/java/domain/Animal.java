@@ -58,6 +58,7 @@ public class Animal extends DomainEntity {
 		this.chipNumber = chipNumber;
 	}
 
+	@NotNull
 	@Min(0)
 	public Integer getAge() {
 		return this.age;

@@ -176,16 +176,18 @@ public class AnimalController extends AbstractController {
 		breeds = this.breedService.findAll();
 		json = new Gson().toJson(breeds);
 
-		if (animalForm.getId() == 0)
-			result = new ModelAndView("animal/register");
-		else
-			result = new ModelAndView("animal/edit");
-		result.addObject("animal", animalForm);
+		//		if (animalForm.getId() == 0)
+		//			result = new ModelAndView("animal/register");
+		//		else
+		//			result = new ModelAndView("animal/edit");
+		result = new ModelAndView("animal/register");
+		result.addObject("animalForm", animalForm);
 		result.addObject("sexs", sexs);
 		result.addObject("species", species);
 		result.addObject("breeds", breeds);
 		result.addObject("jsonBreeds", json);
-		result.addObject("message", message);
+		result.addObject("RequestURI", "animal/edit.do");
+		result.addObject("errorMessage", message);
 
 		return result;
 	}
