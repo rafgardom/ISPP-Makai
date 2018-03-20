@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AnimalService;
@@ -85,7 +86,7 @@ public class RequestCustomerController extends AbstractController {
 				request = this.requestService.reconstruct(requestForm, binding);
 
 				request = this.requestService.save(request);
-				result = new ModelAndView("redirect:");
+				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
 				result = this.createModelAndView(requestForm, "animal.commit.error");
@@ -95,11 +96,12 @@ public class RequestCustomerController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Request request, final BindingResult binding) {
-
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int requestId) {
 		ModelAndView result;
+		Request request;
 
+		request = this.requestService.findOne(requestId);
 		this.requestService.delete(request);
 
 		result = new ModelAndView("redirect:list.do");
