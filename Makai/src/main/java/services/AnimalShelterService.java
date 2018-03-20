@@ -124,7 +124,8 @@ public class AnimalShelterService {
 		if (animalShelterForm.getId() == 0) {
 			result = this.create();
 
-			if (animalShelterForm.getPassword().equals(animalShelterForm.getRepeatPassword()) && animalShelterForm.getPassword() != null && !animalShelterForm.getPassword().isEmpty()) {
+			if (animalShelterForm.getPassword().equals(animalShelterForm.getRepeatPassword()) && animalShelterForm.getPassword() != null && !animalShelterForm.getPassword().isEmpty() && !animalShelterForm.getUserName().contains(" ")
+				&& !animalShelterForm.getPassword().contains(" ")) {
 				password = this.actorService.hashPassword(animalShelterForm.getPassword());
 				result.getUserAccount().setPassword(password);
 				result.getUserAccount().setUsername(animalShelterForm.getUserName());
@@ -136,6 +137,14 @@ public class AnimalShelterService {
 				fieldError = new FieldError("animalShelterForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
 				binding.addError(fieldError);
 
+			}
+			if (animalShelterForm.getUserName().contains(" ")) {
+				FieldError fieldError;
+				final String[] codes = {
+					"animalShelter.username.error"
+				};
+				fieldError = new FieldError("animalShelterForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
 			}
 
 			result.getUserAccount().setEnabled(true);

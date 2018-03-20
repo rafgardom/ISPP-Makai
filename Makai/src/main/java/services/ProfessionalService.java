@@ -129,7 +129,8 @@ public class ProfessionalService {
 		if (professionalForm.getId() == 0) {
 			result = this.create();
 
-			if (professionalForm.getPassword().equals(professionalForm.getRepeatPassword()) && professionalForm.getPassword() != null && !professionalForm.getPassword().isEmpty()) {
+			if (professionalForm.getPassword().equals(professionalForm.getRepeatPassword()) && professionalForm.getPassword() != null && !professionalForm.getPassword().isEmpty() && !professionalForm.getPassword().contains(" ")
+				&& !professionalForm.getUserName().contains(" ")) {
 				password = this.actorService.hashPassword(professionalForm.getPassword());
 				result.getUserAccount().setPassword(password);
 				result.getUserAccount().setUsername(professionalForm.getUserName());
@@ -139,6 +140,15 @@ public class ProfessionalService {
 					"professional.password.error"
 				};
 				fieldError = new FieldError("professionalForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+
+			if (professionalForm.getUserName().contains(" ")) {
+				FieldError fieldError;
+				final String[] codes = {
+					"professional.username.error"
+				};
+				fieldError = new FieldError("professionalForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
 

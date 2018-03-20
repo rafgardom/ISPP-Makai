@@ -128,7 +128,7 @@ public class CustomerService {
 		if (customerForm.getId() == 0) {
 			result = this.create();
 
-			if (customerForm.getPassword().equals(customerForm.getRepeatPassword()) && customerForm.getPassword() != null && !customerForm.getPassword().isEmpty()) {
+			if (customerForm.getPassword().equals(customerForm.getRepeatPassword()) && customerForm.getPassword() != null && !customerForm.getPassword().isEmpty() && !customerForm.getPassword().contains(" ") && !customerForm.getUserName().contains(" ")) {
 				password = this.actorService.hashPassword(customerForm.getPassword());
 				result.getUserAccount().setPassword(password);
 				result.getUserAccount().setUsername(customerForm.getUserName());
@@ -141,6 +141,16 @@ public class CustomerService {
 				binding.addError(fieldError);
 
 			}
+
+			if (customerForm.getUserName().contains(" ")) {
+				FieldError fieldError;
+				final String[] codes = {
+					"customer.username.error"
+				};
+				fieldError = new FieldError("customerForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+
 			result.getUserAccount().setEnabled(true);
 
 		} else

@@ -134,7 +134,7 @@ public class TrainerService {
 		if (trainerForm.getId() == 0) {
 			result = this.create();
 
-			if (trainerForm.getPassword().equals(trainerForm.getRepeatPassword()) && trainerForm.getPassword() != null && !trainerForm.getPassword().isEmpty()) {
+			if (trainerForm.getPassword().equals(trainerForm.getRepeatPassword()) && trainerForm.getPassword() != null && !trainerForm.getPassword().isEmpty() && !trainerForm.getUserName().contains(" ") && !trainerForm.getPassword().contains(" ")) {
 				password = this.actorService.hashPassword(trainerForm.getPassword());
 				result.getUserAccount().setPassword(password);
 				result.getUserAccount().setUsername(trainerForm.getUserName());
@@ -144,6 +144,15 @@ public class TrainerService {
 					"trainer.password.error"
 				};
 				fieldError = new FieldError("trainerForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+
+			if (trainerForm.getUserName().contains(" ")) {
+				FieldError fieldError;
+				final String[] codes = {
+					"trainer.username.error"
+				};
+				fieldError = new FieldError("trainerForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
 
