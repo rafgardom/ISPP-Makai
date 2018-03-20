@@ -178,6 +178,7 @@ public class OfferService {
 		Assert.notNull(offer);
 		final OfferForm result = new OfferForm();
 
+		result.setId(offer.getId());
 		result.setDestination(offer.getDestination());
 		result.setStartMoment(offer.getStartMoment());
 		result.setPrice(offer.getPrice());

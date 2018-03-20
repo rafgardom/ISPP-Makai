@@ -59,17 +59,8 @@
 		<acme:textbox code="offer.duration.day" path="duration.day" mandatory="false" />
 		<br />
 		
-		<jstl:if test="${offer.request.animal==null}">
-			<spring:message code="offer.animal" />
-				<form:select path="animal">
-				<form:option value="${null }" label="----" />    
-			<jstl:forEach items="${animal }" var="animal">
-				<form:option value="${animal}" label="${animal.name}" />
-			</jstl:forEach>
-			</form:select>
+		<acme:select items="${animals}" itemLabel="name" code="offer.animal" path="animal"/>
 		<br />
-		</jstl:if>
-		
 		
 	</fieldset>
 	<br/>

@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.AnimalService;
 import services.OfferService;
 import services.RequestService;
 import services.TrainerService;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Animal;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
@@ -41,6 +43,9 @@ public class OfferTrainerController extends AbstractController {
 
 	@Autowired
 	private RequestService	requestService;
+
+	@Autowired
+	private AnimalService	animalService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -134,14 +139,35 @@ public class OfferTrainerController extends AbstractController {
 				offer = this.offerService.reconstruct(offerForm, binding);
 
 				offer = this.offerService.save(offer);
-				result = new ModelAndView("master.page");
+				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(offerForm, "animal.commit.error");
+				System.out.println(oops);
+				result = this.createEditModelAndView(offerForm, "offer.commit.error");
 
 			}
 		return result;
 
+	}
+
+	// Editar ---------------------------------------------------------------		
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int offerId) {
+		ModelAndView result;
+		Offer offer;
+		Request request;
+		OfferForm offerForm;
+
+		offer = this.offerService.findOne(offerId);
+
+		request = offer.getRequest();
+
+		offerForm = this.offerService.offerToFormObject(offer);
+
+		result = this.createEditModelAndView(offerForm);
+
+		return result;
 	}
 
 	// Ancillary methods ------------------------------------------------------
@@ -159,6 +185,10 @@ public class OfferTrainerController extends AbstractController {
 
 		result = new ModelAndView("offer/create");
 
+		final Collection<Animal> animals = this.animalService.findAnimalFromAnimalShelter();
+
+		result.addObject("RequestURI", "offer/trainer/create.do");
+		result.addObject("animals", animals);
 		result.addObject("offerForm", offerForm);
 		result.addObject("message", message);
 
