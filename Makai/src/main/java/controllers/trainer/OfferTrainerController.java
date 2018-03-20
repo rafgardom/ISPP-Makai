@@ -118,7 +118,11 @@ public class OfferTrainerController extends AbstractController {
 
 		request = this.requestService.findOne(requestId);
 
-		offer = this.offerService.createWithAnimal(request);
+		if (request.getAnimal() != null)
+			offer = this.offerService.createWithAnimal(request);
+		else
+			offer = this.offerService.createWithoutAnimal(request);
+
 		offerForm = this.offerService.offerToFormObject(offer);
 
 		result = this.createEditModelAndView(offerForm);

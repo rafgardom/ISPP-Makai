@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -47,7 +48,7 @@ public class OfferForm {
 		this.id = id;
 	}
 
-	@NotNull
+	@Valid
 	public Coordinates getDestination() {
 		return this.destination;
 	}
@@ -86,7 +87,7 @@ public class OfferForm {
 		this.comment = comment;
 	}
 
-	@NotNull
+	@Valid
 	public Duration getDuration() {
 		return this.duration;
 	}

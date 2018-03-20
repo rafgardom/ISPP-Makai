@@ -59,7 +59,9 @@
 		<acme:textbox code="offer.duration.day" path="duration.day" mandatory="false" />
 		<br />
 		
-		<acme:select items="${animals}" itemLabel="name" code="offer.animal" path="animal"/>
+		<jstl:if test="${offerForm.request.animal==null}">
+			<acme:select items="${animals}" itemLabel="name" code="offer.animal" path="animal"/>
+		</jstl:if>
 		<br />
 		
 	</fieldset>

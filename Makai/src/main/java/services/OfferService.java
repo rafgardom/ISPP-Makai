@@ -90,7 +90,7 @@ public class OfferService {
 		result.setRequest(request);
 
 		//Comprobar de que no tiene ninguna oferta aceptada
-		Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
+		//	Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
 
 		return result;
 	}
