@@ -163,4 +163,8 @@ public class VehicleService {
 		return result;
 	}
 
+	public Collection<Vehicle> findVehicleByTransporterId(final int transporterId) {
+		return this.vehicleRepository.findVehicleByTransporterId(transporterId);
+	}
+
 }

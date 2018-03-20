@@ -12,7 +12,11 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
 import repositories.TravelRepository;
+import security.Authority;
+import domain.Actor;
 import domain.Coordinates;
+import domain.Customer;
+import domain.Professional;
 import domain.Transporter;
 import domain.Travel;
 import domain.Vehicle;
@@ -29,6 +33,15 @@ public class TravelService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private TransporterService	transporterService;
+
+	@Autowired
+	private CustomerService		customerService;
+
+	@Autowired
+	private ProfessionalService	professionalService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	// Constructors------------------------------------------------------------
@@ -110,6 +123,31 @@ public class TravelService {
 		this.travelRepository.delete(travel);
 	}
 
+	// Other business methods -------------------------------------------------
+
+	public void registerTravel(final Travel travel) {
+		Actor actor;
+		Customer customer;
+		Professional professional;
+		Collection<Travel> travels;
+
+		actor = this.actorService.findByPrincipal();
+
+		if (this.actorService.checkAuthority(actor, Authority.CUSTOMER)) {
+			customer = this.customerService.findByPrincipal();
+			travels = customer.getTravelPassengers();
+			travels.add(travel);
+			customer.setTravelPassengers(travels);
+			this.customerService.save(customer);
+		} else if (this.actorService.checkAuthority(actor, Authority.PROFESSIONAL)) {
+			professional = this.professionalService.findByPrincipal();
+			travels = professional.getTravelPassengers();
+			travels.add(travel);
+			professional.setTravelPassengers(travels);
+			this.professionalService.save(professional);
+		}
+
+	}
 	public Travel reconstruct(final TravelForm travelForm, final BindingResult binding) throws IOException {
 		Assert.notNull(travelForm);
 		Travel result;
@@ -150,5 +188,9 @@ public class TravelService {
 		result.setVehicle(travel.getVehicle());
 
 		return result;
+	}
+
+	public Collection<Travel> findTravelByTransporterId(final int transporterId) {
+		return this.travelRepository.findTravelByTransporterId(transporterId);
 	}
 }

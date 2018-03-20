@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.TransporterService;
 import services.VehicleService;
+import domain.Transporter;
 import domain.Vehicle;
 import forms.VehicleForm;
 
@@ -24,7 +26,10 @@ public class VehicleController extends AbstractController {
 
 	//Related services
 	@Autowired
-	private VehicleService	vehicleService;
+	private VehicleService		vehicleService;
+
+	@Autowired
+	private TransporterService	transporterService;
 
 
 	//Constructor
@@ -141,8 +146,12 @@ public class VehicleController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		final Collection<Vehicle> vehicles;
-		vehicles = this.vehicleService.findAll();
+		Collection<Vehicle> vehicles;
+		Transporter principal;
+
+		principal = this.transporterService.findByPrincipal();
+		vehicles = this.vehicleService.findVehicleByTransporterId(principal.getId());
+
 		result = new ModelAndView("vehicle/list");
 		result.addObject("vehicles", vehicles);
 		result.addObject("requestURI", "vehicle/list.do");

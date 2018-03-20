@@ -553,6 +553,10 @@
 		</property>
 		<property name="avgRating" value="2.5" />
 		<property name="userAccount" ref="userAccount5" />
+		<property name="travelPassengers">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 		
@@ -569,6 +573,10 @@
 		</property>
 		<property name="avgRating" value="26.6" />
 		<property name="userAccount" ref="userAccount6" />
+		<property name="travelPassengers">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	
@@ -585,6 +593,10 @@
 		</property>
 		<property name="avgRating" value="32.4" />
 		<property name="userAccount" ref="userAccount7" />
+		<property name="travelPassengers">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Animal Shelter -->
@@ -645,7 +657,11 @@
 			</list>
 		</property>
 		<property name="avgRating" value="15.4" />
-		<property name="travelPassenger" ref="travel2" />
+		<property name="travelPassengers">
+			<list>
+				<ref bean="travel2"/>
+			</list>
+		</property>
 		<property name="userAccount" ref="userAccount2" />
 	</bean>
 	
@@ -663,7 +679,11 @@
 			</list>
 		</property>
 		<property name="avgRating" value="1.2" />
-		<property name="travelPassenger" ref="travel3" />
+		<property name="travelPassengers">
+			<list>
+				<ref bean="travel3"/>
+			</list>
+		</property>
 		<property name="userAccount" ref="userAccount3" />
 	</bean>
 	
@@ -681,6 +701,10 @@
 			</list>
 		</property>
 		<property name="avgRating" value="98.4" />
+		<property name="travelPassengers">
+			<list>
+			</list>
+		</property>
 		<property name="userAccount" ref="userAccount4" />
 	</bean>
 	

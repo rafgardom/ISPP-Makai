@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.TransporterService;
 import services.TravelService;
+import services.VehicleService;
+import domain.Transporter;
 import domain.Travel;
+import domain.Vehicle;
 import forms.TravelForm;
 
 @Controller
@@ -24,7 +28,13 @@ public class TravelController extends AbstractController {
 
 	//Related services
 	@Autowired
-	private TravelService	travelService;
+	private TravelService		travelService;
+
+	@Autowired
+	private VehicleService		vehicleService;
+
+	@Autowired
+	private TransporterService	transporterService;
 
 
 	//Constructor
@@ -46,7 +56,7 @@ public class TravelController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView create(@Valid final TravelForm travelForm, final BindingResult binding) throws IOException {
 		ModelAndView result;
-		final Travel travel;
+		Travel travel;
 		if (binding.hasErrors())
 			result = this.createModelAndView(travelForm);
 		else
@@ -136,7 +146,7 @@ public class TravelController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		final Collection<Travel> travels;
+		Collection<Travel> travels;
 		travels = this.travelService.findAll();
 		result = new ModelAndView("travel/list");
 		result.addObject("travels", travels);
@@ -145,6 +155,19 @@ public class TravelController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/myList", method = RequestMethod.GET)
+	public ModelAndView myList() {
+		ModelAndView result;
+		Collection<Travel> travels;
+		Transporter principal;
+		principal = this.transporterService.findByPrincipal();
+		travels = this.travelService.findTravelByTransporterId(principal.getId());
+		result = new ModelAndView("travel/list");
+		result.addObject("travels", travels);
+		result.addObject("requestURI", "travel/list.do");
+
+		return result;
+	}
 	// Ancillary methods
 
 	protected ModelAndView createModelAndView(final TravelForm travelForm) {
@@ -153,8 +176,15 @@ public class TravelController extends AbstractController {
 	}
 
 	protected ModelAndView createModelAndView(final TravelForm travelForm, final String message) {
+		Collection<Vehicle> vehicles;
+		Transporter principal;
+
+		principal = this.transporterService.findByPrincipal();
+		vehicles = this.vehicleService.findVehicleByTransporterId(principal.getId());
+
 		final ModelAndView result = new ModelAndView("travel/create");
 		result.addObject("travelForm", travelForm);
+		result.addObject("vehicles", vehicles);
 		result.addObject("RequestURI", "travel/create.do");
 		result.addObject("errorMessage", message);
 

@@ -75,9 +75,11 @@
 		<security:intercept-url pattern="/animal/list.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
 		
 		<security:intercept-url pattern="/travel/create.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
+		<security:intercept-url pattern="/travel/myList.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
 		<security:intercept-url pattern="/travel/list.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
 		<security:intercept-url pattern="/travel/edit.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
 		<security:intercept-url pattern="/travel/delete.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
+		
 		<security:intercept-url pattern="/vehicle/register.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
 		<security:intercept-url pattern="/vehicle/list.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
 		<security:intercept-url pattern="/vehicle/edit.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />

@@ -26,4 +26,9 @@
 		<put-attribute name="body" value="/views/travel/list.jsp" />
 	</definition>
 	
+	<definition name="travel/myList" extends="master.page">
+		<put-attribute name="title" value="My travels" />
+		<put-attribute name="body" value="/views/travel/list.jsp" />
+	</definition>
+	
 </tiles-definitions>

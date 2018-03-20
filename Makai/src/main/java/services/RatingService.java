@@ -75,7 +75,7 @@ public class RatingService {
 		Assert.notNull(principal);
 
 		//Comprobar que un customer esta en un viaje
-		Assert.isTrue(principal.getTravelPassenger().equals(travel));
+		Assert.isTrue(principal.getTravelPassengers().contains(travel));
 
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().after(travel.getEndMoment()));

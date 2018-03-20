@@ -73,9 +73,8 @@
 		<acme:textbox code="travel.humanSeats" path="HumanSeats" mandatory="false" />
 		<br />
 		
-		<%-- itemLabel="vehicle.name"
-		<acme:select code="travel.vehicle" path="vehicle" items="vehicles" itemLabel="vehicle" />
-		<br />--%>	
+		<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" />
+		<br />
 
 	</fieldset>
 	<br/>

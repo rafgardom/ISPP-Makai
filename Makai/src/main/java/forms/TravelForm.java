@@ -106,7 +106,6 @@ public class TravelForm {
 	}
 
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	@NotBlank
 	public String getStateDestination() {
 		return this.stateDestination;
 	}
@@ -115,7 +114,6 @@ public class TravelForm {
 	}
 
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	@NotBlank
 	public String getProvinceDestination() {
 		return this.provinceDestination;
 	}

@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Professional;
+import domain.Travel;
 import forms.ProfessionalForm;
 
 @Service
@@ -71,9 +72,12 @@ public class ProfessionalService {
 		userAccount.setAuthorities(authorities);
 
 		final Professional result = new Professional();
+		Collection<Travel> travels;
+		travels = new ArrayList<Travel>();
 
 		result.setUserAccount(userAccount);
 		result.setAvgRating(0.0);
+		result.setTravelPassengers(travels);
 
 		return result;
 	}

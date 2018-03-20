@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Customer;
+import domain.Travel;
 import forms.CustomerForm;
 
 @Service
@@ -70,9 +71,12 @@ public class CustomerService {
 		userAccount.setAuthorities(authorities);
 
 		final Customer result = new Customer();
+		Collection<Travel> travels;
+		travels = new ArrayList<Travel>();
 
 		result.setUserAccount(userAccount);
 		result.setAvgRating(0.0);
+		result.setTravelPassengers(travels);
 
 		return result;
 	}

@@ -75,6 +75,8 @@
 							<spring:message code="master.page.travel.create" /></a> 
 						<a class="dropdown-item" href="travel/list.do">
 							<spring:message code="master.page.travel.list" /></a>
+						<a class="dropdown-item" href="travel/myList.do">
+							<spring:message code="master.page.travel.myList" /></a>
 					</div>
 				</li>
 			</security:authorize>

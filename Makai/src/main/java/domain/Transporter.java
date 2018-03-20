@@ -1,10 +1,12 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -36,17 +38,17 @@ public class Transporter extends Actor {
 
 
 	// Relationships ----------------------------------------------------------
-	private Travel	travelPassenger;
+	private Collection<Travel>	travelPassengers;
 
 
 	@Valid
-	@ManyToOne(optional = true)
-	public Travel getTravelPassenger() {
-		return this.travelPassenger;
+	@ManyToMany()
+	public Collection<Travel> getTravelPassengers() {
+		return this.travelPassengers;
 	}
 
-	public void setTravelPassenger(final Travel travelPassenger) {
-		this.travelPassenger = travelPassenger;
+	public void setTravelPassengers(final Collection<Travel> travelPassengers) {
+		this.travelPassengers = travelPassengers;
 	}
 
 }
