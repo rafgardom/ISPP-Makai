@@ -1,6 +1,7 @@
 
 package controllers;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -100,11 +101,13 @@ public class AnimalController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final AnimalForm animalForm, final BindingResult binding) {
+	public ModelAndView save(@Valid final AnimalForm animalForm, final BindingResult binding) throws IOException {
 
 		ModelAndView result;
 		Animal animal;
 		byte[] savedFile;
+
+		animal = this.animalService.reconstruct(animalForm, binding);
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -125,10 +128,8 @@ public class AnimalController extends AbstractController {
 				} else
 					animalForm.setPicture(null);
 
-				animal = this.animalService.reconstruct(animalForm, binding);
-
 				animal = this.animalService.save(animal);
-				result = new ModelAndView("master.page");
+				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);

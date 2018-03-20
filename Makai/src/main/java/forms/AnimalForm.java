@@ -3,10 +3,10 @@ package forms;
 
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
 import domain.Breed;
@@ -42,7 +42,6 @@ public class AnimalForm {
 		this.id = id;
 	}
 
-	@NotBlank
 	public String getName() {
 		return this.name;
 	}
@@ -59,7 +58,6 @@ public class AnimalForm {
 		this.chipNumber = chipNumber;
 	}
 
-	@Min(0)
 	public Integer getAge() {
 		return this.age;
 	}
@@ -76,6 +74,8 @@ public class AnimalForm {
 		this.sex = sex;
 	}
 
+	@NotNull
+	@Column(length = 16777215)
 	public byte[] getPicture() {
 		return this.picture;
 	}
@@ -93,6 +93,7 @@ public class AnimalForm {
 	}
 
 	@Valid
+	@NotNull
 	public Collection<Breed> getBreeds() {
 		return this.breeds;
 	}
