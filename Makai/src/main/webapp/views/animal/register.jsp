@@ -11,9 +11,9 @@
 	
 	<form:hidden path="id" />
 
-	<acme:input code="animal.name" path="name" />
-	<acme:input code="animal.chipNumber" path="chipNumber"/>
-	<acme:input code="animal.age" path="age" type="number" min="0" />
+	<acme:textbox code="animal.name" path="name" mandatory="true"/>
+	<acme:textbox code="animal.chipNumber" path="chipNumber" mandatory="true"/>
+	<acme:textbox code="animal.age" path="age" mandatory="true"/>
 	
 	<spring:message code="animal.sex" />
 	<form:select path="sex">
@@ -23,9 +23,6 @@
 		</jstl:forEach>
 	</form:select>
 	<br />
-	
-	<form:input path="animalImage" type="file" />
-	<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/>
 	<br />
 	
 	<spring:message code="animal.specie" />
@@ -36,15 +33,16 @@
 		</jstl:forEach>
 	</select>
 	<br />
+	<br />
 	
 	<jstl:set var="json" value="${jsonBreeds }" />
-	<spring:message code="animal.breed" />
-	<form:select name="breed" id="breed" path="breeds" >
-		<form:option value='0' selected="selected" disabled="true" >----</form:option>  
-		<jstl:forEach var="breed" items="${breeds }">
-			<form:option value='${breed.id }'>${breed.breed }</form:option>
-		</jstl:forEach>
-	</form:select>
+	<acme:select id="breed" items="${breeds }" itemLabel="breed" code="animal.breed" path="breeds"/>
+	<br />
+	<br />
+	
+	<spring:message code="animal.picture" />
+	<form:input path="animalImage" type="file" />
+	<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/>
 	<br />
 	
 	<acme:submit name="save" code="animal.save" />
