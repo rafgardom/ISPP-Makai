@@ -32,23 +32,28 @@
 		<br />
 		<acme:input code="request.tags" path="tags" />
 		<br />
-		<%--
-		<acme:select code="request.category" path="category" items="${categories}" itemLabel="getName" />
+		<acme:selectNotEntity code="request.category" path="category" items="${categories}" />
 		<br />
-		--%>
+		<%--
 		<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" />
 		<br />
-
-		<br/>
-		
-		<form:label path="category">
-			<spring:message code="request.category"/>
-		</form:label>
-		<jstl:forEach var="category" items="${categoriesList}">
-			<form:checkbox path ="category" value="${category}"/><jstl:out value="${category}"/>
-		</jstl:forEach>
-		<form:errors path="category" cssClass="error"/>
-
+		 --%>
+		 
+		 <spring:message code="request.myAnimals" var="myA"/>
+		 <spring:message code="request.otherAnimals" var="otherA"/>
+		 
+		 <form:label path="animal">
+			<spring:message code="request.animal" />
+		</form:label>	
+		<form:select id="${UUID.randomUUID().toString()}" path="animal" onchange="javascript: return true;">
+			<form:option value="0" label="----" selected="selected" disabled="true"/>
+			<form:option value="0" label="${myA}" disabled="true"/>		
+			<form:options items="${myAnimals}" itemValue="id" itemLabel="name" />
+			<form:option value="0" label="${otherA}" disabled="true"/>
+			<form:options items="${otherAnimals}" itemValue="id" itemLabel="name" />
+		</form:select>
+		<form:errors path="animal" cssClass="error" />
+		 
 	</fieldset>
 	<br/>
 	

@@ -847,7 +847,6 @@
 			</list>
 		</property>
 		<property name="customer" ref="customer1" />
-		<property name="animalShelter" ref="animalshelter1" />
 	</bean>
 	
 	<bean id="animal2" class="domain.Animal">
@@ -867,7 +866,6 @@
 				<ref bean="breed3" />
 			</list>
 		</property>
-		<property name="customer" ref="customer1" />
 		<property name="animalShelter" ref="animalshelter1" />
 	</bean>
 	
@@ -888,7 +886,6 @@
 				<ref bean="breed4" />
 			</list>
 		</property>
-		<property name="customer" ref="customer2" />
 		<property name="animalShelter" ref="animalshelter2" />
 	</bean>
 	

@@ -44,7 +44,7 @@
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="request/customer/create.do">
 							<spring:message code="master.page.request.create" /></a> 
-						<a class="dropdown-item" href="request/customer/list.do">
+						<a class="dropdown-item" href="request/customer/myList.do">
 							<spring:message code="master.page.request.list" /></a>
 					</div></li>
 					
@@ -98,6 +98,9 @@
 				<li class="nav-item"><a class="nav-link"
 					href="offer/trainer/list.do"><spring:message
 							code="master.page.offer" /> </a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="request/trainer/list.do"><spring:message
+							code="master.page.requests" /> </a></li>
 			</security:authorize>
 
 			<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">

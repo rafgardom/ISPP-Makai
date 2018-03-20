@@ -133,6 +133,10 @@ public class RequestService {
 		return res;
 	}
 
+	public Collection<Request> findRequestsNotAccepted() {
+		return this.requestRepository.findRequestsNotAccepted();
+	}
+
 	public Collection<Request> findRequestByCustomer(final Customer customer) {
 		return this.requestRepository.findRequestsByCustomer(customer.getId());
 	}

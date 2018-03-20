@@ -208,4 +208,8 @@ public class AnimalService {
 
 		return animals;
 	}
+
+	public Collection<Animal> findAnimalFromAnimalShelter() {
+		return this.animalRepository.findAnimalFromAnimalShelter();
+	}
 }

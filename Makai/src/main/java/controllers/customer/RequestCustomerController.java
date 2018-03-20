@@ -44,7 +44,7 @@ public class RequestCustomerController extends AbstractController {
 		super();
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/myList", method = RequestMethod.GET)
 	public ModelAndView listByCustomer() {
 		ModelAndView result;
 		Collection<Request> requests;
@@ -54,8 +54,8 @@ public class RequestCustomerController extends AbstractController {
 
 		requests = this.requestService.findRequestByCustomer(customer);
 
-		result = new ModelAndView("request/list");
-		result.addObject("requestURI", "request/list.do");
+		result = new ModelAndView("request/myList");
+		result.addObject("requestURI", "request/myList.do");
 		result.addObject("requests", requests);
 
 		return result;
@@ -86,7 +86,7 @@ public class RequestCustomerController extends AbstractController {
 				request = this.requestService.reconstruct(requestForm, binding);
 
 				request = this.requestService.save(request);
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:myList.do");
 
 			} catch (final Throwable oops) {
 				result = this.createModelAndView(requestForm, "animal.commit.error");
@@ -123,18 +123,22 @@ public class RequestCustomerController extends AbstractController {
 	protected ModelAndView createModelAndView(final RequestForm requestForm, final String message) {
 		ModelAndView result;
 		Customer principal;
-		Collection<Animal> animals;
+		Collection<Animal> myAnimals;
+		Collection<Animal> otherAnimals;
 		Category[] categories;
 
 		principal = this.customerService.findByPrincipal();
-		animals = this.animalService.findByActorId(principal.getId());
+		myAnimals = this.animalService.findByActorId(principal.getId());
+		otherAnimals = this.animalService.findAnimalFromAnimalShelter();
 
 		categories = Category.values();
 
 		result = new ModelAndView("request/create");
 		result.addObject("RequestURI", "request/customer/create.do");
 		result.addObject("requestForm", requestForm);
-		result.addObject("animals", animals);
+		result.addObject("myAnimals", myAnimals);
+		result.addObject("otherAnimals", otherAnimals);
+
 		result.addObject("categoriesList", categories);
 		result.addObject("message", message);
 

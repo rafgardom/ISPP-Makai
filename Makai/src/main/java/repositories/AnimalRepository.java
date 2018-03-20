@@ -14,4 +14,7 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 
 	@Query("select a from Animal a where a.animalShelter.id = ?1 or a.customer.id=?1")
 	Collection<Animal> findByActorId(int actorId);
+
+	@Query("select a from Animal a where a.animalShelter != null")
+	Collection<Animal> findAnimalFromAnimalShelter();
 }
