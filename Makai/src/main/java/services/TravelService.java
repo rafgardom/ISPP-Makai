@@ -43,6 +43,9 @@ public class TravelService {
 	@Autowired
 	private ActorService		actorService;
 
+	@Autowired
+	private NotificationService	notificationService;
+
 
 	// Constructors------------------------------------------------------------
 	public TravelService() {
@@ -139,6 +142,7 @@ public class TravelService {
 			travels.add(travel);
 			customer.setTravelPassengers(travels);
 			this.customerService.save(customer);
+
 		} else if (this.actorService.checkAuthority(actor, Authority.PROFESSIONAL)) {
 			professional = this.professionalService.findByPrincipal();
 			travels = professional.getTravelPassengers();

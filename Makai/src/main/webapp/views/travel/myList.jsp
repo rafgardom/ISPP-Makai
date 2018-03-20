@@ -26,8 +26,11 @@
 	<acme:column code="travel.humanSeats" property="humanSeats" />
 	
 		<display:column>
-		<a href="travel/register.do?travelId=${row.id}">
-			<spring:message	code="travel.register" />
+		<a href="travel/delete.do?travelId=${row.id}">
+			<spring:message	code="travel.delete" />
+		</a>
+		<a href="travel/edit.do?travelId=${row.id}">
+			<spring:message	code="travel.edit" />
 		</a>
 		</display:column>
 	
