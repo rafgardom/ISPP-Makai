@@ -53,6 +53,22 @@ public class NotificationActorController extends AbstractController {
 		return result;
 	}
 
+	// Display ----------------------------------------------------------------		
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int notificationId) {
+		ModelAndView result;
+		Notification notification;
+
+		notification = this.notificationService.findOne(notificationId);
+
+		result = new ModelAndView("notification/display");
+		result.addObject("notification", notification);
+		result.addObject("requestURI", "notification/actor/display.do");
+
+		return result;
+	}
+
 	// Delete -----------------------------------------------------------------		
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
