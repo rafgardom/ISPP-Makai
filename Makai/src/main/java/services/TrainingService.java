@@ -70,6 +70,17 @@ public class TrainingService {
 		Assert.notNull(principal);
 		Assert.isTrue(training.getTrainer().getId() == principal.getId());
 
+		if (training.getDuration().getDay() == null)
+			training.getDuration().setDay(0);
+		if (training.getDuration().getMonth() == null)
+			training.getDuration().setMonth(0);
+		if (training.getDuration().getWeek() == null)
+			training.getDuration().setWeek(0);
+		if (training.getDuration().getYear() == null)
+			training.getDuration().setYear(0);
+
+		Assert.isTrue(!(training.getDuration().getDay() == 0 && training.getDuration().getMonth() == 0 && training.getDuration().getWeek() == 0 && training.getDuration().getYear() == 0));
+
 		result = this.trainingRepository.save(training);
 
 		return result;
@@ -86,5 +97,15 @@ public class TrainingService {
 		Assert.isTrue(training.getTrainer().getId() == principal.getId());
 
 		this.trainingRepository.delete(training);
+	}
+
+	// Other business methods -------------------------------------------------
+
+	public Collection<Training> findByTrainerId(final int trainerId) {
+		Collection<Training> result;
+
+		result = this.trainingRepository.findByTrainerId(trainerId);
+
+		return result;
 	}
 }

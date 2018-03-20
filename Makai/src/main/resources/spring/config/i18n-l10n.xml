@@ -33,6 +33,7 @@
 		<value>/views/receipt/messages</value>
 		<value>/views/request/messages</value>
 		<value>/views/trainer/messages</value>
+		<value>/views/training/messages</value>
 		<value>/views/travel/messages</value>
 		<value>/views/vehicle/messages</value>
 		<value>/views/offer/messages</value>

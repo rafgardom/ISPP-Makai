@@ -32,6 +32,7 @@
 		<value>/views/professional/tiles.xml</value>
 		<value>/views/receipt/tiles.xml</value>	
 		<value>/views/request/tiles.xml</value>
+		<value>/views/training/tiles.xml</value>
 		<value>/views/travel/tiles.xml</value>
 		<value>/views/vehicle/tiles.xml</value>
 		<value>/views/trainer/tiles.xml</value>
