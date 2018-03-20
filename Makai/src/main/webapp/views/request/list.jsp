@@ -13,15 +13,15 @@
 	<acme:column code="request.description" property="description" />
 	<acme:column code="request.tags" property="tags" />
 	<acme:column code="request.category" property="category.name" />
-	<acme:column code="request.animal" property="animal" />
+	<acme:column code="request.animal" property="animal.name" />
 	
 	<display:column>
-		<a href="request/delete.do?requestId=${row.id}">
+		<a href="request/customer/delete.do?requestId=${row.id}">
 			<spring:message	code="request.delete" />
 		</a>
 	</display:column>
 
 </display:table>
 <security:authorize access="hasRole('CUSTOMER')">
-	<a href="request/create.do"><spring:message	code="request.create" /></a>
+	<a href="request/customer/create.do"><spring:message	code="request.create" /></a>
 </security:authorize>

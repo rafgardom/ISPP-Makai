@@ -1,6 +1,8 @@
 
 package controllers.customer;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AnimalService;
+import services.CustomerService;
 import services.RequestService;
 import controllers.AbstractController;
+import domain.Animal;
+import domain.Category;
+import domain.Customer;
 import domain.Request;
 import forms.RequestForm;
 
@@ -23,6 +30,12 @@ public class RequestCustomerController extends AbstractController {
 	@Autowired
 	private RequestService	requestService;
 
+	@Autowired
+	private CustomerService	customerService;
+
+	@Autowired
+	private AnimalService	animalService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -30,17 +43,31 @@ public class RequestCustomerController extends AbstractController {
 		super();
 	}
 
-	// Creation ---------------------------------------------------------------		
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView listByCustomer() {
+		ModelAndView result;
+		Collection<Request> requests;
+		Customer customer;
+
+		customer = this.customerService.findByPrincipal();
+
+		requests = this.requestService.findRequestByCustomer(customer);
+
+		result = new ModelAndView("request/list");
+		result.addObject("requestURI", "request/list.do");
+		result.addObject("requests", requests);
+
+		return result;
+	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Request request;
 		RequestForm requestForm;
 
-		request = this.requestService.create();
-		requestForm = this.requestService.requestToFormObject(request);
+		requestForm = new RequestForm();
 
-		result = this.createEditModelAndView(requestForm);
+		result = this.createModelAndView(requestForm);
 
 		return result;
 	}
@@ -52,16 +79,16 @@ public class RequestCustomerController extends AbstractController {
 		Request request;
 
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(requestForm);
+			result = this.createModelAndView(requestForm);
 		else
 			try {
 				request = this.requestService.reconstruct(requestForm, binding);
 
 				request = this.requestService.save(request);
-				result = new ModelAndView("master.page");
+				result = new ModelAndView("redirect:");
 
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(requestForm, "animal.commit.error");
+				result = this.createModelAndView(requestForm, "animal.commit.error");
 
 			}
 		return result;
@@ -83,23 +110,32 @@ public class RequestCustomerController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final RequestForm requestForm) {
+	protected ModelAndView createModelAndView(final RequestForm requestForm) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(requestForm, null);
+		result = this.createModelAndView(requestForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final RequestForm requestForm, final String message) {
+	protected ModelAndView createModelAndView(final RequestForm requestForm, final String message) {
 		ModelAndView result;
+		Customer principal;
+		Collection<Animal> animals;
+		Category[] categories;
 
-		result = new ModelAndView("request/customer/register");
+		principal = this.customerService.findByPrincipal();
+		animals = this.animalService.findByActorId(principal.getId());
 
-		result.addObject("request", requestForm);
+		categories = Category.values();
+
+		result = new ModelAndView("request/create");
+		result.addObject("RequestURI", "request/customer/create.do");
+		result.addObject("requestForm", requestForm);
+		result.addObject("animals", animals);
+		result.addObject("categoriesList", categories);
 		result.addObject("message", message);
 
 		return result;
 	}
-
 }

@@ -32,10 +32,22 @@
 		<br />
 		<acme:input code="request.tags" path="tags" />
 		<br />
-		<acme:select code="request.category" path="category" items="categories" itemLabel="category.name" />
+		<%--
+		<acme:select code="request.category" path="category" items="${categories}" itemLabel="getName" />
 		<br />
-		<acme:select code="request.animals" path="animals" items="animals" itemLabel="animal.name" />
+		--%>
+		<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" />
 		<br />
+
+		<br/>
+		
+		<form:label path="category">
+			<spring:message code="request.category"/>
+		</form:label>
+		<jstl:forEach var="category" items="${categoriesList}">
+			<form:checkbox path ="category" value="${category}"/><jstl:out value="${category}"/>
+		</jstl:forEach>
+		<form:errors path="category" cssClass="error"/>
 
 	</fieldset>
 	<br/>

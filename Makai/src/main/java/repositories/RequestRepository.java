@@ -19,4 +19,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select o from Offer o where o.request.id=?1 and o.isAccepted=true")
 	Offer findOfferWithThisRequestTrue(int request);
 
+	@Query("select r from Request r where r.customer.id=?1")
+	Collection<Request> findRequestsByCustomer(int customer);
+
 }

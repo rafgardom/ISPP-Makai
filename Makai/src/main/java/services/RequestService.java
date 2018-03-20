@@ -133,6 +133,10 @@ public class RequestService {
 		return res;
 	}
 
+	public Collection<Request> findRequestByCustomer(final Customer customer) {
+		return this.requestRepository.findRequestsByCustomer(customer.getId());
+	}
+
 	public Request reconstruct(final RequestForm requestForm, final BindingResult binding) throws IOException {
 
 		Assert.notNull(requestForm);
@@ -154,19 +158,21 @@ public class RequestService {
 		return result;
 
 	}
-	public RequestForm requestToFormObject(final Request request) {
-		final RequestForm result;
-
-		Assert.notNull(request);
-
-		result = new RequestForm();
-
-		//result.setId(animal.getId());
-		result.setDescription(request.getDescription());
-		result.setTags(request.getTags());
-		result.setCategory(request.getCategory());
-		result.setAnimal(request.getAnimal());
-
-		return result;
-	}
+	/*
+	 * public RequestForm requestToFormObject(final Request request) {
+	 * final RequestForm result;
+	 * 
+	 * Assert.notNull(request);
+	 * 
+	 * result = new RequestForm();
+	 * 
+	 * //result.setId(animal.getId());
+	 * result.setDescription(request.getDescription());
+	 * result.setTags(request.getTags());
+	 * result.setCategory(request.getCategory());
+	 * result.setAnimal(request.getAnimal());
+	 * 
+	 * return result;
+	 * }
+	 */
 }
