@@ -93,10 +93,10 @@ public class ProfileActorController extends AbstractController {
 				if (profileForm.getUserImage().getSize() > 0 && profileForm.getUserImage().getSize() <= 5242880) {
 
 					savedFile = profileForm.getUserImage().getBytes();
-					profileForm.setPicture(savedFile);
+					actor.setPicture(savedFile);
 
 				} else
-					profileForm.setPicture(null);
+					actor.setPicture(null);
 
 				this.actorService.save(actor);
 				result = new ModelAndView("redirect:display.do");
