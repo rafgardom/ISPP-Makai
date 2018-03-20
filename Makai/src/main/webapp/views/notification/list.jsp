@@ -17,7 +17,10 @@
 	
 	<spring:message code="notification.description" var="descriptionHeader" />
 	<display:column title="${descriptionHeader}" >
-		<jstl:out value="${substrDescription }" />...
+		<jstl:out value="${substrDescription }" />
+		<jstl:if test="${fn:length(row.description)>40 }">
+			<jstl:out value="..." />
+		</jstl:if>
 	</display:column>
 	
 	<display:column>
