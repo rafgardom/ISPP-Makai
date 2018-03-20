@@ -64,6 +64,10 @@
 		</jstl:if>
 		<br />
 		
+		<jstl:if test="${offerForm.request.animal!=null}">
+			<form:hidden path="animal"/>
+		</jstl:if>
+		
 	</fieldset>
 	<br/>
 	
@@ -74,7 +78,7 @@
 	<br/>
 	
 		<acme:submit code="offer.create" name="save" />
-		<acme:cancel code="travel.cancel" url="" />
+		<acme:cancel code="offer.cancel" url="" />
 	<br/>
 	
 </form:form>

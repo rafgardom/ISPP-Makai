@@ -67,12 +67,13 @@ public class OfferService {
 		result = new Offer();
 		result.setTrainer(principal);
 		result.setRequest(request);
+		result.setIsAccepted(false);
 
-		if (request.getAnimal() != null)	//Si el cliente ya ha seleccionado un animal
-			result.setAnimal(request.getAnimal());
+		Assert.isTrue(request.getAnimal() != null);
+		result.setAnimal(request.getAnimal());
 
 		//Comprobar de que no tiene ninguna oferta aceptada
-		//		Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
+		//Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
 
 		return result;
 	}
@@ -88,6 +89,7 @@ public class OfferService {
 		result = new Offer();
 		result.setTrainer(principal);
 		result.setRequest(request);
+		result.setIsAccepted(false);
 
 		//Comprobar de que no tiene ninguna oferta aceptada
 		//	Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
