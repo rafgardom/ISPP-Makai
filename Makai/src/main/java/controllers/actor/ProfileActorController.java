@@ -79,9 +79,10 @@ public class ProfileActorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final ProfileForm profileForm, final BindingResult binding) throws IOException {
 		ModelAndView result;
-		boolean pictureTooLong = false;
 		Actor actor;
 		byte[] savedFile;
+
+		actor = this.actorService.reconstructEdit(profileForm, binding);
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -89,31 +90,20 @@ public class ProfileActorController extends AbstractController {
 		} else
 			try {
 
-				//				final MultipartFile userImage = profileForm.getUserImage();
-
-				if (profileForm.getUserImage().getSize() > 0) {
+				if (profileForm.getUserImage().getSize() > 0 && profileForm.getUserImage().getSize() <= 5242880) {
 
 					savedFile = profileForm.getUserImage().getBytes();
 					profileForm.setPicture(savedFile);
 
-				} else if (profileForm.getUserImage().getSize() > 5242880) {
-					pictureTooLong = true;
-					System.out.println("La imagen es demasiado larga");
-					throw new IllegalArgumentException();
 				} else
 					profileForm.setPicture(null);
 
-				actor = this.actorService.reconstructEdit(profileForm, binding);
 				this.actorService.save(actor);
 				result = new ModelAndView("redirect:display.do");
 
 			} catch (final Throwable oops) {
-				result = this.createModelAndView(profileForm, "profile.register.error");
 				System.out.println(oops.toString());
-				if (pictureTooLong == false)
-					result = this.createModelAndView(profileForm, "profile.register.error");
-				else
-					result = this.createModelAndView(profileForm, "profile.register.picture.error");
+				result = this.createModelAndView(profileForm, "profile.register.error");
 
 			}
 		return result;

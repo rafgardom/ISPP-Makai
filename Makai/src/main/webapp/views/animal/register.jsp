@@ -19,13 +19,8 @@
 	<br />
 	<br />
 	
-	<spring:message code="animal.specie" />
-	<select name="specie" id="specie" onchange="getBreeds();" >
-		<option value='0' selected="selected" disabled="true" >----</option>  
-		<jstl:forEach var="specie" items="${species }">
-			<option value='${specie.id }'>${specie.type }</option>
-		</jstl:forEach>
-	</select>
+	<acme:select id="specie" items="${species }" itemLabel="type" code="animal.specie" path="specie" onchange="getBreeds();" />
+	
 	<br />
 	<br />
 	
@@ -36,7 +31,8 @@
 	
 	<spring:message code="animal.picture" />
 	<form:input path="animalImage" type="file" />
-	<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/>
+	<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
+	<form:errors path="animalImage" cssClass="error" />
 	<br />
 	
 	<jstl:if test="${errorMessage != null}">

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import domain.Breed;
 import domain.Sex;
+import domain.Specie;
 
 public class AnimalForm {
 
@@ -21,6 +22,7 @@ public class AnimalForm {
 	private Sex					sex;
 	private byte[]				picture;
 	private MultipartFile		animalImage;
+	private Specie				specie;
 	private Collection<Breed>	breeds;
 
 
@@ -87,6 +89,15 @@ public class AnimalForm {
 
 	public void setAnimalImage(final MultipartFile animalImage) {
 		this.animalImage = animalImage;
+	}
+
+	@NotNull
+	public Specie getSpecie() {
+		return this.specie;
+	}
+
+	public void setSpecie(final Specie specie) {
+		this.specie = specie;
 	}
 
 	public Collection<Breed> getBreeds() {

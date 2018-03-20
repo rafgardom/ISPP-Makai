@@ -121,10 +121,6 @@ public class AnimalController extends AbstractController {
 					savedFile = animalForm.getAnimalImage().getBytes();
 					animalForm.setPicture(savedFile);
 
-				} else if (animalForm.getAnimalImage().getSize() > 5242880) {
-					//					pictureTooLong = true;
-					System.out.println("La imagen es demasiado larga");
-					throw new IllegalArgumentException();
 				} else
 					animalForm.setPicture(null);
 
@@ -176,11 +172,10 @@ public class AnimalController extends AbstractController {
 		breeds = this.breedService.findAll();
 		json = new Gson().toJson(breeds);
 
-		//		if (animalForm.getId() == 0)
-		//			result = new ModelAndView("animal/register");
-		//		else
-		//			result = new ModelAndView("animal/edit");
-		result = new ModelAndView("animal/register");
+		if (animalForm.getId() == 0)
+			result = new ModelAndView("animal/register");
+		else
+			result = new ModelAndView("animal/edit");
 		result.addObject("animalForm", animalForm);
 		result.addObject("sexs", sexs);
 		result.addObject("species", species);

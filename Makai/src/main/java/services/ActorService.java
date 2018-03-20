@@ -167,6 +167,15 @@ public class ActorService {
 
 		principal = this.findByPrincipal();
 
+		if (profileForm.getUserImage().getSize() > 5242880) {
+			FieldError fieldError;
+			final String[] codes = {
+				"profile.register.picture.tooLong.error"
+			};
+			fieldError = new FieldError("profileForm", "userImage", profileForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
 		if (this.checkAuthority(principal, "CUSTOMER")) {
 			Customer customer;
 

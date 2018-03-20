@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
@@ -163,6 +164,23 @@ public class AnimalService {
 		Assert.notNull(animalForm);
 
 		Animal result;
+
+		if (animalForm.getId() == 0 && animalForm.getAnimalImage().getSize() == 0) {
+			FieldError fieldError;
+			final String[] codes = {
+				"animal.picture.empty.error"
+			};
+			fieldError = new FieldError("animalForm", "animalImage", animalForm.getAnimalImage(), false, codes, null, "");
+			binding.addError(fieldError);
+
+		} else if (animalForm.getAnimalImage().getSize() > 5242880) {
+			FieldError fieldError;
+			final String[] codes = {
+				"animal.picture.tooLong.error"
+			};
+			fieldError = new FieldError("animalForm", "animalImage", animalForm.getAnimalImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
 
 		if (animalForm.getId() == 0)
 			result = this.create();

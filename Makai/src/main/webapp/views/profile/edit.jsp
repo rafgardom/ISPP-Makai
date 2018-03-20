@@ -50,7 +50,8 @@
 		<br />
 		
 		<form:input path="userImage" type="file" />
-		<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/>
+		<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
+		<form:errors path="userImage" cssClass="error" />
 
 	</fieldset>
 	<br />

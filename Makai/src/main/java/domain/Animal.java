@@ -75,7 +75,6 @@ public class Animal extends DomainEntity {
 		this.sex = sex;
 	}
 
-	@NotNull
 	@Lob
 	@Column(length = 16777215)
 	public byte[] getPicture() {
