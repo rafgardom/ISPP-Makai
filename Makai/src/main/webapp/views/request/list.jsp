@@ -29,6 +29,14 @@
 			</a>
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('TRAINER')">
+		<display:column>
+			<a href="offer/trainer/create.do?requestId=${row.id}">
+				<spring:message	code="offer.create" />
+			</a>
+		</display:column>
+	</security:authorize>
 
 </display:table>
 <security:authorize access="hasRole('CUSTOMER')">
