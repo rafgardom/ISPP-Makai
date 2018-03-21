@@ -26,11 +26,11 @@ import forms.TravelForm;
 @Transactional
 public class TravelService {
 
-	// Managed repository -----------------------------------------------------
+	// Managed repository —---------------------------------------------------
 	@Autowired
 	private TravelRepository	travelRepository;
 
-	// Supporting services ----------------------------------------------------
+	// Supporting services —------------------------------------------------—
 	@Autowired
 	private TransporterService	transporterService;
 
@@ -43,13 +43,16 @@ public class TravelService {
 	@Autowired
 	private ActorService		actorService;
 
+	@Autowired
+	private NotificationService	notificationService;
+
 
 	// Constructors------------------------------------------------------------
 	public TravelService() {
 		super();
 	}
 
-	// Simple CRUD methods ----------------------------------------------------
+	// Simple CRUD methods —------------------------------------------------—
 	public Travel findOne(final int travelId) {
 		Travel result;
 
@@ -107,23 +110,25 @@ public class TravelService {
 	}
 
 	public void delete(final Travel travel) {
-		Transporter principal;
+		Actor principal;
 		Calendar today;
 
 		Assert.notNull(travel);
 		Assert.isTrue(travel.getId() != 0);
 
-		principal = this.transporterService.findByPrincipal();
+		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
-		Assert.isTrue(travel.getTransporterOwner().getId() == principal.getId());
+		Assert.isTrue(this.actorService.checkAuthority(principal, "ADMIN") || this.actorService.checkAuthority(principal, "CUSTOMER") || this.actorService.checkAuthority(principal, "PROFESSIONAL"));
+		if (this.actorService.checkAuthority(principal, "CUSTOMER") || this.actorService.checkAuthority(principal, "PROFESSIONAL"))
+			Assert.isTrue(travel.getTransporterOwner().getId() == principal.getId());
 
 		today = Calendar.getInstance();
-		Assert.isTrue(today.getTime().after(travel.getStartMoment()));
+		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
 
 		this.travelRepository.delete(travel);
 	}
 
-	// Other business methods -------------------------------------------------
+	// Other business methods —---------------------------------------------—
 
 	public void registerTravel(final Travel travel) {
 		Actor actor;

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TrainingRepository;
+import domain.Actor;
 import domain.Trainer;
 import domain.Training;
 
@@ -16,13 +17,16 @@ import domain.Training;
 @Transactional
 public class TrainingService {
 
-	// Managed repository -----------------------------------------------------
+	// Managed repository —---------------------------------------------------
 	@Autowired
 	private TrainingRepository	trainingRepository;
 
-	// Supporting services ----------------------------------------------------
+	// Supporting services —------------------------------------------------—
 	@Autowired
 	private TrainerService		trainerService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	// Constructors------------------------------------------------------------
@@ -30,7 +34,7 @@ public class TrainingService {
 		super();
 	}
 
-	// Simple CRUD methods ----------------------------------------------------
+	// Simple CRUD methods —------------------------------------------------—
 	public Training findOne(final int trainingId) {
 		Training result;
 
@@ -87,19 +91,20 @@ public class TrainingService {
 	}
 
 	public void delete(final Training training) {
-		Trainer principal;
+		Actor principal;
 
 		Assert.notNull(training);
 		Assert.isTrue(training.getId() != 0);
 
-		principal = this.trainerService.findByPrincipal();
+		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
-		Assert.isTrue(training.getTrainer().getId() == principal.getId());
+		Assert.isTrue(this.actorService.checkAuthority(principal, "ADMIN") || this.actorService.checkAuthority(principal, "TRAINER"));
+		if (this.actorService.checkAuthority(principal, "TRAINER"))
+			Assert.isTrue(training.getTrainer().getId() == principal.getId());
 
 		this.trainingRepository.delete(training);
 	}
-
-	// Other business methods -------------------------------------------------
+	// Other business methods —---------------------------------------------—
 
 	public Collection<Training> findByTrainerId(final int trainerId) {
 		Collection<Training> result;

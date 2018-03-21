@@ -41,7 +41,9 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
-
+		<security:intercept-url pattern="/administrator/listActors.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/administrator/unban.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/administrator/ban.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/notification/admin/create.do" access="hasRole('ADMIN')" /> 
 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
@@ -92,6 +94,7 @@
 		<security:intercept-url pattern="/travel/myList.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
 		<security:intercept-url pattern="/travel/list.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
 		<security:intercept-url pattern="/travel/edit.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
+		<security:intercept-url pattern="/travel/register.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
 		<security:intercept-url pattern="/travel/delete.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
 		
 		<security:intercept-url pattern="/vehicle/register.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />

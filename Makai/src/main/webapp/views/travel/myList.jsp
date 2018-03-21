@@ -24,16 +24,18 @@
 	<acme:column code="travel.endMoment" property="endMoment" />
 	<acme:column code="travel.animalSeats" property="animalSeats" />
 	<acme:column code="travel.humanSeats" property="humanSeats" />
-
-	<display:column>
-		<div class="btn-group" data-toggle="buttons">
-			<acme:cancel url="travel/delete.do?travelId=${row.id}" code="travel.delete"/>
-			<acme:link href="travel/edit.do?travelId=${row.id}" code="travel.edit"/>
-			<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register"/>
-		</div>
-	</display:column>
 	
+		<display:column>
+		<a href="travel/delete.do?travelId=${row.id}">
+			<spring:message	code="travel.delete" />
+		</a>
+		<a href="travel/edit.do?travelId=${row.id}">
+			<spring:message	code="travel.edit" />
+		</a>
+		</display:column>
+	
+		
 </display:table>
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
-	<acme:link href="travel/create.do" code="travel.create"/>
+	<a href="travel/create.do"><spring:message	code="travel.create" /></a>
 </security:authorize>

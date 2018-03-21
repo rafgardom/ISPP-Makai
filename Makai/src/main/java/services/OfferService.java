@@ -11,7 +11,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
 import repositories.OfferRepository;
-import repositories.RequestRepository;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
@@ -23,14 +22,14 @@ public class OfferService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private OfferRepository		offerRepository;
+	private OfferRepository	offerRepository;
 
 	@Autowired
-	private RequestRepository	requestRepository;
+	private RequestService	requestService;
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
-	private TrainerService		trainerService;
+	private TrainerService	trainerService;
 
 
 	// Constructors------------------------------------------------------------
@@ -73,7 +72,9 @@ public class OfferService {
 		result.setAnimal(request.getAnimal());
 
 		//Comprobar de que no tiene ninguna oferta aceptada
-		//Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
+		//Assert.isTrue(this.requestService.tieneOfferAceptadaUnRequest(request));
+
+		//Assert.isTrue(!request.getIsCancelled());
 
 		return result;
 	}
@@ -92,7 +93,9 @@ public class OfferService {
 		result.setIsAccepted(false);
 
 		//Comprobar de que no tiene ninguna oferta aceptada
-		//	Assert.isTrue(this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
+		//Assert.isTrue(this.requestService.tieneOfferAceptadaUnRequest(request));
+
+		//Assert.isTrue(!request.getIsCancelled());
 
 		return result;
 	}

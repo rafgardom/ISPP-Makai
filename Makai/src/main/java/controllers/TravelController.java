@@ -42,7 +42,7 @@ public class TravelController extends AbstractController {
 		super();
 	}
 
-	//Register
+	//Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -52,7 +52,7 @@ public class TravelController extends AbstractController {
 		return result;
 	}
 
-	//Save register
+	//Save create
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView create(@Valid final TravelForm travelForm, final BindingResult binding) throws IOException {
 		ModelAndView result;
@@ -70,6 +70,17 @@ public class TravelController extends AbstractController {
 				result = this.createModelAndView(travelForm, "travel.commit.error");
 
 			}
+		return result;
+	}
+
+	//Register
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView register(@RequestParam final int travelId) {
+		final ModelAndView result;
+		final Travel travel = this.travelService.findOne(travelId);
+		this.travelService.registerTravel(travel);
+		result = new ModelAndView("redirect:List.do");
+
 		return result;
 	}
 
@@ -121,7 +132,7 @@ public class TravelController extends AbstractController {
 
 		this.travelService.delete(travel);
 
-		result = new ModelAndView("redirect:list.do");
+		result = new ModelAndView("redirect:myList.do");
 
 		return result;
 
@@ -135,9 +146,9 @@ public class TravelController extends AbstractController {
 		travel = this.travelService.findOne(travelId);
 		try {
 			this.travelService.delete(travel);
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:myList.do");
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:myList.do");
 		}
 
 		return result;
@@ -162,9 +173,9 @@ public class TravelController extends AbstractController {
 		Transporter principal;
 		principal = this.transporterService.findByPrincipal();
 		travels = this.travelService.findTravelByTransporterId(principal.getId());
-		result = new ModelAndView("travel/list");
+		result = new ModelAndView("travel/myList");
 		result.addObject("travels", travels);
-		result.addObject("requestURI", "travel/list.do");
+		result.addObject("requestURI", "travel/myList.do");
 
 		return result;
 	}

@@ -10,13 +10,26 @@
 
 package controllers;
 
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import services.ActorService;
+import domain.Actor;
 
 @Controller
 @RequestMapping("/administrator")
 public class AdministratorController extends AbstractController {
+
+	//Related services
+	@Autowired
+	private ActorService	actorService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -31,6 +44,53 @@ public class AdministratorController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("administrator/action-1");
+
+		return result;
+	}
+
+	// ListActors --------------------------------------------------------------------
+	@RequestMapping(value = "/listActors", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Actor> actors;
+
+		actors = this.actorService.findAll();
+
+		result = new ModelAndView("administrator/listActors");
+		result.addObject("requestURI", "administrator/listActors.do");
+		result.addObject("actors", actors);
+
+		return result;
+	}
+
+	// Ban --------------------------------------------------------------------		
+
+	@RequestMapping(value = "/ban", method = RequestMethod.POST, params = "ban")
+	public ModelAndView ban(@RequestParam final int actorId) {
+		ModelAndView result;
+		Actor actor;
+
+		actor = this.actorService.findOne(actorId);
+
+		this.actorService.ban(actor);
+
+		result = new ModelAndView("redirect:listActors.do");
+
+		return result;
+	}
+
+	//	// Unban ------------------------------------------------------------------		
+
+	@RequestMapping(value = "/unban", method = RequestMethod.POST, params = "unban")
+	public ModelAndView unban(@RequestParam final int actorId) {
+		ModelAndView result;
+		Actor actor;
+
+		actor = this.actorService.findOne(actorId);
+
+		this.actorService.unban(actor);
+
+		result = new ModelAndView("redirect:listActors.do");
 
 		return result;
 	}

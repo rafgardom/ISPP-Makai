@@ -15,9 +15,12 @@
 	<acme:column code="vehicle.accommodation" property="accommodation" />
 	<acme:column code="vehicle.year" property="year" />
 	<acme:column code="vehicle.description" property="description" />
-	<acme:column code="vehicle.picture" property="picture" />
 	<acme:column code="vehicle.color" property="color" />
 	<acme:column code="vehicle.license" property="license" />
+	
+	<display:column>
+	<img src="${picture}" alt="<spring:message code='vehicle.picture' />" width="100px" height="100px">
+	</display:column>
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">
