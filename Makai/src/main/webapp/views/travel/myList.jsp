@@ -26,12 +26,10 @@
 	<acme:column code="travel.humanSeats" property="humanSeats" />
 	
 		<display:column>
-		<a href="travel/delete.do?travelId=${row.id}">
-			<spring:message	code="travel.delete" />
-		</a>
-		<a href="travel/edit.do?travelId=${row.id}">
-			<spring:message	code="travel.edit" />
-		</a>
+		<div class="btn-group" data-toggle="buttons">
+			<acme:cancel url="travel/delete.do?travelId=${row.id}" code="travel.delete"/>
+			<acme:link href="travel/edit.do?travelId=${row.id}" code="travel.edit"/>
+		</div>
 		</display:column>
 	
 		

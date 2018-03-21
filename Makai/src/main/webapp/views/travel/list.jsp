@@ -27,8 +27,6 @@
 
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">
-			<acme:cancel url="travel/delete.do?travelId=${row.id}" code="travel.delete"/>
-			<acme:link href="travel/edit.do?travelId=${row.id}" code="travel.edit"/>
 			<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register"/>
 		</div>
 	</display:column>
