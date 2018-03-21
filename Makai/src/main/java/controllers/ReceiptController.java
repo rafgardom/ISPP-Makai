@@ -37,9 +37,9 @@ public class ReceiptController extends AbstractController {
 	@Autowired
 	private CustomerService	customerService;
 
-	private final String	clientID		= "AW0SN35ykdSRReqE2kn8eeCVw92_YjvF2jJKrF9e-2xSejedskZxaOq1HAWJPaCxQ75sMy2PbzzYJsSF";
-	private final String	clientSecret	= "EP5TJXaUqz67q7EyGt43IAVD8yLkWFX5y4Zd-19HezQXrvuI_ABdhOBd5-AHIGCwMIQCtU6YMN9eFlK5";
-	private final String	mode			= "sandbox";
+	private final String	clientID		= "AcfmnPWoOp2x6x5DbmGjyl0gUCWxWEvCTOEnQNsl4QJWQwaL-QzspwL9vbDXTd4xCZHuEIcm6lPYpq0_";
+	private final String	clientSecret	= "EDTVo6vMPwwd78s2Dvj21VwsnD1eUY7Rd98KJtnGMmd5Q9_nAG6rIteY4k8nUaEZnSC-EUJ0FOqgy9J6";
+	private final String	mode			= "live";
 
 
 	//Constructor

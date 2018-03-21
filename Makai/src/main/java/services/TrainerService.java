@@ -141,7 +141,7 @@ public class TrainerService {
 			if (accountValidator.passwordValidate(trainerForm.getPassword()) && !trainerForm.getPassword().toLowerCase().contains("ñ"))
 				passwordValidator = true;
 
-			if (!accountValidator.userNameValidate(trainerForm.getUserName())) {
+			if (accountValidator.userNameValidate(trainerForm.getUserName())) {
 				userNameValidator = false;
 				FieldError fieldError;
 				final String[] codes = {

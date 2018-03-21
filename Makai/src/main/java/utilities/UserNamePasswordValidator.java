@@ -12,7 +12,7 @@ public class UserNamePasswordValidator {
 	private Matcher				userNameMatcher;
 
 	private static final String	PASSWORD_PATTERN	= "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,30})";
-	private static final String	USERNAME_PATTERN	= "/[`~,.<>;':\"/\\[\\]|Ò—$%#@{}()=_+-]/";
+	private static final String	USERNAME_PATTERN	= "[^A-Za-z0-9]";
 
 
 	public UserNamePasswordValidator() {

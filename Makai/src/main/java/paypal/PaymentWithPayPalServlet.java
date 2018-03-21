@@ -33,9 +33,9 @@ import com.paypal.base.rest.PayPalResource;
 public class PaymentWithPayPalServlet extends HttpServlet {
 
 	private static final long	serialVersionUID	= 1L;
-	private final String		clientID			= "AYeO6i3b_8MS1ppIS4GvwkCq78_M3iDjWDXYSJrRo6hbjM3ZiK_qDqujb4POTLaIZlaAtB72iQT0eqBc";
-	private final String		clientSecret		= "EPjro4bBmlvWQWgeCW9TjPSwVOZdjllkNhDXVWxcuDDK0fKJnI5sjr8hoT4Ulx2uDZq3VVeIpudNZPnB";
-	private final String		mode				= "sandbox";
+	private final String		clientID			= "AVeBFGHYN5KimXYs0YcPfQyK1WSEMuAt2T2KJU3cmstzoxv1tnwBuBM2iYdB4M-uWOl3S3H_DNEWtADJ";
+	private final String		clientSecret		= "EDriyWEyd9NkgJuVnyavMn5qmBXZk4DfsCLeUUKCr1WvRGobKzIEqIosgNPQXxgUSGdfRja_hAsyWexv";
+	private final String		mode				= "live";
 
 	private static final Logger	LOGGER				= Logger.getLogger(PaymentWithPayPalServlet.class);
 	Map<String, String>			map					= new HashMap<String, String>();

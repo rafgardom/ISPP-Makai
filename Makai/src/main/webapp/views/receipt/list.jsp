@@ -15,7 +15,7 @@
 		<acme:column code="receipt.moment" property="moment" />
 	</jstl:if>
 	<display:column>
-		<acme:link href="request/list.do?requestId=${row.request.id}"
+		<acme:link href="request/customer/list.do?requestId=${row.request.id}"
 			code="receipt.request" />
 	</display:column>
 	<display:column>
@@ -37,6 +37,12 @@
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
 
+		 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="UZDDUC43GTHFL">
+<input type="image" src="https://www.sandbox.paypal.com/es_ES/ES/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, la forma rápida y segura de pagar en Internet.">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+</form>
 		 
 			
 	</display:column>

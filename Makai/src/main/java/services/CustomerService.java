@@ -135,7 +135,7 @@ public class CustomerService {
 			if (accountValidator.passwordValidate(customerForm.getPassword()) && !customerForm.getPassword().toLowerCase().contains("ñ"))
 				passwordValidator = true;
 
-			if (!accountValidator.userNameValidate(customerForm.getUserName())) {
+			if (accountValidator.userNameValidate(customerForm.getUserName())) {
 				userNameValidator = false;
 				FieldError fieldError;
 				final String[] codes = {

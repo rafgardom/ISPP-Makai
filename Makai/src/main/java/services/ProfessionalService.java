@@ -136,7 +136,7 @@ public class ProfessionalService {
 			if (accountValidator.passwordValidate(professionalForm.getPassword()) && !professionalForm.getPassword().toLowerCase().contains("ñ"))
 				passwordValidator = true;
 
-			if (!accountValidator.userNameValidate(professionalForm.getUserName())) {
+			if (accountValidator.userNameValidate(professionalForm.getUserName())) {
 				userNameValidator = false;
 				FieldError fieldError;
 				final String[] codes = {

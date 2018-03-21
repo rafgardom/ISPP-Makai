@@ -131,7 +131,7 @@ public class AnimalShelterService {
 			if (accountValidator.passwordValidate(animalShelterForm.getPassword()) && !animalShelterForm.getPassword().toLowerCase().contains("ñ"))
 				passwordValidator = true;
 
-			if (!accountValidator.userNameValidate(animalShelterForm.getUserName())) {
+			if (accountValidator.userNameValidate(animalShelterForm.getUserName())) {
 				userNameValidator = false;
 				FieldError fieldError;
 				final String[] codes = {
