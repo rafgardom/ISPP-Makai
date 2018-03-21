@@ -23,31 +23,12 @@
 <%-- Attributes --%> 
  
 <%@ attribute name="code" required="true" %>
-<%@ attribute name="url" required="true" %>
+<%@ attribute name="href" required="true" %>
 
 <%-- Definition --%>
 
-<button type="button" class="btn btn-danger" onclick="location='${url}'" >
-	<span class="glyphicon glyphicon-asterisk"></span><spring:message code="${code}" />
-</button>
+<a class="btn btn-info" href="${href}">
+	<spring:message code="${code}" />
+</a>
 
 <%-- Notes --%>
-
-<%-- 
-
-	If you wish to use this custom tag, you need add the following 
-	script in your master page: 
-
-	<script type="text/javascript">
-		function relativeRedir(loc) {	
-			var b = document.getElementsByTagName('base');
-			if (b && b[0] && b[0].href) {
-	  			if (b[0].href.substr(b[0].href.length - 1) == '/' && loc.charAt(0) == '/')
-	    		loc = loc.substr(1);
-	  			loc = b[0].href + loc;
-			}
-			window.location.replace(loc);
-		}
-	</script>
-
---%>

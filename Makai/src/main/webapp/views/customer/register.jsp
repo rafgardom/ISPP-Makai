@@ -97,7 +97,7 @@
 					<spring:message code="customer.picture" var="picture" />
 					<jstl:out value="${picture}"/>
 					<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
-					class="form:input-large" enctype="multipart/form-data" code="customer.picture"></form:input>
+					enctype="multipart/form-data" code="customer.picture"></form:input>
 					<jstl:out value="${formats}"/>
 				<br/>
 				<br/>

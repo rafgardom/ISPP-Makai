@@ -8,6 +8,8 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+
+<div class="table-responsive">
 <display:table name="notifications" id="row" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="notification.moment" property="moment" format="{0,date,dd/MM/yyyy HH:mm}" />
@@ -24,19 +26,14 @@
 	</display:column>
 	
 	<display:column>
-		<a href="notification/actor/display.do?notificationId=${row.id}">
-			<spring:message	code="notification.display" />
-		</a>
-	</display:column>
-	
-	<display:column>
-		<a href="notification/actor/delete.do?notificationId=${row.id}">
-			<spring:message	code="notification.delete" />
-		</a>
+		<div class="btn-group" data-toggle="buttons">
+			<acme:link href="notification/actor/display.do?notificationId=${row.id}" code="notification.display"/>
+			<acme:cancel url="notification/actor/delete.do?notificationId=${row.id}" code="notification.delete"/>
+		</div>
 	</display:column>
 	
 </display:table>
-
+</div>
 <security:authorize access="hasRole('ADMIN')">
-	<a href="notification/admin/create.do"><spring:message code="notification.create" /></a>
+	<acme:link href="notification/admin/create.do" code="notification.create"/>
 </security:authorize>

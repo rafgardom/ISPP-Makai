@@ -30,6 +30,7 @@
 <%@ attribute name="id" required="false" %>
 <%@ attribute name="onchange" required="false" %>
 <%@ attribute name="disabled" required="false" %>
+<%@ attribute name="mandatory" required="false" %>
 
 <jstl:if test="${id == null}">
 	<jstl:set var="id" value="${UUID.randomUUID().toString()}" />
@@ -41,14 +42,20 @@
 <jstl:if test="${disabled == null}">
 	<jstl:set var="disabled" value="true" />
 </jstl:if>
+<jstl:if test="${mandatory == null}">
+	<jstl:set var="mandatory" value="false" />
+</jstl:if>
 
 <%-- Definition --%>
 
 <div>
 	<form:label path="${path}">
 		<spring:message code="${code}" />
+		<jstl:if test="${mandatory == true}">
+				<strong>(*)</strong>
+		</jstl:if>
 	</form:label>	
-	<form:select id="${id}" path="${path}" onchange="${onchange}">
+	<form:select id="${id}" path="${path}" class="form-control" onchange="${onchange}">
 		<form:option value="0" label="----" selected="selected" disabled="${disabled}"/>		
 		<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
 	</form:select>

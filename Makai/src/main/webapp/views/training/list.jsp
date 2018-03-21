@@ -33,28 +33,18 @@
 		</jstl:if>
 	</display:column>
 	
-	<security:authorize access="hasRole('TRAINER')">
+	<security:authorize access="hasRole('TRAINER')">		
 		<display:column>
-			<a href="training/trainer/display.do?trainingId=${row.id}">
-				<spring:message	code="training.display" />
-			</a>
-		</display:column>
-		
-		<display:column>
-			<a href="training/trainer/edit.do?trainingId=${row.id}">
-				<spring:message	code="training.edit" />
-			</a>
-		</display:column>
-		
-		<display:column>
-			<a href="training/trainer/delete.do?trainingId=${row.id}">
-				<spring:message	code="training.delete" />
-			</a>
+			<div class="btn-group" data-toggle="buttons">
+				<acme:link href="training/trainer/display.do?trainingId=${row.id}" code="training.display"/>
+				<acme:link href="training/trainer/edit.do?trainingId=${row.id}" code="training.edit"/>
+				<acme:cancel url="training/trainer/delete.do?trainingId=${row.id}" code="training.delete"/>
+			</div>
 		</display:column>
 	</security:authorize>
 	
 </display:table>
 
 <security:authorize access="hasRole('TRAINER')">
-	<a href="training/trainer/create.do"><spring:message code="training.create" /></a>
+	<acme:link href="training/trainer/create.do" code="training.create"/>
 </security:authorize>

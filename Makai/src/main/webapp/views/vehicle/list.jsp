@@ -20,17 +20,15 @@
 	<acme:column code="vehicle.license" property="license" />
 	
 	<display:column>
-		<a href="vehicle/delete.do?vehicleId=${row.id}">
-			<spring:message	code="travel.delete" />
-		</a>
-		<a href="vehicle/edit.do?vehicleId=${row.id}">
-			<spring:message	code="travel.edit" />
-		</a>
+		<div class="btn-group" data-toggle="buttons">
+			<acme:link href="vehicle/edit.do?vehicleId=${row.id}" code="travel.edit"/>
+			<acme:cancel url="vehicle/delete.do?vehicleId=${row.id}" code="travel.delete"/>
+		</div>
 	</display:column>
 	
 </display:table>
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
-	<a href="vehicle/register.do"><spring:message	code="vehicle.register" /></a>
+	<acme:link href="vehicle/register.do" code="vehicle.register"/>
 </security:authorize>
 
 

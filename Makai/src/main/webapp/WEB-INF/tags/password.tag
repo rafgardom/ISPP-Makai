@@ -35,14 +35,14 @@
 <%-- Definition --%>
 
 <spring:bind path="${path}">
-	<div class="form-group ${status.error? 'has-error':''}" style="padding-left:1cm">
+	<div class="form-group ${status.error? 'has-error':''}">
 		<form:label path="${path}">
 			<spring:message code="${code}" />:
 			<jstl:if test="${mandatory == true}">
 				<a class="error">(*)</a>
 			</jstl:if>
 		</form:label>
-		<form:password path="${path}" class="form-control col-sm-7" placeholder="${placeholder}" />
+		<form:password path="${path}" class="form-control" placeholder="${placeholder}" />
 		<form:errors path="${path}" cssClass="error" />
 	</div>
 </spring:bind>

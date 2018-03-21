@@ -15,12 +15,12 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 
-<div>
+<div style="display: flex; justify-content:center; justify-content:center;">
 	<img src="images/logo.png" alt="Makai"
-		style="height: 300px; padding-top: 1%; padding-bottom: 1%; padding-left: 33.3333%;" />
+		style="height: 230px; padding-top: 0.3%; padding-bottom: 0.3%;" />
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded">
 	<a class="navbar-brand" href="#">Home</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarColor01">
@@ -137,13 +137,20 @@
 								code="master.page.animalShelter.register" /></a>
 					</div></li>
 			</security:authorize>
-
+			
 			<security:authorize access="isAuthenticated()">
-
 				<li class="nav-item"><a class="nav-link"
 					href="notification/actor/list.do"><spring:message
-							code="master.page.notification.list" /> </a></li>
-
+							code="master.page.notification.list" />
+							<span class="badge badge-default badge-pill bg-secondary">2</span> </a></li>
+			</security:authorize>
+		</ul>
+		
+		<security:authorize access="isAuthenticated()">
+			
+			<ul class="navbar-nav float-right">
+				
+				
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
 							code="master.page.profile" /> (<security:authentication
@@ -155,133 +162,14 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /></a>
-					</div></li>
+					</div></li></ul>
 			</security:authorize>
-
-		</ul>
-		<form class="form-inline my-2 my-lg-0">
+	<!--<form class="form-inline">
 			<input class="form-control mr-sm-2" type="text" placeholder="Search">
 			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-		</form>
+		</form> -->
 	</div>
 </nav>
-
-
-
-<%-- <div>
-	<ul class="jMenu">
-		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		<security:authorize access="hasRole('ADMIN')">
-			<li><a class="fNiv "><spring:message
-						code="master.page.administrator" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message
-								code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message
-								code="master.page.administrator.action.2" /></a></li>
-				</ul></li>
-		</security:authorize>
-
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					EMPTY
-			</ul></li>
-			<li><a class="fNiv"><spring:message	code="master.page.request" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="request/customer/create.do"><spring:message
-								code="master.page.request.create" /></a></li>
-					<li><a href="request/customer/list.do"><spring:message
-								code="master.page.request.list" /></a></li>
-				</ul></li>
-			<li><a class="fNiv"><spring:message	code="master.page.receipt" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="receipt/customer/pending.do"><spring:message code="master.page.receipt.pending" /></a></li>
-					<li><a href="receipt/customer/paid.do"><spring:message code="master.page.receipt.paid" /></a></li>
-				</ul>
-			</li>
-		</security:authorize>
-
-		<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">
-			<li><a class="fNiv"><spring:message
-						code="master.page.travel" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="travel/create.do"><spring:message
-								code="master.page.travel.create" /></a></li>
-					<li><a href="travel/list.do"><spring:message
-								code="master.page.travel.list" /></a></li>
-				</ul></li>
-		</security:authorize>
-		
-		<security:authorize access="hasAnyRole('CUSTOMER,ANIMALSHELTER')">
-			<li><a class="fNiv"><spring:message	code="master.page.animal" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="animal/register.do"><spring:message code="master.page.animal.register" /></a></li>
-					<li><a href="animal/list.do"><spring:message code="master.page.animal.list" /></a></li>
-				</ul>
-			</li>	
-		</security:authorize>
-		
-		<security:authorize access="hasRole('TRAINER')">
-			<li><a class="fNiv" href="offer/trainer/list.do"><spring:message
-						code="master.page.offer" /></a></li>
-		</security:authorize>
-
-		<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">
-			<li><a class="fNiv"><spring:message
-						code="master.page.vehicle" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="vehicle/register.do"><spring:message
-								code="master.page.vehicle.register" /></a></li>
-					<li><a href="vehicle/list.do"><spring:message
-								code="master.page.vehicle.list" /></a></li>
-				</ul></li>
-		</security:authorize>
-
-		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message
-						code="master.page.login" /></a></li>
-			<li><a class="fNiv"> <spring:message
-						code="master.page.register" />
-			</a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/register.do"><spring:message
-								code="master.page.customer.register" /></a></li>
-					<li><a href="professional/register.do"><spring:message
-								code="master.page.professional.register" /></a></li>
-					<li><a href="trainer/register.do"><spring:message
-								code="master.page.trainer.register" /></a></li>
-					<li><a href="animalShelter/register.do"><spring:message
-								code="master.page.animalShelter.register" /> </a></li>
-				</ul></li>
-
-		</security:authorize>
-
-		<security:authorize access="isAuthenticated()">
-			<li><a class="fNiv" href="notification/actor/list.do"><spring:message
-						code="master.page.notification.list" /></a></li>
-			<li><a class="fNiv"> <spring:message
-						code="master.page.profile" /> (<security:authentication
-						property="principal.username" />)
-			</a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="profile/display.do"><spring:message
-								code="master.page.profile.display" /> </a></li>
-					<li><a href="j_spring_security_logout"><spring:message
-								code="master.page.logout" /> </a></li>
-				</ul></li>
-		</security:authorize>
-	</ul>
-</div> --%>
 
 <div>
 	<a href="javascript:setParam('language', 'en');">en</a> | <a

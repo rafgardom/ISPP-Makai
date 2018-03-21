@@ -35,11 +35,11 @@
 
 <%-- Definition --%>
 
-<div>
+<div class="form-group">
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 	</form:label>	
-	<form:select id="${id}" path="${path}">
+	<form:select class="form-control" id="${id}" path="${path}">
 		<form:option value="${null }" label="----" selected="selected" disabled="true"/>
 		<form:options items="${items }" />
 	</form:select>

@@ -30,21 +30,17 @@
 		</display:column>
 		--%>
 		<display:column>
-			<a href="request/customer/delete.do?requestId=${row.id}">
-				<spring:message	code="request.delete" />
-			</a>
+			<acme:cancel url="request/customer/delete.do?requestId=${row.id}" code="request.delete"/>
 		</display:column>
 	</security:authorize>
 	
 	<security:authorize access="hasRole('TRAINER')">
 		<display:column>
-			<a href="offer/trainer/create.do?requestId=${row.id}">
-				<spring:message	code="offer.create" />
-			</a>
+			<acme:link href="offer/trainer/create.do?requestId=${row.id}" code="offer.create"/>
 		</display:column>
 	</security:authorize>
 
 </display:table>
 <security:authorize access="hasRole('CUSTOMER')">
-	<a href="request/customer/create.do"><spring:message	code="request.create" /></a>
+	<acme:link href="request/customer/create.do" code="request.create"/>
 </security:authorize>

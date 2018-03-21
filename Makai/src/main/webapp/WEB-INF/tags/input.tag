@@ -30,6 +30,7 @@
 <%@ attribute name="step" required="false"%>
 <%@ attribute name="min" required="false"%>
 <%@ attribute name="max" required="false"%>
+<%@ attribute name="mandatory" required="false" %>
 
 <jstl:if test="${type == null}">
 	<jstl:set var="type" value="text" />
@@ -37,10 +38,17 @@
 
 <%-- Definition --%>
 
+<jstl:if test="${mandatory == null}">
+	<jstl:set var="mandatory" value="false" />
+</jstl:if>
+
 <div>
 	<form:label path="${path}">
 		<spring:message code="${code}" />:
+		<jstl:if test="${mandatory == true}">
+				<strong>(*)</strong>
+		</jstl:if>
 	</form:label>
-	<form:input path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" />
+	<form:input class="form-control" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" />
 	<form:errors class="error" cssClass="error" path="${path}" />
 </div>

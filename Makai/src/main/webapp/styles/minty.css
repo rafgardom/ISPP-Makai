@@ -4989,7 +4989,7 @@ tbody.collapse.show {
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #f7f7f9;
+  background-color: #ffe2ba/* #f7f7f9 */;
   border-radius: 0.6rem;
 }
 

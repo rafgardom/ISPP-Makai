@@ -29,8 +29,9 @@
 	<br />
 	<br />
 	
+
 	<spring:message code="animal.picture" />
-	<form:input path="animalImage" type="file" />
+	<form:input class="form-control-file" path="animalImage" type="file" />
 	<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
 	<form:errors path="animalImage" cssClass="error" />
 	<br />

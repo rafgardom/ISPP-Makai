@@ -15,17 +15,17 @@
 		<acme:column code="receipt.moment" property="moment" />
 	</jstl:if>
 	<display:column>
-		<acme:cancel url="request/list.do?requestId=${row.request.id}"
+		<acme:link href="request/list.do?requestId=${row.request.id}"
 			code="receipt.request" />
 	</display:column>
 	<display:column>
-		<acme:cancel url="trainer/list.do?trainerId=${row.trainer.id}"
+		<acme:link href="trainer/list.do?trainerId=${row.trainer.id}"
 			code="receipt.trainer" />
 	</display:column>
 	
 	<display:column>
 	Este boton es el que ejecuta el metodo de pago de la api
-		<acme:cancel url="receipt/customer/payment.do?receiptAmount=${row.amount}"
+		<acme:link href="receipt/customer/payment.do?receiptAmount=${row.amount}"
 			code="receipt.pay" />
 			<br/>
 			<br/>

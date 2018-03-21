@@ -32,7 +32,7 @@
 <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
 <link rel="stylesheet" href="styles/common.css" type="text/css">
-<link rel="stylesheet" href="styles/minty.css" type="text/css">
+<link rel="stylesheet" href="styles/minty.css" type="text/css"> 
 <link rel="stylesheet" href="styles/jmenu.css" media="screen"
 	type="text/css" />
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
@@ -40,9 +40,9 @@
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+/* 	$(document).ready(function() {
 		$("#jMenu").jMenu();
-	});
+	}); */
 
 	function askSubmission(msg, form) {
 		if (confirm(msg))
@@ -52,12 +52,13 @@
 
 </head>
 
-<body style="padding-left: 2%; padding-right: 2%">
+<body style="background-color:#ECFAFB; padding-left: 2%; padding-right: 2%">
 
 	<div>
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div>
+<!-- 	<div class="container"> -->
+  	<div class="jumbotron border border-primary">
 		<h1>
 			<tiles:insertAttribute name="title" />
 		</h1>
