@@ -90,6 +90,7 @@
 		<security:intercept-url pattern="/animal/register.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
 		<security:intercept-url pattern="/animal/edit.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
 		<security:intercept-url pattern="/animal/list.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
+		<security:intercept-url pattern="/animal/display.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
 		
 		<security:intercept-url pattern="/travel/create.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
 		<security:intercept-url pattern="/travel/myList.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />

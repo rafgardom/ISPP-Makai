@@ -7,6 +7,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,6 +67,31 @@ public class AnimalController extends AbstractController {
 		result = new ModelAndView("animal/list");
 		result.addObject("requestURI", "animal/list.do");
 		result.addObject("animals", animals);
+
+		return result;
+	}
+
+	// ListingByCustomer -------------------------------------------------------		
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int animalId) {
+		ModelAndView result;
+		Animal animal;
+		byte[] base64;
+		StringBuilder imageString;
+		String image;
+
+		animal = this.animalService.findOne(animalId);
+
+		base64 = Base64.encode(animal.getPicture());
+		imageString = new StringBuilder();
+		imageString.append("data:image/png;base64,");
+		imageString.append(new String(base64));
+		image = imageString.toString();
+
+		result = new ModelAndView("animal/display");
+		result.addObject("animal", animal);
+		result.addObject("pictureImage", image);
+		result.addObject("requestURI", "animal/display.do");
 
 		return result;
 	}
