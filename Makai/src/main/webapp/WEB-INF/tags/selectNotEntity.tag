@@ -28,9 +28,13 @@
 
 <%@ attribute name="id" required="false" %>
 <%@ attribute name="onchange" required="false" %>
+<%@ attribute name="mandatory" required="false" %>
 
 <jstl:if test="${id == null}">
 	<jstl:set var="id" value="${UUID.randomUUID().toString()}" />
+</jstl:if>
+<jstl:if test="${mandatory == null}">
+	<jstl:set var="mandatory" value="false" />
 </jstl:if>
 
 <%-- Definition --%>
@@ -38,12 +42,14 @@
 <div class="form-group">
 	<form:label path="${path}">
 		<spring:message code="${code}" />
+		<jstl:if test="${mandatory == true}">
+				<strong>(*)</strong>
+		</jstl:if>
 	</form:label>	
 	<form:select class="form-control" id="${id}" path="${path}">
 		<form:option value="${null }" label="----" selected="selected" disabled="true"/>
 		<form:options items="${items }" />
 	</form:select>
-	<form:errors path="${path}" cssClass="error" />
+	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 </div>
-
 

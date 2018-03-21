@@ -21,7 +21,7 @@ table {
 }
 
 th,td {
-	padding: 2px 4px 2px 4px !important;
+	padding: 1rem !important;
 	text-align: left;
 /* 	vertical-align: top; */
 }

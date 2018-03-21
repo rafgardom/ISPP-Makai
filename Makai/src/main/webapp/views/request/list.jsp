@@ -16,29 +16,17 @@
 	<acme:column code="request.animal" property="animal.name" />
 	
 	<display:column>
-		<a href="request/actor/display.do?requestId=${row.id}">
-			<spring:message	code="request.display" />
-		</a>
+		<div class="btn-group">
+			<acme:link href="request/actor/display.do?requestId=${row.id}" code="request.display"/>
+			<security:authorize access="hasRole('CUSTOMER')">
+				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
+				<acme:cancel url="request/customer/delete.do?requestId=${row.id}" code="request.delete"/>
+			</security:authorize>
+			<security:authorize access="hasRole('TRAINER')">
+				<acme:link href="offer/trainer/create.do?requestId=${row.id}" code="offer.create" type="success"/>
+			</security:authorize>
+		</div>
 	</display:column>
-	
-	<security:authorize access="hasRole('CUSTOMER')">
-		<%--
-		<display:column>
-			<a href="request/customer/edit.do?requestId=${row.id}">
-				<spring:message	code="request.edit" />
-			</a>
-		</display:column>
-		--%>
-		<display:column>
-			<acme:cancel url="request/customer/delete.do?requestId=${row.id}" code="request.delete"/>
-		</display:column>
-	</security:authorize>
-	
-	<security:authorize access="hasRole('TRAINER')">
-		<display:column>
-			<acme:link href="offer/trainer/create.do?requestId=${row.id}" code="offer.create"/>
-		</display:column>
-	</security:authorize>
 
 </display:table>
 <security:authorize access="hasRole('CUSTOMER')">

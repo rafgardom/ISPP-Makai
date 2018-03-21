@@ -34,9 +34,7 @@
 
 	</ul>
 	
-	<a href="notification/actor/list.do" class="btn btn-info">
-		<spring:message	code="notification.goBack" />
-	</a>
+	<acme:link href="notification/actor/list.do" code="notification.goBack"/>
 
 </div>
 

@@ -39,10 +39,10 @@
 		<form:label path="${path}">
 			<spring:message code="${code}" />:
 			<jstl:if test="${mandatory == true}">
-				<a class="error">(*)</a>
+				<strong>(*)</strong>
 			</jstl:if>
 		</form:label>
 		<form:password path="${path}" class="form-control" placeholder="${placeholder}" />
-		<form:errors path="${path}" cssClass="error" />
+		<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 	</div>
 </spring:bind>

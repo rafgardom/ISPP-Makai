@@ -34,47 +34,32 @@
 		</b></p>
 		<br />
 		<acme:textbox code="travel.country" path="countryOrigin" mandatory="true" />
-		<br />
 		<acme:textbox code="travel.state" path="stateOrigin" mandatory="false" />
-		<br />	
 		<acme:textbox code="travel.province" path="provinceOrigin" mandatory="false" />
-		<br />
 		<acme:textbox code="travel.city" path="cityOrigin" mandatory="true" />
-		<br />
 		<acme:textbox code="travel.zipcode" path="zip_codeOrigin" mandatory="true" />
+		<br />
 		<br />
 		<p><b>
 			<spring:message code="travel.destination" />
 		</b></p>
 		<br />
 		<acme:textbox code="travel.country" path="countryDestination" mandatory="true" />
-		<br />
 		<acme:textbox code="travel.state" path="stateDestination" mandatory="false" />
-		<br />	
 		<acme:textbox code="travel.province" path="provinceDestination" mandatory="false" />
-		<br />
 		<acme:textbox code="travel.city" path="cityDestination" mandatory="true" />
-		<br />
 		<acme:textbox code="travel.zipcode" path="zip_codeDestination" mandatory="true" />
+		<br />
 		<br />
 		<p><b>
 			<spring:message code="travel.details" />
 		</b></p>
 		<br />
 		<acme:textbox code="travel.startMoment" path="startMoment" mandatory="true" />
-		<br />
-
 		<acme:textbox code="travel.endMoment" path="endMoment" mandatory="true" />
-		<br />
-
 		<acme:textbox code="travel.animalSeats" path="animalSeats" mandatory="false" />
-		<br />
-		
 		<acme:textbox code="travel.humanSeats" path="HumanSeats" mandatory="false" />
-		<br />
-		
 		<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" />
-		<br />
 
 	</fieldset>
 	<br/>
@@ -90,6 +75,4 @@
 	
 		<acme:submit code="travel.create" name="save" />
 		<acme:cancel code="travel.cancel" url="" />
-	<br/>
-	
 </form:form>

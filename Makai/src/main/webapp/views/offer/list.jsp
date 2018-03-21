@@ -18,19 +18,15 @@
 	
 	
 	<display:column>
-		<jstl:if test="${row.isAccepted==false}">
-			<acme:link href="offer/trainer/delete.do?offerId=${row.id}" code="offer.delete"/>
-		</jstl:if>
-	</display:column>
-	
-	<display:column>
-		<jstl:if test="${row.isAccepted==false}">
-			<acme:link href="offer/trainer/edit.do?offerId=${row.id}" code="offer.edit"/>
-		</jstl:if>
-	</display:column>
-	
-	<display:column>
+		<div class="btn-group">
 			<acme:link href="offer/trainer/display.do?offerId=${row.id}" code="offer.display"/>
+			<jstl:if test="${row.isAccepted==false}">
+				<acme:link href="offer/trainer/edit.do?offerId=${row.id}" code="offer.edit"/>
+			</jstl:if>
+			<jstl:if test="${row.isAccepted==false}">
+				<acme:link href="offer/trainer/delete.do?offerId=${row.id}" code="offer.delete" type="danger"/>
+			</jstl:if>
+		</div>
 	</display:column>
 	
 </display:table>

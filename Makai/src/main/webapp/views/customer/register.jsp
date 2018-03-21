@@ -28,53 +28,33 @@
 <form:form action="${RequestURI}" modelAttribute="customerForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 		
-	<fieldset>
 		<legend>
 			<spring:message code="customer.personalDetails" />
 		</legend>
-
+		<br/>
 		<acme:textbox code="customer.name" path="name" mandatory="true" />
-		<br />
-
 		<acme:textbox code="customer.surname" path="surname" mandatory="true" />
-		<br />
-
 		<acme:textbox code="customer.phone" path="phone" mandatory="true" />
-		<br />
-
 		<acme:textbox code="customer.email" path="email" mandatory="true" />
-		<br />
-
 		<acme:textbox code="customer.nid" path="nid" mandatory="true" />
-		<br />
 
-	</fieldset>
-	<br />
-	<fieldset>
 		<legend>
 			<spring:message code="customer.coordinates" />
 		</legend>
 
 		<acme:textbox code="coordinates.country" path="coordinates.country"
 			mandatory="true" />
-		<br />
 
 		<acme:textbox code="coordinates.state" path="coordinates.state" />
-		<br />
 
 		<acme:textbox code="coordinates.province" path="coordinates.province" />
-		<br />
 
 		<acme:textbox code="coordinates.city" path="coordinates.city"
 			mandatory="true" />
-		<br />
 		
 		<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code"
 			mandatory="true" />
-		<br />
 
-	</fieldset>
-	<br/>
 	
 	<security:authorize access="isAnonymous()">
 			<br />
@@ -85,10 +65,8 @@
 				<br />
 				<acme:textbox code="customer.username" path="userName"
 					mandatory="true" />
-				<br />
 				<acme:password code="customer.password" path="password"
 					mandatory="true" />
-				<br />
 				<acme:password code="customer.repeatPassword" path="repeatPassword"
 					mandatory="true" />
 				<br/>

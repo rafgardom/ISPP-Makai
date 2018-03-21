@@ -27,9 +27,9 @@
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">	
-			<acme:cancel url="notification/actor/delete.do?notificationId=${row.id}" code="notification.delete"/>
+			<acme:link href="notification/actor/display.do?notificationId=${row.id}" code="notification.display"/>
+			<acme:link href="notification/actor/delete.do?notificationId=${row.id}" code="notification.delete" type="danger"/>
 		</div>
-		<acme:link href="notification/actor/display.do?notificationId=${row.id}" code="notification.display"/>
 	</display:column>
 	
 </display:table>

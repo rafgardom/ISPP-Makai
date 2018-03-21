@@ -28,7 +28,7 @@
 <%-- Definition --%>
 
 <button type="button" class="btn btn-danger" onclick="location='${url}'" >
-	<span class="glyphicon glyphicon-asterisk"></span><spring:message code="${code}" />
+	<span></span><spring:message code="${code}" />
 </button>
 
 <%-- Notes --%>

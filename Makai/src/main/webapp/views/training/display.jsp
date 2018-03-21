@@ -47,10 +47,8 @@
 				
 	</ul>
 
-	<a href="training/trainer/edit.do?trainingId=${training.id}" class="btn btn-info"><spring:message
-			code="training.edit" /></a>
-	<a href="training/trainer/list.do" class="btn btn-info"><spring:message
-			code="training.goBack" /></a>
+	<acme:link href="training/trainer/edit.do?trainingId=${training.id}" code="training.edit"/>
+	<acme:link href="training/trainer/list.do" code="training.goBack"/>
 
 </div>
 

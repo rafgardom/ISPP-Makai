@@ -24,11 +24,22 @@
  
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="href" required="true" %>
+<%@ attribute name="type" required="false" %>
+<%@ attribute name="disabled" required="false" %>
+
+<jstl:if test="${type == null}">
+	<jstl:set var="type" value="info" />
+</jstl:if>
+<jstl:if test="${disabled == null}">
+	<jstl:set var="disabled" value=" " />
+</jstl:if>
 
 <%-- Definition --%>
 
-<a class="btn btn-info" href="${href}">
+<!-- Type: primary secondary success info warning danger link -->
+
+<button type="button" class="btn btn-${type} ${disabled}" onclick="location='${href}'">
 	<spring:message code="${code}" />
-</a>
+</button>
 
 <%-- Notes --%>

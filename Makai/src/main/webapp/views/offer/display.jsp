@@ -141,7 +141,7 @@
 		
 	</ul>
 	<jstl:if test="${(offer.trainer.id==principal.id) && (offer.isAccepted==false)}">
-		<a href="offer/trainer/edit.do?offerId=${offer.id}"><spring:message code="offer.edit" /></a>
+		<acme:link href="offer/trainer/edit.do?offerId=${offer.id}" code="offer.edit"/>
 	</jstl:if>
 	
 </div>

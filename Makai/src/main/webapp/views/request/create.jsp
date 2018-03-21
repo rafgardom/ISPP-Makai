@@ -29,14 +29,10 @@
 	<form:hidden path="id" />
 		
 	<fieldset>
-		<acme:textbox code="request.description" path="description" mandatory="true" />
-		<br />
+		<acme:textarea code="request.description" path="description" mandatory="true" />
 		<acme:input code="request.tags" path="tags" />
-		<br />
 		<acme:selectNotEntity code="request.category" path="category" items="${categories}" />
-		<br />
 		<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
-		<br />	 
 	</fieldset>
 	<br/>
 	

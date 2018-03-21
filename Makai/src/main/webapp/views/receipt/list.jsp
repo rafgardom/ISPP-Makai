@@ -24,12 +24,12 @@
 	</display:column>
 	
 	<display:column>
-	Este boton es el que ejecuta el metodo de pago de la api
+	<!-- Este boton es el que ejecuta el metodo de pago de la api -->
 		<acme:link href="receipt/customer/payment.do?receiptAmount=${row.amount}"
 			code="receipt.pay" />
 			<br/>
 			<br/>
-		Este boton funciona bien pero no esta linkado a la api
+		<!-- Este boton funciona bien pero no esta linkado a la api -->
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="LP6W3QDS5AQB8">

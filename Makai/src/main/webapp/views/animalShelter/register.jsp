@@ -34,14 +34,8 @@
 		</legend>
 
 		<acme:textbox code="animalShelter.name" path="name" mandatory="true" />
-		<br />
-
 		<acme:textbox code="animalShelter.phone" path="phone" mandatory="true" />
-		<br />
-
 		<acme:textbox code="animalShelter.email" path="email" mandatory="true" />
-		<br />
-
 	</fieldset>
 	<br />
 	<fieldset>
@@ -51,22 +45,12 @@
 
 		<acme:textbox code="coordinates.country" path="coordinates.country"
 			mandatory="true" />
-		<br />
-
 		<acme:textbox code="coordinates.state" path="coordinates.state" />
-		<br />
-
 		<acme:textbox code="coordinates.province" path="coordinates.province" />
-		<br />
-
 		<acme:textbox code="coordinates.city" path="coordinates.city"
 			mandatory="true" />
-		<br />
-		
 		<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code"
 			mandatory="true" />
-		<br />
-
 	</fieldset>
 	<br/>
 	
@@ -79,10 +63,8 @@
 				<br />
 				<acme:textbox code="animalShelter.username" path="userName"
 					mandatory="true" />
-				<br />
 				<acme:password code="animalShelter.password" path="password"
 					mandatory="true" />
-				<br />
 				<acme:password code="animalShelter.repeatPassword" path="repeatPassword"
 					mandatory="true" />
 				<br/>

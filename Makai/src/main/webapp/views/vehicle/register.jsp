@@ -27,31 +27,18 @@
 
 <form:form action="${RequestURI}" modelAttribute="vehicleForm" enctype="multipart/form-data">
 		
-	<fieldset>
-		<br />
-		<acme:textbox code="vehicle.brand" path="brand" mandatory="true" />
-		<br />
-		<acme:textbox code="vehicle.seats" path="seats" mandatory="false" />
-		<br />	
-		<acme:textbox code="vehicle.carType" path="carType" mandatory="true" />
-		<br />
-		<acme:textbox code="vehicle.accommodation" path="accommodation" mandatory="false" />
-		<br />
-		<acme:textbox code="vehicle.year" path="year" mandatory="false" />
-		<br />
-		<acme:textbox code="vehicle.description" path="description" mandatory="true" />
-		<br />
-		<acme:textbox code="vehicle.color" path="color" mandatory="true" />
-		<br />
-		<acme:textbox code="vehicle.license" path="license" mandatory="true" />
-		<br />
-		<jstl:out value="${picture}"/>
-					<form:input type="file" path="picture" id="picture" name="picture" mandatory="false"
-					class="form:input-large" enctype="multipart/form-data" code="vehicle.picture"></form:input>
-		<jstl:out value="${formats}"/>
-
-	</fieldset>
-	<br/>
+	<acme:textbox code="vehicle.brand" path="brand" mandatory="true" />
+	<acme:textbox code="vehicle.seats" path="seats" mandatory="false" />
+	<acme:textbox code="vehicle.carType" path="carType" mandatory="true" />
+	<acme:textbox code="vehicle.accommodation" path="accommodation" mandatory="false" />
+	<acme:textbox code="vehicle.year" path="year" mandatory="false" />
+	<acme:textbox code="vehicle.description" path="description" mandatory="true" />
+	<acme:textbox code="vehicle.color" path="color" mandatory="true" />
+	<acme:textbox code="vehicle.license" path="license" mandatory="true" />
+	<jstl:out value="${picture}"/>
+		<form:input type="file" path="picture" id="picture" name="picture" mandatory="false"
+		class="form:input-large" enctype="multipart/form-data" code="vehicle.picture"></form:input>
+	<jstl:out value="${formats}"/>
 	
 	<security:authorize access="isAnonymous()">
 	</security:authorize>
@@ -60,10 +47,8 @@
 		<spring:message code="${errorMessage}" var="error" />
 		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
 	</jstl:if>
-	<br/>
-	
-		<acme:submit code="vehicle.register" name="save" />
-		<acme:cancel code="vehicle.cancel" url="" />
-	<br/>
+	<br/><br/>
+	<acme:submit code="vehicle.register" name="save" />
+	<acme:cancel code="vehicle.cancel" url="" />
 	
 </form:form>

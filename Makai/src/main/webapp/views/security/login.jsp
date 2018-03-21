@@ -19,14 +19,14 @@
 
 <form:form action="j_spring_security_check" modelAttribute="credentials">
 
-	<acme:textbox code="security.username" path="username"/>
+	<acme:textbox code="security.username" path="username" mandatory="true"/>
 	
-	<acme:password code="security.password" path="password"/>
+	<acme:password code="security.password" path="password" mandatory="true"/>
 	
 	<jstl:if test="${showError == true}">
-		<div class="error">
-			<spring:message code="security.login.failed" />
-		</div>
+		<h6 class="alert alert-danger"> 
+ 			<strong>Error:</strong> <spring:message code="security.login.failed" />
+		</h6>
 	</jstl:if>
 	
 	<acme:submit name=" " code="security.login"/>

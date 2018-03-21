@@ -50,5 +50,5 @@
 		</jstl:if>
 	</form:label>
 	<form:input class="form-control" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" />
-	<form:errors class="error" cssClass="error" path="${path}" />
+	<form:errors cssClass="alert alert-danger form-control" path="${path}" />
 </div>

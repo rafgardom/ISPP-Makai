@@ -26,9 +26,13 @@
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="readonly" required="false" %>
 <%@ attribute name="rows" required="false" %>
+<%@ attribute name="mandatory" required="false" %>
 
 <jstl:if test="${readonly == null}">
 	<jstl:set var="readonly" value="false" />
+</jstl:if>
+<jstl:if test="${mandatory == null}">
+	<jstl:set var="mandatory" value="false" />
 </jstl:if>
 
 <%-- Definition --%>
@@ -36,7 +40,10 @@
 <div class="form-group">
 	<form:label path="${path}">
 		<spring:message code="${code}" />
+		<jstl:if test="${mandatory == true}">
+				<strong>(*)</strong>
+		</jstl:if>
 	</form:label>
-	<form:textarea path="${path}" readonly="${readonly}" />
-	<form:errors path="${path}" cssClass="error" />
+	<form:textarea path="${path}" readonly="${readonly}" class="form-control" />
+	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 </div>

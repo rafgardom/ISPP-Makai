@@ -34,35 +34,21 @@
 		</legend>
 
 		<acme:textbox code="professional.name" path="name" mandatory="true" />
-		<br />
-
 		<acme:textbox code="professional.phone" path="phone" mandatory="true" />
-		<br />
-
 		<acme:textbox code="professional.email" path="email" mandatory="true" />
-		<br />
-
 	</fieldset>
 	<br />
 	<fieldset>
 		<legend>
 			<spring:message code="professional.coordinates" />
 		</legend>
-
+		<br />
 		<acme:textbox code="coordinates.country" path="coordinates.country"
 			mandatory="true" />
-		<br />
-
 		<acme:textbox code="coordinates.state" path="coordinates.state" />
-		<br />
-
 		<acme:textbox code="coordinates.province" path="coordinates.province" />
-		<br />
-
 		<acme:textbox code="coordinates.city" path="coordinates.city"
 			mandatory="true" />
-		<br />
-		
 		<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code"
 			mandatory="true" />
 		<br />
@@ -79,10 +65,8 @@
 				<br />
 				<acme:textbox code="professional.username" path="userName"
 					mandatory="true" />
-				<br />
 				<acme:password code="professional.password" path="password"
 					mandatory="true" />
-				<br />
 				<acme:password code="professional.repeatPassword" path="repeatPassword"
 					mandatory="true" />
 				<br/>

@@ -29,13 +29,9 @@
 		
 	<fieldset>
 		<acme:textbox code="request.description" path="description" mandatory="true" />
-		<br />
 		<acme:input code="request.tags" path="tags" />
-		<br />
 		<acme:select code="request.category" path="category" items="categories" itemLabel="category.name" />
-		<br />
 		<acme:select code="request.animals" path="animals" items="animals" itemLabel="animal.name" />
-		<br />
 
 	</fieldset>
 	<br/>

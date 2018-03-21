@@ -14,7 +14,7 @@
 	padding: 0px;
 }
 
-/* First level */
+First level
 
 .jMenu li {
 	display: table-cell;
@@ -33,7 +33,7 @@
 	text-decoration: none;
 }
 
-/* Lower levels */
+Lower levels
 
 .jMenu li ul {
 	display: none;
@@ -84,4 +84,4 @@
 	border-top: 1px solid #322f32;
 	border-bottom: 1px solid #322f32;
 	text-decoration: none;
-}
+} 
