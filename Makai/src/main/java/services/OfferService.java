@@ -72,9 +72,7 @@ public class OfferService {
 		result.setAnimal(request.getAnimal());
 
 		//Comprobar de que no tiene ninguna oferta aceptada
-		//Assert.isTrue(this.requestService.tieneOfferAceptadaUnRequest(request));
-
-		//Assert.isTrue(!request.getIsCancelled());
+		Assert.isNull(this.findOfferAccepted(request));
 
 		return result;
 	}
@@ -93,9 +91,7 @@ public class OfferService {
 		result.setIsAccepted(false);
 
 		//Comprobar de que no tiene ninguna oferta aceptada
-		//Assert.isTrue(this.requestService.tieneOfferAceptadaUnRequest(request));
-
-		//Assert.isTrue(!request.getIsCancelled());
+		Assert.isNull(this.findOfferAccepted(request));
 
 		return result;
 	}
