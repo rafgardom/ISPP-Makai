@@ -2,7 +2,6 @@
 package services;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -17,7 +16,6 @@ import security.Authority;
 import domain.Actor;
 import domain.Coordinates;
 import domain.Customer;
-import domain.Notification;
 import domain.Professional;
 import domain.Transporter;
 import domain.Travel;
@@ -28,11 +26,11 @@ import forms.TravelForm;
 @Transactional
 public class TravelService {
 
-	// Managed repository -----------------------------------------------------
+	// Managed repository —---------------------------------------------------
 	@Autowired
 	private TravelRepository	travelRepository;
 
-	// Supporting services ----------------------------------------------------
+	// Supporting services —------------------------------------------------—
 	@Autowired
 	private TransporterService	transporterService;
 
@@ -54,7 +52,7 @@ public class TravelService {
 		super();
 	}
 
-	// Simple CRUD methods ----------------------------------------------------
+	// Simple CRUD methods —------------------------------------------------—
 	public Travel findOne(final int travelId) {
 		Travel result;
 
@@ -112,31 +110,31 @@ public class TravelService {
 	}
 
 	public void delete(final Travel travel) {
-		Transporter principal;
+		Actor principal;
 		Calendar today;
 
 		Assert.notNull(travel);
 		Assert.isTrue(travel.getId() != 0);
 
-		principal = this.transporterService.findByPrincipal();
+		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
-		Assert.isTrue(travel.getTransporterOwner().getId() == principal.getId());
+		Assert.isTrue(this.actorService.checkAuthority(principal, "ADMIN") || this.actorService.checkAuthority(principal, "CUSTOMER") || this.actorService.checkAuthority(principal, "PROFESSIONAL"));
+		if (this.actorService.checkAuthority(principal, "CUSTOMER") || this.actorService.checkAuthority(principal, "PROFESSIONAL"))
+			Assert.isTrue(travel.getTransporterOwner().getId() == principal.getId());
 
 		today = Calendar.getInstance();
-		Assert.isTrue(today.getTime().after(travel.getStartMoment()));
+		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
 
 		this.travelRepository.delete(travel);
 	}
 
-	// Other business methods -------------------------------------------------
+	// Other business methods —---------------------------------------------—
 
 	public void registerTravel(final Travel travel) {
-		final Collection<Actor> actors = new ArrayList<Actor>();
 		Actor actor;
 		Customer customer;
 		Professional professional;
 		Collection<Travel> travels;
-		Notification notification;
 
 		actor = this.actorService.findByPrincipal();
 
@@ -146,25 +144,12 @@ public class TravelService {
 			travels.add(travel);
 			customer.setTravelPassengers(travels);
 			this.customerService.save(customer);
-
-			actors.add(customer);
-			notification = this.notificationService.create(actors);
-			notification.setReason("Nueva inscripci�n a su viaje");
-			notification.setDescription("Un usuario se ha apuntado a un viaje creado por usted");
-			this.notificationService.save(notification);
-
 		} else if (this.actorService.checkAuthority(actor, Authority.PROFESSIONAL)) {
 			professional = this.professionalService.findByPrincipal();
 			travels = professional.getTravelPassengers();
 			travels.add(travel);
 			professional.setTravelPassengers(travels);
 			this.professionalService.save(professional);
-
-			actors.add(professional);
-			notification = this.notificationService.create(actors);
-			notification.setReason("Nueva inscripci�n a su viaje");
-			notification.setDescription("Un usuario se ha apuntado a un viaje creado por usted");
-			this.notificationService.save(notification);
 		}
 
 	}

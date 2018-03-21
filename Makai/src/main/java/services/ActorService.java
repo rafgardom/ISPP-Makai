@@ -2,6 +2,7 @@
 package services;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,11 @@ import forms.ProfileForm;
 @Transactional
 public class ActorService {
 
-	// Managed repository -----------------------------------------------------
+	// Managed repository —---------------------------------------------------
 	@Autowired
 	private ActorRepository			actorRepository;
 
-	// Supporting services ----------------------------------------------------
+	// Supporting services —------------------------------------------------—
 
 	@Autowired
 	private CustomerService			customerService;
@@ -61,7 +62,7 @@ public class ActorService {
 		super();
 	}
 
-	// Simple CRUD methods ----------------------------------------------------
+	// Simple CRUD methods —------------------------------------------------—
 	public Actor findOne(final int actorId) {
 		Actor result;
 
@@ -105,7 +106,7 @@ public class ActorService {
 		return actor;
 	}
 
-	// Other business methods -------------------------------------------------
+	// Other business methods —---------------------------------------------—
 
 	public Actor findByPrincipal() {
 		Actor result;
@@ -277,22 +278,28 @@ public class ActorService {
 	public Actor ban(Actor actor) {
 		Assert.notNull(actor);
 
+		Calendar today;
+		today = Calendar.getInstance();
+
 		final Administrator administrator;
+
+		administrator = this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
 
 		if (this.checkAuthority(actor, "TRAINER")) {
 			Collection<Training> trainings;
 			trainings = this.trainingService.findByTrainerId(actor.getId());
-			for (final Training tr : trainings)
-				this.trainingService.delete(tr);
-		} else if (this.checkAuthority(actor, "TRANSPORTER")) {
+			if (trainings != null)
+				for (final Training tr : trainings)
+					this.trainingService.delete(tr);
+		} else if (this.checkAuthority(actor, "CUSTOMER") || this.checkAuthority(actor, "PROFESSIONAL")) {
 			Collection<Travel> travels;
 			travels = this.travelService.findTravelByTransporterId(actor.getId());
-			for (final Travel tr : travels)
-				this.travelService.delete(tr);
+			if (travels != null)
+				for (final Travel tr : travels)
+					if (!today.getTime().after(tr.getStartMoment()))
+						this.travelService.delete(tr);
 		}
-
-		administrator = this.administratorService.findByPrincipal();
-		Assert.notNull(administrator);
 
 		actor.getUserAccount().setEnabled(false);
 
