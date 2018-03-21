@@ -79,7 +79,7 @@ public class TravelController extends AbstractController {
 		final ModelAndView result;
 		final Travel travel = this.travelService.findOne(travelId);
 		this.travelService.registerTravel(travel);
-		result = new ModelAndView("redirect:myList.do");
+		result = new ModelAndView("redirect:List.do");
 
 		return result;
 	}
