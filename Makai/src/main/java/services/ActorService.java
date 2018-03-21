@@ -217,12 +217,10 @@ public class ActorService {
 		result.setName(profileForm.getName());
 		result.setPhone(profileForm.getPhone());
 
-		System.out.println(profileForm.getPicture());
-
 		if (profileForm.getPicture() != null)
 			result.setPicture(profileForm.getPicture());
 
-		if (profileForm.getPassword() != null && profileForm.getPassword() != profileForm.getRepeatPassword()) {
+		if (profileForm.getPassword() != null && !profileForm.getPassword().equals(profileForm.getRepeatPassword())) {
 			FieldError fieldError;
 			final String[] codes = {
 				"profile.repeatPasword.error"
@@ -230,7 +228,7 @@ public class ActorService {
 			fieldError = new FieldError("profileForm", "repeatPassword", profileForm.getPassword(), false, codes, null, "");
 			binding.addError(fieldError);
 		} else if (profileForm.getPassword() != null)
-			result.getUserAccount().setPassword(profileForm.getPassword());
+			result.getUserAccount().setPassword(this.hashPassword(profileForm.getPassword()));
 
 		this.validator.validate(result, binding);
 
