@@ -21,7 +21,7 @@
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded">
-	<a class="navbar-brand" href="#">Home</a>
+	<a class="navbar-brand" href="#"><spring:message code="master.page.home" /></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarColor01">
 		<span class="navbar-toggler-icon"></span>
