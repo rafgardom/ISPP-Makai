@@ -149,7 +149,14 @@ public class RequestService {
 	}
 
 	public Collection<Request> findRequestsNotAccepted() {
-		return this.requestRepository.findRequestsNotAccepted();
+		Collection<Request> result;
+		Collection<Request> aceptedRequests;
+
+		result = this.findAll();
+		aceptedRequests = this.requestRepository.findRequestsAccepted();
+		result.removeAll(aceptedRequests);
+
+		return result;
 	}
 
 	public Collection<Request> findRequestByCustomer(final Customer customer) {

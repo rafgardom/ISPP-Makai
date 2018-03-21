@@ -19,10 +19,10 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select o from Offer o where o.request.id=?1 and o.isAccepted=true")
 	Offer findOfferWithThisRequestTrue(int request);
 
-	@Query("select r from Request r where r.customer.id=?1")
+	@Query("select r from Request r where r.customer.id=?1 and r.isCancelled=false")
 	Collection<Request> findRequestsByCustomer(int customer);
 
-	@Query("select distinct o.request from Offer o where o.isAccepted=false")
-	Collection<Request> findRequestsNotAccepted();
+	@Query("select o.request from Offer o where o.isAccepted=true")
+	Collection<Request> findRequestsAccepted();
 
 }
