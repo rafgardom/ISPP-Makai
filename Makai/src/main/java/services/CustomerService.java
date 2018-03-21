@@ -18,6 +18,7 @@ import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import utilities.UserNamePasswordValidator;
 import domain.Customer;
 import domain.Travel;
 import forms.CustomerForm;
@@ -124,14 +125,28 @@ public class CustomerService {
 		Assert.notNull(customerForm);
 		Customer result;
 		String password;
+		final UserNamePasswordValidator accountValidator = new UserNamePasswordValidator();
+		boolean userNameValidator = true;
+		boolean passwordValidator = false;
 
 		if (customerForm.getId() == 0) {
 			result = this.create();
 
-			if (customerForm.getPassword().equals(customerForm.getRepeatPassword()) && customerForm.getPassword() != null && !customerForm.getPassword().isEmpty() && !customerForm.getPassword().contains(" ") && !customerForm.getUserName().contains(" ")) {
+			if (accountValidator.passwordValidate(customerForm.getPassword()) && !customerForm.getPassword().toLowerCase().contains("ñ"))
+				passwordValidator = true;
+
+			if (!accountValidator.userNameValidate(customerForm.getUserName())) {
+				userNameValidator = false;
+				FieldError fieldError;
+				final String[] codes = {
+					"customer.userName.error"
+				};
+				fieldError = new FieldError("customerForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+			if (customerForm.getPassword().equals(customerForm.getRepeatPassword()) && customerForm.getPassword() != null && !customerForm.getPassword().isEmpty() && !customerForm.getPassword().contains(" ") && passwordValidator) {
 				password = this.actorService.hashPassword(customerForm.getPassword());
 				result.getUserAccount().setPassword(password);
-				result.getUserAccount().setUsername(customerForm.getUserName());
 			} else {
 				FieldError fieldError;
 				final String[] codes = {
@@ -141,6 +156,9 @@ public class CustomerService {
 				binding.addError(fieldError);
 
 			}
+
+			if (!customerForm.getUserName().contains(" ") && userNameValidator)
+				result.getUserAccount().setUsername(customerForm.getUserName());
 
 			if (customerForm.getUserName().contains(" ")) {
 				FieldError fieldError;

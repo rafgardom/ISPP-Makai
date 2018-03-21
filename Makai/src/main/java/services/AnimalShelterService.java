@@ -18,6 +18,7 @@ import repositories.AnimalShelterRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import utilities.UserNamePasswordValidator;
 import domain.AnimalShelter;
 import forms.AnimalShelterForm;
 
@@ -120,15 +121,28 @@ public class AnimalShelterService {
 		Assert.notNull(animalShelterForm);
 		AnimalShelter result;
 		String password;
+		final UserNamePasswordValidator accountValidator = new UserNamePasswordValidator();
+		boolean userNameValidator = true;
+		boolean passwordValidator = false;
 
 		if (animalShelterForm.getId() == 0) {
 			result = this.create();
 
-			if (animalShelterForm.getPassword().equals(animalShelterForm.getRepeatPassword()) && animalShelterForm.getPassword() != null && !animalShelterForm.getPassword().isEmpty() && !animalShelterForm.getUserName().contains(" ")
-				&& !animalShelterForm.getPassword().contains(" ")) {
+			if (accountValidator.passwordValidate(animalShelterForm.getPassword()) && !animalShelterForm.getPassword().toLowerCase().contains("ñ"))
+				passwordValidator = true;
+
+			if (!accountValidator.userNameValidate(animalShelterForm.getUserName())) {
+				userNameValidator = false;
+				FieldError fieldError;
+				final String[] codes = {
+					"animalShelter.userName.error"
+				};
+				fieldError = new FieldError("animalShelterForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+			if (animalShelterForm.getPassword().equals(animalShelterForm.getRepeatPassword()) && animalShelterForm.getPassword() != null && !animalShelterForm.getPassword().isEmpty() && !animalShelterForm.getPassword().contains(" ") && passwordValidator) {
 				password = this.actorService.hashPassword(animalShelterForm.getPassword());
 				result.getUserAccount().setPassword(password);
-				result.getUserAccount().setUsername(animalShelterForm.getUserName());
 			} else {
 				FieldError fieldError;
 				final String[] codes = {
@@ -138,6 +152,10 @@ public class AnimalShelterService {
 				binding.addError(fieldError);
 
 			}
+
+			if (!animalShelterForm.getUserName().contains(" ") && userNameValidator)
+				result.getUserAccount().setUsername(animalShelterForm.getUserName());
+
 			if (animalShelterForm.getUserName().contains(" ")) {
 				FieldError fieldError;
 				final String[] codes = {

@@ -18,6 +18,7 @@ import repositories.TrainerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import utilities.UserNamePasswordValidator;
 import domain.Category;
 import domain.Offer;
 import domain.Receipt;
@@ -130,14 +131,28 @@ public class TrainerService {
 		Assert.notNull(trainerForm);
 		Trainer result;
 		String password;
+		final UserNamePasswordValidator accountValidator = new UserNamePasswordValidator();
+		boolean userNameValidator = true;
+		boolean passwordValidator = false;
 
 		if (trainerForm.getId() == 0) {
 			result = this.create();
 
-			if (trainerForm.getPassword().equals(trainerForm.getRepeatPassword()) && trainerForm.getPassword() != null && !trainerForm.getPassword().isEmpty() && !trainerForm.getUserName().contains(" ") && !trainerForm.getPassword().contains(" ")) {
+			if (accountValidator.passwordValidate(trainerForm.getPassword()) && !trainerForm.getPassword().toLowerCase().contains("ñ"))
+				passwordValidator = true;
+
+			if (!accountValidator.userNameValidate(trainerForm.getUserName())) {
+				userNameValidator = false;
+				FieldError fieldError;
+				final String[] codes = {
+					"trainer.userName.error"
+				};
+				fieldError = new FieldError("trainerForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+			if (trainerForm.getPassword().equals(trainerForm.getRepeatPassword()) && trainerForm.getPassword() != null && !trainerForm.getPassword().isEmpty() && !trainerForm.getPassword().contains(" ") && passwordValidator) {
 				password = this.actorService.hashPassword(trainerForm.getPassword());
 				result.getUserAccount().setPassword(password);
-				result.getUserAccount().setUsername(trainerForm.getUserName());
 			} else {
 				FieldError fieldError;
 				final String[] codes = {
@@ -145,7 +160,11 @@ public class TrainerService {
 				};
 				fieldError = new FieldError("trainerForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
 				binding.addError(fieldError);
+
 			}
+
+			if (!trainerForm.getUserName().contains(" ") && userNameValidator)
+				result.getUserAccount().setUsername(trainerForm.getUserName());
 
 			if (trainerForm.getUserName().contains(" ")) {
 				FieldError fieldError;

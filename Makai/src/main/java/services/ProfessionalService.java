@@ -18,6 +18,7 @@ import repositories.ProfessionalRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import utilities.UserNamePasswordValidator;
 import domain.Professional;
 import domain.Travel;
 import forms.ProfessionalForm;
@@ -125,15 +126,28 @@ public class ProfessionalService {
 		Assert.notNull(professionalForm);
 		Professional result;
 		String password;
+		final UserNamePasswordValidator accountValidator = new UserNamePasswordValidator();
+		boolean userNameValidator = true;
+		boolean passwordValidator = false;
 
 		if (professionalForm.getId() == 0) {
 			result = this.create();
 
-			if (professionalForm.getPassword().equals(professionalForm.getRepeatPassword()) && professionalForm.getPassword() != null && !professionalForm.getPassword().isEmpty() && !professionalForm.getPassword().contains(" ")
-				&& !professionalForm.getUserName().contains(" ")) {
+			if (accountValidator.passwordValidate(professionalForm.getPassword()) && !professionalForm.getPassword().toLowerCase().contains("ñ"))
+				passwordValidator = true;
+
+			if (!accountValidator.userNameValidate(professionalForm.getUserName())) {
+				userNameValidator = false;
+				FieldError fieldError;
+				final String[] codes = {
+					"professional.userName.error"
+				};
+				fieldError = new FieldError("professionalForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+			if (professionalForm.getPassword().equals(professionalForm.getRepeatPassword()) && professionalForm.getPassword() != null && !professionalForm.getPassword().isEmpty() && !professionalForm.getPassword().contains(" ") && passwordValidator) {
 				password = this.actorService.hashPassword(professionalForm.getPassword());
 				result.getUserAccount().setPassword(password);
-				result.getUserAccount().setUsername(professionalForm.getUserName());
 			} else {
 				FieldError fieldError;
 				final String[] codes = {
@@ -141,7 +155,11 @@ public class ProfessionalService {
 				};
 				fieldError = new FieldError("professionalForm", "password", result.getUserAccount().getPassword(), false, codes, null, "");
 				binding.addError(fieldError);
+
 			}
+
+			if (!professionalForm.getUserName().contains(" ") && userNameValidator)
+				result.getUserAccount().setUsername(professionalForm.getUserName());
 
 			if (professionalForm.getUserName().contains(" ")) {
 				FieldError fieldError;
