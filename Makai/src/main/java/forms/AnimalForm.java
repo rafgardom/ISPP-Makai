@@ -22,6 +22,7 @@ public class AnimalForm {
 	private Sex					sex;
 	private byte[]				picture;
 	private MultipartFile		animalImage;
+	private String				stringImage;
 	private Specie				specie;
 	private Collection<Breed>	breeds;
 
@@ -89,6 +90,14 @@ public class AnimalForm {
 
 	public void setAnimalImage(final MultipartFile animalImage) {
 		this.animalImage = animalImage;
+	}
+
+	public String getStringImage() {
+		return this.stringImage;
+	}
+
+	public void setStringImage(final String stringImage) {
+		this.stringImage = stringImage;
 	}
 
 	@NotNull

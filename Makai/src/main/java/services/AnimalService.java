@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -203,10 +204,22 @@ public class AnimalService {
 	}
 	public AnimalForm animalToFormObject(final Animal animal) {
 		final AnimalForm result;
+		byte[] base64;
+		StringBuilder imageString;
+		String image;
 
 		Assert.notNull(animal);
 
 		result = new AnimalForm();
+
+		if (animal.getPicture() != null) {
+			base64 = Base64.encode(animal.getPicture());
+			imageString = new StringBuilder();
+			imageString.append("data:image/png;base64,");
+			imageString.append(new String(base64));
+			image = imageString.toString();
+		} else
+			image = null;
 
 		result.setId(animal.getId());
 		result.setName(animal.getName());
@@ -215,6 +228,7 @@ public class AnimalService {
 		result.setSex(animal.getSex());
 		result.setPicture(animal.getPicture());
 		result.setBreeds(animal.getBreeds());
+		result.setStringImage(image);
 
 		return result;
 	}

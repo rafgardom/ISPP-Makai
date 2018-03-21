@@ -10,10 +10,20 @@
 
 <display:table name="animals" id="row" requestURI="${requestURI}" class="displaytag">
 	
+	<display:column>
+		<img src="${row.stringImage}" alt="<spring:message code='profile.no.picture' />" width="125px" height="125px">
+	</display:column>
+	
 	<acme:column code="animal.name" property="name" />
 	<acme:column code="animal.chipNumber" property="chipNumber" />
 	<acme:column code="animal.age" property="age" />
 	<acme:column code="animal.sex" property="sex" />
+	
+	<display:column>
+		<div class="btn-group" data-toggle="buttons">	
+			<acme:link href="animal/display.do?animalId=${row.id}" code="animal.display"/>
+		</div>
+	</display:column>
 		
 </display:table>
 

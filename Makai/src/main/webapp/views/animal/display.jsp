@@ -24,7 +24,7 @@
 	<!-- contenido informacion adicional -->
 	<ul>
 		<li><b><spring:message code="animal.picture" />:</b> <img
-			src="${pictureImage}"
+			src="${animal.stringImage}"
 			alt="<spring:message code='animal.no.picture' />" width="200px"
 			height="200px"></li>
 		<li><b><spring:message code="animal.name" />:</b> <jstl:out

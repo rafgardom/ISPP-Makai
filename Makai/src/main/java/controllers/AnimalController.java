@@ -3,11 +3,11 @@ package controllers;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,12 +57,20 @@ public class AnimalController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listByCustomer() {
 		ModelAndView result;
-		Collection<Animal> animals;
+		Collection<AnimalForm> animals;
 		Actor actor;
 
 		actor = this.actorService.findByPrincipal();
 
-		animals = this.animalService.findByActorId(actor.getId());
+		animals = new HashSet<AnimalForm>();
+
+		for (final Animal a : this.animalService.findByActorId(actor.getId())) {
+			AnimalForm animalForm;
+
+			animalForm = this.animalService.animalToFormObject(a);
+
+			animals.add(animalForm);
+		}
 
 		result = new ModelAndView("animal/list");
 		result.addObject("requestURI", "animal/list.do");
@@ -76,21 +84,13 @@ public class AnimalController extends AbstractController {
 	public ModelAndView display(@RequestParam final int animalId) {
 		ModelAndView result;
 		Animal animal;
-		byte[] base64;
-		StringBuilder imageString;
-		String image;
+		AnimalForm animalForm;
 
 		animal = this.animalService.findOne(animalId);
-
-		base64 = Base64.encode(animal.getPicture());
-		imageString = new StringBuilder();
-		imageString.append("data:image/png;base64,");
-		imageString.append(new String(base64));
-		image = imageString.toString();
+		animalForm = this.animalService.animalToFormObject(animal);
 
 		result = new ModelAndView("animal/display");
-		result.addObject("animal", animal);
-		result.addObject("pictureImage", image);
+		result.addObject("animal", animalForm);
 		result.addObject("requestURI", "animal/display.do");
 
 		return result;
@@ -145,10 +145,9 @@ public class AnimalController extends AbstractController {
 				if (animalForm.getAnimalImage().getSize() > 0) {
 
 					savedFile = animalForm.getAnimalImage().getBytes();
-					animalForm.setPicture(savedFile);
+					animal.setPicture(savedFile);
 
-				} else
-					animalForm.setPicture(null);
+				}
 
 				animal = this.animalService.save(animal);
 				result = new ModelAndView("redirect:list.do");
