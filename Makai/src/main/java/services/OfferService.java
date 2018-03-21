@@ -148,7 +148,7 @@ public class OfferService {
 	//Erase all offers not accepted that are linked to a request which has already an accepted offer
 	public void eraseNonAcceptedOffers(final Request request) {
 		final Offer acceptedOffer = this.findOfferAccepted(request);
-		Assert.notNull(acceptedOffer);
+		Assert.isNull(acceptedOffer);
 
 		final Collection<Offer> nonAcceptedOffers = this.findNonAcceptedOffers(request);
 		if (!nonAcceptedOffers.isEmpty())

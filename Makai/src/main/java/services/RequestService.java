@@ -34,6 +34,9 @@ public class RequestService {
 	private ReceiptService		receiptService;
 
 	@Autowired
+	private OfferService		offerService;
+
+	@Autowired
 	private NotificationService	notificationService;
 
 	@Autowired
@@ -114,12 +117,14 @@ public class RequestService {
 		Assert.isTrue(request.getIsCancelled() == false);
 
 		//Comprobar de que no tiene ninguna oferta aceptada
-		if (this.tieneOfferAceptadaUnRequest(request)) {
+		if (this.offerService.findOfferAccepted(request) != null) {
 			Assert.isTrue(this.receiptService.getPendingReceipts(principal).isEmpty());
 			request.setIsCancelled(true);
 			this.requestRepository.save(request);
-		} else
+		} else {
+			this.offerService.eraseNonAcceptedOffers(request);
 			this.requestRepository.delete(request);
+		}
 
 	}
 

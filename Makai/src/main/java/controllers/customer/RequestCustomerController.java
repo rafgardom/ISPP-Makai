@@ -92,7 +92,7 @@ public class RequestCustomerController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView saveEdit(@Valid final RequestForm requestForm, final BindingResult binding) {
 
 		ModelAndView result;
