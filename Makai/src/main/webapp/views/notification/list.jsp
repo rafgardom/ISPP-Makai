@@ -26,10 +26,10 @@
 	</display:column>
 	
 	<display:column>
-		<div class="btn-group" data-toggle="buttons">
-			<acme:link href="notification/actor/display.do?notificationId=${row.id}" code="notification.display"/>
+		<div class="btn-group" data-toggle="buttons">	
 			<acme:cancel url="notification/actor/delete.do?notificationId=${row.id}" code="notification.delete"/>
 		</div>
+		<acme:link href="notification/actor/display.do?notificationId=${row.id}" code="notification.display"/>
 	</display:column>
 	
 </display:table>

@@ -179,6 +179,21 @@ public class TravelController extends AbstractController {
 
 		return result;
 	}
+
+	// Display -------------------------------------------------------		
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int travelId) {
+		ModelAndView result;
+		Travel travel;
+
+		travel = this.travelService.findOne(travelId);
+
+		result = new ModelAndView("travel/display");
+		result.addObject("travel", travel);
+		result.addObject("requestURI", "travel/display.do?travelId=" + travel.getId());
+
+		return result;
+	}
 	// Ancillary methods
 
 	protected ModelAndView createModelAndView(final TravelForm travelForm) {
