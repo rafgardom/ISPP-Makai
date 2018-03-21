@@ -12,22 +12,22 @@ package utilities;
 
 import java.io.IOException;
 
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 import utilities.internal.ConsoleReader;
 
 public class HashPassword {
 
 	public static void main(final String[] args) throws IOException {
-		Md5PasswordEncoder encoder;
+		ShaPasswordEncoder encoder;
 		ConsoleReader reader;
 		String line, hash;
 
 		try {
-			System.out.printf("HashPassword 1.9%n");
+			System.out.printf("HashPassword 1.9 modified to Sha256%n");
 			System.out.printf("----------------%n%n");
 
-			encoder = new Md5PasswordEncoder();
+			encoder = new ShaPasswordEncoder(256);
 			reader = new ConsoleReader();
 
 			line = reader.readLine();

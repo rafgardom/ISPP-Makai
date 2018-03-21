@@ -36,7 +36,7 @@ public class Credentials {
 		this.username = username;
 	}
 
-	@Size(min = 5, max = 32)
+	@Size(min = 5, max = 64)
 	public String getPassword() {
 		return this.password;
 	}

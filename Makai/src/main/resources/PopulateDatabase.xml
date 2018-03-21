@@ -20,7 +20,7 @@
 
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password" value="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -33,7 +33,7 @@
 
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="customer1" />
-		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
+		<property name="password" value="dea26157fa355301663174eac368538cff8939f36681d6712dedba439ab98b70" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -46,7 +46,7 @@
 	
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="customer2" />
-		<property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b" />
+		<property name="password" value="c8c7cb5b9e8f7a1b3d1d02602ada62327132391dbe0e8ee07913cd550eea1f3b" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -59,7 +59,7 @@
 	
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="customer3" />
-		<property name="password" value="033f7f6121501ae98285ad77f216d5e7" />
+		<property name="password" value="18c5c9be898c65c5e5c51ac3e94feacff0b991f8463a3a18eb524e9f7e6131a8" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -72,7 +72,7 @@
 	
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="profesional1" />
-		<property name="password" value="473deb90997d416b6af80aa585e128af" />
+		<property name="password" value="79343603654a9d7ab7550de6020b8968cecd9b051f372f76e4c3bf8a02b1ee61" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -85,7 +85,7 @@
 	
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="profesional2" />
-		<property name="password" value="e16f47b31979684fa31e74f594404d5c" />
+		<property name="password" value="99d5980282b6633c17349bb3d3d5f3e5fefda316f0f8be84b01648237958cf1b" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -98,7 +98,7 @@
 	
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="profesional3" />
-		<property name="password" value="7e8fbe4bbd13240e64d17022d4e9a1a8" />
+		<property name="password" value="5e795db8cd035981c62fd5605aa491264ea16d32b1e107142afc600c9ee58972" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -111,7 +111,7 @@
 	
 	<bean id="userAccount8" class="security.UserAccount">
 		<property name="username" value="trainer1" />
-		<property name="password" value="4d9a96c8e1650dc161f1adcf5c5082a0" />
+		<property name="password" value="167ec7e469d6e543b4180fdbe60ddacf81563fb178f908896e46a5e86633c702" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -124,7 +124,7 @@
 	
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="trainer2" />
-		<property name="password" value="6662f54a6c5033357408e6839a5c0a05" />
+		<property name="password" value="16378a428f831c77c6c49def99620f0f17f4ba693df2826ee8fbd6c6d451e4b7" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -137,7 +137,7 @@
 	
 	<bean id="userAccount10" class="security.UserAccount">
 		<property name="username" value="trainer3" />
-		<property name="password" value="72977b63f9bf5a01f30bfe2ca802a3c1" />
+		<property name="password" value="29209ecd78e31959de6fcb45b068f221f1130de844cfddd0b63af57369cec375" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -150,7 +150,7 @@
 	
 	<bean id="userAccount11" class="security.UserAccount">
 		<property name="username" value="animalshelter1" />
-		<property name="password" value="a044d5c6de5c3399ea066e89ad548810" />
+		<property name="password" value="0f7395dd04906037a9a7cb770b347e787be1d096ff0190af6bd591b260d2f60e" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -163,7 +163,7 @@
 	
 	<bean id="userAccount12" class="security.UserAccount">
 		<property name="username" value="animalshelter2" />
-		<property name="password" value="134426da8c6a6c06c0bada0f6610575b" />
+		<property name="password" value="ce07a44593752910b4c9f35875b2db5c7e66fa44d2217ea5fd6d45d463759a56" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -176,7 +176,7 @@
 	
 	<bean id="userAccount13" class="security.UserAccount">
 		<property name="username" value="animalshelter3" />
-		<property name="password" value="72c83c5f7f5627ff3cf148d0f3440465" />
+		<property name="password" value="a3dc6a11182b57ea49b4e2386479d6ce25bdfc29210c22ac23ce8c9233684928" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">

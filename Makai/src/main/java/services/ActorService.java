@@ -8,6 +8,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -153,9 +154,9 @@ public class ActorService {
 
 	public String hashPassword(final String password) {
 		String result;
-		Md5PasswordEncoder encoder;
+		ShaPasswordEncoder encoder;
 
-		encoder = new Md5PasswordEncoder();
+		encoder = new ShaPasswordEncoder(256);
 		result = encoder.encodePassword(password, null);
 
 		return result;
