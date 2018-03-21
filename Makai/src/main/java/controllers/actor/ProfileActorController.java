@@ -95,8 +95,7 @@ public class ProfileActorController extends AbstractController {
 					savedFile = profileForm.getUserImage().getBytes();
 					actor.setPicture(savedFile);
 
-				} else
-					actor.setPicture(null);
+				}
 
 				this.actorService.save(actor);
 				result = new ModelAndView("redirect:display.do");
