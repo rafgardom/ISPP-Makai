@@ -156,8 +156,9 @@ public class NotificationService {
 		customer = request.getCustomer();
 		actors.add(customer);
 		notification = this.create(actors);
-		notification.setReason("Nueva oferta en su solicitud" + request.getTags());
-		notification.setDescription("A un entrenador le interesa su solicitud" + request.getTags());
+		notification.setReason("Nueva oferta en su solicitud: " + request.getTags());
+		notification.setDescription("A un entrenador le interesa su solicitud: " + request.getTags());
+		notification.setType(NotificationType.REQUEST);
 
 		this.save(notification);
 
@@ -173,8 +174,8 @@ public class NotificationService {
 		for (final Trainer t : trainers)
 			actors.add(t);
 		notification = this.create(actors);
-		notification.setReason("Nueva solicitud con su misma categoría" + request.getCategory());
-		notification.setDescription("Podría interesarle crear una oferta a dicha solicitud" + request.getTags());
+		notification.setReason("Nueva solicitud con su misma categoría: " + request.getCategory());
+		notification.setDescription("Podría interesarle crear una oferta a dicha solicitud: " + request.getTags());
 		notification.setType(NotificationType.REQUEST);
 
 		this.save(notification);

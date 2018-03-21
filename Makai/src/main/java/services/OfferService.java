@@ -22,14 +22,17 @@ public class OfferService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private OfferRepository	offerRepository;
+	private OfferRepository		offerRepository;
 
 	@Autowired
-	private RequestService	requestService;
+	private RequestService		requestService;
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
-	private TrainerService	trainerService;
+	private TrainerService		trainerService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors------------------------------------------------------------
@@ -106,6 +109,9 @@ public class OfferService {
 		Assert.isTrue(offer.getTrainer().getId() == principal.getId());
 
 		Assert.isTrue(!offer.getIsAccepted());
+
+		if (offer.getId() == 0)
+			this.notificationService.createNotificationForRequestWithOffer(offer.getRequest());
 
 		result = this.offerRepository.save(offer);
 
