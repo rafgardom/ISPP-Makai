@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
 import forms.ProfileForm;
@@ -40,17 +40,10 @@ public class ProfileActorController extends AbstractController {
 	public ModelAndView display() {
 		ModelAndView result;
 		Actor actor;
-		byte[] base64;
-		StringBuilder imageString;
 		String image;
 
 		actor = this.actorService.findByPrincipal();
-
-		base64 = Base64.encode(actor.getPicture());
-		imageString = new StringBuilder();
-		imageString.append("data:image/png;base64,");
-		imageString.append(new String(base64));
-		image = imageString.toString();
+		image = Utilities.showImage(actor.getPicture());
 
 		result = new ModelAndView("profile/display");
 		result.addObject("actor", actor);
