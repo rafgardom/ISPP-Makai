@@ -25,4 +25,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select o.request from Offer o where o.isAccepted=true")
 	Collection<Request> findRequestsAccepted();
 
+	@Query("select r.request from Receipt r where r.isPaid = false and r.request.id=?1")
+	Request findRequestAcceptedPendingReceipts(int request);
+
 }
