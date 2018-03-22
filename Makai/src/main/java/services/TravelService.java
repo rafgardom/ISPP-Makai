@@ -2,6 +2,7 @@
 package services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -16,6 +17,8 @@ import security.Authority;
 import domain.Actor;
 import domain.Coordinates;
 import domain.Customer;
+import domain.Notification;
+import domain.NotificationType;
 import domain.Professional;
 import domain.Transporter;
 import domain.Travel;
@@ -135,6 +138,8 @@ public class TravelService {
 		Customer customer;
 		Professional professional;
 		Collection<Travel> travels;
+		Notification notification;
+		final Collection<Actor> actors = new ArrayList<Actor>();
 
 		actor = this.actorService.findByPrincipal();
 
@@ -144,13 +149,24 @@ public class TravelService {
 			travels.add(travel);
 			customer.setTravelPassengers(travels);
 			this.customerService.save(customer);
+
+			actors.add(customer);
+
 		} else if (this.actorService.checkAuthority(actor, Authority.PROFESSIONAL)) {
 			professional = this.professionalService.findByPrincipal();
 			travels = professional.getTravelPassengers();
 			travels.add(travel);
 			professional.setTravelPassengers(travels);
 			this.professionalService.save(professional);
+
+			actors.add(professional);
 		}
+
+		notification = this.notificationService.create(actors);
+		notification.setReason("Nueva inscripción a su viaje");
+		notification.setDescription("Un usuario se ha apuntado a un viaje creado por usted");
+		notification.setType(NotificationType.TRAVEL);
+		this.notificationService.save(notification);
 
 	}
 	public Travel reconstruct(final TravelForm travelForm, final BindingResult binding) throws IOException {
