@@ -33,11 +33,11 @@ import forms.ProfileForm;
 @Transactional
 public class ActorService {
 
-	// Managed repository —---------------------------------------------------
+	// Managed repository ----------------------------------------------------
 	@Autowired
 	private ActorRepository			actorRepository;
 
-	// Supporting services —------------------------------------------------—
+	// Supporting services ---------------------------------------------------
 
 	@Autowired
 	private CustomerService			customerService;
@@ -63,7 +63,7 @@ public class ActorService {
 		super();
 	}
 
-	// Simple CRUD methods —------------------------------------------------—
+	// Simple CRUD methods ----------------------------------------------------
 	public Actor findOne(final int actorId) {
 		Actor result;
 
@@ -107,7 +107,7 @@ public class ActorService {
 		return actor;
 	}
 
-	// Other business methods —---------------------------------------------—
+	// Other business methods -----------------------------------------------
 
 	public Actor findByPrincipal() {
 		Actor result;
@@ -181,6 +181,14 @@ public class ActorService {
 			FieldError fieldError;
 			final String[] codes = {
 				"profile.register.picture.tooLong.error"
+			};
+			fieldError = new FieldError("profileForm", "userImage", profileForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+		if (!profileForm.getUserImage().getContentType().contains("image")) {
+			FieldError fieldError;
+			final String[] codes = {
+				"profile.picture.extension.error"
 			};
 			fieldError = new FieldError("profileForm", "userImage", profileForm.getUserImage(), false, codes, null, "");
 			binding.addError(fieldError);

@@ -183,6 +183,15 @@ public class AnimalService {
 			binding.addError(fieldError);
 		}
 
+		if (!animalForm.getAnimalImage().getContentType().contains("image")) {
+			FieldError fieldError;
+			final String[] codes = {
+				"animal.picture.extension.error"
+			};
+			fieldError = new FieldError("animalForm", "animalImage", animalForm.getAnimalImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
 		if (animalForm.getId() == 0)
 			result = this.create();
 		else

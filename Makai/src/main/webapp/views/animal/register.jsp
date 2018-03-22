@@ -13,7 +13,7 @@
 
 	<acme:textbox code="animal.name" path="name" mandatory="true"/>
 	<acme:textbox code="animal.chipNumber" path="chipNumber" mandatory="false"/>
-	<acme:textbox code="animal.age" path="age" mandatory="true"/>
+	<acme:input code="animal.age" path="age" type="number" min="0" mandatory="true" />
 	
 	<acme:selectNotEntity items="${sexs }" code="animal.sex" path="sex"/>
 	<br />
