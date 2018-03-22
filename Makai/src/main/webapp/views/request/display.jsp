@@ -32,39 +32,40 @@
 			<jstl:out value="${request.category}"  />
 		</li>
 	</ul>
-	
-	<fieldset>
-		<legend>
-			<b><spring:message code="request.animal" />:</b>
-		</legend>
-		<ul>
-			<li>
-				<b><spring:message code="request.animal.name" />:</b>
-				<jstl:out value="${request.animal.name}" />
-			</li>
+	<jstl:if test="${request.animal != null }">
+		<fieldset>
+			<legend>
+				<b><spring:message code="request.animal" />:</b>
+			</legend>
+			<ul>
+				<li>
+					<b><spring:message code="request.animal.name" />:</b>
+					<jstl:out value="${request.animal.name}" />
+				</li>
+				
+				<li>
+					<b><spring:message code="request.animal.chipNumber" />:</b>
+					<jstl:out value="${request.animal.chipNumber}" />
+				</li>
+				
+				<li>
+					<b><spring:message code="request.animal.age" />:</b>
+					<jstl:out value="${request.animal.age}" />
+				</li>
+				
+				<li>
+					<b><spring:message code="request.animal.sex" />:</b>
+					<jstl:out value="${request.animal.sex}" />
+				</li>
+				
+				<li>
+					<b><spring:message code="request.animal.picture" />:</b>
+					<img src="${request.animal.picture}" alt="<spring:message code='request.no.picture' />" width="200px" height="200px" >
+				</li>
 			
-			<li>
-				<b><spring:message code="request.animal.chipNumber" />:</b>
-				<jstl:out value="${request.animal.chipNumber}" />
-			</li>
-			
-			<li>
-				<b><spring:message code="request.animal.age" />:</b>
-				<jstl:out value="${request.animal.age}" />
-			</li>
-			
-			<li>
-				<b><spring:message code="request.animal.sex" />:</b>
-				<jstl:out value="${request.animal.sex}" />
-			</li>
-			
-			<li>
-				<b><spring:message code="request.animal.picture" />:</b>
-				<img src="${request.animal.picture}" alt="<spring:message code='request.no.picture' />" width="200px" height="200px" >
-			</li>
-		
-		</ul>
-	</fieldset>
+			</ul>
+		</fieldset>
+	</jstl:if>
 	
 	
 	<ul>
