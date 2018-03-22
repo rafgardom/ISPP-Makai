@@ -163,6 +163,10 @@ public class RequestService {
 		return this.requestRepository.findRequestsByCustomer(customer.getId());
 	}
 
+	public Request findRequestAcceptedPendingReceipts(final Request request) {
+		return this.requestRepository.findRequestAcceptedPendingReceipts(request.getId());
+	}
+
 	public Request reconstruct(final RequestForm requestForm, final BindingResult binding) throws IOException {
 
 		Assert.notNull(requestForm);
