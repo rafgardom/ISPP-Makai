@@ -20,7 +20,7 @@
 			<acme:link href="request/actor/display.do?requestId=${row.id}" code="request.display"/>
 			<security:authorize access="hasRole('CUSTOMER')">
 				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
-				<acme:cancel url="offer/customer/list.do?requestId=${row.id}" code="request.list.offer"/>
+				<acme:link href="offer/customer/list.do?requestId=${row.id}" code="request.list.offer"/>
 			</security:authorize>
 			<security:authorize access="hasRole('CUSTOMER')">
 				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
