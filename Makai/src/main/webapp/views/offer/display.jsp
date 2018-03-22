@@ -116,7 +116,7 @@
 			
 			<li>
 				<b><spring:message code="offer.animal.picture" />:</b>
-				<img src="${offer.animal.picture}" alt="<spring:message code='offer.no.picture' />" width="200px" height="200px" >
+				<img src="${animalImage}" alt="<spring:message code='offer.no.picture' />" width="200px" height="200px" >
 			</li>
 		
 		</ul>
