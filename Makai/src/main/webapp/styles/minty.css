@@ -26,7 +26,7 @@
   --white: #fff;
   --gray: #888;
   --gray-dark: #343a40;
-  --primary: #4F6962;
+  --primary: #78C2AD;
   --secondary: #F3969A;
   --success: #56CC9D;
   --info: #6CC3D5;
@@ -4436,7 +4436,6 @@ tbody.collapse.show {
 }
 
 .navbar-dark .navbar-brand {
-  font-size:25px;
   color: #fff;
 }
 
@@ -4445,8 +4444,7 @@ tbody.collapse.show {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  font-size:27px;
-  color: rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
@@ -6138,7 +6136,7 @@ button.close {
 }
 
 .bg-primary {
-  background-color: #4F6962 !important;
+  background-color: #78C2AD !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
