@@ -158,7 +158,7 @@ public class ProfessionalService {
 
 			}
 
-			if (!professionalForm.getUserName().contains(" ") && userNameValidator)
+			if (!professionalForm.getUserName().contains(" ") && userNameValidator && !professionalForm.getUserName().isEmpty())
 				result.getUserAccount().setUsername(professionalForm.getUserName());
 
 			if (professionalForm.getUserName().contains(" ")) {

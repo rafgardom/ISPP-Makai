@@ -157,7 +157,7 @@ public class CustomerService {
 
 			}
 
-			if (!customerForm.getUserName().contains(" ") && userNameValidator)
+			if (!customerForm.getUserName().contains(" ") && userNameValidator && !customerForm.getUserName().isEmpty())
 				result.getUserAccount().setUsername(customerForm.getUserName());
 
 			if (customerForm.getUserName().contains(" ")) {
