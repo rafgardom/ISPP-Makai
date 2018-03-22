@@ -9,11 +9,12 @@
  --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
-
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:useBean id="date" class="java.util.Date" />
 
 <hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b><br/>
+<i style="font-size:16px"><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i> 
