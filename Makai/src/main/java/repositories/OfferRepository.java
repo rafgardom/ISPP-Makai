@@ -17,4 +17,7 @@ public interface OfferRepository extends JpaRepository<Offer, Integer> {
 
 	@Query("select o from Offer o where o.isAccepted = false and o.request.id = ?1")
 	public Collection<Offer> findNonAcceptedOffers(int requestId);
+
+	@Query("select o from Offer o where o.request.id = ?1")
+	public Collection<Offer> findOfferByRequestId(int requestId);
 }

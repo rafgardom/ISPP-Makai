@@ -163,7 +163,7 @@ public class TrainerService {
 
 			}
 
-			if (!trainerForm.getUserName().contains(" ") && userNameValidator && trainerForm.getUserName().isEmpty())
+			if (!trainerForm.getUserName().contains(" ") && userNameValidator && !trainerForm.getUserName().isEmpty())
 				result.getUserAccount().setUsername(trainerForm.getUserName());
 
 			if (trainerForm.getUserName().contains(" ")) {

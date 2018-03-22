@@ -196,4 +196,8 @@ public class OfferService {
 
 		return result;
 	}
+
+	public Collection<Offer> findOfferByRequest(final Request request) {
+		return this.offerRepository.findOfferByRequestId(request.getId());
+	}
 }

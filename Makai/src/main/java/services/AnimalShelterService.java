@@ -153,7 +153,7 @@ public class AnimalShelterService {
 
 			}
 
-			if (!animalShelterForm.getUserName().contains(" ") && userNameValidator && animalShelterForm.getUserName().isEmpty())
+			if (!animalShelterForm.getUserName().contains(" ") && userNameValidator && !animalShelterForm.getUserName().isEmpty())
 				result.getUserAccount().setUsername(animalShelterForm.getUserName());
 
 			if (animalShelterForm.getUserName().contains(" ")) {

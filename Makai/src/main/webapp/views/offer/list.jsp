@@ -20,12 +20,14 @@
 	<display:column>
 		<div class="btn-group">
 			<acme:link href="offer/trainer/display.do?offerId=${row.id}" code="offer.display"/>
-			<jstl:if test="${row.isAccepted==false}">
-				<acme:link href="offer/trainer/edit.do?offerId=${row.id}" code="offer.edit"/>
-			</jstl:if>
-			<jstl:if test="${row.isAccepted==false}">
-				<acme:link href="offer/trainer/delete.do?offerId=${row.id}" code="offer.delete" type="danger"/>
-			</jstl:if>
+			<security:authorize access="hasRole('TRAINER')">
+				<jstl:if test="${row.isAccepted==false}">
+					<acme:link href="offer/trainer/edit.do?offerId=${row.id}" code="offer.edit"/>
+				</jstl:if>
+				<jstl:if test="${row.isAccepted==false}">
+					<acme:link href="offer/trainer/delete.do?offerId=${row.id}" code="offer.delete" type="danger"/>
+				</jstl:if>
+			</security:authorize>
 		</div>
 	</display:column>
 	
