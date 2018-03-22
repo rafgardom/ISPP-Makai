@@ -2,6 +2,7 @@
 package services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
 import repositories.OfferRepository;
+import domain.Customer;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
@@ -145,6 +147,22 @@ public class OfferService {
 
 	public Collection<Offer> findNonAcceptedOffers(final Request request) {
 		return this.offerRepository.findNonAcceptedOffers(request.getId());
+	}
+
+	public Collection<Offer> findAcceptedOffersByCustomer(final Customer customer) {
+		return this.offerRepository.findAcceptedOffersByCustomer(customer.getId());
+	}
+
+	public Collection<Offer> findAcceptedOffersPendingReceipts(final Customer customer) {
+		Collection<Offer> offers;
+		Collection<Offer> result;
+
+		result = new ArrayList<Offer>();
+		offers = this.offerRepository.findAcceptedOffersByCustomer(customer.getId());
+		for (final Offer o : offers)
+			if (this.requestService.findRequestAcceptedPendingReceipts(o.getRequest()) != null)
+				result.add(o);
+		return result;
 	}
 
 	//Erase all offers not accepted that are linked to a request which has already an accepted offer

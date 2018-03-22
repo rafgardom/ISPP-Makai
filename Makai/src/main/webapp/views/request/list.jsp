@@ -21,10 +21,19 @@
 			<security:authorize access="hasRole('CUSTOMER')">
 				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
 				<acme:link href="offer/customer/list.do?requestId=${row.id}" code="request.list.offer"/>
-			</security:authorize>
-			<security:authorize access="hasRole('CUSTOMER')">
-				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
-				<acme:cancel url="request/customer/delete.do?requestId=${row.id}" code="request.delete"/>
+				
+				<jstl:set var="show" value="${true}"/>
+				<jstl:if test="${!offersPendingReceipts.isEmpty()}">
+					<jstl:forEach var="offer" items="${offersPendingReceipts}">
+						<jstl:if test="${offer.request.id == row.id}">
+							<jstl:set var="show" value="${false}"/>
+						</jstl:if>
+					</jstl:forEach>
+				</jstl:if>
+				<jstl:if test="${show == true}">
+					<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
+					<acme:cancel url="request/customer/delete.do?requestId=${row.id}" code="request.delete"/>
+				</jstl:if>
 			</security:authorize>
 			<security:authorize access="hasRole('TRAINER')">
 				<acme:link href="offer/trainer/create.do?requestId=${row.id}" code="offer.create" type="success"/>
