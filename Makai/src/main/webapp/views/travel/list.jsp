@@ -18,8 +18,10 @@
 	<acme:column code="travel.humanSeats" property="humanSeats" />
 
 	<display:column>
-		<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register"/>
+	<div class="btn-group">
+		<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register" type="success"/>
 		<acme:link href="travel/display.do?travelId=${row.id}" code="travel.display"/>
+	</div>
 	</display:column>
 	
 </display:table>

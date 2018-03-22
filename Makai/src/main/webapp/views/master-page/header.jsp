@@ -31,12 +31,6 @@
 		<ul class="navbar-nav mr-auto">
 
 			<security:authorize access="hasAnyRole('CUSTOMER')">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<spring:message code="master.page.customer" /></a>
-					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-						<a class="dropdown-item" href="#">EMPTY</a>
-					</div></li>
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
