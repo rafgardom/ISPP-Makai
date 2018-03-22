@@ -74,7 +74,7 @@ tr.odd {
 }
 
 tr.tableRowEven,tr.even {
-	background-color: #fea
+	background-color: #F5F5F5
 }
 
 tbody tr:hover {

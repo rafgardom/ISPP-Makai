@@ -30,8 +30,8 @@
 		
 	<fieldset>
 		<acme:textarea code="request.description" path="description" mandatory="true" />
-		<acme:input code="request.tags" path="tags" />
-		<acme:selectNotEntity code="request.category" path="category" items="${categories}" />
+		<acme:input code="request.tags" path="tags" mandatory="true" />
+		<acme:selectNotEntity code="request.category" path="category" items="${categories}" mandatory="true" />
 		<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
 	</fieldset>
 	<br/>
