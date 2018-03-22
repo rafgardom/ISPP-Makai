@@ -15,11 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AnimalService;
 import services.CustomerService;
+import services.OfferService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Animal;
 import domain.Category;
 import domain.Customer;
+import domain.Offer;
 import domain.Request;
 import forms.RequestForm;
 
@@ -37,6 +39,9 @@ public class RequestCustomerController extends AbstractController {
 	@Autowired
 	private AnimalService	animalService;
 
+	@Autowired
+	private OfferService	offerService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -51,14 +56,17 @@ public class RequestCustomerController extends AbstractController {
 		ModelAndView result;
 		Collection<Request> requests;
 		Customer customer;
+		Collection<Offer> offersPendingReceipts;
 
 		customer = this.customerService.findByPrincipal();
 
 		requests = this.requestService.findRequestByCustomer(customer);
+		offersPendingReceipts = this.offerService.findAcceptedOffersPendingReceipts(customer);
 
 		result = new ModelAndView("request/myList");
 		result.addObject("requestURI", "request/myList.do");
 		result.addObject("requests", requests);
+		result.addObject("offersPendingReceipts", offersPendingReceipts);
 
 		return result;
 	}
