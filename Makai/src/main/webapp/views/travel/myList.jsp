@@ -17,11 +17,11 @@
 	<acme:column code="travel.animalSeats" property="animalSeats" />
 	<acme:column code="travel.humanSeats" property="humanSeats" />
 	
-		<display:column>
-			<acme:link href="travel/display.do?travelId=${row.id}" code="travel.display"/>
-			<acme:link href="travel/delete.do?travelId=${row.id}" code="travel.delete" type="danger"/>
-			<acme:link href="travel/edit.do?travelId=${row.id}" code="travel.edit"/>
-		</display:column>
+	<display:column>
+		<acme:link href="travel/display.do?travelId=${row.id}" code="travel.display"/>
+		<acme:delete href="travel/delete.do?travelId=${row.id}" code="travel.delete" large="true"/>
+		<acme:link href="travel/edit.do?travelId=${row.id}" code="travel.edit"/>
+	</display:column>
 	
 		
 </display:table>
