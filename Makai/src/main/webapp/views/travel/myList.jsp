@@ -19,7 +19,7 @@
 	
 		<display:column>
 			<acme:link href="travel/display.do?travelId=${row.id}" code="travel.display"/>
-			<acme:cancel url="travel/delete.do?travelId=${row.id}" code="travel.delete"/>
+			<acme:link href="travel/delete.do?travelId=${row.id}" code="travel.delete" type="danger"/>
 			<acme:link href="travel/edit.do?travelId=${row.id}" code="travel.edit"/>
 		</display:column>
 	
@@ -27,3 +27,4 @@
 </display:table>
 	<acme:link href="travel/create.do" code="travel.create"/>
 </security:authorize>
+

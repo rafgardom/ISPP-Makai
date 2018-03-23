@@ -25,7 +25,7 @@
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">
 			<acme:link href="vehicle/edit.do?vehicleId=${row.id}" code="travel.edit"/>
-			<acme:link href="vehicle/delete.do?vehicleId=${row.id}" code="travel.delete" type="danger"/>
+			<acme:delete href="vehicle/delete.do?vehicleId=${row.id}" code="travel.delete" large="true"/>
 		</div>
 	</display:column>
 	

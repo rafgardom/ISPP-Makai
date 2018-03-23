@@ -99,7 +99,7 @@
 
 			<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">
 
-				<%-- <li class="nav-item dropdown"><a
+				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
 							code="master.page.vehicle" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start"
@@ -108,7 +108,8 @@
 								code="master.page.vehicle.register" /></a> <a class="dropdown-item"
 							href="vehicle/list.do"><spring:message
 								code="master.page.vehicle.list" /></a>
-					</div></li> --%>
+					</div>
+				</li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('ADMIN')">

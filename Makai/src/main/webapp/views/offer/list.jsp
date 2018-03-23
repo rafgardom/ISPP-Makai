@@ -25,7 +25,7 @@
 					<acme:link href="offer/trainer/edit.do?offerId=${row.id}" code="offer.edit"/>
 				</jstl:if>
 				<jstl:if test="${row.isAccepted==false}">
-					<acme:link href="offer/trainer/delete.do?offerId=${row.id}" code="offer.delete" type="danger"/>
+					<acme:delete href="offer/trainer/delete.do?offerId=${row.id}" code="offer.delete" large="true"/>
 				</jstl:if>
 			</security:authorize>
 		</div>

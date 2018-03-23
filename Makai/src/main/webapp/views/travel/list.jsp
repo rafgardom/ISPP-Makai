@@ -26,5 +26,5 @@
 	
 </display:table>
 
-	<acme:link href="travel/create.do" code="travel.create"/>
+	<acme:link href="travel/create.do" code="travel.create" type="success"/>
 </security:authorize>
