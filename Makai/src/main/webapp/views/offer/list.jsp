@@ -22,10 +22,8 @@
 			<acme:link href="offer/trainer/display.do?offerId=${row.id}" code="offer.display"/>
 			<security:authorize access="hasRole('TRAINER')">
 				<jstl:if test="${row.isAccepted==false}">
-					<acme:link href="offer/trainer/edit.do?offerId=${row.id}" code="offer.edit"/>
-				</jstl:if>
-				<jstl:if test="${row.isAccepted==false}">
-					<acme:delete href="offer/trainer/delete.do?offerId=${row.id}" code="offer.delete" large="true"/>
+					<acme:link href="offer/trainer/edit.do?offerId=${row.id}" code="offer.edit" type="warning"/>
+					<acme:delete href="offer/trainer/delete.do?offerId=${row.id}" code="offer.delete"/>
 				</jstl:if>
 			</security:authorize>
 		</div>

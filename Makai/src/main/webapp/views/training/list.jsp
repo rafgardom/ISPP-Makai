@@ -37,8 +37,8 @@
 		<display:column>
 			<div class="btn-group" data-toggle="buttons">
 				<acme:link href="training/trainer/display.do?trainingId=${row.id}" code="training.display"/>
-				<acme:link href="training/trainer/edit.do?trainingId=${row.id}" code="training.edit"/>
-				<acme:delete href="training/trainer/delete.do?trainingId=${row.id}" code="training.delete" large="true"/>
+				<acme:link href="training/trainer/edit.do?trainingId=${row.id}" code="training.edit" type="warning"/>
+				<acme:delete href="training/trainer/delete.do?trainingId=${row.id}" code="training.delete"/>
 			</div>
 		</display:column>
 	</security:authorize>
@@ -46,5 +46,5 @@
 </display:table>
 
 <security:authorize access="hasRole('TRAINER')">
-	<acme:link href="training/trainer/create.do" code="training.create"/>
+	<acme:link href="training/trainer/create.do" code="training.create" type="success"/>
 </security:authorize>

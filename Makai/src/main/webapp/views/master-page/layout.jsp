@@ -30,8 +30,8 @@
 
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
-<script type="text/javascript" src="scripts/jmenu.js"></script>
 <script type="text/javascript" src="scripts/bootstrap.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 <link rel="stylesheet" href="styles/common.css" type="text/css">
 <link rel="stylesheet" href="styles/minty.css" type="text/css"> 
@@ -41,10 +41,6 @@
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
 <script type="text/javascript">
-/* 	$(document).ready(function() {
-		$("#jMenu").jMenu();
-	}); */
-
 	function askSubmission(msg, form) {
 		if (confirm(msg))
 			form.submit();

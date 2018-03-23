@@ -35,5 +35,5 @@
 </display:table>
 </div>
 <security:authorize access="hasRole('ADMIN')">
-	<acme:link href="notification/admin/create.do" code="notification.create"/>
+	<acme:link href="notification/admin/create.do" code="notification.create" type="success"/>
 </security:authorize>

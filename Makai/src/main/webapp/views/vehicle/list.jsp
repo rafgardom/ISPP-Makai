@@ -24,14 +24,14 @@
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">
-			<acme:link href="vehicle/edit.do?vehicleId=${row.id}" code="travel.edit"/>
-			<acme:delete href="vehicle/delete.do?vehicleId=${row.id}" code="travel.delete" large="true"/>
+			<acme:link href="vehicle/edit.do?vehicleId=${row.id}" code="travel.edit" type="warning"/>
+			<acme:delete href="vehicle/delete.do?vehicleId=${row.id}" code="travel.delete"/>
 		</div>
 	</display:column>
 	
 </display:table>
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
-	<acme:link href="vehicle/register.do" code="vehicle.register"/>
+	<acme:link href="vehicle/register.do" code="vehicle.create" type="success"/>
 </security:authorize>
 
 

@@ -32,7 +32,7 @@
 				</jstl:if>
 				<jstl:if test="${show == true}">
 					<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
-					<acme:delete href="request/customer/delete.do?requestId=${row.id}" code="request.delete" large="true"/>
+					<acme:delete href="request/customer/delete.do?requestId=${row.id}" code="request.delete"/>
 				</jstl:if>
 			</security:authorize>
 			<security:authorize access="hasRole('TRAINER')">
@@ -43,5 +43,5 @@
 
 </display:table>
 <security:authorize access="hasRole('CUSTOMER')">
-	<acme:link href="request/customer/create.do" code="request.create"/>
+	<acme:link href="request/customer/create.do" code="request.create" type="success"/>
 </security:authorize>

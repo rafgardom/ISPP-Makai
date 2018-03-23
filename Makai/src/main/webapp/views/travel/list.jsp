@@ -10,8 +10,8 @@
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
 <display:table name="travels" id="row" requestURI="${requestURI}" class="displaytag">
 
-	<acme:column code="travel.city" property="origin.city" />
-	<acme:column code="travel.city" property="destination.city" />
+	<acme:column code="travel.origin" property="origin.city" />
+	<acme:column code="travel.destination" property="destination.city" />
 	<acme:column code="travel.startMoment" property="startMoment" />
 	<acme:column code="travel.endMoment" property="endMoment" />
 	<acme:column code="travel.animalSeats" property="animalSeats" />

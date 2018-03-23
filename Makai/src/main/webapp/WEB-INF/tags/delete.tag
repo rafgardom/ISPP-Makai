@@ -24,7 +24,7 @@
  
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="href" required="true" %>
-<%@ attribute name="large" required="false" %>
+<%@ attribute name="cuestion" required="false" %>
 
 
 <%-- Definition --%>
@@ -45,7 +45,7 @@
         </div>
         
         <!-- Modal body -->
-        <jstl:if test="${large != null}">
+        <jstl:if test="${cuestion == null}">
         	<div class="modal-body">
          		<spring:message code="delete.cuestion"/>
         	</div>

@@ -70,7 +70,9 @@
 						<a class="dropdown-item" href="travel/list.do">
 							<spring:message code="master.page.travel.list" /></a>
 						<a class="dropdown-item" href="travel/myList.do">
-							<spring:message code="master.page.travel.myList" /></a>
+							<spring:message code="master.page.travel.myList" /></a> 
+						<a class="dropdown-item" href="vehicle/list.do"><spring:message
+								code="master.page.vehicle.list" /></a>
 					</div>
 				</li>
 			</security:authorize>
@@ -95,21 +97,6 @@
 				<li class="nav-item"><a class="nav-link"
 					href="request/trainer/list.do"><spring:message
 							code="master.page.requests" /> </a></li>
-			</security:authorize>
-
-			<security:authorize access="hasAnyRole('CUSTOMER,PROFESSIONAL')">
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
-							code="master.page.vehicle" /></a>
-					<div class="dropdown-menu" x-placement="bottom-start"
-						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-						<a class="dropdown-item" href="vehicle/register.do"><spring:message
-								code="master.page.vehicle.register" /></a> <a class="dropdown-item"
-							href="vehicle/list.do"><spring:message
-								code="master.page.vehicle.list" /></a>
-					</div>
-				</li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('ADMIN')">
