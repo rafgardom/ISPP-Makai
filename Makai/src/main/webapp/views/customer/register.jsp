@@ -28,72 +28,71 @@
 <form:form action="${RequestURI}" modelAttribute="customerForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 		
-		<legend>
-			<spring:message code="customer.personalDetails" />
-		</legend>
-		<br/>
-		<acme:textbox code="customer.name" path="name" mandatory="true" />
-		<acme:textbox code="customer.surname" path="surname" mandatory="true" />
-		<acme:textbox code="customer.phone" path="phone" mandatory="true" />
-		<acme:textbox code="customer.email" path="email" mandatory="true" />
-		<acme:textbox code="customer.nid" path="nid" mandatory="true" />
+	<br>
+	<div class="row">
+		<div class="col-md-5">
 
-		<legend>
-			<spring:message code="customer.coordinates" />
-		</legend>
-
-		<acme:textbox code="coordinates.country" path="coordinates.country"
-			mandatory="true" />
-
-		<acme:textbox code="coordinates.state" path="coordinates.state" />
-
-		<acme:textbox code="coordinates.province" path="coordinates.province" />
-
-		<acme:textbox code="coordinates.city" path="coordinates.city"
-			mandatory="true" />
+		<h3><spring:message code="profile.personalDetails" /></h3>
 		
-		<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code"
-			mandatory="true" />
-
+			<acme:textbox code="customer.name" path="name" mandatory="true" />
+			<acme:textbox code="customer.surname" path="surname" mandatory="true" />
+			<acme:textbox code="customer.phone" path="phone" mandatory="true" />
+			<acme:textbox code="customer.email" path="email" mandatory="true" />
+			<acme:textbox code="customer.nid" path="nid" mandatory="true" />
+		</div>
+		
+		<div class="offset-md-1 col-md-5">
+		<h3><spring:message code="customer.coordinates" /></h3>
 	
+			<acme:textbox code="coordinates.country" path="coordinates.country" mandatory="true" />
+			<acme:textbox code="coordinates.state" path="coordinates.state" />
+			<acme:textbox code="coordinates.province" path="coordinates.province" />
+			<acme:textbox code="coordinates.city" path="coordinates.city" mandatory="true" />
+			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
+		</div>
+
+		<div class="col-md-12">
+		<br/>
+			
+			<spring:message code="customer.picture"/>
+			<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
+			enctype="multipart/form-data" code="customer.picture"></form:input>
+			<br/>
+			<p><spring:message code="image.formats"/></p>
+		<br/>
+		</div>
+
+<br/><br/><br/><br/>
+
 	<security:authorize access="isAnonymous()">
-			<br />
-			<fieldset>
-				<legend>
-					<spring:message code="customer.userAccountDetails" />
-				</legend>
+		<div class="col-md-5">
+			
+				<h3><spring:message code="customer.userAccountDetails" /></h3>
 				<br />
-				<acme:textbox code="customer.username" path="username"
-					mandatory="true" />
-				<acme:password code="customer.password" path="password"
-					mandatory="true" />
-				<acme:password code="customer.repeatPassword" path="repeatPassword"
-					mandatory="true" />
-				<br/>
-				<br/>
-					<spring:message code="image.formats" var="formats" />
-					<spring:message code="customer.picture" var="picture" />
-					<jstl:out value="${picture}"/>
-					<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
-					enctype="multipart/form-data" code="customer.picture"></form:input>
-					<jstl:out value="${formats}"/>
-				<br/>
-				<br/>
-				<acme:checkbox code="customer.acceptCondition" path="acceptCondition"
-					mandatory="true" />
-			</fieldset>
+				<acme:textbox code="customer.username" path="username" mandatory="true" />
+				<acme:password code="customer.password" path="password" mandatory="true" />
+				<acme:password code="customer.repeatPassword" path="repeatPassword" mandatory="true" />
+		</div>
 	</security:authorize>
+	
+</div>
+	<br/>
+	<br/>
+	
+	<acme:checkbox code="customer.acceptCondition" path="acceptCondition" mandatory="true" />
 	<br/>
 	
 	<jstl:if test="${errorMessage != null}">
 		<spring:message code="${errorMessage}" var="error" />
-		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
+		<font size="3" color="red"><jstl:out value="${error}"></jstl:out></font>
 	</jstl:if>
+
+
 	<br/>
 	<br/>
 	
 		<acme:submit code="customer.register" name="save" />
 		<acme:cancel code="customer.cancel" url="" />
 	<br/>
-	
+
 </form:form>

@@ -44,20 +44,14 @@
 <%-- Definition --%>
 
 <spring:bind path="${path}">
-	<div style="padding-left:1cm">
 		<div class="form-group">
-			<div style="float:left">
 				<form:label path="${path}" cssClass="${status.error? 'error':''}">
 					<spring:message code="${code}" />
 					<jstl:if test="${mandatory == true}">
 						<a class="error">(*)</a>
 					</jstl:if>
 				</form:label>
-			</div>
-			<div>
-				&nbsp;&nbsp;<form:checkbox path="${path}"/>
-			</div>
+		&nbsp;&nbsp;<form:checkbox path="${path}"/>
 		</div>
 		<form:errors path="${path}" cssClass="error" />
-	</div>
 </spring:bind>

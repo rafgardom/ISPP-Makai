@@ -19,16 +19,28 @@
 
 <form:form action="j_spring_security_check" modelAttribute="credentials">
 
-	<acme:textbox code="security.username" path="username" mandatory="true"/>
-	
-	<acme:password code="security.password" path="password" mandatory="true"/>
-	
+
+<div class="row">
+	<div class="offset-md-3 col-md-6 offset-md-3">
+	<br>
 	<jstl:if test="${showError == true}">
-		<h6 class="alert alert-danger"> 
+		<h6 class="alert alert-dimissible alert-warning"> 
+			<button type="button" class="close" data-dismiss="alert">
+    			<span >&times;</span>
+  			</button>
  			<strong>Error:</strong> <spring:message code="security.login.failed" />
 		</h6>
 	</jstl:if>
 	
-	<acme:submit name=" " code="security.login"/>
+	</div>
+	<div class="offset-md-3 col-md-6 offset-md-3 ">
+		
+		<acme:textbox code="security.username" path="username" mandatory="true"/>
+		<acme:password code="security.password" path="password" mandatory="true"/>
 	
+		<acme:submit name=" " code="security.login"/>
+	
+	</div>
+</div>
+
 </form:form>

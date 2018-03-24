@@ -11,31 +11,39 @@
 	
 	<form:hidden path="id" />
 
-	<acme:textbox code="animal.name" path="name" mandatory="true"/>
-	<acme:textbox code="animal.chipNumber" path="chipNumber" mandatory="false"/>
-	<acme:input code="animal.age" path="age" type="number" min="0" mandatory="true" />
+
+<div class="row" >
+	<div class="col-md-5">
+			<acme:textbox code="animal.name" path="name" mandatory="true"/>
+			<acme:textbox code="animal.chipNumber" path="chipNumber" mandatory="false"/>
+			<acme:input code="animal.age" path="age" type="number" min="0" mandatory="true" />
 	
-	<acme:selectNotEntity items="${sexs }" code="animal.sex" path="sex" mandatory="true"/>
+			<acme:selectNotEntity items="${sexs }" code="animal.sex" path="sex" mandatory="true"/>
+	</div>
+	
+	<div class="offset-md-1 col-md-6">
+
+	<br />
+	<br />
+			<acme:select id="specie" items="${species }" itemLabel="type" code="animal.specie" path="specie" onchange="getBreeds();" mandatory="true" />
 	<br />
 	<br />
 	
-	<acme:select id="specie" items="${species }" itemLabel="type" code="animal.specie" path="specie" onchange="getBreeds();" mandatory="true" />
-	
+			<jstl:set var="json" value="${jsonBreeds }" />
+			<acme:select id="breed" items="${breeds }" itemLabel="breed" code="animal.breed" path="breeds" mandatory="true"/>
 	<br />
 	<br />
 	
-	<jstl:set var="json" value="${jsonBreeds }" />
-	<acme:select id="breed" items="${breeds }" itemLabel="breed" code="animal.breed" path="breeds" mandatory="true"/>
-	<br />
-	<br />
-	
+	</div>
+</div>
 
 	<spring:message code="animal.picture" /><strong>(*)</strong>
 	<form:input class="form-control-file" path="animalImage" type="file" />
 	<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
 	<form:errors path="animalImage" cssClass="error" />
 	<br />
-	
+
+
 	<jstl:if test="${errorMessage != null}">
 		<spring:message code="${errorMessage}" var="error" />
 		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>

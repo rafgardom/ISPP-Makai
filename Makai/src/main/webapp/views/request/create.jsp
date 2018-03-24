@@ -27,14 +27,22 @@
 
 <form:form action="${RequestURI}" modelAttribute="requestForm" enctype="multipart/form-data">
 	<form:hidden path="id" />
+	
+	
+	
+	<div class="row">	
+		<div class="col-md-7">		
+					<acme:textarea code="request.description" path="description" mandatory="true" rows="15" />
+		</div>
+		<div class="col-md-5">
+					
+					<acme:textarea code="request.tags" path="tags" mandatory="true" />
+					<acme:selectNotEntity code="request.category" path="category" items="${categories}" mandatory="true" />
+					<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
 		
-	<fieldset>
-		<acme:textarea code="request.description" path="description" mandatory="true" />
-		<acme:input code="request.tags" path="tags" mandatory="true" />
-		<acme:selectNotEntity code="request.category" path="category" items="${categories}" mandatory="true" />
-		<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
-	</fieldset>
-	<br/>
+		</div>	
+
+	</div>
 	
 	<jstl:if test="${errorMessage != null}">
 		<spring:message code="${errorMessage}" var="error" />

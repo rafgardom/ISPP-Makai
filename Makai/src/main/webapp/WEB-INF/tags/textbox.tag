@@ -44,7 +44,7 @@
 		<form:label path="${path}">
 			<spring:message code="${code}" />:
 			<jstl:if test="${mandatory == true}">
-				<strong>(*)</strong>
+				<img src="images/asterisk.svg"	width="17"/> <!-- <strong>(*)</strong> -->
 			</jstl:if>
 		</form:label>
 		<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" />	

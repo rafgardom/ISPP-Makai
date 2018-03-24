@@ -44,6 +44,6 @@
 				<strong>(*)</strong>
 		</jstl:if>
 	</form:label>
-	<form:textarea path="${path}" readonly="${readonly}" class="form-control" />
+	<form:textarea path="${path}" readonly="${readonly}" class="form-control" rows="${rows}"/>
 	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 </div>

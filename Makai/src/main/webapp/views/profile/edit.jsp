@@ -26,58 +26,66 @@
 </jstl:if>
 
 <form:form action="${RequestURI}" modelAttribute="profileForm" enctype="multipart/form-data">
-	<fieldset>
-		<legend>
-			<spring:message code="profile.personalDetails" />
-		</legend>
-		<br />
-		<acme:textbox code="profile.name" path="name" mandatory="true" />
-		
-		<security:authorize access="hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')">
-			<acme:textbox code="profile.surname" path="surname" mandatory="true" />
-			<acme:textbox code="profile.nid" path="nid" mandatory="true" />
+	
+	<br>
+	<div class="row">
+		<div class="col-md-5">
+
+			<h3><spring:message code="profile.personalDetails" /></h3>
 			
-		</security:authorize>
-
-		<acme:textbox code="profile.phone" path="phone" mandatory="true" />
-		<acme:textbox code="profile.email" path="email" mandatory="true" />
-
-		<form:input path="userImage" type="file" />
-		<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
-		<form:errors path="userImage" cssClass="error" />
-
-	</fieldset>
-	<br />
-	<fieldset>
-		<legend>
-			<spring:message code="profile.coordinates" />
-		</legend>
-		<br />
-		<acme:textbox code="coordinates.country" path="coordinates.country"
-			mandatory="true" />
-		<acme:textbox code="coordinates.state" path="coordinates.state" />
-		<acme:textbox code="coordinates.province" path="coordinates.province" />
-		<acme:textbox code="coordinates.city" path="coordinates.city"
-			mandatory="true" />
-		<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code"
-			mandatory="true" />
-	</fieldset>
-	<br/>
+			<br />
+			
+			<acme:textbox code="profile.name" path="name" mandatory="true" />
+			
+			<security:authorize access="hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')">
+				<acme:textbox code="profile.surname" path="surname" mandatory="true" />
+				<acme:textbox code="profile.nid" path="nid" mandatory="true" />
+				
+			</security:authorize>
 	
-	<h6 class="alert alert-info col-sm-7"><spring:message code="profile.editPassword"/><br> 
- 		<strong><input type="radio" id="radioPasswordY" name="answerPw" onclick="editPasswordYes()" /><spring:message code="profile.Yes"/>
-		<input type="radio" id="radioPasswordN" name="answerPw" onclick="editPasswordNo()" checked="checked" /><spring:message code="profile.No"/></strong>
-	</h6>
-	<fieldset id="fieldsetPassword" disabled>
+			<acme:textbox code="profile.phone" path="phone" mandatory="true" />
+			<acme:textbox code="profile.email" path="email" mandatory="true" />
+	
+			<form:input path="userImage" type="file" />
+			<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
+			<form:errors path="userImage" cssClass="error" />
+		</div>
 		
-		<legend>
-			<spring:message code="profile.userAccountDetails" />
-		</legend>
-		<br />
-		<acme:password code="profile.password" path="password" />
-		<acme:password code="profile.repeatPassword" path="repeatPassword" />
-	</fieldset>
-	
+		<div class="offset-md-1 col-md-5">
+			
+			<h3><spring:message code="profile.coordinates" /></h3>
+			<br />
+			<acme:textbox code="coordinates.country" path="coordinates.country"
+				mandatory="true" />
+			<acme:textbox code="coordinates.state" path="coordinates.state" />
+			<acme:textbox code="coordinates.province" path="coordinates.province" />
+			<acme:textbox code="coordinates.city" path="coordinates.city"
+				mandatory="true" />
+			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code"
+				mandatory="true" />
+		
+		</div>	
+	</div>
+	<br>
+	<br>	
+		
+		<fieldset id="fieldsetPassword" disabled>
+			
+			
+			<h3>
+				<spring:message code="profile.userAccountDetails" />
+			</h3>
+			<br />
+			<acme:password code="profile.password" path="password" />
+			<acme:password code="profile.repeatPassword" path="repeatPassword" />
+		</fieldset>
+		<h6 class="alert alert-info col-lg-5"><spring:message code="profile.editPassword"/><br><br>
+			
+	 		<strong><input type="radio" id="radioPasswordY" name="answerPw" onclick="editPasswordYes()" /><spring:message code="profile.Yes"/>
+			<input type="radio" id="radioPasswordN" name="answerPw" onclick="editPasswordNo()" checked="checked" /><spring:message code="profile.No"/></strong>
+		
+		</h6>
+
 	<jstl:if test="${errorMessage != null}">
 		<spring:message code="${errorMessage}" var="error" />
 		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
