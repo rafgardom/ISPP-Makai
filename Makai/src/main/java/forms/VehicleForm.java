@@ -26,6 +26,7 @@ public class VehicleForm {
 	private String			color;
 	private String			license;
 	private MultipartFile	userImage;
+	private String			stringImage;
 
 
 	//Constructor
@@ -121,6 +122,14 @@ public class VehicleForm {
 
 	public void setUserImage(final MultipartFile userImage) {
 		this.userImage = userImage;
+	}
+
+	public String getStringImage() {
+		return this.stringImage;
+	}
+
+	public void setStringImage(final String stringImage) {
+		this.stringImage = stringImage;
 	}
 
 }

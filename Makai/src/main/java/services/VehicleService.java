@@ -14,6 +14,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
 
 import repositories.VehicleRepository;
+import utilities.Utilities;
 import domain.Transporter;
 import domain.Vehicle;
 import forms.VehicleForm;
@@ -111,8 +112,6 @@ public class VehicleService {
 	public Vehicle reconstruct(final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
 		Assert.notNull(vehicleForm);
 		Vehicle result;
-		//MultipartFile userImage;
-		//userImage = vehicleForm.getUserImage();
 		FieldError fieldError;
 
 		if (vehicleForm.getId() == 0 && vehicleForm.getUserImage().getSize() == 0) {
@@ -164,7 +163,15 @@ public class VehicleService {
 	}
 	public VehicleForm toFormObject(final Vehicle vehicle) {
 		Assert.notNull(vehicle);
+		final String image;
 		final VehicleForm result = new VehicleForm();
+		final byte[] picture;
+		picture = vehicle.getPicture();
+
+		if (picture != null)
+			image = Utilities.showImage(picture);
+		else
+			image = null;
 
 		result.setAccommodation(vehicle.getAccommodation());
 		result.setBrand(vehicle.getBrand());
@@ -176,10 +183,10 @@ public class VehicleService {
 		result.setPicture(vehicle.getPicture());
 		result.setSeats(vehicle.getSeats());
 		result.setYear(vehicle.getYear());
+		result.setStringImage(image);
 
 		return result;
 	}
-
 	public Collection<Vehicle> findVehicleByTransporterId(final int transporterId) {
 		return this.vehicleRepository.findVehicleByTransporterId(transporterId);
 	}

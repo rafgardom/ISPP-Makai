@@ -3,6 +3,7 @@ package controllers;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.validation.Valid;
 
@@ -156,11 +157,19 @@ public class VehicleController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Vehicle> vehicles;
+		Collection<VehicleForm> vehicles;
 		Transporter principal;
 
 		principal = this.transporterService.findByPrincipal();
-		vehicles = this.vehicleService.findVehicleByTransporterId(principal.getId());
+		vehicles = new HashSet<VehicleForm>();
+
+		for (final Vehicle a : this.vehicleService.findVehicleByTransporterId(principal.getId())) {
+			VehicleForm vehicleForm;
+
+			vehicleForm = this.vehicleService.toFormObject(a);
+
+			vehicles.add(vehicleForm);
+		}
 
 		result = new ModelAndView("vehicle/list");
 		result.addObject("vehicles", vehicles);
