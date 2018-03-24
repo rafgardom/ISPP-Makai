@@ -7,7 +7,6 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -18,6 +17,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import repositories.AnimalRepository;
 import security.Authority;
+import utilities.Utilities;
 import domain.Actor;
 import domain.Animal;
 import domain.AnimalShelter;
@@ -213,21 +213,15 @@ public class AnimalService {
 	}
 	public AnimalForm animalToFormObject(final Animal animal) {
 		final AnimalForm result;
-		byte[] base64;
-		StringBuilder imageString;
 		String image;
 
 		Assert.notNull(animal);
 
 		result = new AnimalForm();
 
-		if (animal.getPicture() != null) {
-			base64 = Base64.encode(animal.getPicture());
-			imageString = new StringBuilder();
-			imageString.append("data:image/png;base64,");
-			imageString.append(new String(base64));
-			image = imageString.toString();
-		} else
+		if (animal.getPicture() != null)
+			image = Utilities.showImage(animal.getPicture());
+		else
 			image = null;
 
 		result.setId(animal.getId());

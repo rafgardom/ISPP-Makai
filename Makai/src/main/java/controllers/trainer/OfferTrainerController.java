@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +18,7 @@ import services.AnimalService;
 import services.OfferService;
 import services.RequestService;
 import services.TrainerService;
+import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Animal;
@@ -78,18 +78,12 @@ public class OfferTrainerController extends AbstractController {
 		ModelAndView result;
 		Actor actor;
 		Offer offer;
-		final byte[] base64;
-		final StringBuilder imageString;
 		final String image;
 
 		actor = this.actorService.findByPrincipal();
 		offer = this.offerService.findOne(offerId);
 
-		base64 = Base64.encode(offer.getAnimal().getPicture());
-		imageString = new StringBuilder();
-		imageString.append("data:image/png;base64,");
-		imageString.append(new String(base64));
-		image = imageString.toString();
+		image = Utilities.showImage(offer.getAnimal().getPicture());
 
 		result = new ModelAndView("offer/display");
 		result.addObject("offer", offer);
