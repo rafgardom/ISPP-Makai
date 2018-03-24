@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.TransporterService;
 import services.VehicleService;
+import domain.Brand;
+import domain.CarType;
 import domain.Transporter;
 import domain.Vehicle;
 import forms.VehicleForm;
@@ -51,26 +53,34 @@ public class VehicleController extends AbstractController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
 	public ModelAndView register(@Valid final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
 		ModelAndView result;
-		final Vehicle vehicle;
-		boolean pictureTooLong = false;
+		Vehicle vehicle;
+		byte[] savedFile;
+
 		vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
-		if (binding.hasErrors())
-			result = this.createModelAndView(vehicleForm, "vehicle.register.error");
-		else
+
+		if (binding.hasErrors()) {
+			System.out.println(binding.toString());
+			result = this.createModelAndView(vehicleForm);
+
+		} else
 			try {
-				if (vehicleForm.getUserImage().getSize() > 5242880 || !vehicleForm.getUserImage().getContentType().contains("image")) {
-					pictureTooLong = true;
-					throw new IllegalArgumentException();
+
+				if (vehicleForm.getUserImage().getSize() > 0) {
+
+					savedFile = vehicleForm.getUserImage().getBytes();
+					vehicle.setPicture(savedFile);
 				}
-				this.vehicleService.save(vehicle);
-				result = new ModelAndView("redirect:/welcome/index.do");
+
+				vehicle = this.vehicleService.save(vehicle);
+				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				if (pictureTooLong == false)
-					result = this.createModelAndView(vehicleForm, "vehicleForm.register.error");
-				else
-					result = this.createModelAndView(vehicleForm, "vehicleForm.register.picture.error");
+				System.out.println(oops);
+
+				result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
+
 			}
+
 		return result;
 	}
 
@@ -167,10 +177,17 @@ public class VehicleController extends AbstractController {
 	}
 
 	protected ModelAndView createModelAndView(final VehicleForm vehicleForm, final String message) {
+		Brand[] brands;
+		brands = Brand.values();
+		CarType[] carTypes;
+		carTypes = CarType.values();
+
 		final ModelAndView result = new ModelAndView("vehicle/register");
 		result.addObject("vehicleForm", vehicleForm);
 		result.addObject("RequestURI", "vehicle/register.do");
 		result.addObject("errorMessage", message);
+		result.addObject("brands", brands);
+		result.addObject("carTypes", carTypes);
 
 		return result;
 	}

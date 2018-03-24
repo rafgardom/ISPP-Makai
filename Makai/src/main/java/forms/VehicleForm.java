@@ -43,7 +43,6 @@ public class VehicleForm {
 		this.id = id;
 	}
 
-	@NotBlank
 	public Brand getBrand() {
 		return this.brand;
 	}

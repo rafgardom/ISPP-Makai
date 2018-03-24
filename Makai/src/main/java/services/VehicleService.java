@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
-import org.springframework.web.multipart.MultipartFile;
 
 import repositories.VehicleRepository;
 import domain.Transporter;
@@ -112,39 +111,57 @@ public class VehicleService {
 	public Vehicle reconstruct(final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
 		Assert.notNull(vehicleForm);
 		Vehicle result;
+		//MultipartFile userImage;
+		//userImage = vehicleForm.getUserImage();
+		FieldError fieldError;
+
+		if (vehicleForm.getId() == 0 && vehicleForm.getUserImage().getSize() == 0) {
+			final String[] codes = {
+				"vehicle.picture.register.error"
+			};
+			fieldError = new FieldError("vehicleForm", "userImage", vehicleForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+
+		} else if (vehicleForm.getUserImage().getSize() > 5242880) {
+
+			final String[] codes = {
+				"vehicle.picture.register.error"
+			};
+			fieldError = new FieldError("vehicleForm", "userImage", vehicleForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
+		if (!vehicleForm.getUserImage().getContentType().contains("image")) {
+
+			final String[] codes = {
+				"vehicle.picture.register.error"
+			};
+			fieldError = new FieldError("vehicleForm", "userImage", vehicleForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
 
 		if (vehicleForm.getId() == 0)
 			result = this.create();
 		else
 			result = this.findOne(vehicleForm.getId());
 
-		result.setAccommodation(vehicleForm.getAccommodation());
 		result.setBrand(vehicleForm.getBrand());
-		result.setCarType(vehicleForm.getCarType());
-		result.setColor(vehicleForm.getColor());
-		result.setDescription(vehicleForm.getDescription());
-		result.setId(vehicleForm.getId());
-		result.setLicense(vehicleForm.getLicense());
 		result.setSeats(vehicleForm.getSeats());
+		result.setCarType(vehicleForm.getCarType());
+		result.setAccommodation(vehicleForm.getAccommodation());
 		result.setYear(vehicleForm.getYear());
+		result.setDescription(vehicleForm.getDescription());
+		result.setColor(vehicleForm.getColor());
+		result.setLicense(vehicleForm.getLicense());
+		result.setId(vehicleForm.getId());
 
-		final MultipartFile userImage = vehicleForm.getUserImage();
-		result.setPicture(userImage.getBytes());
-
-		if (result.getPicture().length == 0) {
-			FieldError fieldError;
-			final String[] codes = {
-				"customer.register.picture.empty.error"
-			};
-			fieldError = new FieldError("vehicleForm", "userImage", vehicleForm.getUserImage(), false, codes, null, "");
-			binding.addError(fieldError);
-		}
+		if (vehicleForm.getPicture() != null)
+			result.setPicture(vehicleForm.getPicture());
 
 		this.validator.validate(result, binding);
 
 		return result;
 	}
-
 	public VehicleForm toFormObject(final Vehicle vehicle) {
 		Assert.notNull(vehicle);
 		final VehicleForm result = new VehicleForm();
