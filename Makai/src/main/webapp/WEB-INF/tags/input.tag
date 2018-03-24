@@ -44,9 +44,9 @@
 
 <div>
 	<form:label path="${path}">
-		<spring:message code="${code}" />:
+		<spring:message code="${code}" />
 		<jstl:if test="${mandatory == true}">
-				<strong>(*)</strong>
+			<img src="images/asterisk.png"	width="16"/> 
 		</jstl:if>
 	</form:label>
 	<form:input class="form-control" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" />

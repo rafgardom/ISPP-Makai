@@ -37,9 +37,9 @@
 <spring:bind path="${path}">
 	<div class="form-group ${status.error? 'has-error':''}">
 		<form:label path="${path}">
-			<spring:message code="${code}" />:
+			<spring:message code="${code}" />
 			<jstl:if test="${mandatory == true}">
-				<strong>(*)</strong>
+				<img src="images/asterisk.png"	width="16"/>
 			</jstl:if>
 		</form:label>
 		<form:password path="${path}" class="form-control" placeholder="${placeholder}" />

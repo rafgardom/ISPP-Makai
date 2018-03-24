@@ -43,7 +43,7 @@
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 		<jstl:if test="${mandatory == true}">
-				<strong>(*)</strong>
+					<img src="images/asterisk.png"	width="16"/> 
 		</jstl:if>
 	</form:label>	
 	<form:select class="form-control" id="${id}" path="${path}">

@@ -42,9 +42,9 @@
 <spring:bind path="${path}">
 	<div class="form-group ${status.error? 'has-error':''}">
 		<form:label path="${path}">
-			<spring:message code="${code}" />:
+			<spring:message code="${code}" />
 			<jstl:if test="${mandatory == true}">
-				<img src="images/asterisk.svg"	width="17"/> <!-- <strong>(*)</strong> -->
+				<img src="images/asterisk.png"	width="16"/> 
 			</jstl:if>
 		</form:label>
 		<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" />	
