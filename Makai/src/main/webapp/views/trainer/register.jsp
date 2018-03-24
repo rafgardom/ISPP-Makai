@@ -63,7 +63,7 @@
 					<spring:message code="trainer.userAccountDetails" />
 				</legend>
 				<br />
-				<acme:textbox code="trainer.username" path="userName"
+				<acme:textbox code="trainer.username" path="username"
 					mandatory="true" />
 				<acme:password code="trainer.password" path="password"
 					mandatory="true" />

@@ -131,13 +131,13 @@ public class AnimalShelterService {
 			if (accountValidator.passwordValidate(animalShelterForm.getPassword()) && !animalShelterForm.getPassword().toLowerCase().contains("ñ"))
 				passwordValidator = true;
 
-			if (accountValidator.userNameValidate(animalShelterForm.getUserName())) {
+			if (accountValidator.userNameValidate(animalShelterForm.getUsername())) {
 				userNameValidator = false;
 				FieldError fieldError;
 				final String[] codes = {
 					"animalShelter.userName.error"
 				};
-				fieldError = new FieldError("animalShelterForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				fieldError = new FieldError("animalShelterForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
 			if (animalShelterForm.getPassword().equals(animalShelterForm.getRepeatPassword()) && animalShelterForm.getPassword() != null && !animalShelterForm.getPassword().isEmpty() && !animalShelterForm.getPassword().contains(" ") && passwordValidator) {
@@ -153,15 +153,15 @@ public class AnimalShelterService {
 
 			}
 
-			if (!animalShelterForm.getUserName().contains(" ") && userNameValidator && !animalShelterForm.getUserName().isEmpty())
-				result.getUserAccount().setUsername(animalShelterForm.getUserName());
+			if (!animalShelterForm.getUsername().contains(" ") && userNameValidator && !animalShelterForm.getUsername().isEmpty())
+				result.getUserAccount().setUsername(animalShelterForm.getUsername());
 
-			if (animalShelterForm.getUserName().contains(" ")) {
+			if (animalShelterForm.getUsername().contains(" ")) {
 				FieldError fieldError;
 				final String[] codes = {
 					"animalShelter.username.error"
 				};
-				fieldError = new FieldError("animalShelterForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				fieldError = new FieldError("animalShelterForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
 

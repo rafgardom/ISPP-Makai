@@ -28,9 +28,16 @@ public class UserNamePasswordValidator {
 	}
 
 	public boolean userNameValidate(final String userName) {
+		boolean result = false;
+		for (final char i : userName.toCharArray()) {
+			final String check = Character.toString(i);
+			if (this.userNamePattern.matcher(check).matches()) {
+				result = true;
+				break;
+			}
+		}
 
-		this.userNameMatcher = this.userNamePattern.matcher(userName);
-		return this.userNameMatcher.matches();
+		return result;
 
 	}
 }

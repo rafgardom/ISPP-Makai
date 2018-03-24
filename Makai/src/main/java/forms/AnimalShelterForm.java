@@ -4,10 +4,15 @@ package forms;
 import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.web.multipart.MultipartFile;
 
+import security.UserAccount;
 import domain.Coordinates;
 
 public class AnimalShelterForm {
@@ -23,8 +28,9 @@ public class AnimalShelterForm {
 	private String			password;
 	private String			repeatPassword;
 	private boolean			acceptCondition;
-	private String			userName;
+	private String			username;
 	private MultipartFile	userImage;
+	private UserAccount		userAccount;
 
 
 	//Constructor
@@ -68,6 +74,7 @@ public class AnimalShelterForm {
 	}
 
 	@Valid
+	@NotNull
 	public Coordinates getCoordinates() {
 		return this.coordinates;
 	}
@@ -85,6 +92,8 @@ public class AnimalShelterForm {
 	}
 
 	@NotBlank
+	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPassword() {
 		return this.password;
 	}
@@ -94,6 +103,7 @@ public class AnimalShelterForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getRepeatPassword() {
 		return this.repeatPassword;
 	}
@@ -113,12 +123,14 @@ public class AnimalShelterForm {
 
 	@Column(unique = true)
 	@NotBlank
-	public String getUserName() {
-		return this.userName;
+	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setUserName(final String userName) {
-		this.userName = userName;
+	public void setUsername(final String username) {
+		this.username = username;
 	}
 
 	public MultipartFile getUserImage() {
@@ -127,6 +139,14 @@ public class AnimalShelterForm {
 
 	public void setUserImage(final MultipartFile userImage) {
 		this.userImage = userImage;
+	}
+
+	public UserAccount getUserAccount() {
+		return this.userAccount;
+	}
+
+	public void setUserAccount(final UserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 
 }

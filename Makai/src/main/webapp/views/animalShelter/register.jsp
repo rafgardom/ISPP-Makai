@@ -61,7 +61,7 @@
 					<spring:message code="animalShelter.userAccountDetails" />
 				</legend>
 				<br />
-				<acme:textbox code="animalShelter.username" path="userName"
+				<acme:textbox code="animalShelter.username" path="username"
 					mandatory="true" />
 				<acme:password code="animalShelter.password" path="password"
 					mandatory="true" />

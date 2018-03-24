@@ -141,13 +141,13 @@ public class TrainerService {
 			if (accountValidator.passwordValidate(trainerForm.getPassword()) && !trainerForm.getPassword().toLowerCase().contains("ñ"))
 				passwordValidator = true;
 
-			if (accountValidator.userNameValidate(trainerForm.getUserName())) {
+			if (accountValidator.userNameValidate(trainerForm.getUsername())) {
 				userNameValidator = false;
 				FieldError fieldError;
 				final String[] codes = {
-					"trainer.userName.error"
+					"trainer.username.error"
 				};
-				fieldError = new FieldError("trainerForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				fieldError = new FieldError("trainerForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
 			if (trainerForm.getPassword().equals(trainerForm.getRepeatPassword()) && trainerForm.getPassword() != null && !trainerForm.getPassword().isEmpty() && !trainerForm.getPassword().contains(" ") && passwordValidator) {
@@ -163,15 +163,15 @@ public class TrainerService {
 
 			}
 
-			if (!trainerForm.getUserName().contains(" ") && userNameValidator && !trainerForm.getUserName().isEmpty())
-				result.getUserAccount().setUsername(trainerForm.getUserName());
+			if (!trainerForm.getUsername().contains(" ") && userNameValidator && !trainerForm.getUsername().isEmpty())
+				result.getUserAccount().setUsername(trainerForm.getUsername());
 
-			if (trainerForm.getUserName().contains(" ")) {
+			if (trainerForm.getUsername().contains(" ")) {
 				FieldError fieldError;
 				final String[] codes = {
-					"trainer.username.error"
+					"trainer.userName.error"
 				};
-				fieldError = new FieldError("trainerForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				fieldError = new FieldError("trainerForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
 

@@ -136,15 +136,16 @@ public class ProfessionalService {
 			if (accountValidator.passwordValidate(professionalForm.getPassword()) && !professionalForm.getPassword().toLowerCase().contains("с"))
 				passwordValidator = true;
 
-			if (accountValidator.userNameValidate(professionalForm.getUserName())) {
+			if (accountValidator.userNameValidate(professionalForm.getUsername())) {
 				userNameValidator = false;
 				FieldError fieldError;
 				final String[] codes = {
 					"professional.userName.error"
 				};
-				fieldError = new FieldError("professionalForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				fieldError = new FieldError("professionalForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
+			accountValidator.userNameValidate("ссссссссссс");
 			if (professionalForm.getPassword().equals(professionalForm.getRepeatPassword()) && professionalForm.getPassword() != null && !professionalForm.getPassword().isEmpty() && !professionalForm.getPassword().contains(" ") && passwordValidator) {
 				password = this.actorService.hashPassword(professionalForm.getPassword());
 				result.getUserAccount().setPassword(password);
@@ -158,15 +159,23 @@ public class ProfessionalService {
 
 			}
 
-			if (!professionalForm.getUserName().contains(" ") && userNameValidator && !professionalForm.getUserName().isEmpty())
-				result.getUserAccount().setUsername(professionalForm.getUserName());
+			if (!professionalForm.getUsername().contains(" ") && userNameValidator && !professionalForm.getUsername().isEmpty())
+				result.getUserAccount().setUsername(professionalForm.getUsername());
 
-			if (professionalForm.getUserName().contains(" ")) {
+			if (professionalForm.getUsername().contains(" ")) {
 				FieldError fieldError;
 				final String[] codes = {
 					"professional.username.error"
 				};
-				fieldError = new FieldError("professionalForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				fieldError = new FieldError("professionalForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+			if (!userNameValidator) {
+				FieldError fieldError;
+				final String[] codes = {
+					"professional.username.patter.error"
+				};
+				fieldError = new FieldError("professionalForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
 

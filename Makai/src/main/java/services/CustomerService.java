@@ -135,13 +135,13 @@ public class CustomerService {
 			if (accountValidator.passwordValidate(customerForm.getPassword()) && !customerForm.getPassword().toLowerCase().contains("ñ"))
 				passwordValidator = true;
 
-			if (accountValidator.userNameValidate(customerForm.getUserName())) {
+			if (accountValidator.userNameValidate(customerForm.getUsername())) {
 				userNameValidator = false;
 				FieldError fieldError;
 				final String[] codes = {
 					"customer.userName.error"
 				};
-				fieldError = new FieldError("customerForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				fieldError = new FieldError("customerForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
 			if (customerForm.getPassword().equals(customerForm.getRepeatPassword()) && customerForm.getPassword() != null && !customerForm.getPassword().isEmpty() && !customerForm.getPassword().contains(" ") && passwordValidator) {
@@ -157,15 +157,15 @@ public class CustomerService {
 
 			}
 
-			if (!customerForm.getUserName().contains(" ") && userNameValidator && !customerForm.getUserName().isEmpty())
-				result.getUserAccount().setUsername(customerForm.getUserName());
+			if (!customerForm.getUsername().contains(" ") && userNameValidator && !customerForm.getUsername().isEmpty())
+				result.getUserAccount().setUsername(customerForm.getUsername());
 
-			if (customerForm.getUserName().contains(" ")) {
+			if (customerForm.getUsername().contains(" ")) {
 				FieldError fieldError;
 				final String[] codes = {
 					"customer.username.error"
 				};
-				fieldError = new FieldError("customerForm", "userName", result.getUserAccount().getUsername(), false, codes, null, "");
+				fieldError = new FieldError("customerForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
 
