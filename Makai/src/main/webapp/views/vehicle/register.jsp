@@ -26,20 +26,21 @@
 </jstl:if>
 
 <form:form action="${RequestURI}" modelAttribute="vehicleForm" enctype="multipart/form-data">
-		
+	<form:hidden path="id"/>
+	
 	<acme:selectNotEntity code="vehicle.brand" path="brand" items="${brands}" mandatory="true" />
-	<acme:textbox code="vehicle.seats" path="seats" mandatory="false" />
+	<acme:textbox code="vehicle.seats" path="seats" mandatory="true" />
 	<acme:selectNotEntity code="vehicle.carType" path="carType" items="${carTypes}" mandatory="true" />
 	<acme:textbox code="vehicle.accommodation" path="accommodation" mandatory="false" />
-	<acme:textbox code="vehicle.year" path="year" mandatory="false" />
+	<acme:textbox code="vehicle.year" path="year" mandatory="true" />
 	<acme:textbox code="vehicle.description" path="description" mandatory="true" />
 	<acme:textbox code="vehicle.color" path="color" mandatory="true" />
 	<acme:textbox code="vehicle.license" path="license" mandatory="true" />
 	
 	<spring:message code="vehicle.picture" /><strong>(*)</strong>
-	<form:input class="form-control-file" path="picture" type="file" />
+	<form:input class="form-control-file" path="userImage" type="file" />
 	<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
-	<form:errors path="picture" cssClass="error" />
+	<form:errors path="userImage" cssClass="error" />
 	
 	<jstl:if test="${errorMessage != null}">
 		<spring:message code="${errorMessage}" var="error" />

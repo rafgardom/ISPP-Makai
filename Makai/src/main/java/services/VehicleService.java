@@ -72,11 +72,11 @@ public class VehicleService {
 
 		result = new Vehicle();
 		result.setTransporter(principal);
+		result.setIsActived(true);
 
 		return result;
 	}
 
-	@SuppressWarnings("deprecation")
 	public Vehicle save(final Vehicle vehicle) {
 		Assert.notNull(vehicle);
 		Vehicle result;
@@ -89,7 +89,7 @@ public class VehicleService {
 
 		// Hacer comprobacion del año
 		today = Calendar.getInstance();
-		Assert.isTrue(today.getTime().getYear() >= vehicle.getYear());
+		Assert.isTrue(today.get(Calendar.YEAR) >= vehicle.getYear());
 
 		result = this.vehicleRepository.save(vehicle);
 
@@ -153,7 +153,7 @@ public class VehicleService {
 		result.setDescription(vehicleForm.getDescription());
 		result.setColor(vehicleForm.getColor());
 		result.setLicense(vehicleForm.getLicense());
-		result.setId(vehicleForm.getId());
+		//		result.setId(vehicleForm.getId());
 
 		if (vehicleForm.getPicture() != null)
 			result.setPicture(vehicleForm.getPicture());

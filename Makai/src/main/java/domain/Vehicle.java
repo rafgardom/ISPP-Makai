@@ -3,7 +3,9 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -98,6 +100,8 @@ public class Vehicle extends DomainEntity {
 		this.description = description;
 	}
 
+	@Lob
+	@Column(length = 16777215)
 	public byte[] getPicture() {
 		return this.picture;
 	}
