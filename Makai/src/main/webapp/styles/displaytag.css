@@ -10,7 +10,7 @@
  
 table {
 	border: 1px solid #666;
-	width: 95%;
+
 	margin: 20px 0 20px 0 !important;
 	display: block;
   	overflow-x: auto;
@@ -21,7 +21,7 @@ table {
 }
 
 th,td {
-	padding: 1rem !important;
+	padding: 0.5rem !important;
 	text-align: left;
 /* 	vertical-align: top; */
 }
