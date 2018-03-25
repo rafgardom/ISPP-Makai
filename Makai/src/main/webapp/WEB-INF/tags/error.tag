@@ -23,31 +23,22 @@
 <%-- Attributes --%> 
  
 <%@ attribute name="code" required="true" %>
-<%@ attribute name="url" required="true" %>
+<%@ attribute name="type" required="false" %>
+
+<jstl:if test="${type == null}">
+	<jstl:set var="type" value="warning" />
+</jstl:if>
+
 
 <%-- Definition --%>
 
-<button type="button" class="btn btn-danger" onclick="location='${url}'" >
-	<spring:message code="${code}" />
-</button>
+<!-- Type: primary secondary success info warning danger link -->
+
+<h6 class="alert alert-dimissible alert-${type}"> 
+	<button type="button" class="close" data-dismiss="alert">
+    		<span >&times;</span>
+  	</button>
+ 	<strong>Error:</strong> <spring:message code="${code}" />
+</h6>
 
 <%-- Notes --%>
-
-<%-- 
-
-	If you wish to use this custom tag, you need add the following 
-	script in your master page: 
-
-	<script type="text/javascript">
-		function relativeRedir(loc) {	
-			var b = document.getElementsByTagName('base');
-			if (b && b[0] && b[0].href) {
-	  			if (b[0].href.substr(b[0].href.length - 1) == '/' && loc.charAt(0) == '/')
-	    		loc = loc.substr(1);
-	  			loc = b[0].href + loc;
-			}
-			window.location.replace(loc);
-		}
-	</script>
-
---%>

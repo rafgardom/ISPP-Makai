@@ -24,12 +24,7 @@
 	<div class="offset-md-3 col-md-6 offset-md-3">
 	<br>
 	<jstl:if test="${showError == true}">
-		<h6 class="alert alert-dimissible alert-warning"> 
-			<button type="button" class="close" data-dismiss="alert">
-    			<span >&times;</span>
-  			</button>
- 			<strong>Error:</strong> <spring:message code="security.login.failed" />
-		</h6>
+		<acme:error code="security.login.failed"/>
 	</jstl:if>
 	
 	</div>

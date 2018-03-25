@@ -40,14 +40,13 @@
 			<security:authorize access="hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')">
 				<acme:textbox code="profile.surname" path="surname" mandatory="true" />
 				<acme:textbox code="profile.nid" path="nid" mandatory="true" />
-				
 			</security:authorize>
 	
 			<acme:textbox code="profile.phone" path="phone" mandatory="true" />
 			<acme:textbox code="profile.email" path="email" mandatory="true" />
 	
 			<form:input path="userImage" type="file" />
-			<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
+			<spring:message code="image.formats" var="formats" /><p><jstl:out value="${formats}"/></p><br>
 			<form:errors path="userImage" cssClass="error" />
 		</div>
 		
@@ -66,7 +65,6 @@
 		
 		</div>	
 	</div>
-	<br>
 	<br>	
 		
 		<fieldset id="fieldsetPassword" disabled>

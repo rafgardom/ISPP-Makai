@@ -28,12 +28,12 @@
 <form:form action="${RequestURI}" modelAttribute="offerForm" enctype="multipart/form-data">
 		<form:hidden path="id"/>
 		<form:hidden path="request"/>
-	<div class="row">
 		
+		<br>
+		<h3><spring:message code="offer.destination" /></h3>
+			
+	<div class="row">
 		<div class="col-md-5">
-			<br />
-			<h3><b><spring:message code="offer.destination" />:</b></h3>
-			<br />
 			<acme:textbox code="offer.coordinates.country" path="destination.country" mandatory="true" />
 			<acme:textbox code="offer.coordinates.state" path="destination.state" mandatory="false" />
 			<acme:textbox code="offer.coordinates.province" path="destination.province" mandatory="false" />
@@ -41,23 +41,31 @@
 			<acme:textbox code="offer.coordinates.zipCode" path="destination.zip_code" mandatory="true" />
 		</div>
 		<div class="offset-md-1 col-md-5">
+		<br>
 			<acme:textbox code="offer.startMoment" path="startMoment" mandatory="true" />
 			<acme:textbox code="offer.price" path="price" mandatory="true" />
-			<acme:textbox code="offer.comment" path="comment" mandatory="false" />
+			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="8"/>
 		</div>
-		<div class="col-md-5">
-			<h3><b><spring:message code="offer.duration" />:</b></h3>
+	</div>
+	<br>
+	<h3><spring:message code="offer.duration" /></h3>
+	<div class="row">
+		<div class="col-sm-2">
 			<acme:textbox code="offer.duration.year" path="duration.year" mandatory="false" />
 			<acme:textbox code="offer.duration.month" path="duration.month" mandatory="false" />
+		</div>
+		<div class="col-sm-2">
 			<acme:textbox code="offer.duration.week" path="duration.week" mandatory="false" />
 			<acme:textbox code="offer.duration.day" path="duration.day" mandatory="false" />
 		</div>
-		<div class="offset-md-1col-md-5">
+		
+		<div class="col-12">
 			<jstl:if test="${offerForm.request.animal==null}">
+				<br>
+				<h3><spring:message code="offer.animal" /></h3>
 				<acme:select items="${animals}" itemLabel="name" code="offer.animal" path="animal"/>
+				<br>
 			</jstl:if>
-			<br />
-			<br />
 			<jstl:if test="${offerForm.request.animal!=null}">
 				<form:hidden path="animal"/>
 			</jstl:if>

@@ -22,18 +22,11 @@
 	</div>
 	
 	<div class="offset-md-1 col-md-6">
-
-	<br />
-	<br />
 			<acme:select id="specie" items="${species }" itemLabel="type" code="animal.specie" path="specie" onchange="getBreeds();" mandatory="true" />
-	<br />
-	<br />
 	
 			<jstl:set var="json" value="${jsonBreeds }" />
-			<acme:select id="breed" items="${breeds }" itemLabel="breed" code="animal.breed" path="breeds" mandatory="true"/>
-	<br />
-	<br />
-	
+			<acme:select size="9" id="breed" items="${breeds }" itemLabel="breed" code="animal.breed" path="breeds" mandatory="true"/>
+
 	</div>
 </div>
 
@@ -48,8 +41,7 @@
 		<spring:message code="${errorMessage}" var="error" />
 		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
 	</jstl:if>
-	<br/>
-	<br/>
+
 	
 	<acme:submit name="save" code="animal.save" />
 	

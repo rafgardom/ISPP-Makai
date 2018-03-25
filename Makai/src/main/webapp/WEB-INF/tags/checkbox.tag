@@ -44,14 +44,15 @@
 <%-- Definition --%>
 
 <spring:bind path="${path}">
-		<div class="form-group">
-				<form:label path="${path}" cssClass="${status.error? 'error':''}">
-					<spring:message code="${code}" />
-					<jstl:if test="${mandatory == true}">
-						<a class="error">(*)</a>
-					</jstl:if>
-				</form:label>
-		&nbsp;&nbsp;<form:checkbox path="${path}"/>
+		<div class="form-check">
+		<jstl:if test="${mandatory == true}">
+			<img src="images/asterisk.png"	width="16"/> 
+		</jstl:if>
+		<form:label class="form-check-label" path="${path}">
+			<spring:message code="${code}" />
+		</form:label>
+		<form:checkbox path="${path}"/>
+		<form:errors path="${path}"  cssClass="alert alert-danger form-control" />
 		</div>
-		<form:errors path="${path}" cssClass="error" />
+		
 </spring:bind>

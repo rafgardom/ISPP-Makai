@@ -26,42 +26,53 @@
 </jstl:if>
 
 <form:form action="${RequestURI}" modelAttribute="travelForm" enctype="multipart/form-data">
+		<br />
+		<div class="row">
 		
-	<fieldset>
-		<br />
-		<p><b>
-			<spring:message code="travel.origin" />
-		</b></p>
-		<br />
-		<acme:textbox code="travel.country" path="countryOrigin" mandatory="true" />
-		<acme:textbox code="travel.state" path="stateOrigin" mandatory="false" />
-		<acme:textbox code="travel.province" path="provinceOrigin" mandatory="false" />
-		<acme:textbox code="travel.city" path="cityOrigin" mandatory="true" />
-		<acme:textbox code="travel.zipcode" path="zip_codeOrigin" mandatory="true" />
-		<br />
-		<br />
-		<p><b>
-			<spring:message code="travel.destination" />
-		</b></p>
-		<br />
-		<acme:textbox code="travel.country" path="countryDestination" mandatory="true" />
-		<acme:textbox code="travel.state" path="stateDestination" mandatory="false" />
-		<acme:textbox code="travel.province" path="provinceDestination" mandatory="false" />
-		<acme:textbox code="travel.city" path="cityDestination" mandatory="true" />
-		<acme:textbox code="travel.zipcode" path="zip_codeDestination" mandatory="true" />
-		<br />
-		<br />
-		<p><b>
-			<spring:message code="travel.details" />
-		</b></p>
-		<br />
-		<acme:textbox code="travel.startMoment" path="startMoment" mandatory="true" />
-		<acme:textbox code="travel.endMoment" path="endMoment" mandatory="true" />
-		<acme:textbox code="travel.animalSeats" path="animalSeats" mandatory="false" />
-		<acme:textbox code="travel.humanSeats" path="HumanSeats" mandatory="false" />
-		<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" />
+			<div class="col-md-5">
+				<h3><spring:message code="travel.origin" /></h3>
+				<br />
+				<acme:textbox code="travel.country" path="countryOrigin" mandatory="true" />
+				<acme:textbox code="travel.state" path="stateOrigin" mandatory="false" />
+				<acme:textbox code="travel.province" path="provinceOrigin" mandatory="false" />
+				<acme:textbox code="travel.city" path="cityOrigin" mandatory="true" />
+				<acme:textbox code="travel.zipcode" path="zip_codeOrigin" mandatory="true" />
+				
+			</div>
+			<div class="offset-md-1 col-md-5">
+				<h3><spring:message code="travel.destination" /></h3>
+				<br />
+				<acme:textbox code="travel.country" path="countryDestination" mandatory="true" />
+				<acme:textbox code="travel.state" path="stateDestination" mandatory="false" />
+				<acme:textbox code="travel.province" path="provinceDestination" mandatory="false" />
+				<acme:textbox code="travel.city" path="cityDestination" mandatory="true" />
+				<acme:textbox code="travel.zipcode" path="zip_codeDestination" mandatory="true" />
+			
+			</div>
+	</div>
+	<br>
+	<h3><spring:message code="travel.details" /></h3>
+	<div class="row">
 
-	</fieldset>
+			<div class="col-lg-2 col-sm-5 col-5">
+				<acme:textbox code="travel.animalSeats" path="animalSeats" mandatory="false" />
+				<acme:textbox code="travel.humanSeats" path="HumanSeats" mandatory="false" />
+			</div>
+			<div class="col-lg-3 col-sm-5 col-7">
+				<acme:textbox code="travel.startMoment" path="startMoment" mandatory="true" />
+				<acme:textbox code="travel.endMoment" path="endMoment" mandatory="true" />
+			</div>
+			<div class="col-md-7">
+				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" />
+			</div>
+	</div>
+	
+		
+		
+		
+		<br />
+		
+		
 	<br/>
 	
 	<security:authorize access="isAnonymous()">

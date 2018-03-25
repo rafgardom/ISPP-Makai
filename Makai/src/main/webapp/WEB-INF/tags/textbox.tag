@@ -25,6 +25,7 @@
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
 
+<%@ attribute name="style" required="false" %>
 <%@ attribute name="readonly" required="false" %>
 <%@ attribute name="mandatory" required="false" %>
 
@@ -37,10 +38,15 @@
 	<jstl:set var="mandatory" value="false" />
 </jstl:if>
 
+<jstl:if test="${style == null}">
+	<jstl:set var="style" value=" " />
+</jstl:if>
+
+
 <%-- Definition --%>
 
 <spring:bind path="${path}">
-	<div class="form-group ${status.error? 'has-error':''}">
+	<div class="form-group" style="${style}">
 		<form:label path="${path}">
 			<spring:message code="${code}" />
 			<jstl:if test="${mandatory == true}">

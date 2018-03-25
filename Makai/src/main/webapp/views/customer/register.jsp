@@ -29,11 +29,16 @@
 	<form:hidden path="id"/>
 		
 	<br>
+	<jstl:if test="${errorMessage != null}">
+		<spring:message code="${errorMessage}" var="error" />
+		<acme:error code="${errorMessage}"/>
+	</jstl:if>
+	
 	<div class="row">
 		<div class="col-md-5">
 
-		<h3><spring:message code="profile.personalDetails" /></h3>
-		
+			<h3><spring:message code="profile.personalDetails" /></h3>
+			
 			<acme:textbox code="customer.name" path="name" mandatory="true" />
 			<acme:textbox code="customer.surname" path="surname" mandatory="true" />
 			<acme:textbox code="customer.phone" path="phone" mandatory="true" />
@@ -42,7 +47,8 @@
 		</div>
 		
 		<div class="offset-md-1 col-md-5">
-		<h3><spring:message code="customer.coordinates" /></h3>
+			
+			<h3><spring:message code="customer.coordinates" /></h3>
 	
 			<acme:textbox code="coordinates.country" path="coordinates.country" mandatory="true" />
 			<acme:textbox code="coordinates.state" path="coordinates.state" />
@@ -75,24 +81,18 @@
 		</div>
 	</security:authorize>
 	
-</div>
-	<br/>
-	<br/>
+	<div class="offset-md-2 col-md-5">
+	<br/><br/><br/><br/><br/>
 	
 	<acme:checkbox code="customer.acceptCondition" path="acceptCondition" mandatory="true" />
-	<br/>
 	
-	<jstl:if test="${errorMessage != null}">
-		<spring:message code="${errorMessage}" var="error" />
-		<font size="3" color="red"><jstl:out value="${error}"></jstl:out></font>
-	</jstl:if>
+	</div>
 
-
-	<br/>
-	<br/>
-	
+</div>
+		<br/>
 		<acme:submit code="customer.register" name="save" />
 		<acme:cancel code="customer.cancel" url="" />
-	<br/>
+	
+
 
 </form:form>
