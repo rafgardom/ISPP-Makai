@@ -43,7 +43,7 @@
 		<div class="offset-md-1 col-md-5">
 		<br>
 			<acme:textbox code="offer.startMoment" path="startMoment" mandatory="true" />
-			<acme:textbox code="offer.price" path="price" mandatory="true" />
+			<acme:input code="offer.price" path="price" mandatory="true" textPrepend="&euro;"/>
 			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="8"/>
 		</div>
 	</div>

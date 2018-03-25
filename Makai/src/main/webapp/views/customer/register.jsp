@@ -30,7 +30,6 @@
 		
 	<br>
 	<jstl:if test="${errorMessage != null}">
-		<spring:message code="${errorMessage}" var="error" />
 		<acme:error code="${errorMessage}"/>
 	</jstl:if>
 	
@@ -81,11 +80,8 @@
 		</div>
 	</security:authorize>
 	
-	<div class="offset-md-2 col-md-5">
-	<br/><br/><br/><br/><br/>
-	
+	<div class=" col-md-12">
 	<acme:checkbox code="customer.acceptCondition" path="acceptCondition" mandatory="true" />
-	
 	</div>
 
 </div>

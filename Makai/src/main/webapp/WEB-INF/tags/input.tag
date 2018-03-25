@@ -31,10 +31,13 @@
 <%@ attribute name="min" required="false"%>
 <%@ attribute name="max" required="false"%>
 <%@ attribute name="mandatory" required="false" %>
+<%@ attribute name="textPrepend" required="false" %>
 
 <jstl:if test="${type == null}">
 	<jstl:set var="type" value="text" />
 </jstl:if>
+
+
 
 <%-- Definition --%>
 
@@ -49,6 +52,19 @@
 			<img src="images/asterisk.png"	width="16"/> 
 		</jstl:if>
 	</form:label>
+	
+	<jstl:if test="${textPrepend != null}">
+	<div class="input-group"><!-- NO BORRAR -->
+		<div class="input-group-prepend">
+			<span class="input-group-text "><b>${textPrepend}</b></span>
+		</div>
+	</jstl:if>
+	
+	
 	<form:input class="form-control" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" />
 	<form:errors cssClass="alert alert-danger form-control" path="${path}" />
-</div>
+	
+	</div>
+<jstl:if test="${textPrepend != null}">
+	</div><!-- NO BORRAR -->
+</jstl:if>

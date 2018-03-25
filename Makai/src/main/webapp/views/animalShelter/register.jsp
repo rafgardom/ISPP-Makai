@@ -27,7 +27,11 @@
 
 <form:form action="${RequestURI}" modelAttribute="animalShelterForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
-		
+	
+	<jstl:if test="${errorMessage != null}">
+		<acme:error code="${errorMessage}"/>
+	</jstl:if>
+	
 	<fieldset>
 		<legend>
 			<spring:message code="animalShelter.personalDetails" />
@@ -82,11 +86,6 @@
 			</fieldset>
 	</security:authorize>
 	<br/>
-	
-	<jstl:if test="${errorMessage != null}">
-		<spring:message code="${errorMessage}" var="error" />
-		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
-	</jstl:if>
 	<br/>
 	<br/>
 	

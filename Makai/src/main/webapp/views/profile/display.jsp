@@ -68,8 +68,7 @@
 
 	</ul>
 
-	<a href="profile/edit.do" class="btn btn-info"><spring:message
-			code="profile.edit" /></a>
+	<acme:link href="profile/edit.do" code="profile.edit" type="warning"/>
 
 </div>
 

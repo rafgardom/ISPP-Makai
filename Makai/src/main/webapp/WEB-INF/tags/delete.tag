@@ -29,7 +29,7 @@
 
 <%-- Definition --%>
 
-<button type="button" class="btn btn-danger rounded-right" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-danger rounded-right btn-lg" data-toggle="modal" data-target="#myModal">
     <spring:message code="${code}" />
 </button>
 

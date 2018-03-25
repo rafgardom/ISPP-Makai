@@ -52,7 +52,7 @@
 			<spring:message code="${code}" />
 		</form:label>
 		<form:checkbox path="${path}"/>
-		<form:errors path="${path}"  cssClass="alert alert-danger form-control" />
+		<form:errors path="${path}"  cssClass="alert alert-danger" />
 		</div>
 		
 </spring:bind>

@@ -38,7 +38,7 @@
 
 <!-- Type: primary secondary success info warning danger link -->
 
-<button type="button" class="btn btn-${type}" onclick="location='${href}'">
+<button type="button" class="btn btn-${type} btn-lg" onclick="location='${href}'">
 	<spring:message code="${code}" />
 </button>
 

@@ -28,11 +28,13 @@
 <form:form action="${RequestURI}" modelAttribute="profileForm" enctype="multipart/form-data">
 	
 	<br>
+	<jstl:if test="${errorMessage != null}">
+		<acme:error code="${errorMessage}"/>
+	</jstl:if>
 	<div class="row">
 		<div class="col-md-5">
 
 			<h3><spring:message code="profile.personalDetails" /></h3>
-			
 			<br />
 			
 			<acme:textbox code="profile.name" path="name" mandatory="true" />
@@ -84,10 +86,7 @@
 		
 		</h6>
 
-	<jstl:if test="${errorMessage != null}">
-		<spring:message code="${errorMessage}" var="error" />
-		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
-	</jstl:if>
+
 	<br/>
 	<br/>
 	
