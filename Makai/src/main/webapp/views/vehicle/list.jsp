@@ -26,8 +26,8 @@
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">
-			<acme:link href="vehicle/edit.do?vehicleId=${row.id}" code="travel.edit" type="warning"/>
-			<acme:delete href="vehicle/delete.do?vehicleId=${row.id}" code="travel.delete"/>
+			<acme:link image="edit" href="vehicle/edit.do?vehicleId=${row.id}" type="warning"/>
+			<acme:delete href="vehicle/delete.do?vehicleId=${row.id}"/>
 		</div>
 	</display:column>
 	

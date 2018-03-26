@@ -32,6 +32,10 @@
 		<br>
 		<h3><spring:message code="offer.destination" /></h3>
 			
+	<jstl:if test="${errorMessage != null}">
+		<acme:error code="${errorMessage}"/>
+	</jstl:if>
+			
 	<div class="row">
 		<div class="col-md-5">
 			<acme:textbox code="offer.coordinates.country" path="destination.country" mandatory="true" />
@@ -41,10 +45,9 @@
 			<acme:textbox code="offer.coordinates.zipCode" path="destination.zip_code" mandatory="true" />
 		</div>
 		<div class="offset-md-1 col-md-5">
-		<br>
 			<acme:textbox code="offer.startMoment" path="startMoment" mandatory="true" />
 			<acme:input code="offer.price" path="price" mandatory="true" textPrepend="&euro;"/>
-			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="8"/>
+			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="9"/>
 		</div>
 	</div>
 	<br>
@@ -72,12 +75,6 @@
 		</div>
 	<br/>
 </div>
-	<jstl:if test="${errorMessage != null}">
-		<spring:message code="${errorMessage}" var="error" />
-		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
-	</jstl:if>
-	<br/>
-	
 		<acme:submit code="offer.create" name="save" />
 		<acme:cancel code="offer.cancel" url="" />
 	<br/>

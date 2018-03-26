@@ -22,10 +22,11 @@
 
 <%-- Attributes --%> 
  
-<%@ attribute name="code" required="true" %>
+<%@ attribute name="code" required="false" %>
 <%@ attribute name="href" required="true" %>
 <%@ attribute name="type" required="false" %>
 <%@ attribute name="disabled" required="false" %>
+<%@ attribute name="image" required="false" %>
 
 <jstl:if test="${type == null}">
 	<jstl:set var="type" value="info" />
@@ -39,7 +40,12 @@
 <!-- Type: primary secondary success info warning danger link -->
 
 <button type="button" class="btn btn-${type} btn-lg" onclick="location='${href}'">
-	<spring:message code="${code}" />
+	<jstl:if test="${image != null}">
+		<img class="icon-button" src="images/${image}.png"/>
+	</jstl:if>
+	<jstl:if test="${code != null}">
+		<spring:message code="${code}" />
+	</jstl:if>
 </button>
 
 <%-- Notes --%>

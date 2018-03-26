@@ -17,10 +17,11 @@
 	
 	<display:column>
 		<div class="btn-group">
-			<acme:link href="request/actor/display.do?requestId=${row.id}" code="request.display"/>
+			<acme:link image="eye" href="request/actor/display.do?requestId=${row.id}"/>
 			<security:authorize access="hasRole('CUSTOMER')">
 				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
 				<acme:link href="offer/customer/list.do?requestId=${row.id}" code="request.list.offer"/>
+				
 				
 				<jstl:set var="show" value="${true}"/>
 				<jstl:if test="${!offersPendingReceipts.isEmpty()}">
@@ -32,7 +33,7 @@
 				</jstl:if>
 				<jstl:if test="${show == true}">
 					<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
-					<acme:delete href="request/customer/delete.do?requestId=${row.id}" code="request.delete"/>
+					<acme:delete href="request/customer/delete.do?requestId=${row.id}"/>
 				</jstl:if>
 			</security:authorize>
 			<security:authorize access="hasRole('TRAINER')">

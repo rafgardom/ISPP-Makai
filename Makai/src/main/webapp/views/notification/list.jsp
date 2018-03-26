@@ -27,8 +27,8 @@
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">	
-			<acme:link href="notification/actor/display.do?notificationId=${row.id}" code="notification.display"/>
-			<acme:link href="notification/actor/delete.do?notificationId=${row.id}" code="notification.delete" type="danger"/>
+			<acme:link image="eye" href="notification/actor/display.do?notificationId=${row.id}"/>
+			<acme:link image="trash" href="notification/actor/delete.do?notificationId=${row.id}" type="danger"/>
 		</div>
 	</display:column>
 	

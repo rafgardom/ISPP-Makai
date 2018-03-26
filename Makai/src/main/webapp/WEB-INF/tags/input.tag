@@ -31,10 +31,14 @@
 <%@ attribute name="min" required="false"%>
 <%@ attribute name="max" required="false"%>
 <%@ attribute name="mandatory" required="false" %>
-<%@ attribute name="textPrepend" required="false" %>
+<%@ attribute name="height" required="false" %>
+<%@ attribute name="image" required="false" %>
 
 <jstl:if test="${type == null}">
 	<jstl:set var="type" value="text" />
+</jstl:if>
+<jstl:if test="${height == null}">
+	<jstl:set var="height" value="32" />
 </jstl:if>
 
 
@@ -45,7 +49,7 @@
 	<jstl:set var="mandatory" value="false" />
 </jstl:if>
 
-<div>
+<div class="form-group">
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 		<jstl:if test="${mandatory == true}">
@@ -53,10 +57,10 @@
 		</jstl:if>
 	</form:label>
 	
-	<jstl:if test="${textPrepend != null}">
+	<jstl:if test="${image != null}">
 	<div class="input-group"><!-- NO BORRAR -->
 		<div class="input-group-prepend">
-			<span class="input-group-text "><b>${textPrepend}</b></span>
+			<span class="input-group-text "><img src="images/${image}.png" height="${height}px"/></span>
 		</div>
 	</jstl:if>
 	
@@ -65,6 +69,6 @@
 	<form:errors cssClass="alert alert-danger form-control" path="${path}" />
 	
 	</div>
-<jstl:if test="${textPrepend != null}">
+<jstl:if test="${image != null}">
 	</div><!-- NO BORRAR -->
 </jstl:if>

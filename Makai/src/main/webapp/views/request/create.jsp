@@ -28,6 +28,9 @@
 <form:form action="${RequestURI}" modelAttribute="requestForm" enctype="multipart/form-data">
 	<form:hidden path="id" />
 	
+	<jstl:if test="${errorMessage != null}">
+		<acme:error code="${errorMessage}"/>
+	</jstl:if>
 	
 	
 	<div class="row">	
@@ -43,12 +46,6 @@
 		</div>	
 
 	</div>
-	
-	<jstl:if test="${errorMessage != null}">
-		<spring:message code="${errorMessage}" var="error" />
-		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
-	</jstl:if>
-	<br/>
 	
 		<acme:submit code="request.save" name="save" />
 		<acme:cancel code="request.cancel" url="" />

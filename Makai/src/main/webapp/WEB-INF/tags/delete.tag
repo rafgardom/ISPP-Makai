@@ -22,15 +22,21 @@
 
 <%-- Attributes --%> 
  
-<%@ attribute name="code" required="true" %>
+<%@ attribute name="code" required="false" %>
 <%@ attribute name="href" required="true" %>
-<%@ attribute name="cuestion" required="false" %>
+<%@ attribute name="cuestioncode" required="false" %>
 
+<jstl:if test="${cuestioncode == null}">        
+	<jstl:set var="cuestioncode" value="delete.cuestion" />
+</jstl:if>
 
 <%-- Definition --%>
 
 <button type="button" class="btn btn-danger rounded-right btn-lg" data-toggle="modal" data-target="#myModal">
-    <spring:message code="${code}" />
+   	<img class="icon-button" src="images/trash.png"/>
+   	<jstl:if test="${code != null}">
+		<spring:message code="${code}" />
+	</jstl:if>
 </button>
 
   <!-- The Modal -->
@@ -45,12 +51,9 @@
         </div>
         
         <!-- Modal body -->
-        <jstl:if test="${cuestion == null}">
-        	<div class="modal-body">
-         		<spring:message code="delete.cuestion"/>
-        	</div>
-        </jstl:if>
-        
+        <div class="modal-body">
+         	<spring:message code="${cuestioncode}"/>
+        </div>
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="location='${href}'"><spring:message code="delete"/></button>

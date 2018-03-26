@@ -28,6 +28,7 @@
 <%-- Definition --%>
 
 <button type="button" class="btn btn-danger btn-lg" onclick="location='${url}'" >
+	<img class="icon-button" src="images/cancel.png" height="25px"/>
 	<spring:message code="${code}" />
 </button>
 

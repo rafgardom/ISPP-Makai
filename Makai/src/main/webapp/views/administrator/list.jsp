@@ -47,12 +47,12 @@
 		<jstl:choose>
 			<jstl:when test="${row.userAccount.enabled }">
 				<form:form action="administrator/ban.do?actorId=${row.id}" modelAttribute="actor">
-					<acme:submit name="ban" code="administrator.actor.ban" />
+					<acme:submit image="ban" name="ban" code="administrator.actor.ban" />
 				</form:form>
 			</jstl:when>
 			<jstl:otherwise>
 				<form:form action="administrator/unban.do?actorId=${row.id}" modelAttribute="actor">
-					<acme:submit name="unban" code="administrator.actor.unban" />
+					<acme:submit image="ban" name="unban" code="administrator.actor.unban" />
 				</form:form>
 			</jstl:otherwise>
 		</jstl:choose>

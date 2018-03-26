@@ -27,6 +27,11 @@
 
 <form:form action="${RequestURI}" modelAttribute="travelForm" enctype="multipart/form-data">
 		<br />
+		
+		<jstl:if test="${errorMessage != null}">
+			<acme:error code="${errorMessage}"/>
+		</jstl:if>
+		
 		<div class="row">
 		
 			<div class="col-md-5">
@@ -66,22 +71,6 @@
 				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" />
 			</div>
 	</div>
-	
-		
-		
-		
-		<br />
-		
-		
-	<br/>
-	
-	<security:authorize access="isAnonymous()">
-	</security:authorize>
-	
-	<jstl:if test="${errorMessage != null}">
-		<spring:message code="${errorMessage}" var="error" />
-		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
-	</jstl:if>
 	<br/>
 	
 		<acme:submit code="travel.create" name="save" />

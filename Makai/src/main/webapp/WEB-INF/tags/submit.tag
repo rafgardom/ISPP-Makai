@@ -24,9 +24,15 @@
 
 <%@ attribute name="name" required="true" %> 
 <%@ attribute name="code" required="true" %>
+<%@ attribute name="image" required="false" %>
 
+<jstl:if test="${image == null}">
+	<jstl:set var="image" value="save" />
+</jstl:if>	
+	
 <%-- Definition --%>
 
 <button type="submit" name="${name}" class="btn btn-primary btn-lg">
+	<img class="icon-button" src="images/${image}.png" height="25px"/>
 	<spring:message code="${code}" />
 </button>

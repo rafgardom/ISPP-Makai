@@ -23,6 +23,10 @@
 	<form:hidden path="moment" />
 	<form:hidden path="actors" />
 	
+	<jstl:if test="${errorMessage != null}">
+		<acme:error code="${errorMessage}"/>
+	</jstl:if>
+	
 	<acme:selectNotEntity items="${notificationTypes}" code="notification.type" path="type" />
 	
 	<acme:textbox code="notification.reason" path="reason" />

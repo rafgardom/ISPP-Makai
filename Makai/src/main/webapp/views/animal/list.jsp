@@ -21,7 +21,7 @@
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">	
-			<acme:link href="animal/display.do?animalId=${row.id}" code="animal.display"/>
+			<acme:link image="eye" href="animal/display.do?animalId=${row.id}"/>
 		</div>
 	</display:column>
 		

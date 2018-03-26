@@ -20,7 +20,7 @@
 	<display:column>
 	<div class="btn-group">
 		<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register" type="success"/>
-		<acme:link href="travel/display.do?travelId=${row.id}" code="travel.display"/>
+		<acme:link image="eye" href="travel/display.do?travelId=${row.id}"/>
 	</div>
 	</display:column>
 	

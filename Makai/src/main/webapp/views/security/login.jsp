@@ -28,12 +28,13 @@
 	</jstl:if>
 	
 	</div>
+
 	<div class="offset-md-3 col-md-6 offset-md-3 ">
-		
-		<acme:textbox code="security.username" path="username" mandatory="true"/>
+		<i></i>
+		<acme:input code="security.username" path="username" mandatory="true"/>
 		<acme:password code="security.password" path="password" mandatory="true"/>
 	
-		<acme:submit name=" " code="security.login"/>
+		<acme:submit image="login32" name=" " code="security.login"/>
 	
 	</div>
 </div>
