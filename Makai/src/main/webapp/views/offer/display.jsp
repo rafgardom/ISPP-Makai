@@ -141,7 +141,7 @@
 		
 	</ul>
 	<jstl:if test="${(offer.trainer.id==principal.id) && (offer.isAccepted==false)}">
-		<acme:link href="offer/trainer/edit.do?offerId=${offer.id}" code="offer.edit"/>
+		<acme:link href="offer/trainer/edit.do?offerId=${offer.id}" code="offer.edit" type="warning" image="edit"/>
 	</jstl:if>
 	
 </div>

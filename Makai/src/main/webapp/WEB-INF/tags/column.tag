@@ -34,4 +34,4 @@
 <%-- Definition --%>
 
 <spring:message code="${code}" var="titleHeader" />
-<display:column property="${property}" title="${titleHeader}" sortable="${sortable}" format="${format}"  />
+<display:column property="${property}" class="text-center" title="${titleHeader}" sortable="${sortable}" format="${format}"  />

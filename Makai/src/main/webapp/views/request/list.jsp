@@ -20,7 +20,7 @@
 			<acme:link image="eye" href="request/actor/display.do?requestId=${row.id}"/>
 			<security:authorize access="hasRole('CUSTOMER')">
 				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
-				<acme:link href="offer/customer/list.do?requestId=${row.id}" code="request.list.offer"/>
+				<acme:link href="offer/customer/list.do?requestId=${row.id}" code="request.list.offer" type="dark" image="deal"/>
 				
 				
 				<jstl:set var="show" value="${true}"/>
@@ -37,7 +37,7 @@
 				</jstl:if>
 			</security:authorize>
 			<security:authorize access="hasRole('TRAINER')">
-				<acme:link href="offer/trainer/create.do?requestId=${row.id}" code="offer.create" type="success"/>
+				<acme:link href="offer/trainer/create.do?requestId=${row.id}" code="offer.create" image="deal" type="dark"/>
 			</security:authorize>
 		</div>
 	</display:column>
