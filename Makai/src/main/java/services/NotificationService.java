@@ -95,6 +95,7 @@ public class NotificationService {
 		result = new Notification();
 		result.setActor(actor);
 		result.setMoment(calendar.getTime());
+		result.setIsRead(false);
 
 		return result;
 	}
