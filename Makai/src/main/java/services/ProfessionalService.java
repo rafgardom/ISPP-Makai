@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import utilities.UserNamePasswordValidator;
+import domain.Actor;
 import domain.Professional;
 import domain.Travel;
 import forms.ProfessionalForm;
@@ -174,6 +175,17 @@ public class ProfessionalService {
 				FieldError fieldError;
 				final String[] codes = {
 					"professional.username.patter.error"
+				};
+				fieldError = new FieldError("professionalForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+
+			final Actor actor = this.actorService.findByusername(professionalForm.getUsername());
+
+			if (actor != null) {
+				FieldError fieldError;
+				final String[] codes = {
+					"professional.username.unique.error"
 				};
 				fieldError = new FieldError("professionalForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);

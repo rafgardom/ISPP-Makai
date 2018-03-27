@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import utilities.UserNamePasswordValidator;
+import domain.Actor;
 import domain.Category;
 import domain.Offer;
 import domain.Receipt;
@@ -170,6 +171,17 @@ public class TrainerService {
 				FieldError fieldError;
 				final String[] codes = {
 					"trainer.userName.error"
+				};
+				fieldError = new FieldError("trainerForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+
+			final Actor actor = this.actorService.findByusername(trainerForm.getUsername());
+
+			if (actor != null) {
+				FieldError fieldError;
+				final String[] codes = {
+					"trainer.username.unique.error"
 				};
 				fieldError = new FieldError("trainerForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);

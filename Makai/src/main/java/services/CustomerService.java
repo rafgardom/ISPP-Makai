@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import utilities.UserNamePasswordValidator;
+import domain.Actor;
 import domain.Customer;
 import domain.Travel;
 import forms.CustomerForm;
@@ -164,6 +165,17 @@ public class CustomerService {
 				FieldError fieldError;
 				final String[] codes = {
 					"customer.username.error"
+				};
+				fieldError = new FieldError("customerForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+
+			final Actor actor = this.actorService.findByusername(customerForm.getUsername());
+
+			if (actor != null) {
+				FieldError fieldError;
+				final String[] codes = {
+					"customer.username.unique.error"
 				};
 				fieldError = new FieldError("customerForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);

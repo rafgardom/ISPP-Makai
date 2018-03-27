@@ -18,4 +18,6 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	@Query("select a from Actor a where a.id not in (select admin.id from Administrator admin)")
 	Collection<Actor> findAllNotAdmin();
 
+	@Query("select a from Actor a where a.userAccount.username = ?1")
+	Actor findByusername(String username);
 }

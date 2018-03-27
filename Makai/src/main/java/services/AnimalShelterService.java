@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import utilities.UserNamePasswordValidator;
+import domain.Actor;
 import domain.AnimalShelter;
 import forms.AnimalShelterForm;
 
@@ -160,6 +161,17 @@ public class AnimalShelterService {
 				FieldError fieldError;
 				final String[] codes = {
 					"animalShelter.username.error"
+				};
+				fieldError = new FieldError("animalShelterForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+
+			final Actor actor = this.actorService.findByusername(animalShelterForm.getUsername());
+
+			if (actor != null) {
+				FieldError fieldError;
+				final String[] codes = {
+					"animalShelter.username.unique.error"
 				};
 				fieldError = new FieldError("animalShelterForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
