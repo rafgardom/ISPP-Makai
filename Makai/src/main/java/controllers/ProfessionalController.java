@@ -47,9 +47,11 @@ public class ProfessionalController extends AbstractController {
 		Professional professional;
 		boolean pictureTooLong = false;
 		professional = this.professionalService.reconstruct(professionalForm, binding);
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
 			result = this.createModelAndView(professionalForm, "professional.register.error");
-		else
+			if (professionalForm.getUserImage().getSize() == 0)
+				result.addObject("imageError", "professional.register.picture.empty.error");
+		} else
 			try {
 				//				final MultipartFile userImage = customerForm.getUserImage();
 

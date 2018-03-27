@@ -64,6 +64,9 @@
 			enctype="multipart/form-data" code="customer.picture"></form:input>
 			<br/>
 			<p><spring:message code="image.formats"/></p>
+			<jstl:if test="${imageError != null}">
+				<acme:error code="${imageError}" type="danger"/>
+			</jstl:if>
 		<br/>
 		</div>
 

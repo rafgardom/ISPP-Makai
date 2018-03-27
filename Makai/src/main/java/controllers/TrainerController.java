@@ -47,9 +47,12 @@ public class TrainerController extends AbstractController {
 		Trainer trainer;
 		boolean pictureTooLong = false;
 		trainer = this.trainerService.reconstruct(trainerForm, binding);
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
 			result = this.createModelAndView(trainerForm, "trainer.register.error");
-		else
+
+			if (trainerForm.getUserImage().getSize() == 0)
+				result.addObject("imageError", "trainer.register.picture.empty.error");
+		} else
 			try {
 				//				final MultipartFile userImage = customerForm.getUserImage();
 

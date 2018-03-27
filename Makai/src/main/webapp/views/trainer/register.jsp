@@ -81,6 +81,9 @@
 					<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
 					class="form:input-large" enctype="multipart/form-data" code="trainer.picture"></form:input>
 					<jstl:out value="${formats}"/>
+					<jstl:if test="${imageError != null}">
+						<acme:error code="${imageError}" type="danger"/>
+					</jstl:if>
 				<br/>
 				<br/>
 				<acme:checkbox code="trainer.acceptCondition" path="acceptCondition"

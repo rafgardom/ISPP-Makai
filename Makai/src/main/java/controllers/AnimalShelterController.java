@@ -47,9 +47,11 @@ public class AnimalShelterController extends AbstractController {
 		AnimalShelter animalShelter;
 		boolean pictureTooLong = false;
 		animalShelter = this.animalShelterService.reconstruct(animalShelterForm, binding);
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
 			result = this.createModelAndView(animalShelterForm, "animalShelter.register.error");
-		else
+			if (animalShelterForm.getUserImage().getSize() == 0)
+				result.addObject("imageError", "animalShelter.register.picture.empty.error");
+		} else
 			try {
 
 				if (animalShelterForm.getUserImage().getSize() > 5242880 || !animalShelterForm.getUserImage().getContentType().contains("image")) {

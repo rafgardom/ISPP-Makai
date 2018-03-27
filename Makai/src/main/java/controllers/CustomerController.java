@@ -57,9 +57,11 @@ public class CustomerController extends AbstractController {
 		Customer customer;
 		boolean pictureTooLong = false;
 		customer = this.customerService.reconstruct(customerForm, binding);
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
 			result = this.createModelAndView(customerForm, "customer.register.error");
-		else
+			if (customerForm.getUserImage().getSize() == 0)
+				result.addObject("imageError", "customer.register.picture.empty.error");
+		} else
 			try {
 				//				final MultipartFile userImage = customerForm.getUserImage();
 

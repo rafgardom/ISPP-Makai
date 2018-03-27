@@ -79,6 +79,9 @@
 					<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
 					class="form:input-large" enctype="multipart/form-data" code="customer.picture"></form:input>
 					<jstl:out value="${formats}"/>
+					<jstl:if test="${imageError != null}">
+						<acme:error code="${imageError}" type="danger"/>
+					</jstl:if>
 				<br/>
 				<br/>
 				<acme:checkbox code="animalShelter.acceptCondition" path="acceptCondition"

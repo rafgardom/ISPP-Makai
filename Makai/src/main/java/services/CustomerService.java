@@ -202,7 +202,7 @@ public class CustomerService {
 			final String[] codes = {
 				"customer.register.picture.empty.error"
 			};
-			fieldError = new FieldError("customerForm", "userImage", customerForm.getUserImage(), false, codes, null, "");
+			fieldError = new FieldError("customerForm", "userImage", result.getPicture(), false, codes, null, "");
 			binding.addError(fieldError);
 		}
 
