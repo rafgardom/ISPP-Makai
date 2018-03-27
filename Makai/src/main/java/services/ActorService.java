@@ -185,7 +185,7 @@ public class ActorService {
 			fieldError = new FieldError("profileForm", "userImage", profileForm.getUserImage(), false, codes, null, "");
 			binding.addError(fieldError);
 		}
-		if (!profileForm.getUserImage().getContentType().contains("image")) {
+		if (profileForm.getPicture() != null && !profileForm.getUserImage().getContentType().contains("image")) {
 			FieldError fieldError;
 			final String[] codes = {
 				"profile.picture.extension.error"
@@ -228,14 +228,14 @@ public class ActorService {
 		if (profileForm.getPicture() != null)
 			result.setPicture(profileForm.getPicture());
 
-		if (profileForm.getPassword() != null && !profileForm.getPassword().equals(profileForm.getRepeatPassword())) {
+		if (profileForm.getPassword() != null && !profileForm.getPassword().isEmpty() && !profileForm.getPassword().equals(profileForm.getRepeatPassword())) {
 			FieldError fieldError;
 			final String[] codes = {
 				"profile.repeatPasword.error"
 			};
 			fieldError = new FieldError("profileForm", "repeatPassword", profileForm.getPassword(), false, codes, null, "");
 			binding.addError(fieldError);
-		} else if (profileForm.getPassword() != null)
+		} else if (profileForm.getPassword() != null && !profileForm.getPassword().isEmpty())
 			result.getUserAccount().setPassword(this.hashPassword(profileForm.getPassword()));
 
 		this.validator.validate(result, binding);
