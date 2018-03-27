@@ -82,7 +82,6 @@ public class VehicleForm {
 		this.year = year;
 	}
 
-	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDescription() {
 		return this.description;
@@ -98,7 +97,6 @@ public class VehicleForm {
 		this.picture = bs;
 	}
 
-	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getColor() {
 		return this.color;
