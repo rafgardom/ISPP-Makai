@@ -89,4 +89,17 @@ public class NotificationActorController extends AbstractController {
 		return result;
 	}
 
+	// Reload
+	@RequestMapping(value = "/reload", method = RequestMethod.GET)
+	public Integer reload() {
+		Integer result;
+		Actor actor;
+
+		actor = this.actorService.findByPrincipal();
+
+		result = this.notificationService.findNotificationWithoutRead(actor);
+
+		return result;
+	}
+
 }
