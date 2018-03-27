@@ -62,6 +62,8 @@ public class NotificationActorController extends AbstractController {
 
 		notification = this.notificationService.findOne(notificationId);
 
+		this.notificationService.notificationViewed(notification);
+
 		result = new ModelAndView("notification/display");
 		result.addObject("notification", notification);
 		result.addObject("requestURI", "notification/actor/display.do");

@@ -139,7 +139,8 @@ public class NotificationService {
 		Assert.notNull(principal);
 
 		actor = notification.getActor();
-		Assert.isTrue(actor.equals(principal));	//Comprueba si está dentro de sus notificaciones
+		Assert.isTrue(actor.equals(principal)); //Comprueba si está dentro de sus notificaciones
+		this.notificationRepository.delete(notification.getId());
 
 	}
 
@@ -182,5 +183,13 @@ public class NotificationService {
 			this.save(notification);
 		}
 
+	}
+
+	public void notificationViewed(final Notification notification) {
+		Assert.notNull(notification);
+		if (notification.getIsRead() == false)
+			notification.setIsRead(true);
+
+		this.save(notification);
 	}
 }

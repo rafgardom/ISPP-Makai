@@ -22,6 +22,7 @@
 	<form:hidden path="version" />
 	<form:hidden path="moment" />
 	<form:hidden path="actor" />
+	<form:hidden path="isReader" />
 	
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>
