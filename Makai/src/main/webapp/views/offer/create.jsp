@@ -45,8 +45,8 @@
 			<acme:textbox code="offer.coordinates.zipCode" path="destination.zip_code" mandatory="true" />
 		</div>
 		<div class="offset-md-1 col-md-5">
-			<acme:textbox code="offer.startMoment" path="startMoment" mandatory="true" />
-			<acme:input code="offer.price" path="price" mandatory="true" textPrepend="&euro;"/>
+			<acme:input image="calendar" code="offer.startMoment" path="startMoment" mandatory="true" />
+			<acme:input image="euro" code="offer.price" path="price" mandatory="true"/>
 			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="9"/>
 		</div>
 	</div>

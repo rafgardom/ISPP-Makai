@@ -44,8 +44,8 @@
 				<acme:textbox code="profile.nid" path="nid" mandatory="true" />
 			</security:authorize>
 	
-			<acme:textbox code="profile.phone" path="phone" mandatory="true" />
-			<acme:textbox code="profile.email" path="email" mandatory="true" />
+			<acme:input code="profile.phone" path="phone" mandatory="true" image="phone"/>
+			<acme:input code="profile.email" path="email" mandatory="true" image="at" />
 	
 			<form:input path="userImage" type="file" />
 			<spring:message code="image.formats" var="formats" /><p><jstl:out value="${formats}"/></p><br>
@@ -56,35 +56,33 @@
 			
 			<h3><spring:message code="profile.coordinates" /></h3>
 			<br />
-			<acme:textbox code="coordinates.country" path="coordinates.country"
-				mandatory="true" />
+			<acme:textbox code="coordinates.country" path="coordinates.country" mandatory="true" />
 			<acme:textbox code="coordinates.state" path="coordinates.state" />
 			<acme:textbox code="coordinates.province" path="coordinates.province" />
-			<acme:textbox code="coordinates.city" path="coordinates.city"
-				mandatory="true" />
-			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code"
-				mandatory="true" />
+			<acme:textbox code="coordinates.city" path="coordinates.city" mandatory="true" />
+			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
 		
 		</div>	
-	</div>
-	<br>	
-		
+		<div class="col-md-6">
 		<fieldset id="fieldsetPassword" disabled>
-			
-			
 			<h3>
 				<spring:message code="profile.userAccountDetails" />
 			</h3>
 			<br />
-			<acme:password code="profile.password" path="password" />
-			<acme:password code="profile.repeatPassword" path="repeatPassword" />
+			<acme:password code="security.password" path="password" image="lock1"/>
+			<acme:password code="security.password" path="repeatPassword" image="lock1"/>
 		</fieldset>
-		<h6 class="alert alert-info col-lg-5"><spring:message code="profile.editPassword"/><br><br>
+		<h6 class="alert alert-info"><spring:message code="profile.editPassword"/><br><br>
 			
 	 		<strong><input type="radio" id="radioPasswordY" name="answerPw" onclick="editPasswordYes()" /><spring:message code="profile.Yes"/>
 			<input type="radio" id="radioPasswordN" name="answerPw" onclick="editPasswordNo()" checked="checked" /><spring:message code="profile.No"/></strong>
 		
 		</h6>
+		</div>
+	</div>
+	<br>	
+		
+		
 
 
 	<br/>

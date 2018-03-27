@@ -132,10 +132,11 @@
 			</security:authorize>
 			
 			<security:authorize access="isAuthenticated()">
-				<li class="nav-item"><a class="nav-link"
-					href="notification/actor/list.do"><spring:message
-							code="master.page.notification.list" />
-							<span class="badge badge-default badge-pill bg-secondary">2</span> </a></li>
+				<li class="nav-item">
+				<a class="nav-link"
+					href="notification/actor/list.do">
+							<img src="images/notification.png" height="30px"/>
+							<span class="badge badge-default badge-pill bg-secondary pill-menu">2</span> </a></li>
 			</security:authorize>
 		</ul>
 		

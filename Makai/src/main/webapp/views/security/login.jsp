@@ -30,11 +30,10 @@
 	</div>
 
 	<div class="offset-md-3 col-md-6 offset-md-3 ">
-		<i></i>
-		<acme:input code="security.username" path="username" mandatory="true"/>
-		<acme:password code="security.password" path="password" mandatory="true"/>
+		<acme:input image="user-xs" code="security.username" path="username" mandatory="true"/>
+		<acme:password image="lock1" code="security.password" path="password" mandatory="true"/>
 	
-		<acme:submit image="login32" name=" " code="security.login"/>
+		<acme:submit name=" " code="security.login" image="login32" style="btn-block"/>
 	
 	</div>
 </div>

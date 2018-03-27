@@ -42,7 +42,7 @@
 				<acme:textbox code="travel.province" path="provinceOrigin" mandatory="false" />
 				<acme:textbox code="travel.city" path="cityOrigin" mandatory="true" />
 				<acme:textbox code="travel.zipcode" path="zip_codeOrigin" mandatory="true" />
-				
+
 			</div>
 			<div class="offset-md-1 col-md-5">
 				<h3><spring:message code="travel.destination" /></h3>
@@ -59,15 +59,15 @@
 	<h3><spring:message code="travel.details" /></h3>
 	<div class="row">
 
-			<div class="col-lg-2 col-sm-5 col-5">
+			<div class="col-lg-2 col-sm-6 col-12">
 				<acme:textbox code="travel.animalSeats" path="animalSeats" mandatory="false" />
 				<acme:textbox code="travel.humanSeats" path="HumanSeats" mandatory="false" />
 			</div>
-			<div class="col-lg-3 col-sm-5 col-7">
-				<acme:textbox code="travel.startMoment" path="startMoment" mandatory="true" />
-				<acme:textbox code="travel.endMoment" path="endMoment" mandatory="true" />
+			<div class="col-lg-3 col-sm-6 col-12">
+				<acme:input code="travel.startMoment" path="startMoment" mandatory="true" image="calendar" />
+				<acme:input code="travel.endMoment" path="endMoment" mandatory="true" image="calendar"/>
 			</div>
-			<div class="col-md-7">
+			<div class="offset-lg-1 col-md-5 col-12">
 				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" />
 			</div>
 	</div>

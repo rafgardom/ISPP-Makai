@@ -27,6 +27,7 @@
 
 <%@ attribute name="mandatory" required="false" %>
 <%@ attribute name="placeholder" required="false" %>
+<%@ attribute name="image" required="false" %>
 
 <jstl:if test="${mandatory == null}">
 	<jstl:set var="mandatory" value="false" />
@@ -42,7 +43,16 @@
 				<img src="images/asterisk.png"	width="16"/>
 			</jstl:if>
 		</form:label>
+	<jstl:if test="${image != null}">
+		<div class="input-group"><!-- NO BORRAR -->
+			<div class="input-group-prepend">
+				<span class="input-group-text btn-light"><img src="images/${image}.png"/></span>
+			</div>
+	</jstl:if>
 		<form:password path="${path}" class="form-control" placeholder="${placeholder}" />
 		<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 	</div>
+<jstl:if test="${image != null}">
+	</div><!-- NO BORRAR -->
+</jstl:if>
 </spring:bind>
