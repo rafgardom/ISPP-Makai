@@ -21,7 +21,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="moment" />
-	<form:hidden path="actors" />
+	<form:hidden path="actor" />
 	
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>

@@ -2,7 +2,6 @@
 package services;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -138,8 +137,7 @@ public class TravelService {
 		Customer customer;
 		Professional professional;
 		Collection<Travel> travels;
-		Notification notification;
-		final Collection<Actor> actors = new ArrayList<Actor>();
+		Notification notification = null;
 
 		actor = this.actorService.findByPrincipal();
 
@@ -150,7 +148,7 @@ public class TravelService {
 			customer.setTravelPassengers(travels);
 			this.customerService.save(customer);
 
-			actors.add(customer);
+			notification = this.notificationService.create(customer);
 
 		} else if (this.actorService.checkAuthority(actor, Authority.PROFESSIONAL)) {
 			professional = this.professionalService.findByPrincipal();
@@ -159,10 +157,9 @@ public class TravelService {
 			professional.setTravelPassengers(travels);
 			this.professionalService.save(professional);
 
-			actors.add(professional);
+			notification = this.notificationService.create(professional);
 		}
 
-		notification = this.notificationService.create(actors);
 		notification.setReason("Nueva inscripción a su viaje");
 		notification.setDescription("Un usuario se ha apuntado a un viaje creado por usted");
 		notification.setType(NotificationType.TRAVEL);

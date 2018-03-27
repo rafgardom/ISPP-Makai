@@ -64,7 +64,7 @@ public class NotificationServiceTest extends AbstractTest {
 			final Collection<Actor> actors = new ArrayList<Actor>();
 			actors.add(this.actorService.findByPrincipal());
 
-			notification = this.notificationService.create(actors);
+			notification = this.notificationService.create(this.actorService.findByPrincipal());
 			notification.setReason(reason);
 			notification.setDescription(description);
 

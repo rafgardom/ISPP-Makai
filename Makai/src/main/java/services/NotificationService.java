@@ -1,10 +1,8 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +64,7 @@ public class NotificationService {
 		Notification result;
 		Administrator principal;
 		Calendar calendar;
-		Collection<Actor> actors;
+		Actor actor;
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
@@ -74,16 +72,16 @@ public class NotificationService {
 		calendar = Calendar.getInstance();
 		calendar.set(Calendar.MILLISECOND, -10);
 
-		actors = new HashSet<Actor>();
+		actor = new Actor();
 
 		result = new Notification();
-		result.setActors(actors);
+		result.setActor(actor);
 		result.setMoment(calendar.getTime());
 
 		return result;
 	}
 
-	public Notification create(final Collection<Actor> actors) {
+	public Notification create(final Actor actor) {
 		Notification result;
 		Actor principal;
 		Calendar calendar;
@@ -95,7 +93,7 @@ public class NotificationService {
 		calendar.set(Calendar.MILLISECOND, -10);
 
 		result = new Notification();
-		result.setActors(actors);
+		result.setActor(actor);
 		result.setMoment(calendar.getTime());
 
 		return result;
@@ -114,9 +112,24 @@ public class NotificationService {
 		return result;
 	}
 
-	public void delete(final Notification notification) {
+	public void saveForAll(final Notification notification) {
+		Assert.notNull(notification);
 		Actor principal;
 		Collection<Actor> actors;
+
+		principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+
+		actors = this.actorService.findAllNotAdmin();
+		for (final Actor a : actors) {
+			notification.setActor(a);
+			this.notificationRepository.save(notification);
+		}
+	}
+
+	public void delete(final Notification notification) {
+		Actor principal;
+		Actor actor;
 
 		Assert.notNull(notification);
 		Assert.isTrue(notification.getId() != 0);
@@ -124,16 +137,8 @@ public class NotificationService {
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
 
-		actors = notification.getActors();
-		Assert.isTrue(actors.contains(principal));	//Comprueba si está dentro de sus notificaciones
-
-		if (actors.size() <= 1)	//Si es el único se borra la notificación
-			this.notificationRepository.delete(notification);
-		else {	//Si no elimina solo su relación
-			actors.remove(principal);
-			notification.setActors(actors);
-			this.notificationRepository.save(notification);
-		}
+		actor = notification.getActor();
+		Assert.isTrue(actor.equals(principal));	//Comprueba si está dentro de sus notificaciones
 
 	}
 
@@ -151,11 +156,9 @@ public class NotificationService {
 		Assert.notNull(request);
 		Notification notification;
 		Customer customer;
-		final Collection<Actor> actors = new ArrayList<Actor>();
 
 		customer = request.getCustomer();
-		actors.add(customer);
-		notification = this.create(actors);
+		notification = this.create(customer);
 		notification.setReason("Nueva oferta en su solicitud: " + request.getTags());
 		notification.setDescription("A un entrenador le interesa su solicitud: " + request.getTags());
 		notification.setType(NotificationType.REQUEST);
@@ -168,17 +171,15 @@ public class NotificationService {
 		Assert.notNull(request);
 		Notification notification;
 		Collection<Trainer> trainers;
-		final Collection<Actor> actors = new ArrayList<Actor>();
 
 		trainers = this.trainerService.findTrainerSameCategory(request.getCategory());
-		for (final Trainer t : trainers)
-			actors.add(t);
-		notification = this.create(actors);
-		notification.setReason("Nueva solicitud con su misma categoría: " + request.getCategory());
-		notification.setDescription("Podría interesarle crear una oferta a dicha solicitud: " + request.getTags());
-		notification.setType(NotificationType.REQUEST);
-
-		this.save(notification);
+		for (final Trainer t : trainers) {
+			notification = this.create(t);
+			notification.setReason("Nueva solicitud con su misma categoría: " + request.getCategory());
+			notification.setDescription("Podría interesarle crear una oferta a dicha solicitud: " + request.getTags());
+			notification.setType(NotificationType.REQUEST);
+			this.save(notification);
+		}
 
 	}
 }

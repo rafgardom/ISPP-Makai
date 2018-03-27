@@ -44,12 +44,8 @@ public class NotificationAdministratorController extends AbstractController {
 	public ModelAndView create() {
 		final ModelAndView result;
 		Notification notification;
-		Collection<Actor> actors;
 
 		notification = this.notificationService.create();
-
-		actors = this.actorService.findAllNotAdmin();
-		notification.setActors(actors);
 
 		result = this.createEditModelAndView(notification);
 
@@ -65,7 +61,7 @@ public class NotificationAdministratorController extends AbstractController {
 			result = this.createEditModelAndView(notification);
 		} else
 			try {
-				this.notificationService.save(notification);
+				this.notificationService.saveForAll(notification);
 				result = new ModelAndView("redirect:../actor/list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(notification, "notification.commit.error");

@@ -3,7 +3,6 @@ package services;
 
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,6 @@ import org.springframework.util.Assert;
 
 import repositories.RatingRepository;
 import repositories.RequestRepository;
-import domain.Actor;
 import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
@@ -136,13 +134,9 @@ public class RatingService {
 
 			// comprobamos si tiene alguno mas a 0, y si es asi, se crea una notificacion al admin
 			if (count >= 2) {
-				Collection<Actor> actors;
 				Notification notification;
 
-				actors = new HashSet<Actor>();
-				actors.add(this.administratorService.findOne());
-
-				notification = this.notificationService.create(actors);
+				notification = this.notificationService.create(this.administratorService.findOne());
 				notification.setType(NotificationType.RATING);
 				notification.setReason("Demasiadas puntuaciones negativas.");
 				notification.setDescription(message);

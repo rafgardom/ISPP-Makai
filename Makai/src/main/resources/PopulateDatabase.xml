@@ -385,57 +385,129 @@
 		<property name="moment" value="03/12/2018 9:25" />
 		<property name="reason" value="Cambio en las politicas" />
 		<property name="description" value="Se han cambiado las politicas de uso" />
-		<property name="actors">
-			<list>
-				<ref bean="customer1"/>
-				<ref bean="customer2"/>
-				<ref bean="customer3"/>
-			</list>
-		</property>
+		<property name="actor" ref="customer1" />
 		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
 	</bean>
 	
 	<bean id="notification2" class="domain.Notification">
-		<property name="moment" value="03/09/2018 6:12" />
-		<property name="reason" value="Cambio de tasas" />
-		<property name="description" value="Las tasas han aumentado." />
-		<property name="actors">
-			<list>
-				<ref bean="trainer1"/>
-				<ref bean="trainer2"/>
-				<ref bean="trainer3"/>
-			</list>
-		</property>
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="El 11 de Abril habrá un mantenimiento de los servidores de MAKAI. Disculpe las molestias." />
+		<property name="actor" ref="customer1" />
 		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
 	</bean>
 	
-	<bean id="notification3" class="domain.Notification">
-		<property name="moment" value="02/18/2018 6:12" />
-		<property name="reason" value="Cambio de tasas" />
-		<property name="description" value="Las tasas sobre el transporte han aumentado." />
-		<property name="actors">
-			<list>
-				<ref bean="professional1"/>
-				<ref bean="professional2"/>
-				<ref bean="professional3"/>
-			</list>
-		</property>
+		<bean id="notification3" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Bienvenido a MAKAI, si necesitas ayuda no dude en ponerse en contacto con nosotros" />
+		<property name="actor" ref="customer1" />
 		<property name="type" value="GENERAL" />
+		<property name="isRead" value="true" />
 	</bean>
 	
 	<bean id="notification4" class="domain.Notification">
-		<property name="moment" value="01/21/2018 6:12" />
-		<property name="reason" value="Cambio de tasas" />
-		<property name="description" value="Las politicas de adopcion han cambiado." />
-		<property name="actors">
-			<list>
-				<ref bean="animalshelter1"/>
-				<ref bean="animalshelter2"/>
-				<ref bean="animalshelter3"/>
-			</list>
-		</property>
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Se han cambiado las politicas de uso" />
+		<property name="actor" ref="customer2" />
 		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
 	</bean>
+	
+		<bean id="notification5" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Se han cambiado las politicas de uso" />
+		<property name="actor" ref="customer3" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+		<bean id="notification6" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Se han aumentado las tasas" />
+		<property name="actor" ref="trainer1" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+		<bean id="notification7" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Se han aumentado las tasas" />
+		<property name="actor" ref="trainer2" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+		<bean id="notification8" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Se han aumentado las tasas" />
+		<property name="actor" ref="trainer3" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+		<bean id="notification9" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Bienvenido a MAKAI, si necesitas ayuda no dude en ponerse en contacto con nosotros" />
+		<property name="actor" ref="professional1" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+		<bean id="notification10" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Bienvenido a MAKAI, si necesitas ayuda no dude en ponerse en contacto con nosotros" />
+		<property name="actor" ref="professional2" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+		<bean id="notification11" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Se han inscrito en su viaje" />
+		<property name="actor" ref="professional3" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+		<bean id="notification12" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Se han cambiado las politicas de uso" />
+		<property name="actor" ref="animalshelter1" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+		<bean id="notification13" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Se han aumentado las tasas" />
+		<property name="actor" ref="animalshelter2" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+		<bean id="notification14" class="domain.Notification">
+		<property name="moment" value="03/12/2018 9:25" />
+		<property name="reason" value="Cambio en las politicas" />
+		<property name="description" value="Se han cambiado las politicas de uso" />
+		<property name="actor" ref="animalshelter3" />
+		<property name="type" value="GENERAL" />
+		<property name="isRead" value="false" />
+	</bean>
+	
+	
 	
 	<!-- Banner -->	
 	<bean id="banner1" class="domain.Banner">

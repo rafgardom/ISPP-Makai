@@ -1,13 +1,12 @@
 
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -32,8 +31,17 @@ public class Notification extends DomainEntity {
 	private String				reason;
 	private String				description;
 	private NotificationType	type;
+	private Boolean				isRead;
 
 
+	@NotNull
+	public Boolean getIsRead() {
+		return this.isRead;
+	}
+
+	public void setIsRead(final Boolean isRead) {
+		this.isRead = isRead;
+	}
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -71,17 +79,18 @@ public class Notification extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Actor>	actors;
+	private Actor	actor;
 
 
 	@Valid
 	@NotNull
-	@ManyToMany()
-	public Collection<Actor> getActors() {
-		return this.actors;
+	@ManyToOne(optional = false)
+	public Actor getActor() {
+		return this.actor;
 	}
-	public void setActors(final Collection<Actor> actors) {
-		this.actors = actors;
+
+	public void setActor(final Actor actor) {
+		this.actor = actor;
 	}
 
 }
