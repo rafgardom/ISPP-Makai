@@ -15,6 +15,7 @@ import domain.Administrator;
 import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
+import domain.Offer;
 import domain.Request;
 import domain.Trainer;
 
@@ -164,6 +165,21 @@ public class NotificationService {
 		notification.setReason("Nueva oferta en su solicitud: " + request.getTags());
 		notification.setDescription("A un entrenador le interesa su solicitud: " + request.getTags());
 		notification.setType(NotificationType.REQUEST);
+
+		this.save(notification);
+
+	}
+
+	public void createNotificationOfferAcceptedTrainer(final Offer offer) {
+		Assert.notNull(offer);
+		Notification notification;
+		Trainer trainer;
+
+		trainer = offer.getTrainer();
+		notification = this.create(trainer);
+		notification.setReason("Oferta aceptada");
+		notification.setDescription("La oferta" + offer.getComment() + "ha sido aceptada.");
+		notification.setType(NotificationType.OFFER);
 
 		this.save(notification);
 

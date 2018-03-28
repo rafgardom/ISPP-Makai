@@ -26,15 +26,19 @@ public class OfferService {
 	@Autowired
 	private OfferRepository		offerRepository;
 
+	// Supporting services ----------------------------------------------------
+
 	@Autowired
 	private RequestService		requestService;
 
-	// Supporting services ----------------------------------------------------
 	@Autowired
 	private TrainerService		trainerService;
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private CustomerService		customerService;
 
 
 	// Constructors------------------------------------------------------------
@@ -174,6 +178,21 @@ public class OfferService {
 		if (!nonAcceptedOffers.isEmpty())
 			this.offerRepository.delete(nonAcceptedOffers);
 
+	}
+
+	public void acceptedOffer(final Offer offer) {
+		Assert.notNull(offer);
+		Customer customer;
+
+		customer = this.customerService.findByPrincipal();
+		Assert.isTrue(customer.getId() == offer.getRequest().getCustomer().getId());
+
+		offer.setIsAccepted(true);
+		this.save(offer);
+
+		this.notificationService.createNotificationOfferAcceptedTrainer(offer);
+
+		this.eraseNonAcceptedOffers(offer.getRequest());
 	}
 
 	public Offer reconstruct(final OfferForm offerForm, final BindingResult binding) throws IOException {
