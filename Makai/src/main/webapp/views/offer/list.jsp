@@ -23,7 +23,7 @@
 			<security:authorize access="hasRole('TRAINER')">
 				<jstl:if test="${row.isAccepted==false}">
 					<acme:link image="edit" href="offer/trainer/edit.do?offerId=${row.id}" type="warning"/>
-					<acme:delete href="offer/trainer/delete.do?offerId=${row.id}"/>
+					<acme:delete href="offer/trainer/delete.do?offerId=${row.id}" id="${row.id}"/>
 				</jstl:if>
 			</security:authorize>
 		</div>

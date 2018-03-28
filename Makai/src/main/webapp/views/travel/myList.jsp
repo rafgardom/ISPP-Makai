@@ -21,7 +21,7 @@
 		<div class="btn-group">
 			<acme:link href="travel/display.do?travelId=${row.id}" code="travel.display"/>
 			<acme:link href="travel/edit.do?travelId=${row.id}" code="travel.edit" type="warning"/>
-			<acme:delete href="travel/delete.do?travelId=${row.id}" code="travel.delete"/>
+			<acme:delete href="travel/delete.do?travelId=${row.id}" code="travel.delete" id="${row.id}"/>
 		</div>
 	</display:column>
 	
