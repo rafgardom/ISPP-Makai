@@ -48,7 +48,7 @@
 	</div>
 	
 		<acme:submit code="request.save" name="save" />
-		<acme:cancel code="request.cancel" url="" />
+		<acme:cancel code="request.cancel" url="request/customer/myList.do" />
 	<br/>
 	
 </form:form>
