@@ -22,6 +22,8 @@
 
 <%-- Attributes --%> 
  
+ <%@ attribute name="id" required="true" %>
+ 
 <%@ attribute name="code" required="false" %>
 <%@ attribute name="href" required="true" %>
 <%@ attribute name="cuestioncode" required="false" %>
@@ -32,7 +34,7 @@
 
 <%-- Definition --%>
 
-<button type="button" class="btn btn-danger rounded-right btn-lg" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-danger rounded-right btn-lg" data-toggle="modal" data-target="#myModal${id }">
    	<img class="icon-button" src="images/trash.png"/>
    	<jstl:if test="${code != null}">
 		<spring:message code="${code}" />
@@ -40,7 +42,7 @@
 </button>
 
   <!-- The Modal -->
-  <div class="modal fade" id="myModal">
+  <div class="modal fade" id="myModal${id }">
     <div class="modal-dialog modal-dialog-centered modal-sm">
       <div class="modal-content">
 

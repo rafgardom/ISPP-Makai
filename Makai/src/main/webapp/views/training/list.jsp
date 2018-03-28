@@ -38,7 +38,7 @@
 			<div class="btn-group" data-toggle="buttons">
 				<acme:link href="training/trainer/display.do?trainingId=${row.id}" code="training.display"/>
 				<acme:link href="training/trainer/edit.do?trainingId=${row.id}" code="training.edit" type="warning"/>
-				<acme:delete href="training/trainer/delete.do?trainingId=${row.id}" code="training.delete"/>
+				<acme:delete href="training/trainer/delete.do?trainingId=${row.id}" code="training.delete" id="${row.id}" />
 			</div>
 		</display:column>
 	</security:authorize>
