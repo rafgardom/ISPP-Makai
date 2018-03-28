@@ -8,7 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<display:table name="offers" id="row" requestURI="${requestURI}" class="displaytag">
+<display:table name="offers" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="offer.startMoment" property="startMoment" format="{0,date,dd/MM/yyyy HH:mm}" />
 	<acme:column code="offer.coordinates.city" property="destination.city" />

@@ -10,7 +10,7 @@
 
 
 <div class="table-responsive">
-<display:table name="notifications" id="row" requestURI="${requestURI}" class="displaytag">
+<display:table name="notifications" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="notification.moment" property="moment" format="{0,date,dd/MM/yyyy HH:mm}" />
 	<acme:column code="notification.reason" property="reason" />

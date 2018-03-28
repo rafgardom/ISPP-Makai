@@ -11,31 +11,27 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="trainer" />
-	
-	<acme:selectNotEntity items="${categories}" code="training.category" path="category" />
-	
-	<acme:input code="training.price" path="price" type="number" min="0" step="0.01" />
-	<acme:textarea code="training.description" path="description"/>
-	
-	<fieldset>
-		<legend>
-			<spring:message code="training.duration" />
-		</legend>
-
-		<acme:input code="training.duration.year" path="duration.year" type="number" min="0" />
-		<br />
-
-		<acme:input code="training.duration.month" path="duration.month" type="number" min="0" />
-		<br />
-
-		<acme:input code="training.duration.week" path="duration.week" type="number" min="0" />
-		<br />
-
-		<acme:input code="training.duration.day" path="duration.day" type="number" min="0" />
-		<br />
+<div class="row">
+	<div class="col-md-5">
+		<br>
+		<h3><spring:message code="training.general" /></h3>
+		<br>
+		<acme:selectNotEntity items="${categories}" code="training.category" path="category" />
 		
-	</fieldset>
-	
+		<acme:input code="training.price" path="price" type="number" min="0" step="1.0" image="euro"/>
+		<acme:textarea code="training.description" rows="5" path="description"/>
+	</div>
+	<div class="offset-md-1 col-md-5">
+		<br>
+		<h3><spring:message code="training.duration" /></h3>
+		<br>
+		<acme:input code="training.duration.year" path="duration.year" type="number" min="0" />
+		<acme:input code="training.duration.month" path="duration.month" type="number" min="0" />
+		<acme:input code="training.duration.week" path="duration.week" type="number" min="0" />
+		<acme:input code="training.duration.day" path="duration.day" type="number" min="0" />	
+	</div>
+</div>
+	<br>
 	<acme:submit name="save" code="training.save" />
 	<acme:cancel url="./training/trainer/list.do" code="training.cancel"/>
 </form:form>

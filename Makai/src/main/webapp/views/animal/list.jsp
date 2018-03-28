@@ -8,7 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<display:table name="animals" id="row" requestURI="${requestURI}" class="displaytag">
+<display:table name="animals" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<display:column>
 		<img src="${row.stringImage}" alt="<spring:message code='profile.no.picture' />" width="125px" height="125px">

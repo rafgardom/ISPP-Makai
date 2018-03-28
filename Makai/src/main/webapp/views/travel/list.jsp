@@ -8,7 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
-<display:table name="travels" id="row" requestURI="${requestURI}" class="displaytag">
+<display:table name="travels" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 
 	<acme:column code="travel.origin" property="origin.city" />
 	<acme:column code="travel.destination" property="destination.city" />

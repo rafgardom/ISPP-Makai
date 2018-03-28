@@ -8,7 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<display:table name="receipts" id="row" requestURI="${RequestURI}" class="displaytag">
+<display:table name="receipts" id="row" pagesize="5" requestURI="${RequestURI}" class="displaytag">
 
 	<acme:column code="receipt.amount" property="amount" />
 	<jstl:if test="${row.moment != null}">

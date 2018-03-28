@@ -8,7 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
-<display:table name="travels" id="row" requestURI="${requestURI}" class="displaytag">
+<display:table name="travels" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 
 	<acme:column code="travel.origin" property="origin.city" />
 	<acme:column code="travel.destination" property="destination.city" />
@@ -19,9 +19,9 @@
 	
 	<display:column>
 		<div class="btn-group">
-			<acme:link href="travel/display.do?travelId=${row.id}" code="travel.display"/>
-			<acme:link href="travel/edit.do?travelId=${row.id}" code="travel.edit" type="warning"/>
-			<acme:delete href="travel/delete.do?travelId=${row.id}" code="travel.delete" id="${row.id}"/>
+			<acme:link href="travel/display.do?travelId=${row.id}" image="eye"/>
+			<acme:link href="travel/edit.do?travelId=${row.id}" type="warning" image="edit"/>
+			<acme:delete href="travel/delete.do?travelId=${row.id}" id="${row.id}"/>
 		</div>
 	</display:column>
 	

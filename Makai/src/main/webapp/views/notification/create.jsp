@@ -22,17 +22,21 @@
 	<form:hidden path="version" />
 	<form:hidden path="moment" />
 	<form:hidden path="actor" />
-	<form:hidden path="isReader" />
+	<form:hidden path="isRead" />
 	
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>
 	</jstl:if>
 	
-	<acme:selectNotEntity items="${notificationTypes}" code="notification.type" path="type" />
-	
-	<acme:textbox code="notification.reason" path="reason" />
-	<acme:textarea code="notification.description" path="description"/>
-	
+	<div class="row">
+		<div class="col-md-6">
+			<acme:selectNotEntity items="${notificationTypes}" code="notification.type" path="type" />
+			<acme:textbox code="notification.reason" path="reason" />
+		</div>
+		<div class="col-md-6">
+			<acme:textarea code="notification.description" path="description" rows="5" maxlength="256"/>
+		</div>
+	</div>
 	<acme:submit name="save" code="notification.save" />
 	<acme:cancel url="./notification/actor/list.do" code="notification.cancel"/>
 </form:form>

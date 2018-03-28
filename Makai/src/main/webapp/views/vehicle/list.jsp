@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table name="vehicles" id="row" requestURI="${requestURI}" class="displaytag">
+<display:table name="vehicles" id="row" pagesize="3" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="vehicle.brand" property="brand" />
 	<acme:column code="vehicle.seats" property="seats" />

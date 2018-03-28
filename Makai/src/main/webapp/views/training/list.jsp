@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table name="trainings" id="row" requestURI="${requestURI}" class="displaytag">
+<display:table name="trainings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="training.category" property="category" />
 	<acme:column code="training.price" property="price" />
@@ -36,9 +36,9 @@
 	<security:authorize access="hasRole('TRAINER')">		
 		<display:column>
 			<div class="btn-group" data-toggle="buttons">
-				<acme:link href="training/trainer/display.do?trainingId=${row.id}" code="training.display"/>
-				<acme:link href="training/trainer/edit.do?trainingId=${row.id}" code="training.edit" type="warning"/>
-				<acme:delete href="training/trainer/delete.do?trainingId=${row.id}" code="training.delete" id="${row.id}" />
+				<acme:link href="training/trainer/display.do?trainingId=${row.id}" image="eye"/>
+				<acme:link href="training/trainer/edit.do?trainingId=${row.id}" type="warning" image="edit"/>
+				<acme:delete href="training/trainer/delete.do?trainingId=${row.id}" id="${row.id}" />
 			</div>
 		</display:column>
 	</security:authorize>

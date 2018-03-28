@@ -9,7 +9,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<display:table name="requests" id="row" requestURI="${requestURI}" class="displaytag">
+<display:table name="requests" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 
 	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
 	<spring:message code="request.description" var="descriptionHeader" />
