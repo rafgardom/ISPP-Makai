@@ -42,12 +42,15 @@ public class NotificationActorController extends AbstractController {
 		ModelAndView result;
 		Actor actor;
 		Collection<Notification> notifications;
+		Integer numberNoti;
 
 		actor = this.actorService.findByPrincipal();
 		notifications = this.notificationService.findByActorId(actor.getId());
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("notification/list");
 		result.addObject("notifications", notifications);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "notification/actor/list.do");
 
 		return result;
@@ -59,13 +62,16 @@ public class NotificationActorController extends AbstractController {
 	public ModelAndView display(@RequestParam final int notificationId) {
 		ModelAndView result;
 		Notification notification;
+		final Integer numberNoti;
 
 		notification = this.notificationService.findOne(notificationId);
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		this.notificationService.notificationViewed(notification);
 
 		result = new ModelAndView("notification/display");
 		result.addObject("notification", notification);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "notification/actor/display.do");
 
 		return result;
@@ -93,11 +99,8 @@ public class NotificationActorController extends AbstractController {
 	@RequestMapping(value = "/reload", method = RequestMethod.GET)
 	public Integer reload() {
 		Integer result;
-		Actor actor;
 
-		actor = this.actorService.findByPrincipal();
-
-		result = this.notificationService.findNotificationWithoutRead(actor);
+		result = this.notificationService.findNotificationWithoutRead();
 
 		return result;
 	}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CustomerService;
+import services.NotificationService;
 import services.ReceiptService;
 
 import com.paypal.api.payments.Amount;
@@ -32,14 +33,17 @@ public class ReceiptController extends AbstractController {
 
 	//Related services
 	@Autowired
-	private ReceiptService	receiptService;
+	private ReceiptService		receiptService;
 
 	@Autowired
-	private CustomerService	customerService;
+	private CustomerService		customerService;
 
-	private final String	clientID		= "AcfmnPWoOp2x6x5DbmGjyl0gUCWxWEvCTOEnQNsl4QJWQwaL-QzspwL9vbDXTd4xCZHuEIcm6lPYpq0_";
-	private final String	clientSecret	= "EDTVo6vMPwwd78s2Dvj21VwsnD1eUY7Rd98KJtnGMmd5Q9_nAG6rIteY4k8nUaEZnSC-EUJ0FOqgy9J6";
-	private final String	mode			= "live";
+	@Autowired
+	private NotificationService	notificationService;
+
+	private final String		clientID		= "AcfmnPWoOp2x6x5DbmGjyl0gUCWxWEvCTOEnQNsl4QJWQwaL-QzspwL9vbDXTd4xCZHuEIcm6lPYpq0_";
+	private final String		clientSecret	= "EDTVo6vMPwwd78s2Dvj21VwsnD1eUY7Rd98KJtnGMmd5Q9_nAG6rIteY4k8nUaEZnSC-EUJ0FOqgy9J6";
+	private final String		mode			= "live";
 
 
 	//Constructor
@@ -54,9 +58,12 @@ public class ReceiptController extends AbstractController {
 		try {
 			final Customer customer = this.customerService.findByPrincipal();
 			final Collection<Receipt> pendingReceipts = this.receiptService.getPendingReceipts(customer);
+			final Integer numberNoti;
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			result = new ModelAndView("receipt/customer/pending");
 			result.addObject("receipts", pendingReceipts);
+			result.addObject("numberNoti", numberNoti);
 			result.addObject("RequestURI", "receipt/customer/pending.do");
 
 		} catch (final Throwable oops) {
@@ -130,9 +137,12 @@ public class ReceiptController extends AbstractController {
 		try {
 			final Customer customer = this.customerService.findByPrincipal();
 			final Collection<Receipt> paidReceipts = this.receiptService.getPaidReceipts(customer);
+			final Integer numberNoti;
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			result = new ModelAndView("receipt/customer/paid");
 			result.addObject("receipts", paidReceipts);
+			result.addObject("numberNoti", numberNoti);
 			result.addObject("RequestURI", "receipt/customer/paid.do");
 
 		} catch (final Throwable oops) {

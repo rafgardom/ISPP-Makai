@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.NotificationService;
 import services.OfferService;
 import services.RequestService;
 import domain.Offer;
@@ -23,24 +24,30 @@ public class OfferController extends AbstractController {
 	//Related services
 
 	@Autowired
-	private OfferService	offerService;
+	private OfferService		offerService;
 
 	@Autowired
-	private RequestService	requestService;
+	private RequestService		requestService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	//Listing request's offers
 	@RequestMapping(value = "/customer/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int requestId) {
 		ModelAndView result;
+		final Integer numberNoti;
 
 		try {
 			final Request request = this.requestService.findOne(requestId);
 			Assert.notNull(request);
 			final Collection<Offer> offers = this.offerService.findOfferByRequest(request);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			result = new ModelAndView("offer/customer/list");
 			result.addObject("offers", offers);
+			result.addObject("numberNoti", numberNoti);
 			result.addObject("RequestURI", "offer/customer/list.do");
 
 		} catch (final Throwable oops) {

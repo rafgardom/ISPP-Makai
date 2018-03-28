@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AnimalService;
 import services.CustomerService;
+import services.NotificationService;
 import services.OfferService;
 import services.RequestService;
 import controllers.AbstractController;
@@ -31,16 +32,19 @@ public class RequestCustomerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
-	private RequestService	requestService;
+	private RequestService		requestService;
 
 	@Autowired
-	private CustomerService	customerService;
+	private CustomerService		customerService;
 
 	@Autowired
-	private AnimalService	animalService;
+	private AnimalService		animalService;
 
 	@Autowired
-	private OfferService	offerService;
+	private OfferService		offerService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -57,6 +61,9 @@ public class RequestCustomerController extends AbstractController {
 		Collection<Request> requests;
 		Customer customer;
 		Collection<Offer> offersPendingReceipts;
+		final Integer numberNoti;
+
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		customer = this.customerService.findByPrincipal();
 
@@ -65,6 +72,7 @@ public class RequestCustomerController extends AbstractController {
 
 		result = new ModelAndView("request/myList");
 		result.addObject("requestURI", "request/myList.do");
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requests", requests);
 		result.addObject("offersPendingReceipts", offersPendingReceipts);
 
@@ -151,6 +159,9 @@ public class RequestCustomerController extends AbstractController {
 		Customer principal;
 		Collection<Animal> animals;
 		Category[] categories;
+		final Integer numberNoti;
+
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		principal = this.customerService.findByPrincipal();
 		animals = this.animalService.findByActorId(principal.getId());
@@ -167,6 +178,7 @@ public class RequestCustomerController extends AbstractController {
 		result.addObject("requestForm", requestForm);
 		result.addObject("animals", animals);
 		result.addObject("categoriesList", categories);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("message", message);
 
 		return result;

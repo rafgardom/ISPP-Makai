@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AnimalService;
+import services.NotificationService;
 import services.OfferService;
 import services.RequestService;
 import services.TrainerService;
@@ -34,19 +35,22 @@ public class OfferTrainerController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private TrainerService	trainerService;
+	private TrainerService		trainerService;
 
 	@Autowired
-	private OfferService	offerService;
+	private OfferService		offerService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private RequestService	requestService;
+	private RequestService		requestService;
 
 	@Autowired
-	private AnimalService	animalService;
+	private AnimalService		animalService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -61,12 +65,15 @@ public class OfferTrainerController extends AbstractController {
 		ModelAndView result;
 		Trainer trainer;
 		Collection<Offer> offers;
+		final Integer numberNoti;
 
 		trainer = this.trainerService.findByPrincipal();
 		offers = this.offerService.findOffersByTrainer(trainer);
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("offer/list");
 		result.addObject("offers", offers);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "offer/trainer/list.do");
 
 		return result;
@@ -79,9 +86,11 @@ public class OfferTrainerController extends AbstractController {
 		Actor actor;
 		Offer offer;
 		final String image;
+		final Integer numberNoti;
 
 		actor = this.actorService.findByPrincipal();
 		offer = this.offerService.findOne(offerId);
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		image = Utilities.showImage(offer.getAnimal().getPicture());
 
@@ -89,6 +98,7 @@ public class OfferTrainerController extends AbstractController {
 		result.addObject("offer", offer);
 		result.addObject("principal", actor);
 		result.addObject("animalImage", image);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "offer/trainer/display.do?" + offer.getId());
 
 		return result;
@@ -191,14 +201,17 @@ public class OfferTrainerController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final OfferForm offerForm, final String message) {
 		ModelAndView result;
+		final Integer numberNoti;
 
 		result = new ModelAndView("offer/create");
 
 		final Collection<Animal> animals = this.animalService.findAnimalFromAnimalShelter();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result.addObject("RequestURI", "offer/trainer/create.do");
 		result.addObject("animals", animals);
 		result.addObject("offerForm", offerForm);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("message", message);
 
 		return result;

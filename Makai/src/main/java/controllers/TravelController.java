@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.NotificationService;
 import services.TransporterService;
 import services.TravelService;
 import services.VehicleService;
@@ -35,6 +36,9 @@ public class TravelController extends AbstractController {
 
 	@Autowired
 	private TransporterService	transporterService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	//Constructor
@@ -158,9 +162,12 @@ public class TravelController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Travel> travels;
+		final Integer numberNoti;
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 		travels = this.travelService.findAll();
 		result = new ModelAndView("travel/list");
 		result.addObject("travels", travels);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "travel/list.do");
 
 		return result;
@@ -171,10 +178,14 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Collection<Travel> travels;
 		Transporter principal;
+		final Integer numberNoti;
+		numberNoti = this.notificationService.findNotificationWithoutRead();
+
 		principal = this.transporterService.findByPrincipal();
 		travels = this.travelService.findTravelByTransporterId(principal.getId());
 		result = new ModelAndView("travel/myList");
 		result.addObject("travels", travels);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "travel/myList.do");
 
 		return result;
@@ -185,11 +196,14 @@ public class TravelController extends AbstractController {
 	public ModelAndView display(@RequestParam final int travelId) {
 		ModelAndView result;
 		Travel travel;
+		final Integer numberNoti;
 
 		travel = this.travelService.findOne(travelId);
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("travel/display");
 		result.addObject("travel", travel);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "travel/display.do?travelId=" + travel.getId());
 
 		return result;
@@ -204,14 +218,17 @@ public class TravelController extends AbstractController {
 	protected ModelAndView createModelAndView(final TravelForm travelForm, final String message) {
 		Collection<Vehicle> vehicles;
 		Transporter principal;
+		final Integer numberNoti;
 
 		principal = this.transporterService.findByPrincipal();
 		vehicles = this.vehicleService.findVehicleByTransporterId(principal.getId());
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		final ModelAndView result = new ModelAndView("travel/create");
 		result.addObject("travelForm", travelForm);
 		result.addObject("vehicles", vehicles);
 		result.addObject("RequestURI", "travel/create.do");
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("errorMessage", message);
 
 		return result;

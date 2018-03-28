@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.NotificationService;
 import services.TrainerService;
 import services.TrainingService;
 import controllers.AbstractController;
@@ -27,10 +28,13 @@ public class TrainingTrainerController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private TrainingService	trainingService;
+	private TrainingService		trainingService;
 
 	@Autowired
-	private TrainerService	trainerService;
+	private TrainerService		trainerService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -46,12 +50,15 @@ public class TrainingTrainerController extends AbstractController {
 		ModelAndView result;
 		Trainer trainer;
 		Collection<Training> trainings;
+		final Integer numberNoti;
 
 		trainer = this.trainerService.findByPrincipal();
 		trainings = this.trainingService.findByTrainerId(trainer.getId());
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("training/list");
 		result.addObject("trainings", trainings);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "training/trainer/list.do");
 
 		return result;
@@ -63,11 +70,14 @@ public class TrainingTrainerController extends AbstractController {
 	public ModelAndView display(@RequestParam final int trainingId) {
 		ModelAndView result;
 		Training training;
+		final Integer numberNoti;
 
 		training = this.trainingService.findOne(trainingId);
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("training/display");
 		result.addObject("training", training);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "training/trainer/display.do");
 
 		return result;
@@ -94,11 +104,14 @@ public class TrainingTrainerController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		Training training;
+		final Integer numberNoti;
 
 		training = this.trainingService.create();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("training/create");
 		result.addObject("training", training);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "training/trainer/edit.do");
 
 		return result;
@@ -110,11 +123,14 @@ public class TrainingTrainerController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int trainingId) {
 		ModelAndView result;
 		Training training;
+		final Integer numberNoti;
 
 		training = this.trainingService.findOne(trainingId);
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("training/edit");
 		result.addObject("training", training);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "training/trainer/edit.do");
 
 		return result;
@@ -151,6 +167,9 @@ public class TrainingTrainerController extends AbstractController {
 	protected ModelAndView createModelAndView(final Training training, final String message) {
 
 		ModelAndView result;
+		final Integer numberNoti;
+
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		if (training.getId() == 0) {
 			result = new ModelAndView("training/create");
@@ -161,6 +180,7 @@ public class TrainingTrainerController extends AbstractController {
 		}
 
 		result.addObject("training", training);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("message", message);
 
 		return result;

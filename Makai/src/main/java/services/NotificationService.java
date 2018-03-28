@@ -193,9 +193,15 @@ public class NotificationService {
 		this.save(notification);
 	}
 
-	public Integer findNotificationWithoutRead(final Actor actor) {
-		Assert.notNull(actor);
+	public Integer findNotificationWithoutRead() {
+		Actor actor;
 
-		return this.notificationRepository.findNotificationWithoutRead(actor.getId());
+		try {
+			actor = this.actorService.findByPrincipal();
+			return this.notificationRepository.findNotificationWithoutRead(actor.getId());
+		} catch (final Throwable e) {
+			return 0;
+		}
+
 	}
 }

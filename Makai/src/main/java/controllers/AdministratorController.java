@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.NotificationService;
 import domain.Actor;
 
 @Controller
@@ -28,7 +29,10 @@ public class AdministratorController extends AbstractController {
 
 	//Related services
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -53,11 +57,14 @@ public class AdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Actor> actors;
+		final Integer numberNoti;
 
 		actors = this.actorService.findAll();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("administrator/listActors");
 		result.addObject("requestURI", "administrator/listActors.do");
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("actors", actors);
 
 		return result;

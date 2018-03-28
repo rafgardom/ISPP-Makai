@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.NotificationService;
 import services.TransporterService;
 import services.VehicleService;
 import domain.Brand;
@@ -33,6 +34,9 @@ public class VehicleController extends AbstractController {
 
 	@Autowired
 	private TransporterService	transporterService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	//Constructor
@@ -159,9 +163,11 @@ public class VehicleController extends AbstractController {
 		ModelAndView result;
 		Collection<VehicleForm> vehicles;
 		Transporter principal;
+		final Integer numberNoti;
 
 		principal = this.transporterService.findByPrincipal();
 		vehicles = new HashSet<VehicleForm>();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		for (final Vehicle a : this.vehicleService.findVehicleByTransporterId(principal.getId())) {
 			VehicleForm vehicleForm;
@@ -173,6 +179,7 @@ public class VehicleController extends AbstractController {
 
 		result = new ModelAndView("vehicle/list");
 		result.addObject("vehicles", vehicles);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "vehicle/list.do");
 
 		return result;
@@ -190,12 +197,15 @@ public class VehicleController extends AbstractController {
 		brands = Brand.values();
 		CarType[] carTypes;
 		carTypes = CarType.values();
+		final Integer numberNoti;
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		final ModelAndView result = new ModelAndView("vehicle/register");
 		result.addObject("vehicleForm", vehicleForm);
 		result.addObject("RequestURI", "vehicle/register.do");
 		result.addObject("errorMessage", message);
 		result.addObject("brands", brands);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("carTypes", carTypes);
 
 		return result;

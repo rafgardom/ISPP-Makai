@@ -146,7 +146,7 @@
 				<a class="nav-link"
 					href="notification/actor/list.do">
 							<img src="images/notification.png" height="30px"/>
-							<span class="badge badge-default badge-pill bg-secondary pill-menu">2</span> </a></li>
+							<span class="badge badge-default badge-pill bg-secondary pill-menu">${numberNoti}</span> </a></li>
 			</security:authorize>
 		</ul>
 		

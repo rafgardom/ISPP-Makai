@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AnimalService;
 import services.BreedService;
+import services.NotificationService;
 import services.SpecieService;
 
 import com.google.gson.Gson;
@@ -35,16 +36,19 @@ public class AnimalController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
-	private AnimalService	animalService;
+	private AnimalService		animalService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private SpecieService	specieService;
+	private SpecieService		specieService;
 
 	@Autowired
-	private BreedService	breedService;
+	private BreedService		breedService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -59,8 +63,10 @@ public class AnimalController extends AbstractController {
 		ModelAndView result;
 		Collection<AnimalForm> animals;
 		Actor actor;
+		final Integer numberNoti;
 
 		actor = this.actorService.findByPrincipal();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		animals = new HashSet<AnimalForm>();
 
@@ -74,6 +80,7 @@ public class AnimalController extends AbstractController {
 
 		result = new ModelAndView("animal/list");
 		result.addObject("requestURI", "animal/list.do");
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("animals", animals);
 
 		return result;
@@ -85,12 +92,15 @@ public class AnimalController extends AbstractController {
 		ModelAndView result;
 		Animal animal;
 		AnimalForm animalForm;
+		final Integer numberNoti;
 
 		animal = this.animalService.findOne(animalId);
 		animalForm = this.animalService.animalToFormObject(animal);
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("animal/display");
 		result.addObject("animal", animalForm);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "animal/display.do");
 
 		return result;
@@ -191,11 +201,13 @@ public class AnimalController extends AbstractController {
 		final Collection<Specie> species;
 		final Collection<Breed> breeds;
 		String json;
+		final Integer numberNoti;
 
 		sexs = Sex.values();
 		species = this.specieService.findAll();
 		breeds = this.breedService.findAll();
 		json = new Gson().toJson(breeds);
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		if (animalForm.getId() == 0)
 			result = new ModelAndView("animal/register");
@@ -206,6 +218,7 @@ public class AnimalController extends AbstractController {
 		result.addObject("species", species);
 		result.addObject("breeds", breeds);
 		result.addObject("jsonBreeds", json);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("RequestURI", "animal/edit.do");
 		result.addObject("errorMessage", message);
 

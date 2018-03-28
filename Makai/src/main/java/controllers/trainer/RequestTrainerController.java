@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.NotificationService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Request;
@@ -20,7 +21,10 @@ public class RequestTrainerController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private RequestService	requestService;
+	private RequestService		requestService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -34,11 +38,14 @@ public class RequestTrainerController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Request> requests;
+		final Integer numberNoti;
 
 		requests = this.requestService.findRequestsNotAccepted();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("request/list");
 		result.addObject("requestURI", "request/list.do");
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requests", requests);
 
 		return result;

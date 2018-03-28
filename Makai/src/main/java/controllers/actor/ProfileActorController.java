@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.NotificationService;
 import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
@@ -25,7 +26,10 @@ public class ProfileActorController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -41,13 +45,16 @@ public class ProfileActorController extends AbstractController {
 		ModelAndView result;
 		Actor actor;
 		String image;
+		final Integer numberNoti;
 
 		actor = this.actorService.findByPrincipal();
 		image = Utilities.showImage(actor.getPicture());
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("profile/display");
 		result.addObject("actor", actor);
 		result.addObject("pictureImage", image);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "profile/display.do");
 
 		return result;
@@ -59,11 +66,14 @@ public class ProfileActorController extends AbstractController {
 	public ModelAndView edit() {
 		ModelAndView result;
 		ProfileForm profileForm;
+		final Integer numberNoti;
 
 		profileForm = this.actorService.principalToFormObject();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("profile/edit");
 		result.addObject("profileForm", profileForm);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "profile/edit.do");
 
 		return result;
@@ -110,6 +120,9 @@ public class ProfileActorController extends AbstractController {
 
 	protected ModelAndView createModelAndView(final ProfileForm profileForm, final String message) {
 		final ModelAndView result = new ModelAndView("profile/edit");
+		final Integer numberNoti;
+		numberNoti = this.notificationService.findNotificationWithoutRead();
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("profileForm", profileForm);
 		result.addObject("RequestURI", "profile/edit.do");
 		result.addObject("errorMessage", message);

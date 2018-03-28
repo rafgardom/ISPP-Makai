@@ -83,12 +83,15 @@ public class NotificationAdministratorController extends AbstractController {
 		ModelAndView result;
 		Collection<Actor> actors;
 		NotificationType[] notificationTypes;
+		final Integer numberNoti;
 
 		actors = this.actorService.findAll();
 		notificationTypes = NotificationType.values();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("notification/create");
 		result.addObject("notification", notification);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("actors", actors);
 		result.addObject("notificationTypes", notificationTypes);
 		result.addObject("RequestURI", "notification/admin/create.do");

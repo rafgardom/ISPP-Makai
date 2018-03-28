@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.NotificationService;
 import services.RatingService;
 import services.RequestService;
 import controllers.AbstractController;
@@ -23,10 +24,13 @@ public class RatingCustomerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
-	private RatingService	ratingService;
+	private RatingService		ratingService;
 
 	@Autowired
-	private RequestService	requestService;
+	private RequestService		requestService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -81,9 +85,12 @@ public class RatingCustomerController extends AbstractController {
 
 	protected ModelAndView createModelAndView(final Rating rating, final String message) {
 		ModelAndView result;
+		final Integer numberNoti;
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("rating/create");
 		result.addObject("RequestURI", "rating/customer/create.do");
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("rating", rating);
 		result.addObject("message", message);
 
