@@ -10,9 +10,9 @@
 
 <display:table name="offers" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
-	<acme:column code="offer.startMoment" property="startMoment" format="{0,date,dd/MM/yyyy HH:mm}" />
-	<acme:column code="offer.coordinates.city" property="destination.city" />
-	<acme:column code="offer.price" property="price" />
+	<acme:column code="offer.startMoment" property="startMoment" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true"/>
+	<acme:column code="offer.coordinates.city" property="destination.city" sortable="true"/>
+	<acme:column code="offer.price" property="price" sortable="true"/>
 	<acme:column code="offer.animal" property="animal.name" />
 	
 	

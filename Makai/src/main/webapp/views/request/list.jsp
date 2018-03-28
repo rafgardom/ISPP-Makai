@@ -19,8 +19,8 @@
 			<jstl:out value="..." />
 		</jstl:if>
 	</display:column>
-	<acme:column code="request.tags" property="tags" />
-	<acme:column code="request.category" property="category.name" />
+	<acme:column code="request.tags" property="tags" sortable="true"/>
+	<acme:column code="request.category" property="category.name" sortable="true" />
 	
 	<spring:message code="request.animal" var="animalHeader" />
 	<spring:message code="request.none" var="none"/>

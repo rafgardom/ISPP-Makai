@@ -10,9 +10,9 @@
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
 <display:table name="travels" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 
-	<acme:column code="travel.origin" property="origin.city" />
-	<acme:column code="travel.destination" property="destination.city" />
-	<acme:column code="travel.startMoment" property="startMoment" format="{0,date,dd/MM/yyyy HH:mm}"/>
+	<acme:column code="travel.origin" property="origin.city" sortable="true"/>
+	<acme:column code="travel.destination" property="destination.city" sortable="true"/>
+	<acme:column code="travel.startMoment" property="startMoment" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true"/>
 	<acme:column code="travel.endMoment" property="endMoment" format="{0,date,dd/MM/yyyy HH:mm}"/>
 	<acme:column code="travel.animalSeats" property="animalSeats" />
 	<acme:column code="travel.humanSeats" property="humanSeats" />

@@ -12,8 +12,8 @@
 <div class="table-responsive">
 <display:table name="notifications" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 	
-	<acme:column code="notification.moment" property="moment" format="{0,date,dd/MM/yyyy HH:mm}" />
-	<acme:column code="notification.reason" property="reason" />
+	<acme:column code="notification.moment" property="moment" format="{0,date,HH:mm:ss dd/MM/yyyy}" sortable="true"/>
+	<acme:column code="notification.reason" property="reason" sortable="true"/>
 	
 	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
 	

@@ -15,9 +15,9 @@
 	</display:column>
 	
 	<acme:column code="animal.name" property="name" />
-	<acme:column code="animal.chipNumber" property="chipNumber" />
-	<acme:column code="animal.age" property="age" />
-	<acme:column code="animal.sex" property="sex" />
+	<acme:column code="animal.chipNumber" property="chipNumber" sortable="true"/>
+	<acme:column code="animal.age" property="age" sortable="true"/>
+	<acme:column code="animal.sex" property="sex" sortable="true"/>
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">	

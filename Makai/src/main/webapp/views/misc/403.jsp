@@ -16,7 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<img src="images/security.png" style="margin-left:39%"/>
+<img src="http://icons.iconarchive.com/icons/icons8/android/256/Users-Police-icon.png" style="margin-left:39%"/>
 <h3 style="margin-left:39%; font-family: verdana">You should not be here.</h3>
 <h3 style="margin-left:39%; font-family: verdana">You don't have access.</h3> 
 <p style="margin-left:46%; font-size: 18px;font-family: verdana"><a href="<spring:url value='/' />">Go Back</a><p>

@@ -9,7 +9,7 @@
 
 <display:table name="trainings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
-	<acme:column code="training.category" property="category" />
+	<acme:column code="training.category" property="category" sortable="true"/>
 	<acme:column code="training.price" property="price" />
 	<acme:column code="training.description" property="description" />
 	
