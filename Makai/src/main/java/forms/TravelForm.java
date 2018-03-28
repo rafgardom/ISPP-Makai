@@ -177,6 +177,7 @@ public class TravelForm {
 		this.humanSeats = humanSeats;
 	}
 
+	@NotNull
 	public Vehicle getVehicle() {
 		return this.vehicle;
 	}

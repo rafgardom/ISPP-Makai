@@ -122,7 +122,7 @@ public class VehicleController extends AbstractController {
 			} catch (final Throwable oops) {
 				System.out.println(oops);
 
-				result = this.createModelAndView(vehicleForm, "travel.commit.error");
+				result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
 
 			}
 		return result;

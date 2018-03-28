@@ -61,14 +61,14 @@
 
 			<div class="col-lg-2 col-sm-6 col-12">
 				<acme:textbox code="travel.animalSeats" path="animalSeats" mandatory="false" />
-				<acme:textbox code="travel.humanSeats" path="HumanSeats" mandatory="false" />
+				<acme:textbox code="travel.humanSeats" path="humanSeats" mandatory="false" />
 			</div>
 			<div class="col-lg-3 col-sm-6 col-12">
 				<acme:input code="travel.startMoment" path="startMoment" mandatory="true" image="calendar" />
 				<acme:input code="travel.endMoment" path="endMoment" mandatory="true" image="calendar"/>
 			</div>
 			<div class="offset-lg-1 col-md-5 col-12">
-				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" />
+				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" mandatory="true"/>
 			</div>
 	</div>
 	<br/>

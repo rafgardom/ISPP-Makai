@@ -61,29 +61,36 @@ public class TravelController extends AbstractController {
 	public ModelAndView create(@Valid final TravelForm travelForm, final BindingResult binding) throws IOException {
 		ModelAndView result;
 		Travel travel;
+		boolean wrongSeats = false;
 		if (binding.hasErrors())
-			result = this.createModelAndView(travelForm);
+			result = this.createModelAndView(travelForm, "travel.commit.error");
 		else
 			try {
+				if ((travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() < 1) && (travelForm.getHumanSeats() == null || travelForm.getHumanSeats() < 1)) {
+					wrongSeats = true;
+					throw new IllegalArgumentException();
+				}
+
 				travel = this.travelService.reconstruct(travelForm, binding);
 				this.travelService.save(travel);
-				result = new ModelAndView("redirect:/welcome/index.do");
+				result = new ModelAndView("redirect:/travel/myList.do");
 
 			} catch (final Throwable oops) {
-
-				result = this.createModelAndView(travelForm, "travel.commit.error");
+				if (wrongSeats == false)
+					result = this.createModelAndView(travelForm, "travel.register.error");
+				else
+					result = this.createModelAndView(travelForm, "travel.seats.error");
 
 			}
 		return result;
 	}
-
 	//Register
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(@RequestParam final int travelId) {
 		final ModelAndView result;
 		final Travel travel = this.travelService.findOne(travelId);
 		this.travelService.registerTravel(travel);
-		result = new ModelAndView("redirect:list.do");
+		result = new ModelAndView("redirect:myList.do");
 
 		return result;
 	}

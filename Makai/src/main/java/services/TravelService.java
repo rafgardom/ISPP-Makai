@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.TravelRepository;
 import security.Authority;
@@ -47,6 +48,9 @@ public class TravelService {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	// Constructors------------------------------------------------------------
@@ -105,6 +109,8 @@ public class TravelService {
 
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
+
+		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
 
 		result = this.travelRepository.save(travel);
 
@@ -175,13 +181,15 @@ public class TravelService {
 		else
 			result = this.findOne(travelForm.getId());
 
-		result.setOrigin(new Coordinates(travelForm.getCountryOrigin(), travelForm.getCityOrigin(), travelForm.getStateOrigin(), travelForm.getProvinceOrigin(), travelForm.getZip_codeOrigin()));
-		result.setDestination(new Coordinates(travelForm.getCountryDestination(), travelForm.getCityDestination(), travelForm.getStateDestination(), travelForm.getProvinceDestination(), travelForm.getZip_codeDestination()));
+		result.setOrigin(new Coordinates(travelForm.getCountryOrigin(), travelForm.getStateOrigin(), travelForm.getProvinceOrigin(), travelForm.getCityOrigin(), travelForm.getZip_codeOrigin()));
+		result.setDestination(new Coordinates(travelForm.getCountryDestination(), travelForm.getStateDestination(), travelForm.getProvinceDestination(), travelForm.getCityDestination(), travelForm.getZip_codeDestination()));
 		result.setStartMoment(travelForm.getStartMoment());
 		result.setEndMoment(travelForm.getEndMoment());
 		result.setHumanSeats(travelForm.getHumanSeats());
 		result.setAnimalSeats(travelForm.getAnimalSeats());
 		result.setVehicle(travelForm.getVehicle());
+
+		this.validator.validate(result, binding);
 
 		return result;
 	}
