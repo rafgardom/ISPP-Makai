@@ -134,7 +134,7 @@ public class ProfessionalService {
 		if (professionalForm.getId() == 0) {
 			result = this.create();
 
-			if (accountValidator.passwordValidate(professionalForm.getPassword()) && !professionalForm.getPassword().toLowerCase().contains("с"))
+			if (accountValidator.passwordValidate(professionalForm.getPassword()))
 				passwordValidator = true;
 
 			if (accountValidator.userNameValidate(professionalForm.getUsername())) {
@@ -146,7 +146,6 @@ public class ProfessionalService {
 				fieldError = new FieldError("professionalForm", "username", result.getUserAccount().getUsername(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
-			accountValidator.userNameValidate("ссссссссссс");
 			if (professionalForm.getPassword().equals(professionalForm.getRepeatPassword()) && professionalForm.getPassword() != null && !professionalForm.getPassword().isEmpty() && !professionalForm.getPassword().contains(" ") && passwordValidator) {
 				password = this.actorService.hashPassword(professionalForm.getPassword());
 				result.getUserAccount().setPassword(password);

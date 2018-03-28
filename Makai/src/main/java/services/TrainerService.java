@@ -139,7 +139,7 @@ public class TrainerService {
 		if (trainerForm.getId() == 0) {
 			result = this.create();
 
-			if (accountValidator.passwordValidate(trainerForm.getPassword()) && !trainerForm.getPassword().toLowerCase().contains("ñ"))
+			if (accountValidator.passwordValidate(trainerForm.getPassword()))
 				passwordValidator = true;
 
 			if (accountValidator.userNameValidate(trainerForm.getUsername())) {

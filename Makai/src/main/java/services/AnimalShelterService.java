@@ -129,7 +129,7 @@ public class AnimalShelterService {
 		if (animalShelterForm.getId() == 0) {
 			result = this.create();
 
-			if (accountValidator.passwordValidate(animalShelterForm.getPassword()) && !animalShelterForm.getPassword().toLowerCase().contains("ñ"))
+			if (accountValidator.passwordValidate(animalShelterForm.getPassword()))
 				passwordValidator = true;
 
 			if (accountValidator.userNameValidate(animalShelterForm.getUsername())) {

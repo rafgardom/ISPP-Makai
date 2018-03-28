@@ -9,10 +9,9 @@ public class UserNamePasswordValidator {
 	private final Pattern		passwordPattern;
 	private final Pattern		userNamePattern;
 	private Matcher				passwordMatcher;
-	private Matcher				userNameMatcher;
 
-	private static final String	PASSWORD_PATTERN	= "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,30})";
-	private static final String	USERNAME_PATTERN	= "[^A-Za-z0-9]";
+	private static final String	PASSWORD_PATTERN	= "((?=.*\\d)(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[@#$%]).{6,30})";
+	private static final String	USERNAME_PATTERN	= "[^A-Za-z0-9ñÑ]";
 
 
 	public UserNamePasswordValidator() {

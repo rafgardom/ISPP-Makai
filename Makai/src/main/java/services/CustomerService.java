@@ -133,7 +133,7 @@ public class CustomerService {
 		if (customerForm.getId() == 0) {
 			result = this.create();
 
-			if (accountValidator.passwordValidate(customerForm.getPassword()) && !customerForm.getPassword().toLowerCase().contains("ñ"))
+			if (accountValidator.passwordValidate(customerForm.getPassword()))
 				passwordValidator = true;
 
 			if (accountValidator.userNameValidate(customerForm.getUsername())) {

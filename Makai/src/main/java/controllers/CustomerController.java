@@ -70,6 +70,7 @@ public class CustomerController extends AbstractController {
 					throw new IllegalArgumentException();
 				}
 				//				customer.setPicture(userImage.getBytes());
+
 				this.customerService.save(customer);
 				result = new ModelAndView("redirect:/security/login.do");
 
