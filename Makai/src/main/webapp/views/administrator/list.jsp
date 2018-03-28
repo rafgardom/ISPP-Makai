@@ -12,10 +12,9 @@
 
 <display:table name="actors" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
 	
-	<acme:column code="administrator.actor.name" property="name"/>
-	
+	<acme:column code="administrator.actor.username" property="userAccount.username" sortable="true"/>
+	<acme:column code="administrator.actor.name" property="name"/>	
 	<acme:column code="administrator.actor.email" property="email"/>
-	
 	<acme:column code="administrator.actor.phone" property="phone"/>
 		
 	<spring:message code="administrator.actor.coordinates" var="coordinatesHeader" />

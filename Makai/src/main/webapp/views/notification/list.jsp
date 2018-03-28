@@ -18,18 +18,21 @@
 	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
 	
 	<spring:message code="notification.description" var="descriptionHeader" />
-	<display:column title="${descriptionHeader}" >
+<%-- 	<display:column title="${descriptionHeader}" >
 		<jstl:out value="${substrDescription }" />
 		<jstl:if test="${fn:length(row.description)>40 }">
 			<jstl:out value="..." />
 		</jstl:if>
-	</display:column>
+	</display:column> --%>
 	
 	<display:column>
-		<div class="btn-group" data-toggle="buttons">	
+		<div class="btn-group">	
 			<acme:link image="eye" href="notification/actor/display.do?notificationId=${row.id}"/>
-			<acme:link image="trash" href="notification/actor/delete.do?notificationId=${row.id}" type="danger"/>
-		</div>
+			<jstl:if test="${row.isRead}">
+				<acme:link image="trash" href="notification/actor/delete.do?notificationId=${row.id}" type="danger"/>
+			</jstl:if>
+			
+			</div>
 	</display:column>
 	
 </display:table>

@@ -82,7 +82,6 @@ tr.tableRowEven,tr.even {
 tbody tr:hover {
   background-color: rgba(120, 194, 173, 0.54);
   color: white;
-  font-weight: bold;
 }
 
 div.exportlinks {

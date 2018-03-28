@@ -14,6 +14,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div style="display: flex; justify-content:center; justify-content:center;">
 	<img src="images/logo.png" alt="Makai"
@@ -146,7 +147,7 @@
 				<a class="nav-link"
 					href="notification/actor/list.do">
 							<img src="images/notification.png" height="30px"/>
-							<span class="badge badge-default badge-pill bg-secondary pill-menu">${numberNoti}</span> </a></li>
+							<span class="badge badge-default badge-pill bg-secondary pill-menu"><jstl:if test="${numberNoti > 0}" >${numberNoti}</jstl:if></span> </a></li>
 			</security:authorize>
 		</ul>
 		
