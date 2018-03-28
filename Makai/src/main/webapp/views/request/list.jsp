@@ -5,15 +5,33 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
 <display:table name="requests" id="row" requestURI="${requestURI}" class="displaytag">
 
-	<acme:column code="request.description" property="description" />
+	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
+	<spring:message code="request.description" var="descriptionHeader" />
+	<display:column title="${descriptionHeader}" >
+		<jstl:out value="${substrDescription}" />
+		<jstl:if test="${fn:length(row.description)>40}">
+			<jstl:out value="..." />
+		</jstl:if>
+	</display:column>
 	<acme:column code="request.tags" property="tags" />
 	<acme:column code="request.category" property="category.name" />
-	<acme:column code="request.animal" property="animal.name" />
+	
+	<spring:message code="request.animal" var="animalHeader" />
+	<spring:message code="request.none" var="none"/>
+	<display:column title="${animalHeader}" >
+		<jstl:if test="${row.animal != null}">
+			<jstl:out value="${row.animal.name}" />
+		</jstl:if>
+		<jstl:if test="${row.animal == null}">
+			<jstl:out value="${none}" />
+		</jstl:if>
+	</display:column>
 	
 	<display:column>
 		<div class="btn-group">

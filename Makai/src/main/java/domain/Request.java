@@ -5,12 +5,14 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -32,6 +34,8 @@ public class Request extends DomainEntity {
 
 
 	@NotBlank
+	@Size(max = 2000)
+	@Column(name = "description", length = 2000)
 	public String getDescription() {
 		return this.description;
 	}

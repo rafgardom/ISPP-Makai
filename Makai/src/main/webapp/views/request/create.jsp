@@ -34,8 +34,9 @@
 	
 	
 	<div class="row">	
-		<div class="col-md-7">		
-					<acme:textarea code="request.description" path="description" mandatory="true" rows="15" />
+		<div class="col-md-7">	
+					<spring:message code="request.ph" var="ph"/>
+					<acme:textarea code="request.description" path="description" mandatory="true" rows="15" maxlength="2000" placeholder="${ph}"/>
 		</div>
 		<div class="col-md-5">
 					

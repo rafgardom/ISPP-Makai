@@ -28,6 +28,7 @@
 <%@ attribute name="rows" required="false" %>
 <%@ attribute name="mandatory" required="false" %>
 <%@ attribute name="placeholder" required="false" %>
+<%@ attribute name="maxlength" required="false" %>
 
 <jstl:if test="${readonly == null}">
 	<jstl:set var="readonly" value="false" />
@@ -45,6 +46,6 @@
 			<img src="images/asterisk.png"	width="16"/>
 		</jstl:if>
 	</form:label>
-	<form:textarea path="${path}" placeholder="${placeholder }" readonly="${readonly}" class="form-control" rows="${rows}"/>
+	<form:textarea path="${path}" placeholder="${placeholder }" maxlength="${maxlength }" readonly="${readonly}" class="form-control" rows="${rows}"/>
 	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 </div>
