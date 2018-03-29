@@ -19,8 +19,8 @@
 
 	<display:column>
 	<div class="btn-group">
-		<acme:link image="eye" href="travel/display.do?travelId=${row.id}"/>
-		<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register" type="dark"/>
+		<acme:link href="travel/display.do?travelId=${row.id}" image="eye"/>
+		<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register" type="dark" image="map"/>
 	</div>
 	</display:column>
 	

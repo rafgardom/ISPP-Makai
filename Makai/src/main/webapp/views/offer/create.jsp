@@ -46,8 +46,11 @@
 		</div>
 		<div class="offset-md-1 col-md-5">
 			<acme:input image="calendar" code="offer.startMoment" path="startMoment" mandatory="true" />
-			<acme:input image="euro" code="offer.price" path="price" mandatory="true"/>
-			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="9"/>
+			
+  			<acme:input path="price" type="range" code="offer.price" min="0" max="4000" style="slider" id="myRange" mandatory="true" /> 
+  			<h6 class="text-center" id="total"></h6>
+	
+			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="8"/>
 		</div>
 	</div>
 	<br>
@@ -80,3 +83,15 @@
 	<br/>
 	
 </form:form>
+
+<!-- Slider Price -->
+<script type="text/javascript">
+	var slider = document.getElementById("myRange");
+	var output = document.getElementById("total");
+	output.innerHTML = slider.value+",00 &euro;"; // Display the default slider value
+
+	// Update the current slider value (each time you drag the slider handle)
+	slider.oninput = function() {
+	    output.innerHTML = this.value+",00 &euro;";
+	};
+</script>

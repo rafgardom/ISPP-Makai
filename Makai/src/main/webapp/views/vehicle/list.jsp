@@ -33,7 +33,7 @@
 	
 </display:table>
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
-	<acme:link href="vehicle/register.do" code="vehicle.create" type="success"/>
+	<acme:link href="vehicle/register.do" code="vehicle.create" type="success" image="car"/>
 </security:authorize>
 
 

@@ -10,7 +10,7 @@
 <display:table name="trainings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="training.category" property="category" sortable="true"/>
-	<acme:column code="training.price" property="price" />
+	<acme:column code="training.price" property="price" format="{0,number, ,000.00}&euro;"/>
 	<acme:column code="training.description" property="description" />
 	
 	<spring:message code="training.duration" var="durationHeader" />

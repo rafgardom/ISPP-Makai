@@ -18,7 +18,8 @@
 		<br>
 		<acme:selectNotEntity items="${categories}" code="training.category" path="category" />
 		
-		<acme:input code="training.price" path="price" type="number" min="0" step="1.0" image="euro"/>
+		<acme:input code="training.price" path="price" type="range" min="0" max="4000" style="slider" id="myRange"/>
+		<h6 class="text-center" id="total"></h6>
 		<acme:textarea code="training.description" rows="5" path="description"/>
 	</div>
 	<div class="offset-md-1 col-md-5">
@@ -35,3 +36,15 @@
 	<acme:submit name="save" code="training.save" />
 	<acme:cancel url="./training/trainer/list.do" code="training.cancel"/>
 </form:form>
+
+<!-- Slider Price -->
+<script type="text/javascript">
+	var slider = document.getElementById("myRange");
+	var output = document.getElementById("total");
+	output.innerHTML = slider.value+",00 &euro;"; // Display the default slider value
+
+	// Update the current slider value (each time you drag the slider handle)
+	slider.oninput = function() {
+	    output.innerHTML = this.value+",00 &euro;";
+	};
+</script>

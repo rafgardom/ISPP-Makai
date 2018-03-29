@@ -31,15 +31,14 @@
 <%@ attribute name="min" required="false"%>
 <%@ attribute name="max" required="false"%>
 <%@ attribute name="mandatory" required="false" %>
-<%@ attribute name="height" required="false" %>
 <%@ attribute name="image" required="false" %>
+<%@ attribute name="style" required="false" %>
+<%@ attribute name="id" required="false" %>
 
 <jstl:if test="${type == null}">
 	<jstl:set var="type" value="text" />
 </jstl:if>
-<jstl:if test="${height == null}">
-	<jstl:set var="height" value="32" />
-</jstl:if>
+
 
 
 
@@ -64,7 +63,7 @@
 		</div>
 	</jstl:if>
 	
-	<form:input class="form-control" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" />
+	<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }"/>
 	<form:errors cssClass="alert alert-danger form-control" path="${path}" />
 	
 	</div>
