@@ -17,6 +17,7 @@
 	
 	
 	
+	
 	<display:column>
 		<div class="btn-group">
 			<acme:link image="eye" href="offer/trainer/display.do?offerId=${row.id}"/>
@@ -28,6 +29,21 @@
 			</security:authorize>
 		</div>
 	</display:column>
+	
+	
+	<security:authorize access="hasRole('CUSTOMER')">
+		<jstl:if test="${row.isAccepted==false}">
+		<display:column>
+			<acme:link image="deal" href="offer/customer/accept.do?offerId=${row.id}" type="warning"/>
+		</display:column>
+		</jstl:if>
+		
+		<jstl:if test="${row.isAccepted==true}">
+		<display:column>
+			<a><spring:message code="offer.isAccepted" /></a>
+		</display:column>
+		</jstl:if>
+	</security:authorize>
 	
 </display:table>
 
