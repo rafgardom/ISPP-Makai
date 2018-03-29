@@ -71,7 +71,7 @@ public class RequestCustomerController extends AbstractController {
 		offersPendingReceipts = this.offerService.findAcceptedOffersPendingReceipts(customer);
 
 		result = new ModelAndView("request/myList");
-		result.addObject("requestURI", "request/myList.do");
+		result.addObject("requestURI", "request/customer/myList.do");
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("requests", requests);
 		result.addObject("offersPendingReceipts", offersPendingReceipts);
