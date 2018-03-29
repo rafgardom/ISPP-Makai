@@ -40,7 +40,7 @@
 		</div>
 		<div class="col-md-5">
 					
-					<acme:textarea code="request.tags" path="tags" mandatory="true" />
+					<acme:textarea code="request.tags" path="tags" />
 					<acme:selectNotEntity code="request.category" path="category" items="${categories}" mandatory="true" />
 					<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
 		

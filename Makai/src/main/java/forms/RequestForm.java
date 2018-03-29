@@ -44,7 +44,6 @@ public class RequestForm {
 		this.description = description;
 	}
 
-	@NotBlank
 	public String getTags() {
 		return this.tags;
 	}
