@@ -44,7 +44,7 @@ public class RequestTrainerController extends AbstractController {
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("request/list");
-		result.addObject("requestURI", "request/list.do");
+		result.addObject("requestURI", "request/trainer/list.do");
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("requests", requests);
 
