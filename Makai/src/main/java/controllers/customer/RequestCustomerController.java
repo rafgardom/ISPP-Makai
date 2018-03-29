@@ -135,10 +135,13 @@ public class RequestCustomerController extends AbstractController {
 		ModelAndView result;
 		Request request;
 
-		request = this.requestService.findOne(requestId);
-		this.requestService.delete(request);
-
-		result = new ModelAndView("redirect:myList.do");
+		try {
+			request = this.requestService.findOne(requestId);
+			this.requestService.delete(request);
+			result = new ModelAndView("redirect:myList.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:myList.do");
+		}
 
 		return result;
 
