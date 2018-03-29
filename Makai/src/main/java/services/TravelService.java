@@ -166,7 +166,7 @@ public class TravelService {
 			notification = this.notificationService.create(professional);
 		}
 
-		notification.setReason("Nueva inscripción a su viaje");
+		notification.setReason("Nueva inscripciï¿½n a su viaje");
 		notification.setDescription("Un usuario se ha apuntado a un viaje creado por usted");
 		notification.setType(NotificationType.TRAVEL);
 		this.notificationService.save(notification);
@@ -209,9 +209,11 @@ public class TravelService {
 		result.setZip_codeOrigin(travel.getOrigin().getZip_code());
 		result.setZip_codeDestination(travel.getDestination().getZip_code());
 		result.setStartMoment(travel.getStartMoment());
+		result.setEndMoment(travel.getEndMoment());
 		result.setAnimalSeats(travel.getAnimalSeats());
 		result.setHumanSeats(travel.getHumanSeats());
 		result.setVehicle(travel.getVehicle());
+		result.setId(travel.getId());
 
 		return result;
 	}

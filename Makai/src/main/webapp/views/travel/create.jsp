@@ -26,6 +26,7 @@
 </jstl:if>
 
 <form:form action="${RequestURI}" modelAttribute="travelForm" enctype="multipart/form-data">
+<form:hidden path="id"/>
 		<br />
 		
 		<jstl:if test="${errorMessage != null}">

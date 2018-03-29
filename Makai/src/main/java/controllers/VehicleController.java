@@ -77,7 +77,7 @@ public class VehicleController extends AbstractController {
 				}
 
 				vehicle = this.vehicleService.save(vehicle);
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:/vehicle/list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);

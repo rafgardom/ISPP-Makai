@@ -88,7 +88,7 @@ public class VehicleService {
 		Assert.notNull(principal);
 		Assert.isTrue(vehicle.getTransporter().getId() == principal.getId());
 
-		// Hacer comprobacion del año
+		// Hacer comprobacion del aï¿½o
 		today = Calendar.getInstance();
 		Assert.isTrue(today.get(Calendar.YEAR) >= vehicle.getYear());
 
@@ -104,7 +104,7 @@ public class VehicleService {
 		principal = this.transporterService.findByPrincipal();
 		Assert.notNull(principal);
 		Assert.isTrue(vehicle.getTransporter().getId() == principal.getId());
-		Assert.isTrue(!vehicle.getIsActived());
+		//Assert.isTrue(!vehicle.getIsActived());
 
 		this.vehicleRepository.delete(vehicle);
 	}
@@ -114,7 +114,7 @@ public class VehicleService {
 		Vehicle result;
 		FieldError fieldError;
 
-		if (vehicleForm.getId() == 0 && vehicleForm.getUserImage().getSize() == 0) {
+		if (vehicleForm.getUserImage().getSize() == 0) {
 			final String[] codes = {
 				"vehicle.picture.register.error"
 			};
@@ -152,10 +152,7 @@ public class VehicleService {
 		result.setDescription(vehicleForm.getDescription());
 		result.setColor(vehicleForm.getColor());
 		result.setLicense(vehicleForm.getLicense());
-		//		result.setId(vehicleForm.getId());
-
-		if (vehicleForm.getPicture() != null)
-			result.setPicture(vehicleForm.getPicture());
+		result.setPicture(vehicleForm.getPicture());
 
 		this.validator.validate(result, binding);
 
@@ -184,6 +181,7 @@ public class VehicleService {
 		result.setSeats(vehicle.getSeats());
 		result.setYear(vehicle.getYear());
 		result.setStringImage(image);
+		result.setId(vehicle.getId());
 
 		return result;
 	}
