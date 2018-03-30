@@ -2,6 +2,7 @@
 package forms;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -44,6 +45,7 @@ public class VehicleForm {
 		this.id = id;
 	}
 
+	@NotNull
 	public Brand getBrand() {
 		return this.brand;
 	}
@@ -59,6 +61,7 @@ public class VehicleForm {
 		this.seats = seats;
 	}
 
+	@NotNull
 	public CarType getCarType() {
 		return this.carType;
 	}
@@ -82,6 +85,7 @@ public class VehicleForm {
 		this.year = year;
 	}
 
+	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDescription() {
 		return this.description;
@@ -97,6 +101,7 @@ public class VehicleForm {
 		this.picture = bs;
 	}
 
+	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getColor() {
 		return this.color;
@@ -114,6 +119,7 @@ public class VehicleForm {
 		this.license = license;
 	}
 
+	@NotNull
 	public MultipartFile getUserImage() {
 		return this.userImage;
 	}

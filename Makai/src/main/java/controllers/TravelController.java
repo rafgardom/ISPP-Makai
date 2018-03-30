@@ -2,6 +2,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -168,10 +170,18 @@ public class TravelController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Travel> travels;
+		Collection<Travel> travels_all;
+		final Collection<Travel> travels = new ArrayList<Travel>();
 		final Integer numberNoti;
 		numberNoti = this.notificationService.findNotificationWithoutRead();
-		travels = this.travelService.findAll();
+		Calendar today;
+		travels_all = this.travelService.findAll();
+		today = Calendar.getInstance();
+
+		for (final Travel aux : travels_all)
+			if (today.getTime().before(aux.getEndMoment()))
+				travels.add(aux);
+
 		result = new ModelAndView("travel/list");
 		result.addObject("travels", travels);
 		result.addObject("numberNoti", numberNoti);
@@ -183,13 +193,22 @@ public class TravelController extends AbstractController {
 	@RequestMapping(value = "/myList", method = RequestMethod.GET)
 	public ModelAndView myList() {
 		ModelAndView result;
-		Collection<Travel> travels;
+		Collection<Travel> travels_all;
+		final Collection<Travel> travels = new ArrayList<Travel>();
 		Transporter principal;
 		final Integer numberNoti;
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
+		Calendar today;
 		principal = this.transporterService.findByPrincipal();
-		travels = this.travelService.findTravelByTransporterId(principal.getId());
+		travels_all = this.travelService.findTravelByTransporterId(principal.getId());
+
+		today = Calendar.getInstance();
+
+		for (final Travel aux : travels_all)
+			if (today.getTime().before(aux.getEndMoment()))
+				travels.add(aux);
+
 		result = new ModelAndView("travel/myList");
 		result.addObject("travels", travels);
 		result.addObject("numberNoti", numberNoti);

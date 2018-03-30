@@ -163,7 +163,7 @@ public class VehicleController extends AbstractController {
 		vehicles = new HashSet<VehicleForm>();
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		for (final Vehicle a : this.vehicleService.findVehicleByTransporterId(principal.getId())) {
+		for (final Vehicle a : this.vehicleService.findActivatedVehicles(principal)) {
 			VehicleForm vehicleForm;
 
 			vehicleForm = this.vehicleService.toFormObject(a);
@@ -178,7 +178,6 @@ public class VehicleController extends AbstractController {
 
 		return result;
 	}
-
 	// Ancillary methods
 
 	protected ModelAndView createModelAndView(final VehicleForm vehicleForm) {

@@ -109,6 +109,7 @@ public class TravelService {
 
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
+		Assert.isTrue(travel.getEndMoment().before(travel.getEndMoment()));
 
 		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
 
@@ -221,4 +222,9 @@ public class TravelService {
 	public Collection<Travel> findTravelByTransporterId(final int transporterId) {
 		return this.travelRepository.findTravelByTransporterId(transporterId);
 	}
+
+	public Collection<Travel> findTravelByVehicleId(final Vehicle vehicle) {
+		return this.travelRepository.findTravelByVehicleId(vehicle.getId());
+	}
+
 }

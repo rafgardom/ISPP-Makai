@@ -15,4 +15,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
 	@Query("select v from Vehicle v where v.transporter.id=?1")
 	Collection<Vehicle> findVehicleByTransporterId(int transporterId);
 
+	@Query("select v from Vehicle v where v.isActived=true and v.transporter.id=?1")
+	Collection<Vehicle> findActivatedVehicles(int transporterId);
+
 }

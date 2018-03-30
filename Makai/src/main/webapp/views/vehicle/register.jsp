@@ -35,7 +35,7 @@
 	<div class="row">
 		<div class="col-md-5">
 			<acme:selectNotEntity code="vehicle.brand" path="brand" items="${brands}" mandatory="true" />
-			<acme:textbox code="vehicle.seats" path="seats" mandatory="true" />
+			<acme:input code="vehicle.seats" path="seats" type="number" min="0" mandatory="true" />
 			<acme:selectNotEntity code="vehicle.carType" path="carType" items="${carTypes}" mandatory="true" />
 			<acme:textbox code="vehicle.accommodation" path="accommodation" mandatory="false" />
 		</div>
@@ -59,6 +59,6 @@
 	</security:authorize>
 	<br/><br/>
 	<acme:submit code="vehicle.register" name="save" />
-	<acme:cancel code="vehicle.cancel" url="" />
+	<acme:cancel code="vehicle.cancel" url="vehicle/list.do" />
 	
 </form:form>

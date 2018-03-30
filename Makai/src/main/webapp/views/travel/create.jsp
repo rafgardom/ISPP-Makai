@@ -61,8 +61,8 @@
 	<div class="row">
 
 			<div class="col-lg-2 col-sm-6 col-12">
-				<acme:textbox code="travel.animalSeats" path="animalSeats" mandatory="false" />
-				<acme:textbox code="travel.humanSeats" path="humanSeats" mandatory="false" />
+				<acme:input code="travel.animalSeats" path="animalSeats" type="number" min="0" />
+				<acme:input code="travel.humanSeats" path="humanSeats" type="number" min="0" />
 			</div>
 			<div class="col-lg-3 col-sm-6 col-12">
 				<acme:input code="travel.startMoment" path="startMoment" mandatory="true" image="calendar" placeholder="dd/MM/yyyy HH:mm"/>
@@ -74,6 +74,6 @@
 	</div>
 	<br/>
 	
-		<acme:submit code="travel.create" name="save" />
-		<acme:cancel code="travel.cancel" url="" />
+		<acme:submit code="travel.save" name="save" />
+		<acme:cancel code="travel.cancel" url="travel/list.do" />
 </form:form>

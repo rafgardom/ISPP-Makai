@@ -16,6 +16,7 @@ import org.springframework.validation.Validator;
 import repositories.VehicleRepository;
 import utilities.Utilities;
 import domain.Transporter;
+import domain.Travel;
 import domain.Vehicle;
 import forms.VehicleForm;
 
@@ -30,6 +31,9 @@ public class VehicleService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private TransporterService	transporterService;
+
+	@Autowired
+	private TravelService		travelService;
 
 	@Autowired
 	private Validator			validator;
@@ -100,15 +104,23 @@ public class VehicleService {
 	public void delete(final Vehicle vehicle) {
 		Assert.notNull(vehicle);
 		Transporter principal;
+		Collection<Travel> travels;
 
 		principal = this.transporterService.findByPrincipal();
 		Assert.notNull(principal);
 		Assert.isTrue(vehicle.getTransporter().getId() == principal.getId());
-		//Assert.isTrue(!vehicle.getIsActived());
+		Assert.isTrue(vehicle.getIsActived());
 
-		this.vehicleRepository.delete(vehicle);
+		travels = this.travelService.findTravelByVehicleId(vehicle);
+
+		if (travels.isEmpty())
+			this.vehicleRepository.delete(vehicle);
+		else {
+			vehicle.setIsActived(false);
+			this.vehicleRepository.save(vehicle);
+		}
+
 	}
-
 	public Vehicle reconstruct(final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
 		Assert.notNull(vehicleForm);
 		Vehicle result;
@@ -189,6 +201,10 @@ public class VehicleService {
 	}
 	public Collection<Vehicle> findVehicleByTransporterId(final int transporterId) {
 		return this.vehicleRepository.findVehicleByTransporterId(transporterId);
+	}
+
+	public Collection<Vehicle> findActivatedVehicles(final Transporter transporter) {
+		return this.vehicleRepository.findActivatedVehicles(transporter.getId());
 	}
 
 }
