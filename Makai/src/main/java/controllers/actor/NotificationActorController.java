@@ -64,15 +64,19 @@ public class NotificationActorController extends AbstractController {
 		Notification notification;
 		final Integer numberNoti;
 
-		notification = this.notificationService.findOne(notificationId);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+		try {
+			notification = this.notificationService.findOne(notificationId);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		this.notificationService.notificationViewed(notification);
+			this.notificationService.notificationViewed(notification);
 
-		result = new ModelAndView("notification/display");
-		result.addObject("notification", notification);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "notification/actor/display.do");
+			result = new ModelAndView("notification/display");
+			result.addObject("notification", notification);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "notification/actor/display.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+		}
 
 		return result;
 	}
@@ -84,8 +88,8 @@ public class NotificationActorController extends AbstractController {
 		ModelAndView result;
 		Notification notification;
 
-		notification = this.notificationService.findOne(notificationId);
 		try {
+			notification = this.notificationService.findOne(notificationId);
 			this.notificationService.delete(notification);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
