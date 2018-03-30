@@ -152,7 +152,9 @@ public class VehicleService {
 		result.setDescription(vehicleForm.getDescription());
 		result.setColor(vehicleForm.getColor());
 		result.setLicense(vehicleForm.getLicense());
-		result.setPicture(vehicleForm.getPicture());
+
+		if (vehicleForm.getUserImage().getSize() > 0)
+			result.setPicture(vehicleForm.getUserImage().getBytes());
 
 		this.validator.validate(result, binding);
 

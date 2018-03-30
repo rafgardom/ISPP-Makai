@@ -54,14 +54,11 @@ public class VehicleController extends AbstractController {
 		return result;
 	}
 
-	//Save register
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView register(@Valid final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
+	public ModelAndView saveRegister(@Valid final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
+
 		ModelAndView result;
 		Vehicle vehicle;
-		byte[] savedFile;
-
-		vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -70,12 +67,7 @@ public class VehicleController extends AbstractController {
 		} else
 			try {
 
-				if (vehicleForm.getUserImage().getSize() > 0) {
-
-					savedFile = vehicleForm.getUserImage().getBytes();
-					vehicle.setPicture(savedFile);
-				}
-
+				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
 				vehicle = this.vehicleService.save(vehicle);
 				result = new ModelAndView("redirect:/vehicle/list.do");
 
@@ -85,9 +77,11 @@ public class VehicleController extends AbstractController {
 				result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
 
 			}
-
 		return result;
+
 	}
+
+	//Edit
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int vehicleId) {
@@ -103,7 +97,7 @@ public class VehicleController extends AbstractController {
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
+	public ModelAndView saveEdit(@Valid final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
 
 		ModelAndView result;
 		Vehicle vehicle;
@@ -117,7 +111,7 @@ public class VehicleController extends AbstractController {
 
 				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
 				vehicle = this.vehicleService.save(vehicle);
-				result = new ModelAndView("master.page");
+				result = new ModelAndView("redirect:/vehicle/list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
@@ -200,9 +194,17 @@ public class VehicleController extends AbstractController {
 		final Integer numberNoti;
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		final ModelAndView result = new ModelAndView("vehicle/register");
+		ModelAndView result;
+
+		if (vehicleForm.getId() == 0) {
+			result = new ModelAndView("vehicle/register");
+			result.addObject("RequestURI", "vehicle/register.do");
+		} else {
+			result = new ModelAndView("vehicle/edit");
+			result.addObject("RequestURI", "vehicle/edit.do");
+		}
+
 		result.addObject("vehicleForm", vehicleForm);
-		result.addObject("RequestURI", "vehicle/register.do");
 		result.addObject("errorMessage", message);
 		result.addObject("brands", brands);
 		result.addObject("numberNoti", numberNoti);
