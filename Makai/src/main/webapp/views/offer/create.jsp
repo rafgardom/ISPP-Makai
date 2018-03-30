@@ -78,7 +78,12 @@
 		</div>
 	<br/>
 </div>
+	<jstl:if test="${offerForm.id==0}">
 		<acme:submit code="offer.create" name="save" />
+	</jstl:if>
+	<jstl:if test="${offerForm.id!=0}">
+		<acme:submit code="offer.edit" name="save" />
+	</jstl:if>
 		<acme:cancel code="offer.cancel" url="" />
 	<br/>
 	

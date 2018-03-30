@@ -31,6 +31,11 @@
 		<put-attribute name="body" value="/views/offer/create.jsp" />
 	</definition>
 	
+	<definition name="offer/edit" extends="master.page">
+		<put-attribute name="title" value="Edit offer" />
+		<put-attribute name="body" value="/views/offer/create.jsp" />
+	</definition>
+	
 	<definition name="offer/customer/list" extends="master.page">
 		<put-attribute name="title" value="Offer list" />
 		<put-attribute name="body" value="/views/offer/list.jsp" />

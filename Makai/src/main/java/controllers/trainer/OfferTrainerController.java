@@ -205,12 +205,17 @@ public class OfferTrainerController extends AbstractController {
 		ModelAndView result;
 		final Integer numberNoti;
 
-		result = new ModelAndView("offer/create");
+		if (offerForm.getId() == 0) {
+			result = new ModelAndView("offer/create");
+			result.addObject("RequestURI", "offer/trainer/create.do");
+		} else {
+			result = new ModelAndView("offer/edit");
+			result.addObject("RequestURI", "offer/trainer/create.do");
+		}
 
 		final Collection<Animal> animals = this.animalService.findAnimalFromAnimalShelter();
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		result.addObject("RequestURI", "offer/trainer/create.do");
 		result.addObject("animals", animals);
 		result.addObject("offerForm", offerForm);
 		result.addObject("numberNoti", numberNoti);
