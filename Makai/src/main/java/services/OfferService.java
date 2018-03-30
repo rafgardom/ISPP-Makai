@@ -184,14 +184,11 @@ public class OfferService {
 	public void eraseOffersWhenRequestIsDeleted(final Request request) {
 		Assert.notNull(request);
 		final Offer acceptedOffer = this.findOfferAccepted(request);
-		if (acceptedOffer != null)
-			//Si tiene una oferta aceptada no se puede eliminar
-			Assert.isTrue(false);
-		else {
-			final Collection<Offer> nonAcceptedOffers = this.findNonAcceptedOffers(request);
-			if (!nonAcceptedOffers.isEmpty())
-				this.offerRepository.delete(nonAcceptedOffers);
-		}
+		Assert.isNull(acceptedOffer);
+
+		final Collection<Offer> nonAcceptedOffers = this.findNonAcceptedOffers(request);
+		if (!nonAcceptedOffers.isEmpty())
+			this.offerRepository.delete(nonAcceptedOffers);
 
 	}
 
