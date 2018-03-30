@@ -20,5 +20,16 @@
 		<put-attribute name="title" value="Pánico" />
 		<put-attribute name="body" value="/views/misc/panic.jsp" />
 	</definition>
+	
+	<definition name="privacyPolicy" extends="master.page">
+		<put-attribute name="title" value="AVISO LEGAL Y POLÍTICA DE PRIVACIDAD" /> 
+		<put-attribute name="body" value="/views/misc/privacyPolicy.jsp" /> 
+	</definition>
+	
+	<definition name="cookiesPolicy" extends="master.page">
+		<put-attribute name="title" value="POLÍTICA DE COOKIES" /> 
+		<put-attribute name="body" value="/views/misc/cookiesPolicy.jsp" /> 
+	</definition>
+	
 
 </tiles-definitions>

@@ -39,6 +39,7 @@
 
 <link rel="stylesheet" href="styles/slider.css" type="text/css">
 <link rel="stylesheet" href="styles/common.css" type="text/css">
+<link rel="stylesheet" href="styles/cookiesBar.css" type="text/css">
 <link rel="stylesheet" href="styles/minty.css" type="text/css"> 
 <!-- <link rel="stylesheet" href="styles/jmenu.css" media="screen" type="text/css" /> -->
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">

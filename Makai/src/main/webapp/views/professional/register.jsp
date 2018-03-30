@@ -85,8 +85,8 @@
 					</jstl:if>
 				<br/>
 				<br/>
-				<acme:checkbox code="professional.acceptCondition" path="acceptCondition"
-					mandatory="true" />
+				<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="professional.accept" path="acceptCondition" linkCode="professional.conditions"
+					mandatory="true" target="_blank" />
 			</fieldset>
 	</security:authorize>
 	<br/>

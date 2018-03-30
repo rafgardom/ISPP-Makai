@@ -84,8 +84,8 @@
 					</jstl:if>
 				<br/>
 				<br/>
-				<acme:checkbox code="animalShelter.acceptCondition" path="acceptCondition"
-					mandatory="true" />
+				<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="animalShelter.accept" path="acceptCondition" linkCode="animalShelter.conditions"
+					mandatory="true" target="_blank" />
 			</fieldset>
 	</security:authorize>
 	<br/>

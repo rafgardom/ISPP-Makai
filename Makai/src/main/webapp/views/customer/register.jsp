@@ -84,7 +84,8 @@
 	</security:authorize>
 	
 	<div class=" col-md-12">
-	<acme:checkbox code="customer.acceptCondition" path="acceptCondition" mandatory="true" />
+		<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="customer.accept" path="acceptCondition" linkCode="customer.conditions"
+			mandatory="true" target="_blank" />
 	</div>
 
 </div>

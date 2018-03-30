@@ -20,5 +20,15 @@
 		<put-attribute name="title" value="Panic" />
 		<put-attribute name="body" value="/views/misc/panic.jsp" />
 	</definition>
+	
+	<definition name="privacyPolicy" extends="master.page">
+		<put-attribute name="title" value="LEGAL NOTICE AND PRIVACY POLICY" /> 
+		<put-attribute name="body" value="/views/misc/privacyPolicy.jsp" /> 
+	</definition>
+	
+	<definition name="cookiesPolicy" extends="master.page">
+		<put-attribute name="title" value="COOKIES POLICY" /> 
+		<put-attribute name="body" value="/views/misc/cookiesPolicy.jsp" /> 
+	</definition>
 
 </tiles-definitions>
