@@ -57,12 +57,12 @@
 	<h3><spring:message code="offer.duration" /></h3>
 	<div class="row">
 		<div class="col-sm-2">
-			<acme:textbox code="offer.duration.year" path="duration.year" mandatory="false" />
-			<acme:textbox code="offer.duration.month" path="duration.month" mandatory="false" />
+			<acme:input code="offer.duration.year" path="duration.year" type="number" min="0" mandatory="false" />
+			<acme:input code="offer.duration.month" path="duration.month" type="number" min="0" mandatory="false"/>
 		</div>
 		<div class="col-sm-2">
-			<acme:textbox code="offer.duration.week" path="duration.week" mandatory="false" />
-			<acme:textbox code="offer.duration.day" path="duration.day" mandatory="false" />
+			<acme:input code="offer.duration.week" path="duration.week" type="number" min="0" mandatory="false"/>
+			<acme:input code="offer.duration.day" path="duration.day" type="number" min="0" mandatory="false"/>
 		</div>
 		
 		<div class="col-12">
