@@ -36,7 +36,7 @@ public class Coordinates {
 
 
 	@NotBlank
-	@Pattern(regexp = "\\w{2,60}(\\s\\w{2,60})?(\\s\\w{2,60})?")
+	@Pattern(regexp = "^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$")
 	public String getCountry() {
 		return this.country;
 	}
@@ -59,7 +59,7 @@ public class Coordinates {
 	}
 
 	@NotBlank
-	@Pattern(regexp = "\\w{2,60}(\\s\\w{2,60})?(\\s\\w{2,60})?")
+	@Pattern(regexp = "^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$")
 	public String getCity() {
 		return this.city;
 	}
