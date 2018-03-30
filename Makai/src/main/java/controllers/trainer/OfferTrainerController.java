@@ -149,7 +149,7 @@ public class OfferTrainerController extends AbstractController {
 	public ModelAndView save(@Valid final OfferForm offerForm, final BindingResult binding) {
 
 		ModelAndView result;
-		Offer offer;
+		Offer offer = null;
 
 		if (binding.hasErrors())
 			if (offerForm.getRequest() == null)
@@ -165,7 +165,10 @@ public class OfferTrainerController extends AbstractController {
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-				result = this.createEditModelAndView(offerForm, "offer.commit.error");
+				if (offer.getIsAccepted() == true)
+					result = this.createEditModelAndView(offerForm, "offer.commit.error.is.accepted");
+				else
+					result = this.createEditModelAndView(offerForm, "offer.commit.error");
 
 			}
 		return result;

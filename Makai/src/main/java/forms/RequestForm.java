@@ -4,6 +4,8 @@ package forms;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import domain.Animal;
 import domain.Category;
@@ -36,6 +38,7 @@ public class RequestForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDescription() {
 		return this.description;
 	}
@@ -44,6 +47,7 @@ public class RequestForm {
 		this.description = description;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getTags() {
 		return this.tags;
 	}
