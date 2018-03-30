@@ -122,7 +122,7 @@ public class RequestService {
 			request.setIsCancelled(true);
 			this.requestRepository.save(request);
 		} else {
-			this.offerService.eraseNonAcceptedOffers(request);
+			this.offerService.eraseOffersWhenRequestIsDeleted(request);
 			this.requestRepository.delete(request);
 		}
 

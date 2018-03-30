@@ -146,9 +146,10 @@ public class OfferService {
 	}
 
 	public Offer findOfferAccepted(final Request request) {
-		return this.offerRepository.findAcceptedOffer(request.getId());
+		Offer offer;
+		offer = this.offerRepository.findAcceptedOffer(request.getId());
+		return offer;
 	}
-
 	public Collection<Offer> findNonAcceptedOffers(final Request request) {
 		return this.offerRepository.findNonAcceptedOffers(request.getId());
 	}
@@ -177,6 +178,20 @@ public class OfferService {
 		final Collection<Offer> nonAcceptedOffers = this.findNonAcceptedOffers(request);
 		if (!nonAcceptedOffers.isEmpty())
 			this.offerRepository.delete(nonAcceptedOffers);
+
+	}
+
+	public void eraseOffersWhenRequestIsDeleted(final Request request) {
+		Assert.notNull(request);
+		final Offer acceptedOffer = this.findOfferAccepted(request);
+		if (acceptedOffer != null)
+			//Si tiene una oferta aceptada no se puede eliminar
+			Assert.isTrue(false);
+		else {
+			final Collection<Offer> nonAcceptedOffers = this.findNonAcceptedOffers(request);
+			if (!nonAcceptedOffers.isEmpty())
+				this.offerRepository.delete(nonAcceptedOffers);
+		}
 
 	}
 
