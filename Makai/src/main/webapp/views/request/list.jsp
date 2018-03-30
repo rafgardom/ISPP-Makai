@@ -11,16 +11,18 @@
 
 <display:table name="requests" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 
-	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
+<%-- 	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
 	<spring:message code="request.description" var="descriptionHeader" />
 	<display:column title="${descriptionHeader}" >
 		<jstl:out value="${substrDescription}" />
 		<jstl:if test="${fn:length(row.description)>40}">
 			<jstl:out value="..." />
 		</jstl:if>
-	</display:column>
+	</display:column> --%>
+	<acme:column code="request.customer" property="customer.userAccount.username" sortable="true"/>
 	<acme:column code="request.tags" property="tags" sortable="true"/>
 	<acme:column code="request.category" property="category.name" sortable="true" />
+	
 	
 	<spring:message code="request.animal" var="animalHeader" />
 	<spring:message code="request.none" var="none"/>

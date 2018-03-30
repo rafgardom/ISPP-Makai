@@ -65,8 +65,8 @@
 				<acme:textbox code="travel.humanSeats" path="humanSeats" mandatory="false" />
 			</div>
 			<div class="col-lg-3 col-sm-6 col-12">
-				<acme:input code="travel.startMoment" path="startMoment" mandatory="true" image="calendar" />
-				<acme:input code="travel.endMoment" path="endMoment" mandatory="true" image="calendar"/>
+				<acme:input code="travel.startMoment" path="startMoment" mandatory="true" image="calendar" placeholder="dd/MM/yyyy HH:mm"/>
+				<acme:input code="travel.endMoment" path="endMoment" mandatory="true" image="calendar" placeholder="dd/MM/yyyy HH:mm"/>
 			</div>
 			<div class="offset-lg-1 col-md-5 col-12">
 				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" mandatory="true"/>

@@ -10,13 +10,10 @@
 
 <display:table name="offers" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
-	<acme:column code="offer.startMoment" property="startMoment" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true"/>
+	<acme:column code="offer.startMoment" property="startMoment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
 	<acme:column code="offer.coordinates.city" property="destination.city" sortable="true"/>
 	<acme:column code="offer.price" property="price" sortable="true" format="{0,number, ,000.00}&euro;"/>
 	<acme:column code="offer.animal" property="animal.name" />
-	
-	
-	
 	
 	<display:column>
 		<div class="btn-group">
@@ -27,23 +24,19 @@
 					<acme:delete href="offer/trainer/delete.do?offerId=${row.id}" id="${row.id}"/>
 				</jstl:if>
 			</security:authorize>
+			<security:authorize access="hasRole('CUSTOMER')">
+				<jstl:if test="${row.isAccepted==false}">
+					<acme:link image="accept" href="offer/customer/accept.do?offerId=${row.id}" type="info" code="offer.accept"/>
+				</jstl:if>
+			</security:authorize>
 		</div>
+		<jstl:if test="${row.isAccepted==true}">
+			<h6><spring:message code="offer.isAccepted" /></h6>
+		</jstl:if>
 	</display:column>
 	
 	
-	<security:authorize access="hasRole('CUSTOMER')">
-		<jstl:if test="${row.isAccepted==false}">
-		<display:column>
-			<acme:link image="deal" href="offer/customer/accept.do?offerId=${row.id}" type="warning"/>
-		</display:column>
-		</jstl:if>
-		
-		<jstl:if test="${row.isAccepted==true}">
-		<display:column>
-			<a><spring:message code="offer.isAccepted" /></a>
-		</display:column>
-		</jstl:if>
-	</security:authorize>
+
 	
 </display:table>
 

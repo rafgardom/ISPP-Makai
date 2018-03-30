@@ -17,10 +17,8 @@
 <hr />
 
 <b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b><br/>
-<p style="font-size:16px">
-	<a href="misc/privacyPolicy.do?sc=true"><spring:message code="master.page.privacyPolicy" /></a>&nbsp;&nbsp;&#124;&#124;
-	<a href="misc/cookiesPolicy.do"><spring:message code="master.page.cookiesPolicy" /></a>
-</p> 
+<a href="misc/privacyPolicy.do?sc=true"><spring:message code="master.page.privacyPolicy" /></a>&nbsp;&nbsp;&#124;
+<a href="misc/cookiesPolicy.do"><spring:message code="master.page.cookiesPolicy" /></a><br/>
 <i style="font-size:16px"><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i>
 
 <div id="barraaceptacion">

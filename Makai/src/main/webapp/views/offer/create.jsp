@@ -45,7 +45,7 @@
 			<acme:textbox code="offer.coordinates.zipCode" path="destination.zip_code" mandatory="true" />
 		</div>
 		<div class="offset-md-1 col-md-5">
-			<acme:input image="calendar" code="offer.startMoment" path="startMoment" mandatory="true" />
+			<acme:input image="calendar" code="offer.startMoment" path="startMoment" mandatory="true" placeholder="dd/MM/yyyy HH:mm"/>
 			
   			<acme:input path="price" type="range" code="offer.price" min="0" max="4000" style="slider" id="myRange" mandatory="true" /> 
   			<h6 class="text-center" id="total"></h6>
