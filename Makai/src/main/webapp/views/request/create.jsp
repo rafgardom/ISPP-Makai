@@ -35,12 +35,12 @@
 	
 	<div class="row">	
 		<div class="col-md-7">	
-					<spring:message code="request.ph" var="ph"/>
-					<acme:textarea code="request.description" path="description" mandatory="true" rows="15" maxlength="2000" placeholder="${ph}"/>
+					<spring:message code="request.description.ph" var="descriptionPH"/>
+					<acme:textarea code="request.description" path="description" mandatory="true" rows="15" maxlength="2000" placeholder="${descriptionPH}"/>
 		</div>
 		<div class="col-md-5">
-					
-					<acme:textarea code="request.tags" path="tags" />
+					<spring:message code="request.tags.ph" var="tagsPH"/>
+					<acme:textarea code="request.tags" path="tags" maxlength="100" placeholder="${tagsPH}"/>
 					<acme:selectNotEntity code="request.category" path="category" items="${categories}" mandatory="true" />
 					<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
 		

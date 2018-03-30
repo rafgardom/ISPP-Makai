@@ -167,6 +167,10 @@ public class RequestService {
 		return this.requestRepository.findRequestAcceptedPendingReceipts(request.getId());
 	}
 
+	public Collection<Request> findRequestsWithOffer() {
+		return this.requestRepository.findRequestsWithOffer();
+	}
+
 	public Request reconstruct(final RequestForm requestForm, final BindingResult binding) throws IOException {
 
 		Assert.notNull(requestForm);
