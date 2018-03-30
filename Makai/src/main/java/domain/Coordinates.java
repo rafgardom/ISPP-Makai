@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -35,18 +36,21 @@ public class Coordinates {
 
 
 	@NotBlank
+	@Pattern(regexp = "\\w{2,60}(\\s\\w{2,60})?(\\s\\w{2,60})?")
 	public String getCountry() {
 		return this.country;
 	}
 	public void setCountry(final String country) {
 		this.country = country;
 	}
+
 	public String getState() {
 		return this.state;
 	}
 	public void setState(final String state) {
 		this.state = state;
 	}
+
 	public String getProvince() {
 		return this.province;
 	}
@@ -55,6 +59,7 @@ public class Coordinates {
 	}
 
 	@NotBlank
+	@Pattern(regexp = "\\w{2,60}(\\s\\w{2,60})?(\\s\\w{2,60})?")
 	public String getCity() {
 		return this.city;
 	}
@@ -63,6 +68,7 @@ public class Coordinates {
 	}
 
 	@NotBlank
+	@Pattern(regexp = "\\d{2,6}(\\w{1,4})?")
 	public String getZip_code() {
 		return this.zip_code;
 	}

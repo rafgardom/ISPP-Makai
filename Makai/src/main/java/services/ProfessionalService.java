@@ -4,6 +4,7 @@ package services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -196,6 +197,26 @@ public class ProfessionalService {
 			result = this.findOne(professionalForm.getId());
 
 		result.setCoordinates(professionalForm.getCoordinates());
+		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$");
+		if (!result.getCoordinates().getState().isEmpty())
+			if (!coordinatePattern.matcher(result.getCoordinates().getState()).matches()) {
+				FieldError fieldError;
+				final String[] codes = {
+					"general.coordinates.state.error"
+				};
+				fieldError = new FieldError("professionalForm", "coordinates.state", result.getCoordinates().getState(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+		if (!result.getCoordinates().getProvince().isEmpty())
+			if (!coordinatePattern.matcher(result.getCoordinates().getProvince()).matches()) {
+				FieldError fieldError;
+				final String[] codes = {
+					"general.coordinates.province.error"
+				};
+				fieldError = new FieldError("professionalForm", "coordinates.province", result.getCoordinates().getProvince(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+
 		result.setEmail(professionalForm.getEmail());
 		result.setName(professionalForm.getName());
 		result.setPhone(professionalForm.getPhone());
