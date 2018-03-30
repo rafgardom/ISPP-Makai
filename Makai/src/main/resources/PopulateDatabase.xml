@@ -1181,7 +1181,7 @@
 	<!-- Rating -->
 	<bean id="rating1" class="domain.Rating">
 		<property name="stars" value="2" />
-		<property name="comment" value="Muchas curvas" />
+		<property name="comment" value="Me maree mucho" />
 		<property name="moment" value="01/20/2018 9:00" />
 		<property name="travel" ref="travel2" />
 		<property name="customer" ref="customer1" />
@@ -1189,7 +1189,7 @@
 	
 	<bean id="rating2" class="domain.Rating">
 		<property name="stars" value="5" />
-		<property name="comment" value="Muy amable" />
+		<property name="comment" value="Muy amable, gracias" />
 		<property name="moment" value="01/20/2018 9:00" />
 		<property name="travel" ref="travel3" />
 		<property name="customer" ref="customer2" />
@@ -1197,7 +1197,7 @@
 	
 	<bean id="rating3" class="domain.Rating">
 		<property name="stars" value="4" />
-		<property name="comment" value="Me adiestro el perro flama" />
+		<property name="comment" value="Adiestró perros de tamaño pequeño con mucha facilidad" />
 		<property name="moment" value="01/20/2018 9:00" />
 		<property name="request" ref="request3" />
 		<property name="trainer" ref="trainer2" />

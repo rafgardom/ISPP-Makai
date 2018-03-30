@@ -34,6 +34,8 @@
 <%@ attribute name="image" required="false" %>
 <%@ attribute name="style" required="false" %>
 <%@ attribute name="id" required="false" %>
+<%@ attribute name="pattern" required="false" %>
+<%@ attribute name="value" required="false" %>
 
 <jstl:if test="${type == null}">
 	<jstl:set var="type" value="text" />
@@ -63,7 +65,7 @@
 		</div>
 	</jstl:if>
 	
-	<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }"/>
+	<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}"/>
 	<form:errors cssClass="alert alert-danger form-control" path="${path}" />
 	
 	</div>

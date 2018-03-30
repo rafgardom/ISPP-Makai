@@ -16,7 +16,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div style="display: flex; justify-content:center; justify-content:center;">
+<div style="display: flex; justify-content:center;">
 	<img src="images/logo.png" alt="Makai"
 		style="height: 230px; padding-top: 0.3%; padding-bottom: 0.3%;" />
 </div>
@@ -42,21 +42,6 @@
 						<a class="dropdown-item" href="request/customer/myList.do">
 							<spring:message code="master.page.request.list" /></a>
 					</div></li>
-					
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<spring:message code="master.page.receipt" />
-					</a>
-					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-						<a class="dropdown-item" href="receipt/customer/pending.do">
-							<spring:message code="master.page.receipt.pending" />
-						</a>
-						<a class="dropdown-item" href="receipt/customer/paid.do">
-							<spring:message code="master.page.receipt.paid" />
-						</a>
-					</div>
-				</li>
-
 
 			</security:authorize>
 
@@ -89,6 +74,24 @@
 							<spring:message code="master.page.animal.list" /></a>
 					</div>
 				</li>
+			</security:authorize>
+			
+			<security:authorize access="hasAnyRole('CUSTOMER')">
+				
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<spring:message code="master.page.receipt" />
+					</a>
+					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+						<a class="dropdown-item" href="receipt/customer/pending.do">
+							<spring:message code="master.page.receipt.pending" />
+						</a>
+						<a class="dropdown-item" href="receipt/customer/paid.do">
+							<spring:message code="master.page.receipt.paid" />
+						</a>
+					</div>
+				</li>
+			
 			</security:authorize>
 
 			<security:authorize access="hasRole('TRAINER')">

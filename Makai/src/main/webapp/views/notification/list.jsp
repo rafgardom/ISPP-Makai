@@ -11,11 +11,20 @@
 
 <div class="table-responsive">
 <display:table name="notifications" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
+	<display:column>
+	<jstl:if test="${!row.isRead}">
+		<img src="images/new.png" height="45rem"/>
+	</jstl:if>	
+	</display:column>
 	
 	<acme:column code="notification.moment" property="moment" format="{0,date,HH:mm:ss dd/MM/yyyy}" sortable="true"/>
 	<acme:column code="notification.reason" property="reason" sortable="true"/>
 	
 	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
+	
+
+	
+
 	
 	<spring:message code="notification.description" var="descriptionHeader" />
 <%-- 	<display:column title="${descriptionHeader}" >
@@ -26,13 +35,14 @@
 	</display:column> --%>
 	
 	<display:column>
+
 		<div class="btn-group">	
 			<acme:link image="eye" href="notification/actor/display.do?notificationId=${row.id}"/>
 			<jstl:if test="${row.isRead}">
 				<acme:link image="trash" href="notification/actor/delete.do?notificationId=${row.id}" type="danger"/>
 			</jstl:if>
-			
-			</div>
+		</div>
+
 	</display:column>
 	
 </display:table>

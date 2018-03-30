@@ -29,7 +29,7 @@
 <%@ attribute name="image" required="false" %>
 
 <jstl:if test="${type == null}">
-	<jstl:set var="type" value="info" />
+	<jstl:set var="type" value="primary" />
 </jstl:if>
 <jstl:if test="${disabled == null}">
 	<jstl:set var="disabled" value=" " />
