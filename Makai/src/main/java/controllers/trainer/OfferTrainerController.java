@@ -152,7 +152,10 @@ public class OfferTrainerController extends AbstractController {
 		Offer offer;
 
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(offerForm);
+			if (offerForm.getRequest() == null)
+				result = this.createEditModelAndView(offerForm, "offer.commit.error.no.request");
+			else
+				result = this.createEditModelAndView(offerForm);
 		else
 			try {
 				offer = this.offerService.reconstruct(offerForm, binding);
@@ -168,7 +171,6 @@ public class OfferTrainerController extends AbstractController {
 		return result;
 
 	}
-
 	// Editar ---------------------------------------------------------------		
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
