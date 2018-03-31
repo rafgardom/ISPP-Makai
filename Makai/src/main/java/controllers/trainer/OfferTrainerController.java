@@ -112,8 +112,8 @@ public class OfferTrainerController extends AbstractController {
 		ModelAndView result;
 		Offer offer;
 
-		offer = this.offerService.findOne(offerId);
 		try {
+			offer = this.offerService.findOne(offerId);
 			this.offerService.delete(offer);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
