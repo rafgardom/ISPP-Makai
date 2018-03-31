@@ -57,7 +57,7 @@
 
 <script type="text/javascript">
 	
-	var text_max = '<jstl:out value="${maxCharacters }" />';;
+	var text_max = ${maxCharacters };
 	var chars = $('#text').val().length;
 	
 	$('#count_message').html(chars + ' / ' + text_max );
