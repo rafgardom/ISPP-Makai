@@ -99,6 +99,21 @@ public class NotificationActorController extends AbstractController {
 		return result;
 	}
 
+	//Borrar todas las notificaciones de un actor
+	@RequestMapping(value = "/deleteAll", method = RequestMethod.GET)
+	public ModelAndView deleteAll(@RequestParam final int notificationId) {
+		ModelAndView result;
+
+		try {
+			this.notificationService.deleteAllMyNotifications();
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+		}
+
+		return result;
+	}
+
 	// Reload
 	@RequestMapping(value = "/reload", method = RequestMethod.GET)
 	public Integer reload() {

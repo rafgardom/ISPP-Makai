@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -140,8 +141,21 @@ public class NotificationService {
 		Assert.notNull(principal);
 
 		actor = notification.getActor();
-		Assert.isTrue(actor.equals(principal)); //Comprueba si está dentro de sus notificaciones
+		Assert.isTrue(actor.equals(principal)); //Comprueba si estï¿½ dentro de sus notificaciones
 		this.notificationRepository.delete(notification.getId());
+
+	}
+
+	public void deleteAllMyNotifications() {
+		Actor principal;
+		Collection<Notification> notifications = new ArrayList<Notification>();
+
+		principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+		notifications = this.findByActorId(principal.getId());
+
+		for (final Notification aux : notifications)
+			this.notificationRepository.delete(aux);
 
 	}
 
@@ -193,8 +207,8 @@ public class NotificationService {
 		trainers = this.trainerService.findTrainerSameCategory(request.getCategory());
 		for (final Trainer t : trainers) {
 			notification = this.create(t);
-			notification.setReason("Nueva solicitud con su misma categoría: " + request.getCategory());
-			notification.setDescription("Podría interesarle crear una oferta a dicha solicitud: " + request.getTags());
+			notification.setReason("Nueva solicitud con su misma categorï¿½a: " + request.getCategory());
+			notification.setDescription("Podrï¿½a interesarle crear una oferta a dicha solicitud: " + request.getTags());
 			notification.setType(NotificationType.REQUEST);
 			this.save(notification);
 		}

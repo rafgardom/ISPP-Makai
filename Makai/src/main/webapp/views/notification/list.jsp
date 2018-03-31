@@ -45,6 +45,10 @@
 	
 </display:table>
 </div>
+	<jstl:if test="${!empty notifications}">
+		<acme:link image="trash" href="notification/actor/deleteAll.do?notificationId=${row.id}" type="danger"/>
+	</jstl:if>
+	
 <security:authorize access="hasRole('ADMIN')">
 	<acme:link href="notification/admin/create.do" code="notification.create" type="success"/>
 </security:authorize>
