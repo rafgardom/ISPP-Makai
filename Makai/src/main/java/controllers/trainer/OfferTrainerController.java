@@ -165,11 +165,13 @@ public class OfferTrainerController extends AbstractController {
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-				if (offer.getIsAccepted() == true)
-					result = this.createEditModelAndView(offerForm, "offer.commit.error.is.accepted");
+				if (offer != null)
+					if (offer.getIsAccepted() == true)
+						result = this.createEditModelAndView(offerForm, "offer.commit.error.is.accepted");
+				if (this.requestService.tieneOfferAceptadaUnRequest(offerForm.getRequest()))
+					result = this.createEditModelAndView(offerForm, "offer.commit.error.request.accept");
 				else
 					result = this.createEditModelAndView(offerForm, "offer.commit.error");
-
 			}
 		return result;
 
