@@ -1054,7 +1054,7 @@
 	
 	<bean id="offer3" class="domain.Offer">
 		<property name="destination" ref="coordinates16" />
-		<property name="startMoment" value="05/14/2018 6:00" />
+		<property name="startMoment" value="10/14/2018 6:00" />
 		<property name="isAccepted" value="true" />
 		<property name="price" value="259" />
 		<property name="comment" value="Comment Offer 3" />
