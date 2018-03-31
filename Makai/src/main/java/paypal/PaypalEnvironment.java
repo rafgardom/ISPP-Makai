@@ -1,7 +1,6 @@
 
 package paypal;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,31 +27,90 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 import com.paypal.base.rest.PayPalResource;
 
-public class PaymentWithPayPalServlet extends HttpServlet {
+public class PaypalEnvironment {
 
-	private static final long	serialVersionUID	= 1L;
-	private final String		clientID			= "AVeBFGHYN5KimXYs0YcPfQyK1WSEMuAt2T2KJU3cmstzoxv1tnwBuBM2iYdB4M-uWOl3S3H_DNEWtADJ";
-	private final String		clientSecret		= "EDriyWEyd9NkgJuVnyavMn5qmBXZk4DfsCLeUUKCr1WvRGobKzIEqIosgNPQXxgUSGdfRja_hAsyWexv";
-	private final String		mode				= "live";
+	// Replace with your application client ID and secret
+	String						clientId		= "AVZo8Ib0q8ErpMgCMefiwlV-hhR6rEEQElLadcJFI5xQlvWa8FRKB96oPbyUEIbotyh6JrRqOURuiyX3";
+	String						clientSecret	= "ENqaO6Pt5b4MWfEOSJvgcmlRTnJd5ovYTx4ib9AesbvMhUB1iC3-ZO3f7QwZBoFWyw56fKphrRW4wtLp";
 
-	private static final Logger	LOGGER				= Logger.getLogger(PaymentWithPayPalServlet.class);
-	Map<String, String>			map					= new HashMap<String, String>();
+	APIContext					apiContext		= new APIContext(this.clientId, this.clientSecret, "sandbox");
+	Map<String, String>			map				= new HashMap<String, String>();
+
+	private static final Logger	LOGGER			= Logger.getLogger(PaypalEnvironment.class);
 
 
-	@Override
-	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-		this.doPost(req, resp);
+	public Payment createPayment() {
+		// Set payer details
+		final Payer payer = new Payer();
+		payer.setPaymentMethod("paypal");
+
+		// Set redirect URLs
+		final RedirectUrls redirectUrls = new RedirectUrls();
+		redirectUrls.setCancelUrl("http://localhost:3000/cancel");
+		redirectUrls.setReturnUrl("http://localhost:3000/process");
+
+		// Set payment details
+		final Details details = new Details();
+		details.setShipping("1");
+		details.setSubtotal("5");
+		details.setTax("1");
+
+		// Payment amount
+		final Amount amount = new Amount();
+		amount.setCurrency("USD");
+		// Total must be equal to sum of shipping, tax and subtotal.
+		amount.setTotal("7");
+		amount.setDetails(details);
+
+		// Transaction information
+		final Transaction transaction = new Transaction();
+		transaction.setAmount(amount);
+		transaction.setDescription("This is the payment transaction description.");
+
+		// Add transaction to a list
+		final List<Transaction> transactions = new ArrayList<Transaction>();
+		transactions.add(transaction);
+
+		// Add payment details
+		final Payment payment = new Payment();
+		payment.setIntent("sale");
+		payment.setPayer(payer);
+		payment.setRedirectUrls(redirectUrls);
+		payment.setTransactions(transactions);
+
+		// Create payment
+		try {
+			final Payment createdPayment = payment.create(this.apiContext);
+
+			final Iterator links = createdPayment.getLinks().iterator();
+			while (links.hasNext()) {
+				final Links link = (Links) links.next();
+				if (link.getRel().equalsIgnoreCase("approval_url"))
+					// REDIRECT USER TO link.getHref()
+					System.out.println(link.getHref());
+			}
+		} catch (final PayPalRESTException e) {
+			System.err.println(e.getDetails());
+		}
+
+		return payment;
 	}
 
-	// ##Create
-	// Sample showing to create a Payment using PayPal
-	@Override
-	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-		this.createPayment(req, resp);
-		req.getRequestDispatcher("response.jsp").forward(req, resp);
+	public void confirmationPayment(final HttpServletRequest req) {
+		final Payment payment = new Payment();
+		payment.setId(req.getParameter("paymentId"));
+
+		final PaymentExecution paymentExecution = new PaymentExecution();
+		paymentExecution.setPayerId(req.getParameter("PayerID"));
+		try {
+			final Payment createdPayment = payment.execute(this.apiContext, paymentExecution);
+			System.out.println(createdPayment);
+		} catch (final PayPalRESTException e) {
+			System.err.println(e.getDetails());
+		}
 	}
 
-	public Payment createPayment(final HttpServletRequest req, final HttpServletResponse resp) {
+	public Payment createPayment(final HttpServletRequest req, final HttpServletResponse resp, final double totalAmount, final int objectId, final String objectType, final String controllerPath) {
 		Payment createdPayment = null;
 
 		// ### Api Context
@@ -62,8 +118,6 @@ public class PaymentWithPayPalServlet extends HttpServlet {
 		// the call and to send a unique request id
 		// (that ensures idempotency). The SDK generates
 		// a request id if you do not pass one explicitly.
-
-		final APIContext apiContext = new APIContext(this.clientID, this.clientSecret, this.mode);
 		if (req.getParameter("PayerID") != null) {
 			final Payment payment = new Payment();
 			if (req.getParameter("guid") != null)
@@ -73,7 +127,7 @@ public class PaymentWithPayPalServlet extends HttpServlet {
 			paymentExecution.setPayerId(req.getParameter("PayerID"));
 			try {
 
-				createdPayment = payment.execute(apiContext, paymentExecution);
+				createdPayment = payment.execute(this.apiContext, paymentExecution);
 				ResultPrinter.addResult(req, resp, "Executed The Payment", PayPalResource.getLastRequest(), PayPalResource.getLastResponse(), null);
 			} catch (final PayPalRESTException e) {
 				ResultPrinter.addResult(req, resp, "Executed The Payment", PayPalResource.getLastRequest(), null, e.getMessage());
@@ -82,10 +136,10 @@ public class PaymentWithPayPalServlet extends HttpServlet {
 
 			// ###Details
 			// Let's you specify details of a payment amount.
-			final Details details = new Details();
-			details.setShipping("1");
-			details.setSubtotal("5");
-			details.setTax("1");
+			//			final Details details = new Details();
+			//			details.setShipping("1");
+			//			details.setSubtotal("5");
+			//			details.setTax("1");
 
 			// ###Amount
 			// Let's you specify a payment amount.
@@ -93,7 +147,10 @@ public class PaymentWithPayPalServlet extends HttpServlet {
 			amount.setCurrency("EUR");
 			// Total must be equal to sum of shipping, tax and subtotal.
 			amount.setTotal("7");
-			amount.setDetails(details);
+			//###Makai's commission
+			final Double price = totalAmount * 0.1;
+			amount.setTotal(price.toString());
+			//			amount.setDetails(details);
 
 			// ###Transaction
 			// A transaction defines the contract of a
@@ -106,7 +163,7 @@ public class PaymentWithPayPalServlet extends HttpServlet {
 
 			// ### Items
 			final Item item = new Item();
-			item.setName("Ground Coffee 40 oz").setQuantity("1").setCurrency("USD").setPrice("5");
+			item.setName("Training/Entrenamiento").setQuantity("1").setCurrency("EUR").setPrice(price.toString());
 			final ItemList itemList = new ItemList();
 			final List<Item> items = new ArrayList<Item>();
 			items.add(item);
@@ -138,16 +195,16 @@ public class PaymentWithPayPalServlet extends HttpServlet {
 			// ###Redirect URLs
 			final RedirectUrls redirectUrls = new RedirectUrls();
 			final String guid = UUID.randomUUID().toString().replaceAll("-", "");
-			redirectUrls.setCancelUrl(req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/paymentwithpaypal?guid=" + guid);
-			redirectUrls.setReturnUrl(req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/paymentwithpaypal?guid=" + guid);
+			redirectUrls.setCancelUrl(req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/");
+			redirectUrls.setReturnUrl(req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + controllerPath + "/payment/done.do?guid=" + guid + "&" + objectType + "=" + objectId);
 			payment.setRedirectUrls(redirectUrls);
 
 			// Create a payment by posting to the APIService
 			// using a valid AccessToken
 			// The return object contains the status;
 			try {
-				createdPayment = payment.create(apiContext);
-				PaymentWithPayPalServlet.LOGGER.info("Created payment with id = " + createdPayment.getId() + " and status = " + createdPayment.getState());
+				createdPayment = payment.create(this.apiContext);
+				PaypalEnvironment.LOGGER.info("Created payment with id = " + createdPayment.getId() + " and status = " + createdPayment.getState());
 				// ###Payment Approval Url
 				final Iterator<Links> links = createdPayment.getLinks().iterator();
 				while (links.hasNext()) {

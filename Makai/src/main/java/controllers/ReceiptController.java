@@ -1,9 +1,9 @@
 
 package controllers;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,17 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import paypal.PaypalEnvironment;
 import services.CustomerService;
 import services.NotificationService;
 import services.ReceiptService;
 
-import com.paypal.api.payments.Amount;
-import com.paypal.api.payments.Payer;
-import com.paypal.api.payments.Payment;
-import com.paypal.api.payments.RedirectUrls;
-import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
-import com.paypal.base.rest.PayPalRESTException;
 
 import domain.Customer;
 import domain.Receipt;
@@ -41,9 +36,14 @@ public class ReceiptController extends AbstractController {
 	@Autowired
 	private NotificationService	notificationService;
 
-	private final String		clientID		= "AcfmnPWoOp2x6x5DbmGjyl0gUCWxWEvCTOEnQNsl4QJWQwaL-QzspwL9vbDXTd4xCZHuEIcm6lPYpq0_";
-	private final String		clientSecret	= "EDTVo6vMPwwd78s2Dvj21VwsnD1eUY7Rd98KJtnGMmd5Q9_nAG6rIteY4k8nUaEZnSC-EUJ0FOqgy9J6";
-	private final String		mode			= "live";
+	private PaypalEnvironment	paypalEnvironment;
+
+	String						clientId		= "AVg7HUxM_8rUkR1uomU_nVUgRPQmRtdEQcY3iaplKwDaOVYboHUofbIln77eimIpcy0HvWlS_kFKRWHi";
+	String						clientSecret	= "EBKr5W44tQkZYjqLyyDs0iwlwA4gdPa9bb3oF195Pa-6k93SpTjujesWw01YtdtSBd7Ya45fhnl-GqwP";
+
+	APIContext					apiContext		= new APIContext(this.clientId, this.clientSecret, "sandbox");
+
+	Map<String, String>			map				= new HashMap<String, String>();
 
 
 	//Constructor
@@ -76,63 +76,25 @@ public class ReceiptController extends AbstractController {
 
 	//Payment
 
-	@RequestMapping(value = "/customer/payment", method = RequestMethod.GET)
-	public ModelAndView payment(@RequestParam final double receiptAmount) {
-		ModelAndView result;
-		try {
-			final Customer customer = this.customerService.findByPrincipal();
-			//			result = new ModelAndView("receipt/customer/pending");
-			//			result.addObject("receipts", pendingReceipts);
-			//			result.addObject("RequestURI", "receipt/customer/pending.do");
-
-			final Amount amount = new Amount();
-			amount.setCurrency("EUR");
-			amount.setTotal(Double.toString(receiptAmount));
-
-			final Transaction transaction = new Transaction();
-			transaction.setAmount(amount);
-			final List<Transaction> transactions = new ArrayList<Transaction>();
-			transactions.add(transaction);
-
-			final Payer payer = new Payer();
-			payer.setPaymentMethod("paypal");
-
-			final Payment payment = new Payment();
-			payment.setIntent("sale");
-			payment.setPayer(payer);
-			payment.setTransactions(transactions);
-
-			final RedirectUrls redirectUrls = new RedirectUrls();
-			redirectUrls.setCancelUrl("/");
-			redirectUrls.setReturnUrl("/");
-			payment.setRedirectUrls(redirectUrls);
-
-			System.out.println(payment.getLinks());
-
-			result = new ModelAndView();
-
-			try {
-				final APIContext apiContext = new APIContext(this.clientID, this.clientSecret, this.mode);
-				final Payment createdPayment = payment.create(apiContext);
-				System.out.println(createdPayment.toString());
-				result = new ModelAndView(createdPayment.getLinks().get(1).getHref());
-			} catch (final PayPalRESTException e) {
-				System.out.println(e);
-			} catch (final Exception ex) {
-				// Handle errors
-				System.out.println(ex);
-			}
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/");
-			result.addObject("errorMessage", "receipt.pay.error");
-		}
-
-		return result;
-	}
+	//	@RequestMapping(value = "/customer/payment", method = RequestMethod.GET)
+	//	public ModelAndView payment(@RequestParam final double receiptAmount, final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+	//		ModelAndView result;
+	//		result = new ModelAndView();
+	//		try {
+	//			this.createPayment(req, resp);
+	//			//req.getRequestDispatcher("receipt/list.jsp").forward(req, resp);
+	//			result = new ModelAndView("redirect:" + req.getAttribute("redirectURL"));
+	//
+	//		} catch (final Throwable oops) {
+	//			result = new ModelAndView("redirect:/");
+	//			result.addObject("errorMessage", "receipt.pay.error");
+	//		}
+	//		return result;
+	//	}
 
 	//List paid receipt
 	@RequestMapping(value = "/customer/paid", method = RequestMethod.GET)
-	public ModelAndView listpaid() {
+	public ModelAndView listpaid(@RequestParam(required = false) final String token) {
 		ModelAndView result;
 		try {
 			final Customer customer = this.customerService.findByPrincipal();

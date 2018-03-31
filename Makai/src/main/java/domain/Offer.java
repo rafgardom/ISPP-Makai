@@ -32,6 +32,7 @@ public class Offer extends DomainEntity {
 	private Double		price;
 	private String		comment;
 	private Duration	duration;
+	private String		paymentId;
 
 
 	@NotNull

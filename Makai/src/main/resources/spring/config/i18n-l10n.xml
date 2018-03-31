@@ -28,6 +28,7 @@
 		<value>/views/animalShelter/messages</value>
 		<value>/views/customer/messages</value>
 		<value>/views/notification/messages</value>
+		<value>/views/paypal/messages</value>
 		<value>/views/profile/messages</value>
 		<value>/views/professional/messages</value>
 		<value>/views/rating/messages</value>

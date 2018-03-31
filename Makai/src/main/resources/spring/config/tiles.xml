@@ -28,6 +28,7 @@
 		<value>/views/animalShelter/tiles.xml</value>
 		<value>/views/customer/tiles.xml</value>
 		<value>/views/notification/tiles.xml</value>
+		<value>/views/paypal/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
 		<value>/views/professional/tiles.xml</value>
 		<value>/views/rating/tiles.xml</value>	
