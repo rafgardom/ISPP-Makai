@@ -40,7 +40,7 @@
 		</div>
 		<div class="col-md-5">
 					<spring:message code="request.tags.ph" var="tagsPH"/>
-					<acme:textarea code="request.tags" path="tags" placeholder="${tagsPH}" />
+					<acme:textarea code="request.tags" path="tags" maxCharacters="100" placeholder="${tagsPH}" />
 					<acme:selectNotEntity code="request.category" path="category" items="${categories}" mandatory="true" />
 					<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
 		

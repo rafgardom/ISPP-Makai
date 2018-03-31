@@ -48,39 +48,40 @@
 			<img src="images/asterisk.png"	width="16"/>
 		</jstl:if>
 	</form:label>
-	<form:textarea path="${path}" placeholder="${placeholder }" maxlength="${maxlength }" readonly="${readonly}" class="form-control" rows="${rows}" id="text" name="text" />
+	<form:textarea path="${path}" placeholder="${placeholder}" maxlength="${maxlength}" readonly="${readonly}" class="form-control" rows="${rows}" id="text${path}" name="text" />
 	<jstl:if test="${maxCharacters != null}">
-		<span class="pull-right label label-default" id="count_message"></span>
+		<span class="pull-right label label-default" id="count_message${path}"></span>
 	</jstl:if>
 	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 </div>
 
 <script type="text/javascript">
 	
-	var text_max = ${maxCharacters };
-	var chars = $('#text').val().length;
+	var text_max = '<jstl:out value="${maxCharacters}" />';;
+	var path = '<jstl:out value="${path}" />';;
+	var chars = $('#text'+path).val().length;
 	
-	$('#count_message').html(chars + ' / ' + text_max );
+	$('#count_message'+path).html(chars + ' / ' + text_max );
 	
 	if(chars>text_max){
-		$('#count_message').addClass("overlimit");
-		$('#text').addClass("is-invalid");
+		$('#count_message'+path).addClass("overlimit");
+		$('#text'+path).addClass("is-invalid");
 	}else{
-		$('#count_message').removeClass("overlimit");
-		$('#text').removeClass("is-invalid");
+		$('#count_message'+path).removeClass("overlimit");
+		$('#text'+path).removeClass("is-invalid");
 	}
 	
-	$('#text').keyup(function() {
-		var text_length = $('#text').val().length;
+	$('#text'+path).keyup(function() {
+		var text_length = $('#text'+path).val().length;
 		 
-		$('#count_message').html(text_length + ' / ' + text_max);
+		$('#count_message'+path).html(text_length + ' / ' + text_max);
 		
 		if(text_length>text_max){
-			$('#count_message').addClass("text-danger");
-			$('#text').addClass("is-invalid");
+			$('#count_message'+path).addClass("text-danger");
+			$('#text'+path).addClass("is-invalid");
 		}else{
-			$('#count_message').removeClass("text-danger");
-			$('#text').removeClass("is-invalid");
+			$('#count_message'+path).removeClass("text-danger");
+			$('#text'+path).removeClass("is-invalid");
 		}
 	});
 </script>
