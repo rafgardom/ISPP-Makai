@@ -38,21 +38,21 @@
 			<div class="col-md-5">
 				<h3><spring:message code="travel.origin" /></h3>
 				<br />
-				<acme:textbox code="travel.country" path="countryOrigin" mandatory="true" />
-				<acme:textbox code="travel.state" path="stateOrigin" mandatory="false" />
-				<acme:textbox code="travel.province" path="provinceOrigin" mandatory="false" />
-				<acme:textbox code="travel.city" path="cityOrigin" mandatory="true" />
-				<acme:textbox code="travel.zipcode" path="zip_codeOrigin" mandatory="true" />
+				<acme:textbox code="travel.country" path="origin.country" mandatory="true" />
+				<acme:textbox code="travel.state" path="origin.state" mandatory="false" />
+				<acme:textbox code="travel.province" path="origin.province" mandatory="false" />
+				<acme:textbox code="travel.city" path="origin.city" mandatory="true" />
+				<acme:textbox code="travel.zipcode" path="origin.zip_code" mandatory="true" />
 
 			</div>
 			<div class="offset-md-1 col-md-5">
 				<h3><spring:message code="travel.destination" /></h3>
 				<br />
-				<acme:textbox code="travel.country" path="countryDestination" mandatory="true" />
-				<acme:textbox code="travel.state" path="stateDestination" mandatory="false" />
-				<acme:textbox code="travel.province" path="provinceDestination" mandatory="false" />
-				<acme:textbox code="travel.city" path="cityDestination" mandatory="true" />
-				<acme:textbox code="travel.zipcode" path="zip_codeDestination" mandatory="true" />
+				<acme:textbox code="travel.country" path="destination.country" mandatory="true" />
+				<acme:textbox code="travel.state" path="destination.state" mandatory="false" />
+				<acme:textbox code="travel.province" path="destination.province" mandatory="false" />
+				<acme:textbox code="travel.city" path="destination.city" mandatory="true" />
+				<acme:textbox code="travel.zipcode" path="destination.zip_code" mandatory="true" />
 			
 			</div>
 	</div>

@@ -64,7 +64,7 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Travel travel;
 		boolean wrongSeats = false;
-		travel = this.travelService.reconstruct(travelForm, binding);
+
 		if (binding.hasErrors())
 			result = this.createModelAndView(travelForm, "travel.commit.error");
 		else
@@ -73,7 +73,7 @@ public class TravelController extends AbstractController {
 					wrongSeats = true;
 					throw new IllegalArgumentException();
 				}
-
+				travel = this.travelService.reconstruct(travelForm, binding);
 				this.travelService.save(travel);
 				result = new ModelAndView("redirect:/travel/myList.do");
 

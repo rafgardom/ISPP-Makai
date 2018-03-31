@@ -15,7 +15,6 @@ import org.springframework.validation.Validator;
 import repositories.TravelRepository;
 import security.Authority;
 import domain.Actor;
-import domain.Coordinates;
 import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
@@ -109,7 +108,7 @@ public class TravelService {
 
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
-		Assert.isTrue(travel.getEndMoment().before(travel.getEndMoment()));
+		Assert.isTrue(travel.getStartMoment().before(travel.getEndMoment()));
 
 		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
 
@@ -182,8 +181,8 @@ public class TravelService {
 		else
 			result = this.findOne(travelForm.getId());
 
-		result.setOrigin(new Coordinates(travelForm.getCountryOrigin(), travelForm.getStateOrigin(), travelForm.getProvinceOrigin(), travelForm.getCityOrigin(), travelForm.getZip_codeOrigin()));
-		result.setDestination(new Coordinates(travelForm.getCountryDestination(), travelForm.getStateDestination(), travelForm.getProvinceDestination(), travelForm.getCityDestination(), travelForm.getZip_codeDestination()));
+		result.setDestination(travelForm.getDestination());
+		result.setOrigin(travelForm.getOrigin());
 		result.setStartMoment(travelForm.getStartMoment());
 		result.setEndMoment(travelForm.getEndMoment());
 		result.setHumanSeats(travelForm.getHumanSeats());
@@ -199,16 +198,8 @@ public class TravelService {
 		Assert.notNull(travel);
 		final TravelForm result = new TravelForm();
 
-		result.setCountryOrigin(travel.getOrigin().getCountry());
-		result.setCountryDestination(travel.getDestination().getCountry());
-		result.setStateOrigin(travel.getOrigin().getState());
-		result.setStateDestination(travel.getDestination().getState());
-		result.setProvinceOrigin(travel.getOrigin().getProvince());
-		result.setProvinceDestination(travel.getDestination().getProvince());
-		result.setCityOrigin(travel.getOrigin().getCity());
-		result.setCityDestination(travel.getDestination().getCity());
-		result.setZip_codeOrigin(travel.getOrigin().getZip_code());
-		result.setZip_codeDestination(travel.getDestination().getZip_code());
+		result.setDestination(travel.getDestination());
+		result.setOrigin(travel.getOrigin());
 		result.setStartMoment(travel.getStartMoment());
 		result.setEndMoment(travel.getEndMoment());
 		result.setAnimalSeats(travel.getAnimalSeats());
