@@ -15,19 +15,28 @@
 <jsp:useBean id="date" class="java.util.Date" />
 
 <hr />
-
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b><br/>
-<a href="misc/privacyPolicy.do?sc=true"><spring:message code="master.page.privacyPolicy" /></a>&nbsp;&nbsp;&#124;
-<a href="misc/cookiesPolicy.do"><spring:message code="master.page.cookiesPolicy" /></a><br/>
-<i style="font-size:16px"><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i>
+<div class="row">
+	<div class="col-md-5">
+		<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b>
+	</div>
+	<div class="col-md-7 text-md-right">
+		<a href="misc/privacyPolicy.do?sc=true"><spring:message code="master.page.privacyPolicy" /></a>&nbsp;&nbsp;&#124;
+		<a href="misc/cookiesPolicy.do"><spring:message code="master.page.cookiesPolicy" /></a><br/>
+		<i style="font-size:16px"><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i>
+	</div>
+</div>
 
 <div id="barraaceptacion">
-    <div class="inner">
-    	<spring:message code="master.page.cookies" />
-    	<a href="misc/cookiesPolicy.do" class="info"><spring:message code="master.page.cookies.moreInfo" /></a>
-        <button type="button" class="btn btn-default btn-sm ok" onclick="PonerCookie();"><b><spring:message code="master.page.cookies.ok" /></b></button>
+    <div class="inner row">
+			<div class="col-10">
+			<spring:message code="master.page.cookies" />
+	    		<a href="misc/cookiesPolicy.do" class="info"><spring:message code="master.page.cookies.moreInfo" /></a>
+			</div>
+			<div class="col-2 text-sm-right">
+			 	<button type="button" class="btn btn-warning btn-lg ok" onclick="PonerCookie();"><b><spring:message code="master.page.cookies.ok" /></b></button>
+			</div>
+		</div>
     </div>
-</div>
  
 <script>
 function getCookie(c_name){

@@ -25,9 +25,9 @@
 <div style="display: flex; justify-content:center; position:relative; z-index:2;">
 		<img src="images/user3.png" alt="Login user"/>
 </div>
-<div class="card" style="position:relative; z-index:1; margin-top:-9%">
+<div class="card" style="position:relative; z-index:1; margin-top:-2.5rem">
 
-    <div class="card-body" style="margin-top:5%">	
+    <div class="card-body" style="margin-top:1.5rem">	
 	    <jstl:if test="${showError == true}">
 			<acme:error code="security.login.failed"/>
 		</jstl:if>
