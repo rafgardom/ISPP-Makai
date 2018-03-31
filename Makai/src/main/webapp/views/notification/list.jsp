@@ -38,9 +38,7 @@
 
 		<div class="btn-group">	
 			<acme:link image="eye" href="notification/actor/display.do?notificationId=${row.id}"/>
-			<jstl:if test="${row.isRead}">
-				<acme:link image="trash" href="notification/actor/delete.do?notificationId=${row.id}" type="danger"/>
-			</jstl:if>
+			<acme:link image="trash" href="notification/actor/delete.do?notificationId=${row.id}" type="danger"/>
 		</div>
 
 	</display:column>
