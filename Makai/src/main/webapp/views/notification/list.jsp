@@ -46,7 +46,7 @@
 </display:table>
 </div>
 	<jstl:if test="${!empty notifications}">
-		<acme:link image="trash" href="notification/actor/deleteAll.do?notificationId=${row.id}" type="danger"/>
+		<acme:delete href="notification/actor/deleteAll.do?notificationId=${row.id}" id="${row.id}" code="notification.deleteall" cuestioncode="notification.deleteall.cuestion"/>
 	</jstl:if>
 	
 <security:authorize access="hasRole('ADMIN')">
