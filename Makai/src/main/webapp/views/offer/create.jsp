@@ -50,24 +50,29 @@
   			<acme:input path="price" type="range" code="offer.price" min="0" max="4000" style="slider" id="myRange" mandatory="true" /> 
   			<h6 class="text-center" id="total"></h6>
 	
-			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="8"/>
+			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="8" maxCharacters="2000" />
 		</div>
 	</div>
 	<br>
-	<h3><spring:message code="offer.duration" /></h3>
 	<div class="row">
-		<div class="col-sm-2">
-			<acme:input code="offer.duration.year" path="duration.year" type="number" min="0" mandatory="false" />
-			<acme:input code="offer.duration.month" path="duration.month" type="number" min="0" mandatory="false"/>
-		</div>
-		<div class="col-sm-2">
-			<acme:input code="offer.duration.week" path="duration.week" type="number" min="0" mandatory="false"/>
-			<acme:input code="offer.duration.day" path="duration.day" type="number" min="0" mandatory="false"/>
+		<div class="col-sm-4">
+			<h3><spring:message code="offer.duration" /></h3>
+			<div class="row">
+				<div class="col-sm-6">
+					<acme:input code="offer.duration.year" path="duration.year" type="number" min="0" mandatory="false" />
+					<acme:input code="offer.duration.month" path="duration.month" type="number" min="0" mandatory="false"/>
+				</div>
+				<div class="col-sm-6">
+					<acme:input code="offer.duration.week" path="duration.week" type="number" min="0" mandatory="false"/>
+					<acme:input code="offer.duration.day" path="duration.day" type="number" min="0" mandatory="false"/>
+				</div>
+			</div>
+			<form:errors cssClass="alert alert-danger form-control" path="duration" />
+			<br>
 		</div>
 		
-		<div class="col-12">
+		<div class="col-md-12">
 			<jstl:if test="${offerForm.request.animal==null}">
-				<br>
 				<h3><spring:message code="offer.animal" /></h3>
 				<acme:select items="${animals}" itemLabel="name" code="offer.animal" path="animal"/>
 				<br>
@@ -76,8 +81,9 @@
 				<form:hidden path="animal"/>
 			</jstl:if>
 		</div>
+		
 	<br/>
-</div>
+	</div>
 	<jstl:if test="${offerForm.id==0}">
 		<acme:submit code="offer.create" name="save" />
 	</jstl:if>

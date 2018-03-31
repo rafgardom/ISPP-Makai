@@ -8,6 +8,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -78,6 +79,7 @@ public class OfferForm {
 	}
 
 	@NotBlank
+	@Size(max = 2000)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getComment() {
 		return this.comment;

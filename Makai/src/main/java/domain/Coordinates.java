@@ -5,6 +5,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -36,6 +37,7 @@ public class Coordinates {
 
 
 	@NotBlank
+	@Size(max = 100)
 	@Pattern(regexp = "^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$")
 	public String getCountry() {
 		return this.country;
@@ -44,6 +46,7 @@ public class Coordinates {
 		this.country = country;
 	}
 
+	@Size(max = 100)
 	public String getState() {
 		return this.state;
 	}
@@ -51,6 +54,7 @@ public class Coordinates {
 		this.state = state;
 	}
 
+	@Size(max = 100)
 	public String getProvince() {
 		return this.province;
 	}
@@ -59,6 +63,7 @@ public class Coordinates {
 	}
 
 	@NotBlank
+	@Size(max = 100)
 	@Pattern(regexp = "^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$")
 	public String getCity() {
 		return this.city;

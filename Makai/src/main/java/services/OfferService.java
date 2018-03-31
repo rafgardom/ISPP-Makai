@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import repositories.OfferRepository;
 import domain.Customer;
@@ -211,6 +212,14 @@ public class OfferService {
 		Assert.notNull(offerForm);
 		Offer result;
 
+		if (offerForm.getDuration().getDay() == null && offerForm.getDuration().getMonth() == null && offerForm.getDuration().getWeek() == null && offerForm.getDuration().getYear() == null) {
+			FieldError fieldError;
+			final String[] codes = {
+				"offer.duration.empty.error"
+			};
+			fieldError = new FieldError("offerForm", "duration", offerForm.getDuration(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
 		if (offerForm.getId() == 0)
 			if (offerForm.getRequest().getAnimal() == null)
 				result = this.createWithoutAnimal(offerForm.getRequest());

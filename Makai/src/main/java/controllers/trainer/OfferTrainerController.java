@@ -1,6 +1,7 @@
 
 package controllers.trainer;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -146,10 +147,12 @@ public class OfferTrainerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final OfferForm offerForm, final BindingResult binding) {
+	public ModelAndView save(@Valid final OfferForm offerForm, final BindingResult binding) throws IOException {
 
 		ModelAndView result;
-		Offer offer = null;
+		Offer offer;
+
+		offer = this.offerService.reconstruct(offerForm, binding);
 
 		if (binding.hasErrors())
 			if (offerForm.getRequest() == null)
@@ -158,8 +161,6 @@ public class OfferTrainerController extends AbstractController {
 				result = this.createEditModelAndView(offerForm);
 		else
 			try {
-				offer = this.offerService.reconstruct(offerForm, binding);
-
 				offer = this.offerService.save(offer);
 				result = new ModelAndView("redirect:list.do");
 
