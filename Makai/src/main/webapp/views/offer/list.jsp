@@ -16,6 +16,13 @@
 	<acme:column code="offer.animal" property="animal.name" />
 	
 	<display:column>
+		<security:authorize access="hasRole('CUSTOMER')">
+			<a href="profile/displayProfile.do?actorId=${row.trainer.id}">${row.trainer.name}</a>
+		</security:authorize>
+	</display:column>
+	
+	
+	<display:column>
 		<div class="btn-group">
 			<acme:link image="eye" href="offer/trainer/display.do?offerId=${row.id}"/>
 			<security:authorize access="hasRole('TRAINER')">

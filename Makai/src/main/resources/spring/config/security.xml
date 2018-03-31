@@ -93,6 +93,7 @@
 		
 		<security:intercept-url pattern="/profile/edit.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/display.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profile/displayProfile.do" access="isAuthenticated()" /> 
 		
 		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/professional/register.do" access="isAnonymous()" /> 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
@@ -48,6 +49,26 @@ public class ProfileActorController extends AbstractController {
 		final Integer numberNoti;
 
 		actor = this.actorService.findByPrincipal();
+		image = Utilities.showImage(actor.getPicture());
+		numberNoti = this.notificationService.findNotificationWithoutRead();
+
+		result = new ModelAndView("profile/display");
+		result.addObject("actor", actor);
+		result.addObject("pictureImage", image);
+		result.addObject("numberNoti", numberNoti);
+		result.addObject("requestURI", "profile/display.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/displayProfile", method = RequestMethod.GET)
+	public ModelAndView displayProfile(@RequestParam final int actorId) {
+		ModelAndView result;
+		Actor actor;
+		String image;
+		final Integer numberNoti;
+
+		actor = this.actorService.findOne(actorId);
 		image = Utilities.showImage(actor.getPicture());
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
