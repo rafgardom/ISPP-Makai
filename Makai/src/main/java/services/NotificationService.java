@@ -66,7 +66,6 @@ public class NotificationService {
 		Notification result;
 		Administrator principal;
 		Calendar calendar;
-		Actor actor;
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
@@ -74,11 +73,10 @@ public class NotificationService {
 		calendar = Calendar.getInstance();
 		calendar.set(Calendar.MILLISECOND, -10);
 
-		actor = new Actor();
-
 		result = new Notification();
-		result.setActor(actor);
+		result.setActor(principal);
 		result.setMoment(calendar.getTime());
+		result.setIsRead(false);
 
 		return result;
 	}
