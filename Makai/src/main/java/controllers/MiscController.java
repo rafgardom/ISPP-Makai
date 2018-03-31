@@ -22,11 +22,13 @@ public class MiscController extends AbstractController {
 	@RequestMapping(value = "/privacyPolicy", method = RequestMethod.GET)
 	public ModelAndView privacyPolicy(@RequestParam final boolean sc) {
 		ModelAndView result;
-
-		result = new ModelAndView("privacyPolicy");
-		result.addObject("requestURI", "misc/privacyPolicy.do");
-		result.addObject("sc", sc);
-
+		try {
+			result = new ModelAndView("privacyPolicy");
+			result.addObject("requestURI", "misc/privacyPolicy.do");
+			result.addObject("sc", sc);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

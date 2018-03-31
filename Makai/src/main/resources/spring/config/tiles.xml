@@ -27,6 +27,7 @@
 		<value>/views/animal/tiles.xml</value>
 		<value>/views/animalShelter/tiles.xml</value>
 		<value>/views/customer/tiles.xml</value>
+		<value>/views/generalError/tiles.xml</value>
 		<value>/views/notification/tiles.xml</value>
 		<value>/views/paypal/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>

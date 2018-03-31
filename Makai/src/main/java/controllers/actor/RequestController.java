@@ -38,14 +38,17 @@ public class RequestController extends AbstractController {
 		Request request;
 		final Integer numberNoti;
 
-		request = this.requestService.findOne(requestId);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+		try {
+			request = this.requestService.findOne(requestId);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		result = new ModelAndView("request/display");
-		result.addObject("request", request);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "request/trainer/display.do?requestId=" + request.getId());
-
+			result = new ModelAndView("request/display");
+			result.addObject("request", request);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "request/trainer/display.do?requestId=" + request.getId());
+		} catch (final Throwable oops) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

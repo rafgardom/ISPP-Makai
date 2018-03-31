@@ -46,12 +46,14 @@ public class RatingCustomerController extends AbstractController {
 		ModelAndView result;
 		Rating rating;
 		Request request;
+		try {
+			request = this.requestService.findOne(requestId);
+			rating = this.ratingService.createToRequest(request);
 
-		request = this.requestService.findOne(requestId);
-		rating = this.ratingService.createToRequest(request);
-
-		result = this.createModelAndView(rating);
-
+			result = this.createModelAndView(rating);
+		} catch (final Throwable oops) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

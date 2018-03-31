@@ -88,12 +88,14 @@ public class VehicleController extends AbstractController {
 		ModelAndView result;
 		final Vehicle vehicle;
 		VehicleForm vehicleForm;
+		try {
+			vehicle = this.vehicleService.findOne(vehicleId);
+			vehicleForm = this.vehicleService.toFormObject(vehicle);
 
-		vehicle = this.vehicleService.findOne(vehicleId);
-		vehicleForm = this.vehicleService.toFormObject(vehicle);
-
-		result = this.createModelAndView(vehicleForm);
-
+			result = this.createModelAndView(vehicleForm);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
@@ -146,7 +148,7 @@ public class VehicleController extends AbstractController {
 			this.vehicleService.delete(vehicle);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("error");
 		}
 
 		return result;

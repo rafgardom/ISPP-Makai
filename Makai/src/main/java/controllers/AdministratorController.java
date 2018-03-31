@@ -41,17 +41,6 @@ public class AdministratorController extends AbstractController {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------		
-
-	@RequestMapping("/action-1")
-	public ModelAndView action1() {
-		ModelAndView result;
-
-		result = new ModelAndView("administrator/action-1");
-
-		return result;
-	}
-
 	// ListActors --------------------------------------------------------------------
 	@RequestMapping(value = "/listActors", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -76,13 +65,15 @@ public class AdministratorController extends AbstractController {
 	public ModelAndView ban(@RequestParam final int actorId) {
 		ModelAndView result;
 		Actor actor;
+		try {
+			actor = this.actorService.findOne(actorId);
 
-		actor = this.actorService.findOne(actorId);
+			this.actorService.ban(actor);
 
-		this.actorService.ban(actor);
-
-		result = new ModelAndView("redirect:listActors.do");
-
+			result = new ModelAndView("redirect:listActors.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -92,24 +83,15 @@ public class AdministratorController extends AbstractController {
 	public ModelAndView unban(@RequestParam final int actorId) {
 		ModelAndView result;
 		Actor actor;
+		try {
+			actor = this.actorService.findOne(actorId);
 
-		actor = this.actorService.findOne(actorId);
+			this.actorService.unban(actor);
 
-		this.actorService.unban(actor);
-
-		result = new ModelAndView("redirect:listActors.do");
-
-		return result;
-	}
-
-	// Action-2 ---------------------------------------------------------------
-
-	@RequestMapping("/action-2")
-	public ModelAndView action2() {
-		ModelAndView result;
-
-		result = new ModelAndView("administrator/action-2");
-
+			result = new ModelAndView("redirect:listActors.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import paypal.PaypalEnvironment;
-import services.CustomerService;
 import services.OfferService;
 
 import com.paypal.api.payments.Payment;
@@ -25,9 +24,6 @@ import domain.Offer;
 public class OfferCustomerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
-
-	@Autowired
-	private CustomerService	customerService;
 
 	@Autowired
 	private OfferService	offerService;
@@ -54,7 +50,7 @@ public class OfferCustomerController extends AbstractController {
 			result = new ModelAndView("redirect:" + req.getAttribute("redirectURL"));
 			//			this.offerService.acceptedOffer(offer);
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/");
+			result = new ModelAndView("error");
 			System.out.println(oops);
 		}
 

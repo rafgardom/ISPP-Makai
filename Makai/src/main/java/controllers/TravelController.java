@@ -89,11 +89,14 @@ public class TravelController extends AbstractController {
 	//Register
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(@RequestParam final int travelId) {
-		final ModelAndView result;
-		final Travel travel = this.travelService.findOne(travelId);
-		this.travelService.registerTravel(travel);
-		result = new ModelAndView("redirect:myList.do");
-
+		ModelAndView result;
+		try {
+			final Travel travel = this.travelService.findOne(travelId);
+			this.travelService.registerTravel(travel);
+			result = new ModelAndView("redirect:myList.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -102,12 +105,14 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Travel travel;
 		TravelForm travelForm;
+		try {
+			travel = this.travelService.findOne(travelId);
+			travelForm = this.travelService.toFormObject(travel);
 
-		travel = this.travelService.findOne(travelId);
-		travelForm = this.travelService.toFormObject(travel);
-
-		result = this.createModelAndView(travelForm);
-
+			result = this.createModelAndView(travelForm);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -161,7 +166,7 @@ public class TravelController extends AbstractController {
 			this.travelService.delete(travel);
 			result = new ModelAndView("redirect:myList.do");
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:myList.do");
+			result = new ModelAndView("error");
 		}
 
 		return result;
@@ -223,15 +228,17 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Travel travel;
 		final Integer numberNoti;
+		try {
+			travel = this.travelService.findOne(travelId);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		travel = this.travelService.findOne(travelId);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("travel/display");
-		result.addObject("travel", travel);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "travel/display.do?travelId=" + travel.getId());
-
+			result = new ModelAndView("travel/display");
+			result.addObject("travel", travel);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "travel/display.do?travelId=" + travel.getId());
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 	// Ancillary methods

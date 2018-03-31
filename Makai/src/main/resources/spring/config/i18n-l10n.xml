@@ -27,6 +27,7 @@
 		<value>/views/animal/messages</value>
 		<value>/views/animalShelter/messages</value>
 		<value>/views/customer/messages</value>
+		<value>/views/generalError/messages</value>
 		<value>/views/notification/messages</value>
 		<value>/views/paypal/messages</value>
 		<value>/views/profile/messages</value>

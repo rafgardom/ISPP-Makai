@@ -29,6 +29,8 @@
 
 	<security:http auto-config="true" use-expressions="true">
 		<security:intercept-url pattern="/" access="permitAll" /> 
+		
+		<security:intercept-url pattern="/error.do" access="permitAll" />
 
 		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
 		<security:intercept-url pattern="/images/**" access="permitAll" /> 
@@ -53,9 +55,9 @@
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
 		
-		<security:intercept-url pattern="/receipt/customer/pending.do" access="hasRole('CUSTOMER')" />
-		<security:intercept-url pattern="/receipt/customer/paid.do" access="hasRole('CUSTOMER')" />
-		<security:intercept-url pattern="/receipt/customer/payment.do" access="hasRole('CUSTOMER')" />
+<!-- 		<security:intercept-url pattern="/receipt/customer/pending.do" access="hasRole('CUSTOMER')" /> -->
+<!-- 		<security:intercept-url pattern="/receipt/customer/paid.do" access="hasRole('CUSTOMER')" /> -->
+<!-- 		<security:intercept-url pattern="/receipt/customer/payment.do" access="hasRole('CUSTOMER')" /> -->
 		
 		<security:intercept-url pattern="/rating/customer/create.do" access="hasRole('CUSTOMER')" />
 		

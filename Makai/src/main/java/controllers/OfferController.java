@@ -51,7 +51,7 @@ public class OfferController extends AbstractController {
 			result.addObject("RequestURI", "offer/customer/list.do");
 
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/");
+			result = new ModelAndView("error");
 		}
 		return result;
 	}

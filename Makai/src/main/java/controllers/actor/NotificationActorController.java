@@ -75,7 +75,8 @@ public class NotificationActorController extends AbstractController {
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "notification/actor/display.do");
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:list.do");
+			//			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("error");
 		}
 
 		return result;

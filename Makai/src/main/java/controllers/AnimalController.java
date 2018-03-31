@@ -93,16 +93,18 @@ public class AnimalController extends AbstractController {
 		Animal animal;
 		AnimalForm animalForm;
 		final Integer numberNoti;
+		try {
+			animal = this.animalService.findOne(animalId);
+			animalForm = this.animalService.animalToFormObject(animal);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		animal = this.animalService.findOne(animalId);
-		animalForm = this.animalService.animalToFormObject(animal);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("animal/display");
-		result.addObject("animal", animalForm);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "animal/display.do");
-
+			result = new ModelAndView("animal/display");
+			result.addObject("animal", animalForm);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "animal/display.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -127,12 +129,14 @@ public class AnimalController extends AbstractController {
 		ModelAndView result;
 		Animal animal;
 		AnimalForm animalForm;
+		try {
+			animal = this.animalService.findOne(animalId);
+			animalForm = this.animalService.animalToFormObject(animal);
 
-		animal = this.animalService.findOne(animalId);
-		animalForm = this.animalService.animalToFormObject(animal);
-
-		result = this.createEditModelAndView(animalForm);
-
+			result = this.createEditModelAndView(animalForm);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -176,11 +180,13 @@ public class AnimalController extends AbstractController {
 	public ModelAndView delete(final Animal animal, final BindingResult binding) {
 
 		ModelAndView result;
+		try {
+			this.animalService.delete(animal);
 
-		this.animalService.delete(animal);
-
-		result = new ModelAndView("redirect:listByCustomer.do");
-
+			result = new ModelAndView("redirect:listByCustomer.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 
 	}

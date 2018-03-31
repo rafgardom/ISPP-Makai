@@ -103,11 +103,13 @@ public class RequestCustomerController extends AbstractController {
 		ModelAndView result;
 		RequestForm requestForm;
 		Request request;
-
-		request = this.requestService.findOne(requestId);
-		requestForm = this.requestService.requestToFormObject(request);
-		result = this.createEditModelAndView(requestForm);
-
+		try {
+			request = this.requestService.findOne(requestId);
+			requestForm = this.requestService.requestToFormObject(request);
+			result = this.createEditModelAndView(requestForm);
+		} catch (final Throwable oops) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
