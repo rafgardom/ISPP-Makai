@@ -150,9 +150,7 @@ public class OfferTrainerController extends AbstractController {
 	public ModelAndView save(@Valid final OfferForm offerForm, final BindingResult binding) throws IOException {
 
 		ModelAndView result;
-		Offer offer;
-
-		offer = this.offerService.reconstruct(offerForm, binding);
+		Offer offer = null;
 
 		if (binding.hasErrors())
 			if (offerForm.getRequest() == null)
@@ -161,6 +159,7 @@ public class OfferTrainerController extends AbstractController {
 				result = this.createEditModelAndView(offerForm);
 		else
 			try {
+				offer = this.offerService.reconstruct(offerForm, binding);
 				offer = this.offerService.save(offer);
 				result = new ModelAndView("redirect:list.do");
 
