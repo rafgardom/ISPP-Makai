@@ -23,10 +23,6 @@
 			<jstl:out value="${row.duration.month}" />
 			<spring:message code="training.duration.month" />
 		</jstl:if>
-		<jstl:if test="${row.duration.week!=0 }">
-			<jstl:out value="${row.duration.week}" />
-			<spring:message code="training.duration.week" />
-		</jstl:if>
 		<jstl:if test="${row.duration.year!=0 }">
 			<jstl:out value="${row.duration.year}" />
 			<spring:message code="training.duration.year" />

@@ -26,10 +26,6 @@
 				<jstl:out value="${training.duration.month}" />
 				<spring:message code="training.duration.month" />
 			</jstl:if>
-			<jstl:if test="${training.duration.week!=0 }">
-				<jstl:out value="${training.duration.week}" />
-				<spring:message code="training.duration.week" />
-			</jstl:if>
 			<jstl:if test="${training.duration.year!=0 }">
 				<jstl:out value="${training.duration.year}" />
 				<spring:message code="training.duration.year" />

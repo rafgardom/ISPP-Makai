@@ -554,42 +554,36 @@
 	<bean id="duration1" class="domain.Duration">
 		<property name="year" value="0" />
 		<property name="month" value="8" />
-		<property name="week" value="2" />
 		<property name="day" value="1" />
 	</bean>
 	
 	<bean id="duration2" class="domain.Duration">
 		<property name="year" value="1" />
 		<property name="month" value="2" />
-		<property name="week" value="0" />
 		<property name="day" value="0" />
 	</bean>
 	
 	<bean id="duration3" class="domain.Duration">
 		<property name="year" value="0" />
 		<property name="month" value="2" />
-		<property name="week" value="1" />
 		<property name="day" value="4" />
 	</bean>
 	
 		<bean id="duration4" class="domain.Duration">
 		<property name="year" value="0" />
 		<property name="month" value="8" />
-		<property name="week" value="2" />
 		<property name="day" value="1" />
 	</bean>
 	
 	<bean id="duration5" class="domain.Duration">
 		<property name="year" value="1" />
 		<property name="month" value="2" />
-		<property name="week" value="0" />
 		<property name="day" value="0" />
 	</bean>
 	
 	<bean id="duration6" class="domain.Duration">
 		<property name="year" value="0" />
 		<property name="month" value="2" />
-		<property name="week" value="1" />
 		<property name="day" value="4" />
 	</bean>
 

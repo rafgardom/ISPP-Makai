@@ -15,11 +15,10 @@ public class Duration {
 		super();
 	}
 
-	public Duration(final Integer year, final Integer month, final Integer week, final Integer day) {
+	public Duration(final Integer year, final Integer month, final Integer day) {
 		super();
 		this.year = year;
 		this.month = month;
-		this.week = week;
 		this.day = day;
 	}
 
@@ -28,7 +27,6 @@ public class Duration {
 
 	private Integer	year;
 	private Integer	month;
-	private Integer	week;
 	private Integer	day;
 
 
@@ -46,14 +44,6 @@ public class Duration {
 	}
 	public void setMonth(final Integer month) {
 		this.month = month;
-	}
-
-	@Min(0)
-	public Integer getWeek() {
-		return this.week;
-	}
-	public void setWeek(final Integer week) {
-		this.week = week;
 	}
 
 	@Min(0)

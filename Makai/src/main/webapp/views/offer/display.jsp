@@ -77,11 +77,6 @@
 			</li>
 			
 			<li>
-				<b><spring:message code="offer.duration.week" />:</b>
-				<jstl:out value="${offer.duration.week}" />
-			</li>
-			
-			<li>
 				<b><spring:message code="offer.duration.day" />:</b>
 				<jstl:out value="${offer.duration.day}" />
 			</li>

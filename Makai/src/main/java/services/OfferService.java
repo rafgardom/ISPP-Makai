@@ -212,7 +212,7 @@ public class OfferService {
 		Assert.notNull(offerForm);
 		Offer result;
 
-		if (offerForm.getDuration().getDay() == null && offerForm.getDuration().getMonth() == null && offerForm.getDuration().getWeek() == null && offerForm.getDuration().getYear() == null) {
+		if (offerForm.getDuration().getDay() == null && offerForm.getDuration().getMonth() == null && offerForm.getDuration().getYear() == null) {
 			FieldError fieldError;
 			final String[] codes = {
 				"offer.duration.empty.error"

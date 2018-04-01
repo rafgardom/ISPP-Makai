@@ -78,12 +78,10 @@ public class TrainingService {
 			training.getDuration().setDay(0);
 		if (training.getDuration().getMonth() == null)
 			training.getDuration().setMonth(0);
-		if (training.getDuration().getWeek() == null)
-			training.getDuration().setWeek(0);
 		if (training.getDuration().getYear() == null)
 			training.getDuration().setYear(0);
 
-		Assert.isTrue(!(training.getDuration().getDay() == 0 && training.getDuration().getMonth() == 0 && training.getDuration().getWeek() == 0 && training.getDuration().getYear() == 0));
+		Assert.isTrue(!(training.getDuration().getDay() == 0 && training.getDuration().getMonth() == 0 && training.getDuration().getYear() == 0));
 
 		result = this.trainingRepository.save(training);
 
