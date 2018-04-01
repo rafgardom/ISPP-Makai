@@ -48,40 +48,36 @@
 			<img src="images/asterisk.png"	width="16"/>
 		</jstl:if>
 	</form:label>
-	<form:textarea path="${path}" placeholder="${placeholder}" maxlength="${maxlength}" readonly="${readonly}" class="form-control" rows="${rows}" id="text${path}" name="text" />
+	<form:textarea path="${path}" placeholder="${placeholder}" maxlength="${maxlength}" readonly="${readonly}" class="form-control" rows="${rows}" id="text_${path}" name="text" />
 	<jstl:if test="${maxCharacters != null}">
-		<span class="pull-right label label-default" id="count_message${path}"></span>
+		<span class="pull-right label label-default" id="count_message_${path}"></span>
 	</jstl:if>
 	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 </div>
 
 <script type="text/javascript">
 	
-	var text_max = '<jstl:out value="${maxCharacters}" />';;
-	var path = '<jstl:out value="${path}" />';;
-	var chars = $('#text'+path).val().length;
 	
-	$('#count_message'+path).html(chars + ' / ' + text_max );
+	checkCharacters('<jstl:out value="${maxCharacters}" />', '#text_<jstl:out value="${path}" />', '#count_message_<jstl:out value="${path}" />');
 	
-	if(chars>text_max){
-		$('#count_message'+path).addClass("overlimit");
-		$('#text'+path).addClass("is-invalid");
-	}else{
-		$('#count_message'+path).removeClass("overlimit");
-		$('#text'+path).removeClass("is-invalid");
-	}
 	
-	$('#text'+path).keyup(function() {
-		var text_length = $('#text'+path).val().length;
+	$('#text_<jstl:out value="${path}" />').keyup(function() {
+		checkCharacters('<jstl:out value="${maxCharacters}" />', '#text_<jstl:out value="${path}" />', '#count_message_<jstl:out value="${path}" />');
 		 
-		$('#count_message'+path).html(text_length + ' / ' + text_max);
-		
-		if(text_length>text_max){
-			$('#count_message'+path).addClass("text-danger");
-			$('#text'+path).addClass("is-invalid");
-		}else{
-			$('#count_message'+path).removeClass("text-danger");
-			$('#text'+path).removeClass("is-invalid");
-		}
 	});
+	
+	function checkCharacters(text_max, textId, count_messageId) {
+		var text_length = $(textId).val().length;
+		
+		$(count_messageId).html(text_length + ' / ' + text_max );
+		
+		if(text_length > text_max){
+			$(count_messageId).addClass("overlimit");
+			$(textId).addClass("is-invalid");
+		}else{
+			$(count_messageId).removeClass("overlimit");
+			$(textId).removeClass("is-invalid");
+		}
+		
+	}
 </script>
