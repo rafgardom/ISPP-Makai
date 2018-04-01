@@ -72,10 +72,10 @@
 		$(count_messageId).html(text_length + ' / ' + text_max );
 		
 		if(text_length > text_max){
-			$(count_messageId).addClass("overlimit");
+			$(count_messageId).addClass("text-danger");
 			$(textId).addClass("is-invalid");
 		}else{
-			$(count_messageId).removeClass("overlimit");
+			$(count_messageId).removeClass("text-danger");
 			$(textId).removeClass("is-invalid");
 		}
 		

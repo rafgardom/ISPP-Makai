@@ -2,6 +2,7 @@
 package forms;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -38,6 +39,7 @@ public class RequestForm {
 	}
 
 	@NotBlank
+	@Size(max = 2000)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDescription() {
 		return this.description;
@@ -47,6 +49,7 @@ public class RequestForm {
 		this.description = description;
 	}
 
+	@Size(max = 100)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getTags() {
 		return this.tags;

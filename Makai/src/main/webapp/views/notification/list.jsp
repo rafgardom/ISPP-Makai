@@ -19,15 +19,10 @@
 	
 	<acme:column code="notification.moment" property="moment" format="{0,date,HH:mm:ss dd/MM/yyyy}" sortable="true"/>
 	<acme:column code="notification.reason" property="reason" sortable="true"/>
-	
+	<%--
 	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
-	
-
-	
-
-	
 	<spring:message code="notification.description" var="descriptionHeader" />
-<%-- 	<display:column title="${descriptionHeader}" >
+ 	<display:column title="${descriptionHeader}" >
 		<jstl:out value="${substrDescription }" />
 		<jstl:if test="${fn:length(row.description)>40 }">
 			<jstl:out value="..." />

@@ -53,7 +53,7 @@
 		<ul>
 			<li>
 				<b><spring:message code="request.animal.name" />:</b>
-				<jstl:out value="${request.customer.name}" />
+				<a href="profile/displayProfile.do?actorId=${request.customer.id}"><jstl:out value="${request.customer.name}"/></a>
 			</li>	
 		</ul>
 	</fieldset>
