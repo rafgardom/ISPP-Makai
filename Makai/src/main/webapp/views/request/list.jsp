@@ -14,15 +14,31 @@
 	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
 	<spring:message code="request.description" var="descriptionHeader" />
 	<display:column title="${descriptionHeader}" >
-		<jstl:out value="${substrDescription}" />
 		<jstl:if test="${fn:length(row.description)>40}">
-			<jstl:out value="..." />
+			<jstl:out value="${substrDescription}..." />
+		</jstl:if>
+		<jstl:if test="${fn:length(row.description)<=40}">
+			<jstl:out value="${substrDescription}" />
 		</jstl:if>
 	</display:column>
 	<security:authorize access="hasRole('TRAINER')">
-		<acme:column code="request.customer" property="customer.userAccount.username" sortable="true"/>
+	
+		<spring:message code="request.customer" var="customerHeader" />
+		<display:column title="${customerHeader}" class="text-center" sortable="true">
+			<a href="profile/displayProfile.do?actorId=${row.customer.id}"><jstl:out value="${row.customer.name}"/></a>
+		</display:column>
+	
 	</security:authorize>
-	<acme:column code="request.tags" property="tags" sortable="true"/>
+	<jstl:set var="substrTags" value="${fn:substring(row.tags, 0, 20)}" />
+	<spring:message code="request.tags" var="tagsHeader" />
+	<display:column title="${tagsHeader}" >
+		<jstl:if test="${fn:length(row.tags)>20}">
+			<jstl:out value="${substrTags}..." />
+		</jstl:if>
+		<jstl:if test="${fn:length(row.tags)<=20}">
+			<jstl:out value="${substrTags}" />
+		</jstl:if>
+	</display:column>
 	<acme:column code="request.category" property="category.name" sortable="true" />
 	
 	
@@ -30,7 +46,7 @@
 	<spring:message code="request.none" var="none"/>
 	<display:column title="${animalHeader}" >
 		<jstl:if test="${row.animal != null}">
-			<jstl:out value="${row.animal.name}" />
+			<a href="animal/display.do?animalId=${row.animal.id}"><jstl:out value="${row.animal.name}"/></a>
 		</jstl:if>
 		<jstl:if test="${row.animal == null}">
 			<jstl:out value="${none}" />

@@ -43,6 +43,7 @@ public class Request extends DomainEntity {
 		this.description = description;
 	}
 
+	@Size(max = 100)
 	public String getTags() {
 		return this.tags;
 	}
