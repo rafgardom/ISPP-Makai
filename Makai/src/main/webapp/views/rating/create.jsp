@@ -32,6 +32,7 @@
 	<form:hidden path="request" />
 	<form:hidden path="trainer" />
 	<form:hidden path="moment" />
+	<form:hidden path="travel" />
 		
 	<fieldset>
 		<acme:input code="rating.stars" path="stars" type="number" min="0" max="5" />

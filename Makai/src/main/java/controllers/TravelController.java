@@ -18,10 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AnimalService;
 import services.NotificationService;
+import services.RatingService;
 import services.TransporterService;
 import services.TravelService;
 import services.VehicleService;
 import domain.Animal;
+import domain.Rating;
 import domain.Transporter;
 import domain.Travel;
 import domain.Vehicle;
@@ -40,6 +42,9 @@ public class TravelController extends AbstractController {
 
 	@Autowired
 	private AnimalService		animalService;
+
+	@Autowired
+	private RatingService		ratingService;
 
 	@Autowired
 	private TransporterService	transporterService;
@@ -238,10 +243,12 @@ public class TravelController extends AbstractController {
 		Transporter principal;
 		final Integer numberNoti;
 		numberNoti = this.notificationService.findNotificationWithoutRead();
+		Collection<Travel> travels_participated;
 
 		Calendar today;
 		principal = this.transporterService.findByPrincipal();
 		travels_all = this.travelService.findTravelByTransporterId(principal.getId());
+		travels_participated = principal.getTravelPassengers();
 
 		today = Calendar.getInstance();
 
@@ -249,7 +256,12 @@ public class TravelController extends AbstractController {
 			if (today.getTime().before(aux.getEndMoment()))
 				travels.add(aux);
 
+		for (final Travel aux : travels_participated)
+			if (today.getTime().after(aux.getEndMoment()))
+				travels.add(aux);
+
 		result = new ModelAndView("travel/myList");
+		result.addObject("principal", principal);
 		result.addObject("travels", travels);
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "travel/myList.do");
@@ -261,14 +273,18 @@ public class TravelController extends AbstractController {
 	public ModelAndView myPastList() {
 		ModelAndView result;
 		Collection<Travel> travels_all;
+		Collection<Travel> travels_participated;
 		final Collection<Travel> travels = new ArrayList<Travel>();
 		Transporter principal;
 		final Integer numberNoti;
 		numberNoti = this.notificationService.findNotificationWithoutRead();
+		Collection<Rating> principalRatings;
 
 		Calendar today;
 		principal = this.transporterService.findByPrincipal();
 		travels_all = this.travelService.findTravelByTransporterId(principal.getId());
+		travels_participated = principal.getTravelPassengers();
+		principalRatings = this.ratingService.findTravelRatingByCustomer(principal.getId());
 
 		today = Calendar.getInstance();
 
@@ -276,8 +292,14 @@ public class TravelController extends AbstractController {
 			if (today.getTime().after(aux.getEndMoment()))
 				travels.add(aux);
 
+		for (final Travel aux : travels_participated)
+			if (today.getTime().after(aux.getEndMoment()))
+				travels.add(aux);
+
 		result = new ModelAndView("travel/myList");
 		result.addObject("travels", travels);
+		result.addObject("principalRatings", principalRatings);
+		result.addObject("principal", principal);
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "travel/myPastList.do");
 

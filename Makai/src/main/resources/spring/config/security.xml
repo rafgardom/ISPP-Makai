@@ -70,6 +70,9 @@
 		<security:intercept-url pattern="/request/trainer/list.do" access="hasRole('TRAINER')" />
 		<security:intercept-url pattern="/request/actor/display.do" access="hasAnyRole('CUSTOMER','TRAINER')" />
 		
+		<security:intercept-url pattern="/rating/customer/createTravel.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/rating/customer/createRequest.do" access="hasRole('CUSTOMER')" />
+		
 		<security:intercept-url pattern="/offer/trainer/list.do" access="hasRole('TRAINER')" /> 
 		<security:intercept-url pattern="/offer/trainer/delete.do" access="hasRole('TRAINER')" />
 		<security:intercept-url pattern="/offer/trainer/create.do" access="hasRole('TRAINER')" />

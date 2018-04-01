@@ -75,12 +75,15 @@ public class RatingService {
 		//Comprobar que un customer esta en un viaje
 		Assert.isTrue(principal.getTravelPassengers().contains(travel));
 
+		Assert.isNull(this.findRatingByCustomerFromTravel(travel.getId(), principal.getId()));
+
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().after(travel.getEndMoment()));
 
 		result = new Rating();
 		result.setCustomer(principal);
 		result.setTravel(travel);
+		result.setMoment(today.getTime());
 
 		return result;
 	}
@@ -88,6 +91,9 @@ public class RatingService {
 	public Rating createToRequest(final Request request) {
 		Rating result;
 		Customer principal;
+		Calendar today;
+
+		today = Calendar.getInstance();
 
 		principal = this.customerService.findByPrincipal();
 		Assert.notNull(principal);
@@ -101,6 +107,7 @@ public class RatingService {
 		result = new Rating();
 		result.setCustomer(principal);
 		result.setRequest(request);
+		result.setMoment(today.getTime());
 
 		//Sacamos la offer de nuestro request y a partir de la offer (aceptada) sacamos el trainer que la ha creado.
 		final Offer offer = this.requestRepository.findOfferWithThisRequestTrue(request.getId());
@@ -179,5 +186,13 @@ public class RatingService {
 		result = this.ratingRepository.count0starsByTravelId(travelId);
 
 		return result;
+	}
+
+	public Rating findRatingByCustomerFromTravel(final int travelId, final int customerId) {
+		return this.ratingRepository.findRatingByCustomerFromTravel(travelId, customerId);
+	}
+
+	public Collection<Rating> findTravelRatingByCustomer(final int customerId) {
+		return this.ratingRepository.findTravelRatingByCustomer(customerId);
 	}
 }

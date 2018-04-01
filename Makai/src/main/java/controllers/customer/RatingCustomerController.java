@@ -14,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import services.NotificationService;
 import services.RatingService;
 import services.RequestService;
+import services.TravelService;
 import controllers.AbstractController;
 import domain.Rating;
 import domain.Request;
+import domain.Travel;
 
 @Controller
 @RequestMapping("/rating/customer")
@@ -30,6 +32,9 @@ public class RatingCustomerController extends AbstractController {
 	private RequestService		requestService;
 
 	@Autowired
+	private TravelService		travelService;
+
+	@Autowired
 	private NotificationService	notificationService;
 
 
@@ -41,8 +46,8 @@ public class RatingCustomerController extends AbstractController {
 
 	// Create  ---------------------------------------------------------------
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int requestId) {
+	@RequestMapping(value = "/createRequest", method = RequestMethod.GET)
+	public ModelAndView createRequest(@RequestParam final int requestId) {
 		ModelAndView result;
 		Rating rating;
 		Request request;
@@ -57,8 +62,8 @@ public class RatingCustomerController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Rating rating, final BindingResult binding) {
+	@RequestMapping(value = "/createRequest", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveRequest(@Valid final Rating rating, final BindingResult binding) {
 
 		ModelAndView result;
 
@@ -67,7 +72,41 @@ public class RatingCustomerController extends AbstractController {
 		else
 			try {
 				this.ratingService.save(rating);
-				result = new ModelAndView("");
+				result = new ModelAndView("redirect:/request/list.do");
+
+			} catch (final Throwable oops) {
+				result = this.createModelAndView(rating, "rating.commit.error");
+			}
+		return result;
+	}
+
+	@RequestMapping(value = "/createTravel", method = RequestMethod.GET)
+	public ModelAndView createTravel(@RequestParam final int travelId) {
+		ModelAndView result;
+		final Rating rating;
+		Travel travel;
+		try {
+			travel = this.travelService.findOne(travelId);
+			rating = this.ratingService.createToTravel(travel);
+
+			result = this.createModelAndView(rating);
+		} catch (final Throwable oops) {
+			result = new ModelAndView("error");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/createTravel", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveTravel(@Valid final Rating rating, final BindingResult binding) {
+
+		ModelAndView result;
+
+		if (binding.hasErrors())
+			result = this.createModelAndView(rating);
+		else
+			try {
+				this.ratingService.save(rating);
+				result = new ModelAndView("redirect:/travel/myPastList.do");
 
 			} catch (final Throwable oops) {
 				result = this.createModelAndView(rating, "rating.commit.error");
@@ -90,8 +129,15 @@ public class RatingCustomerController extends AbstractController {
 		final Integer numberNoti;
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		result = new ModelAndView("rating/create");
-		result.addObject("RequestURI", "rating/customer/create.do");
+		if (rating.getTravel() == null) {
+			result = new ModelAndView("rating/createRequest");
+			result.addObject("RequestURI", "rating/customer/createRequest.do");
+
+		} else {
+			result = new ModelAndView("rating/createTravel");
+			result.addObject("RequestURI", "rating/customer/createTravel.do");
+		}
+
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("rating", rating);
 		result.addObject("message", message);

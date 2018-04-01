@@ -16,8 +16,13 @@
       
 <tiles-definitions>
 
-	<definition name="rating/create" extends="master.page">
-		<put-attribute name="title" value="Crear puntuación" />
+	<definition name="rating/createTravel" extends="master.page">
+		<put-attribute name="title" value="Crear rating" />
+		<put-attribute name="body" value="/views/rating/create.jsp" />
+	</definition>
+	
+	<definition name="rating/createRequest" extends="master.page">
+		<put-attribute name="title" value="Crear rating" />
 		<put-attribute name="body" value="/views/rating/create.jsp" />
 	</definition>
 	
