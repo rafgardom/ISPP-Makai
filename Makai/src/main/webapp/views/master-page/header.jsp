@@ -52,11 +52,15 @@
 						<spring:message code="master.page.travel" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="travel/create.do">
-							<spring:message code="master.page.travel.create" /></a> 
-						<a class="dropdown-item" href="travel/list.do">
-							<spring:message code="master.page.travel.list" /></a>
+							<spring:message code="master.page.travel.create" /></a>
+						<security:authorize access="hasAnyRole('CUSTOMER')"> 
+							<a class="dropdown-item" href="travel/list.do">
+								<spring:message code="master.page.travel.list" /></a>
+						</security:authorize>
 						<a class="dropdown-item" href="travel/myList.do">
 							<spring:message code="master.page.travel.myList" /></a> 
+						<a class="dropdown-item" href="travel/myPastList.do">
+							<spring:message code="master.page.travel.myPastList" /></a> 
 						<a class="dropdown-item" href="vehicle/list.do"><spring:message
 								code="master.page.vehicle.list" /></a>
 					</div>

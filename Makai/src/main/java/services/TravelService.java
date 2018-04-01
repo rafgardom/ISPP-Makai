@@ -18,7 +18,6 @@ import domain.Actor;
 import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
-import domain.Professional;
 import domain.Transporter;
 import domain.Travel;
 import domain.Vehicle;
@@ -38,6 +37,9 @@ public class TravelService {
 
 	@Autowired
 	private CustomerService		customerService;
+
+	@Autowired
+	private AnimalService		animalService;
 
 	@Autowired
 	private ProfessionalService	professionalService;
@@ -141,32 +143,27 @@ public class TravelService {
 	public void registerTravel(final Travel travel) {
 		Actor actor;
 		Customer customer;
-		Professional professional;
 		Collection<Travel> travels;
 		Notification notification = null;
 
 		actor = this.actorService.findByPrincipal();
 
-		if (this.actorService.checkAuthority(actor, Authority.CUSTOMER)) {
-			customer = this.customerService.findByPrincipal();
-			travels = customer.getTravelPassengers();
-			travels.add(travel);
-			customer.setTravelPassengers(travels);
-			this.customerService.save(customer);
+		Assert.isTrue(this.actorService.checkAuthority(actor, Authority.CUSTOMER));
 
-			notification = this.notificationService.create(customer);
+		customer = this.customerService.findByPrincipal();
+		travels = customer.getTravelPassengers();
 
-		} else if (this.actorService.checkAuthority(actor, Authority.PROFESSIONAL)) {
-			professional = this.professionalService.findByPrincipal();
-			travels = professional.getTravelPassengers();
-			travels.add(travel);
-			professional.setTravelPassengers(travels);
-			this.professionalService.save(professional);
+		Assert.isTrue(!travels.contains(travel));
+		Assert.isTrue(travel.getHumanSeats() > 0);
+		travel.setHumanSeats(travel.getHumanSeats() - 1);
+		this.travelRepository.save(travel);
+		travels.add(travel);
+		customer.setTravelPassengers(travels);
+		this.customerService.save(customer);
 
-			notification = this.notificationService.create(professional);
-		}
+		notification = this.notificationService.create(travel.getTransporterOwner());
 
-		notification.setReason("Nueva inscripci�n a su viaje");
+		notification.setReason("Nueva inscripcion a su viaje");
 		notification.setDescription("Un usuario se ha apuntado a un viaje creado por usted");
 		notification.setType(NotificationType.TRAVEL);
 		this.notificationService.save(notification);

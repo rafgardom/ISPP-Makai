@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
+<security:authorize access="hasRole('CUSTOMER')">
 <display:table name="travels" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 
 	<acme:column code="travel.origin" property="origin.city" sortable="true"/>
@@ -20,7 +20,17 @@
 	<display:column>
 	<div class="btn-group">
 		<acme:link href="travel/display.do?travelId=${row.id}" image="eye"/>
-		<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register" type="dark" image="map"/>
+		<jstl:if test="${row.transporterOwner.id != principal.id && row.humanSeats > 0}">
+		<jstl:set var="show" value="${true}"/>
+			<jstl:forEach var="t" items="${principal.travelPassengers}">
+				<jstl:if test="${t.id == row.id}">
+					<jstl:set var="show" value="${false}"/>
+				</jstl:if>
+			</jstl:forEach>
+			<jstl:if test="${show == true}">
+				<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register" type="dark" image="map"/>
+			</jstl:if>
+		</jstl:if>
 	</div>
 	</display:column>
 	

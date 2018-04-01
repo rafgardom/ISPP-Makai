@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AnimalService;
 import services.NotificationService;
 import services.TransporterService;
 import services.TravelService;
 import services.VehicleService;
+import domain.Animal;
 import domain.Transporter;
 import domain.Travel;
 import domain.Vehicle;
@@ -35,6 +37,9 @@ public class TravelController extends AbstractController {
 
 	@Autowired
 	private VehicleService		vehicleService;
+
+	@Autowired
+	private AnimalService		animalService;
 
 	@Autowired
 	private TransporterService	transporterService;
@@ -93,11 +98,34 @@ public class TravelController extends AbstractController {
 		try {
 			final Travel travel = this.travelService.findOne(travelId);
 			this.travelService.registerTravel(travel);
-			result = new ModelAndView("redirect:myList.do");
+			result = new ModelAndView("redirect:/travel/list.do");
+
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
 		return result;
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+	public ModelAndView register(@Valid final Travel travel, final BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			System.out.println(binding.toString());
+			result = this.registerModelAndView(travel);
+
+		} else
+			try {
+				this.travelService.registerTravel(travel);
+				result = new ModelAndView("redirect:/travel/list.do");
+
+			} catch (final Throwable oops) {
+				System.out.println(oops);
+				result = this.registerModelAndView(travel, "travel.commit.error");
+
+			}
+		return result;
+
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -176,18 +204,25 @@ public class TravelController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Travel> travels_all;
+		Collection<Travel> travelsByPrincipal;
 		final Collection<Travel> travels = new ArrayList<Travel>();
 		final Integer numberNoti;
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 		Calendar today;
 		travels_all = this.travelService.findAll();
 		today = Calendar.getInstance();
+		Transporter principal;
+		principal = this.transporterService.findByPrincipal();
+
+		travelsByPrincipal = this.travelService.findTravelByTransporterId(principal.getId());
 
 		for (final Travel aux : travels_all)
 			if (today.getTime().before(aux.getEndMoment()))
 				travels.add(aux);
 
 		result = new ModelAndView("travel/list");
+		result.addObject("principal", principal);
+		result.addObject("travelsByPrincipal", travelsByPrincipal);
 		result.addObject("travels", travels);
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "travel/list.do");
@@ -218,6 +253,33 @@ public class TravelController extends AbstractController {
 		result.addObject("travels", travels);
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("requestURI", "travel/myList.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/myPastList", method = RequestMethod.GET)
+	public ModelAndView myPastList() {
+		ModelAndView result;
+		Collection<Travel> travels_all;
+		final Collection<Travel> travels = new ArrayList<Travel>();
+		Transporter principal;
+		final Integer numberNoti;
+		numberNoti = this.notificationService.findNotificationWithoutRead();
+
+		Calendar today;
+		principal = this.transporterService.findByPrincipal();
+		travels_all = this.travelService.findTravelByTransporterId(principal.getId());
+
+		today = Calendar.getInstance();
+
+		for (final Travel aux : travels_all)
+			if (today.getTime().after(aux.getEndMoment()))
+				travels.add(aux);
+
+		result = new ModelAndView("travel/myList");
+		result.addObject("travels", travels);
+		result.addObject("numberNoti", numberNoti);
+		result.addObject("requestURI", "travel/myPastList.do");
 
 		return result;
 	}
@@ -261,6 +323,30 @@ public class TravelController extends AbstractController {
 		result.addObject("travelForm", travelForm);
 		result.addObject("vehicles", vehicles);
 		result.addObject("RequestURI", "travel/create.do");
+		result.addObject("numberNoti", numberNoti);
+		result.addObject("errorMessage", message);
+
+		return result;
+	}
+
+	protected ModelAndView registerModelAndView(final Travel travel) {
+		final ModelAndView result = this.registerModelAndView(travel, null);
+		return result;
+	}
+
+	protected ModelAndView registerModelAndView(final Travel travel, final String message) {
+		Collection<Animal> animals;
+		Transporter principal;
+		final Integer numberNoti;
+
+		principal = this.transporterService.findByPrincipal();
+		animals = this.animalService.findByActorId(principal.getId());
+		numberNoti = this.notificationService.findNotificationWithoutRead();
+
+		final ModelAndView result = new ModelAndView("travel/register");
+		result.addObject("travel", travel);
+		result.addObject("animals", animals);
+		result.addObject("RequestURI", "travel/register.do");
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("errorMessage", message);
 

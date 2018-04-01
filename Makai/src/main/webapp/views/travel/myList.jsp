@@ -20,8 +20,10 @@
 	<display:column>
 		<div class="btn-group">
 			<acme:link href="travel/display.do?travelId=${row.id}" image="eye"/>
-			<acme:link href="travel/edit.do?travelId=${row.id}" type="warning" image="edit"/>
-			<acme:delete href="travel/delete.do?travelId=${row.id}" id="${row.id}"/>
+			<jstl:if test="${requestURI == 'travel/myList.do'}">
+				<acme:link href="travel/edit.do?travelId=${row.id}" type="warning" image="edit"/>
+				<acme:delete href="travel/delete.do?travelId=${row.id}" id="${row.id}"/>
+			</jstl:if>
 		</div>
 	</display:column>
 	
