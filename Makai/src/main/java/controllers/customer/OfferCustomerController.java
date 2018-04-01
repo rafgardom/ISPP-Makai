@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,11 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import paypal.PaypalEnvironment;
 import services.OfferService;
+import services.RequestService;
 
 import com.paypal.api.payments.Payment;
 
 import controllers.AbstractController;
 import domain.Offer;
+import domain.Request;
 
 @Controller
 @RequestMapping("/offer/customer")
@@ -27,6 +30,9 @@ public class OfferCustomerController extends AbstractController {
 
 	@Autowired
 	private OfferService	offerService;
+
+	@Autowired
+	private RequestService	requestService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -41,9 +47,12 @@ public class OfferCustomerController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int offerId, final HttpServletRequest req, final HttpServletResponse resp) {
 		ModelAndView result;
 		Offer offer;
+		Request request;
 
 		try {
 			offer = this.offerService.findOne(offerId);
+			request = offer.getRequest();
+			Assert.isTrue(!this.requestService.tieneOfferAceptadaUnRequest(request));
 			final PaypalEnvironment paypalEnvironment = new PaypalEnvironment();
 			final Payment payment = paypalEnvironment.createPayment(req, resp, offer.getPrice(), offer.getId(), "offerId", "/offer/customer");
 
