@@ -28,72 +28,62 @@
 <form:form action="${RequestURI}" modelAttribute="animalShelterForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 	
+	<br>
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>
 	</jstl:if>
 	
-	<fieldset>
-		<legend>
-			<spring:message code="animalShelter.personalDetails" />
-		</legend>
-
-		<acme:textbox code="animalShelter.name" path="name" mandatory="true" />
-		<acme:textbox code="animalShelter.phone" path="phone" mandatory="true" />
-		<acme:textbox code="animalShelter.email" path="email" mandatory="true" />
-	</fieldset>
-	<br />
-	<fieldset>
-		<legend>
-			<spring:message code="animalShelter.coordinates" />
-		</legend>
-
-		<acme:textbox code="coordinates.country" path="coordinates.country"
-			mandatory="true" />
-		<acme:textbox code="coordinates.state" path="coordinates.state" />
-		<acme:textbox code="coordinates.province" path="coordinates.province" />
-		<acme:textbox code="coordinates.city" path="coordinates.city"
-			mandatory="true" />
-		<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code"
-			mandatory="true" />
-	</fieldset>
-	<br/>
+	<div class="row">
+		<div class="col-md-5">
+			<h3>
+				<spring:message code="animalShelter.personalDetails" />
+			</h3>
 	
-	<security:authorize access="isAnonymous()">
+			<acme:textbox code="animalShelter.name" path="name" mandatory="true" />
+			<acme:textbox code="animalShelter.phone" path="phone" mandatory="true" />
+			<acme:textbox code="animalShelter.email" path="email" mandatory="true" />	
+		</div>
+		<div class="offset-md-1 col-md-5">
+			<h3>
+				<spring:message code="animalShelter.coordinates" />
+			</h3>
+	
+			<acme:textbox code="coordinates.country" path="coordinates.country" mandatory="true" />
+			<acme:textbox code="coordinates.state" path="coordinates.state" />
+			<acme:textbox code="coordinates.province" path="coordinates.province" />
+			<acme:textbox code="coordinates.city" path="coordinates.city" mandatory="true" />
+			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
+		</div>
+		<div class="col-md-12">
+		<br>
+			<spring:message code="image.formats" var="formats" />
+			<spring:message code="animalShelter.picture" var="picture" />
+			<jstl:out value="${picture}"/>
+			<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
+			class="form:input-large" enctype="multipart/form-data" code="customer.picture"></form:input>
+			<jstl:out value="${formats}"/>
+			<jstl:if test="${imageError != null}">
+				<acme:error code="${imageError}" type="danger"/>
+			</jstl:if>
+		</div>
+		<br><br><br>
+		<security:authorize access="isAnonymous()">
+		<div class="col-md-5">
+			<h3>
+				<spring:message code="animalShelter.userAccountDetails" />
+			</h3>
 			<br />
-			<fieldset>
-				<legend>
-					<spring:message code="animalShelter.userAccountDetails" />
-				</legend>
-				<br />
-				<acme:textbox code="animalShelter.username" path="username"
-					mandatory="true" />
-				<acme:password code="animalShelter.password" path="password"
-					mandatory="true" />
-				<acme:password code="animalShelter.repeatPassword" path="repeatPassword"
-					mandatory="true" />
-				<br/>
-				<br/>
-					<spring:message code="image.formats" var="formats" />
-					<spring:message code="animalShelter.picture" var="picture" />
-					<jstl:out value="${picture}"/>
-					<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
-					class="form:input-large" enctype="multipart/form-data" code="customer.picture"></form:input>
-					<jstl:out value="${formats}"/>
-					<jstl:if test="${imageError != null}">
-						<acme:error code="${imageError}" type="danger"/>
-					</jstl:if>
-				<br/>
-				<br/>
-				<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="animalShelter.accept" path="acceptCondition" linkCode="animalShelter.conditions"
-					mandatory="true" target="_blank" />
-			</fieldset>
-	</security:authorize>
-	<br/>
-	<br/>
-	<br/>
-	
-		<acme:submit code="animalShelter.register" name="save" />
-		<acme:cancel code="animalShelter.cancel" url="" />
-	<br/>
+			<acme:textbox code="animalShelter.username" path="username" mandatory="true" />
+			<acme:password code="animalShelter.password" path="password" mandatory="true" />
+			<acme:password code="animalShelter.repeatPassword" path="repeatPassword" mandatory="true" />
+		</div>
+		</security:authorize>
+		<div class="col-md-12">
+			<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="animalShelter.accept" path="acceptCondition" linkCode="animalShelter.conditions" mandatory="true" target="_blank" />
+		</div>
+	</div>
+	<br><br>
+	<acme:submit code="animalShelter.register" name="save" />
+	<acme:cancel code="animalShelter.cancel" url="" />
 	
 </form:form>

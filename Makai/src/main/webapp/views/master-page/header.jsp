@@ -16,7 +16,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div style="display: flex; justify-content:center;">
+<div class="center-div">
 	<img src="images/logo.png" alt="Makai"
 		style="height: 230px; padding-top: 0.3%; padding-bottom: 0.3%;" />
 </div>

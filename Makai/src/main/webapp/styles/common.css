@@ -25,6 +25,13 @@
 	margin-left: -1rem;
 }
 
+.center-div{
+	display: flex; 
+	justify-content:center; 
+	position:relative;
+	z-index: 5000;
+}
+
 /*
 * Estrellas
 */

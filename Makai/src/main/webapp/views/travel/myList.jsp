@@ -16,6 +16,7 @@
 	<acme:column code="travel.endMoment" property="endMoment" format="{0,date,dd/MM/yyyy HH:mm}"/>
 	<acme:column code="travel.animalSeats" property="animalSeats" />
 	<acme:column code="travel.humanSeats" property="humanSeats" />
+	<acme:column code="travel.owner" property="transporterOwner.userAccount.username" />
 	
 	<display:column>
 		<div class="btn-group">
