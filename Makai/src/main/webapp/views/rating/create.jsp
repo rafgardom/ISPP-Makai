@@ -41,9 +41,7 @@
 		<div class="col-sm-3">
 			<form:label path="stars">
 				<spring:message code="rating.stars" />
-				<jstl:if test="${mandatory == true}">
-					<img src="images/asterisk.png"	width="16"/> 
-				</jstl:if>
+				<img src="images/asterisk.png"	width="16"/> 
 			</form:label><br />
 			<div class="rating">
 				<label>
