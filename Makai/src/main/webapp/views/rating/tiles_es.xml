@@ -17,12 +17,12 @@
 <tiles-definitions>
 
 	<definition name="rating/createTravel" extends="master.page">
-		<put-attribute name="title" value="Crear rating" />
+		<put-attribute name="title" value="Valoración" />
 		<put-attribute name="body" value="/views/rating/create.jsp" />
 	</definition>
 	
 	<definition name="rating/createRequest" extends="master.page">
-		<put-attribute name="title" value="Crear rating" />
+		<put-attribute name="title" value="Valoración" />
 		<put-attribute name="body" value="/views/rating/create.jsp" />
 	</definition>
 	

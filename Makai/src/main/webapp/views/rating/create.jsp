@@ -35,11 +35,63 @@
 	<form:hidden path="travel" />
 		
 	<fieldset>
-		<acme:input code="rating.stars" path="stars" type="number" min="0" max="5" />
+		<acme:textarea code="rating.comment" path="comment" />
 		<br />
-		<acme:textbox code="rating.comment" path="comment" />
-		<br />
+		
+		<div class="col-sm-3">
+			<form:label path="stars">
+				<spring:message code="rating.stars" />
+				<jstl:if test="${mandatory == true}">
+					<img src="images/asterisk.png"	width="16"/> 
+				</jstl:if>
+			</form:label><br />
+			<div class="rating">
+				<label>
+					<input type="radio" name="stars" value="1" />
+					<span class="icon-star-o"></span>
+				</label>
+				<label>
+					<input type="radio" name="stars" value="2" />
+					<span id="star1" class="star icon-star-o"></span>
+					<span class="icon-star-o"></span>
+				</label>
+				<label>
+					<input type="radio" name="stars" value="3" />
+					<span class="icon-star-o"></span>
+					<span id="star2" class="star icon-star-o"></span>
+					<span class="icon-star-o"></span>   
+				</label>
+				<label>
+					<input type="radio" name="stars" value="4" />
+					<span class="icon-star-o"></span>
+					<span class="icon-star-o"></span>
+					<span id="star3" class="star icon-star-o"></span>
+					<span class="icon-star-o"></span>
+				</label>
+				<label>
+					<input type="radio" name="stars" value="5" />
+					<span class="icon-star-o"></span>
+					<span class="icon-star-o"></span>
+					<span class="icon-star-o"></span>
+					<span id="star4" class="star icon-star-o"></span>
+					<span class="icon-star-o"></span>
+				</label>
+				<label>
+					<input type="radio" name="stars" value="5" />
+					<span class="icon-star-o"></span>
+					<span class="icon-star-o"></span>
+					<span class="icon-star-o"></span>
+					<span class="icon-star-o"></span>
+					<span id="star5" class="star icon-star-o"></span>
+				</label>
+			</div>
+			<form:hidden path="stars" id="starsHidden" /><br />
+			<form:errors path="stars" cssClass="alert alert-danger form-control" />
+		</div>
+		
+		
 	</fieldset>
+	
 	<br/>
 	
 	<jstl:if test="${errorMessage != null}">
@@ -53,3 +105,15 @@
 	<br/>
 	
 </form:form>
+
+<script type="text/javascript">
+	$(':radio').change(function() {
+		$('.star').removeClass('icon-star').addClass('icon-star-o');
+		for(var i=1;i<=this.value;i++){
+			$('#star'+i).removeClass('icon-star-o').addClass('icon-star');
+		}
+		$("#starsHidden").val(this.value);
+		console.log('New star rating: ' + $("#starsHidden").val());
+	});
+	
+</script>
