@@ -70,7 +70,7 @@ public class AnimalController extends AbstractController {
 
 		animals = new HashSet<AnimalForm>();
 
-		for (final Animal a : this.animalService.findByActorId(actor.getId())) {
+		for (final Animal a : this.animalService.findByActorIdNotHidden(actor.getId())) {
 			AnimalForm animalForm;
 
 			animalForm = this.animalService.animalToFormObject(a);
@@ -103,6 +103,24 @@ public class AnimalController extends AbstractController {
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "animal/display.do");
 		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
+		return result;
+	}
+
+	// Delete --------------------------------------------------------------------		
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView ban(@RequestParam final int animalId) {
+		ModelAndView result;
+		Animal animal;
+		try {
+			animal = this.animalService.findOne(animalId);
+
+			this.animalService.delete(animal);
+
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
 			result = new ModelAndView("error");
 		}
 		return result;

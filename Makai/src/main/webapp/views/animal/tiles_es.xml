@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/animal/register.jsp" />
 	</definition>
 	
+	<definition name="animal/edit" extends="master.page">
+		<put-attribute name="title" value="Editar animal" />
+		<put-attribute name="body" value="/views/animal/register.jsp" />
+	</definition>
+	
 	<definition name="animal/list" extends="master.page">	
 		<put-attribute name="title" value="Lista de animales" />
 		<put-attribute name="body" value="/views/animal/list.jsp" />

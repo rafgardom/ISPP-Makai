@@ -247,4 +247,13 @@ public class AnimalService {
 	public Collection<Animal> findAnimalFromAnimalShelter() {
 		return this.animalRepository.findAnimalFromAnimalShelter();
 	}
+
+	public Collection<Animal> findByActorIdNotHidden(final int actorId) {
+		Collection<Animal> animals;
+
+		animals = this.animalRepository.findByActorIdNotHidden(actorId);
+
+		return animals;
+	}
+
 }

@@ -25,6 +25,7 @@ public class AnimalForm {
 	private String				stringImage;
 	private Specie				specie;
 	private Collection<Breed>	breeds;
+	private Boolean				isHidden;
 
 
 	// Constructor ------------------------------------------------------------
@@ -115,6 +116,14 @@ public class AnimalForm {
 
 	public void setBreeds(final Collection<Breed> breeds) {
 		this.breeds = breeds;
+	}
+
+	public Boolean getIsHidden() {
+		return this.isHidden;
+	}
+
+	public void setIsHidden(final Boolean isHidden) {
+		this.isHidden = isHidden;
 	}
 
 }
