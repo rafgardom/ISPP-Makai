@@ -202,22 +202,22 @@ public class OfferService {
 
 	}
 
-	public void acceptedOffer(final Offer offer) {
+	public void acceptedOffer(Offer offer) {
 		Assert.notNull(offer);
 		Customer customer;
-
-		/* Modificamos la fecha de finalizacion del entrenamiento en la entidad Animal */
-		//this.animalService.editFinishTraining(offer);
 
 		customer = this.customerService.findByPrincipal();
 		Assert.isTrue(customer.getId() == offer.getRequest().getCustomer().getId());
 
 		offer.setIsAccepted(true);
-		this.offerRepository.save(offer);
+		offer = this.offerRepository.save(offer);
 
 		this.notificationService.createNotificationOfferAcceptedTrainer(offer);
 
 		this.eraseNonAcceptedOffers(offer.getRequest());
+
+		/* Modificamos la fecha de finalizacion del entrenamiento en la entidad Animal */
+		this.animalService.editFinishTraining(offer);
 	}
 
 	public Offer reconstruct(final OfferForm offerForm, final BindingResult binding) throws IOException {
