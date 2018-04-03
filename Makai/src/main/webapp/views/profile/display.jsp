@@ -8,6 +8,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <security:authentication var="principalUserAccount" property="principal" />
 <div class="center-div">
@@ -22,17 +23,13 @@
 			<p><b><spring:message code="profile.name" />:</b> 
 				<jstl:out value="${actor.name}" /></p>
 		
-		<jstl:if test="${ratings!=null }">
-			<li><b><spring:message code="profile.rating.stars" />:</b> <jstl:out
-					value="${actor.avgRating}" /></li>
-		</jstl:if>
-	  	<security:authorize access="hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')">
-				<p><b><spring:message code="profile.surname" />:</b> 
+		<jstl:if test="${fn:contains('CUSTOMER ADMIN TRAINER',actor.userAccount.authorities[0].authority) }">
+			<p><b><spring:message code="profile.surname" />:</b> 
 					<jstl:out value="${actor.surname}" /></p>
 	
-				<p><b><spring:message code="profile.nid" />:</b> 
-					<jstl:out value="${actor.nid}" /></p>
-		</security:authorize>
+			<p><b><spring:message code="profile.nid" />:</b> 
+				<jstl:out value="${actor.nid}" /></p>
+		</jstl:if>
 	  	
 	  		<p><b><spring:message code="profile.phone" />:</b> <jstl:out
 					value="${actor.phone}" /></p>
