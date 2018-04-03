@@ -105,20 +105,16 @@
 </form:form>
 
 <script type="text/javascript">
-	$(':radio').change(function() {
-		
-	});
-	
 	$(':radio').click(function(){
 		$('.star').removeClass('icon-star').addClass('icon-star-o');
-		for(var i=1;i<=this.value;i++){
-			$('#star'+i).removeClass('icon-star-o').addClass('icon-star');
-		}
 		
 		if(this.value == $("#starsHidden").val()){
-			$("#starsHidden").val("0");
-			$('.star').removeClass('icon-star').addClass('icon-star-o');
+			$("#starsHidden").val(0);
 		}else {
+			for(var i=1;i<=this.value;i++){
+				$('#star'+i).removeClass('icon-star-o').addClass('icon-star');
+			}
+			
 			$("#starsHidden").val(this.value);
 		}
 	});
