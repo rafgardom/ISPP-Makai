@@ -1,6 +1,7 @@
 
 package forms;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Temporal;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import domain.Animal;
 import domain.Coordinates;
 import domain.Vehicle;
 
@@ -19,14 +21,16 @@ public class TravelForm {
 
 	// Attributes 
 
-	private int			id;
-	private Coordinates	destination;
-	private Coordinates	origin;
-	private Date		startMoment;
-	private Date		endMoment;
-	private Integer		animalSeats;
-	private Integer		humanSeats;
-	private Vehicle		vehicle;
+	private int					id;
+	private Coordinates			destination;
+	private Coordinates			origin;
+	private Date				startMoment;
+	private Date				endMoment;
+	private Integer				animalSeats;
+	private Integer				humanSeats;
+	private Vehicle				vehicle;
+	private boolean				principalPassenger;
+	private Collection<Animal>	animals;
 
 
 	//Constructor
@@ -104,6 +108,20 @@ public class TravelForm {
 	}
 	public void setVehicle(final Vehicle vehicle) {
 		this.vehicle = vehicle;
+	}
+
+	public boolean isPrincipalPassenger() {
+		return this.principalPassenger;
+	}
+	public void setPrincipalPassenger(final boolean principalPassenger) {
+		this.principalPassenger = principalPassenger;
+	}
+
+	public Collection<Animal> getAnimals() {
+		return this.animals;
+	}
+	public void setAnimals(final Collection<Animal> animals) {
+		this.animals = animals;
 	}
 
 }

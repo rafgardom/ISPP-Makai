@@ -97,13 +97,15 @@ public class TravelController extends AbstractController {
 		return result;
 	}
 	//Register
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(@RequestParam final int travelId) {
 		ModelAndView result;
+		TravelForm travelForm;
 		try {
 			final Travel travel = this.travelService.findOne(travelId);
-			this.travelService.registerTravel(travel);
-			result = new ModelAndView("redirect:/travel/list.do");
+			travelForm = this.travelService.toFormObject(travel);
+			result = this.registerModelAndView(travelForm);
 
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
@@ -112,21 +114,23 @@ public class TravelController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView register(@Valid final Travel travel, final BindingResult binding) {
+	public ModelAndView register(@Valid final TravelForm travelForm, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
-			result = this.registerModelAndView(travel);
+			result = this.registerModelAndView(travelForm);
 
 		} else
 			try {
-				this.travelService.registerTravel(travel);
+				this.travelService.registerTravel(travelForm);
+				this.registerModelAndView(travelForm);
+
 				result = new ModelAndView("redirect:/travel/list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-				result = this.registerModelAndView(travel, "travel.commit.error");
+				result = this.registerModelAndView(travelForm, "travel.commit.error");
 
 			}
 		return result;
@@ -351,12 +355,12 @@ public class TravelController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView registerModelAndView(final Travel travel) {
-		final ModelAndView result = this.registerModelAndView(travel, null);
+	protected ModelAndView registerModelAndView(final TravelForm travelForm) {
+		final ModelAndView result = this.registerModelAndView(travelForm, null);
 		return result;
 	}
 
-	protected ModelAndView registerModelAndView(final Travel travel, final String message) {
+	protected ModelAndView registerModelAndView(final TravelForm travelForm, final String message) {
 		Collection<Animal> animals;
 		Transporter principal;
 		final Integer numberNoti;
@@ -366,8 +370,9 @@ public class TravelController extends AbstractController {
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		final ModelAndView result = new ModelAndView("travel/register");
-		result.addObject("travel", travel);
+		result.addObject("travelForm", travelForm);
 		result.addObject("animals", animals);
+		result.addObject("principal", principal);
 		result.addObject("RequestURI", "travel/register.do");
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("errorMessage", message);

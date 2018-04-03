@@ -2,6 +2,7 @@
 package services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -13,8 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.TravelRepository;
-import security.Authority;
 import domain.Actor;
+import domain.Animal;
 import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
@@ -87,13 +88,16 @@ public class TravelService {
 		Travel result;
 		Transporter principal;
 		final Vehicle vehicle = null;
+		Collection<Animal> animals;
 
 		principal = this.transporterService.findByPrincipal();
 		Assert.notNull(principal);
+		animals = new ArrayList<Animal>();
 
 		result = new Travel();
 		result.setTransporterOwner(principal);
 		result.setVehicle(vehicle);
+		result.setAnimals(animals);
 
 		return result;
 	}
@@ -140,29 +144,57 @@ public class TravelService {
 
 	// Other business methods —---------------------------------------------—
 
-	public void registerTravel(final Travel travel) {
-		Actor actor;
+	public void registerTravel(final TravelForm travelForm) {
 		Customer customer;
 		Collection<Travel> travels;
+		Collection<Animal> animalsForm;
+		Collection<Animal> animals;
+		Collection<Animal> animalsAux;
+		Integer animalCount;
 		Notification notification = null;
+		Travel travel;
 
-		actor = this.actorService.findByPrincipal();
-
-		Assert.isTrue(this.actorService.checkAuthority(actor, Authority.CUSTOMER));
+		travel = this.findOne(travelForm.getId());
+		Assert.isTrue(travel.getAnimalSeats() > 0 || travel.getHumanSeats() > 0);
 
 		customer = this.customerService.findByPrincipal();
+
 		travels = customer.getTravelPassengers();
 
-		Assert.isTrue(!travels.contains(travel));
-		Assert.isTrue(travel.getHumanSeats() > 0);
-		travel.setHumanSeats(travel.getHumanSeats() - 1);
+		if (travelForm.isPrincipalPassenger()) {
+			if (!travels.contains(travel)) {
+				travel.setHumanSeats(travel.getHumanSeats() - 1);
+				travels.add(travel);
+				customer.setTravelPassengers(travels);
+				this.customerService.save(customer);
+			}
+
+		} else if (travels.contains(travel)) {
+			travel.setHumanSeats(travel.getHumanSeats() + 1);
+			travels.remove(travel);
+			customer.setTravelPassengers(travels);
+			this.customerService.save(customer);
+		}
+
+		animalsForm = travelForm.getAnimals();
+
+		animals = new ArrayList<Animal>();
+		animalsAux = travel.getAnimals();
+		for (final Animal a : animalsAux)
+			if (!this.animalService.findByActorId(customer.getId()).contains(a))
+				animals.add(a);
+			else
+				travel.setAnimalSeats(travel.getAnimalSeats() + 1);
+		if (animalsForm != null) {
+			animalCount = travelForm.getAnimals().size();
+			animals.addAll(animalsForm);
+			Assert.isTrue((travel.getAnimalSeats() - animalCount) >= 0);
+			travel.setAnimalSeats(travel.getAnimalSeats() - animalCount);
+		}
+		travel.setAnimals(animals);
 		this.travelRepository.save(travel);
-		travels.add(travel);
-		customer.setTravelPassengers(travels);
-		this.customerService.save(customer);
 
 		notification = this.notificationService.create(travel.getTransporterOwner());
-
 		notification.setReason("Nueva inscripcion a su viaje");
 		notification.setDescription("Un usuario se ha apuntado a un viaje creado por usted");
 		notification.setType(NotificationType.TRAVEL);
@@ -182,9 +214,10 @@ public class TravelService {
 		result.setOrigin(travelForm.getOrigin());
 		result.setStartMoment(travelForm.getStartMoment());
 		result.setEndMoment(travelForm.getEndMoment());
-		result.setHumanSeats(travelForm.getHumanSeats());
 		result.setAnimalSeats(travelForm.getAnimalSeats());
 		result.setVehicle(travelForm.getVehicle());
+		//result.setAnimals(travelForm.getAnimals());
+		result.setHumanSeats(travelForm.getHumanSeats());
 
 		this.validator.validate(result, binding);
 
@@ -202,6 +235,7 @@ public class TravelService {
 		result.setAnimalSeats(travel.getAnimalSeats());
 		result.setHumanSeats(travel.getHumanSeats());
 		result.setVehicle(travel.getVehicle());
+		//result.setAnimals(travel.getAnimals());
 		result.setId(travel.getId());
 
 		return result;

@@ -27,6 +27,8 @@
 
 <form:form action="${RequestURI}" modelAttribute="travelForm" enctype="multipart/form-data">
 <form:hidden path="id"/>
+<form:hidden path="principalPassenger"/>
+<form:hidden path="animals"/>
 		<br />
 		
 		<jstl:if test="${errorMessage != null}">

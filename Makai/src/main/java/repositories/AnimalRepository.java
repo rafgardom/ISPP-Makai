@@ -20,4 +20,8 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 
 	@Query("select a from Animal a where a.isHidden=false and (a.animalShelter.id = ?1 or a.customer.id=?1)")
 	Collection<Animal> findByActorIdNotHidden(int actorId);
+
+	@Query("select count(t.animals) from Travel t where t.id=?1")
+	Integer countAnimalsByTravel(int travelId);
+
 }

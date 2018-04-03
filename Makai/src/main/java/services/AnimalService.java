@@ -256,4 +256,8 @@ public class AnimalService {
 		return animals;
 	}
 
+	public Integer countAnimalsByTravel(final int travelId) {
+		return this.animalRepository.countAnimalsByTravel(travelId);
+	}
+
 }

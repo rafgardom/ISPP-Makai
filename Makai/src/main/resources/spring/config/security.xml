@@ -115,8 +115,8 @@
 		<security:intercept-url pattern="/travel/list.do" access="hasRole('CUSTOMER')"  />
 		<security:intercept-url pattern="/travel/display.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
 		<security:intercept-url pattern="/travel/edit.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
-		<security:intercept-url pattern="/travel/register.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
 		<security:intercept-url pattern="/travel/delete.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
+		<security:intercept-url pattern="/travel/register.do" access="hasRole('CUSTOMER')"  />
 		
 		<security:intercept-url pattern="/vehicle/register.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
 		<security:intercept-url pattern="/vehicle/list.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
