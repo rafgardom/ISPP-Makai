@@ -913,6 +913,12 @@
 			</list>
 		</property>
 		<property name="customer" ref="customer1" />
+		<property name="travels">
+			<list>
+				<ref bean="travel1"/>
+				<ref bean="travel3"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="animal2" class="domain.Animal">
@@ -933,6 +939,11 @@
 			</list>
 		</property>
 		<property name="animalShelter" ref="animalshelter1" />
+		<property name="travels">
+			<list>
+				<ref bean="travel2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="animal3" class="domain.Animal">
@@ -953,6 +964,10 @@
 			</list>
 		</property>
 		<property name="animalShelter" ref="animalshelter2" />
+		<property name="travels">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Request -->
