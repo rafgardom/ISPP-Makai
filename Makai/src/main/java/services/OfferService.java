@@ -118,6 +118,9 @@ public class OfferService {
 
 		Assert.isTrue(!offer.getIsAccepted());
 
+		if (offer.getPrice() == null)
+			offer.setPrice(0.0);
+
 		if (offer.getId() == 0)
 			this.notificationService.createNotificationForRequestWithOffer(offer.getRequest());
 
