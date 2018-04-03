@@ -7,6 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<div class="table-responsive">
 <display:table name="vehicles" id="row" pagesize="3" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="vehicle.brand" property="brand" />
@@ -32,9 +33,11 @@
 	</display:column>
 	
 </display:table>
+</div>
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
 	<acme:link href="vehicle/register.do" code="vehicle.create" type="success" image="car"/>
 </security:authorize>
+
 
 
 

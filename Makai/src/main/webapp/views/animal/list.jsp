@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
+<div class="table-responsive">
 <display:table name="animals" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<display:column>
@@ -29,4 +29,4 @@
 	
 		
 </display:table>
-
+</div>

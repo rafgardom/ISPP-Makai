@@ -7,6 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<div class="table-responsive">
 <display:table name="trainings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="training.category" property="category" sortable="true"/>
@@ -40,7 +41,8 @@
 	</security:authorize>
 	
 </display:table>
-
+</div>
 <security:authorize access="hasRole('TRAINER')">
 	<acme:link href="training/trainer/create.do" code="training.create" type="success"/>
 </security:authorize>
+

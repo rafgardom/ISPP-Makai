@@ -8,6 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
+<div class="table-responsive">
 <display:table name="travels" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 
 	<acme:column code="travel.origin" property="origin.city" sortable="true"/>
@@ -45,6 +46,9 @@
 	
 		
 </display:table>
+</div>
+	<br>
 	<acme:link href="travel/create.do" code="travel.create" type="success"/>
+
 </security:authorize>
 

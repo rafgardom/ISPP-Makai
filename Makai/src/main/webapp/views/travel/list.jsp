@@ -8,6 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('CUSTOMER')">
+<div class="table-responsive">
 <display:table name="travels" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 
 	<acme:column code="travel.origin" property="origin.city" sortable="true"/>
@@ -18,7 +19,7 @@
 	<acme:column code="travel.humanSeats" property="humanSeats" />
 	
 	<spring:message code="travel.owner" var="ownerHeader" />
-	<display:column class="text-center" title="ownerHeader" >
+	<display:column title="${ownerHeader}" class="text-center">
 		<a href="profile/displayProfile.do?actorId=${row.transporterOwner.id}"><jstl:out value="${row.transporterOwner.name}"/></a>
 	</display:column>
 
@@ -40,6 +41,6 @@
 	</display:column>
 	
 </display:table>
-
+</div>
 	<acme:link href="travel/create.do" code="travel.create" type="success"/>
 </security:authorize>

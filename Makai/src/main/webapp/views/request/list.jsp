@@ -8,7 +8,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
+<div class="table-responsive">
 <display:table name="requests" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 
 	<jstl:set var="substrDescription" value="${fn:substring(row.description, 0, 40)}" />
@@ -90,6 +90,8 @@
 	</display:column>
 
 </display:table>
+</div>
 <security:authorize access="hasRole('CUSTOMER')">
+	<br>
 	<acme:link href="request/customer/create.do" code="request.create" type="success"/>
 </security:authorize>

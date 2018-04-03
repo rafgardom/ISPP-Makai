@@ -10,6 +10,7 @@
 
 <security:authentication var="principalUserAccount" property="principal" />
 
+<div class="table-responsive">
 <display:table name="actors" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
 	
 	<acme:column code="administrator.actor.username" property="userAccount.username" sortable="true"/>
@@ -56,7 +57,5 @@
 			</jstl:otherwise>
 		</jstl:choose>
 	</display:column> 
-	
-	
-	
 </display:table>
+</div>
