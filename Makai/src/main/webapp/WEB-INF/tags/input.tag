@@ -66,10 +66,13 @@
 	</jstl:if>
 	
 	<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}"/>
+
+<jstl:if test="${image == null}">
 	<form:errors cssClass="alert alert-danger form-control" path="${path}" />
-	
+</jstl:if>
 	</div>
 	
 <jstl:if test="${image != null}">
+	<form:errors cssClass="alert alert-danger form-control" path="${path}" />
 	</div><!-- NO BORRAR -->
 </jstl:if>

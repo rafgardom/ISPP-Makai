@@ -40,8 +40,8 @@
 	
 			<acme:textbox code="trainer.name" path="name" mandatory="true" />
 			<acme:textbox code="trainer.surname" path="surname" mandatory="true" />
-			<acme:textbox code="trainer.phone" path="phone" mandatory="true" />
-			<acme:textbox code="trainer.email" path="email" mandatory="true" />
+			<acme:input image="phone" code="trainer.phone" path="phone" mandatory="true" />
+			<acme:input image="at" code="trainer.email" path="email" mandatory="true" />
 			<acme:textbox code="trainer.nid" path="nid" mandatory="true" />
 		</div>
 		<div class="offset-md-1 col-md-5">
@@ -75,9 +75,9 @@
 				<spring:message code="trainer.userAccountDetails" />
 			</h3>
 			<br />
-			<acme:textbox code="trainer.username" path="username" mandatory="true" />
-			<acme:password code="trainer.password" path="password" mandatory="true" />
-			<acme:password code="trainer.repeatPassword" path="repeatPassword" mandatory="true" />
+			<acme:input image="user-xs" code="trainer.username" path="username" mandatory="true" />
+			<acme:password image="lock1" code="trainer.password" path="password" mandatory="true" />
+			<acme:password image="lock1" code="trainer.repeatPassword" path="repeatPassword" mandatory="true" />
 		</div>
 		</security:authorize>
 		<div class="col-md-12">

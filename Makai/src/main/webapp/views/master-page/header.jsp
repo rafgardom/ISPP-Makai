@@ -160,7 +160,7 @@
 		
 		<security:authorize access="isAuthenticated()">
 			
-			<ul class="navbar-nav float-right">
+			<ul class="navbar-nav float-lg-right">
 				
 				
 				<li class="nav-item dropdown"><a

@@ -50,9 +50,12 @@
 			</div>
 	</jstl:if>
 		<form:password path="${path}" class="form-control" placeholder="${placeholder}" />
+<jstl:if test="${image == null}">
 		<form:errors path="${path}" cssClass="alert alert-danger form-control" />
+</jstl:if>
 	</div>
 <jstl:if test="${image != null}">
+	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 	</div><!-- NO BORRAR -->
 </jstl:if>
 </spring:bind>

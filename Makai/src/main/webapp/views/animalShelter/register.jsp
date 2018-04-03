@@ -40,8 +40,8 @@
 			</h3>
 	
 			<acme:textbox code="animalShelter.name" path="name" mandatory="true" />
-			<acme:textbox code="animalShelter.phone" path="phone" mandatory="true" />
-			<acme:textbox code="animalShelter.email" path="email" mandatory="true" />	
+			<acme:input image="phone" code="animalShelter.phone" path="phone" mandatory="true" />
+			<acme:input image="at" code="animalShelter.email" path="email" mandatory="true" />	
 		</div>
 		<div class="offset-md-1 col-md-5">
 			<h3>
@@ -73,9 +73,9 @@
 				<spring:message code="animalShelter.userAccountDetails" />
 			</h3>
 			<br />
-			<acme:textbox code="animalShelter.username" path="username" mandatory="true" />
-			<acme:password code="animalShelter.password" path="password" mandatory="true" />
-			<acme:password code="animalShelter.repeatPassword" path="repeatPassword" mandatory="true" />
+			<acme:input image="user-xs" code="animalShelter.username" path="username" mandatory="true" />
+			<acme:password image="lock1" code="animalShelter.password" path="password" mandatory="true" />
+			<acme:password image="lock1" code="animalShelter.repeatPassword" path="repeatPassword" mandatory="true" />
 		</div>
 		</security:authorize>
 		<div class="col-md-12">
