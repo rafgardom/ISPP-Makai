@@ -91,15 +91,16 @@ public class AnimalController extends AbstractController {
 	public ModelAndView display(@RequestParam final int animalId) {
 		ModelAndView result;
 		Animal animal;
-		AnimalForm animalForm;
+//		AnimalForm animalForm;
 		final Integer numberNoti;
 		try {
 			animal = this.animalService.findOne(animalId);
-			animalForm = this.animalService.animalToFormObject(animal);
+//			animalForm = this.animalService.animalToFormObject(animal);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			result = new ModelAndView("animal/display");
-			result.addObject("animal", animalForm);
+//			result.addObject("animal", animalForm);
+			result.addObject("animal",animal);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "animal/display.do");
 		} catch (final Throwable e) {
