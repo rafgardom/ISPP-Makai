@@ -36,7 +36,7 @@ public class Rating extends DomainEntity {
 
 
 	@NotNull
-	@Range(min = 0, max = 10)
+	@Range(min = 1, max = 5)
 	public Integer getStars() {
 		return this.stars;
 	}

@@ -12,10 +12,10 @@ import domain.Rating;
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
-	@Query("select count(r) from Rating r where r.stars=0 and r.trainer.id=?1")
+	@Query("select count(r) from Rating r where r.stars=1 and r.trainer.id=?1")
 	public Integer count0starsByTrainerId(int trainerId);
 
-	@Query("select count(r) from Rating r where r.stars=0 and r.travel.id=?1")
+	@Query("select count(r) from Rating r where r.stars=1 and r.travel.id=?1")
 	public Integer count0starsByTravelId(int travelId);
 
 	@Query("select r from Rating r where r.travel.id=?1 and r.customer.id=?2")

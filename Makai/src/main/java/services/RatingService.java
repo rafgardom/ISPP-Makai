@@ -140,7 +140,7 @@ public class RatingService {
 			this.trainerService.save(result.getTrainer());
 		}
 
-		if (result.getStars() == 0) {
+		if (result.getStars() == 1) {
 			Integer count;
 			String message;
 
@@ -152,7 +152,7 @@ public class RatingService {
 				message = "El viaje " + result.getTravel().getId() + ", tiene " + count + " voto(s) negativo(s).";
 			}
 
-			// comprobamos si tiene alguno mas a 0, y si es asi, se crea una notificacion al admin
+			// comprobamos si tiene alguno mas a 1, y si es asi, se crea una notificacion al admin
 			if (count >= 2) {
 				Notification notification;
 
