@@ -89,7 +89,6 @@ public class Animal extends DomainEntity {
 	private AnimalShelter		animalShelter;
 	private Customer			customer;
 	private Collection<Breed>	breeds;
-	private Collection<Travel>	travels;
 
 
 	@Valid
@@ -121,16 +120,6 @@ public class Animal extends DomainEntity {
 
 	public void setBreeds(final Collection<Breed> breeds) {
 		this.breeds = breeds;
-	}
-
-	@Valid
-	@ManyToMany()
-	public Collection<Travel> getTravels() {
-		return this.travels;
-	}
-
-	public void setTravels(final Collection<Travel> travels) {
-		this.travels = travels;
 	}
 
 }

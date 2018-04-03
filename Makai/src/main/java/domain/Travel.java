@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -9,6 +10,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -103,8 +105,9 @@ public class Travel extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private Transporter	transporterOwner;
-	private Vehicle		vehicle;
+	private Transporter			transporterOwner;
+	private Vehicle				vehicle;
+	private Collection<Animal>	animals;
 
 
 	@Valid
@@ -125,6 +128,17 @@ public class Travel extends DomainEntity {
 	}
 	public void setVehicle(final Vehicle vehicle) {
 		this.vehicle = vehicle;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToMany()
+	public Collection<Animal> getAnimals() {
+		return this.animals;
+	}
+
+	public void setAnimals(final Collection<Animal> animals) {
+		this.animals = animals;
 	}
 
 }
