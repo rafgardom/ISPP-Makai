@@ -35,6 +35,9 @@
 				<jstl:if test="${row.isAccepted==false}">
 					<acme:link image="accept" href="offer/customer/accept.do?offerId=${row.id}" type="info" code="offer.accept"/>
 				</jstl:if>
+				<jstl:if test="${row.isAccepted==true}">
+					<acme:link image="star-white-32" href="rating/customer/createRequest.do?requestId=${row.request.id}" type="info" code="offer.rating"/>
+				</jstl:if>
 			</security:authorize>
 		</div>
 		<jstl:if test="${row.isAccepted==true}">

@@ -8,6 +8,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
+<security:authentication var="principalUserAccount" property="principal" />
 <div class="center-div">
 	<img src="${pictureImage}" alt="<spring:message code='profile.no.picture' />" width="200px" height="200px"><br>
 </div>
@@ -20,6 +22,10 @@
 			<p><b><spring:message code="profile.name" />:</b> 
 				<jstl:out value="${actor.name}" /></p>
 		
+		<jstl:if test="${ratings!=null }">
+			<li><b><spring:message code="profile.rating.stars" />:</b> <jstl:out
+					value="${actor.avgRating}" /></li>
+		</jstl:if>
 	  	<security:authorize access="hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')">
 				<p><b><spring:message code="profile.surname" />:</b> 
 					<jstl:out value="${actor.surname}" /></p>
@@ -58,6 +64,21 @@
 </div>
 <br>
 
-<acme:link href="profile/edit.do" code="profile.edit" type="warning btn-block"/>
+<jstl:if test="${ratings!=null }">
+	<h3>
+		<b><spring:message code="profile.ratings" />:</b>
+	</h3>
+	
+	<display:table name="ratings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
+		<acme:column code="profile.rating.moment" property="moment" />
+		<acme:column code="profile.rating.customer" property="customer.name" />
+		<acme:column code="profile.rating.stars" property="stars" />
+		<acme:column code="profile.rating.comment" property="comment" />
+	</display:table>
+</jstl:if>
+<br />
 
+<jstl:if test="${principalUserAccount.id == actor.userAccount.id }">
+	<acme:link href="profile/edit.do" code="profile.edit" type="warning btn-block"/>
+</jstl:if>
 

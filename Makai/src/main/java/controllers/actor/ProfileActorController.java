@@ -2,6 +2,7 @@
 package controllers.actor;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.validation.Valid;
 
@@ -15,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.NotificationService;
+import services.RatingService;
 import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Rating;
 import forms.ProfileForm;
 
 @Controller
@@ -31,6 +34,9 @@ public class ProfileActorController extends AbstractController {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private RatingService		ratingService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -47,15 +53,21 @@ public class ProfileActorController extends AbstractController {
 		Actor actor;
 		String image;
 		final Integer numberNoti;
+		Collection<Rating> ratings;
 
+		ratings = null;
 		actor = this.actorService.findByPrincipal();
 		image = Utilities.showImage(actor.getPicture());
 		numberNoti = this.notificationService.findNotificationWithoutRead();
+
+		if (this.actorService.checkAuthority(actor, "TRAINER"))
+			ratings = this.ratingService.findByTrainerId(actor.getId());
 
 		result = new ModelAndView("profile/display");
 		result.addObject("actor", actor);
 		result.addObject("pictureImage", image);
 		result.addObject("numberNoti", numberNoti);
+		result.addObject("ratings", ratings);
 		result.addObject("requestURI", "profile/display.do");
 
 		return result;
@@ -67,15 +79,21 @@ public class ProfileActorController extends AbstractController {
 		Actor actor;
 		String image;
 		final Integer numberNoti;
+		Collection<Rating> ratings;
 
+		ratings = null;
 		actor = this.actorService.findOne(actorId);
 		image = Utilities.showImage(actor.getPicture());
 		numberNoti = this.notificationService.findNotificationWithoutRead();
+
+		if (this.actorService.checkAuthority(actor, "TRAINER"))
+			ratings = this.ratingService.findByTrainerId(actor.getId());
 
 		result = new ModelAndView("profile/display");
 		result.addObject("actor", actor);
 		result.addObject("pictureImage", image);
 		result.addObject("numberNoti", numberNoti);
+		result.addObject("ratings", ratings);
 		result.addObject("requestURI", "profile/display.do");
 
 		return result;

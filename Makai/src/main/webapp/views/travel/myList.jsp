@@ -33,7 +33,7 @@
 					</jstl:if>
 				</jstl:forEach>
 				<jstl:if test="${show == true}">
-					<acme:link href="rating/customer/createTravel.do?travelId=${row.id}" type="dark" image="star-32"/>
+					<acme:link href="rating/customer/createTravel.do?travelId=${row.id}" type="dark" image="star-white-32"/>
 				</jstl:if>
 			</jstl:if>
 		</div>

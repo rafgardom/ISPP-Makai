@@ -38,6 +38,9 @@ public class RatingService {
 	private AdministratorService	administratorService;
 
 	@Autowired
+	private TrainerService			trainerService;
+
+	@Autowired
 	private NotificationService		notificationService;
 
 
@@ -92,6 +95,7 @@ public class RatingService {
 		Rating result;
 		Customer principal;
 		Calendar today;
+		Offer offer;
 
 		today = Calendar.getInstance();
 
@@ -101,8 +105,9 @@ public class RatingService {
 		//Comprobamos que la request es del principal
 		Assert.isTrue(request.getCustomer().equals(principal));
 
-		//Comprobar de que ha sido aceptada la oferta
-		Assert.isTrue(!this.requestRepository.findOfferWithThisRequestTrue(request.getId()).equals(null));
+		//Comprobar que ha sido aceptada la oferta
+		offer = this.requestRepository.findOfferWithThisRequestTrue(request.getId());
+		Assert.isTrue(!offer.equals(null));
 
 		result = new Rating();
 		result.setCustomer(principal);
@@ -110,7 +115,6 @@ public class RatingService {
 		result.setMoment(today.getTime());
 
 		//Sacamos la offer de nuestro request y a partir de la offer (aceptada) sacamos el trainer que la ha creado.
-		final Offer offer = this.requestRepository.findOfferWithThisRequestTrue(request.getId());
 		result.setTrainer(offer.getTrainer());
 
 		return result;
@@ -126,6 +130,15 @@ public class RatingService {
 		Assert.isTrue(rating.getCustomer().getId() == principal.getId());
 
 		result = this.ratingRepository.save(rating);
+
+		if (result.getTrainer() != null) {
+			Double avgRating;
+
+			avgRating = this.getAvgByTrainerId(result.getTrainer().getId());
+
+			result.getTrainer().setAvgRating(avgRating);
+			this.trainerService.save(result.getTrainer());
+		}
 
 		if (result.getStars() == 0) {
 			Integer count;
@@ -194,5 +207,21 @@ public class RatingService {
 
 	public Collection<Rating> findTravelRatingByCustomer(final int customerId) {
 		return this.ratingRepository.findTravelRatingByCustomer(customerId);
+	}
+
+	public Collection<Rating> findByTrainerId(final int trainerId) {
+		Collection<Rating> result;
+
+		result = this.ratingRepository.findByTrainerId(trainerId);
+
+		return result;
+	}
+
+	public Double getAvgByTrainerId(final int trainerId) {
+		Double result;
+
+		result = this.ratingRepository.getAvgByTrainerId(trainerId);
+
+		return result;
 	}
 }

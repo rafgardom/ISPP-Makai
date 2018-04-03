@@ -23,4 +23,10 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
 	@Query("select r from Rating r where r.customer.id=?1 and r.travel != null")
 	public Collection<Rating> findTravelRatingByCustomer(int customerId);
+
+	@Query("select r from Rating r where r.trainer.id=?1")
+	public Collection<Rating> findByTrainerId(int trainerId);
+
+	@Query("select avg(r.stars) from Rating r where r.trainer.id=?1")
+	public Double getAvgByTrainerId(int trainerId);
 }

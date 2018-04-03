@@ -72,7 +72,7 @@ public class RatingCustomerController extends AbstractController {
 		else
 			try {
 				this.ratingService.save(rating);
-				result = new ModelAndView("redirect:/request/list.do");
+				result = new ModelAndView("redirect:../../offer/customer/list.do?requestId=" + rating.getRequest().getId());
 
 			} catch (final Throwable oops) {
 				result = this.createModelAndView(rating, "rating.commit.error");
@@ -97,7 +97,7 @@ public class RatingCustomerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/createTravel", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveTravel(@Valid final Rating rating, final BindingResult binding) {
+	public ModelAndView saveTravel(@Valid Rating rating, final BindingResult binding) {
 
 		ModelAndView result;
 
@@ -105,7 +105,8 @@ public class RatingCustomerController extends AbstractController {
 			result = this.createModelAndView(rating);
 		else
 			try {
-				this.ratingService.save(rating);
+				rating = this.ratingService.save(rating);
+
 				result = new ModelAndView("redirect:/travel/myPastList.do");
 
 			} catch (final Throwable oops) {
@@ -113,7 +114,6 @@ public class RatingCustomerController extends AbstractController {
 			}
 		return result;
 	}
-
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createModelAndView(final Rating rating) {

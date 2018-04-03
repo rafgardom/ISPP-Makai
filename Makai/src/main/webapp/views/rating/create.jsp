@@ -83,7 +83,7 @@
 					<span id="star5" class="star icon-star-o"></span>
 				</label>
 			</div>
-			<form:hidden path="stars" id="starsHidden" /><br />
+			<form:hidden path="stars" id="starsHidden" value="0" /><br />
 			<form:errors path="stars" cssClass="alert alert-danger form-control" />
 		</div>
 		
@@ -99,19 +99,28 @@
 	<br/>
 	
 		<acme:submit code="rating.save" name="save" />
-		<acme:cancel code="rating.cancel" url="" />
+		<acme:cancel code="rating.cancel" url="travel/myPastList.do" />
 	<br/>
 	
 </form:form>
 
 <script type="text/javascript">
 	$(':radio').change(function() {
+		
+	});
+	
+	$(':radio').click(function(){
 		$('.star').removeClass('icon-star').addClass('icon-star-o');
 		for(var i=1;i<=this.value;i++){
 			$('#star'+i).removeClass('icon-star-o').addClass('icon-star');
 		}
-		$("#starsHidden").val(this.value);
-		console.log('New star rating: ' + $("#starsHidden").val());
+		
+		if(this.value == $("#starsHidden").val()){
+			$("#starsHidden").val("0");
+			$('.star').removeClass('icon-star').addClass('icon-star-o');
+		}else {
+			$("#starsHidden").val(this.value);
+		}
 	});
 	
 </script>
