@@ -3,7 +3,9 @@ package services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,9 @@ public class OfferService {
 
 	@Autowired
 	private CustomerService		customerService;
+
+	@Autowired
+	private AnimalService		animalService;
 
 
 	// Constructors------------------------------------------------------------
@@ -201,6 +206,9 @@ public class OfferService {
 		Assert.notNull(offer);
 		Customer customer;
 
+		/* Modificamos la fecha de finalizacion del entrenamiento en la entidad Animal */
+		//this.animalService.editFinishTraining(offer);
+
 		customer = this.customerService.findByPrincipal();
 		Assert.isTrue(customer.getId() == offer.getRequest().getCustomer().getId());
 
@@ -265,5 +273,20 @@ public class OfferService {
 
 	public Collection<Animal> findAnimalWithOfferAccept() {
 		return this.offerRepository.findOfferAccept();
+	}
+
+	public Date calculateWhenFinishOffer(final Offer offer) {
+		Assert.notNull(offer);
+
+		final Calendar comienzo = Calendar.getInstance();
+		comienzo.setTime(offer.getStartMoment());
+
+		/* Añadimos la duracion */
+		comienzo.add(Calendar.DAY_OF_MONTH, offer.getDuration().getDay());
+		comienzo.add(Calendar.MONTH, offer.getDuration().getMonth());
+		comienzo.add(Calendar.YEAR, offer.getDuration().getYear());
+
+		return comienzo.getTime();
+
 	}
 }

@@ -4,6 +4,7 @@ package services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,7 @@ import domain.Animal;
 import domain.AnimalShelter;
 import domain.Breed;
 import domain.Customer;
+import domain.Offer;
 import forms.AnimalForm;
 
 @Service
@@ -280,6 +282,17 @@ public class AnimalService {
 		animals = this.animalRepository.findByActorIdNotHidden(actorId);
 
 		return animals;
+	}
+
+	public void editFinishTraining(final Offer offer) {
+		Assert.notNull(offer);
+		Date fechaFinalizacionTraining;
+		Animal animal;
+
+		animal = offer.getAnimal();
+		fechaFinalizacionTraining = this.offerService.calculateWhenFinishOffer(offer);
+		animal.setFinishTraining(fechaFinalizacionTraining);
+		this.animalRepository.save(animal);
 	}
 
 }
