@@ -62,6 +62,8 @@ public class ProfileActorController extends AbstractController {
 
 		if (this.actorService.checkAuthority(actor, "TRAINER"))
 			ratings = this.ratingService.findByTrainerId(actor.getId());
+		else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
+			ratings = this.ratingService.findByTransporterId(actor.getId());
 
 		result = new ModelAndView("profile/display");
 		result.addObject("actor", actor);
@@ -88,6 +90,8 @@ public class ProfileActorController extends AbstractController {
 
 		if (this.actorService.checkAuthority(actor, "TRAINER"))
 			ratings = this.ratingService.findByTrainerId(actor.getId());
+		else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
+			ratings = this.ratingService.findByTransporterId(actor.getId());
 
 		result = new ModelAndView("profile/display");
 		result.addObject("actor", actor);

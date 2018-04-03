@@ -69,7 +69,13 @@
 	<display:table name="ratings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 		<acme:column code="profile.rating.moment" property="moment" />
 		<acme:column code="profile.rating.customer" property="customer.name" />
-		<acme:column code="profile.rating.stars" property="stars" />
+		
+		<spring:message code="profile.rating.stars" var="starsHeader" />
+		<display:column class="text-center" title="${starsHeader }" >
+			<jstl:forEach var = "i" begin = "1" end = "${row.stars }" >
+				<img src="images/star-32.png">
+			</jstl:forEach>
+		</display:column>
 		<acme:column code="profile.rating.comment" property="comment" />
 	</display:table>
 </jstl:if>

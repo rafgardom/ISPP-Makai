@@ -209,6 +209,14 @@ public class RatingService {
 		return this.ratingRepository.findTravelRatingByCustomer(customerId);
 	}
 
+	public Collection<Rating> findByTransporterId(final int transporterId) {
+		Collection<Rating> result;
+
+		result = this.ratingRepository.findByTransporterId(transporterId);
+
+		return result;
+	}
+
 	public Collection<Rating> findByTrainerId(final int trainerId) {
 		Collection<Rating> result;
 
