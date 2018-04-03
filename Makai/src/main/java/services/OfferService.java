@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import repositories.OfferRepository;
+import domain.Animal;
 import domain.Customer;
 import domain.Offer;
 import domain.Request;
@@ -257,5 +258,9 @@ public class OfferService {
 
 	public Collection<Offer> findOfferByRequest(final Request request) {
 		return this.offerRepository.findOfferByRequestId(request.getId());
+	}
+
+	public Collection<Animal> findAnimalWithOfferAccept() {
+		return this.offerRepository.findOfferAccept();
 	}
 }

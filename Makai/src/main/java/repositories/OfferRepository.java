@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Animal;
 import domain.Offer;
 
 @Repository
@@ -23,4 +24,7 @@ public interface OfferRepository extends JpaRepository<Offer, Integer> {
 
 	@Query("select o from Offer o where o.isAccepted = true and o.request.customer.id = ?1")
 	public Collection<Offer> findAcceptedOffersByCustomer(int customerId);
+
+	@Query("select o.animal from Offer o where o.isAccepted = true")
+	public Collection<Animal> findOfferAccept();
 }

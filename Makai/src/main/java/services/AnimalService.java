@@ -44,6 +44,9 @@ public class AnimalService {
 	private CustomerService			customerService;
 
 	@Autowired
+	private OfferService			offerService;
+
+	@Autowired
 	private Validator				validator;
 
 
@@ -248,6 +251,29 @@ public class AnimalService {
 		return this.animalRepository.findAnimalFromAnimalShelter();
 	}
 
+	public Collection<Animal> findAnimalWithoutAdopted() {
+		final Collection<Animal> result = new ArrayList<Animal>();
+		Collection<Animal> animals;
+		final Collection<Animal> animalWithoffersAccepted;
+
+		animals = this.findAnimalWithoudDeleted();
+		animalWithoffersAccepted = this.offerService.findAnimalWithOfferAccept();
+
+		for (final Animal aux : animals)
+			if (!animalWithoffersAccepted.contains(aux))
+				result.add(aux);
+		return result;
+
+	}
+	public Collection<Animal> findAnimalWithoudDeleted() {
+		final Collection<Animal> result = new ArrayList<Animal>();
+		Collection<Animal> animals;
+		animals = this.findAll();
+		for (final Animal aux : animals)
+			if (aux.getIsHidden() == false)
+				result.add(aux);
+		return result;
+	}
 	public Collection<Animal> findByActorIdNotHidden(final int actorId) {
 		Collection<Animal> animals;
 
