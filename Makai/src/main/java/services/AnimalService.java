@@ -4,6 +4,7 @@ package services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,7 @@ import domain.Animal;
 import domain.AnimalShelter;
 import domain.Breed;
 import domain.Customer;
+import domain.Offer;
 import forms.AnimalForm;
 
 @Service
@@ -42,6 +44,9 @@ public class AnimalService {
 
 	@Autowired
 	private CustomerService			customerService;
+
+	@Autowired
+	private OfferService			offerService;
 
 	@Autowired
 	private Validator				validator;
@@ -248,6 +253,29 @@ public class AnimalService {
 		return this.animalRepository.findAnimalFromAnimalShelter();
 	}
 
+	public Collection<Animal> findAnimalWithoutAdopted() {
+		final Collection<Animal> result = new ArrayList<Animal>();
+		Collection<Animal> animals;
+		final Collection<Animal> animalWithoffersAccepted;
+
+		animals = this.findAnimalWithoudDeleted();
+		animalWithoffersAccepted = this.offerService.findAnimalWithOfferAccept();
+
+		for (final Animal aux : animals)
+			if (!animalWithoffersAccepted.contains(aux))
+				result.add(aux);
+		return result;
+
+	}
+	public Collection<Animal> findAnimalWithoudDeleted() {
+		final Collection<Animal> result = new ArrayList<Animal>();
+		Collection<Animal> animals;
+		animals = this.findAll();
+		for (final Animal aux : animals)
+			if (aux.getIsHidden() == false)
+				result.add(aux);
+		return result;
+	}
 	public Collection<Animal> findByActorIdNotHidden(final int actorId) {
 		Collection<Animal> animals;
 
@@ -256,8 +284,16 @@ public class AnimalService {
 		return animals;
 	}
 
-	public Integer countAnimalsByTravel(final int travelId) {
-		return this.animalRepository.countAnimalsByTravel(travelId);
+	public void editFinishTraining(final Offer offer) {
+		Assert.notNull(offer);
+		Date fechaFinalizacionTraining;
+		Animal animal;
+
+		animal = offer.getAnimal();
+		fechaFinalizacionTraining = this.offerService.calculateWhenFinishOffer(offer);
+		animal.setFinishTraining(fechaFinalizacionTraining);
+		this.animalRepository.save(animal);
+
 	}
 
 }

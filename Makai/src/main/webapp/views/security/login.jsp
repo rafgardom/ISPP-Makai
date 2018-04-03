@@ -32,7 +32,7 @@
 			<acme:error code="security.login.failed"/>
 		</jstl:if>
 		
-		<h3 class="card-title text-muted text-center">Sign in</h3>
+		<h3 class="card-title text-muted text-center"><spring:message code="master.page.sign.in"/></h3>
 		<acme:input image="user-xs" code="security.username" path="username" mandatory="true"/>
 		<acme:password image="lock1" code="security.password" path="password" mandatory="true"/>
 		</div>

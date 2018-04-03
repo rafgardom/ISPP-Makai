@@ -8,6 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
+<div class="table-responsive">
 <display:table name="travels" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 
 	<acme:column code="travel.origin" property="origin.city" sortable="true"/>
@@ -16,7 +17,11 @@
 	<acme:column code="travel.endMoment" property="endMoment" format="{0,date,dd/MM/yyyy HH:mm}"/>
 	<acme:column code="travel.animalSeats" property="animalSeats" />
 	<acme:column code="travel.humanSeats" property="humanSeats" />
-	<acme:column code="travel.owner" property="transporterOwner.userAccount.username" />
+	
+	<spring:message code="travel.owner" var="ownerHeader" />
+	<display:column class="text-center" title="ownerHeader" >
+		<a href="profile/displayProfile.do?actorId=${row.transporterOwner.id}"><jstl:out value="${row.transporterOwner.name}"/></a>
+	</display:column>
 	
 	<display:column>
 		<div class="btn-group">
@@ -41,6 +46,9 @@
 	
 		
 </display:table>
+</div>
+	<br>
 	<acme:link href="travel/create.do" code="travel.create" type="success"/>
+
 </security:authorize>
 

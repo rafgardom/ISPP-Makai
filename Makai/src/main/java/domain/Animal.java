@@ -2,6 +2,7 @@
 package domain;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -10,11 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -33,7 +37,18 @@ public class Animal extends DomainEntity {
 	private Sex		sex;
 	private byte[]	picture;
 	private Boolean	isHidden;
+	private Date	finishTraining;
 
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	public Date getFinishTraining() {
+		return this.finishTraining;
+	}
+
+	public void setFinishTraining(final Date finishTraining) {
+		this.finishTraining = finishTraining;
+	}
 
 	@NotNull
 	public Boolean getIsHidden() {

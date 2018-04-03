@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
+<div class="table-responsive">
 <display:table name="offers" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="offer.startMoment" property="startMoment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
@@ -45,8 +45,6 @@
 		</jstl:if>
 	</display:column>
 	
-	
 
-	
 </display:table>
-
+</div>

@@ -218,7 +218,7 @@ public class OfferTrainerController extends AbstractController {
 			result.addObject("RequestURI", "offer/trainer/create.do");
 		}
 
-		final Collection<Animal> animals = this.animalService.findAnimalFromAnimalShelter();
+		final Collection<Animal> animals = this.animalService.findAnimalWithoutAdopted();
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result.addObject("animals", animals);

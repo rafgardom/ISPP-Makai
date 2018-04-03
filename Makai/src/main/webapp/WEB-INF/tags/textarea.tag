@@ -67,16 +67,18 @@
 	});
 	
 	function checkCharacters(text_max, textId, count_messageId) {
-		var text_length = $(textId).val().length;
-		
-		$(count_messageId).html(text_length + ' / ' + text_max );
-		
-		if(text_length > text_max){
-			$(count_messageId).addClass("text-danger");
-			$(textId).addClass("is-invalid");
-		}else{
-			$(count_messageId).removeClass("text-danger");
-			$(textId).removeClass("is-invalid");
+		if(text_max!=""){
+			var text_length = $(textId).val().length;
+			
+			$(count_messageId).html(text_length + ' / ' + text_max );
+			
+			if(text_length > text_max){
+				$(count_messageId).addClass("text-danger");
+				$(textId).addClass("is-invalid");
+			}else{
+				$(count_messageId).removeClass("text-danger");
+				$(textId).removeClass("is-invalid");
+			}
 		}
 		
 	}

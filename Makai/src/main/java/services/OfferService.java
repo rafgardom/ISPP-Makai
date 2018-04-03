@@ -3,7 +3,9 @@ package services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import repositories.OfferRepository;
+import domain.Animal;
 import domain.Customer;
 import domain.Offer;
 import domain.Request;
@@ -40,6 +43,9 @@ public class OfferService {
 
 	@Autowired
 	private CustomerService		customerService;
+
+	@Autowired
+	private AnimalService		animalService;
 
 
 	// Constructors------------------------------------------------------------
@@ -117,6 +123,9 @@ public class OfferService {
 
 		Assert.isTrue(!offer.getIsAccepted());
 
+		if (offer.getPrice() == null)
+			offer.setPrice(0.0);
+
 		if (offer.getId() == 0)
 			this.notificationService.createNotificationForRequestWithOffer(offer.getRequest());
 
@@ -193,7 +202,7 @@ public class OfferService {
 
 	}
 
-	public void acceptedOffer(final Offer offer) {
+	public void acceptedOffer(Offer offer) {
 		Assert.notNull(offer);
 		Customer customer;
 
@@ -201,11 +210,14 @@ public class OfferService {
 		Assert.isTrue(customer.getId() == offer.getRequest().getCustomer().getId());
 
 		offer.setIsAccepted(true);
-		this.offerRepository.save(offer);
+		offer = this.offerRepository.save(offer);
 
 		this.notificationService.createNotificationOfferAcceptedTrainer(offer);
 
 		this.eraseNonAcceptedOffers(offer.getRequest());
+
+		/* Modificamos la fecha de finalizacion del entrenamiento en la entidad Animal */
+		this.animalService.editFinishTraining(offer);
 	}
 
 	public Offer reconstruct(final OfferForm offerForm, final BindingResult binding) throws IOException {
@@ -257,5 +269,24 @@ public class OfferService {
 
 	public Collection<Offer> findOfferByRequest(final Request request) {
 		return this.offerRepository.findOfferByRequestId(request.getId());
+	}
+
+	public Collection<Animal> findAnimalWithOfferAccept() {
+		return this.offerRepository.findOfferAccept();
+	}
+
+	public Date calculateWhenFinishOffer(final Offer offer) {
+		Assert.notNull(offer);
+
+		final Calendar comienzo = Calendar.getInstance();
+		comienzo.setTime(offer.getStartMoment());
+
+		/* Añadimos la duracion */
+		comienzo.add(Calendar.DAY_OF_MONTH, offer.getDuration().getDay());
+		comienzo.add(Calendar.MONTH, offer.getDuration().getMonth());
+		comienzo.add(Calendar.YEAR, offer.getDuration().getYear());
+
+		return comienzo.getTime();
+
 	}
 }
