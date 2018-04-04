@@ -27,4 +27,7 @@ public interface OfferRepository extends JpaRepository<Offer, Integer> {
 
 	@Query("select o.animal from Offer o where o.isAccepted = true")
 	public Collection<Animal> findOfferAccept();
+
+	@Query("select o from Offer o where o.isAccepted = true")
+	public Collection<Offer> offersAccepted();
 }

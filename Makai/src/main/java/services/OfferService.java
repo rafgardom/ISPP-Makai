@@ -289,4 +289,8 @@ public class OfferService {
 		return comienzo.getTime();
 
 	}
+
+	public Collection<Offer> offersAccepted() {
+		return this.offerRepository.offersAccepted();
+	}
 }
