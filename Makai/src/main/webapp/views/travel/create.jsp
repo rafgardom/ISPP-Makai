@@ -67,11 +67,15 @@
 				<acme:input code="travel.humanSeats" path="humanSeats" type="number" min="0" />
 			</div>
 			<div class="col-lg-3 col-sm-6 col-12">
-				<acme:input code="travel.startMoment" path="startMoment" mandatory="true" image="calendar" placeholder="dd/MM/yyyy HH:mm"/>
-				<acme:input code="travel.endMoment" path="endMoment" mandatory="true" image="calendar" placeholder="dd/MM/yyyy HH:mm"/>
-			</div>
-			<div class="offset-lg-1 col-md-5 col-12">
 				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" mandatory="true"/>
+			</div>
+			<div class="offset-lg-1 col-md-3 col-12">
+				<acme:input code="travel.startMoment" path="startDate" mandatory="true" image="calendar" placeholder="dd/MM/yyyy" id="datepicker"/>
+				<acme:input code="travel.startMoment" path="startTime" mandatory="true" image="clock" placeholder="HH:mm"/>
+			</div>
+			<div class="col-md-3 col-12">
+				<acme:input code="travel.endMoment" path="endDate" mandatory="true" image="calendar" placeholder="dd/MM/yyyy" id="datepicker2"/>
+				<acme:input code="travel.endMoment" path="endTime" mandatory="true" image="clock" placeholder="HH:mm"/>
 			</div>
 	</div>
 	<br/>
@@ -80,9 +84,18 @@
 		<acme:cancel code="travel.cancel" url="travel/list.do" />
 </form:form>
 
+ <!-- Datepicker -->
 <script>
-$('#datepicker').datepicker({ 
-	dateFormat: 'dd/mm/yy', 
-	minDate: 0,
-	}).val();
+$( function() {
+    $( "#datepicker" ).datepicker({ 
+    	dateFormat: 'dd/mm/yy', 
+    	minDate: 0,
+    	});
+  } );
+$( function() {
+    $( "#datepicker2" ).datepicker({ 
+    	dateFormat: 'dd/mm/yy', 
+    	minDate: 0,
+    	});
+  } );
 </script>

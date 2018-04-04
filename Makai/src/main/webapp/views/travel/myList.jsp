@@ -19,7 +19,7 @@
 	<acme:column code="travel.humanSeats" property="humanSeats" />
 	
 	<spring:message code="travel.owner" var="ownerHeader" />
-	<display:column class="text-center" title="ownerHeader" >
+	<display:column class="text-center" title="${ownerHeader}" >
 		<a href="profile/displayProfile.do?actorId=${row.transporterOwner.id}"><jstl:out value="${row.transporterOwner.name}"/></a>
 	</display:column>
 	

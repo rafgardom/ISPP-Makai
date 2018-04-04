@@ -24,8 +24,10 @@ public class TravelForm {
 	private int					id;
 	private Coordinates			destination;
 	private Coordinates			origin;
-	private Date				startMoment;
-	private Date				endMoment;
+	private Date				startDate;
+	private Date				startTime;
+	private Date				endDate;
+	private Date				endTime;
 	private Integer				animalSeats;
 	private Integer				humanSeats;
 	private Vehicle				vehicle;
@@ -66,24 +68,47 @@ public class TravelForm {
 
 	@NotNull
 	@Future
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getStartMoment() {
-		return this.startMoment;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public Date getStartDate() {
+		return this.startDate;
 	}
-	public void setStartMoment(final Date startMoment) {
-		this.startMoment = startMoment;
+	public void setStartDate(final Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@NotNull
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm")
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 
 	@NotNull
 	@Future
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getEndMoment() {
-		return this.endMoment;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public Date getEndDate() {
+		return endDate;
 	}
-	public void setEndMoment(final Date endMoment) {
-		this.endMoment = endMoment;
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	@NotNull
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm")
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	@Min(0)

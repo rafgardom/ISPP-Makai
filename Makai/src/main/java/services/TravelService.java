@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -212,8 +213,8 @@ public class TravelService {
 
 		result.setDestination(travelForm.getDestination());
 		result.setOrigin(travelForm.getOrigin());
-		result.setStartMoment(travelForm.getStartMoment());
-		result.setEndMoment(travelForm.getEndMoment());
+		result.setStartMoment(sumDates(travelForm.getStartDate(), travelForm.getStartTime()));
+		result.setEndMoment(sumDates(travelForm.getEndDate(), travelForm.getEndTime()));
 		result.setAnimalSeats(travelForm.getAnimalSeats());
 		result.setVehicle(travelForm.getVehicle());
 		//result.setAnimals(travelForm.getAnimals());
@@ -230,8 +231,10 @@ public class TravelService {
 
 		result.setDestination(travel.getDestination());
 		result.setOrigin(travel.getOrigin());
-		result.setStartMoment(travel.getStartMoment());
-		result.setEndMoment(travel.getEndMoment());
+		result.setStartDate(travel.getStartMoment());
+		result.setStartTime(travel.getStartMoment());
+		result.setEndDate(travel.getEndMoment());
+		result.setEndTime(travel.getEndMoment());
 		result.setAnimalSeats(travel.getAnimalSeats());
 		result.setHumanSeats(travel.getHumanSeats());
 		result.setVehicle(travel.getVehicle());
@@ -239,6 +242,21 @@ public class TravelService {
 		result.setId(travel.getId());
 
 		return result;
+	}
+	
+	public Date sumDates(Date date,Date time){
+		Date res = null;
+		Calendar caltime = Calendar.getInstance(); 
+		Calendar caldate = Calendar.getInstance();
+		caltime.setTime(time); 
+        caldate.setTime(date); 
+		int hour = caltime.get(Calendar.HOUR_OF_DAY);
+		int minutes = caltime.get(Calendar.MINUTE);
+
+        caldate.set(Calendar.HOUR_OF_DAY, hour);
+        caldate.set(Calendar.MINUTE, minutes);
+        res = caldate.getTime();
+        return res;
 	}
 
 	public Collection<Travel> findTravelByTransporterId(final int transporterId) {
