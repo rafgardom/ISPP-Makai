@@ -3,6 +3,7 @@ package services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -279,6 +280,24 @@ public class AnimalService {
 				result.add(aux);
 		return result;
 	}
+
+	public Collection<Animal> findAnimalsWithoutDeletedAndCustomer() {
+		return this.animalRepository.findAnimalWithoutDeletedAndCustomer();
+	}
+
+	public Collection<Animal> animalsWithOfferAcceptedAndWithoutTimeTraining() {
+		final Collection<Animal> result = new ArrayList<Animal>();
+		final Collection<Offer> offersAcepted = this.offerService.offersAccepted();
+		Calendar today;
+		today = Calendar.getInstance();
+
+		for (final Offer aux : offersAcepted)
+			if (aux.getAnimal().getFinishTraining().after(today.getTime()))
+				result.add(aux.getAnimal());
+
+		return result;
+	}
+
 	public Collection<Animal> findByActorIdNotHidden(final int actorId) {
 		Collection<Animal> animals;
 
@@ -295,6 +314,7 @@ public class AnimalService {
 		animal = offer.getAnimal();
 		fechaFinalizacionTraining = this.offerService.calculateWhenFinishOffer(offer);
 		animal.setFinishTraining(fechaFinalizacionTraining);
+		animal.setCustomer(offer.getRequest().getCustomer());
 		this.animalRepository.save(animal);
 
 	}
