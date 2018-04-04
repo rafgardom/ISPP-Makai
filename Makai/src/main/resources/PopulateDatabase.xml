@@ -941,6 +941,7 @@
 		<property name="age" value="8" />
 		<property name="sex" value="MALE" />
 		<property name="isHidden" value="false" />
+		<property name="finishTraining" value="12/18/2018 6:00" />
 		<property name="picture">
 			<list>
 				<value>0x40</value>
@@ -953,6 +954,7 @@
 			</list>
 		</property>
 		<property name="animalShelter" ref="animalshelter2" />
+		<property name="customer" ref="customer2" />
 	</bean>
 	
 	<!-- Request -->
