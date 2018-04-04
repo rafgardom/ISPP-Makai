@@ -17,7 +17,9 @@
 <hr />
 <div class="row">
 	<div class="col-md-5">
-		<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b>
+		<a href="javascript:setParam('language', 'en');">English</a> | <a
+		href="javascript:setParam('language', 'es');">Español</a>
+		<h6><b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b></h6>
 	</div>
 	<div class="col-md-7 text-md-right">
 		<a href="misc/privacyPolicy.do?sc=true"><spring:message code="master.page.privacyPolicy" /></a>&nbsp;&nbsp;&#124;
@@ -25,6 +27,9 @@
 		<i style="font-size:16px"><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i>
 	</div>
 </div>
+
+
+
 
 <div id="barraaceptacion">
     <div class="inner row">
@@ -35,8 +40,8 @@
 			<div class="col-2 text-sm-right">
 			 	<button type="button" class="btn btn-warning btn-lg ok" onclick="PonerCookie();"><b><spring:message code="master.page.cookies.ok" /></b></button>
 			</div>
-		</div>
-    </div>
+	</div>
+</div>
  
 <script>
 function getCookie(c_name){
@@ -72,4 +77,37 @@ function PonerCookie(){
     setCookie('tiendaaviso','1',365);
     document.getElementById("barraaceptacion").style.display="none";
 }
+</script>
+<script>
+	function setParam(name, value) {
+		var l = window.location;
+
+		/* build params */
+		var params = {};
+		var x = /(?:\??)([^=&?]+)=?([^&?]*)/g;
+		var s = l.search;
+		for ( var r = x.exec(s); r; r = x.exec(s)) {
+			r[1] = decodeURIComponent(r[1]);
+			if (!r[2])
+				r[2] = '%%';
+			params[r[1]] = r[2];
+		}
+
+		/* set param */
+		params[name] = encodeURIComponent(value);
+
+		/* build search */
+		var search = [];
+		for ( var i in params) {
+			var p = encodeURIComponent(i);
+			var v = params[i];
+			if (v != '%%')
+				p += '=' + v;
+			search.push(p);
+		}
+		search = search.join('&');
+
+		/* execute search */
+		l.search = search;
+	}
 </script>

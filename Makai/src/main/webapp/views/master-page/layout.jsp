@@ -37,7 +37,8 @@
 <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="styles/slider.css" type="text/css">
 <link rel="stylesheet" href="styles/common.css" type="text/css">
 <link rel="stylesheet" href="styles/cookiesBar.css" type="text/css">
@@ -58,7 +59,7 @@
 </head>
 
 <body style="background-color:#ECFAFB; padding-left: 2%; padding-right: 2%">
-
+	<div class="container">
 	<div>
 		<tiles:insertAttribute name="header" />
 	</div>
@@ -67,10 +68,11 @@
 <%-- 	<acme:carousel/> --%>
 
 
-  	<div class="jumbotron border border-primary">
+<%--   	<div class="jumbotron border border-primary">
  		<h1>
 			<tiles:insertAttribute name="title" />
-		</h1> 
+		</h1>  --%>
+		<br>
 		<tiles:insertAttribute name="body" />	
 		<jstl:if test="${message != null}">
 			<br />

@@ -22,7 +22,9 @@
 </div>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary rounded">
-	<a class="navbar-brand" href=""><spring:message code="master.page.home" /></a>
+	<a class="navbar-brand" href="">
+	<img src="images/dog-house.png" height="45px"/>
+	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarColor01">
 		<span class="navbar-toggler-icon"></span>
@@ -35,10 +37,10 @@
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<spring:message code="master.page.request" /></a>
+						<img src="images/request.png"/><spring:message code="master.page.requests" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="request/customer/create.do">
-							<spring:message code="master.page.request.create" /></a> 
+				 		<spring:message code="master.page.request.create" /></a> 
 						<a class="dropdown-item" href="request/customer/myList.do">
 							<spring:message code="master.page.request.list" /></a>
 					</div></li>
@@ -49,7 +51,7 @@
 
 				<li class="nav-item dropdown"> 
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<spring:message code="master.page.travel" /></a>
+						<img src="images/cage.png"/><spring:message code="master.page.travel" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="travel/create.do">
 							<spring:message code="master.page.travel.create" /></a>
@@ -70,7 +72,7 @@
 			<security:authorize access="hasAnyRole('CUSTOMER,ANIMALSHELTER')">
 				<li class="nav-item dropdown"> 
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<spring:message	code="master.page.animal" /></a>
+						<img src="images/animals.png"/><spring:message	code="master.page.animal" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="animal/register.do">
 							<spring:message code="master.page.animal.register" /></a> 
@@ -103,11 +105,11 @@
 					href="offer/trainer/list.do"><spring:message
 							code="master.page.offer" /> </a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="request/trainer/list.do"><spring:message
-							code="master.page.requests" /> </a></li>
+					href="request/trainer/list.do">
+					<img src="images/request.png"/><spring:message code="master.page.requests" /> </a></li>
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
-							code="master.page.trainer.training" /></a>
+					class="nav-link dropdown-toggle" data-toggle="dropdown">
+					<spring:message code="master.page.trainer.training" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start"
 						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="training/trainer/list.do"><spring:message
@@ -153,7 +155,7 @@
 				<li class="nav-item">
 				<a class="nav-link"
 					href="notification/actor/list.do">
-							<img src="images/notification.png" height="30px"/>
+							<img src="images/bell.png"/>
 							<span class="badge badge-default badge-pill bg-secondary pill-menu"><jstl:if test="${numberNoti > 0}" >${numberNoti}</jstl:if></span> </a></li>
 			</security:authorize>
 		</ul>
@@ -164,9 +166,9 @@
 				
 				
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
-							code="master.page.profile" /> (<security:authentication
-							property="principal.username" />)</a>
+					class="nav-link dropdown-toggle" data-toggle="dropdown"><img src="images/user (1).png"/><spring:message
+							code="master.page.profile" /> <%-- (<security:authentication
+							property="principal.username" />) --%></a>
 					<div class="dropdown-menu" x-placement="bottom-start"
 						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="profile/display.do"><spring:message
@@ -182,43 +184,3 @@
 		</form> -->
 	</div>
 </nav>
-
-<div>
-	<a href="javascript:setParam('language', 'en');">en</a> | <a
-		href="javascript:setParam('language', 'es');">es</a>
-</div>
-
-<script>
-	function setParam(name, value) {
-		var l = window.location;
-
-		/* build params */
-		var params = {};
-		var x = /(?:\??)([^=&?]+)=?([^&?]*)/g;
-		var s = l.search;
-		for ( var r = x.exec(s); r; r = x.exec(s)) {
-			r[1] = decodeURIComponent(r[1]);
-			if (!r[2])
-				r[2] = '%%';
-			params[r[1]] = r[2];
-		}
-
-		/* set param */
-		params[name] = encodeURIComponent(value);
-
-		/* build search */
-		var search = [];
-		for ( var i in params) {
-			var p = encodeURIComponent(i);
-			var v = params[i];
-			if (v != '%%')
-				p += '=' + v;
-			search.push(p);
-		}
-		search = search.join('&');
-
-		/* execute search */
-		l.search = search;
-	}
-</script>
-

@@ -90,12 +90,14 @@ $( function() {
     $( "#datepicker" ).datepicker({ 
     	dateFormat: 'dd/mm/yy', 
     	minDate: 0,
+    	firstDay: 1
     	});
   } );
 $( function() {
     $( "#datepicker2" ).datepicker({ 
     	dateFormat: 'dd/mm/yy', 
     	minDate: 0,
+    	firstDay: 1
     	});
   } );
 </script>
