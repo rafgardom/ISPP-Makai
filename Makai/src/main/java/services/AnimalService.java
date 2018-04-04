@@ -25,6 +25,8 @@ import domain.Animal;
 import domain.AnimalShelter;
 import domain.Breed;
 import domain.Customer;
+import domain.Notification;
+import domain.NotificationType;
 import domain.Offer;
 import forms.AnimalForm;
 
@@ -48,6 +50,9 @@ public class AnimalService {
 
 	@Autowired
 	private OfferService			offerService;
+
+	@Autowired
+	private NotificationService		notificationService;
 
 	@Autowired
 	private Validator				validator;
@@ -134,9 +139,13 @@ public class AnimalService {
 		Actor principal;
 		AnimalShelter animalShelter;
 		Customer customer;
+		Collection<Offer> ofertasRelacionadas;
+		Notification notification;
 
 		Assert.notNull(animal);
 		Assert.isTrue(animal.getId() != 0);
+
+		ofertasRelacionadas = this.offerService.findNotAcceptedOffersByAnimalId(animal.getId());
 
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
@@ -149,6 +158,15 @@ public class AnimalService {
 			customer = this.customerService.findByPrincipal();
 			Assert.notNull(customer);
 			Assert.isTrue(animal.getCustomer().getId() == customer.getId());
+		}
+
+		for (final Offer o : ofertasRelacionadas) {
+			notification = this.notificationService.create(o.getTrainer());
+			notification.setReason("Lo sentimos, pero " + animal.getName() + " ya no está disponible");
+			notification.setDescription("El animal que intentaba solicitar ya no se encuentra disponible");
+			notification.setType(NotificationType.GENERAL);
+			this.notificationService.save(notification);
+			this.offerService.delete(o);
 		}
 
 		//Cambiamos el atributo isHidden a true cuando el animal es eliminado

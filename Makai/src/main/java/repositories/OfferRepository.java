@@ -30,4 +30,8 @@ public interface OfferRepository extends JpaRepository<Offer, Integer> {
 
 	@Query("select o from Offer o where o.isAccepted = true")
 	public Collection<Offer> offersAccepted();
+
+	@Query("select o from Offer o where o.animal.id=?1 and o.isAccepted=false")
+	public Collection<Offer> findNotAcceptedOffersByAnimalId(int animalId);
+
 }

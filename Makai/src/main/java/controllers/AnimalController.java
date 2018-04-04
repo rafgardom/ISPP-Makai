@@ -122,6 +122,7 @@ public class AnimalController extends AbstractController {
 
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
+			System.out.println(oops.toString());
 			result = new ModelAndView("error");
 		}
 		return result;

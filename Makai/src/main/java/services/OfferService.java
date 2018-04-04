@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import repositories.OfferRepository;
+import domain.Actor;
 import domain.Animal;
 import domain.Customer;
 import domain.Offer;
@@ -34,6 +35,9 @@ public class OfferService {
 
 	@Autowired
 	private RequestService		requestService;
+
+	@Autowired
+	private ActorService		actorService;
 
 	@Autowired
 	private TrainerService		trainerService;
@@ -135,14 +139,14 @@ public class OfferService {
 	}
 
 	public void delete(final Offer offer) {
-		Trainer principal;
+		Actor principal;
 
 		Assert.notNull(offer);
 		Assert.isTrue(offer.getId() != 0);
 
-		principal = this.trainerService.findByPrincipal();
+		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
-		Assert.isTrue(offer.getTrainer().getId() == principal.getId());
+		Assert.isTrue(this.actorService.checkAuthority(principal, "CUSTOMER") || this.actorService.checkAuthority(principal, "ANIMALSHELTER") || (this.actorService.checkAuthority(principal, "TRAINER") && offer.getTrainer().getId() == principal.getId()));
 
 		Assert.isTrue(!offer.getIsAccepted());
 
@@ -273,6 +277,10 @@ public class OfferService {
 
 	public Collection<Animal> findAnimalWithOfferAccept() {
 		return this.offerRepository.findOfferAccept();
+	}
+
+	public Collection<Offer> findNotAcceptedOffersByAnimalId(final int animalId) {
+		return this.offerRepository.findNotAcceptedOffersByAnimalId(animalId);
 	}
 
 	public Date calculateWhenFinishOffer(final Offer offer) {
