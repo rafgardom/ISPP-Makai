@@ -172,7 +172,7 @@ public class RequestCustomerController extends AbstractController {
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		principal = this.customerService.findByPrincipal();
-		animals = this.animalService.findByActorId(principal.getId());
+		animals = this.animalService.animalsToRequest(principal);
 
 		categories = Category.values();
 

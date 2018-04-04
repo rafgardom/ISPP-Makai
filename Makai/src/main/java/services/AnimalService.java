@@ -298,6 +298,24 @@ public class AnimalService {
 		return result;
 	}
 
+	public Collection<Animal> animalsToRequest(final Customer customer) {
+		Collection<Animal> result;
+		final Collection<Animal> animalsWorking = new ArrayList<Animal>();
+		final Collection<Offer> offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
+		Calendar today;
+		today = Calendar.getInstance();
+
+		result = this.findByActorIdNotHidden(customer.getId());
+
+		for (final Offer aux : offersAcepted)
+			if (aux.getAnimal().getFinishTraining().after(today.getTime()) && !aux.getAnimal().getIsHidden())
+				animalsWorking.add(aux.getAnimal());
+
+		result.removeAll(animalsWorking);
+
+		return result;
+	}
+
 	public Collection<Animal> findByActorIdNotHidden(final int actorId) {
 		Collection<Animal> animals;
 
