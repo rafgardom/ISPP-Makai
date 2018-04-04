@@ -91,16 +91,20 @@ public class AnimalController extends AbstractController {
 	public ModelAndView display(@RequestParam final int animalId) {
 		ModelAndView result;
 		Animal animal;
+		Breed[] breeds;
+		String specie;
 		//		AnimalForm animalForm;
 		final Integer numberNoti;
 		try {
 			animal = this.animalService.findOne(animalId);
 			//			animalForm = this.animalService.animalToFormObject(animal);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
-
+			breeds = animal.getBreeds().toArray(new Breed[animal.getBreeds().size()]);
+			specie = breeds[0].getSpecie().getType();
 			result = new ModelAndView("animal/display");
 			//			result.addObject("animal", animalForm);
 			result.addObject("animal", animal);
+			result.addObject("specie", specie);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "animal/display.do");
 		} catch (final Throwable e) {
@@ -108,7 +112,6 @@ public class AnimalController extends AbstractController {
 		}
 		return result;
 	}
-
 	// Delete --------------------------------------------------------------------		
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

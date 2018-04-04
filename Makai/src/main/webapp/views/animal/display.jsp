@@ -28,6 +28,9 @@
 				
 			<p><b><spring:message code="animal.sex" />:</b> <jstl:out
 				value="${animal.sex}" /></p>
+				
+			<p><b><spring:message code="animal.specie" />:</b> <jstl:out
+				value="${specie}" /></p>
 	  	
 	  	</div>
 	</div>
