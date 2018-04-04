@@ -95,6 +95,14 @@
 	
 </form:form>
 
+<!-- Datepicker -->
+<script>
+$('#datepicker').datepicker({ 
+	dateFormat: 'dd/mm/yy', 
+	minDate: 0,
+	}).val();
+</script>
+
 <!-- Slider Duration -->
 <script type="text/javascript">
 	var slider1 = document.getElementById("myRange1");
@@ -122,3 +130,4 @@
 	    output3.innerHTML = this.value+" <spring:message code="offer.duration.year"/>";
 	};
 </script>
+ 

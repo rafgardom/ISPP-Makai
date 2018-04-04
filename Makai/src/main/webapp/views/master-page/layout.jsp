@@ -37,6 +37,7 @@
 <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="styles/slider.css" type="text/css">
 <link rel="stylesheet" href="styles/common.css" type="text/css">
 <link rel="stylesheet" href="styles/cookiesBar.css" type="text/css">
@@ -67,9 +68,9 @@
 
 
   	<div class="jumbotron border border-primary">
-		<h1>
+ 		<h1>
 			<tiles:insertAttribute name="title" />
-		</h1>
+		</h1> 
 		<tiles:insertAttribute name="body" />	
 		<jstl:if test="${message != null}">
 			<br />

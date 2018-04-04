@@ -79,3 +79,10 @@
 		<acme:submit code="travel.save" name="save" />
 		<acme:cancel code="travel.cancel" url="travel/list.do" />
 </form:form>
+
+<script>
+$('#datepicker').datepicker({ 
+	dateFormat: 'dd/mm/yy', 
+	minDate: 0,
+	}).val();
+</script>
