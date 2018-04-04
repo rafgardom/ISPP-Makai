@@ -188,7 +188,7 @@ public class AnimalService {
 			binding.addError(fieldError);
 		}
 
-		if (!animalForm.getAnimalImage().getContentType().contains("image")) {
+		if (animalForm.getAnimalImage().getSize() != 0 && !animalForm.getAnimalImage().getContentType().contains("image")) {
 			FieldError fieldError;
 			final String[] codes = {
 				"animal.picture.extension.error"
@@ -237,7 +237,10 @@ public class AnimalService {
 		result.setPicture(animal.getPicture());
 		result.setBreeds(animal.getBreeds());
 		result.setStringImage(image);
-
+		if (animal.getId() != 0) {
+			final Breed[] breed = animal.getBreeds().toArray(new Breed[animal.getBreeds().size()]);
+			result.setSpecie(breed[0].getSpecie());
+		}
 		return result;
 	}
 
