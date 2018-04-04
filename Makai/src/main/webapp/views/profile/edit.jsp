@@ -34,8 +34,8 @@
 				<acme:textbox code="profile.nid" path="nid" mandatory="true" />
 			</security:authorize>
 	
-			<acme:input code="profile.phone" path="phone" mandatory="true" image="phone"/>
-			<acme:input code="profile.email" path="email" mandatory="true" image="at" />
+			<acme:input code="profile.phone" path="phone" mandatory="true" image="phone" pattern="((\+|00)\d{2,4}(\s)?)?\d{9,13}" />
+			<acme:input code="profile.email" path="email" mandatory="true" image="at" type="email" />
 	
 			<form:input path="userImage" type="file" />
 			<spring:message code="image.formats" var="formats" /><p><jstl:out value="${formats}"/></p><br>
