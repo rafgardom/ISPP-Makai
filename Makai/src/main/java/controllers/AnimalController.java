@@ -226,14 +226,12 @@ public class AnimalController extends AbstractController {
 		final Collection<Specie> species;
 		final Collection<Breed> breeds;
 		String json;
-		final String selectedBreeds;
 		final Integer numberNoti;
 
 		sexs = Sex.values();
 		species = this.specieService.findAll();
 		breeds = this.breedService.findAll();
 		json = new Gson().toJson(breeds);
-		selectedBreeds = new Gson().toJson(animalForm.getBreeds());
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		if (animalForm.getId() == 0)
@@ -245,7 +243,6 @@ public class AnimalController extends AbstractController {
 		result.addObject("species", species);
 		result.addObject("breeds", breeds);
 		result.addObject("jsonBreeds", json);
-		result.addObject("selectedBreeds", selectedBreeds);
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("RequestURI", "animal/edit.do");
 		result.addObject("errorMessage", message);

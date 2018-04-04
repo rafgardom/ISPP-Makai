@@ -46,24 +46,38 @@
 </form:form>
 
 <script type="text/javascript">
-getBreeds();
+	var specieVal = document.getElementById("specie").selectedOptions[0].value;
+	var selectBreeds = document.getElementById("breed");
+	
+	var breeds = '<jstl:out value="${json }" />';
+	breeds = breeds.replace(/&#034;/g, '"');
+	var obj = JSON.parse(breeds);
+	
+	for (var i = 0; i < obj.length; i++){
+    	var e = obj[i];
+    	
+        if(e["specie"]["id"] != specieVal){
+			for (var j=0; j<selectBreeds.length; j++){
+				if (selectBreeds.options[j].value == e["id"] ){
+					selectBreeds.remove(j);
+				}
+			}
+        }
+    }
+
 	function getBreeds(){
 	    var specieVal = document.getElementById("specie").selectedOptions[0].value;
 	    var selectBreeds = document.getElementById("breed");
 	    
 	    var breeds = '<jstl:out value="${json }" />';
-	    var selectedbreeds= '<jstl:out value="${selectedBreeds }" />';
 	    breeds = breeds.replace(/&#034;/g, '"');
 	    var obj = JSON.parse(breeds);
-	    var objbreeds=JSON.parse(selectedbreeds);
 	    
 	    if(obj.length != selectBreeds.length){
-	    	
 	    	html ='<option value=0 selected="selected" disabled="true">----</option>';
-	    	
 	    	for(var i = 0; i < obj.length; i++) {
 	    		var e = obj[i];
-	            html += "<option value=" + e["id"]  + ">" +e["breed"] + "</option>"
+	            html += "<option value=" + e["id"]  + ">" +e["breed"] + "</option>";
 	        }
 	    	selectBreeds.innerHTML = html;
 	    }
