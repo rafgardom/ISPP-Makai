@@ -249,4 +249,8 @@ public class TravelService {
 		return this.travelRepository.findTravelByVehicleId(vehicle.getId());
 	}
 
+	public Collection<Travel> findTravelWithAnimalsByCustomer(final int customerId) {
+		return this.travelRepository.findTravelWithAnimalsByCustomer(customerId);
+	}
+
 }

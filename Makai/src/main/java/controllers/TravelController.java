@@ -248,11 +248,13 @@ public class TravelController extends AbstractController {
 		final Integer numberNoti;
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 		Collection<Travel> travels_participated;
+		Collection<Travel> travels_animals;
 
 		Calendar today;
 		principal = this.transporterService.findByPrincipal();
 		travels_all = this.travelService.findTravelByTransporterId(principal.getId());
 		travels_participated = principal.getTravelPassengers();
+		travels_animals = this.travelService.findTravelWithAnimalsByCustomer(principal.getId());
 
 		today = Calendar.getInstance();
 
@@ -261,7 +263,11 @@ public class TravelController extends AbstractController {
 				travels.add(aux);
 
 		for (final Travel aux : travels_participated)
-			if (today.getTime().after(aux.getEndMoment()))
+			if (today.getTime().before(aux.getEndMoment()))
+				travels.add(aux);
+
+		for (final Travel aux : travels_animals)
+			if (today.getTime().before(aux.getEndMoment()))
 				travels.add(aux);
 
 		result = new ModelAndView("travel/myList");
@@ -283,12 +289,14 @@ public class TravelController extends AbstractController {
 		final Integer numberNoti;
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 		Collection<Rating> principalRatings;
+		Collection<Travel> travels_animals;
 
 		Calendar today;
 		principal = this.transporterService.findByPrincipal();
 		travels_all = this.travelService.findTravelByTransporterId(principal.getId());
 		travels_participated = principal.getTravelPassengers();
 		principalRatings = this.ratingService.findTravelRatingByCustomer(principal.getId());
+		travels_animals = this.travelService.findTravelWithAnimalsByCustomer(principal.getId());
 
 		today = Calendar.getInstance();
 
@@ -297,6 +305,10 @@ public class TravelController extends AbstractController {
 				travels.add(aux);
 
 		for (final Travel aux : travels_participated)
+			if (today.getTime().after(aux.getEndMoment()))
+				travels.add(aux);
+
+		for (final Travel aux : travels_animals)
 			if (today.getTime().after(aux.getEndMoment()))
 				travels.add(aux);
 

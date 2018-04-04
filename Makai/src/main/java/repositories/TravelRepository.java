@@ -18,4 +18,7 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
 	@Query("select t from Travel t where t.vehicle.id=?1")
 	Collection<Travel> findTravelByVehicleId(int vehicleId);
 
+	@Query("select t from Travel t join t.animals a where a.customer.id=?1")
+	Collection<Travel> findTravelWithAnimalsByCustomer(int customerId);
+
 }

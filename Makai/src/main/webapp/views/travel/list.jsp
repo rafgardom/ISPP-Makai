@@ -26,7 +26,7 @@
 	<display:column>
 	<div class="btn-group">
 		<acme:link href="travel/display.do?travelId=${row.id}" image="eye"/>
-		<jstl:if test="${row.transporterOwner.id != principal.id && row.humanSeats > 0}">
+		<jstl:if test="${row.transporterOwner.id != principal.id && (row.humanSeats > 0 || row.humanSeats > 0)}">
 		<jstl:set var="show" value="${true}"/>
 			<jstl:forEach var="t" items="${principal.travelPassengers}">
 				<jstl:if test="${t.id == row.id}">
