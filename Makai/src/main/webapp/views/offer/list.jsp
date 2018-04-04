@@ -10,7 +10,7 @@
 <div class="table-responsive">
 <display:table name="offers" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
-	<acme:column code="offer.startMoment" property="startMoment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
+	<acme:column code="offer.startMoment" property="startMoment" sortable="true" format="{0,date,dd/MM/yyyy}"/>
 	<acme:column code="offer.coordinates.city" property="destination.city" sortable="true"/>
 	<acme:column code="offer.price" property="price" sortable="true" format="{0,number, ,000.00}&euro;"/>
 	<acme:column code="offer.animal" property="animal.name" />

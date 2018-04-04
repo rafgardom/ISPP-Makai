@@ -61,8 +61,8 @@ public class OfferForm {
 
 	@NotNull
 	@Future
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getStartMoment() {
 		return this.startMoment;
 	}

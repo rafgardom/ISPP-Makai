@@ -45,8 +45,8 @@
 			<acme:textbox code="offer.coordinates.zipCode" path="destination.zip_code" mandatory="true" />
 		</div>
 		<div class="offset-md-1 col-md-5">
-			<acme:input image="calendar" code="offer.startMoment" path="startMoment" mandatory="true" placeholder="dd/MM/yyyy HH:mm"/>
-			<acme:input image="euro" code="offer.price" path="price" min="0" mandatory="true"/>
+			<acme:input id="datepicker" image="calendar" code="offer.startMoment" path="startMoment" mandatory="true" placeholder="dd/MM/yyyy"/>
+			<acme:input image="euro" code="offer.price" path="price" min="0"/>
 			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="9" maxCharacters="2000" />
 		</div>
 		<div class="col-md-11">
@@ -95,12 +95,14 @@
 	
 </form:form>
 
-<!-- Datepicker -->
+ <!-- Datepicker -->
 <script>
-$('#datepicker').datepicker({ 
-	dateFormat: 'dd/mm/yy', 
-	minDate: 0,
-	}).val();
+$( function() {
+    $( "#datepicker" ).datepicker({ 
+    	dateFormat: 'dd/mm/yy', 
+    	minDate: 0,
+    	});
+  } );
 </script>
 
 <!-- Slider Duration -->
@@ -130,4 +132,4 @@ $('#datepicker').datepicker({
 	    output3.innerHTML = this.value+" <spring:message code="offer.duration.year"/>";
 	};
 </script>
- 
+
