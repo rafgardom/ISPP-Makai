@@ -26,6 +26,7 @@
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="items" required="true" type="Object[]" %>
 
+<%@ attribute name="id" required="false" %>
 <%@ attribute name="onchange" required="false" %>
 <%@ attribute name="mandatory" required="false" %>
 
@@ -42,7 +43,7 @@
 					<img src="images/asterisk.png"	width="16"/> 
 		</jstl:if>
 	</form:label>	
-	<form:select class="form-control" path="${path}">
+	<form:select class="form-control" id="${id}" path="${path}">
 		<form:option value="${null }" label="----" selected="selected" disabled="true"/>
 		<form:options items="${items }" />
 	</form:select>
