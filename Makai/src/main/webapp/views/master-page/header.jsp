@@ -16,14 +16,10 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="center-div">
-	<img src="images/logo.png" alt="Makai"
-		style="height: 230px; padding-top: 0.3%; padding-bottom: 0.3%;" />
-</div>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary rounded">
 	<a class="navbar-brand" href="">
-	<img src="images/dog-house.png" height="45px"/>
+	<img src="images/dog-house.png" height="45px" class="img-menu"/>
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarColor01">
@@ -37,7 +33,7 @@
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<img src="images/request.png"/><spring:message code="master.page.requests" /></a>
+						<img src="images/request.png" class="img-menu"/><spring:message code="master.page.requests" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="request/customer/create.do">
 				 		<spring:message code="master.page.request.create" /></a> 
@@ -51,7 +47,7 @@
 
 				<li class="nav-item dropdown"> 
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<img src="images/cage.png"/><spring:message code="master.page.travel" /></a>
+						<img src="images/cage.png" class="img-menu"/><spring:message code="master.page.travel" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="travel/create.do">
 							<spring:message code="master.page.travel.create" /></a>
@@ -72,7 +68,7 @@
 			<security:authorize access="hasAnyRole('CUSTOMER,ANIMALSHELTER')">
 				<li class="nav-item dropdown"> 
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<img src="images/animals.png"/><spring:message	code="master.page.animal" /></a>
+						<img src="images/animals.png" class="img-menu"/><spring:message	code="master.page.animal" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="animal/register.do">
 							<spring:message code="master.page.animal.register" /></a> 
@@ -102,11 +98,11 @@
 
 			<security:authorize access="hasRole('TRAINER')">
 				<li class="nav-item"><a class="nav-link"
-					href="offer/trainer/list.do"><spring:message
-							code="master.page.offer" /> </a></li>
-				<li class="nav-item"><a class="nav-link"
 					href="request/trainer/list.do">
-					<img src="images/request.png"/><spring:message code="master.page.requests" /> </a></li>
+					<img src="images/request.png" class="img-menu"/><spring:message code="master.page.requests" /> </a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="offer/trainer/list.do">
+					<img src="images/deal1.png" class="img-menu"/><spring:message code="master.page.offer" /> </a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown">
 					<spring:message code="master.page.trainer.training" /></a>
@@ -155,7 +151,7 @@
 				<li class="nav-item">
 				<a class="nav-link"
 					href="notification/actor/list.do">
-							<img src="images/bell.png"/>
+							<img src="images/bell.png" class="img-menu"/>
 							<span class="badge badge-default badge-pill bg-secondary pill-menu"><jstl:if test="${numberNoti > 0}" >${numberNoti}</jstl:if></span> </a></li>
 			</security:authorize>
 		</ul>
@@ -166,7 +162,7 @@
 				
 				
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><img src="images/user (1).png"/><spring:message
+					class="nav-link dropdown-toggle" data-toggle="dropdown"><img src="images/user (1).png" class="img-menu"/><spring:message
 							code="master.page.profile" /> <%-- (<security:authentication
 							property="principal.username" />) --%></a>
 					<div class="dropdown-menu" x-placement="bottom-start"

@@ -17,9 +17,17 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<div class="card bg-light">
-	<h3 class="card-title"><spring:message code="welcome.greeting.prefix" /></h3>
-</div>
+	<div class="row my-5">
+	<div class="offset-1 col-3">
+	<img src="images/logo.png" alt="Makai"
+		style="height: 220px;" /><br>
+	
+	</div>
+	<div class="offset-1 col-7">
+		<h3 class="text-center"><spring:message code="welcome.greeting.prefix" /></h3>	
+	</div>
+	</div>
+
 <br>
 <div class="card-deck text-light text-center">
 	<div class="card bg-secondary">

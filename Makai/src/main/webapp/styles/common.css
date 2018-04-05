@@ -8,6 +8,10 @@
  * 
  */
 
+.img-menu{
+	margin-right: 2px;
+}
+
 .ui-datepicker-calendar{
 	width: 100%;
     font-size: .9em;
