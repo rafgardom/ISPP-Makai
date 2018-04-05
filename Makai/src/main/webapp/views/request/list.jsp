@@ -59,25 +59,21 @@
 			<security:authorize access="hasRole('CUSTOMER')">
 				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
 				<jstl:set var="showTrade" value="${false}"/>
-				<jstl:if test="${!requestsWithOffer.isEmpty()}">
-					<jstl:forEach var="r" items="${requestsWithOffer}">
-						<jstl:if test="${r.id == row.id}">
-							<jstl:set var="showTrade" value="${true}"/>
-						</jstl:if>
-					</jstl:forEach>
-				</jstl:if>
+				<jstl:forEach var="r" items="${requestsWithOffer}">
+					<jstl:if test="${r.id == row.id}">
+						<jstl:set var="showTrade" value="${true}"/>
+					</jstl:if>
+				</jstl:forEach>
 				<jstl:if test="${showTrade == true}">
 					<acme:link href="offer/customer/list.do?requestId=${row.id}" code="request.list.offer" type="dark" image="deal"/>
 				</jstl:if>
 				
 				<jstl:set var="showDelete" value="${true}"/>
-				<jstl:if test="${!offersPendingReceipts.isEmpty()}">
-					<jstl:forEach var="offer" items="${offersPendingReceipts}">
-						<jstl:if test="${offer.request.id == row.id}">
-							<jstl:set var="showDelete" value="${false}"/>
-						</jstl:if>
-					</jstl:forEach>
-				</jstl:if>
+				<jstl:forEach var="offer" items="${offersPendingReceipts}">
+					<jstl:if test="${offer.request.id == row.id}">
+						<jstl:set var="showDelete" value="${false}"/>
+					</jstl:if>
+				</jstl:forEach>
 				<jstl:if test="${showDelete == true}">
 					<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
 					<acme:delete href="request/customer/delete.do?requestId=${row.id}" id="${row.id}"/>

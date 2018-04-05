@@ -27,15 +27,10 @@
 <%@ attribute name="items" required="true" type="java.util.Collection" %>
 <%@ attribute name="itemLabel" required="true" %>
 
-<%@ attribute name="id" required="false" %>
 <%@ attribute name="onchange" required="false" %>
 <%@ attribute name="disabled" required="false" %>
 <%@ attribute name="mandatory" required="false" %>
 <%@ attribute name="size" required="false" %>
-
-<jstl:if test="${id == null}">
-	<jstl:set var="id" value="${UUID.randomUUID().toString()}" />
-</jstl:if>
 
 <jstl:if test="${onchange == null}">
 	<jstl:set var="onchange" value="javascript: return true;" />
@@ -56,7 +51,7 @@
 				<img src="images/asterisk.png"	width="16"/> 
 		</jstl:if>
 	</form:label>	
-	<form:select size="${size}" id="${id}" path="${path}" class="form-control" onchange="${onchange}">
+	<form:select size="${size}" path="${path}" class="form-control" onchange="${onchange}">
 		<form:option value="0" label="----" selected="selected" disabled="${disabled}"/>		
 		<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
 	</form:select>
