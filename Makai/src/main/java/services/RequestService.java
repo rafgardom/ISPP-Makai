@@ -97,7 +97,8 @@ public class RequestService {
 		Assert.isTrue(!this.tieneOfferUnRequest(request));
 
 		//SOLO PARA EL CREATE
-		this.notificationService.createNotificationToTrainerWithTraining(request);
+		if (request.getId() == 0)
+			this.notificationService.createNotificationToTrainerWithTraining(request);
 
 		result = this.requestRepository.save(request);
 

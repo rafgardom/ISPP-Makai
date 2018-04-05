@@ -205,8 +205,8 @@ public class NotificationService {
 		trainers = this.trainerService.findTrainerSameCategory(request.getCategory());
 		for (final Trainer t : trainers) {
 			notification = this.create(t);
-			notification.setReason("Nueva solicitud con su misma categor�a: " + request.getCategory());
-			notification.setDescription("Podr�a interesarle crear una oferta a dicha solicitud: " + request.getTags());
+			notification.setReason("Nueva solicitud con su misma categoría: " + request.getCategory());
+			notification.setDescription("Podría interesarle crear una oferta a dicha solicitud: " + request.getTags());
 			notification.setType(NotificationType.REQUEST);
 			this.save(notification);
 		}
