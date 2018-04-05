@@ -17,16 +17,18 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-	<div class="row my-5">
-	<div class="offset-1 col-3">
-	<img src="images/logo.png" alt="Makai"
-		style="height: 220px;" /><br>
-	
+<div class="card" style="background-color: rgba(248, 249, 250, 0.58);">
+	<div class="row align-items-center py-3">
+		<div class="offset-md-1 col-md-3 col-12">
+			<div class="center-div">
+				<img src="images/logo.png" alt="Makai" style="height: 220px;" />
+			</div>
+		</div>
+		<div class="offset-md-1 col-md-7 col-12">
+			<h3 class="text-center"><spring:message code="welcome.greeting.prefix" /></h3>	
+		</div>
 	</div>
-	<div class="offset-1 col-7">
-		<h3 class="text-center"><spring:message code="welcome.greeting.prefix" /></h3>	
-	</div>
-	</div>
+</div>
 
 <br>
 <div class="card-deck text-light text-center">
