@@ -30,8 +30,10 @@
 <form:hidden path="animalSeats"/>
 <form:hidden path="humanSeats"/>
 
-<form:hidden path="startMoment"/>
-<form:hidden path="endMoment"/>
+<form:hidden path="startDate"/>
+<form:hidden path="startTime"/>
+<form:hidden path="endDate"/>
+<form:hidden path="endTime"/>
 <form:hidden path="vehicle"/>
 
 <form:hidden path="origin.country"/>
