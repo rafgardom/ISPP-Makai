@@ -37,7 +37,6 @@
 		<img alt="dog-training" src="images/trainer.png" height="128" width="128">
 		</div>
 		<h4 class="card-title">Entrenadores profesionales</h4>
-		<a href="#!" class="card-link text-warning" ></a>
 		<h5 class="card-footer card-text">Mas de 146 entrenadores, para el adiestramiento de todo tipo de mascotas, según la tarea requerida.</h5>
 	</div>
 	<div class="card bg-primary">

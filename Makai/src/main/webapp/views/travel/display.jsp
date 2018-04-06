@@ -17,84 +17,80 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
-<div>	
-	<fieldset>
-		<legend>
-			<b><spring:message code="travel.origin" />:</b>
-		</legend>
-		<ul>
-			<li>
+<security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">	
+
+<div class="card-deck">
+	<div class="card">
+	 	<br><h3 class="card-title"><spring:message code="travel.origin" /></h3>
+	  	<div class="card-body">
+	  			<p>
 			<b><spring:message code="travel.country" />:</b>
 			<jstl:out value="${travel.origin.country}"  />
-		</li>
-		<li>
-			<b><spring:message code="travel.state" />:</b>
-			<jstl:out value="${travel.origin.state}"  />
-		</li>
-		<li>
-			<b><spring:message code="travel.province" />:</b>
-			<jstl:out value="${travel.origin.province}"  />
-		</li>
-		<li>
-			<b><spring:message code="travel.city" />:</b>
-			<jstl:out value="${travel.origin.city}"  />
-		</li>
-		<li>
-			<b><spring:message code="travel.zipcode" />:</b>
-			<jstl:out value="${travel.origin.zip_code}"  />
-		</li>
-		<li>
-			<b><spring:message code="travel.startMoment" />:</b>
-			<jstl:out value="${travel.startMoment}"  />
-		</li>
-		</ul>
-	</fieldset>
-		<fieldset>
-		<legend>
-			<b><spring:message code="travel.destination" />:</b>
-		</legend>
-		<ul>
-			<li>
+			</p>
+			<p>
+				<b><spring:message code="travel.state" />:</b>
+				<jstl:out value="${travel.origin.state}"  />
+			</p>
+			<p>
+				<b><spring:message code="travel.province" />:</b>
+				<jstl:out value="${travel.origin.province}"  />
+			</p>
+			<p>
+				<b><spring:message code="travel.city" />:</b>
+				<jstl:out value="${travel.origin.city}"  />
+			</p>
+			<p>
+				<b><spring:message code="travel.zipcode" />:</b>
+				<jstl:out value="${travel.origin.zip_code}"  />
+			</p>
+			<p>
+				<b><spring:message code="travel.startMoment" />:</b>
+				<jstl:out value="${travel.startMoment}"  />
+			</p>
+	  	</div>
+	</div>
+	<div class="card">
+	 	<br><h3 class="card-title"><spring:message code="travel.destination" /></h3>
+	  	<div class="card-body">
+	  		<p>
 			<b><spring:message code="travel.country" />:</b>
 			<jstl:out value="${travel.destination.country}"  />
-		</li>
-		<li>
+		</p>
+		<p>
 			<b><spring:message code="travel.state" />:</b>
 			<jstl:out value="${travel.destination.state}"  />
-		</li>
-		<li>
+		</p>
+		<p>
 			<b><spring:message code="travel.province" />:</b>
 			<jstl:out value="${travel.destination.province}"  />
-		</li>
-		<li>
+		</p>
+		<p>
 			<b><spring:message code="travel.city" />:</b>
 			<jstl:out value="${travel.destination.city}"  />
-		</li>
-		<li>
+		</p>
+		<p>
 			<b><spring:message code="travel.zipcode" />:</b>
 			<jstl:out value="${travel.destination.zip_code}"  />
-		</li>
-		<li>
+		</p>
+		<p>
 			<b><spring:message code="travel.endMoment" />:</b>
 			<jstl:out value="${travel.endMoment}"  />
-		</li>
-		</ul>
-	</fieldset>
-	<fieldset>
-		<legend>
-			<b><spring:message code="travel.seats" />:</b>
-		</legend>
-		<ul>
-			<li>
-			<b><spring:message code="travel.animalSeats" />:</b>
-			<jstl:out value="${travel.animalSeats}"  />
-		</li>
-		<li>
-			<b><spring:message code="travel.humanSeats" />:</b>
-			<jstl:out value="${travel.humanSeats}"  />
-		</li>
-		</ul>
-	</fieldset>
+		</p>
+	  	</div>
+	 </div>
+
 </div>
+	 <div class="card my-3">
+	 	<br><h3 class="card-title"><spring:message code="travel.seats" /></h3>
+	  	<div class="card-body">
+		  	<p>
+				<b><spring:message code="travel.animalSeats" />:</b>
+				<jstl:out value="${travel.animalSeats}"  />
+			</p>
+			<p>
+				<b><spring:message code="travel.humanSeats" />:</b>
+				<jstl:out value="${travel.humanSeats}"  />
+			</p>
+	  	</div>
+	 </div>
 </security:authorize>

@@ -19,22 +19,23 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<div>
+<div class="card-deck my-1">
+	<div class="card">
+	  	<div class="card-body"> 	
+		<p><b><spring:message code="notification.moment" />:</b> <jstl:out
+				value="${notification.moment}" /></p>
 
-	<ul>
-		<li><b><spring:message code="notification.moment" />:</b> <jstl:out
-				value="${notification.moment}" /></li>
-
-		<li><b><spring:message code="notification.reason" />:</b> <jstl:out
-				value="${notification.reason}" /></li>
-
-		<li><b><spring:message code="notification.description" />:</b> <jstl:out
-				value="${notification.description}" /></li>
-
-
-	</ul>
-	
+		<p><b><spring:message code="notification.reason" />:</b> <jstl:out
+				value="${notification.reason}" /></p>
+		</div>
+	</div>
+		<div class="card">
+	  	<div class="card-body"> 	
+		<p><b><spring:message code="notification.description" />:</b> <jstl:out
+				value="${notification.description}" /></p>
+		</div>
+	</div>
+</div>	
 	<acme:link href="notification/actor/list.do" code="notification.goBack"/>
 
-</div>
 

@@ -17,45 +17,44 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<div>
-	<ul>
-		<li>
-			<b><spring:message code="request.description" />:</b>
-			<jstl:out value="${request.description}"  />
-		</li>
-		<li>
+<div class="card-deck">
+	<div class="card">
+ 		<div class="card-body">
+		<p>
 			<b><spring:message code="request.tags" />:</b>
 			<jstl:out value="${request.tags}"  />
-		</li>
-		<li>
+		</p>
+		<p>
 			<b><spring:message code="request.category" />:</b>
 			<jstl:out value="${request.category}"  />
-		</li>
-	</ul>
+		</p>
+		<p>
+			<b><spring:message code="request.description" />:</b>
+			<jstl:out value="${request.description}"  />
+		</p>
+	</div>
+	</div>
 	<jstl:if test="${request.animal != null }">
-		<fieldset>
-			<legend>
-				<b><spring:message code="request.animal" />:</b>
-			</legend>
-			<ul>
-				<li>
-					<b><spring:message code="request.animal.name" />:</b>
-					<a href="animal/display.do?animalId=${request.animal.id}"><jstl:out value="${request.animal.name}"/></a>
-				</li>
-			</ul>
-		</fieldset>
+	<div class="card">
+ 		<br><h3 class="card-title"><spring:message code="request.animal" /></h3>
+  		<div class="card-body">
+			<p>
+				<b><spring:message code="request.animal.name" />:</b>
+				<a href="animal/display.do?animalId=${request.animal.id}"><jstl:out value="${request.animal.name}"/></a>
+			</p>
+		
+		</div>
+	</div>
 	</jstl:if>
-	
-	<fieldset>
-		<legend>
-			<b><spring:message code="request.customer" />:</b>
-		</legend>
-		<ul>
-			<li>
+	<div class="card">
+ 		<br><h3 class="card-title"><spring:message code="request.customer" /></h3>
+  		<div class="card-body">
+			<p>
 				<b><spring:message code="request.animal.name" />:</b>
 				<a href="profile/displayProfile.do?actorId=${request.customer.id}"><jstl:out value="${request.customer.name}"/></a>
-			</li>	
-		</ul>
-	</fieldset>
-	
+			</p>
+		
+		</div>
+	</div>
+
 </div>

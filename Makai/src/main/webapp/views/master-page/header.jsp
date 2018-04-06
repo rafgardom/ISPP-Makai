@@ -15,6 +15,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary rounded">
@@ -103,7 +104,7 @@
 				<li class="nav-item"><a class="nav-link"
 					href="offer/trainer/list.do">
 					<img src="images/deal1.png" class="img-menu"/><spring:message code="master.page.offer" /> </a></li>
-				<li class="nav-item dropdown"><a
+				<%-- <li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown">
 					<spring:message code="master.page.trainer.training" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start"
@@ -112,7 +113,7 @@
 								code="master.page.training.list" /></a>
 						<a class="dropdown-item" href="training/trainer/create.do"><spring:message
 								code="master.page.training.create" /></a>
-					</div></li>
+					</div></li> --%>
 			</security:authorize>
 
 			<security:authorize access="hasRole('ADMIN')">
@@ -137,9 +138,9 @@
 					<div class="dropdown-menu" x-placement="bottom-start"
 						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="customer/register.do"><spring:message
-								code="master.page.customer.register" /></a> <a
+								code="master.page.customer.register" /></a> <%-- <a
 							class="dropdown-item" href="professional/register.do"><spring:message
-								code="master.page.professional.register" /></a> <a
+								code="master.page.professional.register" /></a> --%> <a
 							class="dropdown-item" href="trainer/register.do"><spring:message
 								code="master.page.trainer.register" /></a> <a class="dropdown-item"
 							href="animalShelter/register.do"><spring:message
@@ -162,13 +163,13 @@
 				
 				
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><img src="images/user (1).png" class="img-menu"/><spring:message
-							code="master.page.profile" /> <%-- (<security:authentication
-							property="principal.username" />) --%></a>
+					class="nav-link dropdown-toggle" data-toggle="dropdown"><img src="images/user (1).png" class="img-menu"/>  <security:authentication
+							property="principal.username" var="username" /> ${fn:toUpperCase(username)} </a>
 					<div class="dropdown-menu" x-placement="bottom-start"
 						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-						<a class="dropdown-item" href="profile/display.do"><spring:message
-								code="master.page.profile.display" /></a>
+						<a class="dropdown-item" href="profile/display.do"><%-- <spring:message
+								code="master.page.profile.display" /> --%><spring:message
+							code="master.page.profile" /></a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /></a>
