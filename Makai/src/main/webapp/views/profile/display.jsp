@@ -13,7 +13,7 @@
 <security:authentication var="principalUserAccount" property="principal" />
 <jstl:if test="${pictureImage != null}">
 <div class="center-div">
-	<img src="${pictureImage}" alt="<spring:message code='profile.no.picture' />" width="200px" height="200px"><br>
+	<img src="${pictureImage}" class="rounded-circle" alt="<spring:message code='profile.no.picture' />" width="200px" height="200px"><br>
 </div>
 </jstl:if>
 <br>

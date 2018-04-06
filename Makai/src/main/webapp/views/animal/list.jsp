@@ -11,7 +11,7 @@
 <display:table name="animals" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<display:column>
-		<img src="${row.stringImage}" alt="<spring:message code='profile.no.picture' />" width="125px" height="125px">
+		<img src="${row.stringImage}" class="rounded-circle" alt="<spring:message code='profile.no.picture' />" width="125px" height="125px">
 	</display:column>
 	
 	<acme:column code="animal.name" property="name" />

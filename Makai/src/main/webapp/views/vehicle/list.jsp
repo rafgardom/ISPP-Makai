@@ -21,7 +21,7 @@
 	
 
 	<display:column>
-		<img src="${row.stringImage}" alt="<spring:message code='vehicle.no.picture' />" width="100px" height="100px">
+		<img src="${row.stringImage}" class="rounded-circle" alt="<spring:message code='vehicle.no.picture' />" width="100px" height="100px">
 	</display:column>
 	
 	
