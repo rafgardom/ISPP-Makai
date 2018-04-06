@@ -20,6 +20,7 @@ import services.AnimalService;
 import services.BreedService;
 import services.NotificationService;
 import services.SpecieService;
+import utilities.Utilities;
 
 import com.google.gson.Gson;
 
@@ -93,6 +94,7 @@ public class AnimalController extends AbstractController {
 		Animal animal;
 		Breed[] breeds;
 		String specie;
+		String image;
 		//		AnimalForm animalForm;
 		final Integer numberNoti;
 		try {
@@ -101,10 +103,12 @@ public class AnimalController extends AbstractController {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 			breeds = animal.getBreeds().toArray(new Breed[animal.getBreeds().size()]);
 			specie = breeds[0].getSpecie().getType();
+			image = Utilities.showImage(animal.getPicture());
 			result = new ModelAndView("animal/display");
 			//			result.addObject("animal", animalForm);
 			result.addObject("animal", animal);
 			result.addObject("specie", specie);
+			result.addObject("animalImage", image);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "animal/display.do");
 		} catch (final Throwable e) {

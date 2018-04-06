@@ -9,7 +9,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <div class="center-div">
- <img src="${animal.picture}" class="rounded-circle" alt="<spring:message code='animal.no.picture' />" width="200px" height="200px">
+ <img src="${animalImage}" class="rounded-circle" alt="<spring:message code='animal.no.picture' />" width="200px" height="200px">
 </div>
 <br>
 <div class="card-deck">
