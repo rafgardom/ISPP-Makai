@@ -86,6 +86,63 @@ public class AnimalController extends AbstractController {
 
 		return result;
 	}
+	// ListingAdopted -------------------------------------------------------		
+	@RequestMapping(value = "/listAdopted", method = RequestMethod.GET)
+	public ModelAndView listAdopted() {
+		ModelAndView result;
+		Collection<AnimalForm> animals;
+		Actor actor;
+		final Integer numberNoti;
+
+		actor = this.actorService.findByPrincipal();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
+
+		animals = new HashSet<AnimalForm>();
+
+		for (final Animal a : this.animalService.findByActorIdAndAdopted(actor.getId())) {
+			AnimalForm animalForm;
+
+			animalForm = this.animalService.animalToFormObject(a);
+
+			animals.add(animalForm);
+		}
+
+		result = new ModelAndView("animal/list");
+		result.addObject("requestURI", "animal/list.do");
+		result.addObject("numberNoti", numberNoti);
+		result.addObject("animals", animals);
+
+		return result;
+	}
+
+	// ListingByCustomer -------------------------------------------------------		
+	@RequestMapping(value = "/listNotAdopted", method = RequestMethod.GET)
+	public ModelAndView listNotAdopted() {
+		ModelAndView result;
+		Collection<AnimalForm> animals;
+		Actor actor;
+		final Integer numberNoti;
+
+		actor = this.actorService.findByPrincipal();
+		numberNoti = this.notificationService.findNotificationWithoutRead();
+
+		animals = new HashSet<AnimalForm>();
+
+		for (final Animal a : this.animalService.findByActorIdAndNotAdopted(actor.getId())) {
+			AnimalForm animalForm;
+
+			animalForm = this.animalService.animalToFormObject(a);
+
+			animals.add(animalForm);
+		}
+
+		result = new ModelAndView("animal/list");
+		result.addObject("requestURI", "animal/list.do");
+		result.addObject("numberNoti", numberNoti);
+		result.addObject("animals", animals);
+
+		return result;
+	}
 
 	// ListingByCustomer -------------------------------------------------------		
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
