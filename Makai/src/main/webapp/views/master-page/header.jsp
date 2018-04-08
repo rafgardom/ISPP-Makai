@@ -75,6 +75,12 @@
 							<spring:message code="master.page.animal.register" /></a> 
 						<a class="dropdown-item" href="animal/list.do">
 							<spring:message code="master.page.animal.list" /></a>
+						<security:authorize access="hasRole('ANIMALSHELTER')">
+						<a class="dropdown-item" href="animal/listAdopted.do">
+							<spring:message code="master.page.animal.listAdopted" /></a>
+						<a class="dropdown-item" href="animal/listNotAdopted.do">
+							<spring:message code="master.page.animal.listNotAdopted" /></a>
+						</security:authorize>
 					</div>
 				</li>
 			</security:authorize>
