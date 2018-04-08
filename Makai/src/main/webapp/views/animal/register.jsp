@@ -17,7 +17,7 @@
 <div class="row" >
 	<div class="col-md-5">
 			<acme:textbox code="animal.name" path="name" mandatory="true"/>
-			<acme:input code="animal.chipNumber" path="chipNumber" mandatory="false" image="chip" />
+			<acme:input code="animal.chipNumber" path="chipNumber" mandatory="true" image="chip" />
 			<acme:input code="animal.age" path="age" type="number" min="0" mandatory="true" />
 			<acme:selectNotEntity items="${sexs}" code="animal.sex" path="sex" mandatory="true"/>
 	</div>
