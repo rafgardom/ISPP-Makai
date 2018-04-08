@@ -51,38 +51,41 @@
 <jstl:if test="${errorMessage != null}">
 			<acme:error code="${errorMessage}"/>
 </jstl:if>
-
-<h3><spring:message code="travel.seats" /></h3>
-	<fieldset>
-		<ul>
-			<li>
-			<b><spring:message code="travel.animalSeats" />:</b>
-			<jstl:out value="${travelForm.animalSeats}"  />
-		</li>
-		<li>
-			<b><spring:message code="travel.humanSeats" />:</b>
-			<jstl:out value="${travelForm.humanSeats}"  />
-		</li>
-		</ul>
-	</fieldset>
-
-<h3><spring:message code="travel.join" /></h3>
-<fieldset>	
-			<form:label path="animals">
-				<b><spring:message code="travel.animals"/></b>
-			</form:label>
-			<br>
+<div class="card-deck">
+	<div class="card">
+		 	<br><h3 class="card-title"><spring:message code="travel.seats" /></h3>
+		  	<div class="card-body">
+		  		<p><b><spring:message code="travel.animalSeats" />:</b>
+				<jstl:out value="${travelForm.animalSeats}"  /></p>
+				<p><b><spring:message code="travel.humanSeats" />:</b>
+				<jstl:out value="${travelForm.humanSeats}"  /></p>
+		  	</div>
+	</div>
+	
+	
+	<div class="card">
+		 	<br><h3 class="card-title"><spring:message code="travel.join" /></h3>
+		  	<div class="card-body">
+		  		<form:label path="principalPassenger">
+					<b><spring:message code="travel.customer"/></b>
+				</form:label>	
+				<br>
+				<form:checkbox path ="principalPassenger" value="${principal}"/><jstl:out value="${principal.name}"/>
+				<br>
+		  		<form:label path="animals">
+					<b><spring:message code="travel.animals"/></b>
+				</form:label>
+				<br>
 				<jstl:forEach var="animal" items="${animals}">
 					<form:checkbox path ="animals" value="${animal}"/><jstl:out value="${animal.name}"/>
 				</jstl:forEach>
-			<br>
-			<form:label path="principalPassenger">
-				<b><spring:message code="travel.customer"/></b>
-			</form:label>	
-			<br>
-				<form:checkbox path ="principalPassenger" value="${principal}"/><jstl:out value="${principal.name}"/>
-		
-</fieldset>
+				<br>
+
+		  	</div>
+	</div>
+
+</div>
+
 		<br>
 		<acme:submit code="travel.save" name="save" />
 		<acme:cancel code="travel.cancel" url="travel/list.do" />

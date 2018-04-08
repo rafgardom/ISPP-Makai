@@ -97,7 +97,7 @@
 			
 			<p>
 				<b><spring:message code="offer.animal.picture" />:</b>
-				<img src="${animalImage}" alt="<spring:message code='offer.no.picture' />" width="200px" height="200px" >
+				<img src="${animalImage}" class="rounded-circle" alt="<spring:message code='offer.no.picture' />" width="200px" height="200px" >
 			</p>
 	  	
 	  	</div>
