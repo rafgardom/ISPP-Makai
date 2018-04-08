@@ -70,4 +70,7 @@ public class TransporterService {
 
 		return result;
 	}
+	public Collection<Transporter> findPassengersByTravel(final int travelId) {
+		return this.transporterRepository.findPassengersByTravel(travelId);
+	}
 }

@@ -20,6 +20,7 @@ import domain.Animal;
 import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
+import domain.Professional;
 import domain.Transporter;
 import domain.Travel;
 import domain.Vehicle;
@@ -127,6 +128,11 @@ public class TravelService {
 	public void delete(final Travel travel) {
 		Actor principal;
 		Calendar today;
+		Collection<Travel> travels_participated;
+		Collection<Travel> travels_aux;
+		Collection<Transporter> transporters;
+		Customer customer;
+		final Professional professional;
 
 		Assert.notNull(travel);
 		Assert.isTrue(travel.getId() != 0);
@@ -134,15 +140,28 @@ public class TravelService {
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
 		Assert.isTrue(this.actorService.checkAuthority(principal, "ADMIN") || this.actorService.checkAuthority(principal, "CUSTOMER") || this.actorService.checkAuthority(principal, "PROFESSIONAL"));
-		if (this.actorService.checkAuthority(principal, "CUSTOMER") || this.actorService.checkAuthority(principal, "PROFESSIONAL"))
-			Assert.isTrue(travel.getTransporterOwner().getId() == principal.getId());
+		Assert.isTrue(travel.getTransporterOwner().getId() == principal.getId());
+
+		transporters = this.transporterService.findPassengersByTravel(travel.getId());
+
+		if (transporters.size() != 0)
+			for (final Transporter t : transporters) {
+				travels_participated = t.getTravelPassengers();
+				travels_aux = t.getTravelPassengers();
+				for (final Travel trav : travels_participated)
+					if (trav.getId() == travel.getId()) {
+						travels_aux.remove(trav);
+						customer = this.customerService.findOne(t.getId());
+						customer.setTravelPassengers(travels_aux);
+						this.customerService.save(customer);
+					}
+			}
 
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
 
 		this.travelRepository.delete(travel);
 	}
-
 	// Other business methods —---------------------------------------------—
 
 	public void registerTravel(final TravelForm travelForm) {
@@ -213,11 +232,10 @@ public class TravelService {
 
 		result.setDestination(travelForm.getDestination());
 		result.setOrigin(travelForm.getOrigin());
-		result.setStartMoment(sumDates(travelForm.getStartDate(), travelForm.getStartTime()));
-		result.setEndMoment(sumDates(travelForm.getEndDate(), travelForm.getEndTime()));
+		result.setStartMoment(this.sumDates(travelForm.getStartDate(), travelForm.getStartTime()));
+		result.setEndMoment(this.sumDates(travelForm.getEndDate(), travelForm.getEndTime()));
 		result.setAnimalSeats(travelForm.getAnimalSeats());
 		result.setVehicle(travelForm.getVehicle());
-		//result.setAnimals(travelForm.getAnimals());
 		result.setHumanSeats(travelForm.getHumanSeats());
 
 		this.validator.validate(result, binding);
@@ -238,25 +256,24 @@ public class TravelService {
 		result.setAnimalSeats(travel.getAnimalSeats());
 		result.setHumanSeats(travel.getHumanSeats());
 		result.setVehicle(travel.getVehicle());
-		//result.setAnimals(travel.getAnimals());
 		result.setId(travel.getId());
 
 		return result;
 	}
-	
-	public Date sumDates(Date date,Date time){
-		Date res = null;
-		Calendar caltime = Calendar.getInstance(); 
-		Calendar caldate = Calendar.getInstance();
-		caltime.setTime(time); 
-        caldate.setTime(date); 
-		int hour = caltime.get(Calendar.HOUR_OF_DAY);
-		int minutes = caltime.get(Calendar.MINUTE);
 
-        caldate.set(Calendar.HOUR_OF_DAY, hour);
-        caldate.set(Calendar.MINUTE, minutes);
-        res = caldate.getTime();
-        return res;
+	public Date sumDates(final Date date, final Date time) {
+		Date res = null;
+		final Calendar caltime = Calendar.getInstance();
+		final Calendar caldate = Calendar.getInstance();
+		caltime.setTime(time);
+		caldate.setTime(date);
+		final int hour = caltime.get(Calendar.HOUR_OF_DAY);
+		final int minutes = caltime.get(Calendar.MINUTE);
+
+		caldate.set(Calendar.HOUR_OF_DAY, hour);
+		caldate.set(Calendar.MINUTE, minutes);
+		res = caldate.getTime();
+		return res;
 	}
 
 	public Collection<Travel> findTravelByTransporterId(final int transporterId) {

@@ -26,9 +26,14 @@
 	<display:column>
 		<div class="btn-group">
 			<acme:link href="travel/display.do?travelId=${row.id}" image="eye"/>
-			<jstl:if test="${requestURI == 'travel/myList.do' && row.transporterOwner.id == principal.id}">
-				<acme:link href="travel/edit.do?travelId=${row.id}" type="warning" image="edit"/>
-				<acme:delete href="travel/delete.do?travelId=${row.id}" id="${row.id}"/>
+			<jstl:if test="${requestURI == 'travel/myList.do'}">
+				<jstl:if test="${row.transporterOwner.id == principal.id}">
+					<acme:link href="travel/edit.do?travelId=${row.id}" type="warning" image="edit"/>
+					<acme:delete href="travel/delete.do?travelId=${row.id}" id="${row.id}"/>
+				</jstl:if>
+				<jstl:if test="${row.transporterOwner.id != principal.id}">
+					<acme:link href="travel/register.do?travelId=${row.id}" type="warning" image="edit"/>
+				</jstl:if>
 			</jstl:if>
 			<jstl:if test="${requestURI == 'travel/myPastList.do' && row.transporterOwner.id != principal.id}">
 				<jstl:set var="show" value="${true}"/>

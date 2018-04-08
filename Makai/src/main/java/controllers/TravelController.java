@@ -142,10 +142,10 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Travel travel;
 		TravelForm travelForm;
+
 		try {
 			travel = this.travelService.findOne(travelId);
 			travelForm = this.travelService.toFormObject(travel);
-
 			result = this.createModelAndView(travelForm);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
@@ -158,6 +158,7 @@ public class TravelController extends AbstractController {
 
 		ModelAndView result;
 		Travel travel;
+		Collection<Transporter> transporters;
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -168,6 +169,9 @@ public class TravelController extends AbstractController {
 
 				travel = this.travelService.reconstruct(travelForm, binding);
 				travel = this.travelService.save(travel);
+				transporters = this.transporterService.findPassengersByTravel(travel.getId());
+				if (transporters.size() != 0)
+					result = this.createModelAndView(travelForm, "travel.edit.error");
 				result = new ModelAndView("master.page");
 
 			} catch (final Throwable oops) {
