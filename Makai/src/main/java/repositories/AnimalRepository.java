@@ -27,4 +27,7 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 	@Query("select a from Animal a where a.isHidden=false and a.customer=null")
 	Collection<Animal> findAnimalWithoutDeletedAndCustomer();
 
+	@Query("select a from Animal a where a.chipNumber=?1")
+	Animal findAnimalByChipNumber(String chipNumber);
+
 }

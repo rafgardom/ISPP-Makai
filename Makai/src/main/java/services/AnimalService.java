@@ -216,6 +216,16 @@ public class AnimalService {
 			binding.addError(fieldError);
 		}
 
+		final Animal animalByChip = this.findAnimalByChipNumber(animalForm.getChipNumber());
+		if (animalByChip != null) {
+			FieldError fieldError;
+			final String[] codes = {
+				"animal.chipNumber.extension.error"
+			};
+			fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
 		if (animalForm.getId() == 0)
 			result = this.create();
 		else
@@ -353,6 +363,10 @@ public class AnimalService {
 		animal.setCustomer(offer.getRequest().getCustomer());
 		this.animalRepository.save(animal);
 
+	}
+
+	public Animal findAnimalByChipNumber(final String chipNumber) {
+		return this.animalRepository.findAnimalByChipNumber(chipNumber);
 	}
 
 }
