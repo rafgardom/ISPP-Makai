@@ -30,4 +30,10 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 	@Query("select a from Animal a where a.chipNumber=?1")
 	Animal findAnimalByChipNumber(String chipNumber);
 
+	@Query("select a from Animal a where a.customer!=null and a.animalShelter.id = ?1")
+	Collection<Animal> findByActorIdAndAdopted(int actorId);
+
+	@Query("select a from Animal a where a.customer=null and a.animalShelter.id = ?1")
+	Collection<Animal> findByActorIdAndNotAdopted(int actorId);
+
 }

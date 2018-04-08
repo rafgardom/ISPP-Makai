@@ -162,7 +162,7 @@ public class AnimalService {
 
 		for (final Offer o : ofertasRelacionadas) {
 			notification = this.notificationService.create(o.getTrainer());
-			notification.setReason("Lo sentimos, pero " + animal.getName() + " ya no está disponible");
+			notification.setReason("Lo sentimos, pero " + animal.getName() + " ya no estÃ¡ disponible");
 			notification.setDescription("El animal que intentaba solicitar ya no se encuentra disponible");
 			notification.setType(NotificationType.GENERAL);
 			this.notificationService.save(notification);
@@ -367,6 +367,22 @@ public class AnimalService {
 
 	public Animal findAnimalByChipNumber(final String chipNumber) {
 		return this.animalRepository.findAnimalByChipNumber(chipNumber);
+	}
+
+	public Collection<Animal> findByActorIdAndAdopted(final int actorId) {
+		Collection<Animal> animals;
+
+		animals = this.animalRepository.findByActorIdAndAdopted(actorId);
+
+		return animals;
+	}
+
+	public Collection<Animal> findByActorIdAndNotAdopted(final int actorId) {
+		Collection<Animal> animals;
+
+		animals = this.animalRepository.findByActorIdAndNotAdopted(actorId);
+
+		return animals;
 	}
 
 }
