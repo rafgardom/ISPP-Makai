@@ -133,6 +133,9 @@ public class OfferService {
 		if (offer.getId() == 0)
 			this.notificationService.createNotificationForRequestWithOffer(offer.getRequest());
 
+		/* Comprobar que el animal no ha sido adoptado por otro customer */
+		Assert.isTrue(this.elAnimalNoHaSidoAdoptado(offer.getAnimal()));
+
 		result = this.offerRepository.save(offer);
 
 		return result;
@@ -301,4 +304,13 @@ public class OfferService {
 	public Collection<Offer> offersAccepted() {
 		return this.offerRepository.offersAccepted();
 	}
+
+	public Boolean elAnimalNoHaSidoAdoptado(final Animal animal) {
+		Boolean result = true;
+		if (animal.getFinishTraining() != null)
+			if (animal.getFinishTraining().after(Calendar.getInstance().getTime()))
+				result = false;
+		return result;
+	}
+
 }
