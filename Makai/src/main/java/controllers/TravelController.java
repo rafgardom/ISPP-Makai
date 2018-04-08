@@ -267,7 +267,7 @@ public class TravelController extends AbstractController {
 				travels.add(aux);
 
 		for (final Travel aux : travels_animals)
-			if (today.getTime().before(aux.getStartMoment()))
+			if (today.getTime().before(aux.getStartMoment()) && !travels.contains(aux))
 				travels.add(aux);
 
 		result = new ModelAndView("travel/myList");

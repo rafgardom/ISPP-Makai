@@ -127,7 +127,7 @@ public class TravelService {
 		Actor principal;
 		Calendar today;
 		Collection<Travel> travels_participated;
-		Collection<Travel> travels_aux;
+		final Collection<Travel> travels_aux;
 		Collection<Transporter> transporters;
 		Customer customer;
 
@@ -144,14 +144,13 @@ public class TravelService {
 		if (transporters.size() != 0)
 			for (final Transporter t : transporters) {
 				travels_participated = t.getTravelPassengers();
-				travels_aux = t.getTravelPassengers();
-				for (final Travel trav : travels_participated)
-					if (trav.getId() == travel.getId()) {
-						travels_aux.remove(trav);
-						customer = this.customerService.findOne(t.getId());
-						customer.setTravelPassengers(travels_aux);
-						this.customerService.save(customer);
-					}
+				if (travels_participated.contains(travel)) {
+					travels_participated.remove(travel);
+					customer = this.customerService.findOne(t.getId());
+					customer.setTravelPassengers(travels_participated);
+					this.customerService.save(customer);
+				}
+
 			}
 
 		today = Calendar.getInstance();
@@ -172,7 +171,8 @@ public class TravelService {
 		Travel travel;
 
 		travel = this.findOne(travelForm.getId());
-		Assert.isTrue(travel.getAnimalSeats() > 0 || travel.getHumanSeats() > 0);
+		//Assert.isTrue(travel.getAnimalSeats() > 0 || travel.getHumanSeats() > 0);
+		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
 
 		customer = this.customerService.findByPrincipal();
 
