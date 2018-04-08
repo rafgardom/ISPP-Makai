@@ -31,6 +31,14 @@
 				
 			<p><b><spring:message code="animal.specie" />:</b> <jstl:out
 				value="${specie}" /></p>
+				
+			
+			<jstl:forEach var="r" items="${animal.breeds}">
+				<jstl:if test="${r != null}">
+					<p><b><spring:message code="animal.breed" />:</b> <jstl:out
+				value="${r.breed}" /></p>
+				</jstl:if>
+			</jstl:forEach>
 	  	
 	  	</div>
 	</div>
