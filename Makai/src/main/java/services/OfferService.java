@@ -18,6 +18,8 @@ import repositories.OfferRepository;
 import domain.Actor;
 import domain.Animal;
 import domain.Customer;
+import domain.Notification;
+import domain.NotificationType;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
@@ -223,6 +225,9 @@ public class OfferService {
 
 		this.eraseNonAcceptedOffers(offer.getRequest());
 
+		/* Eliminamos las ofertas no aceptadas que tengan el animal */
+		this.eliminatedOffersWithThisAnimal(offer);
+
 		/* Modificamos la fecha de finalizacion del entrenamiento en la entidad Animal */
 		this.animalService.editFinishTraining(offer);
 	}
@@ -311,6 +316,20 @@ public class OfferService {
 			if (animal.getFinishTraining().after(Calendar.getInstance().getTime()))
 				result = false;
 		return result;
+	}
+
+	public void eliminatedOffersWithThisAnimal(final Offer offer) {
+		final Collection<Offer> ofertasRelacionadas = this.findNotAcceptedOffersByAnimalId(offer.getAnimal().getId());
+		Notification notification;
+
+		for (final Offer o : ofertasRelacionadas) {
+			notification = this.notificationService.create(o.getTrainer());
+			notification.setReason("Lo sentimos, pero " + offer.getAnimal().getName() + " ya no está disponible");
+			notification.setDescription("El animal que intentaba solicitar ya no se encuentra disponible");
+			notification.setType(NotificationType.GENERAL);
+			this.notificationService.save(notification);
+			this.delete(o);
+		}
 	}
 
 }

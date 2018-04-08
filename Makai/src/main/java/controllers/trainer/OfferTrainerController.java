@@ -170,7 +170,7 @@ public class OfferTrainerController extends AbstractController {
 						result = this.createEditModelAndView(offerForm, "offer.commit.error.is.accepted");
 				if (this.requestService.tieneOfferAceptadaUnRequest(offerForm.getRequest()))
 					result = this.createEditModelAndView(offerForm, "offer.commit.error.request.accept");
-				if (this.offerService.elAnimalNoHaSidoAdoptado(offerForm.getAnimal()))
+				if (!this.offerService.elAnimalNoHaSidoAdoptado(offerForm.getAnimal()))
 					result = this.createEditModelAndView(offerForm, "offer.commit.error.animal.adoptado");
 				else
 					result = this.createEditModelAndView(offerForm, "offer.commit.error");
