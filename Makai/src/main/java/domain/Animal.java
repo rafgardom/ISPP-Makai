@@ -66,6 +66,8 @@ public class Animal extends DomainEntity {
 		this.name = name;
 	}
 
+	@NotBlank
+	@Column(unique = true)
 	public String getChipNumber() {
 		return this.chipNumber;
 	}
