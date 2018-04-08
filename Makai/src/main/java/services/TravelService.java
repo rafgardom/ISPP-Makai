@@ -20,7 +20,6 @@ import domain.Animal;
 import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
-import domain.Professional;
 import domain.Transporter;
 import domain.Travel;
 import domain.Vehicle;
@@ -116,7 +115,6 @@ public class TravelService {
 
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
-		Assert.isTrue(travel.getStartMoment().before(travel.getEndMoment()));
 
 		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
 
@@ -132,7 +130,6 @@ public class TravelService {
 		Collection<Travel> travels_aux;
 		Collection<Transporter> transporters;
 		Customer customer;
-		final Professional professional;
 
 		Assert.notNull(travel);
 		Assert.isTrue(travel.getId() != 0);
@@ -233,7 +230,7 @@ public class TravelService {
 		result.setDestination(travelForm.getDestination());
 		result.setOrigin(travelForm.getOrigin());
 		result.setStartMoment(this.sumDates(travelForm.getStartDate(), travelForm.getStartTime()));
-		result.setEndMoment(this.sumDates(travelForm.getEndDate(), travelForm.getEndTime()));
+		result.setDuration(travelForm.getDuration());
 		result.setAnimalSeats(travelForm.getAnimalSeats());
 		result.setVehicle(travelForm.getVehicle());
 		result.setHumanSeats(travelForm.getHumanSeats());
@@ -251,8 +248,7 @@ public class TravelService {
 		result.setOrigin(travel.getOrigin());
 		result.setStartDate(travel.getStartMoment());
 		result.setStartTime(travel.getStartMoment());
-		result.setEndDate(travel.getEndMoment());
-		result.setEndTime(travel.getEndMoment());
+		result.setDuration(travel.getDuration());
 		result.setAnimalSeats(travel.getAnimalSeats());
 		result.setHumanSeats(travel.getHumanSeats());
 		result.setVehicle(travel.getVehicle());

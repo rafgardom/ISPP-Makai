@@ -81,7 +81,6 @@ public class RatingService {
 		Assert.isNull(this.findRatingByCustomerFromTravel(travel.getId(), principal.getId()));
 
 		today = Calendar.getInstance();
-		Assert.isTrue(today.getTime().after(travel.getEndMoment()));
 
 		result = new Rating();
 		result.setCustomer(principal);

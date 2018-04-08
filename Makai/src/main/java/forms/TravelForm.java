@@ -26,8 +26,7 @@ public class TravelForm {
 	private Coordinates			origin;
 	private Date				startDate;
 	private Date				startTime;
-	private Date				endDate;
-	private Date				endTime;
+	private int					duration;
 	private Integer				animalSeats;
 	private Integer				humanSeats;
 	private Vehicle				vehicle;
@@ -81,34 +80,11 @@ public class TravelForm {
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm")
 	public Date getStartTime() {
-		return startTime;
+		return this.startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(final Date startTime) {
 		this.startTime = startTime;
-	}
-
-	@NotNull
-	@Future
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
-	@NotNull
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "HH:mm")
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
 	}
 
 	@Min(0)
@@ -147,6 +123,14 @@ public class TravelForm {
 	}
 	public void setAnimals(final Collection<Animal> animals) {
 		this.animals = animals;
+	}
+
+	@NotNull
+	public int getDuration() {
+		return this.duration;
+	}
+	public void setDuration(final int duration) {
+		this.duration = duration;
 	}
 
 }

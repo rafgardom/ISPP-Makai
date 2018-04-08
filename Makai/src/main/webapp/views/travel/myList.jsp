@@ -14,7 +14,7 @@
 	<acme:column code="travel.origin" property="origin.city" sortable="true"/>
 	<acme:column code="travel.destination" property="destination.city" sortable="true"/>
 	<acme:column code="travel.startMoment" property="startMoment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
-	<acme:column code="travel.endMoment" property="endMoment" format="{0,date,dd/MM/yyyy HH:mm}"/>
+	<acme:column code="travel.duration" property="duration"/>
 	<acme:column code="travel.animalSeats" property="animalSeats" />
 	<acme:column code="travel.humanSeats" property="humanSeats" />
 	

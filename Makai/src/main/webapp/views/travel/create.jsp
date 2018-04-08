@@ -71,12 +71,13 @@
 			</div>
 			<div class="offset-lg-1 col-md-3 col-12">
 				<acme:input code="travel.startMoment" path="startDate" mandatory="true" image="calendar" placeholder="dd/MM/yyyy" id="datepicker"/>
-				<acme:input code="travel.startMoment" path="startTime" mandatory="true" image="clock" placeholder="HH:mm"/>
+				<acme:input code="travel.startTime" path="startTime" mandatory="true" image="clock" placeholder="HH:mm"/>
 			</div>
-			<div class="col-md-3 col-12">
-				<acme:input code="travel.endMoment" path="endDate" mandatory="true" image="calendar" placeholder="dd/MM/yyyy" id="datepicker2"/>
-				<acme:input code="travel.endMoment" path="endTime" mandatory="true" image="clock" placeholder="HH:mm"/>
-			</div>
+			<div class="col-md-11">
+				<h3><spring:message code="travel.duration" /></h3>
+			  	<acme:input path="duration" code="travel.duration" type="number" min="0"  /> 
+  			</div>
+			<form:errors cssClass="alert alert-danger form-control" path="duration" />
 	</div>
 	<br/>
 	

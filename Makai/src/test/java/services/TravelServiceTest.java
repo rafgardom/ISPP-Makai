@@ -45,11 +45,11 @@ public class TravelServiceTest extends AbstractTest {
 	public void driverCreateTravel() {
 		final Object testingData[][] = {
 			{
-				"customer1", 123, "SpainOrigen", "AndaluciaOrigen", "CadizOrigen", "CadizOrigen", "123654", "SpainDestino", "AndaluciaDestino", "SevillaDestino", "SevillaDestino", "04/20/2018 9:00", "05/20/2018 9:00", 1, 2, null
+				"customer1", 123, "SpainOrigen", "AndaluciaOrigen", "CadizOrigen", "CadizOrigen", "123654", "SpainDestino", "AndaluciaDestino", "SevillaDestino", "SevillaDestino", "04/20/2018 9:00", 90, 1, 2, null
 			}
 
 			, {
-				"customer1", 123, " ", "AndaluciaOrigen1", "CadizOrigen1", "CadizOrigen1", "123254", "SpainDestino1", "AndaluciaDestino1", "SevillaDestino1", "SevillaDestino1", "05/20/2018 9:00", "06/20/2018 9:00", 2, 2, ConstraintViolationException.class
+				"customer1", 123, " ", "AndaluciaOrigen1", "CadizOrigen1", "CadizOrigen1", "123254", "SpainDestino1", "AndaluciaDestino1", "SevillaDestino1", "SevillaDestino1", "05/20/2018 9:00", 90, 2, 2, ConstraintViolationException.class
 			}
 		/*
 		 * , {
@@ -66,10 +66,10 @@ public class TravelServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++)
 			this.createTravel((String) testingData[i][0], (int) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6], (String) testingData[i][7],
-				(String) testingData[i][8], (String) testingData[i][9], (String) testingData[i][10], (String) testingData[i][11], (String) testingData[i][12], (int) testingData[i][13], (int) testingData[i][14], (Class<?>) testingData[i][15]);
+				(String) testingData[i][8], (String) testingData[i][9], (String) testingData[i][10], (String) testingData[i][11], (int) testingData[i][12], (int) testingData[i][13], (int) testingData[i][14], (Class<?>) testingData[i][15]);
 	}
 	protected void createTravel(final String username, final int vehicle, final String paisOrigin, final String estadoOrigen, final String provinciaOrigen, final String ciudadOrigen, final String zipCode, final String paisDestino,
-		final String estadoDestino, final String provinciaDestino, final String ciudadDestino, final String fechaSalida, final String fechaLlegada, final int asientosAnimales, final int asientosPersonas, final Class<?> expected) {
+		final String estadoDestino, final String provinciaDestino, final String ciudadDestino, final String fechaSalida, final int duracion, final int asientosAnimales, final int asientosPersonas, final Class<?> expected) {
 		Class<?> caught;
 
 		final Coordinates coordinateOrigen = new Coordinates();
@@ -80,11 +80,10 @@ public class TravelServiceTest extends AbstractTest {
 		String[] timeSalida = null;
 
 		/* Moment llegada */
-		String[] dateLlegada = null;
-		String[] timeLlegada = null;
+		final String[] dateLlegada = null;
+		final String[] timeLlegada = null;
 
 		final Calendar calendarSalida = Calendar.getInstance();
-		final Calendar calendarLlegada = Calendar.getInstance();
 
 		caught = null;
 		try {
@@ -110,11 +109,7 @@ public class TravelServiceTest extends AbstractTest {
 			dateSalida = dateSalida[0].split("/");
 			calendarSalida.set(Integer.parseInt(dateSalida[2]), Integer.parseInt(dateSalida[1]), Integer.parseInt(dateSalida[0]), Integer.parseInt(timeSalida[0]), Integer.parseInt(timeSalida[1]));
 
-			/* End Moment */
-			dateLlegada = fechaLlegada.split(" ");
-			timeLlegada = dateLlegada[1].split(":");
-			dateLlegada = dateLlegada[0].split("/");
-			calendarLlegada.set(Integer.parseInt(dateLlegada[2]), Integer.parseInt(dateLlegada[1]), Integer.parseInt(dateLlegada[0]), Integer.parseInt(timeLlegada[0]), Integer.parseInt(timeLlegada[1]));
+			/* Duration */
 
 			/* Vehiculo */
 			Vehicle vehiculo = null;
@@ -125,7 +120,7 @@ public class TravelServiceTest extends AbstractTest {
 			travel.setOrigin(coordinateOrigen);
 			travel.setDestination(coordinateDestino);
 			travel.setStartMoment(calendarSalida.getTime());
-			travel.setEndMoment(calendarLlegada.getTime());
+			travel.setDuration(duracion);
 			travel.setAnimalSeats(asientosAnimales);
 			travel.setHumanSeats(asientosPersonas);
 			travel.setVehicle(vehiculo);

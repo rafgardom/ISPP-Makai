@@ -47,6 +47,10 @@
 				<b><spring:message code="travel.startMoment" />:</b>
 				<jstl:out value="${travel.startMoment}"  />
 			</p>
+			<p>
+				<b><spring:message code="travel.duration" />:</b>
+				<jstl:out value="${travel.duration}" />
+			</p>
 	  	</div>
 	</div>
 	<div class="card">
@@ -71,10 +75,6 @@
 		<p>
 			<b><spring:message code="travel.zipcode" />:</b>
 			<jstl:out value="${travel.destination.zip_code}"  />
-		</p>
-		<p>
-			<b><spring:message code="travel.endMoment" />:</b>
-			<jstl:out value="${travel.endMoment}"  />
 		</p>
 	  	</div>
 	 </div>

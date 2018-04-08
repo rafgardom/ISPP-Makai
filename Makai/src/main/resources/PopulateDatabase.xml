@@ -1134,7 +1134,7 @@
 		<property name="origin" ref="coordinates17" />
 		<property name="destination" ref="coordinates18" />
 		<property name="startMoment" value="04/20/2018 9:00" />
-		<property name="endMoment" value="04/20/2018 11:00" />
+		<property name="duration" value="90" />
 		<property name="animalSeats" value="0" />
 		<property name="humanSeats" value="2" />
 		<property name="vehicle" ref="vehicle1" />
@@ -1150,7 +1150,7 @@
 		<property name="origin" ref="coordinates19" />
 		<property name="destination" ref="coordinates20" />
 		<property name="startMoment" value="02/20/2018 9:00" />
-		<property name="endMoment" value="02/20/2018 11:00" />
+		<property name="duration" value="90" />
 		<property name="animalSeats" value="1" />
 		<property name="humanSeats" value="3" />
 		<property name="vehicle" ref="vehicle2" />
@@ -1166,7 +1166,7 @@
 		<property name="origin" ref="coordinates21" />
 		<property name="destination" ref="coordinates22" />
 		<property name="startMoment" value="01/20/2018 9:00" />
-		<property name="endMoment" value="01/20/2018 11:00" />
+		<property name="duration" value="90" />
 		<property name="animalSeats" value="2" />
 		<property name="humanSeats" value="4" />
 		<property name="vehicle" ref="vehicle3" />
@@ -1182,7 +1182,7 @@
 		<property name="origin" ref="coordinates23" />
 		<property name="destination" ref="coordinates24" />
 		<property name="startMoment" value="04/26/2018 9:00" />
-		<property name="endMoment" value="04/26/2018 11:30" />
+		<property name="duration" value="90" />
 		<property name="animalSeats" value="1" />
 		<property name="humanSeats" value="1" />
 		<property name="vehicle" ref="vehicle2" />

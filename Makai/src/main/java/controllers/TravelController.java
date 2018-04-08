@@ -158,7 +158,6 @@ public class TravelController extends AbstractController {
 
 		ModelAndView result;
 		Travel travel;
-		Collection<Transporter> transporters;
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -169,9 +168,6 @@ public class TravelController extends AbstractController {
 
 				travel = this.travelService.reconstruct(travelForm, binding);
 				travel = this.travelService.save(travel);
-				transporters = this.transporterService.findPassengersByTravel(travel.getId());
-				if (transporters.size() != 0)
-					result = this.createModelAndView(travelForm, "travel.edit.error");
 				result = new ModelAndView("master.page");
 
 			} catch (final Throwable oops) {
@@ -230,7 +226,7 @@ public class TravelController extends AbstractController {
 		travelsByPrincipal = this.travelService.findTravelByTransporterId(principal.getId());
 
 		for (final Travel aux : travels_all)
-			if (today.getTime().before(aux.getEndMoment()))
+			if (today.getTime().before(aux.getStartMoment()))
 				travels.add(aux);
 
 		result = new ModelAndView("travel/list");
@@ -263,15 +259,15 @@ public class TravelController extends AbstractController {
 		today = Calendar.getInstance();
 
 		for (final Travel aux : travels_all)
-			if (today.getTime().before(aux.getEndMoment()))
+			if (today.getTime().before(aux.getStartMoment()))
 				travels.add(aux);
 
 		for (final Travel aux : travels_participated)
-			if (today.getTime().before(aux.getEndMoment()))
+			if (today.getTime().before(aux.getStartMoment()))
 				travels.add(aux);
 
 		for (final Travel aux : travels_animals)
-			if (today.getTime().before(aux.getEndMoment()))
+			if (today.getTime().before(aux.getStartMoment()))
 				travels.add(aux);
 
 		result = new ModelAndView("travel/myList");
@@ -305,15 +301,15 @@ public class TravelController extends AbstractController {
 		today = Calendar.getInstance();
 
 		for (final Travel aux : travels_all)
-			if (today.getTime().after(aux.getEndMoment()))
+			if (today.getTime().after(aux.getStartMoment()))
 				travels.add(aux);
 
 		for (final Travel aux : travels_participated)
-			if (today.getTime().after(aux.getEndMoment()))
+			if (today.getTime().after(aux.getStartMoment()))
 				travels.add(aux);
 
 		for (final Travel aux : travels_animals)
-			if (today.getTime().after(aux.getEndMoment()))
+			if (today.getTime().after(aux.getStartMoment()))
 				travels.add(aux);
 
 		result = new ModelAndView("travel/myList");

@@ -35,7 +35,7 @@ public class Travel extends DomainEntity {
 	private Coordinates	origin;
 	private Coordinates	destination;
 	private Date		startMoment;
-	private Date		endMoment;
+	private int			duration;
 	private Integer		animalSeats;
 	private Integer		humanSeats;
 
@@ -77,14 +77,12 @@ public class Travel extends DomainEntity {
 		this.startMoment = startMoment;
 	}
 
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getEndMoment() {
-		return this.endMoment;
+	@Min(0)
+	public int getDuration() {
+		return this.duration;
 	}
-	public void setEndMoment(final Date endMoment) {
-		this.endMoment = endMoment;
+	public void setDuration(final int duration) {
+		this.duration = duration;
 	}
 
 	@Min(0)
