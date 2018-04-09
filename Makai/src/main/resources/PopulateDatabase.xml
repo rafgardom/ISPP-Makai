@@ -187,7 +187,7 @@
 		<property name="enabled" value="true" />
 	</bean>
 	
-	<!-- Coordinates 	-->	
+	<!-- Coordinates -->	
 	<bean id="coordinates1" class="domain.Coordinates">
 		<property name="country" value="Spain" />
 		<property name="state" value="Andalucia" />
@@ -380,7 +380,7 @@
 		<property name="zip_code" value="51114" />
 	</bean>
 	
-	<!-- Notification 	-->	
+	<!-- Notification -->	
 	<bean id="notification1" class="domain.Notification">
 		<property name="moment" value="03/12/2018 9:25" />
 		<property name="reason" value="Cambio en las politicas" />
@@ -519,6 +519,9 @@
 		</property>
 		<property name="totalViews" value="250" />
 		<property name="currentViews" value="198" />
+		<property name="email" value="enterprise1@gmail.com" />
+		<property name="enterprise" value="Enterprise 1" />
+		<property name="price" value="2.5" />
 	</bean>
 	
 	<bean id="banner2" class="domain.Banner">
@@ -530,6 +533,9 @@
 		</property>
 		<property name="totalViews" value="125" />
 		<property name="currentViews" value="125" />
+		<property name="email" value="enterprise2@gmail.com" />
+		<property name="enterprise" value="Enterprise 2" />
+		<property name="price" value="1.25" />
 	</bean>
 	
 	<bean id="banner3" class="domain.Banner">
@@ -541,6 +547,9 @@
 		</property>
 		<property name="totalViews" value="10" />
 		<property name="currentViews" value="6" />
+		<property name="email" value="enterprise1@gmail.com" />
+		<property name="enterprise" value="Enterprise 1" />
+		<property name="price" value="0.1" />
 	</bean>
 	
 	<!-- Price -->	
@@ -588,7 +597,7 @@
 	</bean>
 
 	
-	<!-- Administrator 	-->
+	<!-- Administrator -->
 	<bean id="administrator" class="domain.Administrator">
 		<property name="name" value="administrator" />
 		<property name="email" value="admin@gmail.com" />

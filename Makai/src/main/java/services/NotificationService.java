@@ -105,8 +105,10 @@ public class NotificationService {
 		Notification result;
 		Actor principal;
 
-		principal = this.actorService.findByPrincipal();
-		Assert.notNull(principal);
+		if (notification.getType().getName() != "BANNER") {
+			principal = this.actorService.findByPrincipal();
+			Assert.notNull(principal);
+		}
 
 		result = this.notificationRepository.save(notification);
 
@@ -139,7 +141,7 @@ public class NotificationService {
 		Assert.notNull(principal);
 
 		actor = notification.getActor();
-		Assert.isTrue(actor.equals(principal)); //Comprueba si est� dentro de sus notificaciones
+		Assert.isTrue(actor.equals(principal)); //Comprueba si esta dentro de sus notificaciones
 		this.notificationRepository.delete(notification.getId());
 
 	}
@@ -211,6 +213,25 @@ public class NotificationService {
 			this.save(notification);
 		}
 
+	}
+
+	public Notification createForBanner() {
+		Notification result;
+		Calendar calendar;
+		Actor administrator;
+
+		calendar = Calendar.getInstance();
+		calendar.set(Calendar.MILLISECOND, -10);
+
+		administrator = this.actorService.findAdministrator();
+
+		result = new Notification();
+		result.setActor(this.actorService.findOne(administrator.getId()));
+		result.setMoment(calendar.getTime());
+		result.setIsRead(false);
+		result.setType(NotificationType.BANNER);
+
+		return result;
 	}
 
 	public void notificationViewed(final Notification notification) {

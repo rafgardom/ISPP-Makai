@@ -138,6 +138,10 @@
 					href="security/login.do"> <spring:message
 							code="master.page.sign.in" />
 				</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="banner/create.do"> <spring:message
+							code="master.page.banner.create" />
+				</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
 							code="master.page.sign.up" /></a>

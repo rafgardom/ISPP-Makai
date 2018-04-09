@@ -333,4 +333,14 @@ public class ActorService {
 	public Actor findByusername(final String username) {
 		return this.actorRepository.findByusername(username);
 	}
+
+	public Actor findAdministrator() {
+		Actor[] actors;
+		Collection<Actor> administrators;
+
+		administrators = this.actorRepository.findAdministrator();
+		actors = administrators.toArray(new Actor[administrators.size()]);
+
+		return actors[0];
+	}
 }
