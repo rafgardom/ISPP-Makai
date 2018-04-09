@@ -92,7 +92,6 @@ public class AnimalShelterForm {
 	}
 
 	@NotBlank
-	@Size(min = 5, max = 32)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPassword() {
 		return this.password;

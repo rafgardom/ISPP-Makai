@@ -163,7 +163,9 @@
 				<a class="nav-link"
 					href="notification/actor/list.do">
 							<img src="images/bell.png" class="img-menu"/>
-							<span class="badge badge-default badge-pill bg-secondary pill-menu"><jstl:if test="${numberNoti > 0}" >${numberNoti}</jstl:if></span> </a></li>
+							<span class="badge badge-default badge-pill bg-secondary pill-menu"><jstl:if test="${numberNoti > 0}" >${numberNoti}</jstl:if></span> 
+							<span class="d-lg-none d-md-none"><spring:message code="master.page.notification.list" /></span>
+							</a></li>
 			</security:authorize>
 		</ul>
 		

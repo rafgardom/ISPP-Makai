@@ -78,7 +78,7 @@
 				<h3><spring:message code="customer.userAccountDetails" /></h3>
 				<br />
 				<acme:input image="user-xs" code="customer.username" path="username" mandatory="true" />
-				<acme:password image="lock1" code="customer.password" path="password" mandatory="true" />
+				<acme:password image="lock1" code="customer.password" path="password" mandatory="true" infoButton="true"/>
 				<acme:password image="lock1" code="customer.repeatPassword" path="repeatPassword" mandatory="true" />
 		</div>
 	</security:authorize>
@@ -96,3 +96,4 @@
 
 
 </form:form>
+

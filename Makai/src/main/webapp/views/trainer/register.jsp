@@ -76,7 +76,7 @@
 			</h3>
 			<br />
 			<acme:input image="user-xs" code="trainer.username" path="username" mandatory="true" />
-			<acme:password image="lock1" code="trainer.password" path="password" mandatory="true" />
+			<acme:password image="lock1" code="trainer.password" path="password" mandatory="true" infoButton="true"/>
 			<acme:password image="lock1" code="trainer.repeatPassword" path="repeatPassword" mandatory="true" />
 		</div>
 		</security:authorize>

@@ -106,7 +106,9 @@ public class ProfessionalForm {
 	public void setSurname(final String surname) {
 		this.surname = surname;
 	}
-
+	
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPassword() {
 		return this.password;
 	}

@@ -69,7 +69,7 @@
 				<acme:textbox code="professional.username" path="username"
 					mandatory="true" />
 				<acme:password code="professional.password" path="password"
-					mandatory="true" />
+					mandatory="true" infoButton="true" />
 				<acme:password code="professional.repeatPassword" path="repeatPassword"
 					mandatory="true" />
 				<br/>

@@ -74,7 +74,7 @@
 			</h3>
 			<br />
 			<acme:input image="user-xs" code="animalShelter.username" path="username" mandatory="true" />
-			<acme:password image="lock1" code="animalShelter.password" path="password" mandatory="true" />
+			<acme:password image="lock1" code="animalShelter.password" path="password" mandatory="true" infoButton="true"/>
 			<acme:password image="lock1" code="animalShelter.repeatPassword" path="repeatPassword" mandatory="true" />
 		</div>
 		</security:authorize>

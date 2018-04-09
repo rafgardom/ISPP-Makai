@@ -18,8 +18,7 @@
 <form:form action="${requestURI}" modelAttribute="banner" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 	<form:hidden path="price"/>
-	
-	<br>
+
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>
 	</jstl:if>
@@ -44,7 +43,6 @@
 			<acme:textbox code="banner.enterprise" path="enterprise" mandatory="true" />
 			<acme:input image="at" code="banner.email" path="email" mandatory="true" />
 		</div>
-		<br><br><br>
 	</div>
 	<br><br>
 	<acme:submit code="banner.create" name="save" />
