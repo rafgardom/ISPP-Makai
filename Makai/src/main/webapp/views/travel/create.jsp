@@ -75,7 +75,8 @@
 			</div>
 			<div class="col-md-11">
 				<h3><spring:message code="travel.duration" /></h3>
-			  	<acme:input path="duration" code="travel.duration" type="number" min="0"  /> 
+			  	<acme:input path="duration" type="range" code="travel.duration" min="0" max="1200" style="slider" id="myRange"  /> 
+  				<h6 class="text-center" id="total"></h6>
   			</div>
 			<form:errors cssClass="alert alert-danger form-control" path="duration" />
 	</div>
@@ -94,11 +95,28 @@ $( function() {
     	firstDay: 1
     	});
   } );
-$( function() {
-    $( "#datepicker2" ).datepicker({ 
-    	dateFormat: 'dd/mm/yy', 
-    	minDate: 0,
-    	firstDay: 1
-    	});
-  } );
+  
+var slider1 = document.getElementById("myRange");
+var output1 = document.getElementById("total");
+output1.innerHTML = slider1.value+"&nbsp;<spring:message code="script.minutes" />"; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider1.oninput = function() {
+
+	if (this.value>=60) {
+		out= Math.trunc(this.value/60);
+		out2="&nbsp;<spring:message code="script.hours" />&nbsp;";
+		if(this.value%60>0){
+			out3 = this.value%60;
+			out4 = "&nbsp;<spring:message code="script.minutes" />&nbsp;";
+			output1.innerHTML = out+out2+out3+out4;
+		}else{
+			output1.innerHTML = out+out2;
+		}
+	}else{
+		out2="&nbsp;<spring:message code="script.minutes" />";
+		output1.innerHTML = this.value+out2;
+	}
+   
+};
 </script>
