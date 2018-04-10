@@ -17,6 +17,7 @@ import org.springframework.validation.Validator;
 
 import repositories.BannerRepository;
 import utilities.Utilities;
+import domain.Actor;
 import domain.Administrator;
 import domain.Banner;
 import domain.Notification;
@@ -36,6 +37,9 @@ public class BannerService {
 
 	@Autowired
 	private NotificationService		notificationService;
+
+	@Autowired
+	private ActorService			actorService;
 
 	@Autowired
 	private Validator				validator;
@@ -69,6 +73,8 @@ public class BannerService {
 
 		result = new Banner();
 		result.setTotalViews(0);
+		final Actor actor = this.actorService.findByPrincipal();
+		result.setActor(actor);
 
 		return result;
 	}
@@ -94,7 +100,7 @@ public class BannerService {
 			notification = this.notificationService.createForBanner();
 
 			notification.setReason("Banner creado");
-			notification.setDescription("La empresa " + banner.getEnterprise() + " con correco electrónico " + banner.getEmail() + " ha creado un banner nuevo.");
+			notification.setDescription("Se ha creado un anuncio por parte de " + banner.getActor().getName() + " con correco electrónico " + banner.getActor().getEmail() + " y teléfono " + banner.getActor().getPhone());
 
 			this.notificationService.save(notification);
 		}
@@ -159,8 +165,6 @@ public class BannerService {
 		else
 			result = this.findOne(bannerForm.getId());
 
-		result.setEnterprise(bannerForm.getEnterprise());
-		result.setEmail(bannerForm.getEmail());
 		result.setTotalViews(bannerForm.getTotalViews());
 		result.setCurrentViews(bannerForm.getCurrentViews());
 		result.setPrice(bannerForm.getPrice());
@@ -187,8 +191,6 @@ public class BannerService {
 			image = null;
 
 		result.setId(banner.getId());
-		result.setEnterprise(banner.getEnterprise());
-		result.setEmail(banner.getEmail());
 		result.setPrice(banner.getPrice());
 		result.setTotalViews(banner.getTotalViews());
 		result.setCurrentViews(banner.getCurrentViews());

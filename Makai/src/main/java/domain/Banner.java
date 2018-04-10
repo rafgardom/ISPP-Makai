@@ -6,11 +6,10 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -27,9 +26,8 @@ public class Banner extends DomainEntity {
 	private byte[]	picture;
 	private Integer	totalViews;
 	private Integer	currentViews;
-	private String	email;
-	private String	enterprise;
 	private Double	price;
+	private String	zone;
 
 
 	@Lob
@@ -57,25 +55,6 @@ public class Banner extends DomainEntity {
 		this.currentViews = currentViews;
 	}
 
-	@NotBlank
-	@Email
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	@NotBlank
-	public String getEnterprise() {
-		return this.enterprise;
-	}
-
-	public void setEnterprise(final String enterprise) {
-		this.enterprise = enterprise;
-	}
-
 	@NotNull
 	@Min(0)
 	public Double getPrice() {
@@ -84,6 +63,31 @@ public class Banner extends DomainEntity {
 
 	public void setPrice(final Double price) {
 		this.price = price;
+	}
+
+	public String getZone() {
+		return this.zone;
+	}
+
+	public void setZone(final String zone) {
+		this.zone = zone;
+	}
+
+
+	//Relationships
+
+	private Actor	actor;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Actor getActor() {
+		return this.actor;
+	}
+
+	public void setActor(final Actor actor) {
+		this.actor = actor;
 	}
 
 }

@@ -155,6 +155,9 @@
 								code="master.page.trainer.register" /></a> <a class="dropdown-item"
 							href="animalShelter/register.do"><spring:message
 								code="master.page.animalShelter.register" /></a>
+							<a class="dropdown-item"
+							href="advertising/register.do"><spring:message
+								code="master.page.advertising.register" /></a>
 					</div></li>
 			</security:authorize>
 			

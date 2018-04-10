@@ -25,6 +25,7 @@
 		
 		<value>/views/administrator/messages</value>
 		<value>/views/animal/messages</value>
+		<value>/views/advertising/messages</value>
 		<value>/views/animalShelter/messages</value>
 		<value>/views/banner/messages</value> 
 		<value>/views/customer/messages</value>

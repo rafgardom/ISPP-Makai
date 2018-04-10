@@ -187,6 +187,32 @@
 		<property name="enabled" value="true" />
 	</bean>
 	
+	<bean id="userAccount14" class="security.UserAccount">
+		<property name="username" value="advertising1" />
+		<property name="password" value="b7a9e174e4c664025e048e952e1ea6c07ee89de8bdb1ea3cb4fd91fd559dfac7" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADVERTISING" />
+				</bean>
+			</list>
+		</property>
+		<property name="enabled" value="true" />
+	</bean>
+	
+	<bean id="userAccount15" class="security.UserAccount">
+		<property name="username" value="advertising2" />
+		<property name="password" value="e3bd71118914af630d724f5359090430bba01a975a4b42773f8cb93bf32614f2" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADVERTISING" />
+				</bean>
+			</list>
+		</property>
+		<property name="enabled" value="true" />
+	</bean>
+	
 	<!-- Coordinates -->	
 	<bean id="coordinates1" class="domain.Coordinates">
 		<property name="country" value="Spain" />
@@ -519,9 +545,8 @@
 		</property>
 		<property name="totalViews" value="250" />
 		<property name="currentViews" value="198" />
-		<property name="email" value="enterprise1@gmail.com" />
-		<property name="enterprise" value="Enterprise 1" />
 		<property name="price" value="2.5" />
+		<property name="actor" ref="animalshelter1" />
 	</bean>
 	
 	<bean id="banner2" class="domain.Banner">
@@ -533,9 +558,8 @@
 		</property>
 		<property name="totalViews" value="125" />
 		<property name="currentViews" value="125" />
-		<property name="email" value="enterprise2@gmail.com" />
-		<property name="enterprise" value="Enterprise 2" />
 		<property name="price" value="1.25" />
+		<property name="actor" ref="advertising1" />
 	</bean>
 	
 	<bean id="banner3" class="domain.Banner">
@@ -547,9 +571,8 @@
 		</property>
 		<property name="totalViews" value="10" />
 		<property name="currentViews" value="6" />
-		<property name="email" value="enterprise1@gmail.com" />
-		<property name="enterprise" value="Enterprise 1" />
 		<property name="price" value="0.1" />
+		<property name="actor" ref="trainer1" />
 	</bean>
 	
 	<!-- Price -->	
@@ -672,6 +695,35 @@
 			<list>
 			</list>
 		</property>
+	</bean>
+	
+	<!-- Advertising -->
+	<bean id="advertising1" class="domain.Advertising">
+		<property name="name" value="Advertising1" />
+		<property name="email" value="advertising1@gmail.com" />
+		<property name="phone" value="+35632165487" />
+		<property name="coordinates" ref="coordinates5" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount14" />
+	</bean>
+	
+	<bean id="advertising2" class="domain.Advertising">
+		<property name="name" value="Advertising2" />
+		<property name="email" value="advertising2@gmail.com" />
+		<property name="phone" value="+35632165466" />
+		<property name="coordinates" ref="coordinates5" />
+		<property name="picture">
+			<list>
+				<value>0x41</value>
+				<value>0x43</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount15" />
 	</bean>
 	
 	<!-- Animal Shelter -->

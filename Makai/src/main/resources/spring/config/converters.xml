@@ -27,6 +27,7 @@
 		<bean class="converters.AdministratorToStringConverter" />
 		<bean class="converters.AnimalShelterToStringConverter" />
 		<bean class="converters.AnimalToStringConverter" />
+		<bean class="converters.AdvertisingToStringConverter" />
 		<bean class="converters.BannerToStringConverter" />
 		<bean class="converters.BreedToStringConverter" />
 		<bean class="converters.CustomerToStringConverter" />
@@ -46,6 +47,7 @@
 		
 		<bean class="converters.StringToActorConverter" />
 		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.StringToAdvertisingConverter" />
 		<bean class="converters.StringToAnimalShelterConverter" />
 		<bean class="converters.StringToAnimalConverter" />
 		<bean class="converters.StringToBannerConverter" />
