@@ -24,10 +24,11 @@
 		<value>/views/welcome/tiles.xml</value>
 		
 		<value>/views/administrator/tiles.xml</value>
+		<value>/views/advertising/tiles.xml</value>
 		<value>/views/animal/tiles.xml</value>
 		<value>/views/animalShelter/tiles.xml</value>
-		<value>/views/advertising/tiles.xml</value>
-		<value>/views/banner/tiles.xml</value> 
+		<value>/views/banner/tiles.xml</value>
+		<value>/views/breed/tiles.xml</value> 
 		<value>/views/customer/tiles.xml</value>
 		<value>/views/generalError/tiles.xml</value>
 		<value>/views/notification/tiles.xml</value>
@@ -37,6 +38,7 @@
 		<value>/views/rating/tiles.xml</value>	
 		<value>/views/receipt/tiles.xml</value>	
 		<value>/views/request/tiles.xml</value>
+		<value>/views/specie/tiles.xml</value>
 		<value>/views/training/tiles.xml</value>
 		<value>/views/travel/tiles.xml</value>
 		<value>/views/vehicle/tiles.xml</value>

@@ -65,6 +65,18 @@ public class BreedService {
 		return result;
 	}
 
+	public Breed create() {
+		Breed result;
+		Administrator principal;
+
+		principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+
+		result = new Breed();
+
+		return result;
+	}
+
 	public Breed save(final Breed breed) {
 		Assert.notNull(breed);
 		Breed result;
@@ -87,7 +99,7 @@ public class BreedService {
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 
-		//Comprobar de que ningún Animal tiene asociada a esta Breed
+		//Comprobar de que ningï¿½n Animal tiene asociada a esta Breed
 		Assert.isTrue(!this.tieneBreedUnAnimal(breed));
 
 		this.breedRepository.delete(breed);

@@ -27,7 +27,8 @@
 		<value>/views/animal/messages</value>
 		<value>/views/advertising/messages</value>
 		<value>/views/animalShelter/messages</value>
-		<value>/views/banner/messages</value> 
+		<value>/views/banner/messages</value>
+		<value>/views/breed/messages</value> 
 		<value>/views/customer/messages</value>
 		<value>/views/generalError/messages</value>
 		<value>/views/notification/messages</value>
@@ -37,6 +38,7 @@
 		<value>/views/rating/messages</value>
 		<value>/views/receipt/messages</value>
 		<value>/views/request/messages</value>
+		<value>/views/specie/messages</value>
 		<value>/views/trainer/messages</value>
 		<value>/views/training/messages</value>
 		<value>/views/travel/messages</value>
