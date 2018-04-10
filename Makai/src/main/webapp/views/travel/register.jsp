@@ -69,14 +69,22 @@
 					<b><spring:message code="travel.customer"/></b>
 				</form:label>	
 				<br>
-				<form:checkbox path ="principalPassenger" value="${principal}"/><jstl:out value="${principal.name}"/>
-				<br>
+				
+					<form:checkbox id="principal" path ="principalPassenger" value="${principalPassenger}"/><jstl:out value="${principal.name}"/>
+					<br>
+				
+				
 		  		<form:label path="animals">
 					<b><spring:message code="travel.animals"/></b>
 				</form:label>
 				<br>
 				<jstl:forEach var="animal" items="${animals}">
-					<form:checkbox path ="animals" value="${animal}"/><jstl:out value="${animal.name}"/>
+					<jstl:if test="${travelForm.animals.contains(animal)}">
+						<form:checkbox name="animalTrue" path ="animals" value="${animal}"/><jstl:out value="${animal.name}"/>
+					</jstl:if>
+					<jstl:if test="${!travelForm.animals.contains(animal)}">
+						<form:checkbox name="animalFalse" path ="animals" value="${animal}"/><jstl:out value="${animal.name}"/>
+					</jstl:if>
 				</jstl:forEach>
 				<br>
 
@@ -89,3 +97,13 @@
 		<acme:submit code="travel.save" name="save" />
 		<acme:cancel code="travel.cancel" url="travel/list.do" />
 </form:form>
+
+<script type="text/javascript">
+
+var x = document.getElementsByName("animalTrue");
+
+for (var i = 0; i < x.length; i++) {
+        x[i].checked = true;       
+    }
+
+</script>

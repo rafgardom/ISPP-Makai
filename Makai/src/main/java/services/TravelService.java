@@ -243,6 +243,9 @@ public class TravelService {
 	public TravelForm toFormObject(final Travel travel) {
 		Assert.notNull(travel);
 		final TravelForm result = new TravelForm();
+		Transporter principal;
+
+		principal = this.transporterService.findByPrincipal();
 
 		result.setDestination(travel.getDestination());
 		result.setOrigin(travel.getOrigin());
@@ -253,6 +256,11 @@ public class TravelService {
 		result.setHumanSeats(travel.getHumanSeats());
 		result.setVehicle(travel.getVehicle());
 		result.setId(travel.getId());
+
+		if (principal.getTravelPassengers().contains(travel))
+			result.setPrincipalPassenger(true);
+		else
+			result.setPrincipalPassenger(false);
 
 		return result;
 	}

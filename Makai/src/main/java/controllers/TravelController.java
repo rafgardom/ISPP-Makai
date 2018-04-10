@@ -115,6 +115,7 @@ public class TravelController extends AbstractController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
 	public ModelAndView register(@Valid final TravelForm travelForm, final BindingResult binding) {
+
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
