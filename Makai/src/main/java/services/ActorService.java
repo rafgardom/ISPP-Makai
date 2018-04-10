@@ -81,6 +81,17 @@ public class ActorService {
 		return result;
 	}
 
+	public Collection<Actor> findAllActorsWithoutAdmin() {
+		Collection<Actor> result;
+		Administrator admin;
+		admin = this.administratorService.findByPrincipal();
+
+		result = this.actorRepository.findAll();
+		result.remove(admin);
+
+		return result;
+	}
+
 	public Actor save(Actor actor) {
 		Assert.notNull(actor);
 
@@ -292,6 +303,7 @@ public class ActorService {
 
 		administrator = this.administratorService.findByPrincipal();
 		Assert.notNull(administrator);
+		Assert.isTrue(!actor.equals(administrator));
 
 		if (this.checkAuthority(actor, "TRAINER")) {
 			Collection<Training> trainings;
@@ -322,6 +334,7 @@ public class ActorService {
 
 		administrator = this.administratorService.findByPrincipal();
 		Assert.notNull(administrator);
+		Assert.isTrue(!actor.equals(administrator));
 
 		actor.getUserAccount().setEnabled(true);
 

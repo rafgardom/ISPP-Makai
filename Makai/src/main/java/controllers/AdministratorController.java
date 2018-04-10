@@ -48,7 +48,7 @@ public class AdministratorController extends AbstractController {
 		Collection<Actor> actors;
 		final Integer numberNoti;
 
-		actors = this.actorService.findAll();
+		actors = this.actorService.findAllActorsWithoutAdmin();
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("administrator/listActors");
