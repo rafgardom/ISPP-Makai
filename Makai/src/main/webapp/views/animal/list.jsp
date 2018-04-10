@@ -17,14 +17,20 @@
 	<acme:column code="animal.name" property="name" />
 	<acme:column code="animal.chipNumber" property="chipNumber" sortable="true"/>
 	<acme:column code="animal.age" property="age" sortable="true"/>
-	
+<%--	
 	<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
 	<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
 	<jstl:set var="language" value="sex.spanishName"/>
 	<jstl:if test="${lang == 'en'}">
 		<jstl:set var="language" value="sex.name"/>
-	</jstl:if>
+	</jstl:if> 
 	<acme:column code="animal.sex" property="${language}" sortable="true"/>
+	--%>
+	 
+	<spring:message code="animal.sex" var="sexHeader"/>
+	<display:column title="${sexHeader}" class="text-center">
+		<acme:imageSex sexName="${row.sex.name}"/>
+	</display:column>
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">	
