@@ -26,7 +26,15 @@
 		</p>
 		<p>
 			<b><spring:message code="request.category" />:</b>
-			<jstl:out value="${request.category}"  />
+			<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+			<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+			<jstl:if test="${lang == 'es'}">
+				<jstl:out value="${request.category.spanishName}"  />
+			</jstl:if>
+			<jstl:if test="${lang == 'en'}">
+				<jstl:out value="${request.category.name}"  />
+			</jstl:if>
+			
 		</p>
 		<p>
 			<b><spring:message code="request.description" />:</b>

@@ -7,6 +7,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+
 <form:form  action="${requestURI }" modelAttribute="training">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -16,7 +19,7 @@
 		<br>
 		<h3><spring:message code="training.general" /></h3>
 		<br>
-		<acme:selectNotEntity items="${categories}" code="training.category" path="category" />
+		<acme:selectNotEntity items="${categories}" lang="${lang}" code="training.category" path="category" />
 		
 		<acme:input image="euro" code="training.price" path="price" min="0"/>
 		<acme:textarea code="training.description" rows="7" path="description"/>

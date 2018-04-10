@@ -9,8 +9,13 @@
 
 <div class="table-responsive">
 <display:table name="trainings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
-	
-	<acme:column code="training.category" property="category" sortable="true"/>
+	<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+	<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+	<jstl:set var="language" value="category.spanishName"/>
+	<jstl:if test="${lang == 'en'}">
+		<jstl:set var="language" value="category.name"/>
+	</jstl:if>
+	<acme:column code="training.category" property="${language}" sortable="true"/>
 	<acme:column code="training.price" property="price" format="{0,number, ,000.00}&euro;"/>
 	<acme:column code="training.description" property="description" />
 	

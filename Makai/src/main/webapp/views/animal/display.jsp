@@ -26,8 +26,17 @@
 			<p><b><spring:message code="animal.age" />:</b> <jstl:out
 				value="${animal.age}" /></p>
 				
-			<p><b><spring:message code="animal.sex" />:</b> <jstl:out
-				value="${animal.sex}" /></p>
+			<p>
+				<b><spring:message code="animal.sex" />:</b>
+				<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+				<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+				<jstl:if test="${lang == 'es'}">
+					<jstl:out value="${animal.sex.spanishName}"  />
+				</jstl:if>
+				<jstl:if test="${lang == 'en'}">
+					<jstl:out value="${animal.sex.name}"  />
+				</jstl:if>
+			</p>
 				
 			<p><b><spring:message code="animal.specie" />:</b> <jstl:out
 				value="${specie}" /></p>

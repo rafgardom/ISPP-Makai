@@ -17,6 +17,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+
 <form:form  action="${requestURI }" modelAttribute="notification">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -30,7 +33,7 @@
 	
 	<div class="row">
 		<div class="col-md-6">
-			<acme:selectNotEntity items="${notificationTypes}" code="notification.type" path="type" />
+			<acme:selectNotEntity items="${notificationTypes}" lang="${lang}" code="notification.type" path="type" />
 			<acme:textbox code="notification.reason" path="reason" />
 		</div>
 		<div class="col-md-6">

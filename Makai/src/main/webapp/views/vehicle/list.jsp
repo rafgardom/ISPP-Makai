@@ -10,9 +10,22 @@
 <div class="table-responsive">
 <display:table name="vehicles" id="row" pagesize="3" requestURI="${requestURI}" class="displaytag">
 	
-	<acme:column code="vehicle.brand" property="brand" />
+	<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+	<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+	<jstl:set var="language" value="brand.spanishName"/>
+	<jstl:if test="${lang == 'en'}">
+		<jstl:set var="language" value="brand.name"/>
+	</jstl:if>
+	<acme:column code="vehicle.brand" property="${language}" />
 	<acme:column code="vehicle.seats" property="seats" />
-	<acme:column code="vehicle.carType" property="carType" />
+	
+	<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+	<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+	<jstl:set var="language" value="carType.spanishName"/>
+	<jstl:if test="${lang == 'en'}">
+		<jstl:set var="language" value="carType.name"/>
+	</jstl:if>
+	<acme:column code="vehicle.carType" property="${language}" />
 	<acme:column code="vehicle.accommodation" property="accommodation" />
 	<acme:column code="vehicle.year" property="year" />
 	<acme:column code="vehicle.description" property="description" />

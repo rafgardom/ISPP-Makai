@@ -10,6 +10,7 @@
 
 <%@ tag language="java" body-content="empty" %>
 
+					
 <%-- Taglibs --%>
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -25,6 +26,7 @@
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="items" required="true" type="Object[]" %>
+<%@ attribute name="lang" required="true" %>
 
 <%@ attribute name="id" required="false" %>
 <%@ attribute name="onchange" required="false" %>
@@ -35,6 +37,10 @@
 </jstl:if>
 
 <%-- Definition --%>
+<jstl:set var="language" value="spanishName"/>
+<jstl:if test="${lang == 'en'}">
+	<jstl:set var="language" value="name"/>
+</jstl:if>
 
 <div class="form-group">
 	<form:label path="${path}">
@@ -45,7 +51,7 @@
 	</form:label>	
 	<form:select class="form-control" id="${id}" path="${path}">
 		<form:option value="${null }" label="----" selected="selected" disabled="true"/>
-		<form:options items="${items }" />
+		<form:options items="${items }" itemLabel="${language}"/>
 	</form:select>
 	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
 </div>

@@ -25,6 +25,9 @@
 	<div class="alert alert-success"><spring:message code="${successMessage}" /></div>
 </jstl:if>
 
+<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+
 <form:form action="${RequestURI}" modelAttribute="vehicleForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 	
@@ -34,9 +37,9 @@
 	
 	<div class="row">
 		<div class="col-md-5">
-			<acme:selectNotEntity code="vehicle.brand" path="brand" items="${brands}" mandatory="true" />
+			<acme:selectNotEntity code="vehicle.brand" path="brand" items="${brands}" lang="${lang}" mandatory="true" />
 			<acme:input code="vehicle.seats" path="seats" type="number" min="0" mandatory="true" />
-			<acme:selectNotEntity code="vehicle.carType" path="carType" items="${carTypes}" mandatory="true" />
+			<acme:selectNotEntity code="vehicle.carType" path="carType" items="${carTypes}" lang="${lang}" mandatory="true" />
 			<acme:textbox code="vehicle.accommodation" path="accommodation" mandatory="false" />
 		</div>
 		<div class="offset-md-1 col-md-5">

@@ -92,7 +92,14 @@
 			
 			<p>
 				<b><spring:message code="offer.animal.sex" />:</b>
-				<jstl:out value="${offer.animal.sex}" />
+				<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+				<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+				<jstl:if test="${lang == 'es'}">
+					<jstl:out value="${offer.animal.sex.spanishName}"  />
+				</jstl:if>
+				<jstl:if test="${lang == 'en'}">
+					<jstl:out value="${offer.animal.sex.name}"  />
+				</jstl:if>
 			</p>
 			
 			<p>

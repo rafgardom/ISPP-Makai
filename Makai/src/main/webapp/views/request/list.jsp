@@ -39,7 +39,14 @@
 			<jstl:out value="${substrTags}" />
 		</jstl:if>
 	</display:column>
-	<acme:column code="request.category" property="category.name" sortable="true" />
+	
+	<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+	<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+	<jstl:set var="language" value="category.spanishName"/>
+	<jstl:if test="${lang == 'en'}">
+		<jstl:set var="language" value="category.name"/>
+	</jstl:if>
+	<acme:column code="request.category" property="${language}" sortable="true" />
 	
 	
 	<spring:message code="request.animal" var="animalHeader" />

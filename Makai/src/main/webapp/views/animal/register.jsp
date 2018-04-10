@@ -7,6 +7,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+
 <form:form action="${RequestURI}" modelAttribute="animalForm" enctype="multipart/form-data">
 	
 	<form:hidden path="id" />
@@ -19,7 +22,7 @@
 			<acme:textbox code="animal.name" path="name" mandatory="true"/>
 			<acme:input code="animal.chipNumber" path="chipNumber" mandatory="true" image="chip" />
 			<acme:input code="animal.age" path="age" type="number" min="0" mandatory="true" />
-			<acme:selectNotEntity items="${sexs}" code="animal.sex" path="sex" mandatory="true"/>
+			<acme:selectNotEntity items="${sexs}" lang="${lang}" code="animal.sex" path="sex" mandatory="true"/>
 	</div>
 	
 	<div class="offset-md-1 col-md-6">

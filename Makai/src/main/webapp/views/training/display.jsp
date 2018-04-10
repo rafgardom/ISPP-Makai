@@ -14,7 +14,14 @@
 	<ul>
 		<li>
 			<b><spring:message code="training.category" />:</b>
-			<jstl:out value="${training.category}" />
+			<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+			<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+			<jstl:if test="${lang == 'es'}">
+				<jstl:out value="${training.category.spanishName}"  />
+			</jstl:if>
+			<jstl:if test="${lang == 'en'}">
+				<jstl:out value="${training.category.name}"  />
+			</jstl:if>
 		</li>
 		<li>
 			<b><spring:message code="training.duration" />:</b>

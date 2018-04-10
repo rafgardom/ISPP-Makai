@@ -25,6 +25,9 @@
 	<div class="alert alert-success"><spring:message code="${successMessage}" /></div>
 </jstl:if>
 
+<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+
 <form:form action="${RequestURI}" modelAttribute="requestForm" enctype="multipart/form-data">
 	<form:hidden path="id" />
 	
@@ -41,7 +44,7 @@
 		<div class="col-md-5">
 					<spring:message code="request.tags.ph" var="tagsPH"/>
 					<acme:textarea code="request.tags" path="tags" maxCharacters="100" placeholder="${tagsPH}" />
-					<acme:selectNotEntity code="request.category" path="category" items="${categories}" mandatory="true" />
+					<acme:selectNotEntity code="request.category" path="category" items="${categories}" lang="${lang}" mandatory="true" />
 					<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
 		
 		</div>	
