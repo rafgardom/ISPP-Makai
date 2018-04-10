@@ -216,15 +216,20 @@ public class AnimalService {
 			binding.addError(fieldError);
 		}
 
-		final Animal animalByChip = this.findAnimalByChipNumber(animalForm.getChipNumber());
-		if (animalByChip != null) {
-			FieldError fieldError;
-			final String[] codes = {
-				"animal.chipNumber.extension.error"
-			};
-			fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
-			binding.addError(fieldError);
-		}
+		//		final Animal animalByChip = this.findAnimalByChipNumber(animalForm.getChipNumber());
+		//		Boolean incorrecto = false;
+		//		if (animalByChip != null && animalByChip.getId() != animalForm.getId())
+		//			incorrecto = true;
+		//		else if (animalByChip != null && animalByChip.getId() == animalForm.getId())
+		//			incorrecto = false;
+		//		if (incorrecto) {
+		//			FieldError fieldError;
+		//			final String[] codes = {
+		//				"animal.chipNumber.extension.error"
+		//			};
+		//			fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+		//			binding.addError(fieldError);
+		//		}
 
 		if (animalForm.getId() == 0)
 			result = this.create();

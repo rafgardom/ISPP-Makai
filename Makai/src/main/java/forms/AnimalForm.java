@@ -3,8 +3,10 @@ package forms;
 
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
 import domain.Breed;
@@ -52,6 +54,8 @@ public class AnimalForm {
 		this.name = name;
 	}
 
+	@NotBlank
+	@Column(unique = true)
 	public String getChipNumber() {
 		return this.chipNumber;
 	}
