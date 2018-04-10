@@ -919,22 +919,22 @@
 	
 	<!-- Breed -->
 	<bean id="breed1" class="domain.Breed">
-		<property name="breed" value="Mastin" />
+		<property name="name" value="Mastin" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed2" class="domain.Breed">
-		<property name="breed" value="Siames" />
+		<property name="name" value="Siames" />
 		<property name="specie" ref="specie2" />
 	</bean>
 	
 	<bean id="breed3" class="domain.Breed">
-		<property name="breed" value="Iguana" />
+		<property name="name" value="Iguana" />
 		<property name="specie" ref="specie3" />
 	</bean>
 	
 	<bean id="breed4" class="domain.Breed">
-		<property name="breed" value="Bulldog" />
+		<property name="name" value="Bulldog" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
