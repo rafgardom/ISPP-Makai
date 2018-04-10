@@ -15,9 +15,8 @@ public class BannerForm {
 	private MultipartFile	bannerImage;
 	private Integer			totalViews;
 	private Integer			currentViews;
-	private String			email;
-	private String			enterprise;
 	private Double			price;
+	private String			zone;
 
 
 	// Constructor ------------------------------------------------------------
@@ -77,28 +76,20 @@ public class BannerForm {
 		this.currentViews = currentViews;
 	}
 
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	public String getEnterprise() {
-		return this.enterprise;
-	}
-
-	public void setEnterprise(final String enterprise) {
-		this.enterprise = enterprise;
-	}
-
 	public Double getPrice() {
 		return this.price;
 	}
 
 	public void setPrice(final Double price) {
 		this.price = price;
+	}
+
+	public String getZone() {
+		return this.zone;
+	}
+
+	public void setZone(final String zone) {
+		this.zone = zone;
 	}
 
 }

@@ -33,13 +33,13 @@ public class BannerService {
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
-	private AdministratorService	administratorService;
-
-	@Autowired
 	private NotificationService		notificationService;
 
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private AdministratorService	administratorService;
 
 	@Autowired
 	private Validator				validator;
@@ -73,8 +73,10 @@ public class BannerService {
 
 		result = new Banner();
 		result.setTotalViews(0);
+		result.setCurrentViews(0);
 		final Actor actor = this.actorService.findByPrincipal();
 		result.setActor(actor);
+		result.setIsActive(false);
 
 		return result;
 	}
@@ -82,7 +84,11 @@ public class BannerService {
 	public Banner save(final Banner banner) {
 		Assert.notNull(banner);
 		Banner result;
+		Actor actor;
 		double totalViewsVal;
+
+		actor = this.actorService.findByPrincipal();
+		Assert.isTrue(banner.getActor().equals(actor));
 
 		if (banner.getId() != 0)
 			//Solo se puede modificar si el current y el total view son iguales
@@ -109,13 +115,14 @@ public class BannerService {
 	}
 
 	public void delete(final Banner banner) {
-		Administrator principal;
+		Actor principal;
 
 		Assert.notNull(banner);
 		Assert.isTrue(banner.getId() != 0);
 
-		principal = this.administratorService.findByPrincipal();
+		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
+		Assert.isTrue(this.actorService.checkAuthority(principal, "ADMIN") || banner.getActor().equals(principal));
 
 		this.bannerRepository.delete(banner);
 	}
@@ -168,6 +175,7 @@ public class BannerService {
 		result.setTotalViews(bannerForm.getTotalViews());
 		result.setCurrentViews(bannerForm.getCurrentViews());
 		result.setPrice(bannerForm.getPrice());
+		result.setZone(bannerForm.getZone());
 
 		if (bannerForm.getPicture() != null)
 			result.setPicture(bannerForm.getPicture());
@@ -196,6 +204,38 @@ public class BannerService {
 		result.setCurrentViews(banner.getCurrentViews());
 		result.setPicture(banner.getPicture());
 		result.setStringImage(image);
+		result.setZone(banner.getZone());
+
+		return result;
+	}
+
+	public Collection<Banner> findByActorId(final int actorId) {
+		Collection<Banner> result;
+
+		result = this.bannerRepository.findByActorId(actorId);
+
+		return result;
+	}
+
+	public Banner active(final Banner banner) {
+		Assert.notNull(banner);
+		Banner result;
+		Administrator administrator;
+
+		administrator = this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
+
+		banner.setIsActive(true);
+		result = this.bannerRepository.save(banner);
+
+		//		Notification notification;
+		//		notification = this.notificationService.create();
+		//
+		//		notification.setType(NotificationType.BANNER);
+		//		notification.setReason("Banner aceptado");
+		//		notification.setDescription("Un banner que usted ha registrado ha sido aceptado. Si desea ver el banner haga click en el siguiente enlace: ");
+		//
+		//		this.notificationService.save(notification);
 
 		return result;
 	}

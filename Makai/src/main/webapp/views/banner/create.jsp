@@ -18,31 +18,32 @@
 <form:form action="${requestURI}" modelAttribute="bannerForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 	<form:hidden path="price"/>
+	<form:hidden path="currentViews"/>
 
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>
 	</jstl:if>
 	
 	<div class="row">
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<acme:input type="number" code="banner.totalViews" path="totalViews" mandatory="true" id="totalViews" />
 			
 			<p>
 				<spring:message code="banner.price" />:
 				<font id="divPrice">0</font> &euro;
 			</p>
+			
+		</div>
+		<div class="col-md-5 offset-md-1">
+			<acme:textbox code="banner.zone" path="zone" mandatory="true" />
+			<br>
+			
 			<spring:message code="image.formats" var="formats" />
 			<spring:message code="banner.picture" var="picture" />
 			<jstl:out value="${picture}"/>
 			<form:input type="file" path="bannerImage" id="bannerImage" name="bannerImage" mandatory="true" class="form:input-large" enctype="multipart/form-data" code="banner.picture"></form:input>
 			<jstl:out value="${formats}"/>
 			<form:errors path="bannerImage" cssClass="alert alert-danger form-control" />
-			
-		</div>
-		<div class="col-md-6 offset-md-1">
-			<br>
-			<acme:textbox code="banner.enterprise" path="enterprise" mandatory="true" />
-			<acme:input image="at" code="banner.email" path="email" mandatory="true" />
 		</div>
 	</div>
 	<br><br>

@@ -546,6 +546,7 @@
 		<property name="totalViews" value="250" />
 		<property name="currentViews" value="198" />
 		<property name="price" value="2.5" />
+		<property name="isActive" value="true" />
 		<property name="actor" ref="animalshelter1" />
 	</bean>
 	
@@ -559,6 +560,7 @@
 		<property name="totalViews" value="125" />
 		<property name="currentViews" value="125" />
 		<property name="price" value="1.25" />
+		<property name="isActive" value="true" />
 		<property name="actor" ref="advertising1" />
 	</bean>
 	
@@ -572,6 +574,7 @@
 		<property name="totalViews" value="10" />
 		<property name="currentViews" value="6" />
 		<property name="price" value="0.1" />
+		<property name="isActive" value="true" />
 		<property name="actor" ref="trainer1" />
 	</bean>
 	
