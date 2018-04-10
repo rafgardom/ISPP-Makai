@@ -15,7 +15,7 @@
 	<div class="alert alert-success"><spring:message code="${successMessage}" /></div>
 </jstl:if>
 
-<form:form action="${requestURI}" modelAttribute="banner" enctype="multipart/form-data">
+<form:form action="${requestURI}" modelAttribute="bannerForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 	<form:hidden path="price"/>
 
@@ -36,6 +36,7 @@
 			<jstl:out value="${picture}"/>
 			<form:input type="file" path="bannerImage" id="bannerImage" name="bannerImage" mandatory="true" class="form:input-large" enctype="multipart/form-data" code="banner.picture"></form:input>
 			<jstl:out value="${formats}"/>
+			<form:errors path="bannerImage" cssClass="alert alert-danger form-control" />
 			
 		</div>
 		<div class="col-md-6 offset-md-1">
@@ -55,6 +56,6 @@
 	
 	$("#totalViews").on("input", function() {
 		var totalViews = $("#totalViews").val();
-		$('#divPrice').text(0.01*totalViews);
+		$('#divPrice').text(Math.round((0.01*totalViews * 100 )) / 100);
 	});
 </script>

@@ -1,8 +1,11 @@
 
 package services;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Collection;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,12 +76,15 @@ public class BannerService {
 	public Banner save(final Banner banner) {
 		Assert.notNull(banner);
 		Banner result;
+		double totalViewsVal;
 
 		if (banner.getId() != 0)
 			//Solo se puede modificar si el current y el total view son iguales
 			Assert.isTrue(banner.getCurrentViews().equals(banner.getTotalViews()));
 
-		banner.setPrice(0.01 * banner.getTotalViews());
+		totalViewsVal = 0.01 * banner.getTotalViews() * 100;
+		totalViewsVal = Math.round(totalViewsVal);
+		banner.setPrice(totalViewsVal / 100);
 
 		result = this.bannerRepository.save(banner);
 
@@ -115,6 +121,7 @@ public class BannerService {
 		Assert.notNull(bannerForm);
 
 		Banner result;
+		BufferedImage bufferedImage;
 
 		if (bannerForm.getId() == 0 && bannerForm.getBannerImage().getSize() == 0) {
 			FieldError fieldError;
@@ -141,6 +148,11 @@ public class BannerService {
 			fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
 			binding.addError(fieldError);
 		}
+
+		bufferedImage = ImageIO.read(bannerForm.getBannerImage().getInputStream());
+		// Esto me vale para controlar el tamaño de los bannners
+		System.out.println(bufferedImage.getWidth());
+		System.out.println(bufferedImage.getHeight());
 
 		if (bannerForm.getId() == 0)
 			result = this.create();

@@ -99,9 +99,9 @@ public class BannerController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("banner/create");
-		result.addObject("banner", bannerForm);
+		result.addObject("bannerForm", bannerForm);
 		result.addObject("requestURI", "banner/create.do");
-		result.addObject("message", message);
+		result.addObject("errorMessage", message);
 
 		return result;
 	}
