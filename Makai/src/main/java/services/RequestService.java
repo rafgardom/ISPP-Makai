@@ -2,7 +2,6 @@
 package services;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.validation.Validator;
 
 import repositories.RequestRepository;
 import domain.Customer;
-import domain.Receipt;
 import domain.Request;
 import forms.RequestForm;
 
@@ -29,9 +27,6 @@ public class RequestService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private CustomerService		customerService;
-
-	@Autowired
-	private ReceiptService		receiptService;
 
 	@Autowired
 	private OfferService		offerService;
@@ -69,17 +64,12 @@ public class RequestService {
 	public Request create() {
 		Request result;
 		Customer principal;
-		Collection<Receipt> receipts;
 
 		principal = this.customerService.findByPrincipal();
 		Assert.notNull(principal);
 
 		result = new Request();
 		result.setCustomer(principal);
-		result.setIsCancelled(false);
-
-		receipts = new ArrayList<Receipt>();
-		result.setReceipts(receipts);
 
 		return result;
 	}
@@ -115,14 +105,8 @@ public class RequestService {
 		Assert.notNull(principal);
 		Assert.isTrue(request.getCustomer().getId() == principal.getId());
 
-		Assert.isTrue(request.getIsCancelled() == false);
-
 		//Comprobar de que no tiene ninguna oferta aceptada
-		if (this.offerService.findOfferAccepted(request) != null) {
-			Assert.isTrue(this.receiptService.getPendingReceipts(principal).isEmpty());
-			request.setIsCancelled(true);
-			this.requestRepository.save(request);
-		} else {
+		if (this.offerService.findOfferAccepted(request) == null) {
 			this.offerService.eraseOffersWhenRequestIsDeleted(request);
 			this.requestRepository.delete(request);
 		}
@@ -162,10 +146,6 @@ public class RequestService {
 
 	public Collection<Request> findRequestByCustomer(final Customer customer) {
 		return this.requestRepository.findRequestsByCustomer(customer.getId());
-	}
-
-	public Request findRequestAcceptedPendingReceipts(final Request request) {
-		return this.requestRepository.findRequestAcceptedPendingReceipts(request.getId());
 	}
 
 	public Collection<Request> findRequestsWithOffer() {

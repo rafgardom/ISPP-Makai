@@ -36,7 +36,6 @@
 		<bean class="converters.PriceToStringConverter" />
 		<bean class="converters.ProfessionalToStringConverter" />
 		<bean class="converters.RatingToStringConverter" />
-		<bean class="converters.ReceiptToStringConverter" />
 		<bean class="converters.RequestToStringConverter" />
 		<bean class="converters.SpecieToStringConverter" />
 		<bean class="converters.TrainerToStringConverter" />
@@ -58,7 +57,6 @@
 		<bean class="converters.StringToPriceConverter" />
 		<bean class="converters.StringToProfessionalConverter" />
 		<bean class="converters.StringToRatingConverter" />
-		<bean class="converters.StringToReceiptConverter" />
 		<bean class="converters.StringToRequestConverter" />
 		<bean class="converters.StringToSpecieConverter" />
 		<bean class="converters.StringToTrainerConverter" />

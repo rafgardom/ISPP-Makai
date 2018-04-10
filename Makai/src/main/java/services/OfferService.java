@@ -2,7 +2,6 @@
 package services;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -175,18 +174,6 @@ public class OfferService {
 
 	public Collection<Offer> findAcceptedOffersByCustomer(final Customer customer) {
 		return this.offerRepository.findAcceptedOffersByCustomer(customer.getId());
-	}
-
-	public Collection<Offer> findAcceptedOffersPendingReceipts(final Customer customer) {
-		Collection<Offer> offers;
-		Collection<Offer> result;
-
-		result = new ArrayList<Offer>();
-		offers = this.offerRepository.findAcceptedOffersByCustomer(customer.getId());
-		for (final Offer o : offers)
-			if (this.requestService.findRequestAcceptedPendingReceipts(o.getRequest()) != null)
-				result.add(o);
-		return result;
 	}
 
 	//Erase all offers not accepted that are linked to a request which has already an accepted offer

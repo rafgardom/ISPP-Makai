@@ -59,20 +59,8 @@ public class Trainer extends Actor {
 
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Receipt>	receipts;
 	private Collection<Offer>	offers;
 
-
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "trainer")
-	public Collection<Receipt> getReceipts() {
-		return this.receipts;
-	}
-
-	public void setReceipts(final Collection<Receipt> receipts) {
-		this.receipts = receipts;
-	}
 
 	@Valid
 	@NotNull

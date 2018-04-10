@@ -23,7 +23,6 @@ import utilities.UserNamePasswordValidator;
 import domain.Actor;
 import domain.Category;
 import domain.Offer;
-import domain.Receipt;
 import domain.Trainer;
 import forms.TrainerForm;
 
@@ -82,9 +81,6 @@ public class TrainerService {
 
 		final Collection<Offer> offers = new ArrayList<Offer>();
 		result.setOffers(offers);
-
-		final Collection<Receipt> receipts = new ArrayList<Receipt>();
-		result.setReceipts(receipts);
 
 		result.setAvgRating(0.0);
 
@@ -251,7 +247,6 @@ public class TrainerService {
 		result.setPhone(trainer.getPhone());
 		result.setPicture(trainer.getPicture());
 		result.setSurname(trainer.getSurname());
-		result.setReceipts(trainer.getReceipts());
 		result.setOffers(result.getOffers());
 		result.setAvgRating(trainer.getAvgRating());
 

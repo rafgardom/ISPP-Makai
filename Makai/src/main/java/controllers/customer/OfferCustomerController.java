@@ -79,7 +79,7 @@ public class OfferCustomerController extends AbstractController {
 
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/");
-			result.addObject("errorMessage", "receipt.pay.error");
+			result.addObject("errorMessage", "offer.pay.error");
 		}
 		return result;
 	}
@@ -93,7 +93,7 @@ public class OfferCustomerController extends AbstractController {
 
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/");
-			result.addObject("errorMessage", "receipt.pay.error");
+			result.addObject("errorMessage", "offer.pay.error");
 		}
 		return result;
 	}

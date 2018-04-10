@@ -62,7 +62,9 @@
 	
 	<display:column>
 		<div class="btn-group">
+		
 			<acme:link image="eye" href="request/actor/display.do?requestId=${row.id}"/>
+			
 			<security:authorize access="hasRole('CUSTOMER')">
 				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
 				<jstl:set var="showTrade" value="${false}"/>
@@ -76,7 +78,7 @@
 				</jstl:if>
 				
 				<jstl:set var="showDelete" value="${true}"/>
-				<jstl:forEach var="offer" items="${offersPendingReceipts}">
+				<jstl:forEach var="offer" items="${offersAcepted}">
 					<jstl:if test="${offer.request.id == row.id}">
 						<jstl:set var="showDelete" value="${false}"/>
 					</jstl:if>
@@ -86,6 +88,7 @@
 					<acme:delete href="request/customer/delete.do?requestId=${row.id}" id="${row.id}"/>
 				</jstl:if>
 			</security:authorize>
+			
 			<security:authorize access="hasRole('TRAINER')">
 				<acme:link href="offer/trainer/create.do?requestId=${row.id}" code="offer.create" image="deal" type="dark"/>
 			</security:authorize>

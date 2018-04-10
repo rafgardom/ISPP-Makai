@@ -60,7 +60,7 @@ public class RequestCustomerController extends AbstractController {
 		ModelAndView result;
 		Collection<Request> requests;
 		Customer customer;
-		Collection<Offer> offersPendingReceipts;
+		Collection<Offer> offersAcepted;
 		Collection<Request> requestsWithOffer;
 		final Integer numberNoti;
 
@@ -69,14 +69,14 @@ public class RequestCustomerController extends AbstractController {
 		customer = this.customerService.findByPrincipal();
 
 		requests = this.requestService.findRequestByCustomer(customer);
-		offersPendingReceipts = this.offerService.findAcceptedOffersPendingReceipts(customer);
+		offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
 		requestsWithOffer = this.requestService.findRequestsWithOffer();
 
 		result = new ModelAndView("request/myList");
 		result.addObject("requestURI", "request/customer/myList.do");
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("requests", requests);
-		result.addObject("offersPendingReceipts", offersPendingReceipts);
+		result.addObject("offersAcepted", offersAcepted);
 		result.addObject("requestsWithOffer", requestsWithOffer);
 
 		return result;

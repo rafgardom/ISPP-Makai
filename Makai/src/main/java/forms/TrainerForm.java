@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import security.UserAccount;
 import domain.Coordinates;
 import domain.Offer;
-import domain.Receipt;
 
 public class TrainerForm {
 
@@ -34,7 +33,6 @@ public class TrainerForm {
 	private String				password;
 	private String				repeatPassword;
 	private boolean				acceptCondition;
-	private Collection<Receipt>	receipts;
 	private Collection<Offer>	offers;
 	private String				username;
 	private MultipartFile		userImage;
@@ -143,14 +141,6 @@ public class TrainerForm {
 
 	public void setAcceptCondition(final boolean acceptCondition) {
 		this.acceptCondition = acceptCondition;
-	}
-
-	public Collection<Receipt> getReceipts() {
-		return this.receipts;
-	}
-
-	public void setReceipts(final Collection<Receipt> receipts) {
-		this.receipts = receipts;
 	}
 
 	public Collection<Offer> getOffers() {

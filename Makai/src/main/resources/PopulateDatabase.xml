@@ -850,11 +850,6 @@
 			</list>
 		</property>
 		<property name="avgRating" value="114.4" />
-		<property name="receipts">
-			<list>
-
-			</list>
-		</property>
 		<property name="offers">
 			<list>
 				<ref bean="offer1"/>
@@ -878,11 +873,6 @@
 			</list>
 		</property>
 		<property name="avgRating" value="16.4" />
-		<property name="receipts">
-			<list>
-				<ref bean="receipt1" />
-			</list>
-		</property>
 		<property name="offers">
 			<list>
 				<ref bean="offer3"/>
@@ -905,11 +895,6 @@
 			</list>
 		</property>
 		<property name="avgRating" value="42.9" />
-		<property name="receipts">
-			<list>
-
-			</list>
-		</property>
 		<property name="offers">
 			<list>
 
@@ -1023,40 +1008,22 @@
 		<property name="description" value="Description Request 1" />
 		<property name="tags" value="Tag Request 1" />
 		<property name="category" value="ABUSE" />
-		<property name="isCancelled" value="false" />
 		<property name="customer" ref="customer1" />
 		<property name="animal" ref="animal1" />
-		<property name="receipts">
-			<list>
-				
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="request2" class="domain.Request">
 		<property name="description" value="Description Request 2" />
 		<property name="tags" value="Tag Request 2" />
 		<property name="category" value="GENERAL" />
-		<property name="isCancelled" value="false" />
 		<property name="customer" ref="customer1" />
-		<property name="receipts">
-			<list>
-				
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="request3" class="domain.Request">
 		<property name="description" value="Description Request 3" />
 		<property name="tags" value="Tag Request 3" />
 		<property name="category" value="ADDICTION" />
-		<property name="isCancelled" value="false" />
 		<property name="customer" ref="customer2" />
-		<property name="receipts">
-			<list>
-				<ref bean="receipt1" />
-			</list>
-		</property>
 	</bean>
 	
 	<!-- Training -->
@@ -1119,17 +1086,6 @@
 		<property name="request" ref="request3" />
 		<property name="trainer" ref="trainer2" />
 		<property name="animal" ref="animal3" />
-	</bean>
-	
-	<!-- Receipt -->
-	<bean id="receipt1" class="domain.Receipt">
-		<property name="moment"><null/></property>
-		<property name="amount" value="259" />
-		<property name="commission" value="15" />
-		<property name="isPaid" value="false"/>
-		<property name="trainer" ref="trainer2" />
-		<property name="request" ref="request3" />
-		
 	</bean>
 	
 	<!-- Vehicle -->

@@ -1,14 +1,11 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -30,7 +27,6 @@ public class Request extends DomainEntity {
 	private String		description;
 	private String		tags;
 	private Category	category;
-	private Boolean		isCancelled;
 
 
 	@NotBlank
@@ -60,20 +56,10 @@ public class Request extends DomainEntity {
 		this.category = category;
 	}
 
-	@NotNull
-	public Boolean getIsCancelled() {
-		return this.isCancelled;
-	}
-
-	public void setIsCancelled(final Boolean isCancelled) {
-		this.isCancelled = isCancelled;
-	}
-
 
 	// Relationships ----------------------------------------------------------
-	private Customer			customer;
-	private Collection<Receipt>	receipts;
-	private Animal				animal;
+	private Customer	customer;
+	private Animal		animal;
 
 
 	@Valid
@@ -85,17 +71,6 @@ public class Request extends DomainEntity {
 
 	public void setCustomer(final Customer customer) {
 		this.customer = customer;
-	}
-
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "request")
-	public Collection<Receipt> getReceipts() {
-		return this.receipts;
-	}
-
-	public void setReceipts(final Collection<Receipt> receipts) {
-		this.receipts = receipts;
 	}
 
 	@Valid
