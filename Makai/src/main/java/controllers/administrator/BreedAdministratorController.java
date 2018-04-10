@@ -62,7 +62,7 @@ public class BreedAdministratorController extends AbstractController {
 		} else
 			try {
 				this.breedService.save(breed);
-				result = new ModelAndView("redirect:../../");
+				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(breed, "breed.commit.error");
 			}
@@ -135,10 +135,9 @@ public class BreedAdministratorController extends AbstractController {
 		species = this.specieService.findAll();
 
 		result = new ModelAndView("breed/create");
+		result.addObject("breed", breed);
 		result.addObject("species", species);
-		result.addObject("RequestURI", "breed/admin/create.do");
 		result.addObject("errorMessage", message);
-		result.addObject("breed1", breed);
 
 		return result;
 	}

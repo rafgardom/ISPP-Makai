@@ -10,9 +10,9 @@
 
 
 <div class="table-responsive">
-<display:table name="species" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
+<display:table name="breeds" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 	
-	<acme:column code="specie.type" property="type" sortable="true"/>
+	<acme:column code="breed.name" property="name" sortable="true"/>
 	
 	<display:column>
 

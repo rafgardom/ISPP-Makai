@@ -99,7 +99,7 @@ public class BreedService {
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 
-		//Comprobar de que ning�n Animal tiene asociada a esta Breed
+		//Comprobar de que ningun Animal tiene asociada a esta Breed
 		Assert.isTrue(!this.tieneBreedUnAnimal(breed));
 
 		this.breedRepository.delete(breed);
@@ -108,7 +108,7 @@ public class BreedService {
 	public Boolean tieneBreedUnAnimal(final Breed breed) {
 		Boolean res = true;
 
-		if (this.breedRepository.findAnimalWithThisBreed(breed.getBreed()).isEmpty())
+		if (this.breedRepository.findAnimalWithThisBreed(breed.getName()).isEmpty())
 			res = false;
 
 		return res;

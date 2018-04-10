@@ -32,7 +32,7 @@
 			<acme:select id="specie" items="${species }" itemLabel="type" code="animal.specie" path="specie" onchange="getBreeds();" mandatory="true" />
 	
 			<jstl:set var="json" value="${jsonBreeds }" />
-			<acme:select size="9" id="breed" items="${breeds }" itemLabel="breed" code="animal.breed" path="breeds" mandatory="true"/>
+			<acme:select size="9" id="breed" items="${breeds }" itemLabel="name" code="animal.breed" path="breeds" mandatory="true"/>
 
 	</div>
 	<div class="col-md-6">
@@ -83,7 +83,7 @@
 	    	html ='<option value=0 selected="selected" disabled="true">----</option>';
 	    	for(var i = 0; i < obj.length; i++) {
 	    		var e = obj[i];
-	            html += "<option value=" + e["id"]  + ">" +e["breed"] + "</option>";
+	            html += "<option value=" + e["id"]  + ">" +e["name"] + "</option>";
 	        }
 	    	selectBreeds.innerHTML = html;
 	    }

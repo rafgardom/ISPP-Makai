@@ -13,7 +13,7 @@ import domain.Breed;
 @Repository
 public interface BreedRepository extends JpaRepository<Breed, Integer> {
 
-	@Query("select a from Animal a join a.breeds b where b.breed=?1")
+	@Query("select a from Animal a join a.breeds b where b.name=?1")
 	Collection<Animal> findAnimalWithThisBreed(String breed);
 
 }

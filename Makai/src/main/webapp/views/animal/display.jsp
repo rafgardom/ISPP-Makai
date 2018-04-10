@@ -46,7 +46,7 @@
 			<jstl:forEach var="r" items="${animal.breeds}">
 				<jstl:if test="${r != null}">
 					<p><b><spring:message code="animal.breed" />:</b> <jstl:out
-				value="${r.breed}" /></p>
+				value="${r.name}" /></p>
 				</jstl:if>
 			</jstl:forEach>
 	  	

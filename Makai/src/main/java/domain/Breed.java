@@ -21,15 +21,15 @@ public class Breed extends DomainEntity {
 
 
 	// Attributes -------------------------------------------------------------
-	private String	breed;
+	private String	name;
 
 
 	@NotBlank
-	public String getBreed() {
-		return this.breed;
+	public String getName() {
+		return this.name;
 	}
-	public void setBreed(final String breed) {
-		this.breed = breed;
+	public void setName(final String name) {
+		this.name = name;
 	}
 
 

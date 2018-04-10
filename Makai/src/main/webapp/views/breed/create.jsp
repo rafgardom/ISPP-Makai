@@ -20,7 +20,7 @@
 <%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
 <jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
 
-<form:form  action="${RequestURI }" modelAttribute="breed1">
+<form:form  action="breed/admin/create.do" modelAttribute="breed">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
@@ -31,7 +31,7 @@
 	<div class="row">
 		<div class="col-md-6">
 			<acme:select items="${species }" itemLabel="type" code="breed.specie" path="specie"  mandatory="true" />
-			<acme:input code="breed.breed" path="breed" mandatory="true" />
+			<acme:input code="breed.name" path="name" mandatory="true" />
 		</div>
 	</div>
 	
