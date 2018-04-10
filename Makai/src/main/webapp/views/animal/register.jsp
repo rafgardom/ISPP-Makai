@@ -22,7 +22,10 @@
 			<acme:textbox code="animal.name" path="name" mandatory="true"/>
 			<acme:input code="animal.chipNumber" path="chipNumber" mandatory="true" image="chip" />
 			<acme:input code="animal.age" path="age" type="number" min="0" mandatory="true" />
-			<acme:selectNotEntity items="${sexs}" lang="${lang}" code="animal.sex" path="sex" mandatory="true"/>
+			
+			<acme:radioSex/> 
+	
+	<%-- <acme:selectNotEntity items="${sexs}" lang="${lang}" code="animal.sex" path="sex" mandatory="true"/>  --%>
 	</div>
 	
 	<div class="offset-md-1 col-md-6">
@@ -97,5 +100,16 @@
 	        }
 	    }
 	    
+	}
+</script>
+
+
+<script type="text/javascript">
+	value1 = document.getElementById("customRadio2").value;
+	valueForm = document.getElementById("valueForm").value;
+	if (value1 === valueForm) {
+		document.getElementById("customRadio2").checked = true;
+	}else{
+		document.getElementById("customRadio1").checked = true;
 	}
 </script>
