@@ -17,8 +17,8 @@
 	<display:column>
 
 		<div class="btn-group">	
-			<acme:link image="edit" href="specie/admin/edit.do?specieId=${row.id}" type="warning"/>
-			<acme:link image="trash" href="specie/admin/delete.do?specieId=${row.id}" type="danger"/>
+			<acme:link image="edit" href="breed/admin/edit.do?breedId=${row.id}" type="warning"/>
+			<acme:link image="trash" href="breed/admin/delete.do?breedId=${row.id}" type="danger"/>
 		</div>
 
 	</display:column>
