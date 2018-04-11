@@ -76,7 +76,8 @@ public class BannerService {
 		result.setCurrentViews(0);
 		final Actor actor = this.actorService.findByPrincipal();
 		result.setActor(actor);
-		result.setIsActive(false);
+		result.setActive(false);
+		result.setPaid(false);
 
 		return result;
 	}
@@ -94,7 +95,7 @@ public class BannerService {
 			//Solo se puede modificar si el current y el total view son iguales
 			Assert.isTrue(banner.getCurrentViews().equals(banner.getTotalViews()));
 
-		totalViewsVal = 0.01 * banner.getTotalViews() * 100;
+		totalViewsVal = 1.0 * banner.getTotalViews();
 		totalViewsVal = Math.round(totalViewsVal);
 		banner.setPrice(totalViewsVal / 100);
 
@@ -112,6 +113,11 @@ public class BannerService {
 		}
 
 		return result;
+	}
+
+	public void simpleSave(final Banner banner) {
+		Assert.notNull(banner);
+		this.bannerRepository.save(banner);
 	}
 
 	public void delete(final Banner banner) {
@@ -176,6 +182,7 @@ public class BannerService {
 		result.setCurrentViews(bannerForm.getCurrentViews());
 		result.setPrice(bannerForm.getPrice());
 		result.setZone(bannerForm.getZone());
+		result.setPaid(bannerForm.isPaid());
 
 		if (bannerForm.getPicture() != null)
 			result.setPicture(bannerForm.getPicture());
@@ -205,6 +212,8 @@ public class BannerService {
 		result.setPicture(banner.getPicture());
 		result.setStringImage(image);
 		result.setZone(banner.getZone());
+		result.setPaid(banner.isPaid());
+		result.setActive(banner.isActive());
 
 		return result;
 	}
@@ -225,7 +234,7 @@ public class BannerService {
 		administrator = this.administratorService.findByPrincipal();
 		Assert.notNull(administrator);
 
-		banner.setIsActive(true);
+		banner.setActive(true);
 		result = this.bannerRepository.save(banner);
 
 		//		Notification notification;

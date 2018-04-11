@@ -5,19 +5,26 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import paypal.PaypalEnvironment;
 import services.ActorService;
 import services.BannerService;
 import services.NotificationService;
+
+import com.paypal.api.payments.Payment;
+
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Banner;
@@ -138,7 +145,7 @@ public class BannerActorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final BannerForm bannerForm, final BindingResult binding) throws IOException {
+	public ModelAndView save(@Valid final BannerForm bannerForm, final BindingResult binding, final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
 
 		ModelAndView result;
 		Banner banner;
@@ -159,9 +166,17 @@ public class BannerActorController extends AbstractController {
 					banner.setPicture(savedFile);
 
 				}
+				banner.setPaid(false);
+				banner.setActive(false);
+				banner = this.bannerService.save(banner);
 
-				this.bannerService.save(banner);
-				result = new ModelAndView("redirect:list.do");
+				final double price = banner.getPrice();
+
+				final PaypalEnvironment paypalEnvironment = new PaypalEnvironment();
+				final Payment payment = paypalEnvironment.createPayment(req, resp, price, banner.getId(), "bannerId", "/banner/actor");
+				result = new ModelAndView("redirect:" + req.getAttribute("redirectURL"));
+
+				//				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
@@ -171,6 +186,56 @@ public class BannerActorController extends AbstractController {
 			}
 		return result;
 
+	}
+
+	@RequestMapping(value = "/payment/done", method = RequestMethod.GET)
+	public ModelAndView paymentFirstStep(@RequestParam(required = false) final int bannerId) {
+		ModelAndView result;
+		result = new ModelAndView();
+		try {
+			final Banner banner = this.bannerService.findOne(bannerId);
+			banner.setPaid(true);
+			this.bannerService.simpleSave(banner);
+			result = new ModelAndView("banner/actor/payment/successful");
+
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/");
+			result.addObject("errorMessage", "banner.pay.error");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/payment/successful", method = RequestMethod.GET)
+	public ModelAndView paymentSecondStep() {
+		ModelAndView result;
+		result = new ModelAndView();
+		try {
+			result = new ModelAndView("redirect:/banner/actor/payment/done.do");
+
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/");
+			result.addObject("errorMessage", "offer.pay.error");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/pay", method = RequestMethod.GET)
+	public ModelAndView payBanner(@RequestParam final int bannerId, final HttpServletRequest req, final HttpServletResponse resp) {
+		ModelAndView result;
+		try {
+			final Actor actor = this.actorService.findByPrincipal();
+			final Banner banner = this.bannerService.findOne(bannerId);
+			Assert.isTrue(banner.getActor().equals(actor));
+
+			final double price = banner.getPrice();
+
+			final PaypalEnvironment paypalEnvironment = new PaypalEnvironment();
+			final Payment payment = paypalEnvironment.createPayment(req, resp, price, banner.getId(), "bannerId", "/banner/actor");
+			result = new ModelAndView("redirect:" + req.getAttribute("redirectURL"));
+		} catch (final Throwable oops) {
+			result = new ModelAndView("error");
+		}
+		return result;
 	}
 
 	// Ancillary methods ------------------------------------------------------

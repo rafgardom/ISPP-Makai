@@ -109,6 +109,9 @@
 		<security:intercept-url pattern="/banner/actor/edit.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/banner/actor/display.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/banner/actor/delete.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/banner/actor/payment/done.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/banner/actor/pay.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/banner/actor/payment/successful.do" access="isAuthenticated()" />
 		
 		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/professional/register.do" access="isAnonymous()" /> 

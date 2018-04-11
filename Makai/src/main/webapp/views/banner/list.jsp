@@ -18,6 +18,17 @@
 	<acme:column code="banner.currentViews" property="currentViews" sortable="true"/>
 	<acme:column code="banner.price" property="price" sortable="true"/>
 	<acme:column code="banner.zone" property="zone" sortable="true"/>
+	<spring:message code="banner.paid" var="titleHeader" />
+	<display:column class="text-center" title="${titleHeader}" sortable="true">
+		<jstl:if test="${row.paid == true }">
+			<spring:message code="banner.paidTrue" var="paidTrue" />
+			<jstl:out value="${paidTrue }"/>
+		</jstl:if>
+		<jstl:if test="${row.paid == false }">
+			<acme:link href="banner/actor/pay.do?bannerId=${row.id}" code="banner.pay" type="success"/>
+		</jstl:if>
+	</display:column>
+	<acme:column code="banner.active" property="active" sortable="true"/>
 	
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>

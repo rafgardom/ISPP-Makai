@@ -17,6 +17,8 @@ public class BannerForm {
 	private Integer			currentViews;
 	private Double			price;
 	private String			zone;
+	private boolean			paid;
+	private boolean			isActive;
 
 
 	// Constructor ------------------------------------------------------------
@@ -90,6 +92,22 @@ public class BannerForm {
 
 	public void setZone(final String zone) {
 		this.zone = zone;
+	}
+
+	public boolean isPaid() {
+		return this.paid;
+	}
+
+	public void setPaid(final boolean paid) {
+		this.paid = paid;
+	}
+
+	public boolean isActive() {
+		return this.isActive;
+	}
+
+	public void setActive(final boolean isActive) {
+		this.isActive = isActive;
 	}
 
 }

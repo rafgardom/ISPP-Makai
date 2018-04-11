@@ -29,6 +29,7 @@ public class Banner extends DomainEntity {
 	private Double	price;
 	private String	zone;
 	private boolean	isActive;
+	private boolean	paid;
 
 
 	@Lob
@@ -74,12 +75,19 @@ public class Banner extends DomainEntity {
 		this.zone = zone;
 	}
 
-	@NotNull
-	public boolean getIsActive() {
+	public boolean isPaid() {
+		return this.paid;
+	}
+
+	public void setPaid(final boolean paid) {
+		this.paid = paid;
+	}
+
+	public boolean isActive() {
 		return this.isActive;
 	}
 
-	public void setIsActive(final boolean isActive) {
+	public void setActive(final boolean isActive) {
 		this.isActive = isActive;
 	}
 

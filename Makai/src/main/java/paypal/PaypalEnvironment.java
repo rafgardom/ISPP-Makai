@@ -110,6 +110,16 @@ public class PaypalEnvironment {
 		}
 	}
 
+	public static double round(double value, final int places) {
+		if (places < 0)
+			throw new IllegalArgumentException();
+
+		final long factor = (long) Math.pow(10, places);
+		value = value * factor;
+		final long tmp = Math.round(value);
+		return (double) tmp / factor;
+	}
+
 	public Payment createPayment(final HttpServletRequest req, final HttpServletResponse resp, final double totalAmount, final int objectId, final String objectType, final String controllerPath) {
 		Payment createdPayment = null;
 
@@ -148,8 +158,8 @@ public class PaypalEnvironment {
 			// Total must be equal to sum of shipping, tax and subtotal.
 			amount.setTotal("7");
 			//###Makai's commission
-			final Double price = totalAmount * 0.1;
-			amount.setTotal(price.toString());
+			final Double finalPrice = PaypalEnvironment.round(totalAmount, 2);
+			amount.setTotal(finalPrice.toString());
 			//			amount.setDetails(details);
 
 			// ###Transaction
@@ -158,12 +168,13 @@ public class PaypalEnvironment {
 			// is fulfilling it. Transaction is created with
 			// a `Payee` and `Amount` types
 			final Transaction transaction = new Transaction();
+
 			transaction.setAmount(amount);
 			transaction.setDescription("This is the payment transaction description.");
 
 			// ### Items
 			final Item item = new Item();
-			item.setName("Training/Entrenamiento").setQuantity("1").setCurrency("EUR").setPrice(price.toString());
+			item.setName("Training/Entrenamiento").setQuantity("1").setCurrency("EUR").setPrice(finalPrice.toString());
 			final ItemList itemList = new ItemList();
 			final List<Item> items = new ArrayList<Item>();
 			items.add(item);

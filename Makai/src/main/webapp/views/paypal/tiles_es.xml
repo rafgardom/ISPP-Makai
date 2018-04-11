@@ -21,5 +21,10 @@
 		<put-attribute name="body" value="/views/paypal/satisfied.jsp" />
 	</definition>
 	
+	<definition name="banner/actor/payment/successful" extends="master.page">
+		<put-attribute name="title" value="Pago realizado con éxito" />
+		<put-attribute name="body" value="/views/paypal/satisfied.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>
