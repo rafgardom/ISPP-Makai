@@ -54,19 +54,7 @@
 			<acme:textbox code="coordinates.city" path="coordinates.city" mandatory="true" />
 			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
 		</div>
-		<div class="col-md-12">
-		<br>
-			<spring:message code="image.formats" var="formats" />
-			<spring:message code="animalShelter.picture" var="picture" />
-			<jstl:out value="${picture}"/>
-			<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
-			class="form:input-large" enctype="multipart/form-data" code="customer.picture"></form:input>
-			<jstl:out value="${formats}"/>
-			<jstl:if test="${imageError != null}">
-				<acme:error code="${imageError}" type="danger"/>
-			</jstl:if>
-		</div>
-		<br><br><br>
+
 		<security:authorize access="isAnonymous()">
 		<div class="col-md-5">
 			<h3>
@@ -74,10 +62,13 @@
 			</h3>
 			<br />
 			<acme:input image="user-xs" code="animalShelter.username" path="username" mandatory="true" />
-			<acme:password image="lock1" code="animalShelter.password" path="password" mandatory="true" infoButton="true"/>
+			<acme:password image="lock1" code="animalShelter.password" path="password" mandatory="true" info="true"/>
 			<acme:password image="lock1" code="animalShelter.repeatPassword" path="repeatPassword" mandatory="true" />
 		</div>
 		</security:authorize>
+		<div class="offset-md-1 col-md-5">
+			<acme:inputImage path="userImage" imageError="${imageError}" mandatory="true"/>
+		</div>
 		<div class="col-md-12">
 			<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="animalShelter.accept" path="acceptCondition" linkCode="animalShelter.conditions" mandatory="true" target="_blank" />
 		</div>

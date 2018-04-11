@@ -56,21 +56,6 @@
 			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
 		</div>
 
-		<div class="col-md-12">
-		<br/>
-			
-			<spring:message code="customer.picture"/>
-			<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
-			enctype="multipart/form-data" code="customer.picture"></form:input>
-			<br/>
-			<p><spring:message code="image.formats"/></p>
-			<jstl:if test="${imageError != null}">
-				<acme:error code="${imageError}" type="danger"/>
-			</jstl:if>
-		<br/>
-		</div>
-
-<br/><br/><br/><br/>
 
 	<security:authorize access="isAnonymous()">
 		<div class="col-md-5">
@@ -78,12 +63,15 @@
 				<h3><spring:message code="customer.userAccountDetails" /></h3>
 				<br />
 				<acme:input image="user-xs" code="customer.username" path="username" mandatory="true" />
-				<acme:password image="lock1" code="customer.password" path="password" mandatory="true" infoButton="true"/>
+				<acme:password image="lock1" code="customer.password" path="password" mandatory="true" infoButton="true" info="true"/>
 				<acme:password image="lock1" code="customer.repeatPassword" path="repeatPassword" mandatory="true" />
 		</div>
 	</security:authorize>
+	<div class="offset-md-1 col-md-5">
+		<acme:inputImage path="userImage" imageError="${imageError}"  mandatory="true"/>
+	</div>
 	
-	<div class=" col-md-12">
+	<div class="col-md-12">
 		<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="customer.accept" path="acceptCondition" linkCode="customer.conditions"
 			mandatory="true" target="_blank" />
 	</div>

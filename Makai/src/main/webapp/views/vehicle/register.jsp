@@ -49,10 +49,7 @@
 			<acme:textbox code="vehicle.license" path="license" mandatory="true" />
 		</div>
 		<div class="col-12">
-			<spring:message code="vehicle.picture" /><strong>(*)</strong>
-			<form:input class="form-control-file" path="userImage" type="file" />
-			<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
-			<form:errors path="userImage" cssClass="error" />
+			<acme:inputImage path="userImage" mandatory="true"/>
 		</div>
 	</div>		
 

@@ -37,13 +37,7 @@
 		<div class="col-md-5 offset-md-1">
 			<acme:textbox code="banner.zone" path="zone" mandatory="true" />
 			<br>
-			
-			<spring:message code="image.formats" var="formats" />
-			<spring:message code="banner.picture" var="picture" />
-			<jstl:out value="${picture}"/>
-			<form:input type="file" path="bannerImage" id="bannerImage" name="bannerImage" mandatory="true" class="form:input-large" enctype="multipart/form-data" code="banner.picture"></form:input>
-			<jstl:out value="${formats}"/>
-			<form:errors path="bannerImage" cssClass="alert alert-danger form-control" />
+			<acme:inputImage path="bannerImage"/>
 		</div>
 	</div>
 	<br><br>

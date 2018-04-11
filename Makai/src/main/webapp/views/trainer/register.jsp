@@ -28,6 +28,7 @@
 <form:form action="${RequestURI}" modelAttribute="trainerForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 	
+	<br>
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>
 	</jstl:if>
@@ -55,31 +56,22 @@
 			<acme:textbox code="coordinates.city" path="coordinates.city" mandatory="true" />
 			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
 		</div>
-		<div class="col-md-12">
-		<br>
-			<spring:message code="image.formats" var="formats" />
-			<spring:message code="trainer.picture" var="picture" />
-			<jstl:out value="${picture}"/>
-			<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
-			class="form:input-large" enctype="multipart/form-data" code="trainer.picture"></form:input>
-			<jstl:out value="${formats}"/>
-			<jstl:if test="${imageError != null}">
-				<acme:error code="${imageError}" type="danger"/>
-			</jstl:if>
 
-		</div>
-		<br><br><br>
 		<security:authorize access="isAnonymous()">
 		<div class="col-md-5">
+			<br>
 			<h3>
 				<spring:message code="trainer.userAccountDetails" />
 			</h3>
 			<br />
 			<acme:input image="user-xs" code="trainer.username" path="username" mandatory="true" />
-			<acme:password image="lock1" code="trainer.password" path="password" mandatory="true" infoButton="true"/>
+			<acme:password image="lock1" code="trainer.password" path="password" mandatory="true" infoButton="true" info="true"/>
 			<acme:password image="lock1" code="trainer.repeatPassword" path="repeatPassword" mandatory="true" />
 		</div>
 		</security:authorize>
+		<div class="offset-md-1 col-md-5">
+			<acme:inputImage path="userImage" imageError="${imageError}"  mandatory="true"/>
+		</div>
 		<div class="col-md-12">
 			<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="trainer.accept" path="acceptCondition" linkCode="trainer.conditions"
 					mandatory="true" target="_blank" />

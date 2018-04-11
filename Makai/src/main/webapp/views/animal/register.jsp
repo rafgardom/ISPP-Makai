@@ -36,10 +36,8 @@
 
 	</div>
 	<div class="col-md-6">
-		<spring:message code="animal.picture" /><strong>(*)</strong>
-		<form:input class="form-control-file" path="animalImage" type="file" />
-		<spring:message code="image.formats" var="formats" /><jstl:out value="${formats}"/><br>
-		<form:errors path="animalImage" cssClass="alert alert-danger form-control" />
+		<br>
+		<acme:inputImage path="animalImage" mandatory="true"/>
 	</div>
 </div>
 

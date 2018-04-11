@@ -78,9 +78,10 @@
 			<br />
 			<span class="message"><spring:message code="${message}" /></span>
 		</jstl:if>	
-	</div>
+	
 	<div>
 		<tiles:insertAttribute name="footer" />
+	</div>
 	</div>
 
 </body>

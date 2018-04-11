@@ -24,11 +24,12 @@
  
 <%@ attribute name="path" required="true" rtexprvalue="true" %>
 <%@ attribute name="code" required="true" rtexprvalue="true" %>
+<%@ attribute name="image" required="true" %>
 
 <%@ attribute name="mandatory" required="false" %>
 <%@ attribute name="placeholder" required="false" %>
-<%@ attribute name="image" required="false" %>
 <%@ attribute name="infoButton" required="false" %>
+<%@ attribute name="info" required="false" %>
 
 <jstl:if test="${mandatory == null}">
 	<jstl:set var="mandatory" value="false" />
@@ -45,44 +46,18 @@
 				</jstl:if>
 		</form:label>
 		
-		<jstl:if test="${infoButton != null}">
-			<button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#myModal"><b>?</b></button>
-		</jstl:if>
-		
-	<jstl:if test="${image != null}">
-		<div class="input-group"><!-- NO BORRAR -->
+		<div class="input-group">
 			<div class="input-group-prepend">
 				<span class="input-group-text btn-light"><img src="images/${image}.png"/></span>
 			</div>
-	</jstl:if>
-		<form:password path="${path}" class="form-control" placeholder="${placeholder}" />
-<jstl:if test="${image == null}">
-		<form:errors path="${path}" cssClass="alert alert-danger form-control" />
-</jstl:if>
-	</div>
-<jstl:if test="${image != null}">
+			<form:password path="${path}" class="form-control" placeholder="${placeholder}" />
+		</div>
 	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
-	</div><!-- NO BORRAR -->
-</jstl:if>
-</spring:bind>
+	<jstl:if test="${info != null}">
+		<small class="form-text text-muted">*<spring:message code="customer.password.error1"/><br>
+		*<spring:message code="customer.password.error2"/></small>
+	</jstl:if>
+	
+	</div>
 
-<!-- MODAL Button info -->
-<jstl:if test="${infoButton != null}">
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-dialog-centered modal">
-      <div class="modal-content">
-        <div class="modal-header">	
-        	<ul>
-		        <li>
-		        	<h6><b><spring:message code="customer.password.error1"/></b></h6>
-		        </li>
-		        <li> 
-		            <h6><b><spring:message code="customer.password.error2"/></b></h6>
-		        </li>
-	        </ul>
-        	<button type="button" class="close" data-dismiss="modal">&times;</button>
-         </div>   	
-      </div>
-    </div>
-  </div>
-</jstl:if>
+</spring:bind>

@@ -36,10 +36,6 @@
 	
 			<acme:input code="profile.phone" path="phone" mandatory="true" image="phone" pattern="((\+|00)\d{2,4}(\s)?)?\d{9,13}" />
 			<acme:input code="profile.email" path="email" mandatory="true" image="at" type="email" />
-	
-			<form:input path="userImage" type="file" />
-			<spring:message code="image.formats" var="formats" /><p><jstl:out value="${formats}"/></p><br>
-			<form:errors path="userImage" cssClass="error" />
 		</div>
 		
 		<div class="offset-md-1 col-md-5">
@@ -53,30 +49,31 @@
 			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
 		
 		</div>	
-		<div class="col-md-6">
-		<fieldset id="fieldsetPassword" disabled>
-			<h3>
-				<spring:message code="profile.userAccountDetails" />
-			</h3>
-			<br />
-			<acme:password code="security.password" path="password" image="lock1"/>
-			<acme:password code="security.password" path="repeatPassword" image="lock1"/>
-		</fieldset>
-		<h6 class="alert alert-info"><spring:message code="profile.editPassword"/><br><br>
-			
-	 		<strong><input type="radio" id="radioPasswordY" name="answerPw" onclick="editPasswordYes()" /><spring:message code="profile.Yes"/>
-			<input type="radio" id="radioPasswordN" name="answerPw" onclick="editPasswordNo()" checked="checked" /><spring:message code="profile.No"/></strong>
-		
-		</h6>
+		<div class="col-md-5">
+
+	
+		<div class="alert alert-primary">
+		<h3>
+			<spring:message code="profile.userAccountDetails" />
+		</h3>
+		<br>
+		<h6><spring:message code="profile.editPassword"/><br><br>	
+			<strong><input type="radio" id="radioPasswordY" name="answerPw" onclick="editPasswordYes()" /><spring:message code="profile.Yes"/>
+			<input type="radio" id="radioPasswordN" name="answerPw" onclick="editPasswordNo()" checked="checked" /><spring:message code="profile.No"/></strong></h6>
+			<fieldset id="fieldsetPassword" disabled>
+				<br />
+				<acme:password code="security.password" path="password" image="lock1"/>
+				<acme:password code="security.password" path="repeatPassword" image="lock1"/>
+			</fieldset>
+		</div>
+	
+		</div>
+		<div class="offset-md-1 col-md-5">
+			<acme:inputImage path="userImage"/>
 		</div>
 	</div>
 	<br>	
 		
-		
-
-
-	<br/>
-	<br/>
 	
 	<acme:submit code="profile.save" name="save" />
 	<acme:cancel code="profile.cancel" url="profile/display.do" />
