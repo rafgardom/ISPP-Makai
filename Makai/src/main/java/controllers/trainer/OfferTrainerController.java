@@ -87,6 +87,7 @@ public class OfferTrainerController extends AbstractController {
 		Actor actor;
 		Offer offer;
 		final String image;
+		Boolean intruso = false;
 		final Integer numberNoti;
 
 		actor = this.actorService.findByPrincipal();
@@ -95,13 +96,24 @@ public class OfferTrainerController extends AbstractController {
 
 		image = Utilities.showImage(offer.getAnimal().getPicture());
 
-		result = new ModelAndView("offer/display");
-		result.addObject("offer", offer);
-		result.addObject("principal", actor);
-		result.addObject("animalImage", image);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "offer/trainer/display.do?" + offer.getId());
+		if (this.actorService.checkAuthority(actor, "CUSTOMER"))
+			if (offer.getRequest().getCustomer().getId() != actor.getId())
+				intruso = true;
+		if (this.actorService.checkAuthority(actor, "TRAINER"))
+			if (offer.getTrainer().getId() != actor.getId())
+				intruso = true;
 
+		if (intruso == true)
+			result = new ModelAndView("redirect:../../");
+		else {
+
+			result = new ModelAndView("offer/display");
+			result.addObject("offer", offer);
+			result.addObject("principal", actor);
+			result.addObject("animalImage", image);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "offer/trainer/display.do?" + offer.getId());
+		}
 		return result;
 	}
 
