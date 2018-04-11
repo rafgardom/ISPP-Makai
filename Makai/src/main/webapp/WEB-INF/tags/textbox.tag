@@ -54,6 +54,6 @@
 			</jstl:if>
 		</form:label>
 		<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" />	
-		<form:errors path="${path}" cssClass="alert alert-danger form-control" />
+		<form:errors path="${path}" cssClass="alert alert-danger form-control-sm d-block" />
 	</div>
 </spring:bind>

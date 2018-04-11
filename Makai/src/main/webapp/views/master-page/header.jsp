@@ -153,9 +153,9 @@
 					<div class="dropdown-menu" x-placement="bottom-start"
 						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="customer/register.do"><spring:message
-								code="master.page.customer.register" /></a> <%-- <a
+								code="master.page.customer.register" /></a>  <a
 							class="dropdown-item" href="professional/register.do"><spring:message
-								code="master.page.professional.register" /></a> --%> <a
+								code="master.page.professional.register" /></a>  <a
 							class="dropdown-item" href="trainer/register.do"><spring:message
 								code="master.page.trainer.register" /></a> <a class="dropdown-item"
 							href="animalShelter/register.do"><spring:message

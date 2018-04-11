@@ -20,7 +20,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
 <jstl:if test="${successMessage != null}">
 	<div class="alert alert-success"><spring:message code="${successMessage}" /></div>
 </jstl:if>
@@ -28,74 +27,54 @@
 <form:form action="${RequestURI}" modelAttribute="professionalForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 		
+	<br>
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>
 	</jstl:if>
-	<fieldset>
-		<legend>
-			<spring:message code="professional.personalDetails" />
-		</legend>
-
-		<acme:textbox code="professional.name" path="name" mandatory="true" />
-		<acme:textbox code="professional.phone" path="phone" mandatory="true" />
-		<acme:textbox code="professional.email" path="email" mandatory="true" />
-	</fieldset>
-	<br />
-	<fieldset>
-		<legend>
-			<spring:message code="professional.coordinates" />
-		</legend>
-		<br />
-		<acme:textbox code="coordinates.country" path="coordinates.country"
-			mandatory="true" />
-		<acme:textbox code="coordinates.state" path="coordinates.state" />
-		<acme:textbox code="coordinates.province" path="coordinates.province" />
-		<acme:textbox code="coordinates.city" path="coordinates.city"
-			mandatory="true" />
-		<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code"
-			mandatory="true" />
-		<br />
-
-	</fieldset>
-	<br/>
 	
+	<div class="row">
+		<div class="col-md-5">
+
+			<h3><spring:message code="professional.personalDetails" /></h3>
+			
+			<acme:textbox code="professional.name" path="name" mandatory="true" />
+			<acme:input image="phone" code="professional.phone" path="phone" mandatory="true" />
+			<acme:input image="at" code="professional.email" path="email" mandatory="true" />
+			<br>
+			<acme:inputImage path="userImage" imageError="${imageError}"  mandatory="true"/>
+		</div>
+		
+		<div class="offset-md-1 col-md-5">
+			
+			<h3><spring:message code="professional.coordinates" /></h3>
+	
+			<acme:textbox code="coordinates.country" path="coordinates.country" mandatory="true" />
+			<acme:textbox code="coordinates.state" path="coordinates.state" />
+			<acme:textbox code="coordinates.province" path="coordinates.province" />
+			<acme:textbox code="coordinates.city" path="coordinates.city" mandatory="true" />
+			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
+		</div>
+
+
 	<security:authorize access="isAnonymous()">
-			<br />
-			<fieldset>
-				<legend>
-					<spring:message code="professional.userAccountDetails" />
-				</legend>
+		<div class="col-md-5">
+			
+				<h3><spring:message code="professional.userAccountDetails" /></h3>
 				<br />
-				<acme:textbox code="professional.username" path="username"
-					mandatory="true" />
-				<acme:password code="professional.password" path="password"
-					mandatory="true" infoButton="true" />
-				<acme:password code="professional.repeatPassword" path="repeatPassword"
-					mandatory="true" />
-				<br/>
-				<br/>
-					<spring:message code="image.formats" var="formats" />
-					<spring:message code="professional.picture" var="picture" />
-					<jstl:out value="${picture}"/>
-					<form:input type="file" path="userImage" id="userImage" name="userImage" mandatory="true"
-					class="form:input-large" enctype="multipart/form-data" code="customer.picture"></form:input>
-					<jstl:out value="${formats}"/>
-					<jstl:if test="${imageError != null}">
-						<acme:error code="${imageError}" type="danger"/>
-					</jstl:if>
-				<br/>
-				<br/>
-				<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="professional.accept" path="acceptCondition" linkCode="professional.conditions"
-					mandatory="true" target="_blank" />
-			</fieldset>
+				<acme:input image="user-xs" code="professional.username" path="username" mandatory="true" />
+				<acme:password image="lock1" code="professional.password" path="password" mandatory="true" info="true"/>
+				<acme:password image="lock1" code="professional.repeatPassword" path="repeatPassword" mandatory="true" />
+		</div>
 	</security:authorize>
-	<br/>
+		
+		<div class="col-md-12">
+			<acme:acceptUseTerms href="misc/privacyPolicy.do?sc=false" code="professional.accept" path="acceptCondition" linkCode="professional.conditions"
+				mandatory="true" target="_blank" />
+		</div>
 
-	<br/>
-	<br/>
-	
+	</div>
+	<br>
 		<acme:submit code="professional.register" name="save" />
 		<acme:cancel code="professional.cancel" url="" />
-	<br/>
 	
 </form:form>

@@ -37,7 +37,7 @@
 
 <form:input type="file" path="${path}"></form:input>
 <small class="form-text text-muted"><spring:message code="image.formats"/></small>
-<form:errors path="${path}" cssClass="alert alert-danger form-control" />
+<form:errors path="${path}" cssClass="alert alert-danger form-control-sm d-block" />
 
 <!-- Solo para actores -->
 <jstl:if test="${inputError != null}">

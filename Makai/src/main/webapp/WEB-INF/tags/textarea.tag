@@ -52,7 +52,7 @@
 	<jstl:if test="${maxCharacters != null}">
 		<span class="pull-right label label-default" id="count_message_${path}"></span>
 	</jstl:if>
-	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
+	<form:errors path="${path}" cssClass="alert alert-danger form-control-sm d-block" />
 </div>
 
 <script type="text/javascript">
