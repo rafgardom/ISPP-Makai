@@ -244,8 +244,14 @@ public class TravelService {
 		Assert.notNull(travel);
 		final TravelForm result = new TravelForm();
 		Transporter principal;
+		final Collection<Animal> animals = new ArrayList<Animal>();
+		Collection<Animal> animalsAux;
 
 		principal = this.transporterService.findByPrincipal();
+		animalsAux = this.animalService.findByActorId(principal.getId());
+		for (final Animal a : animalsAux)
+			if (travel.getAnimals().contains(a))
+				animals.add(a);
 
 		result.setDestination(travel.getDestination());
 		result.setOrigin(travel.getOrigin());
@@ -256,6 +262,7 @@ public class TravelService {
 		result.setHumanSeats(travel.getHumanSeats());
 		result.setVehicle(travel.getVehicle());
 		result.setId(travel.getId());
+		result.setAnimals(animals);
 
 		if (principal.getTravelPassengers().contains(travel))
 			result.setPrincipalPassenger(true);
