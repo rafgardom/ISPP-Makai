@@ -28,7 +28,7 @@ public class Banner extends DomainEntity {
 	private Integer	currentViews;
 	private Double	price;
 	private String	zone;
-	private boolean	isActive;
+	private boolean	active;
 	private boolean	paid;
 
 
@@ -84,11 +84,11 @@ public class Banner extends DomainEntity {
 	}
 
 	public boolean isActive() {
-		return this.isActive;
+		return this.active;
 	}
 
-	public void setActive(final boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(final boolean active) {
+		this.active = active;
 	}
 
 

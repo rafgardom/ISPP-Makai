@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import domain.Actor;
+
 public class BannerForm {
 
 	// Attributes -------------------------------------------------------------
@@ -18,7 +20,8 @@ public class BannerForm {
 	private Double			price;
 	private String			zone;
 	private boolean			paid;
-	private boolean			isActive;
+	private boolean			active;
+	private Actor			actor;
 
 
 	// Constructor ------------------------------------------------------------
@@ -103,11 +106,19 @@ public class BannerForm {
 	}
 
 	public boolean isActive() {
-		return this.isActive;
+		return this.active;
 	}
 
-	public void setActive(final boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(final boolean active) {
+		this.active = active;
+	}
+
+	public Actor getActor() {
+		return this.actor;
+	}
+
+	public void setActor(final Actor actor) {
+		this.actor = actor;
 	}
 
 }

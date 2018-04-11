@@ -140,7 +140,6 @@ public class BannerService {
 		Assert.notNull(bannerForm);
 
 		Banner result;
-		BufferedImage bufferedImage;
 
 		if (bannerForm.getId() == 0 && bannerForm.getBannerImage().getSize() == 0) {
 			FieldError fieldError;
@@ -166,12 +165,14 @@ public class BannerService {
 			};
 			fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
 			binding.addError(fieldError);
-		}
+		} else if (bannerForm.getBannerImage().getSize() != 0) {
+			BufferedImage bufferedImage;
 
-		bufferedImage = ImageIO.read(bannerForm.getBannerImage().getInputStream());
-		// Esto me vale para controlar el tamaño de los bannners
-		System.out.println(bufferedImage.getWidth());
-		System.out.println(bufferedImage.getHeight());
+			bufferedImage = ImageIO.read(bannerForm.getBannerImage().getInputStream());
+			// Esto me vale para controlar el tamaño de los bannners
+			System.out.println(bufferedImage.getWidth());
+			System.out.println(bufferedImage.getHeight());
+		}
 
 		if (bannerForm.getId() == 0)
 			result = this.create();
@@ -183,6 +184,7 @@ public class BannerService {
 		result.setPrice(bannerForm.getPrice());
 		result.setZone(bannerForm.getZone());
 		result.setPaid(bannerForm.isPaid());
+		result.setActive(bannerForm.isActive());
 
 		if (bannerForm.getPicture() != null)
 			result.setPicture(bannerForm.getPicture());
@@ -214,6 +216,7 @@ public class BannerService {
 		result.setZone(banner.getZone());
 		result.setPaid(banner.isPaid());
 		result.setActive(banner.isActive());
+		result.setActor(banner.getActor());
 
 		return result;
 	}

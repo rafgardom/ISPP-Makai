@@ -7,6 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<security:authentication var="principalUserAccount" property="principal" />
 <div class="table-responsive">
 <display:table name="bannerForms" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
@@ -40,11 +41,17 @@
 		<div class="btn-group" data-toggle="buttons">	
 			<acme:link image="eye" href="banner/actor/display.do?bannerId=${row.id}"/>
 			
-			<jstl:if test="${row.totalViews==row.currentViews }">
-				<acme:link image="edit" href="banner/actor/edit.do?bannerId=${row.id}" type="warning"/>
+			<jstl:if test="${principalUserAccount.id == row.actor.userAccount.id }">
+				<jstl:if test="${row.totalViews==row.currentViews }">
+					<acme:link image="edit" href="banner/actor/edit.do?bannerId=${row.id}" type="warning"/>
+				</jstl:if>
+				
+				<acme:delete href="banner/actor/delete.do?bannerId=${row.id}" id="${row.id}"/>
 			</jstl:if>
 			
-			<acme:delete href="banner/actor/delete.do?bannerId=${row.id}" id="${row.id}"/>
+			<security:authorize access="hasRole('ADMIN')">
+				<acme:delete href="banner/actor/delete.do?bannerId=${row.id}" id="${row.id}"/>
+			</security:authorize>
 			
 		</div>
 	</display:column>

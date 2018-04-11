@@ -18,6 +18,7 @@
 <form:form action="${requestURI}" modelAttribute="bannerForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 	<form:hidden path="price"/>
+	<form:hidden path="active"/>
 	<form:hidden path="currentViews"/>
 
 	<jstl:if test="${errorMessage != null}">
@@ -42,7 +43,7 @@
 	</div>
 	<br><br>
 	<acme:submit code="banner.create" name="save" />
-	<acme:cancel code="banner.cancel" url="" />
+	<acme:cancel code="banner.cancel" url="banner/actor/list.do" />
 	
 </form:form>
 

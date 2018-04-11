@@ -143,7 +143,7 @@
 					href="security/login.do"> <spring:message
 							code="master.page.sign.in" />
 				</a></li>
-				<li class="nav-item"><a class="nav-link"
+				<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#advertisingModal"
 					href="banner/create.do"> <spring:message
 							code="master.page.banner.advertise" />
 				</a></li>
@@ -166,19 +166,27 @@
 					</div></li>
 			</security:authorize>
 			
+			<security:authorize access="hasRole('ADMIN')">
+				<li class="nav-item"><a class="nav-link"
+					href="banner/actor/list.do"> <spring:message
+							code="master.page.banners" />
+				</a></li>
+			</security:authorize>
+			
 			<security:authorize access="isAuthenticated()">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<spring:message code="master.page.banners" />
-					</a>
-					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-						<a class="dropdown-item" href="banner/actor/create.do">
-				 			<spring:message code="master.page.banner.create" /></a> 
-						<a class="dropdown-item" href="banner/actor/list.do">
-							<spring:message code="master.page.banner.list" /></a>
-					</div>
-				</li>
-				
+				<security:authorize access="!hasRole('ADMIN')">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+							<spring:message code="master.page.banners" />
+						</a>
+						<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+							<a class="dropdown-item" href="banner/actor/create.do">
+					 			<spring:message code="master.page.banner.create" /></a> 
+							<a class="dropdown-item" href="banner/actor/list.do">
+								<spring:message code="master.page.banner.list" /></a>
+						</div>
+					</li>
+				</security:authorize>
 				<li class="nav-item">
 				<a class="nav-link"
 					href="notification/actor/list.do">
@@ -213,3 +221,28 @@
 		</form> -->
 	</div>
 </nav>
+
+<!-- The Modal -->
+<div class="modal fade" id="advertisingModal">
+	<div class="modal-dialog modal-dialog-centered modal-sm">
+		<div class="modal-content">
+		
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title"><spring:message code="master.page.banner.advertise"/></h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+				<spring:message code="master.page.banner.haveAccount"/>
+			</div>
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location='security/login.do'"><spring:message code="master.page.yes"/></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="location='advertising/register.do'"><spring:message code="master.page.no"/></button>
+			</div>
+		  
+		</div>
+	</div>
+  </div>

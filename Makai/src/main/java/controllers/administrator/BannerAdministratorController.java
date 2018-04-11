@@ -1,5 +1,5 @@
 
-package controllers.actor;
+package controllers.administrator;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -31,8 +31,8 @@ import domain.Banner;
 import forms.BannerForm;
 
 @Controller
-@RequestMapping("/banner/actor")
-public class BannerActorController extends AbstractController {
+@RequestMapping("/banner/admin")
+public class BannerAdministratorController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
@@ -47,7 +47,7 @@ public class BannerActorController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public BannerActorController() {
+	public BannerAdministratorController() {
 		super();
 	}
 
@@ -56,20 +56,15 @@ public class BannerActorController extends AbstractController {
 	public ModelAndView listByAdvertising() {
 		ModelAndView result;
 		Collection<BannerForm> bannerForms;
-		Collection<Banner> banners;
 		Actor actor;
 		Integer numberNoti;
 
 		actor = this.actorService.findByPrincipal();
-		if (this.actorService.checkAuthority(actor, "ADMIN"))
-			banners = this.bannerService.findAll();
-		else
-			banners = this.bannerService.findByActorId(actor.getId());
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		bannerForms = new HashSet<BannerForm>();
 
-		for (final Banner b : banners)
+		for (final Banner b : this.bannerService.findByActorId(actor.getId()))
 			bannerForms.add(this.bannerService.bannerToFormObject(b));
 
 		result = new ModelAndView("banner/list");
