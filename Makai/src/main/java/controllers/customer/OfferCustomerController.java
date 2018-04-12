@@ -54,7 +54,11 @@ public class OfferCustomerController extends AbstractController {
 			request = offer.getRequest();
 			Assert.isTrue(!this.requestService.tieneOfferAceptadaUnRequest(request));
 			final PaypalEnvironment paypalEnvironment = new PaypalEnvironment();
-			final Payment payment = paypalEnvironment.createPayment(req, resp, offer.getPrice() * 0.1, offer.getId(), "offerId", "/offer/customer");
+			Double price = offer.getPrice() * 0.1;
+			if (price > 2500.0)
+				price = 2500.0;
+
+			final Payment payment = paypalEnvironment.createPayment(req, resp, price, offer.getId(), "offerId", "/offer/customer");
 
 			result = new ModelAndView("redirect:" + req.getAttribute("redirectURL"));
 			//			this.offerService.acceptedOffer(offer);

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -42,6 +43,7 @@ public class Banner extends DomainEntity {
 	}
 
 	@Min(1)
+	@Max(250000)
 	public Integer getTotalViews() {
 		return this.totalViews;
 	}
