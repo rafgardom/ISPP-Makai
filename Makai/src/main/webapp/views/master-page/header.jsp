@@ -144,8 +144,9 @@
 							code="master.page.sign.in" />
 				</a></li>
 				<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#advertisingModal"
-					href="banner/create.do"> <spring:message
-							code="master.page.banner.advertise" />
+					href="banner/create.do"> 
+					<img src="images/ad.png" class="img-menu"/>
+					<spring:message code="master.page.banner.advertise" />
 				</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
@@ -177,7 +178,7 @@
 				<security:authorize access="!hasRole('ADMIN')">
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-							<spring:message code="master.page.banners" />
+								<img src="images/ad.png" class="img-menu"/><spring:message code="master.page.banners" />
 						</a>
 						<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 							<a class="dropdown-item" href="banner/actor/create.do">

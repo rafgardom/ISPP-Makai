@@ -125,18 +125,18 @@ span.pagebanner {
 	padding: 2px 4px 2px 4px;
 	width: 79%;
 	margin-top: 10px;
-	display: block;
+	display: none;
 	border-bottom: none;
 }
 
 span.pagelinks {
-	background-color: #eee;
+/* 	background-color: #eee;
 	border: 1px dotted #999;
 	padding: 2px 4px 2px 4px;
 	width: 79%;
-	display: block;
-	border-top: none;
-	margin-bottom: -5px;
+	margin-bottom: -5px; */
+	display: flex;
+    justify-content: center;
 }
 
 .group-1 {

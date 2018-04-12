@@ -58,7 +58,7 @@
 
 </head>
 
-<body style="background-color:#ECFAFB; padding-left: 2%; padding-right: 2%">
+<body style="background-color:#ECFAFB;">
 	<div class="container">
 	<div>
 		<tiles:insertAttribute name="header" />

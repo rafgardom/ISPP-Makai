@@ -574,7 +574,7 @@ pre code {
 
 @media (min-width: 576px) {
   .container {
-    max-width: 540px;
+    max-width: 640px;
   }
 }
 
@@ -2017,7 +2017,7 @@ pre code {
 }
 
 .form-control:disabled, .form-control[readonly] {
-  background-color: #f7f7f9;
+  background-color: #EAEAEA;
   opacity: 1;
 }
 
