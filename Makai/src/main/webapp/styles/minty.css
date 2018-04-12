@@ -5014,6 +5014,12 @@ tbody.collapse.show {
   border-radius: 0.4rem;
 }
 
+.alert-password {
+  color: #AFDDD3;
+  background-color: #A7D7C9;
+  border-color: #b8daff;
+}
+
 .alert-heading {
   color: inherit;
 }

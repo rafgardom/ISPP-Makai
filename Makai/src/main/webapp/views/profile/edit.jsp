@@ -52,7 +52,7 @@
 		<div class="col-md-5">
 
 	
-		<div class="alert alert-primary">
+		<div class="alert alert-password">
 		<h3>
 			<spring:message code="profile.userAccountDetails" />
 		</h3>
