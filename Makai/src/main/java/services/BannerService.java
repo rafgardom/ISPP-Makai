@@ -21,6 +21,7 @@ import domain.Actor;
 import domain.Administrator;
 import domain.Banner;
 import domain.Notification;
+import domain.NotificationType;
 import forms.BannerForm;
 
 @Service
@@ -71,12 +72,14 @@ public class BannerService {
 	public Banner create() {
 		Banner result;
 
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+
 		result = new Banner();
 		result.setTotalViews(0);
 		result.setCurrentViews(0);
-		final Actor actor = this.actorService.findByPrincipal();
 		result.setActor(actor);
-		result.setActive(false);
+		result.setValidated(false);
 		result.setPaid(false);
 
 		return result;
@@ -95,10 +98,15 @@ public class BannerService {
 			//Solo se puede modificar si el current y el total view son iguales
 			Assert.isTrue(banner.getCurrentViews().equals(banner.getTotalViews()));
 
+		Assert.isTrue(banner.getZone().equals("izquierda") || banner.getZone().equals("derecha") || banner.getZone().equals("abajo"));
+
 		totalViewsVal = 1.0 * banner.getTotalViews();
 		totalViewsVal = Math.round(totalViewsVal);
 		banner.setPrice(totalViewsVal / 100);
 
+		// siempre que se haga una modificacion en el banner el admin debe volver a validarlo y se debe volver a realizar el pago
+		banner.setPaid(false);
+		banner.setValidated(false);
 		result = this.bannerRepository.save(banner);
 
 		if (banner.getId() == 0) {
@@ -174,6 +182,15 @@ public class BannerService {
 			System.out.println(bufferedImage.getHeight());
 		}
 
+		if (!bannerForm.getZone().equals("izquierda") && !bannerForm.getZone().equals("derecha") && !bannerForm.getZone().equals("abajo")) {
+			FieldError fieldError;
+			final String[] codes = {
+				"banner.zone.error"
+			};
+			fieldError = new FieldError("bannerForm", "zone", bannerForm.getZone(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
 		if (bannerForm.getId() == 0)
 			result = this.create();
 		else
@@ -184,7 +201,7 @@ public class BannerService {
 		result.setPrice(bannerForm.getPrice());
 		result.setZone(bannerForm.getZone());
 		result.setPaid(bannerForm.isPaid());
-		result.setActive(bannerForm.isActive());
+		result.setValidated(bannerForm.isValidated());
 
 		if (bannerForm.getPicture() != null)
 			result.setPicture(bannerForm.getPicture());
@@ -215,7 +232,7 @@ public class BannerService {
 		result.setStringImage(image);
 		result.setZone(banner.getZone());
 		result.setPaid(banner.isPaid());
-		result.setActive(banner.isActive());
+		result.setValidated(banner.isValidated());
 		result.setActor(banner.getActor());
 
 		return result;
@@ -229,25 +246,25 @@ public class BannerService {
 		return result;
 	}
 
-	public Banner active(final Banner banner) {
+	public Banner validate(final Banner banner) {
 		Assert.notNull(banner);
 		Banner result;
 		Administrator administrator;
+		Notification notification;
 
 		administrator = this.administratorService.findByPrincipal();
 		Assert.notNull(administrator);
 
-		banner.setActive(true);
+		banner.setValidated(true);
 		result = this.bannerRepository.save(banner);
 
-		//		Notification notification;
-		//		notification = this.notificationService.create();
-		//
-		//		notification.setType(NotificationType.BANNER);
-		//		notification.setReason("Banner aceptado");
-		//		notification.setDescription("Un banner que usted ha registrado ha sido aceptado. Si desea ver el banner haga click en el siguiente enlace: ");
-		//
-		//		this.notificationService.save(notification);
+		notification = this.notificationService.create(banner.getActor());
+
+		notification.setType(NotificationType.BANNER);
+		notification.setReason("Banner aceptado");
+		notification.setDescription("Un banner que usted ha registrado ha sido aceptado.");
+
+		this.notificationService.save(notification);
 
 		return result;
 	}

@@ -18,7 +18,7 @@
 <form:form action="${requestURI}" modelAttribute="bannerForm" enctype="multipart/form-data">
 	<form:hidden path="id"/>
 	<form:hidden path="price"/>
-	<form:hidden path="active"/>
+	<form:hidden path="validated"/>
 	<form:hidden path="currentViews"/>
 
 	<jstl:if test="${errorMessage != null}">
@@ -36,7 +36,19 @@
 			
 		</div>
 		<div class="col-md-5 offset-md-1">
-			<acme:textbox code="banner.zone" path="zone" mandatory="true" />
+			<div class="form-group">
+				<form:label path="zone">
+					<spring:message code="banner.zone" />
+					<img src="images/asterisk.png"	width="16"/> 
+				</form:label>	
+				<form:select path="zone" class="form-control" >
+					<form:option value="0" label="----" selected="selected" disabled="disabled"/>
+					<form:option value="izquierda" ><spring:message code="banner.zone.izquierda" /></form:option>
+					<form:option value="derecha" ><spring:message code="banner.zone.derecha" /></form:option>
+					<form:option value="abajo" ><spring:message code="banner.zone.abajo" /></form:option>
+				</form:select>
+				<form:errors path="zone" cssClass="alert alert-danger form-control" />
+			</div>
 			<br>
 			<acme:inputImage path="bannerImage"/>
 		</div>
@@ -49,6 +61,10 @@
 
 <script type="text/javascript">
 	
+	if($("#totalViews").val()>0){
+		var totalViews = $("#totalViews").val();
+		$('#divPrice').text(Math.round((0.01*totalViews * 100 )) / 100);
+	}
 	
 	$("#totalViews").on("input", function() {
 		var totalViews = $("#totalViews").val();

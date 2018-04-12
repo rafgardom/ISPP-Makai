@@ -12,6 +12,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Banner extends DomainEntity {
@@ -29,7 +31,7 @@ public class Banner extends DomainEntity {
 	private Integer	currentViews;
 	private Double	price;
 	private String	zone;
-	private boolean	active;
+	private boolean	validated;
 	private boolean	paid;
 
 
@@ -69,6 +71,7 @@ public class Banner extends DomainEntity {
 		this.price = price;
 	}
 
+	@NotBlank
 	public String getZone() {
 		return this.zone;
 	}
@@ -77,6 +80,7 @@ public class Banner extends DomainEntity {
 		this.zone = zone;
 	}
 
+	@NotNull
 	public boolean isPaid() {
 		return this.paid;
 	}
@@ -85,12 +89,13 @@ public class Banner extends DomainEntity {
 		this.paid = paid;
 	}
 
-	public boolean isActive() {
-		return this.active;
+	@NotNull
+	public boolean isValidated() {
+		return this.validated;
 	}
 
-	public void setActive(final boolean active) {
-		this.active = active;
+	public void setValidated(final boolean validated) {
+		this.validated = validated;
 	}
 
 

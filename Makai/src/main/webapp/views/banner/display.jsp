@@ -9,7 +9,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <div class="center-div">
- <img src="${bannerImage}" class="rounded-circle" alt="<spring:message code='animal.no.picture' />" width="200px" height="200px">
+ <img src="${banner.stringImage}" class="rounded-circle" alt="<spring:message code='animal.no.picture' />" width="200px" height="200px">
 </div>
 <br>
 <div class="card-deck">
@@ -28,7 +28,7 @@
 				
 			<p>
 				<b><spring:message code="banner.zone" />:</b>
-				<jstl:out value="${banner.zone}" />
+				<spring:message code="banner.zone.${banner.zone}" />
 			</p>
 			
 			<security:authorize access="hasRole('ADMIN')">

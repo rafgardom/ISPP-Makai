@@ -74,6 +74,8 @@
 		<security:intercept-url pattern="/specie/admin/edit.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/specie/admin/delete.do" access="hasRole('ADMIN')" />
 		
+		<security:intercept-url pattern="/banner/admin/validate.do" access="hasRole('ADMIN')" />
+		
 		<security:intercept-url pattern="/breed/admin/list.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/breed/admin/create.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/breed/admin/edit.do" access="hasRole('ADMIN')" />
@@ -118,7 +120,6 @@
 		<security:intercept-url pattern="/trainer/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/animalShelter/register.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/advertising/register.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/banner/create.do" access="isAnonymous()" /> 
 		
 		<security:intercept-url pattern="/animal/register.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
 		<security:intercept-url pattern="/animal/delete.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />

@@ -18,18 +18,44 @@
 	<acme:column code="banner.totalViews" property="totalViews" sortable="true" />
 	<acme:column code="banner.currentViews" property="currentViews" sortable="true"/>
 	<acme:column code="banner.price" property="price" sortable="true"/>
-	<acme:column code="banner.zone" property="zone" sortable="true"/>
+	
+	<spring:message code="banner.zone" var="zoneHeader" />
+	<display:column class="text-center" title="${zoneHeader}" sortable="true">
+		<spring:message code="banner.zone.${row.zone}"  />
+	</display:column>
 	<spring:message code="banner.paid" var="titleHeader" />
 	<display:column class="text-center" title="${titleHeader}" sortable="true">
-		<jstl:if test="${row.paid == true }">
-			<spring:message code="banner.paidTrue" var="paidTrue" />
-			<jstl:out value="${paidTrue }"/>
-		</jstl:if>
-		<jstl:if test="${row.paid == false }">
-			<acme:link href="banner/actor/pay.do?bannerId=${row.id}" code="banner.pay" type="success"/>
-		</jstl:if>
+		<jstl:choose>
+			<jstl:when test="${row.paid == true }">
+				<spring:message code="banner.paidTrue"  />
+			</jstl:when>
+			<jstl:when test="${row.paid == false && principalUserAccount.id == row.actor.userAccount.id && row.validated == true }">
+				<acme:link href="banner/actor/pay.do?bannerId=${row.id}" code="banner.pay" type="success"/>
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="banner.paidFalse"  />
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
-	<acme:column code="banner.active" property="active" sortable="true"/>
+	
+	<spring:message code="banner.validated" var="validatedHeader" />
+	<display:column class="text-center" title="${validatedHeader}" sortable="true">
+		<jstl:choose>
+			<jstl:when test="${row.validated == true }">
+				<spring:message code="banner.validatedTrue"  />
+			</jstl:when>
+			<jstl:otherwise>
+				<security:authorize access="isAuthenticated()">
+					<security:authorize access="!hasRole('ADMIN')">
+						<spring:message code="banner.validatedFalse"  />
+					</security:authorize>
+					<security:authorize access="hasRole('ADMIN')">
+						<acme:link href="banner/admin/validate.do?bannerId=${row.id}" code="banner.validate" type="success"/>
+					</security:authorize>
+				</security:authorize>
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 	
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>

@@ -3,6 +3,7 @@ package forms;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
 import domain.Actor;
@@ -20,7 +21,7 @@ public class BannerForm {
 	private Double			price;
 	private String			zone;
 	private boolean			paid;
-	private boolean			active;
+	private boolean			validated;
 	private Actor			actor;
 
 
@@ -89,6 +90,7 @@ public class BannerForm {
 		this.price = price;
 	}
 
+	@NotBlank
 	public String getZone() {
 		return this.zone;
 	}
@@ -105,12 +107,12 @@ public class BannerForm {
 		this.paid = paid;
 	}
 
-	public boolean isActive() {
-		return this.active;
+	public boolean isValidated() {
+		return this.validated;
 	}
 
-	public void setActive(final boolean active) {
-		this.active = active;
+	public void setValidated(final boolean validated) {
+		this.validated = validated;
 	}
 
 	public Actor getActor() {

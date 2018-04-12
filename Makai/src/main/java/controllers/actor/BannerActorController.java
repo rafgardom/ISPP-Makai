@@ -86,14 +86,16 @@ public class BannerActorController extends AbstractController {
 		ModelAndView result;
 		final Integer numberNoti;
 		Banner banner;
+		BannerForm bannerForm;
 
 		banner = this.bannerService.findOne(bannerId);
+		bannerForm = this.bannerService.bannerToFormObject(banner);
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		result = new ModelAndView("banner/display");
 		result.addObject("requestURI", "banner/actor/display.do");
 		result.addObject("numberNoti", numberNoti);
-		result.addObject("banner", banner);
+		result.addObject("banner", bannerForm);
 
 		return result;
 	}
@@ -150,7 +152,7 @@ public class BannerActorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final BannerForm bannerForm, final BindingResult binding, final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+	public ModelAndView save(@Valid final BannerForm bannerForm, final BindingResult binding) throws IOException {
 
 		ModelAndView result;
 		Banner banner;
@@ -172,16 +174,9 @@ public class BannerActorController extends AbstractController {
 
 				}
 				banner.setPaid(false);
-				banner.setActive(false);
+				banner.setValidated(false);
 				banner = this.bannerService.save(banner);
-
-				final double price = banner.getPrice();
-
-				final PaypalEnvironment paypalEnvironment = new PaypalEnvironment();
-				final Payment payment = paypalEnvironment.createPayment(req, resp, price, banner.getId(), "bannerId", "/banner/actor");
-				result = new ModelAndView("redirect:" + req.getAttribute("redirectURL"));
-
-				//				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
@@ -231,6 +226,7 @@ public class BannerActorController extends AbstractController {
 			final Actor actor = this.actorService.findByPrincipal();
 			final Banner banner = this.bannerService.findOne(bannerId);
 			Assert.isTrue(banner.getActor().equals(actor));
+			Assert.isTrue(banner.isValidated());
 
 			final double price = banner.getPrice();
 
