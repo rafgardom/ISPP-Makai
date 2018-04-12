@@ -298,7 +298,7 @@ public class AnimalController extends AbstractController {
 	}
 
 	protected ModelAndView createEditModelAndView(final AnimalForm animalForm, final String message) {
-		ModelAndView result;
+		final ModelAndView result;
 		Sex[] sexs;
 		final Collection<Specie> species;
 		final Collection<Breed> breeds;
@@ -311,10 +311,11 @@ public class AnimalController extends AbstractController {
 		json = new Gson().toJson(breeds);
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
+		result = new ModelAndView("animal/register");
 		if (animalForm.getId() == 0)
-			result = new ModelAndView("animal/register");
+			result.addObject("requestURI", "animal/register.do");
 		else
-			result = new ModelAndView("welcome/index");
+			result.addObject("requestURI", "animal/edit.do");
 		result.addObject("animalForm", animalForm);
 		result.addObject("sexs", sexs);
 		result.addObject("species", species);
