@@ -190,15 +190,7 @@ public class AnimalService {
 
 		Animal result;
 
-		if (animalForm.getAnimalImage().getSize() == 0) {
-			FieldError fieldError;
-			final String[] codes = {
-				"animal.picture.empty.error"
-			};
-			fieldError = new FieldError("animalForm", "animalImage", animalForm.getAnimalImage(), false, codes, null, "");
-			binding.addError(fieldError);
-
-		} else if (animalForm.getAnimalImage().getSize() > 5242880) {
+		if (animalForm.getAnimalImage().getSize() > 5242880) {
 			FieldError fieldError;
 			final String[] codes = {
 				"animal.picture.tooLong.error"
