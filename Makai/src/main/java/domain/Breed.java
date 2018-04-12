@@ -3,6 +3,7 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ public class Breed extends DomainEntity {
 	private String	name;
 
 
+	@Column(unique = true)
 	@NotBlank
 	public String getName() {
 		return this.name;

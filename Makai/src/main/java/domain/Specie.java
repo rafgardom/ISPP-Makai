@@ -3,6 +3,7 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -21,6 +22,7 @@ public class Specie extends DomainEntity {
 	private String	type;
 
 
+	@Column(unique = true)
 	@NotBlank
 	public String getType() {
 		return this.type;
