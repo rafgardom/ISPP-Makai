@@ -71,7 +71,8 @@ public class OfferForm {
 		this.startMoment = startMoment;
 	}
 
-	@Min(0)
+	@NotNull
+	@Min(1)
 	public Double getPrice() {
 		return this.price;
 	}

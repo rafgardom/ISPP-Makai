@@ -66,7 +66,8 @@ public class Offer extends DomainEntity {
 		this.isAccepted = isAccepted;
 	}
 
-	@Min(0)
+	@NotNull
+	@Min(1)
 	public Double getPrice() {
 		return this.price;
 	}
