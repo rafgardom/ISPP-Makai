@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -157,6 +158,7 @@ public class AnimalController extends AbstractController {
 		final Integer numberNoti;
 		try {
 			animal = this.animalService.findOne(animalId);
+			Assert.isTrue(animal.getIsHidden() == false);
 			//			animalForm = this.animalService.animalToFormObject(animal);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 			breeds = animal.getBreeds().toArray(new Breed[animal.getBreeds().size()]);
@@ -216,6 +218,7 @@ public class AnimalController extends AbstractController {
 		AnimalForm animalForm;
 		try {
 			animal = this.animalService.findOne(animalId);
+			Assert.isTrue(animal.getIsHidden() == false);
 			animalForm = this.animalService.animalToFormObject(animal);
 
 			result = this.createEditModelAndView(animalForm);

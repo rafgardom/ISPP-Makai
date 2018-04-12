@@ -116,6 +116,7 @@ public class AnimalService {
 		AnimalShelter animalShelter;
 		Customer customer;
 
+		Assert.isTrue(animal.getIsHidden() == false);
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
 		Assert.isTrue(this.actorService.checkAuthority(principal, Authority.CUSTOMER) || this.actorService.checkAuthority(principal, Authority.ANIMALSHELTER));
@@ -142,6 +143,7 @@ public class AnimalService {
 		Collection<Offer> ofertasRelacionadas;
 		Notification notification;
 
+		Assert.isTrue(animal.getIsHidden() == false);
 		Assert.notNull(animal);
 		Assert.isTrue(animal.getId() != 0);
 
@@ -171,7 +173,7 @@ public class AnimalService {
 
 		//Cambiamos el atributo isHidden a true cuando el animal es eliminado
 		animal.setIsHidden(true);
-		this.save(animal);
+		this.animalRepository.save(animal);
 	}
 
 	// Other business methods -------------------------------------------------
