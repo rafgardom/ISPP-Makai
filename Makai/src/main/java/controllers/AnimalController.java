@@ -231,6 +231,7 @@ public class AnimalController extends AbstractController {
 		ModelAndView result;
 		Animal animal;
 		byte[] savedFile;
+		animal = this.animalService.reconstruct(animalForm, binding);
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -238,7 +239,6 @@ public class AnimalController extends AbstractController {
 
 		} else
 			try {
-				animal = this.animalService.reconstruct(animalForm, binding);
 
 				if (animalForm.getAnimalImage().getSize() > 0) {
 

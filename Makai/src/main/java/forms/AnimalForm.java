@@ -3,10 +3,11 @@ package forms;
 
 import java.util.Collection;
 
-import javax.persistence.Column;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.web.multipart.MultipartFile;
 
 import domain.Breed;
@@ -46,6 +47,7 @@ public class AnimalForm {
 		this.id = id;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return this.name;
 	}
@@ -54,8 +56,7 @@ public class AnimalForm {
 		this.name = name;
 	}
 
-	@NotBlank
-	@Column(unique = true)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getChipNumber() {
 		return this.chipNumber;
 	}
@@ -72,6 +73,7 @@ public class AnimalForm {
 		this.age = age;
 	}
 
+	@Valid
 	public Sex getSex() {
 		return this.sex;
 	}
@@ -97,6 +99,7 @@ public class AnimalForm {
 		this.animalImage = animalImage;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getStringImage() {
 		return this.stringImage;
 	}

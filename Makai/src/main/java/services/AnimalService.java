@@ -190,7 +190,7 @@ public class AnimalService {
 
 		Animal result;
 
-		if (animalForm.getId() == 0 && animalForm.getAnimalImage().getSize() == 0) {
+		if (animalForm.getAnimalImage().getSize() == 0) {
 			FieldError fieldError;
 			final String[] codes = {
 				"animal.picture.empty.error"

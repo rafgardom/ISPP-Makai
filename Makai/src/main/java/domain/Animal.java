@@ -18,6 +18,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -59,6 +61,7 @@ public class Animal extends DomainEntity {
 		this.isHidden = isHidden;
 	}
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return this.name;
 	}
@@ -66,8 +69,7 @@ public class Animal extends DomainEntity {
 		this.name = name;
 	}
 
-	@NotBlank
-	@Column(unique = true)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getChipNumber() {
 		return this.chipNumber;
 	}
