@@ -210,6 +210,50 @@ public class AnimalController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveRegister(@Valid final AnimalForm animalForm, final BindingResult binding) throws IOException {
+
+		ModelAndView result;
+		Animal animal;
+		byte[] savedFile;
+		animal = this.animalService.reconstruct(animalForm, binding);
+
+		if (binding.hasErrors()) {
+			System.out.println(binding.toString());
+			result = this.createEditModelAndView(animalForm);
+
+		} else
+			try {
+
+				if (animalForm.getAnimalImage().getSize() > 0 && animalForm.getAnimalImage().getSize() <= 5242880) {
+
+					savedFile = animalForm.getAnimalImage().getBytes();
+					animal.setPicture(savedFile);
+
+				}
+
+				animal = this.animalService.save(animal);
+				result = new ModelAndView("redirect:list.do");
+
+			} catch (final Throwable oops) {
+				System.out.println(oops);
+
+				if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
+					FieldError fieldError;
+					final String[] codes = {
+						"animal.chipNumber.extension.error"
+					};
+					fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+					binding.addError(fieldError);
+				}
+
+				result = this.createEditModelAndView(animalForm, "animal.commit.error");
+
+			}
+		return result;
+
+	}
+
 	// Edition ----------------------------------------------------------------		
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int animalId) {

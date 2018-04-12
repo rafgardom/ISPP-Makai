@@ -10,7 +10,7 @@
 <%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
 <jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
 
-<form:form action="${RequestURI}" modelAttribute="animalForm" enctype="multipart/form-data">
+<form:form action="${requestURI}" modelAttribute="animalForm" enctype="multipart/form-data">
 	
 	<form:hidden path="id" />
 
