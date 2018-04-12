@@ -219,6 +219,7 @@ public class AnimalController extends AbstractController {
 		try {
 			animal = this.animalService.findOne(animalId);
 			Assert.isTrue(animal.getIsHidden() == false);
+			Assert.isTrue(animalId != 0);
 			animalForm = this.animalService.animalToFormObject(animal);
 
 			result = this.createEditModelAndView(animalForm);
@@ -313,7 +314,7 @@ public class AnimalController extends AbstractController {
 		if (animalForm.getId() == 0)
 			result = new ModelAndView("animal/register");
 		else
-			result = new ModelAndView("animal/edit");
+			result = new ModelAndView("welcome/index");
 		result.addObject("animalForm", animalForm);
 		result.addObject("sexs", sexs);
 		result.addObject("species", species);
