@@ -23,36 +23,33 @@
 	<display:column class="text-center" title="${zoneHeader}" sortable="true">
 		<spring:message code="banner.zone.${row.zone}"  />
 	</display:column>
+	
+	<spring:message code="banner.validated" var="validatedHeader" />
+	<display:column class="text-center" title="${validatedHeader}" sortable="true">
+		<security:authorize access="isAuthenticated()">
+			<security:authorize access="!hasRole('ADMIN')">
+				<img src="images/${row.validated}.png" title="<spring:message code='banner.validated.${row.validated}' />" >
+			</security:authorize>
+			<security:authorize access="hasRole('ADMIN')">
+				<jstl:if test="${row.validated==false }">
+					<acme:link href="banner/admin/validate.do?bannerId=${row.id}" code="banner.validate" type="success"/>
+				</jstl:if>
+				<jstl:if test="${row.validated==true }">
+					<img src="images/${row.validated}.png" title="<spring:message code='banner.validated.${row.validated}' />" >
+				</jstl:if>
+				
+			</security:authorize>
+		</security:authorize>
+	</display:column>
+	
 	<spring:message code="banner.paid" var="titleHeader" />
 	<display:column class="text-center" title="${titleHeader}" sortable="true">
 		<jstl:choose>
-			<jstl:when test="${row.paid == true }">
-				<spring:message code="banner.paidTrue"  />
-			</jstl:when>
 			<jstl:when test="${row.paid == false && principalUserAccount.id == row.actor.userAccount.id && row.validated == true }">
 				<acme:link href="banner/actor/pay.do?bannerId=${row.id}" code="banner.pay" type="success"/>
 			</jstl:when>
 			<jstl:otherwise>
-				<spring:message code="banner.paidFalse"  />
-			</jstl:otherwise>
-		</jstl:choose>
-	</display:column>
-	
-	<spring:message code="banner.validated" var="validatedHeader" />
-	<display:column class="text-center" title="${validatedHeader}" sortable="true">
-		<jstl:choose>
-			<jstl:when test="${row.validated == true }">
-				<spring:message code="banner.validatedTrue"  />
-			</jstl:when>
-			<jstl:otherwise>
-				<security:authorize access="isAuthenticated()">
-					<security:authorize access="!hasRole('ADMIN')">
-						<spring:message code="banner.validatedFalse"  />
-					</security:authorize>
-					<security:authorize access="hasRole('ADMIN')">
-						<acme:link href="banner/admin/validate.do?bannerId=${row.id}" code="banner.validate" type="success"/>
-					</security:authorize>
-				</security:authorize>
+				<img src="images/${row.paid}.png" title="<spring:message code='banner.paid.${row.paid}' />" >
 			</jstl:otherwise>
 		</jstl:choose>
 	</display:column>
