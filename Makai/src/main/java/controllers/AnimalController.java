@@ -240,7 +240,7 @@ public class AnimalController extends AbstractController {
 		} else
 			try {
 
-				if (animalForm.getAnimalImage().getSize() > 0) {
+				if (animalForm.getAnimalImage().getSize() > 0 && animalForm.getAnimalImage().getSize() <= 5242880) {
 
 					savedFile = animalForm.getAnimalImage().getBytes();
 					animal.setPicture(savedFile);
