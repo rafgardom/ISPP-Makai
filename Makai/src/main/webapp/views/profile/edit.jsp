@@ -62,7 +62,7 @@
 			<input type="radio" id="radioPasswordN" name="answerPw" onclick="editPasswordNo()" checked="checked" /><spring:message code="profile.No"/></strong></h6>
 			<fieldset id="fieldsetPassword" disabled>
 				<br />
-				<acme:password code="security.password" path="password" image="lock1"/>
+				<acme:password code="security.password" path="password" image="lock1" infoButton="true" info="true" />
 				<acme:password code="security.password" path="repeatPassword" image="lock1"/>
 			</fieldset>
 		</div>

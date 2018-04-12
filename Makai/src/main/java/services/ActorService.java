@@ -4,6 +4,7 @@ package services;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,7 @@ import repositories.ActorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import utilities.UserNamePasswordValidator;
 import domain.Actor;
 import domain.Administrator;
 import domain.Customer;
@@ -185,8 +187,13 @@ public class ActorService {
 		Assert.notNull(profileForm);
 		final Actor principal;
 		Actor result = null;
+		final UserNamePasswordValidator accountValidator = new UserNamePasswordValidator();
+		boolean passwordValidator = false;
 
 		principal = this.findByPrincipal();
+
+		if (accountValidator.passwordValidate(profileForm.getPassword()))
+			passwordValidator = true;
 
 		if (profileForm.getUserImage().getSize() > 5242880) {
 			FieldError fieldError;
@@ -204,6 +211,26 @@ public class ActorService {
 			fieldError = new FieldError("profileForm", "userImage", profileForm.getUserImage(), false, codes, null, "");
 			binding.addError(fieldError);
 		}
+
+		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$");
+		if (!profileForm.getCoordinates().getState().isEmpty())
+			if (!coordinatePattern.matcher(profileForm.getCoordinates().getState()).matches()) {
+				FieldError fieldError;
+				final String[] codes = {
+					"general.coordinates.state.error"
+				};
+				fieldError = new FieldError("profileForm", "coordinates.state", profileForm.getCoordinates().getState(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+		if (!profileForm.getCoordinates().getProvince().isEmpty())
+			if (!coordinatePattern.matcher(profileForm.getCoordinates().getProvince()).matches()) {
+				FieldError fieldError;
+				final String[] codes = {
+					"general.coordinates.province.error"
+				};
+				fieldError = new FieldError("profileForm", "coordinates.province", profileForm.getCoordinates().getProvince(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
 
 		if (this.checkAuthority(principal, "CUSTOMER")) {
 			Customer customer;
@@ -239,15 +266,23 @@ public class ActorService {
 		if (profileForm.getPicture() != null)
 			result.setPicture(profileForm.getPicture());
 
-		if (profileForm.getPassword() != null && !profileForm.getPassword().isEmpty() && !profileForm.getPassword().equals(profileForm.getRepeatPassword())) {
-			FieldError fieldError;
-			final String[] codes = {
-				"profile.repeatPasword.error"
-			};
-			fieldError = new FieldError("profileForm", "repeatPassword", profileForm.getPassword(), false, codes, null, "");
-			binding.addError(fieldError);
-		} else if (profileForm.getPassword() != null && !profileForm.getPassword().isEmpty())
-			result.getUserAccount().setPassword(this.hashPassword(profileForm.getPassword()));
+		if (profileForm.getPassword() != null && !profileForm.getPassword().isEmpty())
+			if (!profileForm.getPassword().equals(profileForm.getRepeatPassword())) {
+				FieldError fieldError;
+				final String[] codes = {
+					"profile.repeatPasword.error"
+				};
+				fieldError = new FieldError("profileForm", "repeatPassword", profileForm.getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
+			} else if (profileForm.getPassword().contains(" ") || !passwordValidator) {
+				FieldError fieldError;
+				final String[] codes = {
+					"profile.password.error"
+				};
+				fieldError = new FieldError("profileForm", "password", profileForm.getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
+			} else
+				result.getUserAccount().setPassword(this.hashPassword(profileForm.getPassword()));
 
 		this.validator.validate(result, binding);
 
