@@ -192,9 +192,6 @@ public class ActorService {
 
 		principal = this.findByPrincipal();
 
-		if (accountValidator.passwordValidate(profileForm.getPassword()))
-			passwordValidator = true;
-
 		if (profileForm.getUserImage().getSize() > 5242880) {
 			FieldError fieldError;
 			final String[] codes = {
@@ -266,8 +263,12 @@ public class ActorService {
 		if (profileForm.getPicture() != null)
 			result.setPicture(profileForm.getPicture());
 
-		if (profileForm.getPassword() != null && !profileForm.getPassword().isEmpty())
+		if (profileForm.getPassword() != null && !profileForm.getPassword().isEmpty()) {
+			if (accountValidator.passwordValidate(profileForm.getPassword()))
+				passwordValidator = true;
+
 			if (!profileForm.getPassword().equals(profileForm.getRepeatPassword())) {
+
 				FieldError fieldError;
 				final String[] codes = {
 					"profile.repeatPasword.error"
@@ -283,7 +284,7 @@ public class ActorService {
 				binding.addError(fieldError);
 			} else
 				result.getUserAccount().setPassword(this.hashPassword(profileForm.getPassword()));
-
+		}
 		this.validator.validate(result, binding);
 
 		return result;

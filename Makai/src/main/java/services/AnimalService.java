@@ -231,6 +231,8 @@ public class AnimalService {
 			result = this.findOne(animalForm.getId());
 
 		result.setName(animalForm.getName());
+		if (result.getName().isEmpty())
+			result.setName(null);
 		result.setChipNumber(animalForm.getChipNumber());
 		result.setAge(animalForm.getAge());
 		result.setSex(animalForm.getSex());
