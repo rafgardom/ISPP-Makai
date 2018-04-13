@@ -68,7 +68,7 @@
 		<b><spring:message code="profile.ratings" />:</b>
 	</h3>
 	
-	<display:table name="ratings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
+	<display:table name="ratings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag w-100 d-table">
 		<acme:column code="profile.rating.moment" property="moment" format="{0,date,dd/MM/yyyy}"/>
 		<acme:column code="profile.rating.customer" property="customer.name" />
 		

@@ -21,8 +21,8 @@ table {
 }
 
 th,td {
-	padding: 1rem;
-	text-align: left;
+	padding: 0.7rem;
+	text-align: center;
 /* 	vertical-align: top; */
 }
 
@@ -54,7 +54,7 @@ th.sortable a {
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-position: right;	
-	padding-right: 1.7rem;
+	padding-right: 1.1rem;
 }
 
 th.order1 a {

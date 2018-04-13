@@ -20,7 +20,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary rounded">
 	<a class="navbar-brand" href="">
-	<img src="images/dog-house.png" height="45px" class="img-menu"/>
+	<img src="images/dog-house.png" height="45px" class="mx-1"/><span class="d-lg-none d-md-none"><spring:message code="master.page.home"/></span>
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarColor01">
@@ -143,11 +143,7 @@
 					href="security/login.do"> <spring:message
 							code="master.page.sign.in" />
 				</a></li>
-				<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#advertisingModal"
-					href="banner/create.do"> 
-					<img src="images/ad.png" class="img-menu"/>
-					<spring:message code="master.page.banner.advertise" />
-				</a></li>
+				
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
 							code="master.page.sign.up" /></a>
@@ -165,6 +161,11 @@
 							href="advertising/register.do"><spring:message
 								code="master.page.advertising.register" /></a>
 					</div></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#advertisingModal"
+						href="banner/create.do"> 
+						<img src="images/ad.png" class="img-menu"/>
+						<spring:message code="master.page.banner.advertise" />
+					</a></li>
 			</security:authorize>
 			
 			<security:authorize access="hasRole('ADMIN')">
