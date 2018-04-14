@@ -46,7 +46,7 @@ public class OfferCustomerController extends AbstractController {
 	@RequestMapping(value = "/accept", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int offerId, final HttpServletRequest req, final HttpServletResponse resp) {
 		ModelAndView result;
-		Offer offer;
+		Offer offer = null;
 		Request request;
 
 		try {
@@ -64,7 +64,16 @@ public class OfferCustomerController extends AbstractController {
 			//			this.offerService.acceptedOffer(offer);
 		} catch (final Throwable oops) {
 			result = new ModelAndView("error");
-			System.out.println(oops);
+			if (offer != null) {
+				if (offer.getIsAccepted() == true)
+					result.addObject("errorOffer", "offer.commit.error.is.accepted");
+				else if (this.requestService.tieneOfferAceptadaUnRequest(offer.getRequest()))
+					result.addObject("errorOffer", "offer.commit.error.request.accept");
+				else if (!this.offerService.elAnimalNoHaSidoAdoptado(offer.getAnimal()))
+					result.addObject("errorOffer", "offer.commit.error.animal.adoptado");
+			} else
+				result.addObject("errorOffer", "offer.commit.error.no.exist.offer");
+
 		}
 
 		//		result = new ModelAndView("redirect:../../request/customer/myList.do");

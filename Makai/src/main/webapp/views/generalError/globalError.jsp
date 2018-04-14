@@ -21,3 +21,8 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <h1><spring:message code="globalError.message" /> </h1>
+
+<jstl:if test="${errorOffer != null}">
+			<br />
+			<h1><spring:message code="${errorOffer}" /></h1>
+</jstl:if>
