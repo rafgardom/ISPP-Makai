@@ -8,5 +8,12 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
+<div class="card text-center">
+<div class="card-title mt-5">
+	<h2><spring:message code="pay.success"/></h2>
+	<img src="images/shield.png" style="margin-right: -2rem;"/>
+	<img src="images/paypal.png" />
+</div>
+</div>
 
-	<h1>El pago se realizó correctamente.</h1>
+

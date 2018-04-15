@@ -14,8 +14,11 @@
 
 <jsp:useBean id="date" class="java.util.Date" />
 
-<hr />
-<div class="row">
+
+<div class="w-100" style="background: #F8F9FA;">
+<div class="sticky-top"><hr /></div>
+<div class="row mx-5 ">
+
 	<div class="col-md-5">
 		<a href="javascript:setParam('language', 'en');">English</a> | <a
 		href="javascript:setParam('language', 'es');">Español</a>
@@ -28,7 +31,7 @@
 	</div>
 </div>
 
-
+</div>
 
 
 <div id="barraaceptacion">

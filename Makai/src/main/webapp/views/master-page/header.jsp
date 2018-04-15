@@ -18,7 +18,7 @@
 <%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
 
-<nav class="navbar navbar-expand-md navbar-dark bg-primary rounded">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
 	<a class="navbar-brand" href="">
 	<img src="images/dog-house.png" height="45px" class="mx-1"/><span class="d-lg-none d-md-none"><spring:message code="master.page.home"/></span>
 	</a>
@@ -163,7 +163,7 @@
 					</div></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#advertisingModal"
 						href="banner/create.do"> 
-						<img src="images/ad.png" class="img-menu"/>
+						<!-- <img src="images/ad.png" class="img-menu"/> -->
 						<spring:message code="master.page.banner.advertise" />
 					</a></li>
 			</security:authorize>

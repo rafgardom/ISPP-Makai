@@ -59,7 +59,7 @@
 </head>
 
 <body style="background-color:#ECFAFB;">
-	<div class="container">
+<!-- 	<div class="container"> -->
 	<div>
 		<tiles:insertAttribute name="header" />
 	</div>
@@ -73,16 +73,16 @@
 			<tiles:insertAttribute name="title" />
 		</h1>  --%>
 		<br>
+		<div class="mx-5">
 		<tiles:insertAttribute name="body" />	
+		</div>
 		<jstl:if test="${message != null}">
 			<br />
 			<span class="message"><spring:message code="${message}" /></span>
 		</jstl:if>	
 	
-	<div>
+<!-- 	<div> -->
 		<tiles:insertAttribute name="footer" />
-	</div>
-	</div>
 
 </body>
 </html>

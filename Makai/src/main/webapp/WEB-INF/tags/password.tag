@@ -52,7 +52,7 @@
 			</div>
 			<form:password path="${path}" class="form-control" placeholder="${placeholder}" />
 		</div>
-	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
+	<form:errors path="${path}" cssClass="alert alert-danger form-control-sm d-block" />
 	<jstl:if test="${info != null}">
 		<small class="form-text text-muted">*<spring:message code="customer.password.error1"/><br>
 		*<spring:message code="customer.password.error2"/></small>
