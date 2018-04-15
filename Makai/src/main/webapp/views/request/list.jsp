@@ -67,13 +67,7 @@
 			
 			<security:authorize access="hasRole('CUSTOMER')">
 				<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
-				<jstl:set var="showTrade" value="${false}"/>
-				<jstl:forEach var="r" items="${requestsWithOffer}">
-					<jstl:if test="${r.id == row.id}">
-						<jstl:set var="showTrade" value="${true}"/>
-					</jstl:if>
-				</jstl:forEach>
-				<jstl:if test="${showTrade == true}">
+				<jstl:if test="${requestsWithOffer.contains(row)}">
 					<acme:link href="offer/customer/list.do?requestId=${row.id}" code="request.list.offer" type="dark" image="deal"/>
 				</jstl:if>
 				
