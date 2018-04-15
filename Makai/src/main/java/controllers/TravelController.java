@@ -74,24 +74,54 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Travel travel;
 		boolean wrongSeats = false;
+		boolean wrongTime = false;
+		boolean notPrincipal = false;
+		boolean passengers = false;
+
+		Calendar today;
+		Transporter principal;
+		principal = this.transporterService.findByPrincipal();
+
+		today = Calendar.getInstance();
 
 		if (binding.hasErrors())
 			result = this.createModelAndView(travelForm, "travel.commit.error");
 		else
 			try {
+				travel = this.travelService.reconstruct(travelForm, binding);
+				final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
 				if ((travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() < 1) && (travelForm.getHumanSeats() == null || travelForm.getHumanSeats() < 1)) {
 					wrongSeats = true;
 					throw new IllegalArgumentException();
+				} else if (transporters.size() > 0) {
+					passengers = true;
+					throw new IllegalArgumentException();
 				}
-				travel = this.travelService.reconstruct(travelForm, binding);
+
+				else if (!today.getTime().before(travel.getStartMoment())) {
+					wrongTime = true;
+					throw new IllegalArgumentException();
+				}
+
+				else if (travel.getTransporterOwner().getId() != principal.getId()) {
+					notPrincipal = true;
+					throw new IllegalArgumentException();
+				}
+
 				this.travelService.save(travel);
 				result = new ModelAndView("redirect:/travel/myList.do");
 
 			} catch (final Throwable oops) {
-				if (wrongSeats == false)
-					result = this.createModelAndView(travelForm, "travel.register.error");
-				else
+				if (wrongSeats == true)
 					result = this.createModelAndView(travelForm, "travel.seats.error");
+				else if (passengers == true)
+					result = this.createModelAndView(travelForm, "travel.edit.error");
+				else if (wrongTime == true)
+					result = this.createModelAndView(travelForm, "travel.time.error");
+				else if (notPrincipal == true)
+					result = this.createModelAndView(travelForm, "travel.principal.error");
+				else
+					result = this.createModelAndView(travelForm, "travel.register.error");
 
 			}
 		return result;
@@ -166,16 +196,12 @@ public class TravelController extends AbstractController {
 
 		} else
 			try {
-
 				travel = this.travelService.reconstruct(travelForm, binding);
 				travel = this.travelService.save(travel);
 				result = new ModelAndView("master.page");
 
 			} catch (final Throwable oops) {
-				System.out.println(oops);
-
 				result = this.createModelAndView(travelForm, "travel.commit.error");
-
 			}
 		return result;
 

@@ -2,6 +2,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -59,6 +60,10 @@ public class VehicleController extends AbstractController {
 
 		ModelAndView result;
 		Vehicle vehicle;
+		Calendar today;
+		boolean yearError = false;
+
+		today = Calendar.getInstance();
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -66,19 +71,21 @@ public class VehicleController extends AbstractController {
 
 		} else
 			try {
-
 				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
+				if (today.get(Calendar.YEAR) <= vehicle.getYear()) {
+					yearError = true;
+					throw new IllegalArgumentException();
+				}
 				vehicle = this.vehicleService.save(vehicle);
 				result = new ModelAndView("redirect:/vehicle/list.do");
 
 			} catch (final Throwable oops) {
-				System.out.println(oops);
-
-				result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
-
+				if (yearError = true)
+					result = this.createModelAndView(vehicleForm, "vehicle.year.error");
+				else
+					result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
 			}
 		return result;
-
 	}
 
 	//Edit

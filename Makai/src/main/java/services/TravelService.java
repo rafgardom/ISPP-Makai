@@ -127,7 +127,6 @@ public class TravelService {
 		Actor principal;
 		Calendar today;
 		Collection<Travel> travels_participated;
-		final Collection<Travel> travels_aux;
 		Collection<Transporter> transporters;
 		Customer customer;
 
