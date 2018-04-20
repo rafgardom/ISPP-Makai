@@ -144,16 +144,32 @@ public class OfferTrainerController extends AbstractController {
 		Request request;
 		OfferForm offerForm;
 
-		request = this.requestService.findOne(requestId);
+		try {
+			request = this.requestService.findOne(requestId);
 
-		if (request.getAnimal() != null)
-			offer = this.offerService.createWithAnimal(request);
-		else
-			offer = this.offerService.createWithoutAnimal(request);
+			if (request.getAnimal() != null)
+				offer = this.offerService.createWithAnimal(request);
+			else
+				offer = this.offerService.createWithoutAnimal(request);
 
-		offerForm = this.offerService.offerToFormObject(offer);
+			offerForm = this.offerService.offerToFormObject(offer);
 
-		result = this.createEditModelAndView(offerForm);
+			result = this.createEditModelAndView(offerForm);
+		} catch (final Throwable oops) {
+			Trainer trainer;
+			Collection<Offer> offers;
+			final Integer numberNoti;
+
+			trainer = this.trainerService.findByPrincipal();
+			offers = this.offerService.findOffersByTrainer(trainer);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
+
+			result = new ModelAndView("offer/list");
+			result.addObject("offers", offers);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "offer/trainer/list.do");
+			result.addObject("message", "offer.commit.error.deleted.accept");
+		}
 
 		return result;
 	}
