@@ -170,10 +170,10 @@ public class TravelService {
 		Travel travel;
 
 		travel = this.findOne(travelForm.getId());
-		//Assert.isTrue(travel.getAnimalSeats() > 0 || travel.getHumanSeats() > 0);
-		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
 
+		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
 		customer = this.customerService.findByPrincipal();
+		Assert.isTrue(travel.getTransporterOwner().getId() != customer.getId());
 
 		travels = customer.getTravelPassengers();
 
