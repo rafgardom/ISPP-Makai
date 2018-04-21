@@ -54,7 +54,7 @@ public class AnimalShelterController extends AbstractController {
 		} else
 			try {
 
-				if (animalShelterForm.getUserImage().getSize() > 5242880 || !animalShelterForm.getUserImage().getContentType().contains("image")) {
+				if (animalShelterForm.getUserImage().getSize() > 2097152 || !animalShelterForm.getUserImage().getContentType().contains("image")) {
 					pictureTooLong = true;
 					throw new IllegalArgumentException();
 				}

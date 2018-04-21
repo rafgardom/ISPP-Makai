@@ -59,27 +59,29 @@ public class BannerActorController extends AbstractController {
 		Collection<Banner> banners;
 		Actor actor;
 		Integer numberNoti;
+		try {
+			actor = this.actorService.findByPrincipal();
+			if (this.actorService.checkAuthority(actor, "ADMIN"))
+				banners = this.bannerService.findAll();
+			else
+				banners = this.bannerService.findByActorId(actor.getId());
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		actor = this.actorService.findByPrincipal();
-		if (this.actorService.checkAuthority(actor, "ADMIN"))
-			banners = this.bannerService.findAll();
-		else
-			banners = this.bannerService.findByActorId(actor.getId());
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+			bannerForms = new HashSet<BannerForm>();
 
-		bannerForms = new HashSet<BannerForm>();
+			for (final Banner b : banners)
+				bannerForms.add(this.bannerService.bannerToFormObject(b));
 
-		for (final Banner b : banners)
-			bannerForms.add(this.bannerService.bannerToFormObject(b));
-
-		result = new ModelAndView("banner/list");
-		result.addObject("requestURI", "banner/actor/list.do");
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("bannerForms", bannerForms);
+			result = new ModelAndView("banner/list");
+			result.addObject("requestURI", "banner/actor/list.do");
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("bannerForms", bannerForms);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 
 		return result;
 	}
-
 	// Display -----------------------------------------------------------------		
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int bannerId) {
@@ -88,18 +90,22 @@ public class BannerActorController extends AbstractController {
 		Banner banner;
 		BannerForm bannerForm;
 
-		banner = this.bannerService.findOne(bannerId);
-		bannerForm = this.bannerService.bannerToFormObject(banner);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+		try {
+			banner = this.bannerService.findOne(bannerId);
+			bannerForm = this.bannerService.bannerToFormObject(banner);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		result = new ModelAndView("banner/display");
-		result.addObject("requestURI", "banner/actor/display.do");
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("banner", bannerForm);
+			result = new ModelAndView("banner/display");
+			result.addObject("requestURI", "banner/actor/display.do");
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("banner", bannerForm);
+
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 
 		return result;
 	}
-
 	// Delete --------------------------------------------------------------------		
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -125,13 +131,15 @@ public class BannerActorController extends AbstractController {
 		ModelAndView result;
 		Banner banner;
 		BannerForm bannerForm;
+		try {
+			banner = this.bannerService.create();
+			bannerForm = this.bannerService.bannerToFormObject(banner);
+			bannerForm.setPrice(0.0);
 
-		banner = this.bannerService.create();
-		bannerForm = this.bannerService.bannerToFormObject(banner);
-		bannerForm.setPrice(0.0);
-
-		result = this.createEditModelAndView(bannerForm);
-
+			result = this.createEditModelAndView(bannerForm);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -143,11 +151,14 @@ public class BannerActorController extends AbstractController {
 		Banner banner;
 		BannerForm bannerForm;
 
-		banner = this.bannerService.findOne(bannerId);
-		bannerForm = this.bannerService.bannerToFormObject(banner);
+		try {
+			banner = this.bannerService.findOne(bannerId);
+			bannerForm = this.bannerService.bannerToFormObject(banner);
 
-		result = this.createEditModelAndView(bannerForm);
-
+			result = this.createEditModelAndView(bannerForm);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

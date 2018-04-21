@@ -42,13 +42,16 @@ public class NotificationAdministratorController extends AbstractController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
-		final ModelAndView result;
+		ModelAndView result;
 		Notification notification;
 
-		notification = this.notificationService.create();
+		try {
+			notification = this.notificationService.create();
 
-		result = this.createEditModelAndView(notification);
-
+			result = this.createEditModelAndView(notification);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

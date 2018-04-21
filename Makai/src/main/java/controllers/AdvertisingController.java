@@ -54,7 +54,7 @@ public class AdvertisingController extends AbstractController {
 		} else
 			try {
 
-				if (advertisingForm.getUserImage().getSize() > 5242880 || !advertisingForm.getUserImage().getContentType().contains("image")) {
+				if (advertisingForm.getUserImage().getSize() > 2097152 || !advertisingForm.getUserImage().getContentType().contains("image")) {
 					pictureTooLong = true;
 					throw new IllegalArgumentException();
 				}

@@ -65,7 +65,7 @@ public class CustomerController extends AbstractController {
 			try {
 				//				final MultipartFile userImage = customerForm.getUserImage();
 
-				if (customerForm.getUserImage().getSize() > 5242880 || !customerForm.getUserImage().getContentType().contains("image")) {
+				if (customerForm.getUserImage().getSize() > 2097152 || !customerForm.getUserImage().getContentType().contains("image")) {
 					pictureTooLong = true;
 					throw new IllegalArgumentException();
 				}

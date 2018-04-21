@@ -62,6 +62,7 @@ public class VehicleController extends AbstractController {
 		Vehicle vehicle;
 		Calendar today;
 		boolean yearError = false;
+		boolean pictureTooLong = false;
 
 		today = Calendar.getInstance();
 
@@ -76,12 +77,18 @@ public class VehicleController extends AbstractController {
 					yearError = true;
 					throw new IllegalArgumentException();
 				}
+				if (vehicleForm.getUserImage().getSize() > 2097152 || !vehicleForm.getUserImage().getContentType().contains("image")) {
+					pictureTooLong = true;
+					throw new IllegalArgumentException();
+				}
 				vehicle = this.vehicleService.save(vehicle);
 				result = new ModelAndView("redirect:/vehicle/list.do");
 
 			} catch (final Throwable oops) {
 				if (yearError = true)
 					result = this.createModelAndView(vehicleForm, "vehicle.year.error");
+				if (pictureTooLong == false)
+					result = this.createModelAndView(vehicleForm, "advertising.register.error");
 				else
 					result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
 			}
@@ -110,7 +117,7 @@ public class VehicleController extends AbstractController {
 
 		ModelAndView result;
 		Vehicle vehicle;
-
+		boolean pictureTooLong = false;
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
 			result = this.createModelAndView(vehicleForm);
@@ -118,14 +125,21 @@ public class VehicleController extends AbstractController {
 		} else
 			try {
 
+				if (vehicleForm.getUserImage().getSize() > 2097152 || !vehicleForm.getUserImage().getContentType().contains("image")) {
+					pictureTooLong = true;
+					throw new IllegalArgumentException();
+				}
+
 				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
 				vehicle = this.vehicleService.save(vehicle);
 				result = new ModelAndView("redirect:/vehicle/list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-
-				result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
+				if (pictureTooLong == false)
+					result = this.createModelAndView(vehicleForm, "advertising.register.error");
+				else
+					result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
 
 			}
 		return result;
@@ -136,11 +150,13 @@ public class VehicleController extends AbstractController {
 	public ModelAndView delete(final Vehicle vehicle, final BindingResult binding) {
 
 		ModelAndView result;
+		try {
+			this.vehicleService.delete(vehicle);
 
-		this.vehicleService.delete(vehicle);
-
-		result = new ModelAndView("redirect:list.do");
-
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 
 	}
@@ -171,20 +187,22 @@ public class VehicleController extends AbstractController {
 		principal = this.transporterService.findByPrincipal();
 		vehicles = new HashSet<VehicleForm>();
 		numberNoti = this.notificationService.findNotificationWithoutRead();
+		try {
+			for (final Vehicle a : this.vehicleService.findActivatedVehicles(principal)) {
+				VehicleForm vehicleForm;
 
-		for (final Vehicle a : this.vehicleService.findActivatedVehicles(principal)) {
-			VehicleForm vehicleForm;
+				vehicleForm = this.vehicleService.toFormObject(a);
 
-			vehicleForm = this.vehicleService.toFormObject(a);
+				vehicles.add(vehicleForm);
+			}
 
-			vehicles.add(vehicleForm);
+			result = new ModelAndView("vehicle/list");
+			result.addObject("vehicles", vehicles);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "vehicle/list.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
 		}
-
-		result = new ModelAndView("vehicle/list");
-		result.addObject("vehicles", vehicles);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "vehicle/list.do");
-
 		return result;
 	}
 	// Ancillary methods

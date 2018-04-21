@@ -55,7 +55,7 @@ public class ProfessionalController extends AbstractController {
 			try {
 				//				final MultipartFile userImage = customerForm.getUserImage();
 
-				if (professionalForm.getUserImage().getSize() > 5242880 || !professionalForm.getUserImage().getContentType().contains("image")) {
+				if (professionalForm.getUserImage().getSize() > 2097152 || !professionalForm.getUserImage().getContentType().contains("image")) {
 					pictureTooLong = true;
 					throw new IllegalArgumentException();
 				}

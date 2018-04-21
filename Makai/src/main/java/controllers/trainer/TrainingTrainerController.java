@@ -51,16 +51,18 @@ public class TrainingTrainerController extends AbstractController {
 		Trainer trainer;
 		Collection<Training> trainings;
 		final Integer numberNoti;
+		try {
+			trainer = this.trainerService.findByPrincipal();
+			trainings = this.trainingService.findByTrainerId(trainer.getId());
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		trainer = this.trainerService.findByPrincipal();
-		trainings = this.trainingService.findByTrainerId(trainer.getId());
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("training/list");
-		result.addObject("trainings", trainings);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "training/trainer/list.do");
-
+			result = new ModelAndView("training/list");
+			result.addObject("trainings", trainings);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "training/trainer/list.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -71,15 +73,17 @@ public class TrainingTrainerController extends AbstractController {
 		ModelAndView result;
 		Training training;
 		final Integer numberNoti;
+		try {
+			training = this.trainingService.findOne(trainingId);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		training = this.trainingService.findOne(trainingId);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("training/display");
-		result.addObject("training", training);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "training/trainer/display.do");
-
+			result = new ModelAndView("training/display");
+			result.addObject("training", training);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "training/trainer/display.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -89,12 +93,14 @@ public class TrainingTrainerController extends AbstractController {
 	public ModelAndView delete(@RequestParam final int trainingId) {
 		ModelAndView result;
 		Training training;
+		try {
+			training = this.trainingService.findOne(trainingId);
+			this.trainingService.delete(training);
 
-		training = this.trainingService.findOne(trainingId);
-		this.trainingService.delete(training);
-
-		result = new ModelAndView("redirect:list.do");
-
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -105,15 +111,17 @@ public class TrainingTrainerController extends AbstractController {
 		ModelAndView result;
 		Training training;
 		final Integer numberNoti;
+		try {
+			training = this.trainingService.create();
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		training = this.trainingService.create();
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("training/create");
-		result.addObject("training", training);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "training/trainer/edit.do");
-
+			result = new ModelAndView("training/create");
+			result.addObject("training", training);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "training/trainer/edit.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -124,15 +132,17 @@ public class TrainingTrainerController extends AbstractController {
 		ModelAndView result;
 		Training training;
 		final Integer numberNoti;
+		try {
+			training = this.trainingService.findOne(trainingId);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		training = this.trainingService.findOne(trainingId);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("training/edit");
-		result.addObject("training", training);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "training/trainer/edit.do");
-
+			result = new ModelAndView("training/edit");
+			result.addObject("training", training);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "training/trainer/edit.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

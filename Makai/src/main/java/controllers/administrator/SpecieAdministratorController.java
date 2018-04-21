@@ -69,16 +69,17 @@ public class SpecieAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Specie> species;
+		try {
+			species = this.specieService.findAll();
 
-		species = this.specieService.findAll();
-
-		result = new ModelAndView("specie/list");
-		result.addObject("requestURI", "specie/admin/list.do");
-		result.addObject("species", species);
-
+			result = new ModelAndView("specie/list");
+			result.addObject("requestURI", "specie/admin/list.do");
+			result.addObject("species", species);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
-
 	// Delete --------------------------------------------------------------------		
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

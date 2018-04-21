@@ -39,15 +39,17 @@ public class RequestTrainerController extends AbstractController {
 		ModelAndView result;
 		Collection<Request> requests;
 		final Integer numberNoti;
+		try {
+			requests = this.requestService.findRequestsNotAccepted();
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		requests = this.requestService.findRequestsNotAccepted();
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("request/list");
-		result.addObject("requestURI", "request/trainer/list.do");
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requests", requests);
-
+			result = new ModelAndView("request/list");
+			result.addObject("requestURI", "request/trainer/list.do");
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requests", requests);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

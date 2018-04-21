@@ -63,22 +63,25 @@ public class RequestCustomerController extends AbstractController {
 		Collection<Offer> offersAcepted;
 		Collection<Request> requestsWithOffer;
 		final Integer numberNoti;
+		try {
 
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		customer = this.customerService.findByPrincipal();
+			customer = this.customerService.findByPrincipal();
 
-		requests = this.requestService.findRequestByCustomer(customer);
-		offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
-		requestsWithOffer = this.requestService.findRequestsWithOffer();
+			requests = this.requestService.findRequestByCustomer(customer);
+			offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
+			requestsWithOffer = this.requestService.findRequestsWithOffer();
 
-		result = new ModelAndView("request/myList");
-		result.addObject("requestURI", "request/customer/myList.do");
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requests", requests);
-		result.addObject("offersAcepted", offersAcepted);
-		result.addObject("requestsWithOffer", requestsWithOffer);
-
+			result = new ModelAndView("request/myList");
+			result.addObject("requestURI", "request/customer/myList.do");
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requests", requests);
+			result.addObject("offersAcepted", offersAcepted);
+			result.addObject("requestsWithOffer", requestsWithOffer);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

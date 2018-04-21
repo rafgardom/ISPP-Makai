@@ -47,15 +47,17 @@ public class AdministratorController extends AbstractController {
 		ModelAndView result;
 		Collection<Actor> actors;
 		final Integer numberNoti;
+		try {
+			actors = this.actorService.findAllActorsWithoutAdmin();
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		actors = this.actorService.findAllActorsWithoutAdmin();
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("administrator/listActors");
-		result.addObject("requestURI", "administrator/listActors.do");
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("actors", actors);
-
+			result = new ModelAndView("administrator/listActors");
+			result.addObject("requestURI", "administrator/listActors.do");
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("actors", actors);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

@@ -74,13 +74,15 @@ public class BreedAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Breed> breeds;
+		try {
+			breeds = this.breedService.findAll();
 
-		breeds = this.breedService.findAll();
-
-		result = new ModelAndView("breed/list");
-		result.addObject("requestURI", "breed/admin/list.do");
-		result.addObject("breeds", breeds);
-
+			result = new ModelAndView("breed/list");
+			result.addObject("requestURI", "breed/admin/list.do");
+			result.addObject("breeds", breeds);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

@@ -241,28 +241,31 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Collection<Travel> travels_all;
 		Collection<Travel> travelsByPrincipal;
-		final Collection<Travel> travels = new ArrayList<Travel>();
-		final Integer numberNoti;
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-		Calendar today;
-		travels_all = this.travelService.findAll();
-		today = Calendar.getInstance();
-		Transporter principal;
-		principal = this.transporterService.findByPrincipal();
+		try {
+			final Collection<Travel> travels = new ArrayList<Travel>();
+			final Integer numberNoti;
+			numberNoti = this.notificationService.findNotificationWithoutRead();
+			Calendar today;
+			travels_all = this.travelService.findAll();
+			today = Calendar.getInstance();
+			Transporter principal;
+			principal = this.transporterService.findByPrincipal();
 
-		travelsByPrincipal = this.travelService.findTravelByTransporterId(principal.getId());
+			travelsByPrincipal = this.travelService.findTravelByTransporterId(principal.getId());
 
-		for (final Travel aux : travels_all)
-			if (today.getTime().before(aux.getStartMoment()))
-				travels.add(aux);
+			for (final Travel aux : travels_all)
+				if (today.getTime().before(aux.getStartMoment()))
+					travels.add(aux);
 
-		result = new ModelAndView("travel/list");
-		result.addObject("principal", principal);
-		result.addObject("travelsByPrincipal", travelsByPrincipal);
-		result.addObject("travels", travels);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "travel/list.do");
-
+			result = new ModelAndView("travel/list");
+			result.addObject("principal", principal);
+			result.addObject("travelsByPrincipal", travelsByPrincipal);
+			result.addObject("travels", travels);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "travel/list.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -273,36 +276,39 @@ public class TravelController extends AbstractController {
 		final Collection<Travel> travels = new ArrayList<Travel>();
 		Transporter principal;
 		final Integer numberNoti;
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-		Collection<Travel> travels_participated;
-		Collection<Travel> travels_animals;
+		try {
+			numberNoti = this.notificationService.findNotificationWithoutRead();
+			Collection<Travel> travels_participated;
+			Collection<Travel> travels_animals;
 
-		Calendar today;
-		principal = this.transporterService.findByPrincipal();
-		travels_all = this.travelService.findTravelByTransporterId(principal.getId());
-		travels_participated = principal.getTravelPassengers();
-		travels_animals = this.travelService.findTravelWithAnimalsByCustomer(principal.getId());
+			Calendar today;
+			principal = this.transporterService.findByPrincipal();
+			travels_all = this.travelService.findTravelByTransporterId(principal.getId());
+			travels_participated = principal.getTravelPassengers();
+			travels_animals = this.travelService.findTravelWithAnimalsByCustomer(principal.getId());
 
-		today = Calendar.getInstance();
+			today = Calendar.getInstance();
 
-		for (final Travel aux : travels_all)
-			if (today.getTime().before(aux.getStartMoment()))
-				travels.add(aux);
+			for (final Travel aux : travels_all)
+				if (today.getTime().before(aux.getStartMoment()))
+					travels.add(aux);
 
-		for (final Travel aux : travels_participated)
-			if (today.getTime().before(aux.getStartMoment()))
-				travels.add(aux);
+			for (final Travel aux : travels_participated)
+				if (today.getTime().before(aux.getStartMoment()))
+					travels.add(aux);
 
-		for (final Travel aux : travels_animals)
-			if (today.getTime().before(aux.getStartMoment()) && !travels.contains(aux))
-				travels.add(aux);
+			for (final Travel aux : travels_animals)
+				if (today.getTime().before(aux.getStartMoment()) && !travels.contains(aux))
+					travels.add(aux);
 
-		result = new ModelAndView("travel/myList");
-		result.addObject("principal", principal);
-		result.addObject("travels", travels);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "travel/myList.do");
-
+			result = new ModelAndView("travel/myList");
+			result.addObject("principal", principal);
+			result.addObject("travels", travels);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "travel/myList.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -314,38 +320,41 @@ public class TravelController extends AbstractController {
 		final Collection<Travel> travels = new ArrayList<Travel>();
 		Transporter principal;
 		final Integer numberNoti;
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-		Collection<Rating> principalRatings;
-		Collection<Travel> travels_animals;
+		try {
+			numberNoti = this.notificationService.findNotificationWithoutRead();
+			Collection<Rating> principalRatings;
+			Collection<Travel> travels_animals;
 
-		Calendar today;
-		principal = this.transporterService.findByPrincipal();
-		travels_all = this.travelService.findTravelByTransporterId(principal.getId());
-		travels_participated = principal.getTravelPassengers();
-		principalRatings = this.ratingService.findTravelRatingByCustomer(principal.getId());
-		travels_animals = this.travelService.findTravelWithAnimalsByCustomer(principal.getId());
+			Calendar today;
+			principal = this.transporterService.findByPrincipal();
+			travels_all = this.travelService.findTravelByTransporterId(principal.getId());
+			travels_participated = principal.getTravelPassengers();
+			principalRatings = this.ratingService.findTravelRatingByCustomer(principal.getId());
+			travels_animals = this.travelService.findTravelWithAnimalsByCustomer(principal.getId());
 
-		today = Calendar.getInstance();
+			today = Calendar.getInstance();
 
-		for (final Travel aux : travels_all)
-			if (today.getTime().after(aux.getStartMoment()))
-				travels.add(aux);
+			for (final Travel aux : travels_all)
+				if (today.getTime().after(aux.getStartMoment()))
+					travels.add(aux);
 
-		for (final Travel aux : travels_participated)
-			if (today.getTime().after(aux.getStartMoment()))
-				travels.add(aux);
+			for (final Travel aux : travels_participated)
+				if (today.getTime().after(aux.getStartMoment()))
+					travels.add(aux);
 
-		for (final Travel aux : travels_animals)
-			if (today.getTime().after(aux.getStartMoment()))
-				travels.add(aux);
+			for (final Travel aux : travels_animals)
+				if (today.getTime().after(aux.getStartMoment()))
+					travels.add(aux);
 
-		result = new ModelAndView("travel/myList");
-		result.addObject("travels", travels);
-		result.addObject("principalRatings", principalRatings);
-		result.addObject("principal", principal);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "travel/myPastList.do");
-
+			result = new ModelAndView("travel/myList");
+			result.addObject("travels", travels);
+			result.addObject("principalRatings", principalRatings);
+			result.addObject("principal", principal);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "travel/myPastList.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 

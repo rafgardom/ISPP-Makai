@@ -43,16 +43,18 @@ public class NotificationActorController extends AbstractController {
 		Actor actor;
 		Collection<Notification> notifications;
 		Integer numberNoti;
+		try {
+			actor = this.actorService.findByPrincipal();
+			notifications = this.notificationService.findByActorId(actor.getId());
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		actor = this.actorService.findByPrincipal();
-		notifications = this.notificationService.findByActorId(actor.getId());
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("notification/list");
-		result.addObject("notifications", notifications);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "notification/actor/list.do");
-
+			result = new ModelAndView("notification/list");
+			result.addObject("notifications", notifications);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "notification/actor/list.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -75,7 +77,6 @@ public class NotificationActorController extends AbstractController {
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "notification/actor/display.do");
 		} catch (final Throwable oops) {
-			//			result = new ModelAndView("redirect:list.do");
 			result = new ModelAndView("error");
 		}
 
@@ -109,7 +110,7 @@ public class NotificationActorController extends AbstractController {
 			this.notificationService.deleteAllMyNotifications();
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("error");
 		}
 
 		return result;

@@ -55,23 +55,26 @@ public class ProfileActorController extends AbstractController {
 		final Integer numberNoti;
 		Collection<Rating> ratings;
 
-		ratings = null;
-		actor = this.actorService.findByPrincipal();
-		image = Utilities.showImage(actor.getPicture());
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+		try {
+			ratings = null;
+			actor = this.actorService.findByPrincipal();
+			image = Utilities.showImage(actor.getPicture());
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		if (this.actorService.checkAuthority(actor, "TRAINER"))
-			ratings = this.ratingService.findByTrainerId(actor.getId());
-		else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
-			ratings = this.ratingService.findByTransporterId(actor.getId());
+			if (this.actorService.checkAuthority(actor, "TRAINER"))
+				ratings = this.ratingService.findByTrainerId(actor.getId());
+			else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
+				ratings = this.ratingService.findByTransporterId(actor.getId());
 
-		result = new ModelAndView("profile/display");
-		result.addObject("actor", actor);
-		result.addObject("pictureImage", image);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("ratings", ratings);
-		result.addObject("requestURI", "profile/display.do");
-
+			result = new ModelAndView("profile/display");
+			result.addObject("actor", actor);
+			result.addObject("pictureImage", image);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("ratings", ratings);
+			result.addObject("requestURI", "profile/display.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -83,23 +86,26 @@ public class ProfileActorController extends AbstractController {
 		final Integer numberNoti;
 		Collection<Rating> ratings;
 
-		ratings = null;
-		actor = this.actorService.findOne(actorId);
-		image = Utilities.showImage(actor.getPicture());
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+		try {
+			ratings = null;
+			actor = this.actorService.findOne(actorId);
+			image = Utilities.showImage(actor.getPicture());
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		if (this.actorService.checkAuthority(actor, "TRAINER"))
-			ratings = this.ratingService.findByTrainerId(actor.getId());
-		else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
-			ratings = this.ratingService.findByTransporterId(actor.getId());
+			if (this.actorService.checkAuthority(actor, "TRAINER"))
+				ratings = this.ratingService.findByTrainerId(actor.getId());
+			else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
+				ratings = this.ratingService.findByTransporterId(actor.getId());
 
-		result = new ModelAndView("profile/display");
-		result.addObject("actor", actor);
-		result.addObject("pictureImage", image);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("ratings", ratings);
-		result.addObject("requestURI", "profile/display.do");
-
+			result = new ModelAndView("profile/display");
+			result.addObject("actor", actor);
+			result.addObject("pictureImage", image);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("ratings", ratings);
+			result.addObject("requestURI", "profile/display.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -110,15 +116,17 @@ public class ProfileActorController extends AbstractController {
 		ModelAndView result;
 		ProfileForm profileForm;
 		final Integer numberNoti;
+		try {
+			profileForm = this.actorService.principalToFormObject();
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		profileForm = this.actorService.principalToFormObject();
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("profile/edit");
-		result.addObject("profileForm", profileForm);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "profile/edit.do");
-
+			result = new ModelAndView("profile/edit");
+			result.addObject("profileForm", profileForm);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "profile/edit.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -136,7 +144,7 @@ public class ProfileActorController extends AbstractController {
 		} else
 			try {
 
-				if (profileForm.getUserImage().getSize() > 0 && profileForm.getUserImage().getSize() <= 5242880) {
+				if (profileForm.getUserImage().getSize() > 0 && profileForm.getUserImage().getSize() <= 2097152) {
 
 					savedFile = profileForm.getUserImage().getBytes();
 					actor.setPicture(savedFile);

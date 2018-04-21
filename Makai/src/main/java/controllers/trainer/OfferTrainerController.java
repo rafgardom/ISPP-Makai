@@ -67,16 +67,18 @@ public class OfferTrainerController extends AbstractController {
 		Trainer trainer;
 		Collection<Offer> offers;
 		final Integer numberNoti;
+		try {
+			trainer = this.trainerService.findByPrincipal();
+			offers = this.offerService.findOffersByTrainer(trainer);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		trainer = this.trainerService.findByPrincipal();
-		offers = this.offerService.findOffersByTrainer(trainer);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("offer/list");
-		result.addObject("offers", offers);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "offer/trainer/list.do");
-
+			result = new ModelAndView("offer/list");
+			result.addObject("offers", offers);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "offer/trainer/list.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -86,16 +88,18 @@ public class OfferTrainerController extends AbstractController {
 		Trainer trainer;
 		Collection<Offer> offers;
 		final Integer numberNoti;
+		try {
+			trainer = this.trainerService.findByPrincipal();
+			offers = this.offerService.findOffersByTrainerPassed(trainer);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		trainer = this.trainerService.findByPrincipal();
-		offers = this.offerService.findOffersByTrainerPassed(trainer);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
-
-		result = new ModelAndView("offer/list");
-		result.addObject("offers", offers);
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("requestURI", "offer/trainer/listPassed.do");
-
+			result = new ModelAndView("offer/list");
+			result.addObject("offers", offers);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "offer/trainer/listPassed.do");
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -153,7 +157,7 @@ public class OfferTrainerController extends AbstractController {
 			this.offerService.delete(offer);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("error");
 		}
 
 		return result;

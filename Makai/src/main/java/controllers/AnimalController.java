@@ -67,25 +67,27 @@ public class AnimalController extends AbstractController {
 		Collection<AnimalForm> animals;
 		Actor actor;
 		final Integer numberNoti;
+		try {
+			actor = this.actorService.findByPrincipal();
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		actor = this.actorService.findByPrincipal();
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+			animals = new HashSet<AnimalForm>();
 
-		animals = new HashSet<AnimalForm>();
+			for (final Animal a : this.animalService.findByActorIdNotHidden(actor.getId())) {
+				AnimalForm animalForm;
 
-		for (final Animal a : this.animalService.findByActorIdNotHidden(actor.getId())) {
-			AnimalForm animalForm;
+				animalForm = this.animalService.animalToFormObject(a);
 
-			animalForm = this.animalService.animalToFormObject(a);
+				animals.add(animalForm);
+			}
 
-			animals.add(animalForm);
+			result = new ModelAndView("animal/list");
+			result.addObject("requestURI", "animal/list.do");
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("animals", animals);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
 		}
-
-		result = new ModelAndView("animal/list");
-		result.addObject("requestURI", "animal/list.do");
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("animals", animals);
-
 		return result;
 	}
 	// ListingAdopted -------------------------------------------------------		
@@ -95,25 +97,27 @@ public class AnimalController extends AbstractController {
 		Collection<AnimalForm> animals;
 		Actor actor;
 		final Integer numberNoti;
+		try {
+			actor = this.actorService.findByPrincipal();
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		actor = this.actorService.findByPrincipal();
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+			animals = new HashSet<AnimalForm>();
 
-		animals = new HashSet<AnimalForm>();
+			for (final Animal a : this.animalService.findByActorIdAndAdopted(actor.getId())) {
+				AnimalForm animalForm;
 
-		for (final Animal a : this.animalService.findByActorIdAndAdopted(actor.getId())) {
-			AnimalForm animalForm;
+				animalForm = this.animalService.animalToFormObject(a);
 
-			animalForm = this.animalService.animalToFormObject(a);
+				animals.add(animalForm);
+			}
 
-			animals.add(animalForm);
+			result = new ModelAndView("animal/list");
+			result.addObject("requestURI", "animal/list.do");
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("animals", animals);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
 		}
-
-		result = new ModelAndView("animal/list");
-		result.addObject("requestURI", "animal/list.do");
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("animals", animals);
-
 		return result;
 	}
 
@@ -124,25 +128,27 @@ public class AnimalController extends AbstractController {
 		Collection<AnimalForm> animals;
 		Actor actor;
 		final Integer numberNoti;
+		try {
+			actor = this.actorService.findByPrincipal();
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		actor = this.actorService.findByPrincipal();
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+			animals = new HashSet<AnimalForm>();
 
-		animals = new HashSet<AnimalForm>();
+			for (final Animal a : this.animalService.findByActorIdAndNotAdopted(actor.getId())) {
+				AnimalForm animalForm;
 
-		for (final Animal a : this.animalService.findByActorIdAndNotAdopted(actor.getId())) {
-			AnimalForm animalForm;
+				animalForm = this.animalService.animalToFormObject(a);
 
-			animalForm = this.animalService.animalToFormObject(a);
+				animals.add(animalForm);
+			}
 
-			animals.add(animalForm);
+			result = new ModelAndView("animal/list");
+			result.addObject("requestURI", "animal/list.do");
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("animals", animals);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
 		}
-
-		result = new ModelAndView("animal/list");
-		result.addObject("requestURI", "animal/list.do");
-		result.addObject("numberNoti", numberNoti);
-		result.addObject("animals", animals);
-
 		return result;
 	}
 
@@ -225,7 +231,7 @@ public class AnimalController extends AbstractController {
 		} else
 			try {
 
-				if (animalForm.getAnimalImage().getSize() > 0 && animalForm.getAnimalImage().getSize() <= 5242880) {
+				if (animalForm.getAnimalImage().getSize() > 0 && animalForm.getAnimalImage().getSize() <= 2097152 && animalForm.getAnimalImage().getContentType().contains("image")) {
 
 					savedFile = animalForm.getAnimalImage().getBytes();
 					animal.setPicture(savedFile);
@@ -288,7 +294,7 @@ public class AnimalController extends AbstractController {
 		} else
 			try {
 
-				if (animalForm.getAnimalImage().getSize() > 0 && animalForm.getAnimalImage().getSize() <= 5242880) {
+				if (animalForm.getAnimalImage().getSize() > 0 && animalForm.getAnimalImage().getSize() <= 2097152 && animalForm.getAnimalImage().getContentType().contains("image")) {
 
 					savedFile = animalForm.getAnimalImage().getBytes();
 					animal.setPicture(savedFile);

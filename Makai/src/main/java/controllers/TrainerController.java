@@ -56,7 +56,7 @@ public class TrainerController extends AbstractController {
 			try {
 				//				final MultipartFile userImage = customerForm.getUserImage();
 
-				if (trainerForm.getUserImage().getSize() > 5242880 || !trainerForm.getUserImage().getContentType().contains("image")) {
+				if (trainerForm.getUserImage().getSize() > 2097152 || !trainerForm.getUserImage().getContentType().contains("image")) {
 					pictureTooLong = true;
 					throw new IllegalArgumentException();
 				}
