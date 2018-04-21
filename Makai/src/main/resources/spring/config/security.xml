@@ -82,6 +82,7 @@
 		<security:intercept-url pattern="/breed/admin/delete.do" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/offer/trainer/list.do" access="hasRole('TRAINER')" /> 
+		<security:intercept-url pattern="/offer/trainer/listPassed.do" access="hasRole('TRAINER')" /> 
 		<security:intercept-url pattern="/offer/trainer/delete.do" access="hasRole('TRAINER')" />
 		<security:intercept-url pattern="/offer/trainer/create.do" access="hasRole('TRAINER')" />
 		<security:intercept-url pattern="/offer/trainer/edit.do" access="hasRole('TRAINER')" />

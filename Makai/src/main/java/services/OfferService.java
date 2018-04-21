@@ -2,6 +2,7 @@
 package services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -160,7 +161,24 @@ public class OfferService {
 	//Other business service
 
 	public Collection<Offer> findOffersByTrainer(final Trainer trainer) {
-		return trainer.getOffers();
+		final Collection<Offer> result = new ArrayList<Offer>();
+		final Collection<Offer> allOffers = trainer.getOffers();
+		for (final Offer aux : allOffers)
+			if (this.calculateWhenFinishOffer(aux).after(new Date()))
+				result.add(aux);
+
+		return result;
+	}
+
+	public Collection<Offer> findOffersByTrainerPassed(final Trainer trainer) {
+		final Collection<Offer> allOffers = trainer.getOffers();
+		final Collection<Offer> result = new ArrayList<Offer>();
+
+		for (final Offer aux : allOffers)
+			if (this.calculateWhenFinishOffer(aux).before(new Date()))
+				result.add(aux);
+
+		return result;
 	}
 
 	public Offer findOfferAccepted(final Request request) {

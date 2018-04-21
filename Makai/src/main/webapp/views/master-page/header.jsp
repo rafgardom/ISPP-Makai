@@ -89,9 +89,25 @@
 				<li class="nav-item"><a class="nav-link"
 					href="request/trainer/list.do">
 					<img src="images/request.png" class="img-menu"/><spring:message code="master.page.requests" /> </a></li>
+				
+				<!-- 
 				<li class="nav-item"><a class="nav-link"
 					href="offer/trainer/list.do">
 					<img src="images/deal1.png" class="img-menu"/><spring:message code="master.page.offer" /> </a></li>
+				 -->	
+				<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+								<img src="images/deal1.png" class="img-menu"/><spring:message code="master.page.offer" />
+						</a>
+						<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+							<a class="dropdown-item" href="offer/trainer/list.do">
+					 			<spring:message code="master.page.offer" /></a> 
+							<a class="dropdown-item" href="offer/trainer/listPassed.do">
+								<spring:message code="master.page.offer.passed" /></a>
+						</div>
+					</li>
+						
+					
 				<%-- <li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown">
 					<spring:message code="master.page.trainer.training" /></a>

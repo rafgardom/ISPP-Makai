@@ -80,7 +80,26 @@ public class OfferTrainerController extends AbstractController {
 		return result;
 	}
 
-	// List -------------------------------------------------------------------	
+	@RequestMapping(value = "/listPassed", method = RequestMethod.GET)
+	public ModelAndView listPassed() {
+		ModelAndView result;
+		Trainer trainer;
+		Collection<Offer> offers;
+		final Integer numberNoti;
+
+		trainer = this.trainerService.findByPrincipal();
+		offers = this.offerService.findOffersByTrainerPassed(trainer);
+		numberNoti = this.notificationService.findNotificationWithoutRead();
+
+		result = new ModelAndView("offer/list");
+		result.addObject("offers", offers);
+		result.addObject("numberNoti", numberNoti);
+		result.addObject("requestURI", "offer/trainer/listPassed.do");
+
+		return result;
+	}
+
+	// Display -------------------------------------------------------------------	
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int offerId) {
 		ModelAndView result;
