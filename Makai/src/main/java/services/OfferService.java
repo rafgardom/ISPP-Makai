@@ -161,11 +161,13 @@ public class OfferService {
 	//Other business service
 
 	public Collection<Offer> findOffersByTrainer(final Trainer trainer) {
-		final Collection<Offer> result = new ArrayList<Offer>();
 		final Collection<Offer> allOffers = trainer.getOffers();
+		final Collection<Offer> result = new ArrayList<Offer>();
+		result.addAll(allOffers);
+
 		for (final Offer aux : allOffers)
-			if (this.calculateWhenFinishOffer(aux).after(new Date()))
-				result.add(aux);
+			if (this.calculateWhenFinishOffer(aux).before(new Date()) && aux.getIsAccepted() == true)
+				result.remove(aux);
 
 		return result;
 	}
@@ -175,7 +177,7 @@ public class OfferService {
 		final Collection<Offer> result = new ArrayList<Offer>();
 
 		for (final Offer aux : allOffers)
-			if (this.calculateWhenFinishOffer(aux).before(new Date()))
+			if (this.calculateWhenFinishOffer(aux).before(new Date()) && aux.getIsAccepted() == true)
 				result.add(aux);
 
 		return result;
