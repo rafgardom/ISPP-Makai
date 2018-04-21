@@ -90,29 +90,34 @@ public class OfferTrainerController extends AbstractController {
 		Boolean intruso = false;
 		final Integer numberNoti;
 
-		actor = this.actorService.findByPrincipal();
-		offer = this.offerService.findOne(offerId);
-		numberNoti = this.notificationService.findNotificationWithoutRead();
+		try {
+			actor = this.actorService.findByPrincipal();
+			offer = this.offerService.findOne(offerId);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-		image = Utilities.showImage(offer.getAnimal().getPicture());
+			image = Utilities.showImage(offer.getAnimal().getPicture());
 
-		if (this.actorService.checkAuthority(actor, "CUSTOMER"))
-			if (offer.getRequest().getCustomer().getId() != actor.getId())
-				intruso = true;
-		if (this.actorService.checkAuthority(actor, "TRAINER"))
-			if (offer.getTrainer().getId() != actor.getId())
-				intruso = true;
+			if (this.actorService.checkAuthority(actor, "CUSTOMER"))
+				if (offer.getRequest().getCustomer().getId() != actor.getId())
+					intruso = true;
+			if (this.actorService.checkAuthority(actor, "TRAINER"))
+				if (offer.getTrainer().getId() != actor.getId())
+					intruso = true;
 
-		if (intruso == true)
-			result = new ModelAndView("redirect:../../");
-		else {
+			if (intruso == true)
+				result = new ModelAndView("redirect:../../");
+			else {
 
-			result = new ModelAndView("offer/display");
-			result.addObject("offer", offer);
-			result.addObject("principal", actor);
-			result.addObject("animalImage", image);
-			result.addObject("numberNoti", numberNoti);
-			result.addObject("requestURI", "offer/trainer/display.do?" + offer.getId());
+				result = new ModelAndView("offer/display");
+				result.addObject("offer", offer);
+				result.addObject("principal", actor);
+				result.addObject("animalImage", image);
+				result.addObject("numberNoti", numberNoti);
+				result.addObject("requestURI", "offer/trainer/display.do?" + offer.getId());
+			}
+		} catch (final Throwable oops) {
+			result = new ModelAndView("error");
+			result.addObject("errorOffer", "offer.commit.error.no.exist.offer");
 		}
 		return result;
 	}
@@ -201,7 +206,7 @@ public class OfferTrainerController extends AbstractController {
 				if (!this.offerService.elAnimalNoHaSidoAdoptado(offerForm.getAnimal()))
 					result = this.createEditModelAndView(offerForm, "offer.commit.error.animal.adoptado");
 				else
-					result = this.createEditModelAndView(offerForm, "offer.commit.error");
+					result = this.createEditModelAndView(offerForm, "offer.commit.error.no.exist.offer");
 			}
 		return result;
 
@@ -215,14 +220,19 @@ public class OfferTrainerController extends AbstractController {
 		Request request;
 		OfferForm offerForm;
 
-		offer = this.offerService.findOne(offerId);
+		try {
+			offer = this.offerService.findOne(offerId);
 
-		request = offer.getRequest();
+			request = offer.getRequest();
 
-		offerForm = this.offerService.offerToFormObject(offer);
+			offerForm = this.offerService.offerToFormObject(offer);
 
-		result = this.createEditModelAndView(offerForm);
+			result = this.createEditModelAndView(offerForm);
 
+		} catch (final Throwable oops) {
+			result = new ModelAndView("error");
+			result.addObject("errorOffer", "offer.commit.error.no.exist.offer");
+		}
 		return result;
 	}
 
