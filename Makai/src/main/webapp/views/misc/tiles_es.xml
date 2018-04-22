@@ -31,5 +31,10 @@
 		<put-attribute name="body" value="/views/misc/cookiesPolicy.jsp" /> 
 	</definition>
 	
+	<definition name="faq" extends="master.page">
+		<put-attribute name="title" value="Preguntas frecuentes" /> 
+		<put-attribute name="body" value="/views/misc/faq.jsp" /> 
+	</definition>
+	
 
 </tiles-definitions>

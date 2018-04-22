@@ -43,4 +43,16 @@ public class MiscController extends AbstractController {
 
 		return result;
 	}
+
+	// FAQ ----------------------------------------------------------
+
+	@RequestMapping(value = "/faq", method = RequestMethod.GET)
+	public ModelAndView faq() {
+		ModelAndView result;
+
+		result = new ModelAndView("faq");
+		result.addObject("requestURI", "misc/faq.do");
+
+		return result;
+	}
 }

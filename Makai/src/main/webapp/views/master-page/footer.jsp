@@ -26,7 +26,9 @@
 	</div>
 	<div class="col-md-7 text-md-right">
 		<a href="misc/privacyPolicy.do?sc=true"><spring:message code="master.page.privacyPolicy" /></a>&nbsp;&nbsp;&#124;
-		<a href="misc/cookiesPolicy.do"><spring:message code="master.page.cookiesPolicy" /></a><br/>
+		<a href="misc/cookiesPolicy.do"><spring:message code="master.page.cookiesPolicy" /></a>&nbsp;&nbsp;&#124;
+		<a href="misc/faq.do"><spring:message code="master.page.faq" /></a>
+		<br/>
 		<small><i><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i></small>
 	</div>
 </div>
