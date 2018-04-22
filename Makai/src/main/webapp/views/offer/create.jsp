@@ -74,9 +74,19 @@
 		<div class="col-md-5">
 			<jstl:if test="${offerForm.request.animal==null}">
 				<h3><spring:message code="offer.animal" /></h3>
-				<acme:select items="${animals}" itemLabel="name" code="offer.animal" path="animal"/>
+				
+				<p class="buscador">
+       			<label><spring:message code="offer.search" /></label>
+        		<input id="buscador" type="input" value="" onkeyup="getSearch()">
+   	 			</p>
+				
+				<acme:select id="animalSelect" size="4" items="${animals}" itemLabel="name" code="offer.animal" path="animal"/>
 				<br>
+				 
+				 
+				
 			</jstl:if>
+			
 			<jstl:if test="${offerForm.request.animal!=null}">
 				<form:hidden path="animal"/>
 			</jstl:if>
@@ -94,6 +104,32 @@
 	<br/>
 	
 </form:form>
+
+<script type="text/javascript">
+function getSearch(){
+    var selectAnimal = document.getElementById("animalSelect");
+    var buscador = document.getElementById("buscador").value.toLowerCase();
+    var todos = document.getElementById("animalSelect");
+    
+     for (var i = 0; i < selectAnimal.length; i++){
+    	var e = selectAnimal[i].text.toLowerCase();
+
+    	if(e.indexOf(buscador) > -1){
+    		console.log("Si" + selectAnimal[i].text);
+    	//	selectAnimal.add(todos[i]);
+    		$(animalSelect[i]).show(); 
+    	}
+    	
+    	if(e.indexOf(buscador) == -1){
+    		console.log("No" + selectAnimal[i].text);
+    	//	selectAnimal.remove(i);
+    		$(animalSelect[i]).hide(); 
+    	}
+    		
+    }
+    
+}
+</script>
 
  <!-- Datepicker -->
 <script>
