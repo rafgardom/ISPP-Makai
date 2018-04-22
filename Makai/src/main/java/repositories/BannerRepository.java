@@ -14,4 +14,7 @@ public interface BannerRepository extends JpaRepository<Banner, Integer> {
 
 	@Query("select b from Banner b where b.actor.id=?1")
 	Collection<Banner> findByActorId(int actorId);
+
+	@Query("select b from Banner b where b.paid = true and b.validated = true")
+	Collection<Banner> getValidatedAndPaid();
 }

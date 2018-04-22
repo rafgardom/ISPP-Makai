@@ -3,7 +3,9 @@ package services;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -266,6 +268,23 @@ public class BannerService {
 
 		this.notificationService.save(notification);
 
+		return result;
+	}
+
+	public Banner randomBannerGenerator() {
+		Banner result;
+		final Collection<Banner> potentialBanners = this.bannerRepository.getValidatedAndPaid();
+		final ArrayList<Banner> banners = new ArrayList<Banner>(potentialBanners);
+
+		if (banners.size() == 0)
+			result = null;
+		else if (potentialBanners.size() == 1)
+			result = banners.get(0);
+		else {
+			final Random random = new Random();
+			final int index = random.nextInt(banners.size());
+			result = banners.get(index);
+		}
 		return result;
 	}
 

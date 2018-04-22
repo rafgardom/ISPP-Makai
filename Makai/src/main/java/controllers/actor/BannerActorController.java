@@ -76,6 +76,7 @@ public class BannerActorController extends AbstractController {
 			result.addObject("requestURI", "banner/actor/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("bannerForms", bannerForms);
+
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
