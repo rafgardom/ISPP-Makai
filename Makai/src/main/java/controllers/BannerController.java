@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BannerService;
+import services.PriceService;
 import domain.Banner;
+import domain.Price;
 import forms.BannerForm;
 
 @Controller
@@ -23,6 +25,9 @@ public class BannerController extends AbstractController {
 	// Services ---------------------------------------------------------------
 	@Autowired
 	private BannerService	bannerService;
+
+	@Autowired
+	private PriceService	priceService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -100,9 +105,13 @@ public class BannerController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final BannerForm bannerForm, final String message) {
 		ModelAndView result;
+		Price price;
+
+		price = this.priceService.findOne();
 
 		result = new ModelAndView("banner/create");
 		result.addObject("bannerForm", bannerForm);
+		result.addObject("bannerPrice", price.getBannerPrice());
 		result.addObject("requestURI", "banner/create.do");
 		result.addObject("errorMessage", message);
 

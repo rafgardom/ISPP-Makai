@@ -22,12 +22,14 @@ import paypal.PaypalEnvironment;
 import services.ActorService;
 import services.BannerService;
 import services.NotificationService;
+import services.PriceService;
 
 import com.paypal.api.payments.Payment;
 
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Banner;
+import domain.Price;
 import forms.BannerForm;
 
 @Controller
@@ -40,6 +42,9 @@ public class BannerActorController extends AbstractController {
 
 	@Autowired
 	private ActorService		actorService;
+
+	@Autowired
+	private PriceService		priceService;
 
 	@Autowired
 	private NotificationService	notificationService;
@@ -139,6 +144,7 @@ public class BannerActorController extends AbstractController {
 
 			result = this.createEditModelAndView(bannerForm);
 		} catch (final Throwable e) {
+			System.out.println(e.toString());
 			result = new ModelAndView("error");
 		}
 		return result;
@@ -263,9 +269,13 @@ public class BannerActorController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final BannerForm bannerForm, final String message) {
 		ModelAndView result;
+		Price price;
+
+		price = this.priceService.findOne();
 
 		result = new ModelAndView("banner/create");
 		result.addObject("bannerForm", bannerForm);
+		result.addObject("bannerPrice", price.getBannerPrice());
 		result.addObject("requestURI", "banner/actor/create.do");
 		result.addObject("errorMessage", message);
 

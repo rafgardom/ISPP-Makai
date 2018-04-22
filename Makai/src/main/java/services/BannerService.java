@@ -24,6 +24,7 @@ import domain.Administrator;
 import domain.Banner;
 import domain.Notification;
 import domain.NotificationType;
+import domain.Price;
 import forms.BannerForm;
 
 @Service
@@ -43,6 +44,9 @@ public class BannerService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private PriceService			priceService;
 
 	@Autowired
 	private Validator				validator;
@@ -91,7 +95,8 @@ public class BannerService {
 		Assert.notNull(banner);
 		Banner result;
 		Actor actor;
-		double totalViewsVal;
+		double bannerPriceVal;
+		Price price;
 
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(banner.getActor().equals(actor));
@@ -102,9 +107,10 @@ public class BannerService {
 
 		Assert.isTrue(banner.getZone().equals("izquierda") || banner.getZone().equals("derecha") || banner.getZone().equals("abajo"));
 
-		totalViewsVal = 1.0 * banner.getTotalViews();
-		totalViewsVal = Math.round(totalViewsVal);
-		banner.setPrice(totalViewsVal / 100);
+		price = this.priceService.findOne();
+		bannerPriceVal = price.getBannerPrice() * banner.getTotalViews();
+		bannerPriceVal = Math.round(bannerPriceVal * 100);
+		banner.setPrice(bannerPriceVal / 100);
 
 		// siempre que se haga una modificacion en el banner el admin debe volver a validarlo y se debe volver a realizar el pago
 		banner.setPaid(false);

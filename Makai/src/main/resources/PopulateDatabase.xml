@@ -586,7 +586,7 @@
 	
 	<!-- Price -->	
 	<bean id="price1" class="domain.Price">
-		<property name="bannerPrice" value="0.02" />
+		<property name="bannerPrice" value="0.01" />
 		<property name="adoptionFee" value="15" />
 		<property name="travelFee" value="10" />
 	</bean>

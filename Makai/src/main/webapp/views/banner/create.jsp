@@ -60,14 +60,16 @@
 </form:form>
 
 <script type="text/javascript">
+
+	var price = '<jstl:out value="${bannerPrice }" />';
 	
 	if($("#totalViews").val()>0){
 		var totalViews = $("#totalViews").val();
-		$('#divPrice').text(Math.round((0.01*totalViews * 100 )) / 100);
+		$('#divPrice').text(Math.round((price*totalViews * 100 )) / 100);
 	}
 	
 	$("#totalViews").on("input", function() {
 		var totalViews = $("#totalViews").val();
-		$('#divPrice').text(Math.round((0.01*totalViews * 100 )) / 100);
+		$('#divPrice').text(Math.round((price*totalViews * 100 )) / 100);
 	});
 </script>

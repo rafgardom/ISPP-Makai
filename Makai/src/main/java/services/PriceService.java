@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,16 @@ public class PriceService {
 
 		result = this.priceRepository.findOne(priceId);
 		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Price findOne() {
+		List<Price> prices;
+		Price result;
+
+		prices = this.priceRepository.findAll();
+		result = prices.get(0);
 
 		return result;
 	}
