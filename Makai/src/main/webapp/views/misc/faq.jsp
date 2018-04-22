@@ -20,3 +20,10 @@
 
 <h4 style="margin-left:2%;"><spring:message code="faq.q4.request" /></h4>
 <p><spring:message code="faq.a4.request" /><p>
+
+<!-- TRAVEL -->
+<h4 style="margin-left:2%;"><spring:message code="faq.q5.travel" /></h4>
+<p><spring:message code="faq.a5.travel" /><p>
+
+<h4 style="margin-left:2%;"><spring:message code="faq.q6.travel" /></h4>
+<p><spring:message code="faq.a6.travel" /><p>
