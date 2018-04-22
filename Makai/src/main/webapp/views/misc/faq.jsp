@@ -6,11 +6,17 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h4 style="margin-left:2%;"><spring:message code="faq.q1" /></h4>
-<p><spring:message code="faq.a1" /><p>
+<!-- OFFER -->
+<h4 style="margin-left:2%;"><spring:message code="faq.q1.offer" /></h4>
+<p><spring:message code="faq.a1.offer" /><p>
 
-<h4 style="margin-left:2%;"><spring:message code="faq.q2" /></h4>
-<p><spring:message code="faq.a2" /><p>
+<h4 style="margin-left:2%;"><spring:message code="faq.q2.offer" /></h4>
+<p><spring:message code="faq.a2.offer" /><p>
 
-<h4 style="margin-left:2%;"><spring:message code="faq.q3" /></h4>
-<p><spring:message code="faq.a3" /><p>
+
+<!-- REQUEST -->
+<h4 style="margin-left:2%;"><spring:message code="faq.q3.request" /></h4>
+<p><spring:message code="faq.a3.request" /><p>
+
+<h4 style="margin-left:2%;"><spring:message code="faq.q4.request" /></h4>
+<p><spring:message code="faq.a4.request" /><p>
