@@ -363,12 +363,22 @@ public class TravelController extends AbstractController {
 	public ModelAndView display(@RequestParam final int travelId) {
 		ModelAndView result;
 		Travel travel;
+		Vehicle vehicle;
 		final Integer numberNoti;
+		Collection<Transporter> passengers;
+		Collection<Animal> animals;
+
 		try {
 			travel = this.travelService.findOne(travelId);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
+			vehicle = travel.getVehicle();
+			passengers = this.transporterService.findPassengersByTravel(travelId);
+			animals = travel.getAnimals();
 
 			result = new ModelAndView("travel/display");
+			result.addObject("animals", animals);
+			result.addObject("vehicle", vehicle);
+			result.addObject("passengers", passengers);
 			result.addObject("travel", travel);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/display.do?travelId=" + travel.getId());

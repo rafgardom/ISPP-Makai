@@ -93,4 +93,47 @@
 			</p>
 	  	</div>
 	 </div>
+	 <div class="card my-3">
+	 	<br><h3 class="card-title"><spring:message code="travel.vehicle" /></h3>
+	  	<div class="card-body">
+		  	<p>
+		  		<b><spring:message code="travel.vehicle.carType" />:</b>
+				<jstl:out value="${vehicle.carType}"  />
+			</p>
+			<p>
+				<b><spring:message code="travel.vehicle.brand" />:</b>
+				<jstl:out value="${vehicle.brand}"  />
+			</p>
+			<p>
+				<b><spring:message code="travel.vehicle.year" />:</b>
+				<jstl:out value="${vehicle.year}"  />
+			</p>
+			<p>
+				<b><spring:message code="travel.vehicle.color" />:</b>
+				<jstl:out value="${vehicle.color}"  />
+			</p>
+			<p>
+				<b><spring:message code="travel.vehicle.description" />:</b>
+				<jstl:out value="${vehicle.description}"  />
+			</p>
+	  	</div>
+	 </div>
+	 <div class="card my-3">
+	 	<br><h3 class="card-title"><spring:message code="travel.passengers" /></h3>
+	  		<div class="card-body">
+	  		<b><spring:message code="travel.persons" />:</b>
+	  		<jstl:forEach var="passenger" items="${passengers}">
+		  		<p>
+					<jstl:out value="${passenger.name}"/>
+				</p>
+			</jstl:forEach>
+			<b><spring:message code="travel.animals" />:</b>
+			<jstl:forEach var="animal" items="${animals}">
+		  		<p>
+					<jstl:out value="${animal.name}"/>
+				</p>
+			</jstl:forEach>
+	  		</div>
+	  	</div>
+	  
 </security:authorize>
