@@ -79,11 +79,21 @@
        			<label><spring:message code="offer.search" /></label>
         		<input id="buscador" type="input" value="" onkeyup="getSearch()">
    	 			</p>
+				<%-- 
+				<acme:selectsome id="animalSelect" size="4" items="${animals}" itemLabel="animalShelter.name"  code="offer.animal" path="animal"/>
+				<br> --%> 
 				
-				<acme:select id="animalSelect" size="4" items="${animals}" itemLabel="name" code="offer.animal" path="animal"/>
-				<br>
-				 
-				 
+				<form:label path="animal">
+				<spring:message code="offer.animal" />
+				</form:label>	
+				<form:select size="4" id="animalSelect" path="animal" class="form-control" onchange="${onchange}">
+					<form:option value="0" label="----" selected="selected" disabled="true"/>	
+					<jstl:forEach var="aux" items="${animals}">	
+					<form:option value="${aux.id}"><p>Nombre:<jstl:out value="${aux.name}"/></p>	<p>Edad:<jstl:out value="${aux.age}"/></p>	<p>Refugio:<jstl:out value="${aux.animalShelter.name}"/></p></form:option>
+					</jstl:forEach>
+				</form:select>
+				<form:errors path="animal" cssClass="alert alert-danger form-control" />
+					 
 				
 			</jstl:if>
 			
