@@ -18,6 +18,6 @@ public interface BannerRepository extends JpaRepository<Banner, Integer> {
 	@Query("select b from Banner b where b.paid = true and b.validated = true")
 	Collection<Banner> getValidatedAndPaid();
 
-	@Query("select b from Banner b where b.zone = ?1")
+	@Query("select b from Banner b where b.zone = ?1 and b.paid = true and b.validated = true")
 	Collection<Banner> getBannerByZone(String zone);
 }
