@@ -22,7 +22,6 @@ import services.RatingService;
 import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
-import domain.Banner;
 import domain.Rating;
 import forms.ProfileForm;
 
@@ -72,9 +71,9 @@ public class ProfileActorController extends AbstractController {
 			else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
 				ratings = this.ratingService.findByTransporterId(actor.getId());
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("profile/display");
 			result.addObject("actor", actor);
@@ -110,9 +109,9 @@ public class ProfileActorController extends AbstractController {
 			else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
 				ratings = this.ratingService.findByTransporterId(actor.getId());
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("profile/display");
 			result.addObject("actor", actor);

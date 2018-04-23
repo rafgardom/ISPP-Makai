@@ -16,7 +16,6 @@ import services.NotificationService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Actor;
-import domain.Banner;
 import domain.Request;
 
 @Controller
@@ -56,9 +55,9 @@ public class RequestController extends AbstractController {
 			request = this.requestService.findOne(requestId);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			principal = this.actorService.findByPrincipal();
 			if (this.actorService.checkAuthority(principal, "CUSTOMER"))

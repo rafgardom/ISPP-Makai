@@ -18,7 +18,6 @@ import services.BannerService;
 import services.BreedService;
 import services.SpecieService;
 import controllers.AbstractController;
-import domain.Banner;
 import domain.Breed;
 import domain.Specie;
 
@@ -83,9 +82,9 @@ public class BreedAdministratorController extends AbstractController {
 		try {
 			breeds = this.breedService.findAll();
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("breed/list");
 			result.addObject("requestURI", "breed/admin/list.do");

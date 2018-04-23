@@ -24,7 +24,6 @@ import services.ActorService;
 import services.BannerService;
 import services.NotificationService;
 import domain.Actor;
-import domain.Banner;
 
 @Controller
 @RequestMapping("/administrator")
@@ -57,9 +56,9 @@ public class AdministratorController extends AbstractController {
 			actors = this.actorService.findAllActorsWithoutAdmin();
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("administrator/listActors");
 			result.addObject("requestURI", "administrator/listActors.do");

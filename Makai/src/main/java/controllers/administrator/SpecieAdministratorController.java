@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BannerService;
 import services.SpecieService;
 import controllers.AbstractController;
-import domain.Banner;
 import domain.Specie;
 
 @Controller
@@ -78,9 +77,9 @@ public class SpecieAdministratorController extends AbstractController {
 		try {
 			species = this.specieService.findAll();
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("specie/list");
 			result.addObject("requestURI", "specie/admin/list.do");

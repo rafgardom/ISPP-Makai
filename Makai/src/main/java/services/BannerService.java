@@ -3,6 +3,7 @@ package services;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,6 +12,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -295,10 +297,16 @@ public class BannerService {
 		return result;
 	}
 
-	public ArrayList<Banner> getBannerByZone(final String zone) {
-		final Collection<Banner> banners = this.bannerRepository.getBannerByZone(zone);
-		final ArrayList<Banner> result = new ArrayList<Banner>(banners);
-		Collections.shuffle(result);
+	public ArrayList<String> getBannerByZone(final String zone) throws UnsupportedEncodingException {
+		final Collection<byte[]> banners = this.bannerRepository.getBannerByZone(zone);
+		final ArrayList<byte[]> arrayListBanner = new ArrayList<byte[]>(banners);
+		Collections.shuffle(arrayListBanner);
+		final ArrayList<String> result = new ArrayList<>();
+		for (final byte[] i : arrayListBanner) {
+			final String banner = new String(Base64.encode(i), "UTF-8");
+			result.add(banner);
+		}
+
 		return result;
 	}
 

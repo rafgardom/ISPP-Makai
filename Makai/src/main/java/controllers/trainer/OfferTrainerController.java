@@ -26,7 +26,6 @@ import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Animal;
-import domain.Banner;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
@@ -78,9 +77,9 @@ public class OfferTrainerController extends AbstractController {
 			offers = this.offerService.findOffersByTrainer(trainer);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("offer/list");
 			result.addObject("offers", offers);
@@ -106,9 +105,9 @@ public class OfferTrainerController extends AbstractController {
 			offers = this.offerService.findOffersByTrainerPassed(trainer);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("offer/list");
 			result.addObject("offers", offers);
@@ -140,9 +139,9 @@ public class OfferTrainerController extends AbstractController {
 
 			image = Utilities.showImage(offer.getAnimal().getPicture());
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			if (this.actorService.checkAuthority(actor, "CUSTOMER"))
 				if (offer.getRequest().getCustomer().getId() != actor.getId())

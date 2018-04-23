@@ -22,7 +22,6 @@ import services.OfferService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Animal;
-import domain.Banner;
 import domain.Category;
 import domain.Customer;
 import domain.Offer;
@@ -79,9 +78,9 @@ public class RequestCustomerController extends AbstractController {
 			offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
 			requestsWithOffer = this.requestService.findRequestsWithOffer();
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("request/myList");
 			result.addObject("requestURI", "request/customer/myList.do");

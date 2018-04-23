@@ -10,6 +10,7 @@
 
 package controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BannerService;
 import services.NotificationService;
-import domain.Banner;
 
 @Controller
 @RequestMapping("/welcome")
@@ -45,7 +45,7 @@ public class WelcomeController extends AbstractController {
 	// Index ------------------------------------------------------------------		
 
 	@RequestMapping(value = "/index")
-	public ModelAndView index(@RequestParam(required = false) final String name) {
+	public ModelAndView index(@RequestParam(required = false) final String name) throws UnsupportedEncodingException {
 		ModelAndView result;
 		SimpleDateFormat formatter;
 		String moment;
@@ -53,9 +53,9 @@ public class WelcomeController extends AbstractController {
 
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
-		final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-		final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-		final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+		final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+		final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+		final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("name", name);

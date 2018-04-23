@@ -78,9 +78,9 @@ public class BannerActorController extends AbstractController {
 			for (final Banner b : banners)
 				bannerForms.add(this.bannerService.bannerToFormObject(b));
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("banner/list");
 			result.addObject("requestURI", "banner/actor/list.do");
@@ -109,9 +109,9 @@ public class BannerActorController extends AbstractController {
 			bannerForm = this.bannerService.bannerToFormObject(banner);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("banner/display");
 			result.addObject("requestURI", "banner/actor/display.do");
