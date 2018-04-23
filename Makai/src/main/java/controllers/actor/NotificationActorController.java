@@ -1,6 +1,7 @@
 
 package controllers.actor;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.BannerService;
 import services.NotificationService;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Banner;
 import domain.Notification;
 
 @Controller
@@ -27,6 +30,9 @@ public class NotificationActorController extends AbstractController {
 
 	@Autowired
 	private ActorService		actorService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -48,10 +54,17 @@ public class NotificationActorController extends AbstractController {
 			notifications = this.notificationService.findByActorId(actor.getId());
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("notification/list");
 			result.addObject("notifications", notifications);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "notification/actor/list.do");
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -72,10 +85,17 @@ public class NotificationActorController extends AbstractController {
 
 			this.notificationService.notificationViewed(notification);
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("notification/display");
 			result.addObject("notification", notification);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "notification/actor/display.do");
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable oops) {
 			result = new ModelAndView("error");
 		}

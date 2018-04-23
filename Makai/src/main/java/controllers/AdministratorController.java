@@ -10,6 +10,7 @@
 
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.BannerService;
 import services.NotificationService;
 import domain.Actor;
+import domain.Banner;
 
 @Controller
 @RequestMapping("/administrator")
@@ -33,6 +36,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -51,10 +57,18 @@ public class AdministratorController extends AbstractController {
 			actors = this.actorService.findAllActorsWithoutAdmin();
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("administrator/listActors");
 			result.addObject("requestURI", "administrator/listActors.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("actors", actors);
+
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

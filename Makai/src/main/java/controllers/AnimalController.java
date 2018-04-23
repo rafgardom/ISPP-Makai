@@ -2,6 +2,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AnimalService;
+import services.BannerService;
 import services.BreedService;
 import services.NotificationService;
 import services.SpecieService;
@@ -28,6 +30,7 @@ import com.google.gson.Gson;
 
 import domain.Actor;
 import domain.Animal;
+import domain.Banner;
 import domain.Breed;
 import domain.Sex;
 import domain.Specie;
@@ -52,6 +55,9 @@ public class AnimalController extends AbstractController {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -81,10 +87,18 @@ public class AnimalController extends AbstractController {
 				animals.add(animalForm);
 			}
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("animal/list");
 			result.addObject("requestURI", "animal/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("animals", animals);
+
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -111,10 +125,18 @@ public class AnimalController extends AbstractController {
 				animals.add(animalForm);
 			}
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("animal/list");
 			result.addObject("requestURI", "animal/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("animals", animals);
+
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -142,10 +164,17 @@ public class AnimalController extends AbstractController {
 				animals.add(animalForm);
 			}
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("animal/list");
 			result.addObject("requestURI", "animal/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("animals", animals);
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -172,11 +201,19 @@ public class AnimalController extends AbstractController {
 			image = Utilities.showImage(animal.getPicture());
 			result = new ModelAndView("animal/display");
 			//			result.addObject("animal", animalForm);
+
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result.addObject("animal", animal);
 			result.addObject("specie", specie);
 			result.addObject("animalImage", image);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "animal/display.do");
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

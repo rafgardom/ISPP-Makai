@@ -1,6 +1,8 @@
 
 package controllers.actor;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.BannerService;
 import services.NotificationService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Banner;
 import domain.Request;
 
 @Controller
@@ -28,6 +32,9 @@ public class RequestController extends AbstractController {
 
 	@Autowired
 	private ActorService		actorService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -49,6 +56,10 @@ public class RequestController extends AbstractController {
 			request = this.requestService.findOne(requestId);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			principal = this.actorService.findByPrincipal();
 			if (this.actorService.checkAuthority(principal, "CUSTOMER"))
 				if (request.getCustomer().getId() != principal.getId())
@@ -61,6 +72,9 @@ public class RequestController extends AbstractController {
 				result.addObject("request", request);
 				result.addObject("numberNoti", numberNoti);
 				result.addObject("requestURI", "request/trainer/display.do?requestId=" + request.getId());
+				result.addObject("imagesLeft", imagesLeft);
+				result.addObject("imagesBottom", imagesBottom);
+				result.addObject("imagesRight", imagesRight);
 			}
 		} catch (final Throwable oops) {
 			result = new ModelAndView("error");

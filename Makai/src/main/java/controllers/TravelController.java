@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AnimalService;
+import services.BannerService;
 import services.NotificationService;
 import services.RatingService;
 import services.TransporterService;
 import services.TravelService;
 import services.VehicleService;
 import domain.Animal;
+import domain.Banner;
 import domain.Rating;
 import domain.Transporter;
 import domain.Travel;
@@ -51,6 +53,9 @@ public class TravelController extends AbstractController {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	//Constructor
@@ -257,12 +262,20 @@ public class TravelController extends AbstractController {
 				if (today.getTime().before(aux.getStartMoment()))
 					travels.add(aux);
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("travel/list");
 			result.addObject("principal", principal);
 			result.addObject("travelsByPrincipal", travelsByPrincipal);
 			result.addObject("travels", travels);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/list.do");
+
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -301,11 +314,19 @@ public class TravelController extends AbstractController {
 				if (today.getTime().before(aux.getStartMoment()) && !travels.contains(aux))
 					travels.add(aux);
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("travel/myList");
 			result.addObject("principal", principal);
 			result.addObject("travels", travels);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/myList.do");
+
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -346,12 +367,20 @@ public class TravelController extends AbstractController {
 				if (today.getTime().after(aux.getStartMoment()))
 					travels.add(aux);
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("travel/myList");
 			result.addObject("travels", travels);
 			result.addObject("principalRatings", principalRatings);
 			result.addObject("principal", principal);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/myPastList.do");
+
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -375,6 +404,10 @@ public class TravelController extends AbstractController {
 			passengers = this.transporterService.findPassengersByTravel(travelId);
 			animals = travel.getAnimals();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("travel/display");
 			result.addObject("animals", animals);
 			result.addObject("vehicle", vehicle);
@@ -382,6 +415,10 @@ public class TravelController extends AbstractController {
 			result.addObject("travel", travel);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/display.do?travelId=" + travel.getId());
+
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

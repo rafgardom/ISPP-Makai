@@ -2,6 +2,7 @@
 package controllers.actor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -77,10 +78,17 @@ public class BannerActorController extends AbstractController {
 			for (final Banner b : banners)
 				bannerForms.add(this.bannerService.bannerToFormObject(b));
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("banner/list");
 			result.addObject("requestURI", "banner/actor/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("bannerForms", bannerForms);
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
@@ -101,10 +109,17 @@ public class BannerActorController extends AbstractController {
 			bannerForm = this.bannerService.bannerToFormObject(banner);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("banner/display");
 			result.addObject("requestURI", "banner/actor/display.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("banner", bannerForm);
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");

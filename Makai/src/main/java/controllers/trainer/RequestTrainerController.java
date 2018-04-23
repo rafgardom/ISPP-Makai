@@ -1,6 +1,7 @@
 
 package controllers.trainer;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BannerService;
 import services.NotificationService;
 import services.RequestService;
 import controllers.AbstractController;
+import domain.Banner;
 import domain.Request;
 
 @Controller
@@ -25,6 +28,9 @@ public class RequestTrainerController extends AbstractController {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -43,10 +49,17 @@ public class RequestTrainerController extends AbstractController {
 			requests = this.requestService.findRequestsNotAccepted();
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("request/list");
 			result.addObject("requestURI", "request/trainer/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requests", requests);
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

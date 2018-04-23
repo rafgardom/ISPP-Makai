@@ -2,6 +2,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BannerService;
 import services.NotificationService;
 import services.TransporterService;
 import services.VehicleService;
+import domain.Banner;
 import domain.Brand;
 import domain.CarType;
 import domain.Transporter;
@@ -38,6 +41,9 @@ public class VehicleController extends AbstractController {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	//Constructor
@@ -195,11 +201,18 @@ public class VehicleController extends AbstractController {
 
 				vehicles.add(vehicleForm);
 			}
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("vehicle/list");
 			result.addObject("vehicles", vehicles);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "vehicle/list.do");
+
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

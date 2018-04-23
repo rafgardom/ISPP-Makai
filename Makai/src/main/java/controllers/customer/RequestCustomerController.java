@@ -1,6 +1,7 @@
 
 package controllers.customer;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AnimalService;
+import services.BannerService;
 import services.CustomerService;
 import services.NotificationService;
 import services.OfferService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Animal;
+import domain.Banner;
 import domain.Category;
 import domain.Customer;
 import domain.Offer;
@@ -45,6 +48,9 @@ public class RequestCustomerController extends AbstractController {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -73,12 +79,20 @@ public class RequestCustomerController extends AbstractController {
 			offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
 			requestsWithOffer = this.requestService.findRequestsWithOffer();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("request/myList");
 			result.addObject("requestURI", "request/customer/myList.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requests", requests);
 			result.addObject("offersAcepted", offersAcepted);
 			result.addObject("requestsWithOffer", requestsWithOffer);
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
+
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

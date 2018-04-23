@@ -1,6 +1,7 @@
 
 package controllers.administrator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BannerService;
 import services.SpecieService;
 import controllers.AbstractController;
+import domain.Banner;
 import domain.Specie;
 
 @Controller
@@ -25,6 +28,9 @@ public class SpecieAdministratorController extends AbstractController {
 
 	@Autowired
 	private SpecieService	specieService;
+
+	@Autowired
+	private BannerService	bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -72,9 +78,16 @@ public class SpecieAdministratorController extends AbstractController {
 		try {
 			species = this.specieService.findAll();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("specie/list");
 			result.addObject("requestURI", "specie/admin/list.do");
 			result.addObject("species", species);
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

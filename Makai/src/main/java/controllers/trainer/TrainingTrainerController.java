@@ -2,6 +2,7 @@
 package controllers.trainer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BannerService;
 import services.NotificationService;
 import services.TrainerService;
 import services.TrainingService;
 import controllers.AbstractController;
+import domain.Banner;
 import domain.Trainer;
 import domain.Training;
 
@@ -35,6 +38,9 @@ public class TrainingTrainerController extends AbstractController {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -56,10 +62,17 @@ public class TrainingTrainerController extends AbstractController {
 			trainings = this.trainingService.findByTrainerId(trainer.getId());
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("training/list");
 			result.addObject("trainings", trainings);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "training/trainer/list.do");
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -77,10 +90,18 @@ public class TrainingTrainerController extends AbstractController {
 			training = this.trainingService.findOne(trainingId);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("training/display");
 			result.addObject("training", training);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "training/trainer/display.do");
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
+
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

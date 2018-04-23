@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -291,6 +292,13 @@ public class BannerService {
 			final int index = random.nextInt(banners.size());
 			result = banners.get(index);
 		}
+		return result;
+	}
+
+	public ArrayList<Banner> getBannerByZone(final String zone) {
+		final Collection<Banner> banners = this.bannerRepository.getBannerByZone(zone);
+		final ArrayList<Banner> result = new ArrayList<Banner>(banners);
+		Collections.shuffle(result);
 		return result;
 	}
 

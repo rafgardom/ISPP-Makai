@@ -2,6 +2,7 @@
 package controllers.actor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.BannerService;
 import services.NotificationService;
 import services.RatingService;
 import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Banner;
 import domain.Rating;
 import forms.ProfileForm;
 
@@ -37,6 +40,9 @@ public class ProfileActorController extends AbstractController {
 
 	@Autowired
 	private RatingService		ratingService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -66,12 +72,19 @@ public class ProfileActorController extends AbstractController {
 			else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
 				ratings = this.ratingService.findByTransporterId(actor.getId());
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("profile/display");
 			result.addObject("actor", actor);
 			result.addObject("pictureImage", image);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("ratings", ratings);
 			result.addObject("requestURI", "profile/display.do");
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -97,12 +110,19 @@ public class ProfileActorController extends AbstractController {
 			else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
 				ratings = this.ratingService.findByTransporterId(actor.getId());
 
+			final ArrayList<Banner> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesRight = this.bannerService.getBannerByZone("derecha");
+
 			result = new ModelAndView("profile/display");
 			result.addObject("actor", actor);
 			result.addObject("pictureImage", image);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("ratings", ratings);
 			result.addObject("requestURI", "profile/display.do");
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
