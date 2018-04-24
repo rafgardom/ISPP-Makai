@@ -1,6 +1,8 @@
 
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -33,6 +36,8 @@ public class Banner extends DomainEntity {
 	private String	zone;
 	private boolean	validated;
 	private boolean	paid;
+	private Date	paidMoment;
+	private Integer	clicksNumber;
 
 
 	@Lob
@@ -89,6 +94,15 @@ public class Banner extends DomainEntity {
 		this.paid = paid;
 	}
 
+	@Past
+	public Date getPaidMoment() {
+		return this.paidMoment;
+	}
+
+	public void setPaidMoment(final Date paidMoment) {
+		this.paidMoment = paidMoment;
+	}
+
 	@NotNull
 	public boolean isValidated() {
 		return this.validated;
@@ -96,6 +110,15 @@ public class Banner extends DomainEntity {
 
 	public void setValidated(final boolean validated) {
 		this.validated = validated;
+	}
+
+	@NotNull
+	public Integer getClicksNumber() {
+		return this.clicksNumber;
+	}
+
+	public void setClicksNumber(final Integer clicksNumber) {
+		this.clicksNumber = clicksNumber;
 	}
 
 

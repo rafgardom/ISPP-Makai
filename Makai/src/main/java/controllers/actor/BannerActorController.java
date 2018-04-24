@@ -4,7 +4,6 @@ package controllers.actor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,21 +61,15 @@ public class BannerActorController extends AbstractController {
 	public ModelAndView listByAdvertising() {
 		ModelAndView result;
 		Collection<BannerForm> bannerForms;
-		Collection<Banner> banners;
 		Actor actor;
 		Integer numberNoti;
 		try {
 			actor = this.actorService.findByPrincipal();
 			if (this.actorService.checkAuthority(actor, "ADMIN"))
-				banners = this.bannerService.findAll();
+				bannerForms = this.bannerService.findAllBannerForms();
 			else
-				banners = this.bannerService.findByActorId(actor.getId());
+				bannerForms = this.bannerService.findBannerFormsByActorId(actor.getId());
 			numberNoti = this.notificationService.findNotificationWithoutRead();
-
-			bannerForms = new HashSet<BannerForm>();
-
-			for (final Banner b : banners)
-				bannerForms.add(this.bannerService.bannerToFormObject(b));
 
 			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
@@ -127,6 +120,7 @@ public class BannerActorController extends AbstractController {
 
 		return result;
 	}
+
 	// Delete --------------------------------------------------------------------		
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -224,11 +218,17 @@ public class BannerActorController extends AbstractController {
 	@RequestMapping(value = "/payment/done", method = RequestMethod.GET)
 	public ModelAndView paymentFirstStep(@RequestParam(required = false) final int bannerId) {
 		ModelAndView result;
+		Price price;
+
 		result = new ModelAndView();
+		price = this.priceService.findOne();
 		try {
 			final Banner banner = this.bannerService.findOne(bannerId);
 			banner.setPaid(true);
 			this.bannerService.simpleSave(banner);
+			price.setBannersTotalBenefit(price.getBannersTotalBenefit() + banner.getPrice());
+			price.setBannersCreated(price.getBannersCreated() + 1);
+			price = this.priceService.save(price);
 			result = new ModelAndView("banner/actor/payment/successful");
 
 		} catch (final Throwable oops) {

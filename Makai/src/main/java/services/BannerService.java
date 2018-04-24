@@ -90,6 +90,7 @@ public class BannerService {
 		result.setActor(actor);
 		result.setValidated(false);
 		result.setPaid(false);
+		result.setClicksNumber(0);
 
 		return result;
 	}
@@ -253,6 +254,62 @@ public class BannerService {
 		Collection<Banner> result;
 
 		result = this.bannerRepository.findByActorId(actorId);
+
+		return result;
+	}
+
+	public Collection<BannerForm> findBannerFormsByActorId(final int actorId) {
+		Collection<BannerForm> result;
+
+		result = this.bannerRepository.findBannerFormsByActorId(actorId);
+
+		return result;
+	}
+
+	public Collection<BannerForm> findAllBannerForms() {
+		Collection<BannerForm> result;
+
+		result = this.bannerRepository.findAllBannerForms();
+
+		return result;
+	}
+
+	public Collection<BannerForm> findMoreViews() {
+		Collection<BannerForm> result;
+
+		result = this.bannerRepository.findMoreViews();
+
+		return result;
+	}
+
+	public Collection<BannerForm> findLessViews() {
+		Collection<BannerForm> result;
+
+		result = this.bannerRepository.findLessViews();
+
+		return result;
+	}
+
+	public Collection<BannerForm> findMoreClicks() {
+		Collection<BannerForm> result;
+
+		result = this.bannerRepository.findMoreClicks();
+
+		return result;
+	}
+
+	public Collection<BannerForm> findLessClicks() {
+		Collection<BannerForm> result;
+
+		result = this.bannerRepository.findLessClicks();
+
+		return result;
+	}
+
+	public Double findSumPricesPaid() {
+		Double result;
+
+		result = this.bannerRepository.findSumPricesPaid();
 
 		return result;
 	}

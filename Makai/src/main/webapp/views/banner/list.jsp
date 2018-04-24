@@ -60,6 +60,10 @@
 		</display:column>
 	</security:authorize>
 	
+	<acme:column code="banner.clicksNumber" property="clicksNumber" sortable="true" />
+	<acme:column code="banner.daily" property="dailyViews" sortable="true" />
+	<acme:column code="banner.monthly" property="monthlyViews" sortable="true" />
+	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">	
 			<acme:link image="eye" href="banner/actor/display.do?bannerId=${row.id}"/>

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.PriceRepository;
-import domain.Administrator;
+import domain.Actor;
 import domain.Price;
 
 @Service
@@ -19,11 +19,11 @@ public class PriceService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private PriceRepository			priceRepository;
+	private PriceRepository	priceRepository;
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
-	private AdministratorService	administratorService;
+	private ActorService	actorService;
 
 
 	// Constructors------------------------------------------------------------
@@ -62,9 +62,9 @@ public class PriceService {
 	public Price save(final Price price) {
 		Assert.notNull(price);
 		Price result;
-		Administrator principal;
+		Actor principal;
 
-		principal = this.administratorService.findByPrincipal();
+		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
 
 		result = this.priceRepository.save(price);

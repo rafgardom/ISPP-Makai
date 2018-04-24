@@ -6,7 +6,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
+import utilities.Utilities;
 import domain.Actor;
+import domain.Banner;
 
 public class BannerForm {
 
@@ -23,6 +25,9 @@ public class BannerForm {
 	private boolean			paid;
 	private boolean			validated;
 	private Actor			actor;
+	private double			dailyViews;
+	private double			monthlyViews;
+	private Integer			clicksNumber;
 
 
 	// Constructor ------------------------------------------------------------
@@ -31,6 +36,40 @@ public class BannerForm {
 		super();
 	}
 
+	public BannerForm(final Banner banner) {
+		this.id = banner.getId();
+		this.picture = banner.getPicture();
+		this.stringImage = Utilities.showImage(banner.getPicture());
+		this.totalViews = banner.getTotalViews();
+		this.currentViews = banner.getCurrentViews();
+		this.price = banner.getPrice();
+		this.zone = banner.getZone();
+		this.paid = banner.isPaid();
+		this.validated = banner.isValidated();
+		this.actor = banner.getActor();
+		this.clicksNumber = banner.getClicksNumber();
+	}
+
+	public BannerForm(final Banner banner, double dailyViews, final double monthlyViews) {
+		double aux;
+
+		aux = 1.0 * Math.round(dailyViews * 100);
+		dailyViews = aux / 100;
+
+		this.id = banner.getId();
+		this.picture = banner.getPicture();
+		this.stringImage = Utilities.showImage(banner.getPicture());
+		this.totalViews = banner.getTotalViews();
+		this.currentViews = banner.getCurrentViews();
+		this.price = banner.getPrice();
+		this.zone = banner.getZone();
+		this.paid = banner.isPaid();
+		this.validated = banner.isValidated();
+		this.actor = banner.getActor();
+		this.clicksNumber = banner.getClicksNumber();
+		this.dailyViews = dailyViews;
+		this.monthlyViews = monthlyViews;
+	}
 	// Getters & setters ------------------------------------------------------
 
 	public int getId() {
@@ -121,6 +160,30 @@ public class BannerForm {
 
 	public void setActor(final Actor actor) {
 		this.actor = actor;
+	}
+
+	public double getDailyViews() {
+		return this.dailyViews;
+	}
+
+	public void setDailyViews(final double dailyViews) {
+		this.dailyViews = dailyViews;
+	}
+
+	public double getMonthlyViews() {
+		return this.monthlyViews;
+	}
+
+	public void setMonthlyViews(final double monthlyViews) {
+		this.monthlyViews = monthlyViews;
+	}
+
+	public Integer getClicksNumber() {
+		return this.clicksNumber;
+	}
+
+	public void setClicksNumber(final Integer clicksNumber) {
+		this.clicksNumber = clicksNumber;
 	}
 
 }

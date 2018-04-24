@@ -184,27 +184,24 @@
 					</a></li>
 			</security:authorize>
 			
-			<security:authorize access="hasRole('ADMIN')">
-				<li class="nav-item"><a class="nav-link"
-					href="banner/actor/list.do"> <spring:message
-							code="master.page.banners" />
-				</a></li>
-			</security:authorize>
-			
 			<security:authorize access="isAuthenticated()">
-				<security:authorize access="!hasRole('ADMIN')">
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-								<img src="images/ad.png" class="img-menu"/><spring:message code="master.page.banners" />
-						</a>
-						<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+							<img src="images/ad.png" class="img-menu"/><spring:message code="master.page.banners" />
+					</a>
+					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+						<a class="dropdown-item" href="banner/actor/list.do">
+							<spring:message code="master.page.banner.list" /></a>
+						<security:authorize access="!hasRole('ADMIN')">
 							<a class="dropdown-item" href="banner/actor/create.do">
-					 			<spring:message code="master.page.banner.create" /></a> 
-							<a class="dropdown-item" href="banner/actor/list.do">
-								<spring:message code="master.page.banner.list" /></a>
-						</div>
-					</li>
-				</security:authorize>
+				 				<spring:message code="master.page.banner.create" /></a> 
+						</security:authorize>
+						<security:authorize access="hasRole('ADMIN')">
+							<a class="dropdown-item" href="banner/admin/dashboard.do">
+								<spring:message code="master.page.banner.dahsboard" /></a>
+						</security:authorize>
+					</div>
+				</li>
 				<li class="nav-item">
 				<a class="nav-link"
 					href="notification/actor/list.do">
