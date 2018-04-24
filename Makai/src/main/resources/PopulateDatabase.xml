@@ -32,8 +32,8 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer1" />
-		<property name="password" value="dea26157fa355301663174eac368538cff8939f36681d6712dedba439ab98b70" />
+		<property name="username" value="Jesus" />
+		<property name="password" value="225172a4cff0642a8311b7a28ae0544a2cd2c6f1b9768e8514fc1368a5408af9" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -45,8 +45,8 @@
 	</bean>
 	
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="customer2" />
-		<property name="password" value="c8c7cb5b9e8f7a1b3d1d02602ada62327132391dbe0e8ee07913cd550eea1f3b" />
+		<property name="username" value="Santiago" />
+		<property name="password" value="d90e6b3cad27e7da22114b914099fbc003231aad6d589625c68aca187d1f6bf1" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -58,8 +58,8 @@
 	</bean>
 	
 	<bean id="userAccount4" class="security.UserAccount">
-		<property name="username" value="customer3" />
-		<property name="password" value="18c5c9be898c65c5e5c51ac3e94feacff0b991f8463a3a18eb524e9f7e6131a8" />
+		<property name="username" value="Elena" />
+		<property name="password" value="8bc87e2fd7e8e5b8a84bf9b34bd932dd762893034c001f3625ad60f69f9afa3e" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -71,8 +71,8 @@
 	</bean>
 	
 	<bean id="userAccount5" class="security.UserAccount">
-		<property name="username" value="professional1" />
-		<property name="password" value="682755eb288706c61b5dc69e380fa8f47840a1d0a5b99b07f70dce1c61753932" />
+		<property name="username" value="Javier" />
+		<property name="password" value="54b6428cff9a4669e4f66aa1d8287ef46f7962c17b803fec9056c90f8ffd96cc" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -84,8 +84,8 @@
 	</bean>
 	
 	<bean id="userAccount6" class="security.UserAccount">
-		<property name="username" value="professional2" />
-		<property name="password" value="ad4fe6f590427451edb8302d621d37610adacda9f8c486f97b0145bb6bb3630a" />
+		<property name="username" value="Rafael" />
+		<property name="password" value="29288d30a160826b90bf6f20ccc2b8a78f94e6d91db7d21daab9cf6c3c118c20" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -97,8 +97,8 @@
 	</bean>
 	
 	<bean id="userAccount7" class="security.UserAccount">
-		<property name="username" value="professional3" />
-		<property name="password" value="1d6be67ede3f74dd94d70c91bd9e8cb179f487cb4df92bce6c309aff8f600165" />
+		<property name="username" value="Pedro" />
+		<property name="password" value="377084cecdc4780bd29347370b07a6d31c67b0ce05c75b153a09b2965f73690b" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -110,8 +110,8 @@
 	</bean>
 	
 	<bean id="userAccount8" class="security.UserAccount">
-		<property name="username" value="trainer1" />
-		<property name="password" value="167ec7e469d6e543b4180fdbe60ddacf81563fb178f908896e46a5e86633c702" />
+		<property name="username" value="Marta" />
+		<property name="password" value="ccd36d188f87cedf053eefea52cf8ef5574ba0a786b280507dd022dcfe7e6027" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -123,8 +123,8 @@
 	</bean>
 	
 	<bean id="userAccount9" class="security.UserAccount">
-		<property name="username" value="trainer2" />
-		<property name="password" value="16378a428f831c77c6c49def99620f0f17f4ba693df2826ee8fbd6c6d451e4b7" />
+		<property name="username" value="Shelu" />
+		<property name="password" value="561c12a16dcdb221d8259f0b564abcc6060135048b620c6a7c4df2c6a27ab25f" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -136,8 +136,8 @@
 	</bean>
 	
 	<bean id="userAccount10" class="security.UserAccount">
-		<property name="username" value="trainer3" />
-		<property name="password" value="29209ecd78e31959de6fcb45b068f221f1130de844cfddd0b63af57369cec375" />
+		<property name="username" value="Diego" />
+		<property name="password" value="a6a6179cd45d57f43cd1a9d105e199e3177f6e14f017e52c6f6de72b66f182ac" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -149,8 +149,8 @@
 	</bean>
 	
 	<bean id="userAccount11" class="security.UserAccount">
-		<property name="username" value="animalshelter1" />
-		<property name="password" value="0f7395dd04906037a9a7cb770b347e787be1d096ff0190af6bd591b260d2f60e" />
+		<property name="username" value="Adrian" />
+		<property name="password" value="9c9a3223d8355da56fde719172f02288e59f92266773e3c9d79481e4ad3f3574" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -162,8 +162,8 @@
 	</bean>
 	
 	<bean id="userAccount12" class="security.UserAccount">
-		<property name="username" value="animalshelter2" />
-		<property name="password" value="ce07a44593752910b4c9f35875b2db5c7e66fa44d2217ea5fd6d45d463759a56" />
+		<property name="username" value="Belen" />
+		<property name="password" value="d12f05925aa30debb3b5e92263160608d14f61158e10238250a04d7d1b31e971" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -175,8 +175,8 @@
 	</bean>
 	
 	<bean id="userAccount13" class="security.UserAccount">
-		<property name="username" value="animalshelter3" />
-		<property name="password" value="a3dc6a11182b57ea49b4e2386479d6ce25bdfc29210c22ac23ce8c9233684928" />
+		<property name="username" value="Alejandro" />
+		<property name="password" value="40e985b40148314629ecae8d2494895c1a694f77ab9ec173ce6398772abfad19" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -188,8 +188,8 @@
 	</bean>
 	
 	<bean id="userAccount14" class="security.UserAccount">
-		<property name="username" value="advertising1" />
-		<property name="password" value="b7a9e174e4c664025e048e952e1ea6c07ee89de8bdb1ea3cb4fd91fd559dfac7" />
+		<property name="username" value="Pablo" />
+		<property name="password" value="1aeffa7cb0b4b695503bb86d7f233c5395822b2a2485bca793019bfa006eb0fe" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -201,8 +201,8 @@
 	</bean>
 	
 	<bean id="userAccount15" class="security.UserAccount">
-		<property name="username" value="advertising2" />
-		<property name="password" value="e3bd71118914af630d724f5359090430bba01a975a4b42773f8cb93bf32614f2" />
+		<property name="username" value="JuanCarlos" />
+		<property name="password" value="f5e2fdf4b40a93a29b80df0db1752b8f2e4832826392d7d09778873d58a39a3e" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -639,8 +639,8 @@
 	
 	<!-- Administrator -->
 	<bean id="administrator" class="domain.Administrator">
-		<property name="name" value="administrator" />
-		<property name="email" value="admin@gmail.com" />
+		<property name="name" value="Makai" />
+		<property name="email" value="ispp.makai.1718@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates1" />
 		<property name="picture">
@@ -649,15 +649,15 @@
 				<value>0x43</value>
 			</list>
 		</property>
-		<property name="surname" value="SurnameAdmin" />
+		<property name="surname" value="ISPP" />
 		<property name="nid" value="98698525D" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 
 	<!-- Professional -->
 	<bean id="professional1" class="domain.Professional">
-		<property name="name" value="Name Profesional1" />
-		<property name="email" value="profesional1@gmail.com" />
+		<property name="name" value="Javier" />
+		<property name="email" value="javi@gmail.com" />
 		<property name="phone" value="+34666944487" />
 		<property name="coordinates" ref="coordinates2" />
 		<property name="picture">
@@ -676,8 +676,8 @@
 	
 		
 	<bean id="professional2" class="domain.Professional">
-		<property name="name" value="Name Professional2" />
-		<property name="email" value="profesional2@gmail.com" />
+		<property name="name" value="Rafael" />
+		<property name="email" value="rafa@gmail.com" />
 		<property name="phone" value="+38 632165112" />
 		<property name="coordinates" ref="coordinates3" />
 		<property name="picture">
@@ -696,8 +696,8 @@
 	
 	
 	<bean id="professional3" class="domain.Professional">
-		<property name="name" value="Name Professional3" />
-		<property name="email" value="professional3@gmail.com" />
+		<property name="name" value="Pedro" />
+		<property name="email" value="pedro@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates4" />
 		<property name="picture">
@@ -716,9 +716,9 @@
 	
 	<!-- Advertising -->
 	<bean id="advertising1" class="domain.Advertising">
-		<property name="name" value="Advertising1" />
-		<property name="email" value="advertising1@gmail.com" />
-		<property name="phone" value="+35632165487" />
+		<property name="name" value="Pablo" />
+		<property name="email" value="pablo@gmail.com" />
+		<property name="phone" value="+34632165487" />
 		<property name="coordinates" ref="coordinates5" />
 		<property name="picture">
 			<list>
@@ -730,9 +730,9 @@
 	</bean>
 	
 	<bean id="advertising2" class="domain.Advertising">
-		<property name="name" value="Advertising2" />
-		<property name="email" value="advertising2@gmail.com" />
-		<property name="phone" value="+35632165466" />
+		<property name="name" value="Juan Carlos" />
+		<property name="email" value="juancarlos@gmail.com" />
+		<property name="phone" value="+34632165466" />
 		<property name="coordinates" ref="coordinates5" />
 		<property name="picture">
 			<list>
@@ -745,9 +745,9 @@
 	
 	<!-- Animal Shelter -->
 	<bean id="animalshelter1" class="domain.AnimalShelter">
-		<property name="name" value="Name Animal Shelter1" />
-		<property name="email" value="animalShelter1@gmail.com" />
-		<property name="phone" value="+35632144487" />
+		<property name="name" value="Adrián" />
+		<property name="email" value="adrian@gmail.com" />
+		<property name="phone" value="+34632144487" />
 		<property name="coordinates" ref="coordinates5" />
 		<property name="picture">
 			<list>
@@ -759,8 +759,8 @@
 	</bean>
 	
 	<bean id="animalshelter2" class="domain.AnimalShelter">
-		<property name="name" value="Name Animal Shelter2" />
-		<property name="email" value="animalShelter2@gmail.com" />
+		<property name="name" value="Belén" />
+		<property name="email" value="belen@gmail.com" />
 		<property name="phone" value="+34 632887487" />
 		<property name="coordinates" ref="coordinates6" />
 		<property name="picture">
@@ -773,8 +773,8 @@
 	</bean>
 	
 	<bean id="animalshelter3" class="domain.AnimalShelter">
-		<property name="name" value="Name Animal Shelter3" />
-		<property name="email" value="animalShelter3@gmail.com" />
+		<property name="name" value="Alejandro" />
+		<property name="email" value="alejandro@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates7" />
 		<property name="picture">
@@ -788,10 +788,10 @@
 	
 	<!-- Customer -->
 	<bean id="customer1" class="domain.Customer">
-		<property name="name" value="Name Customer1" />
-		<property name="surname" value="Surname Customer1" />
+		<property name="name" value="Jesús" />
+		<property name="surname" value="Vázquez" />
 		<property name="nid" value="326598T" />
-		<property name="email" value="customer1@gmail.com" />
+		<property name="email" value="jesus@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates8" />
 		<property name="picture">
@@ -810,10 +810,10 @@
 	</bean>
 	
 	<bean id="customer2" class="domain.Customer">
-		<property name="name" value="Name Customer2" />
-		<property name="surname" value="Surname Customer2" />
+		<property name="name" value="Santiago" />
+		<property name="surname" value="Fraga" />
 		<property name="nid" value="300598T" />
-		<property name="email" value="customer2@gmail.com" />
+		<property name="email" value="santiago@gmail.com" />
 		<property name="phone" value="+39632144487" />
 		<property name="coordinates" ref="coordinates9" />
 		<property name="picture">
@@ -832,10 +832,10 @@
 	</bean>
 	
 	<bean id="customer3" class="domain.Customer">
-		<property name="name" value="Name Customer3" />
-		<property name="surname" value="Surname Customer3" />
+		<property name="name" value="Elena" />
+		<property name="surname" value="Camero" />
 		<property name="nid" value="326500T" />
-		<property name="email" value="customer3@gmail.com" />
+		<property name="email" value="elena@gmail.com" />
 		<property name="phone" value="+34 699655654" />
 		<property name="coordinates" ref="coordinates10" />
 		<property name="picture">
@@ -854,10 +854,10 @@
 	
 	<!-- Trainer -->
 	<bean id="trainer1" class="domain.Trainer">
-		<property name="name" value="Name Trainer1" />
-		<property name="surname" value="Surname Trainer1" />
+		<property name="name" value="Marta" />
+		<property name="surname" value="Carmona" />
 		<property name="nid" value="116598T" />
-		<property name="email" value="trainer1@gmail.com" />
+		<property name="email" value="marta@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates11" />
 		<property name="picture">
@@ -877,10 +877,10 @@
 	</bean>
 	
 	<bean id="trainer2" class="domain.Trainer">
-		<property name="name" value="Name Trainer2" />
-		<property name="surname" value="Surname Trainer2" />
+		<property name="name" value="Shelu" />
+		<property name="surname" value="Martinez" />
 		<property name="nid" value="116698T" />
-		<property name="email" value="trainer2@gmail.com" />
+		<property name="email" value="shelu@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates12" />
 		<property name="picture">
@@ -899,10 +899,10 @@
 	</bean>
 	
 	<bean id="trainer3" class="domain.Trainer">
-		<property name="name" value="Name Trainer3" />
-		<property name="surname" value="Surname Trainer3" />
+		<property name="name" value="Diego" />
+		<property name="surname" value="Rodríguez" />
 		<property name="nid" value="886598T" />
-		<property name="email" value="trainer3@gmail.com" />
+		<property name="email" value="diego@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates13" />
 		<property name="picture">
@@ -958,7 +958,7 @@
 	
 	<!-- Animal -->
 	<bean id="animal1" class="domain.Animal">
-		<property name="name" value="Name Animal 1" />
+		<property name="name" value="Kika" />
 		<property name="chipNumber" value="554784P" />
 		<property name="age" value="2" />
 		<property name="sex" value="MALE" />
@@ -979,7 +979,7 @@
 	</bean>
 	
 	<bean id="animal2" class="domain.Animal">
-		<property name="name" value="Name Animal 2" />
+		<property name="name" value="Nymeria" />
 		<property name="chipNumber" value="550084P" />
 		<property name="age" value="5" />
 		<property name="sex" value="FEMALE" />
@@ -999,7 +999,7 @@
 	</bean>
 	
 	<bean id="animal3" class="domain.Animal">
-		<property name="name" value="Name Animal 3" />
+		<property name="name" value="Pepe" />
 		<property name="chipNumber" value="554711P" />
 		<property name="age" value="8" />
 		<property name="sex" value="MALE" />
@@ -1022,23 +1022,23 @@
 	
 	<!-- Request -->
 	<bean id="request1" class="domain.Request">
-		<property name="description" value="Description Request 1" />
-		<property name="tags" value="Tag Request 1" />
+		<property name="description" value="Necesito una mascota que me proteja cuando salga a la calle." />
+		<property name="tags" value="Protección" />
 		<property name="category" value="ABUSE" />
 		<property name="customer" ref="customer1" />
 		<property name="animal" ref="animal1" />
 	</bean>
 	
 	<bean id="request2" class="domain.Request">
-		<property name="description" value="Description Request 2" />
-		<property name="tags" value="Tag Request 2" />
+		<property name="description" value="Quiero un perro que me haga compañía para no sentirme solo en casa." />
+		<property name="tags" value="Compañía" />
 		<property name="category" value="GENERAL" />
 		<property name="customer" ref="customer1" />
 	</bean>
 	
 	<bean id="request3" class="domain.Request">
-		<property name="description" value="Description Request 3" />
-		<property name="tags" value="Tag Request 3" />
+		<property name="description" value="Soy adicto al tabaco y necesito ayuda para dejar de fumar." />
+		<property name="tags" value="DEJAR DE FUMAR" />
 		<property name="category" value="ADDICTION" />
 		<property name="customer" ref="customer2" />
 	</bean>
@@ -1048,7 +1048,7 @@
 		<property name="category" value="ABUSE" />
 		<property name="duration" ref="duration1" />
 		<property name="price" value="1580" />
-		<property name="description" value="Description training 1" />
+		<property name="description" value="Adiestro perros especializados para ciegos." />
 		<property name="trainer" ref="trainer1" />
 	</bean>
 	
@@ -1056,7 +1056,7 @@
 		<property name="category" value="GENERAL" />
 		<property name="duration" ref="duration2" />
 		<property name="price" value="180" />
-		<property name="description" value="Description training 2" />
+		<property name="description" value="Adiestro perros problematicos para que se porten mejor a un precio muy bajo." />
 		<property name="trainer" ref="trainer1" />
 	</bean>
 	
@@ -1064,7 +1064,7 @@
 		<property name="category" value="ADDICTION" />
 		<property name="duration" ref="duration3" />
 		<property name="price" value="259" />
-		<property name="description" value="Description training 3" />
+		<property name="description" value="Entreno a todo tipo de perros que han dado cualquier tipo de problemas. Eficiencia 100%" />
 		<property name="trainer" ref="trainer2" />
 	</bean>
 	
@@ -1074,7 +1074,7 @@
 		<property name="startMoment" value="11/24/2018 9:00" />
 		<property name="isAccepted" value="false" />
 		<property name="price" value="1580" />
-		<property name="comment" value="Comment Offer 1" />
+		<property name="comment" value="Adiestro a tu perro para que se comporte bien en todos los sitios y te proteja con gente extraña que con la que te sientas con miedo." />
 		<property name="duration" ref="duration4" />
 		<property name="request" ref="request1" />
 		<property name="trainer" ref="trainer1" />
@@ -1086,7 +1086,7 @@
 		<property name="startMoment" value="10/26/2018 10:00" />
 		<property name="isAccepted" value="false" />
 		<property name="price" value="180" />
-		<property name="comment" value="Comment Offer 2" />
+		<property name="comment" value="Puedo adiestrar a un perro para que te haga caso a todo lo que le digas en poco tiempo y a un precio muy bajo." />
 		<property name="duration" ref="duration5" />
 		<property name="request" ref="request2" />
 		<property name="trainer" ref="trainer1" />
@@ -1098,7 +1098,7 @@
 		<property name="startMoment" value="10/14/2018 6:00" />
 		<property name="isAccepted" value="true" />
 		<property name="price" value="259" />
-		<property name="comment" value="Comment Offer 3" />
+		<property name="comment" value="Elijo y entreno un perro especial para que dejes de fumar en menos de un mes gracias a su compañía." />
 		<property name="duration" ref="duration6" />
 		<property name="request" ref="request3" />
 		<property name="trainer" ref="trainer2" />
