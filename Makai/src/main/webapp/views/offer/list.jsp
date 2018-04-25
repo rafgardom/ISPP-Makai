@@ -35,12 +35,22 @@
 			<security:authorize access="hasRole('CUSTOMER')">
 				<jstl:if test="${row.isAccepted==false}">
 					<acme:link image="accept" href="offer/customer/accept.do?offerId=${row.id}" type="info" code="offer.accept"/>
+					
 				</jstl:if>
 				<jstl:if test="${row.isAccepted==true}">
 					<acme:link image="star-white-32" href="rating/customer/createRequest.do?requestId=${row.request.id}" type="info" code="offer.rating"/>
 				</jstl:if>
 			</security:authorize>
 		</div>
+	<security:authorize access="hasRole('CUSTOMER')">
+		<display:column>
+			<jstl:if test="${row.isAccepted==false}">
+				<div class="btn-group">
+					<acme:link image="accept" href="offer/customer/pilotPlan.do?offerId=${row.id}" type="info" code="offer.pilotPlanAccept"/>
+				</div>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 		<jstl:if test="${row.isAccepted==true}">
 			<h6><spring:message code="offer.isAccepted" /></h6>
 		</jstl:if>

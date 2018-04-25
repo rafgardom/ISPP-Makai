@@ -117,4 +117,34 @@ public class OfferCustomerController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/pilotPlan", method = RequestMethod.GET)
+	public ModelAndView paymentSimulation(@RequestParam final int offerId) {
+		ModelAndView result;
+		result = new ModelAndView();
+		try {
+			final Offer offer = this.offerService.findOne(offerId);
+			this.offerService.acceptedOffer(offer);
+			result = new ModelAndView("redirect:/offer/customer/pilotPlan/successful.do");
+
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/");
+			result.addObject("errorMessage", "offer.pay.error");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/pilotPlan/successful", method = RequestMethod.GET)
+	public ModelAndView paymentSimulation() {
+		ModelAndView result;
+		result = new ModelAndView();
+		try {
+			result = new ModelAndView("offer/customer/pilotPlan/successful");
+
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/");
+			result.addObject("errorMessage", "offer.pay.error");
+		}
+		return result;
+	}
+
 }
