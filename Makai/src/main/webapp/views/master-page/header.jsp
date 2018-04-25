@@ -156,14 +156,14 @@
 				</a></li>
 				
 			
-					<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#advertisingModal"
+			<%-- 		<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#advertisingModal"
 						href="banner/create.do"> 
 						<!-- <img src="images/ad.png" class="img-menu"/> -->
 						<spring:message code="master.page.banner.advertise" />
-					</a></li>
+					</a></li> --%>
 			</security:authorize>
 			
-			<security:authorize access="isAuthenticated()">
+			<security:authorize access="hasAnyRole('ADMIN,ANIMALSHELTER')">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
 							<img src="images/ad.png" class="img-menu"/><spring:message code="master.page.banners" />
@@ -171,7 +171,7 @@
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="banner/actor/list.do">
 							<spring:message code="master.page.banner.list" /></a>
-						<security:authorize access="!hasRole('ADMIN')">
+						<security:authorize access="hasRole('ANIMALSHELTER')">
 							<a class="dropdown-item" href="banner/actor/create.do">
 				 				<spring:message code="master.page.banner.create" /></a> 
 						</security:authorize>
@@ -181,20 +181,19 @@
 						</security:authorize>
 					</div>
 				</li>
-				<li class="nav-item">
-				<a class="nav-link"
-					href="notification/actor/list.do">
-							<img src="images/bell.png" class="img-menu"/>
-							<span class="badge badge-default badge-pill bg-secondary pill-menu"><jstl:if test="${numberNoti > 0}" >${numberNoti}</jstl:if></span> 
-							<span class="d-lg-none d-md-none"><spring:message code="master.page.notification.list" /></span>
-							</a></li>
 			</security:authorize>
 		</ul>
 		
 		<security:authorize access="isAuthenticated()">
 			
 			<ul class="navbar-nav float-lg-right">
-				
+					<li class="nav-item">
+				<a class="nav-link"
+					href="notification/actor/list.do">
+							<img src="images/bell.png" class="img-menu"/>
+							<span class="badge badge-default badge-pill bg-secondary pill-menu"><jstl:if test="${numberNoti > 0}" >${numberNoti}</jstl:if></span> 
+							<span class="d-lg-none d-md-none"><spring:message code="master.page.notification.list" /></span>
+				</a></li>
 				
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown"><img src="images/user (1).png" class="img-menu"/>  <security:authentication
