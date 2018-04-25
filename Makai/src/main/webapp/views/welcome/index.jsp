@@ -18,37 +18,43 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <div class="row text-center">
-	<div class="col-md-8">
+	<div class="col-lg-8">
 	<div class="card py-3" style="background-color: rgba(248, 249, 250, 0.58);">
 		<div class="row align-items-center">
-			<div class="offset-md-1 col-md-3">
+			<div class="offset-lg-1 col-lg-3">
 				<div class="center-div">
 					<img src="images/logo.png" alt="Makai" style="height: 220px;" />
 				</div>
 			</div>
-			<div class="offset-md-1 col-md-7">
+			<div class="offset-lg-1 col-lg-7">
 				<h3><spring:message code="welcome.greeting.prefix" /></h3>	
 			</div>
 		</div>
 	</div>
 	</div>
-	<div class="col-md-4">
-	<div class="card bg-info pt-3">
-		<div class="center-div py-2">
-			<img alt="ad" src="images/ad2.png"  height="128" width="128">
-		</div>
-		<div class="card-footer mt-3">
-		<security:authorize access="isAuthenticated()">
-			<acme:link href="banner/actor/create.do" type=" btn-outline-light" code="master.page.banner.advertise"/>
-		</security:authorize>
-		<security:authorize access="isAnonymous()">
-			<acme:link href="advertising/register.do" type=" btn-outline-light" code="master.page.banner.advertise"/>
-		</security:authorize>
-		</div>
 	
-	</div>
-	</div>
-
+	<security:authorize access="isAnonymous()">
+		<div class="col-lg-4 mt-lg-0 mt-3">
+		<div class="card bg-info pt-3">
+			<div class="center-div py-2">
+				<img alt="ad" src="images/ad2.png"  height="128" width="128">
+			</div>
+			<div class="card-footer mt-3">
+				<button type="button" data-toggle="modal" data-target="#advertisingModal" class="btn btn-lg btn-outline-light" >
+				 	<spring:message code="master.page.banner.advertise" />
+				</button>
+				
+				<%-- <a data-toggle="modal" data-target="#advertisingModal"
+						href="banner/create.do"> 
+						<!-- <img src="images/ad.png" class="img-menu"/> -->
+						<spring:message code="master.page.banner.advertise" />
+					</a> --%>
+			</div>
+		
+		</div>
+		</div>
+	</security:authorize>
+	
 </div>
 <br>
 <div class="card-deck text-light text-center pb-5">
