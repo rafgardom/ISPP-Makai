@@ -35,6 +35,7 @@
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">	
 			<acme:link image="eye" href="animal/display.do?animalId=${row.id}"/>
+			<acme:link image="edit" href="animal/edit.do?animalId=${row.id}"/>
 			<acme:delete href="animal/delete.do?animalId=${row.id}" id="${row.id}"/>
 		</div>
 	</display:column>
