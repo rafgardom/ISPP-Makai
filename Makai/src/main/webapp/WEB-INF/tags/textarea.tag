@@ -38,6 +38,9 @@
 <jstl:if test="${mandatory == null}">
 	<jstl:set var="mandatory" value="false" />
 </jstl:if>
+<jstl:if test="${mandatory == true}">
+	<jstl:set var="required" value="required" />
+</jstl:if>
 
 <%-- Definition --%>
 
@@ -48,7 +51,7 @@
 			<img src="images/asterisk.png"	width="16"/>
 		</jstl:if>
 	</form:label>
-	<form:textarea path="${path}" placeholder="${placeholder}" maxlength="${maxlength}" readonly="${readonly}" class="form-control" rows="${rows}" id="text_${path}" name="text" />
+	<form:textarea path="${path}" placeholder="${placeholder}" maxlength="${maxlength}" readonly="${readonly}" class="form-control" rows="${rows}" id="text_${path}" name="text" required="${required}"/>
 	<jstl:if test="${maxCharacters != null}">
 		<span class="pull-right label label-default" id="count_message_${path}"></span>
 	</jstl:if>

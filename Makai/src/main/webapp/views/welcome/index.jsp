@@ -19,7 +19,7 @@
 
 <div class="row text-center">
 	<div class="col-lg-8">
-	<div class="card py-3" style="background-color: rgba(248, 249, 250, 0.58);">
+	<div class="card py-3 shadow" style="background-color: rgba(248, 249, 250, 0.58);">
 		<div class="row align-items-center">
 			<div class="offset-lg-1 col-lg-3">
 				<div class="center-div">
@@ -35,7 +35,7 @@
 	
 	<security:authorize access="isAnonymous()">
 		<div class="col-lg-4 mt-lg-0 mt-3">
-		<div class="card bg-info pt-3">
+		<div class="card bg-info pt-3 shadow">
 			<div class="center-div py-2">
 				<img alt="ad" src="images/ad2.png"  height="128" width="128">
 			</div>
@@ -43,12 +43,6 @@
 				<button type="button" data-toggle="modal" data-target="#advertisingModal" class="btn btn-lg btn-outline-light" >
 				 	<spring:message code="master.page.banner.advertise" />
 				</button>
-				
-				<%-- <a data-toggle="modal" data-target="#advertisingModal"
-						href="banner/create.do"> 
-						<!-- <img src="images/ad.png" class="img-menu"/> -->
-						<spring:message code="master.page.banner.advertise" />
-					</a> --%>
 			</div>
 		
 		</div>
@@ -59,7 +53,7 @@
 <br>
 <div class="card-deck text-light text-center pb-5">
 	<security:authorize access="isAnonymous()">
-			<div class="card bg-secondary">
+			<div class="card bg-secondary shadow">
 				<div class="center-div py-2">
 				<img alt="dog-training" src="images/trainer.png" height="128" width="128">
 				</div>
@@ -71,17 +65,17 @@
 				<acme:link href="trainer/register.do" type=" btn-outline-light" code="welcome.trainer.register"/>
 				</div>
 			</div>
-			<div class="card bg-primary">
+			<div class="card bg-primary shadow">
 				<div class="center-div py-2">
 				<img alt="travel-pet" src="images/travel-pet.png" height="128" width="128">
 				</div>
-				<h4 class="card-title"><spring:message code="welcome.travel.title"/></h4>
+				<h5 class="card-title"><spring:message code="welcome.travel.title"/></h5>
 				<h5 class="card-body card-text"><spring:message code="welcome.travels.card"/></h5>
 				<div class="card-footer">
 				<acme:link href="customer/register.do" type=" btn-outline-light" code="welcome.customer.register"/>
 				</div>
 			</div>
-			<div class="card bg-warning">
+			<div class="card bg-warning shadow">
 				<div class="center-div py-2">
 					<img alt="dog-training" src="images/medical-report (1).png" height="128" width="128">
 				</div>

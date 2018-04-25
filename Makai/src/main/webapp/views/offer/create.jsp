@@ -20,7 +20,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
 <jstl:if test="${successMessage != null}">
 	<div class="alert alert-success"><spring:message code="${successMessage}" /></div>
 </jstl:if>
@@ -29,6 +28,53 @@
 		<form:hidden path="id"/>
 		<form:hidden path="request"/>
 		
+		
+		<div class="row">
+		<div class="offset-md-4 col-md-4">
+			
+			<jstl:if test="${offerForm.request.animal==null}">
+				<h3><spring:message code="offer.animal" /></h3>
+				
+				<div class="buscador">
+				<spring:message code="offer.search" var="search"/>
+       			<label>${search }</label>
+        		<input class="form-control" type="input" onkeyup="getSearch()" id="buscador" placeholder="${search }">
+				</div>
+
+				<form:label path="animal">
+				<spring:message code="offer.animal" />
+				</form:label>	
+				<form:select size="4" id="animalSelect" path="animal" class="form-control" onchange="${onchange}">
+					<jstl:forEach var="aux" items="${animals}">	
+					<form:option value="${aux.id}"><p>Nombre:<jstl:out value="${aux.name}"/></p>	<p>Edad:<jstl:out value="${aux.age}"/></p>	<p>Refugio:<jstl:out value="${aux.animalShelter.name}"/></p></form:option>
+					</jstl:forEach>
+				</form:select>
+				<form:errors path="animal" cssClass="alert alert-danger form-control" />
+					 
+				
+			</jstl:if>
+			
+			<jstl:if test="${offerForm.request.animal!=null}">
+				
+				<form:hidden path="animal"/>
+				<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
+			
+				<div style="display: flex; justify-content:center; position:relative; z-index:2;">
+					<img src="${util.showImage(offerForm.getRequest().getAnimal().getPicture())} " class="rounded-circle" width="200px" height="200px">
+				</div>
+				<div class="card text-center" style="position:relative; z-index:1; margin-top:-2.5rem">
+    				<div class="card-body" style="margin-top:1.5rem">	
+						<h3 class="card-title"><jstl:out value="${offerForm.request.animal.name}"/></h3>
+						<h6 class="card-body text-muted"><jstl:out value="${offerForm.request.animal.age} ,${offerForm.request.animal.sex}"/><br>
+						<jstl:out value="${offerForm.request.animal.customer.name} , ${offerForm.request.animal.customer.coordinates.city}"/></h6>
+					</div>
+					
+				</div>
+		
+			</jstl:if>
+			</div>
+	</div>
+	
 		<br>
 		<h3><spring:message code="offer.destination" /></h3>
 			
@@ -46,7 +92,7 @@
 		</div>
 		<div class="offset-md-1 col-md-5">
 			<acme:input id="datepicker" image="calendar" code="offer.startMoment" path="startMoment" mandatory="true" placeholder="dd/MM/yyyy"/>
-			<acme:input image="euro" code="offer.price" path="price" min="0"/>
+			<acme:input image="euro" code="offer.price" path="price" min="0" mandatory="true"/>
 			<acme:textarea code="offer.comment" path="comment" mandatory="true" rows="9" maxCharacters="2000" />
 		</div>
 		<div class="col-md-11">
@@ -69,41 +115,9 @@
 	</div>
 	
 	<br>
-	<div class="row">
-		
-		<div class="col-md-5">
-			<jstl:if test="${offerForm.request.animal==null}">
-				<h3><spring:message code="offer.animal" /></h3>
-				
-				<p class="buscador">
-       			<label><spring:message code="offer.search" /></label>
-        		<input id="buscador" type="input" value="" onkeyup="getSearch()">
-   	 			</p>
-				<%-- 
-				<acme:selectsome id="animalSelect" size="4" items="${animals}" itemLabel="animalShelter.name"  code="offer.animal" path="animal"/>
-				<br> --%> 
-				
-				<form:label path="animal">
-				<spring:message code="offer.animal" />
-				</form:label>	
-				<form:select size="4" id="animalSelect" path="animal" class="form-control" onchange="${onchange}">
-					<form:option value="0" label="----" selected="selected" disabled="true"/>	
-					<jstl:forEach var="aux" items="${animals}">	
-					<form:option value="${aux.id}"><p>Nombre:<jstl:out value="${aux.name}"/></p>	<p>Edad:<jstl:out value="${aux.age}"/></p>	<p>Refugio:<jstl:out value="${aux.animalShelter.name}"/></p></form:option>
-					</jstl:forEach>
-				</form:select>
-				<form:errors path="animal" cssClass="alert alert-danger form-control" />
-					 
-				
-			</jstl:if>
-			
-			<jstl:if test="${offerForm.request.animal!=null}">
-				<form:hidden path="animal"/>
-			</jstl:if>
-		</div>
-		
+	
 	<br/>
-	</div>
+	
 	<jstl:if test="${offerForm.id==0}">
 		<acme:submit code="offer.create" name="save" />
 	</jstl:if>
