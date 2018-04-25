@@ -41,7 +41,7 @@
 			<acme:textbox code="customer.name" path="name" mandatory="true" />
 			<acme:textbox code="customer.surname" path="surname" mandatory="true" />
 			<acme:input image="phone" code="customer.phone" path="phone" mandatory="true" />
-			<acme:input image="at" code="customer.email" path="email" mandatory="true" />
+			<acme:input image="at" code="customer.email" path="email" type="email" mandatory="true" />
 			<acme:textbox code="customer.nid" path="nid" mandatory="true" />
 		</div>
 		

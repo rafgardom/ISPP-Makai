@@ -155,23 +155,7 @@
 							code="master.page.sign.in" />
 				</a></li>
 				
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
-							code="master.page.sign.up" /></a>
-					<div class="dropdown-menu" x-placement="bottom-start"
-						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-						<a class="dropdown-item" href="customer/register.do"><spring:message
-								code="master.page.customer.register" /></a>  <a
-							class="dropdown-item" href="professional/register.do"><spring:message
-								code="master.page.professional.register" /></a>  <a
-							class="dropdown-item" href="trainer/register.do"><spring:message
-								code="master.page.trainer.register" /></a> <a class="dropdown-item"
-							href="animalShelter/register.do"><spring:message
-								code="master.page.animalShelter.register" /></a>
-							<a class="dropdown-item"
-							href="advertising/register.do"><spring:message
-								code="master.page.advertising.register" /></a>
-					</div></li>
+			
 					<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#advertisingModal"
 						href="banner/create.do"> 
 						<!-- <img src="images/ad.png" class="img-menu"/> -->

@@ -34,6 +34,10 @@
 <jstl:if test="${mandatory == null}">
 	<jstl:set var="mandatory" value="false" />
 </jstl:if>
+<jstl:if test="${mandatory == true}">
+	<jstl:set var="required" value="required" />
+</jstl:if>
+
 
 <%-- Definition --%>
 
@@ -50,12 +54,12 @@
 			<div class="input-group-prepend">
 				<span class="input-group-text btn-light"><img src="images/${image}.png"/></span>
 			</div>
-			<form:password path="${path}" class="form-control" placeholder="${placeholder}" />
+			<form:password path="${path}" class="form-control" placeholder="${placeholder}" required="required"/>
 		</div>
 	<form:errors path="${path}" cssClass="alert alert-danger form-control-sm d-block" />
 	<jstl:if test="${info != null}">
-		<small class="form-text text-muted">*<spring:message code="customer.password.error1"/><br>
-		*<spring:message code="customer.password.error2"/></small>
+		<h6 class="form-text">*<spring:message code="customer.password.error1"/><br>
+		*<spring:message code="customer.password.error2"/></h6>
 	</jstl:if>
 	
 	</div>

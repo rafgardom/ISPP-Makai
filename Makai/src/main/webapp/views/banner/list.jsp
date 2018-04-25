@@ -11,9 +11,9 @@
 <div class="table-responsive">
 <display:table name="bannerForms" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
-	<display:column>
+<%-- 	<display:column>
 		<img src="${row.stringImage}" class="rounded-circle" alt="<spring:message code='profile.no.picture' />" width="125px" height="125px">
-	</display:column>
+	</display:column> --%>
 	
 	<acme:column code="banner.totalViews" property="totalViews" sortable="true" />
 	<acme:column code="banner.currentViews" property="currentViews" sortable="true"/>

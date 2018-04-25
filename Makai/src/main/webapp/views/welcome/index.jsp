@@ -37,23 +37,32 @@
 		<img alt="dog-training" src="images/trainer.png" height="128" width="128">
 		</div>
 		<h4 class="card-title"><spring:message code="welcome.trainer.title"/></h4>
-		<h5 class="card-footer card-text"><spring:message code="welcome.trainers.card"/></h5>
+		<h5 class="card-body card-text mx-2">
+			<spring:message code="welcome.trainers.card"/>
+		</h5>
+		<div class="card-footer">
+		<acme:link href="trainer/register.do" type=" btn-outline-light" code="welcome.trainer.register"/>
+		</div>
 	</div>
 	<div class="card bg-primary">
 		<div class="center-div py-2">
 		<img alt="travel-pet" src="images/travel-pet.png" height="128" width="128">
 		</div>
 		<h4 class="card-title"><spring:message code="welcome.travel.title"/></h4>
-		<h5 class="card-footer card-text"><spring:message code="welcome.travels.card"/></h5>
-	
+		<h5 class="card-body card-text"><spring:message code="welcome.travels.card"/></h5>
+		<div class="card-footer">
+		<acme:link href="customer/register.do" type=" btn-outline-light" code="welcome.customer.register"/>
+		</div>
 	</div>
 	<div class="card bg-warning">
 		<div class="center-div py-2">
 			<img alt="dog-training" src="images/medical-report (1).png" height="128" width="128">
 		</div>
 		<h4 class="card-title"><spring:message code="welcome.animalshelter.title"/></h4>
-		<h5 class="card-footer"><spring:message code="welcome.animalshelters.card"/></h5>
-	
+		<h5 class="card-body card-text"><spring:message code="welcome.animalshelters.card"/></h5>
+		<div class="card-footer">
+		<acme:link href="animalShelter/register.do" type=" btn-outline-light" code="welcome.animalShelter.register"/>
+		</div>
 	</div>
 </div>
 

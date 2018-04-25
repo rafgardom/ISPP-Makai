@@ -3033,7 +3033,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-light:hover {
-  color: #fff;
+  color: #393939 !important;;
   background-color: #f8f9fa;
   border-color: #f8f9fa;
 }

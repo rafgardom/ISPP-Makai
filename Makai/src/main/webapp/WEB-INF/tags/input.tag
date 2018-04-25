@@ -49,6 +49,9 @@
 <jstl:if test="${mandatory == null}">
 	<jstl:set var="mandatory" value="false" />
 </jstl:if>
+<jstl:if test="${mandatory == true}">
+	<jstl:set var="required" value="required" />
+</jstl:if>
 
 <div class="form-group">
 	<form:label path="${path}">
@@ -65,7 +68,7 @@
 		</div>
 	</jstl:if>
 	
-	<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}"/>
+	<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}" required="${required}"/>
 
 <jstl:if test="${image == null}">
 	<form:errors cssClass="alert alert-danger form-control-sm d-block" path="${path}" />

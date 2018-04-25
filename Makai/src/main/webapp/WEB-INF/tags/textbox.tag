@@ -38,6 +38,10 @@
 	<jstl:set var="mandatory" value="false" />
 </jstl:if>
 
+<jstl:if test="${mandatory == true}">
+	<jstl:set var="required" value="required" />
+</jstl:if>
+
 <jstl:if test="${style == null}">
 	<jstl:set var="style" value=" " />
 </jstl:if>
@@ -53,7 +57,7 @@
 				<img src="images/asterisk.png"	width="16"/> 
 			</jstl:if>
 		</form:label>
-		<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" />	
+		<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" required="${required}"/>	
 		<form:errors path="${path}" cssClass="alert alert-danger form-control-sm d-block" />
 	</div>
 </spring:bind>
