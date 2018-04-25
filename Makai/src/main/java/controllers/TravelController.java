@@ -113,7 +113,7 @@ public class TravelController extends AbstractController {
 				}
 
 				this.travelService.save(travel);
-				result = new ModelAndView("redirect:/travel/myList.do");
+				result = new ModelAndView("redirect:myList.do");
 
 			} catch (final Throwable oops) {
 				if (wrongSeats == true)
@@ -161,7 +161,7 @@ public class TravelController extends AbstractController {
 				this.travelService.registerTravel(travelForm);
 				this.registerModelAndView(travelForm);
 
-				result = new ModelAndView("redirect:/travel/list.do");
+				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);

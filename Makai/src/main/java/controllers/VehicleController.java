@@ -68,6 +68,7 @@ public class VehicleController extends AbstractController {
 		Calendar today;
 		boolean yearError = false;
 		boolean pictureTooLong = false;
+		boolean pictureEmtpy = false;
 
 		today = Calendar.getInstance();
 
@@ -82,8 +83,12 @@ public class VehicleController extends AbstractController {
 					yearError = true;
 					throw new IllegalArgumentException();
 				}
-				if (vehicleForm.getUserImage().getSize() > 2097152 || !vehicleForm.getUserImage().getContentType().contains("image")) {
+				if (vehicleForm.getUserImage().getSize() > 2097152) {
 					pictureTooLong = true;
+					throw new IllegalArgumentException();
+				}
+				if (!vehicleForm.getUserImage().getContentType().contains("image")) {
+					pictureEmtpy = true;
 					throw new IllegalArgumentException();
 				}
 				vehicle = this.vehicleService.save(vehicle);
@@ -92,8 +97,10 @@ public class VehicleController extends AbstractController {
 			} catch (final Throwable oops) {
 				if (yearError = true)
 					result = this.createModelAndView(vehicleForm, "vehicle.year.error");
-				if (pictureTooLong == false)
-					result = this.createModelAndView(vehicleForm, "advertising.register.error");
+				if (pictureTooLong == true)
+					result = this.createModelAndView(vehicleForm, "vehicle.pictureSize.error");
+				if (pictureEmtpy == true)
+					result = this.createModelAndView(vehicleForm, "vehicle.pictureEmpty.error");
 				else
 					result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
 			}
