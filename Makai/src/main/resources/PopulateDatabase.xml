@@ -930,6 +930,18 @@
 		<property name="type" value="Reptil" />
 	</bean>
 	
+	<bean id="specie4" class="domain.Specie">
+		<property name="type" value="Roedor" />
+	</bean>
+	
+	<bean id="specie5" class="domain.Specie">
+		<property name="type" value="Pájaro" />
+	</bean>
+	
+	<bean id="specie6" class="domain.Specie">
+		<property name="type" value="Establo" />
+	</bean>
+	
 	
 	<!-- Breed -->
 	<bean id="breed1" class="domain.Breed">
@@ -943,13 +955,183 @@
 	</bean>
 	
 	<bean id="breed3" class="domain.Breed">
-		<property name="name" value="Iguana" />
+		<property name="name" value="Lagarto" />
 		<property name="specie" ref="specie3" />
 	</bean>
 	
 	<bean id="breed4" class="domain.Breed">
 		<property name="name" value="Bulldog" />
 		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed5" class="domain.Breed">
+		<property name="name" value="Labrador" />
+		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed6" class="domain.Breed">
+		<property name="name" value="Pastor alemán" />
+		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed7" class="domain.Breed">
+		<property name="name" value="Yorkshire" />
+		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed8" class="domain.Breed">
+		<property name="name" value="Beagle" />
+		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed9" class="domain.Breed">
+		<property name="name" value="Golden" />
+		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed10" class="domain.Breed">
+		<property name="name" value="Bóxer" />
+		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed11" class="domain.Breed">
+		<property name="name" value="Perro salchicha" />
+		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed12" class="domain.Breed">
+		<property name="name" value="Poodle" />
+		<property name="specie" ref="specie1" />
+	</bean>
+	
+	<bean id="breed13" class="domain.Breed">
+		<property name="name" value="Persa" />
+		<property name="specie" ref="specie2" />
+	</bean>
+	
+	<bean id="breed14" class="domain.Breed">
+		<property name="name" value="Maine Coon" />
+		<property name="specie" ref="specie2" />
+	</bean>
+	
+	<bean id="breed15" class="domain.Breed">
+		<property name="name" value="Siberiano" />
+		<property name="specie" ref="specie2" />
+	</bean>
+	
+	<bean id="breed16" class="domain.Breed">
+		<property name="name" value="Radgoll" />
+		<property name="specie" ref="specie2" />
+	</bean>
+	
+	<bean id="breed17" class="domain.Breed">
+		<property name="name" value="Somalí" />
+		<property name="specie" ref="specie2" />
+	</bean>
+	
+	<bean id="breed18" class="domain.Breed">
+		<property name="name" value="Azul ruso" />
+		<property name="specie" ref="specie2" />
+	</bean>
+	
+	<bean id="breed19" class="domain.Breed">
+		<property name="name" value="Tortuga" />
+		<property name="specie" ref="specie3" />
+	</bean>
+	
+	<bean id="breed20" class="domain.Breed">
+		<property name="name" value="Serpiente" />
+		<property name="specie" ref="specie3" />
+	</bean>
+	
+	<bean id="breed21" class="domain.Breed">
+		<property name="name" value="Hámster" />
+		<property name="specie" ref="specie4" />
+	</bean>
+	
+	<bean id="breed22" class="domain.Breed">
+		<property name="name" value="Cobaya" />
+		<property name="specie" ref="specie4" />
+	</bean>
+	
+	<bean id="breed23" class="domain.Breed">
+		<property name="name" value="Jerbo" />
+		<property name="specie" ref="specie4" />
+	</bean>
+	
+	<bean id="breed24" class="domain.Breed">
+		<property name="name" value="Chinchilla" />
+		<property name="specie" ref="specie4" />
+	</bean>
+	
+	<bean id="breed25" class="domain.Breed">
+		<property name="name" value="Ratón" />
+		<property name="specie" ref="specie4" />
+	</bean>
+	
+	<bean id="breed26" class="domain.Breed">
+		<property name="name" value="Rata" />
+		<property name="specie" ref="specie4" />
+	</bean>
+	
+	<bean id="breed27" class="domain.Breed">
+		<property name="name" value="Periquito" />
+		<property name="specie" ref="specie5" />
+	</bean>
+	
+	<bean id="breed28" class="domain.Breed">
+		<property name="name" value="Canario" />
+		<property name="specie" ref="specie5" />
+	</bean>
+	
+	<bean id="breed29" class="domain.Breed">
+		<property name="name" value="Jilguero" />
+		<property name="specie" ref="specie5" />
+	</bean>
+	
+	<bean id="breed30" class="domain.Breed">
+		<property name="name" value="Loro" />
+		<property name="specie" ref="specie5" />
+	</bean>
+	
+	<bean id="breed31" class="domain.Breed">
+		<property name="name" value="Cacatúa" />
+		<property name="specie" ref="specie5" />
+	</bean>
+	
+	<bean id="breed32" class="domain.Breed">
+		<property name="name" value="Ninfa" />
+		<property name="specie" ref="specie5" />
+	</bean>
+	
+	<bean id="breed33" class="domain.Breed">
+		<property name="name" value="Agaporni" />
+		<property name="specie" ref="specie5" />
+	</bean>
+	
+	<bean id="breed34" class="domain.Breed">
+		<property name="name" value="Paloma" />
+		<property name="specie" ref="specie5" />
+	</bean>
+	
+	<bean id="breed35" class="domain.Breed">
+		<property name="name" value="Gorrión" />
+		<property name="specie" ref="specie5" />
+	</bean>
+	
+	<bean id="breed36" class="domain.Breed">
+		<property name="name" value="Caballo" />
+		<property name="specie" ref="specie6" />
+	</bean>
+	
+	<bean id="breed37" class="domain.Breed">
+		<property name="name" value="Poni" />
+		<property name="specie" ref="specie6" />
+	</bean>
+	
+	<bean id="breed38" class="domain.Breed">
+		<property name="name" value="Burro" />
+		<property name="specie" ref="specie6" />
 	</bean>
 	
 	
