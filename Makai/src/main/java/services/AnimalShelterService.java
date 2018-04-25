@@ -213,14 +213,14 @@ public class AnimalShelterService {
 		final MultipartFile userImage = animalShelterForm.getUserImage();
 		result.setPicture(userImage.getBytes());
 
-		if (result.getPicture().length == 0) {
-			FieldError fieldError;
-			final String[] codes = {
-				"customer.register.picture.empty.error"
-			};
-			fieldError = new FieldError("animalShelterForm", "userImage", animalShelterForm.getUserImage(), false, codes, null, "");
-			binding.addError(fieldError);
-		}
+		//		if (result.getPicture().length == 0) {
+		//			FieldError fieldError;
+		//			final String[] codes = {
+		//				"customer.register.picture.empty.error"
+		//			};
+		//			fieldError = new FieldError("animalShelterForm", "userImage", animalShelterForm.getUserImage(), false, codes, null, "");
+		//			binding.addError(fieldError);
+		//		}
 
 		this.validator.validate(result, binding);
 

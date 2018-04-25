@@ -53,11 +53,11 @@ public class AdvertisingController extends AbstractController {
 				result.addObject("imageError", "advertising.register.picture.empty.error");
 		} else
 			try {
-
-				if (advertisingForm.getUserImage().getSize() > 2097152 || !advertisingForm.getUserImage().getContentType().contains("image")) {
-					pictureTooLong = true;
-					throw new IllegalArgumentException();
-				}
+				if (!advertisingForm.getUserImage().isEmpty())
+					if (advertisingForm.getUserImage().getSize() > 2097152 || !advertisingForm.getUserImage().getContentType().contains("image")) {
+						pictureTooLong = true;
+						throw new IllegalArgumentException();
+					}
 				this.advertisingService.save(advertising);
 				result = new ModelAndView("redirect:/security/login.do");
 

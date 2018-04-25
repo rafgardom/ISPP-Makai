@@ -217,14 +217,14 @@ public class CustomerService {
 		final MultipartFile userImage = customerForm.getUserImage();
 		result.setPicture(userImage.getBytes());
 
-		if (result.getPicture().length == 0) {
-			FieldError fieldError;
-			final String[] codes = {
-				"customer.register.picture.empty.error"
-			};
-			fieldError = new FieldError("customerForm", "userImage", result.getPicture(), false, codes, null, "");
-			binding.addError(fieldError);
-		}
+		//		if (result.getPicture().length == 0 && result.getPicture() != null) {
+		//			FieldError fieldError;
+		//			final String[] codes = {
+		//				"customer.register.picture.empty.error"
+		//			};
+		//			fieldError = new FieldError("customerForm", "userImage", result.getPicture(), false, codes, null, "");
+		//			binding.addError(fieldError);
+		//		}
 
 		this.validator.validate(result, binding);
 

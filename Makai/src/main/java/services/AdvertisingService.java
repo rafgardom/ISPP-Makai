@@ -213,14 +213,14 @@ public class AdvertisingService {
 		final MultipartFile userImage = advertisingForm.getUserImage();
 		result.setPicture(userImage.getBytes());
 
-		if (result.getPicture().length == 0) {
-			FieldError fieldError;
-			final String[] codes = {
-				"customer.register.picture.empty.error"
-			};
-			fieldError = new FieldError("advertisingForm", "userImage", advertisingForm.getUserImage(), false, codes, null, "");
-			binding.addError(fieldError);
-		}
+		//		if (result.getPicture().length == 0) {
+		//			FieldError fieldError;
+		//			final String[] codes = {
+		//				"customer.register.picture.empty.error"
+		//			};
+		//			fieldError = new FieldError("advertisingForm", "userImage", advertisingForm.getUserImage(), false, codes, null, "");
+		//			binding.addError(fieldError);
+		//		}
 
 		this.validator.validate(result, binding);
 
