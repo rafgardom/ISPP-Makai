@@ -192,7 +192,7 @@ public class ActorService {
 
 		principal = this.findByPrincipal();
 
-		if (profileForm.getUserImage().getSize() > 5242880) {
+		if (profileForm.getUserImage().getSize() > 2097152) {
 			FieldError fieldError;
 			final String[] codes = {
 				"profile.register.picture.tooLong.error"
@@ -234,7 +234,6 @@ public class ActorService {
 
 			customer = this.customerService.findByPrincipal();
 			customer.setSurname(profileForm.getSurname());
-			customer.setNid(profileForm.getNid());
 			result = customer;
 
 		} else if (this.checkAuthority(principal, "ADMIN")) {
@@ -302,7 +301,6 @@ public class ActorService {
 
 			customer = this.customerService.findByPrincipal();
 			result.setSurname(customer.getSurname());
-			result.setNid(customer.getNid());
 
 		} else if (this.checkAuthority(actor, "ADMIN")) {
 			Administrator administrator;

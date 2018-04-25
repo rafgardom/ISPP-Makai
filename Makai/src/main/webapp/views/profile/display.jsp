@@ -25,7 +25,7 @@
 			<p><b><spring:message code="profile.name" />:</b> 
 				<jstl:out value="${actor.name}" /></p>
 		
-		<jstl:if test="${fn:contains('CUSTOMER ADMIN TRAINER',actor.userAccount.authorities[0].authority) }">
+		<jstl:if test="${fn:contains('ADMIN TRAINER',actor.userAccount.authorities[0].authority) }">
 			<p><b><spring:message code="profile.surname" />:</b> 
 					<jstl:out value="${actor.surname}" /></p>
 	

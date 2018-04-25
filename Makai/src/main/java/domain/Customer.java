@@ -20,18 +20,8 @@ public class Customer extends Transporter {
 
 
 	// Attributes -------------------------------------------------------------
-	private String	nid;
 	private String	surname;
 
-
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getNid() {
-		return this.nid;
-	}
-	public void setNid(final String nid) {
-		this.nid = nid;
-	}
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)

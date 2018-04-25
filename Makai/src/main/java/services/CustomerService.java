@@ -209,7 +209,6 @@ public class CustomerService {
 			}
 		result.setEmail(customerForm.getEmail());
 		result.setName(customerForm.getName());
-		result.setNid(customerForm.getNid());
 		result.setPhone(customerForm.getPhone());
 		result.setPicture(customerForm.getPicture());
 		result.setSurname(customerForm.getSurname());
@@ -240,7 +239,6 @@ public class CustomerService {
 		result.setEmail(customer.getEmail());
 		result.setId(customer.getId());
 		result.setName(customer.getName());
-		result.setNid(customer.getNid());
 		result.setPhone(customer.getPhone());
 		result.setPicture(customer.getPicture());
 		result.setSurname(customer.getSurname());

@@ -48,7 +48,6 @@ public class CustomerServiceTest extends AbstractTest {
 		customerForm.setCoordinates(coordinates);
 		customerForm.setEmail("testing@test.com");
 		customerForm.setName("name");
-		customerForm.setNid("nid");
 		customerForm.setPhone("phone");
 		customerForm.setPassword("password");
 

@@ -31,6 +31,8 @@
 			
 			<security:authorize access="hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')">
 				<acme:textbox code="profile.surname" path="surname" mandatory="true" />
+			</security:authorize>
+			<security:authorize access="hasAnyRole('ADMIN', 'TRAINER')">
 				<acme:textbox code="profile.nid" path="nid" mandatory="true" />
 			</security:authorize>
 	
