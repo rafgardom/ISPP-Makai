@@ -75,7 +75,6 @@
 			</div>
 	</div>
 	
-		<br>
 		<h3><spring:message code="offer.destination" /></h3>
 			
 	<jstl:if test="${errorMessage != null}">

@@ -64,8 +64,8 @@
 			<input type="radio" id="radioPasswordN" name="answerPw" onclick="editPasswordNo()" checked="checked" /><spring:message code="profile.No"/></strong></h6>
 			<fieldset id="fieldsetPassword" disabled>
 				<br />
-				<acme:password code="security.password" path="password" image="lock1" infoButton="true" info="true" />
-				<acme:password code="security.password" path="repeatPassword" image="lock1"/>
+				<acme:password code="security.password" path="password" image="lock1" infoButton="true" info="true" id="password"/>
+				<acme:password code="security.password" path="repeatPassword" image="lock1" id="confirm_password"/>
 			</fieldset>
 		</div>
 	
@@ -90,4 +90,42 @@
 	function editPasswordNo() {
     	document.getElementById("fieldsetPassword").disabled = true;
 	}
+</script>
+
+<!-- CONTROL PASSWORD 1 -->
+<script type="text/javascript">
+	$('#password').on('keyup', function () {
+		var pass1 = $('#password').val();
+		var message1 = $('#passwordmessage');
+		
+		if(pass1.toLowerCase() == pass1){
+			message1.html('<spring:message code="password.no.capital" />').css('color', 'red');
+		} else
+		  if (!(/\d/.test(pass1))) {
+			  message1.html('<spring:message code="password.no.number" />').css('color', 'red');
+		  } else 
+			  message1.html('<spring:message code="password.correct" />').css('color', 'green');
+	});
+</script>
+
+<!-- CONTROL PASSWORD 2 -->
+<script type="text/javascript">
+	$('#password, #confirm_password').on('keyup', function () {
+		var pass1 = $('#password').val();
+		var pass2 = $('#confirm_password').val();
+		var message2 = $('#confirm_passwordmessage');
+		if (pass2 === ""){
+		  	message2.html('');
+	    } else
+			if(pass2.toLowerCase() == pass2){
+				message2.html('<spring:message code="password.no.capital" />').css('color', 'red');
+			} else
+			  if (!(/\d/.test(pass2))) {
+				  message2.html('<spring:message code="password.no.number" />').css('color', 'red');
+			  } else 
+				  if (pass1 != pass2) {
+					  message2.html('<spring:message code="password.same" />').css('color', 'red');
+				  } else 
+					  message2.html('<spring:message code="password.correct" />').css('color', 'green');
+	});
 </script>

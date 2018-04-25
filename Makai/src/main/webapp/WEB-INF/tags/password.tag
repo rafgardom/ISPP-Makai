@@ -27,6 +27,7 @@
 <%@ attribute name="image" required="true" %>
 
 <%@ attribute name="mandatory" required="false" %>
+<%@ attribute name="id" required="false" %>
 <%@ attribute name="placeholder" required="false" %>
 <%@ attribute name="infoButton" required="false" %>
 <%@ attribute name="info" required="false" %>
@@ -54,8 +55,12 @@
 			<div class="input-group-prepend">
 				<span class="input-group-text btn-light"><img src="images/${image}.png"/></span>
 			</div>
-			<form:password path="${path}" class="form-control" placeholder="${placeholder}" required="required"/>
+			<form:password path="${path}" class="form-control" placeholder="${placeholder}" id="${id }" required="required"/>
 		</div>
+		<jstl:if test="${id != null}">
+			<h6 id="${id}message" class="text-center mt-1"></h6>
+		</jstl:if>
+		
 	<form:errors path="${path}" cssClass="alert alert-danger form-control-sm d-block" />
 	<jstl:if test="${info != null}">
 		<h6 class="form-text">*<spring:message code="customer.password.error1"/><br>
