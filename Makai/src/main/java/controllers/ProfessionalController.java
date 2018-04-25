@@ -55,10 +55,11 @@ public class ProfessionalController extends AbstractController {
 			try {
 				//				final MultipartFile userImage = customerForm.getUserImage();
 
-				if (professionalForm.getUserImage().getSize() > 2097152 || !professionalForm.getUserImage().getContentType().contains("image")) {
-					pictureTooLong = true;
-					throw new IllegalArgumentException();
-				}
+				if (!professionalForm.getUserImage().isEmpty())
+					if (professionalForm.getUserImage().getSize() > 2097152 || !professionalForm.getUserImage().getContentType().contains("image")) {
+						pictureTooLong = true;
+						throw new IllegalArgumentException();
+					}
 				//				customer.setPicture(userImage.getBytes());
 				this.professionalService.save(professional);
 				result = new ModelAndView("redirect:/security/login.do");

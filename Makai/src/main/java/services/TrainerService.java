@@ -221,14 +221,14 @@ public class TrainerService {
 		final MultipartFile userImage = trainerForm.getUserImage();
 		result.setPicture(userImage.getBytes());
 
-		if (result.getPicture().length == 0) {
-			FieldError fieldError;
-			final String[] codes = {
-				"trainer.register.picture.empty.error"
-			};
-			fieldError = new FieldError("trainerForm", "userImage", trainerForm.getUserImage(), false, codes, null, "");
-			binding.addError(fieldError);
-		}
+		//		if (result.getPicture().length == 0) {
+		//			FieldError fieldError;
+		//			final String[] codes = {
+		//				"trainer.register.picture.empty.error"
+		//			};
+		//			fieldError = new FieldError("trainerForm", "userImage", trainerForm.getUserImage(), false, codes, null, "");
+		//			binding.addError(fieldError);
+		//		}
 
 		this.validator.validate(result, binding);
 

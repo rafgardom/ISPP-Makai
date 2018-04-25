@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/paypal/satisfied.jsp" />
 	</definition>
 	
+	<definition name="offer/customer/pilotPlan/successful" extends="master.page">
+		<put-attribute name="title" value="Successful payment" />
+		<put-attribute name="body" value="/views/paypal/satisfied.jsp" />
+	</definition>
+	
 	<definition name="banner/actor/payment/successful" extends="master.page">
 		<put-attribute name="title" value="Successful payment" />
 		<put-attribute name="body" value="/views/paypal/satisfied.jsp" />

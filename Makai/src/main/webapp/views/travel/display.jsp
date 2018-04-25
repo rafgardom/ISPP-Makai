@@ -122,6 +122,7 @@
 	 	<br><h3 class="card-title"><spring:message code="travel.passengers" /></h3>
 	  		<div class="card-body">
 	  		<b><spring:message code="travel.persons" />:</b>
+	  		<jstl:if test="${passengers.isEmpty()}"></br></jstl:if>
 	  		<jstl:forEach var="passenger" items="${passengers}">
 		  		<p>
 					<jstl:out value="${passenger.name}"/>

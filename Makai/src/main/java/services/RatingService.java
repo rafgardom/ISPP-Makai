@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.RatingRepository;
 import repositories.RequestRepository;
+import domain.Animal;
 import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
@@ -39,6 +40,9 @@ public class RatingService {
 
 	@Autowired
 	private TrainerService			trainerService;
+
+	@Autowired
+	private AnimalService			animalService;
 
 	@Autowired
 	private NotificationService		notificationService;
@@ -71,12 +75,21 @@ public class RatingService {
 		Rating result;
 		Customer principal;
 		Calendar today;
+		Collection<Animal> animals;
+		Boolean hasAnimal = false;
 
 		principal = this.customerService.findByPrincipal();
 		Assert.notNull(principal);
 
+		//Comprobar que un customer tiene un animal en el viaje
+		animals = this.animalService.findByActorId(principal.getId());
+		for (final Animal a : travel.getAnimals())
+			if (animals.contains(a))
+				hasAnimal = true;
+
 		//Comprobar que un customer esta en un viaje
-		Assert.isTrue(principal.getTravelPassengers().contains(travel));
+		if (!hasAnimal)
+			Assert.isTrue(principal.getTravelPassengers().contains(travel));
 
 		Assert.isNull(this.findRatingByCustomerFromTravel(travel.getId(), principal.getId()));
 
@@ -89,7 +102,6 @@ public class RatingService {
 
 		return result;
 	}
-
 	public Rating createToRequest(final Request request) {
 		Rating result;
 		Customer principal;

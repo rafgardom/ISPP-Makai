@@ -53,11 +53,11 @@ public class AnimalShelterController extends AbstractController {
 				result.addObject("imageError", "animalShelter.register.picture.empty.error");
 		} else
 			try {
-
-				if (animalShelterForm.getUserImage().getSize() > 2097152 || !animalShelterForm.getUserImage().getContentType().contains("image")) {
-					pictureTooLong = true;
-					throw new IllegalArgumentException();
-				}
+				if (!animalShelterForm.getUserImage().isEmpty())
+					if (animalShelterForm.getUserImage().getSize() > 2097152 || !animalShelterForm.getUserImage().getContentType().contains("image")) {
+						pictureTooLong = true;
+						throw new IllegalArgumentException();
+					}
 				this.animalShelterService.save(animalShelter);
 				result = new ModelAndView("redirect:/security/login.do");
 

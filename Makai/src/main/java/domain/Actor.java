@@ -75,7 +75,6 @@ public class Actor extends DomainEntity {
 		this.coordinates = coordinates;
 	}
 
-	@NotNull
 	@Lob
 	@Column(length = 16777215)
 	public byte[] getPicture() {

@@ -790,7 +790,6 @@
 	<bean id="customer1" class="domain.Customer">
 		<property name="name" value="Jesús" />
 		<property name="surname" value="Vázquez" />
-		<property name="nid" value="326598T" />
 		<property name="email" value="jesus@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates8" />
@@ -812,7 +811,6 @@
 	<bean id="customer2" class="domain.Customer">
 		<property name="name" value="Santiago" />
 		<property name="surname" value="Fraga" />
-		<property name="nid" value="300598T" />
 		<property name="email" value="santiago@gmail.com" />
 		<property name="phone" value="+39632144487" />
 		<property name="coordinates" ref="coordinates9" />
@@ -834,7 +832,6 @@
 	<bean id="customer3" class="domain.Customer">
 		<property name="name" value="Elena" />
 		<property name="surname" value="Camero" />
-		<property name="nid" value="326500T" />
 		<property name="email" value="elena@gmail.com" />
 		<property name="phone" value="+34 699655654" />
 		<property name="coordinates" ref="coordinates10" />

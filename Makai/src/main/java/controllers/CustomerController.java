@@ -65,12 +65,12 @@ public class CustomerController extends AbstractController {
 			try {
 				//				final MultipartFile userImage = customerForm.getUserImage();
 
-				if (customerForm.getUserImage().getSize() > 2097152 || !customerForm.getUserImage().getContentType().contains("image")) {
-					pictureTooLong = true;
-					throw new IllegalArgumentException();
-				}
+				if (!customerForm.getUserImage().isEmpty())
+					if (customerForm.getUserImage().getSize() > 2097152 || !customerForm.getUserImage().getContentType().contains("image")) {
+						pictureTooLong = true;
+						throw new IllegalArgumentException();
+					}
 				//				customer.setPicture(userImage.getBytes());
-
 				this.customerService.save(customer);
 				result = new ModelAndView("redirect:/security/login.do");
 

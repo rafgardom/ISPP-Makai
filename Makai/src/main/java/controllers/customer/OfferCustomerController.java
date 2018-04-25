@@ -14,12 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import paypal.PaypalEnvironment;
 import services.OfferService;
+import services.PriceService;
 import services.RequestService;
 
 import com.paypal.api.payments.Payment;
 
 import controllers.AbstractController;
 import domain.Offer;
+import domain.Price;
 import domain.Request;
 
 @Controller
@@ -33,6 +35,9 @@ public class OfferCustomerController extends AbstractController {
 
 	@Autowired
 	private RequestService	requestService;
+
+	@Autowired
+	private PriceService	priceService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -48,13 +53,14 @@ public class OfferCustomerController extends AbstractController {
 		ModelAndView result;
 		Offer offer = null;
 		Request request;
+		final Price priceObject = this.priceService.findOne();
 
 		try {
 			offer = this.offerService.findOne(offerId);
 			request = offer.getRequest();
 			Assert.isTrue(!this.requestService.tieneOfferAceptadaUnRequest(request));
 			final PaypalEnvironment paypalEnvironment = new PaypalEnvironment();
-			Double price = offer.getPrice() * 0.1;
+			Double price = offer.getPrice() * (priceObject.getAdoptionFee() / 100);
 			if (price > 2500.0)
 				price = 2500.0;
 
@@ -103,6 +109,36 @@ public class OfferCustomerController extends AbstractController {
 		result = new ModelAndView();
 		try {
 			result = new ModelAndView("redirect:/offer/customer/payment/done.do");
+
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/");
+			result.addObject("errorMessage", "offer.pay.error");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/pilotPlan", method = RequestMethod.GET)
+	public ModelAndView paymentSimulation(@RequestParam final int offerId) {
+		ModelAndView result;
+		result = new ModelAndView();
+		try {
+			final Offer offer = this.offerService.findOne(offerId);
+			this.offerService.acceptedOffer(offer);
+			result = new ModelAndView("redirect:/offer/customer/pilotPlan/successful.do");
+
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/");
+			result.addObject("errorMessage", "offer.pay.error");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/pilotPlan/successful", method = RequestMethod.GET)
+	public ModelAndView paymentSimulation() {
+		ModelAndView result;
+		result = new ModelAndView();
+		try {
+			result = new ModelAndView("offer/customer/pilotPlan/successful");
 
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/");

@@ -55,7 +55,7 @@
 	</div>
 	<br><br>
 	<acme:submit code="banner.create" name="save" />
-	<acme:cancel code="banner.cancel" url="banner/actor/list.do" />
+	<acme:cancel code="banner.cancel" url="" />
 	
 </form:form>
 

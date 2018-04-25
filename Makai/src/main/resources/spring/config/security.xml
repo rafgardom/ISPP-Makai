@@ -90,7 +90,11 @@
 		<security:intercept-url pattern="/offer/trainer/edit.do" access="hasRole('TRAINER')" />
 		<security:intercept-url pattern="/offer/trainer/display.do" access="hasAnyRole('CUSTOMER','TRAINER')" />
 		<security:intercept-url pattern="/offer/customer/list.do" access="hasRole('CUSTOMER')" /> 
-		<security:intercept-url pattern="/offer/customer/payment/done.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/offer/customer/payment/done.do" access="hasRole('CUSTOMER')" />
+		
+		<!-- Offer pilot plan --> 
+		<security:intercept-url pattern="/offer/customer/pilotPlan.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/offer/customer/pilotPlan/successful.do" access="hasRole('CUSTOMER')" />
 		
 		
 		<security:intercept-url pattern="/training/trainer/list.do" access="hasRole('TRAINER')" />
@@ -109,14 +113,14 @@
 		<security:intercept-url pattern="/profile/display.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/displayProfile.do" access="isAuthenticated()" /> 
 		
-		<security:intercept-url pattern="/banner/actor/list.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/banner/actor/create.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/banner/actor/edit.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/banner/actor/display.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/banner/actor/delete.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/banner/actor/payment/done.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/banner/actor/pay.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/banner/actor/payment/successful.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/banner/actor/list.do" access="hasAnyRole('ADVERTISING')" />
+		<security:intercept-url pattern="/banner/actor/create.do" access="hasAnyRole('ADVERTISING')" />
+		<security:intercept-url pattern="/banner/actor/edit.do" access="hasAnyRole('ADVERTISING')" />
+		<security:intercept-url pattern="/banner/actor/display.do" access="hasAnyRole('ADVERTISING','ADMIN')" />
+		<security:intercept-url pattern="/banner/actor/delete.do" access="hasAnyRole('ADVERTISING','ADMIN')" />
+		<security:intercept-url pattern="/banner/actor/payment/done.do" access="hasAnyRole('ADVERTISING')" />
+		<security:intercept-url pattern="/banner/actor/pay.do" access="hasAnyRole('ADVERTISING')" />
+		<security:intercept-url pattern="/banner/actor/payment/successful.do" access="hasAnyRole('ADVERTISING')" />
 		
 		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/professional/register.do" access="isAnonymous()" /> 
@@ -131,19 +135,29 @@
 		<security:intercept-url pattern="/animal/listNotAdopted.do" access="hasRole('ANIMALSHELTER')" />
 		<security:intercept-url pattern="/animal/display.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER','TRAINER')" />
 		
-		<security:intercept-url pattern="/travel/create.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
-		<security:intercept-url pattern="/travel/myList.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
-		<security:intercept-url pattern="/travel/myPastList.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
+		<security:intercept-url pattern="/travel/create.do" access="hasAnyRole('CUSTOMER')" />
+<!-- 		<security:intercept-url pattern="/travel/create.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" /> -->
+		<security:intercept-url pattern="/travel/myList.do" access="hasAnyRole('CUSTOMER')"  />
+<!-- 		<security:intercept-url pattern="/travel/myList.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  /> -->
+		<security:intercept-url pattern="/travel/myPastList.do" access="hasAnyRole('CUSTOMER')"  />
+<!-- 		<security:intercept-url pattern="/travel/myPastList.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  /> -->
 		<security:intercept-url pattern="/travel/list.do" access="hasRole('CUSTOMER')"  />
-		<security:intercept-url pattern="/travel/display.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
-		<security:intercept-url pattern="/travel/edit.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
-		<security:intercept-url pattern="/travel/delete.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  />
+		<security:intercept-url pattern="/travel/display.do" access="hasAnyRole('CUSTOMER')"  />
+<!-- 		<security:intercept-url pattern="/travel/display.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  /> -->
+		<security:intercept-url pattern="/travel/edit.do" access="hasAnyRole('CUSTOMER')"  />
+<!-- 		<security:intercept-url pattern="/travel/edit.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  /> -->
+		<security:intercept-url pattern="/travel/delete.do" access="hasAnyRole('CUSTOMER')"  />
+<!-- 		<security:intercept-url pattern="/travel/delete.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  /> -->
 		<security:intercept-url pattern="/travel/register.do" access="hasRole('CUSTOMER')"  />
 		
-		<security:intercept-url pattern="/vehicle/register.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
-		<security:intercept-url pattern="/vehicle/list.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
-		<security:intercept-url pattern="/vehicle/edit.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />
-		<security:intercept-url pattern="/vehicle/delete.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />     
+		<security:intercept-url pattern="/vehicle/register.do" access="hasAnyRole('CUSTOMER')" />
+<!-- 		<security:intercept-url pattern="/vehicle/register.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" /> -->
+		<security:intercept-url pattern="/vehicle/list.do" access="hasAnyRole('CUSTOMER')" />
+<!-- 		<security:intercept-url pattern="/vehicle/list.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" /> -->
+		<security:intercept-url pattern="/vehicle/edit.do" access="hasAnyRole('CUSTOMER')" />
+<!-- 		<security:intercept-url pattern="/vehicle/edit.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" /> -->
+		<security:intercept-url pattern="/vehicle/delete.do" access="hasAnyRole('CUSTOMER')" /> 
+<!-- 		<security:intercept-url pattern="/vehicle/delete.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" />       -->
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

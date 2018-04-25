@@ -11,6 +11,20 @@
 <div class="table-responsive">
 <display:table name="travels" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 
+	<jstl:set var="estilo" value="normal" />
+	<jstl:if test="${principal.id == row.transporterOwner.id}">
+		<jstl:set var="estilo" value="propietario" />
+	</jstl:if>
+	<jstl:if test="${principal.travelPassengers.contains(row)}">
+		<jstl:set var="estilo" value="participo" />
+	</jstl:if>
+	<jstl:forEach var="animal" items="${myAnimals}">
+		<jstl:if test="${row.animals.contains(animal)}">
+			<jstl:set var="estilo" value="participo" />
+		</jstl:if>
+	</jstl:forEach>
+	
+
 	<acme:column code="travel.origin" property="origin.city" sortable="true"/>
 	<acme:column code="travel.destination" property="destination.city" sortable="true"/>
 	<acme:column code="travel.startMoment" property="startMoment" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true"/>
@@ -26,7 +40,7 @@
 	<display:column>
 	<div class="btn-group">
 		<acme:link href="travel/display.do?travelId=${row.id}" image="eye"/>
-		<jstl:if test="${row.transporterOwner.id != principal.id && (row.humanSeats > 0 || row.animalSeats > 0)}">
+		<jstl:if test="${((row.transporterOwner.id != principal.id) && (row.humanSeats > 0 || row.animalSeats > 0)) || (estilo == 'participo')}">
 			<jstl:set var="show" value="${true}"/>
 			<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register" type="dark" image="map"/>
 		</jstl:if>

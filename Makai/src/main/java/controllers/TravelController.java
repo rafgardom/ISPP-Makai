@@ -245,6 +245,7 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Collection<Travel> travels_all;
 		Collection<Travel> travelsByPrincipal;
+		Collection<Animal> myAnimals;
 		try {
 			final Collection<Travel> travels = new ArrayList<Travel>();
 			final Integer numberNoti;
@@ -255,6 +256,7 @@ public class TravelController extends AbstractController {
 			Transporter principal;
 			principal = this.transporterService.findByPrincipal();
 
+			myAnimals = this.animalService.findByActorId(principal.getId());
 			travelsByPrincipal = this.travelService.findTravelByTransporterId(principal.getId());
 
 			for (final Travel aux : travels_all)
@@ -267,6 +269,7 @@ public class TravelController extends AbstractController {
 
 			result = new ModelAndView("travel/list");
 			result.addObject("principal", principal);
+			result.addObject("myAnimals", myAnimals);
 			result.addObject("travelsByPrincipal", travelsByPrincipal);
 			result.addObject("travels", travels);
 			result.addObject("numberNoti", numberNoti);

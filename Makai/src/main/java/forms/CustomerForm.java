@@ -25,7 +25,6 @@ public class CustomerForm {
 	private String			phone;
 	private Coordinates		coordinates;
 	private byte[]			picture;
-	private String			nid;
 	private String			surname;
 	private String			password;
 	private String			repeatPassword;
@@ -91,14 +90,6 @@ public class CustomerForm {
 
 	public void setPicture(final byte[] picture) {
 		this.picture = picture;
-	}
-
-	public String getNid() {
-		return this.nid;
-	}
-
-	public void setNid(final String nid) {
-		this.nid = nid;
 	}
 
 	public String getSurname() {
