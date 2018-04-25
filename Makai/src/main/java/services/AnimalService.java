@@ -225,10 +225,13 @@ public class AnimalService {
 		//			binding.addError(fieldError);
 		//		}
 
+		Collection<Breed> breeds = null;
 		if (animalForm.getId() == 0)
 			result = this.create();
-		else
+		else {
 			result = this.findOne(animalForm.getId());
+			breeds = result.getBreeds();
+		}
 
 		result.setName(animalForm.getName());
 		if (result.getName().isEmpty())
@@ -240,6 +243,27 @@ public class AnimalService {
 
 		if (animalForm.getPicture() != null)
 			result.setPicture(animalForm.getPicture());
+
+		if (result.getPicture() == null) {
+			FieldError fieldError;
+			final String[] codes = {
+				"customer.register.picture.empty.error"
+			};
+			fieldError = new FieldError("animalForm", "animalImage", result.getPicture(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
+		if (animalForm.getBreeds() == null) {
+			FieldError fieldError;
+			final String[] codes = {
+				"animal.specie.breed.error"
+			};
+			fieldError = new FieldError("animalForm", "breeds", result.getBreeds(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+
+		if (result.getBreeds() == null)
+			result.setBreeds(breeds);
 
 		this.validator.validate(result, binding);
 

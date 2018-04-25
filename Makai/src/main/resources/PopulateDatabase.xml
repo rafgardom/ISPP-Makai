@@ -1151,7 +1151,7 @@
 		<property name="breeds">
 			<list>
 				<ref bean="breed1" />
-				<ref bean="breed2" />
+				<ref bean="breed4" />
 			</list>
 		</property>
 		<property name="customer" ref="customer1" />
