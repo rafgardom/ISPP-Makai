@@ -45,8 +45,13 @@
 					<spring:message code="request.tags.ph" var="tagsPH"/>
 					<acme:textarea code="request.tags" path="tags" maxCharacters="100" placeholder="${tagsPH}" />
 					<acme:selectNotEntity code="request.category" path="category" items="${categories}" lang="${lang}" mandatory="true" />
+					<jstl:if test="${animals.size()!=0}">
 					<acme:select code="request.animal" path="animal" items="${animals}" itemLabel="name" disabled="false"/>
-		
+					</jstl:if>
+					
+					<jstl:if test="${animals.size()==0}">
+						<p><spring:message code="no.animal"/><a href="animal/register.do"><spring:message code="add.animal"/></a></p>
+					</jstl:if>
 		</div>	
 
 	</div>
