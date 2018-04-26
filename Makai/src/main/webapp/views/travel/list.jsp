@@ -6,11 +6,6 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-
-<h1 class="text-center">
-	<spring:message code="welcome.travel.list"/>
-</h1>
 
 <div class="table-responsive">
 <display:table name="travels" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">

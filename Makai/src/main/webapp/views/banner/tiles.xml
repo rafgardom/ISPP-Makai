@@ -17,12 +17,12 @@
 <tiles-definitions>
 
 	<definition name="banner/create" extends="master.page">
-		<put-attribute name="title" value="Create de banner" />
+		<put-attribute name="title" value="Create banner" />
 		<put-attribute name="body" value="/views/banner/create.jsp" />
 	</definition>
 	
 	<definition name="banner/list" extends="master.page">
-		<put-attribute name="title" value="List banners" />
+		<put-attribute name="title" value="My banners" />
 		<put-attribute name="body" value="/views/banner/list.jsp" />
 	</definition>
 	

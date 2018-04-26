@@ -7,10 +7,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<h1 class="text-center">
-	<spring:message code="welcome.vehicle.list"/>
-</h1>
-
 <div class="table-responsive">
 <display:table name="vehicles" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	

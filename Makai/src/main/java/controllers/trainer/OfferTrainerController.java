@@ -109,7 +109,7 @@ public class OfferTrainerController extends AbstractController {
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
-			result = new ModelAndView("offer/list");
+			result = new ModelAndView("offer/listPast");
 			result.addObject("offers", offers);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "offer/trainer/listPassed.do");

@@ -66,13 +66,10 @@
 
 	<!-- CAROUSEL -->
 <%-- 	<acme:carousel/> --%>
-
-
-<%--   	<div class="jumbotron border border-primary">
- 		<h1>
-			<tiles:insertAttribute name="title" />
-		</h1>  --%>
 		<br>
+		<h1 class="text-center mt-3">
+			<tiles:insertAttribute name="title" />
+		</h1> 
 		<div class="mx-5">
 		<tiles:insertAttribute name="body" />	
 		</div>

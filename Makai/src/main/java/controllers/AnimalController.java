@@ -128,7 +128,7 @@ public class AnimalController extends AbstractController {
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
-			result = new ModelAndView("animal/list");
+			result = new ModelAndView("animal/listAdopted");
 			result.addObject("requestURI", "animal/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("animals", animals);
@@ -167,7 +167,7 @@ public class AnimalController extends AbstractController {
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
-			result = new ModelAndView("animal/list");
+			result = new ModelAndView("animal/listNotAdopted");
 			result.addObject("requestURI", "animal/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("animals", animals);

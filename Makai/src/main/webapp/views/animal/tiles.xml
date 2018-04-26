@@ -22,12 +22,22 @@
 	</definition>
 	
 	<definition name="animal/edit" extends="master.page">
-		<put-attribute name="title" value="Edit animal" />
+		<put-attribute name="title" value="Edit Animal" />
 		<put-attribute name="body" value="/views/animal/register.jsp" />
 	</definition>
 	
 	<definition name="animal/list" extends="master.page">	
-		<put-attribute name="title" value="Animal Book" />
+		<put-attribute name="title" value="My Animals" />
+		<put-attribute name="body" value="/views/animal/list.jsp" />
+	</definition>
+	
+	<definition name="animal/listAdopted" extends="master.page">	
+		<put-attribute name="title" value="Adopted Animals" />
+		<put-attribute name="body" value="/views/animal/list.jsp" />
+	</definition>
+	
+	<definition name="animal/listNotAdopted" extends="master.page">	
+		<put-attribute name="title" value="Not Adopted Animals" />
 		<put-attribute name="body" value="/views/animal/list.jsp" />
 	</definition>
 	

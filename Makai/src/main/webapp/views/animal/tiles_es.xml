@@ -27,13 +27,23 @@
 	</definition>
 	
 	<definition name="animal/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de animales" />
+		<put-attribute name="title" value="Mis animales" />
 		<put-attribute name="body" value="/views/animal/list.jsp" />
 	</definition>
 	
 	<definition name="animal/display" extends="master.page">	
 		<put-attribute name="title" value="Animal" />
 		<put-attribute name="body" value="/views/animal/display.jsp" />
+	</definition>
+	
+	<definition name="animal/listAdopted" extends="master.page">	
+		<put-attribute name="title" value="Mis animales adoptados" />
+		<put-attribute name="body" value="/views/animal/list.jsp" />
+	</definition>
+	
+	<definition name="animal/listNotAdopted" extends="master.page">	
+		<put-attribute name="title" value="Mis animales no adoptados" />
+		<put-attribute name="body" value="/views/animal/list.jsp" />
 	</definition>
 	
 </tiles-definitions>
