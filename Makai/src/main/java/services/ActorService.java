@@ -209,7 +209,7 @@ public class ActorService {
 			binding.addError(fieldError);
 		}
 
-		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑá-úA-Z]+(?:[\\s-][a-zñÑá-úA-Z]+)*$");
+		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑá-úÁ-ÚA-Z]+(?:[\\s-][a-zñÑá-úÁ-ÚA-Z]+)*$");
 		if (!profileForm.getCoordinates().getState().isEmpty())
 			if (!coordinatePattern.matcher(profileForm.getCoordinates().getState()).matches()) {
 				FieldError fieldError;

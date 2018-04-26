@@ -189,7 +189,7 @@ public class CustomerService {
 
 		result.setCoordinates(customerForm.getCoordinates());
 		//		Pattern coordinatePattern = Pattern.compile("^[a-záéíóúÁÉÍÓÚñÑA-Z]+(?:[\\s-][a-záéíóúÁÉÍÓÚñÑA-Z]+)*$");
-		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑá-úA-Z]+(?:[\\s-][a-zñÑá-úA-Z]+)*$");
+		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑá-úÁ-ÚA-Z]+(?:[\\s-][a-zñÑá-úÁ-ÚA-Z]+)*$");
 		if (!result.getCoordinates().getState().isEmpty())
 			if (!coordinatePattern.matcher(result.getCoordinates().getState()).matches()) {
 				FieldError fieldError;
