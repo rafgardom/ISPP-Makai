@@ -35,5 +35,5 @@
 	</div>
 	
 	<acme:submit name="save" code="specie.save" />
-	<acme:cancel url="" code="specie.cancel"/>
+	<acme:cancel url="specie/admin/list.do" code="specie.cancel"/>
 </form:form>

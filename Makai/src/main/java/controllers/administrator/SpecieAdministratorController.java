@@ -62,7 +62,7 @@ public class SpecieAdministratorController extends AbstractController {
 		} else
 			try {
 				this.specieService.save(specie);
-				result = new ModelAndView("redirect:../../");
+				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(specie, "specie.commit.error");
 			}
@@ -77,6 +77,13 @@ public class SpecieAdministratorController extends AbstractController {
 		try {
 			species = this.specieService.findAll();
 
+			final Boolean canDelete[] = new Boolean[species.size()];
+			int i = 0;
+			for (final Specie s : species) {
+				canDelete[i] = this.specieService.tieneBreedUnaSpecie(s);
+				i++;
+			}
+
 			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
@@ -84,6 +91,7 @@ public class SpecieAdministratorController extends AbstractController {
 			result = new ModelAndView("specie/list");
 			result.addObject("requestURI", "specie/admin/list.do");
 			result.addObject("species", species);
+			result.addObject("canDelete", canDelete);
 			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
 			result.addObject("imagesRight", imagesRight);

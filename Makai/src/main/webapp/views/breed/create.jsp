@@ -36,5 +36,5 @@
 	</div>
 	
 	<acme:submit name="save" code="breed.save" />
-	<acme:cancel url="" code="breed.cancel"/>
+	<acme:cancel url="breed/admin/list.do" code="breed.cancel"/>
 </form:form>

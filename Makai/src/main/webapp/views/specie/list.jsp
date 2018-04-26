@@ -8,7 +8,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
+<jstl:set var="i" value="${0}"></jstl:set>
 <div class="table-responsive">
 <display:table name="species" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 	
@@ -18,10 +18,12 @@
 
 		<div class="btn-group">	
 			<acme:link image="edit" href="specie/admin/edit.do?specieId=${row.id}" type="warning"/>
-			<acme:link image="trash" href="specie/admin/delete.do?specieId=${row.id}" type="danger"/>
+			<jstl:if test="${canDelete[i] == false}">
+				<acme:link image="trash" href="specie/admin/delete.do?specieId=${row.id}" type="danger"/>
+			</jstl:if>
 		</div>
 
 	</display:column>
-	
+	<jstl:set var="i" value="${i+1}"></jstl:set>
 </display:table>
 </div>
