@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -268,9 +269,14 @@ public class OfferTrainerController extends AbstractController {
 		Offer offer;
 		Request request;
 		OfferForm offerForm;
+		Trainer principal;
 
 		try {
 			offer = this.offerService.findOne(offerId);
+
+			principal = this.trainerService.findByPrincipal();
+
+			Assert.isTrue(offer.getTrainer().getId() == principal.getId());
 
 			request = offer.getRequest();
 
