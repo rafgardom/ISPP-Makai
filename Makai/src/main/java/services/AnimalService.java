@@ -241,6 +241,9 @@ public class AnimalService {
 		result.setSex(animalForm.getSex());
 		result.setBreeds(animalForm.getBreeds());
 
+		if (animalForm.getAnimalImage().getSize() > 0)
+			result.setPicture(animalForm.getAnimalImage().getBytes());
+
 		if (animalForm.getPicture() != null)
 			result.setPicture(animalForm.getPicture());
 
