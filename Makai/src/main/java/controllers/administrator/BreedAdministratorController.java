@@ -79,8 +79,16 @@ public class BreedAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Breed> breeds;
+
 		try {
 			breeds = this.breedService.findAll();
+
+			final Boolean canDelete[] = new Boolean[breeds.size()];
+			int i = 0;
+			for (final Breed b : breeds) {
+				canDelete[i] = this.breedService.tieneBreedUnAnimal(b);
+				i++;
+			}
 
 			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
@@ -89,6 +97,7 @@ public class BreedAdministratorController extends AbstractController {
 			result = new ModelAndView("breed/list");
 			result.addObject("requestURI", "breed/admin/list.do");
 			result.addObject("breeds", breeds);
+			result.addObject("canDelete", canDelete);
 			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
 			result.addObject("imagesRight", imagesRight);

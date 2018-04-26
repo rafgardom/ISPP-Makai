@@ -366,7 +366,7 @@ public class TravelController extends AbstractController {
 					travels.add(aux);
 
 			for (final Travel aux : travels_animals)
-				if (today.getTime().after(aux.getStartMoment()))
+				if (today.getTime().after(aux.getStartMoment()) && !travels.contains(aux))
 					travels.add(aux);
 
 			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
