@@ -27,10 +27,14 @@ import controllers.AbstractController;
 @RequestMapping("/security")
 public class LoginController extends AbstractController {
 
+	//Variable
+
+	public static boolean	banned;
+
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	LoginService	service;
+	LoginService			service;
 
 
 	// Constructors -----------------------------------------------------------
@@ -42,7 +46,7 @@ public class LoginController extends AbstractController {
 	// Login ------------------------------------------------------------------
 
 	@RequestMapping("/login")
-	public ModelAndView login(@Valid @ModelAttribute final Credentials credentials, final BindingResult bindingResult, @RequestParam(required = false) final boolean showError) {
+	public ModelAndView login(@Valid @ModelAttribute final Credentials credentials, final BindingResult bindingResult, @RequestParam(required = false) final boolean showError, @RequestParam(required = false) final boolean bannedTrue) {
 		Assert.notNull(credentials);
 		Assert.notNull(bindingResult);
 
@@ -51,19 +55,23 @@ public class LoginController extends AbstractController {
 		result = new ModelAndView("security/login");
 		result.addObject("credentials", credentials);
 		result.addObject("showError", showError);
+		result.addObject("bannedTrue", bannedTrue);
+		if (LoginController.banned == true)
+			LoginController.banned = false;
 
 		return result;
 	}
-
 	// LoginFailure -----------------------------------------------------------
 
 	@RequestMapping("/loginFailure")
 	public ModelAndView failure() {
 		ModelAndView result;
 
-		result = new ModelAndView("redirect:login.do?showError=true");
+		result = new ModelAndView("redirect:login.do");
+
+		result.addObject("bannedTrue", LoginController.banned);
+		result.addObject("showError", true);
 
 		return result;
 	}
-
 }

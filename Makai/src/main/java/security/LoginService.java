@@ -10,6 +10,9 @@
 
 package security;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -24,6 +27,9 @@ import org.springframework.util.Assert;
 @Service
 @Transactional
 public class LoginService implements UserDetailsService {
+
+	//Logger
+	public static Logger	LOGGER	= Logger.getLogger("security.LoginService");
 
 	// Managed repository -----------------------------------------------------
 
@@ -41,6 +47,11 @@ public class LoginService implements UserDetailsService {
 
 		result = this.userRepository.findByUsername(username);
 		Assert.notNull(result);
+		if (result != null && result.isEnabled() == false) {
+			LoginService.LOGGER.log(Level.WARNING, "Usuario baneado", "user.banned");
+			LoginController.banned = true;
+			throw new IllegalArgumentException("El usuario está baneado");
+		}
 		// WARNING: The following sentences prevent lazy initialisation problems!
 		Assert.notNull(result.getAuthorities());
 		result.getAuthorities().size();

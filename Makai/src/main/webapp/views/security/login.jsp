@@ -26,10 +26,13 @@
 		<img src="images/user3.png" alt="Login user"/>
 </div>
 <div class="card" style="position:relative; z-index:1; margin-top:-2.5rem">
-
     <div class="card-body" style="margin-top:1.5rem">	
-	    <jstl:if test="${showError == true}">
+	    
+	    <jstl:if test="${showError == true && bannedTrue == false}">
 			<acme:error code="security.login.failed"/>
+		</jstl:if>
+		<jstl:if test="${bannedTrue == true}">
+			<acme:error code="security.user.banned"/>
 		</jstl:if>
 		
 		<h3 class="card-title text-muted text-center"><spring:message code="master.page.sign.in"/></h3>
