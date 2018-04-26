@@ -34,7 +34,7 @@
 			</security:authorize>
 			<security:authorize access="hasRole('CUSTOMER')">
 				<jstl:if test="${row.isAccepted==false}">
-					<acme:link image="accept" href="offer/customer/accept.do?offerId=${row.id}" type="info" code="offer.accept"/>
+					<acme:link image="paypal4" href="offer/customer/accept.do?offerId=${row.id}" type="warning"  code="offer.accept"/>
 					
 				</jstl:if>
 				<jstl:if test="${row.isAccepted==true}">
@@ -45,8 +45,8 @@
 	<security:authorize access="hasRole('CUSTOMER')">
 		<display:column>
 			<jstl:if test="${row.isAccepted==false}">
-				<div class="btn-group">
-					<acme:link image="accept" href="offer/customer/pilotPlan.do?offerId=${row.id}" type="info" code="offer.pilotPlanAccept"/>
+				<div class="btn-group">	
+					<acme:link image="paypal4" href="offer/customer/pilotPlan.do?offerId=${row.id}" type="warning" code="offer.pilotPlanAccept"/>
 				</div>
 			</jstl:if>
 		</display:column>
