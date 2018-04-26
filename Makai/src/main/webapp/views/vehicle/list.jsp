@@ -7,8 +7,12 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<h1 class="text-center">
+	<spring:message code="welcome.vehicle.list"/>
+</h1>
+
 <div class="table-responsive">
-<display:table name="vehicles" id="row" pagesize="3" requestURI="${requestURI}" class="displaytag">
+<display:table name="vehicles" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
 	<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
@@ -49,6 +53,7 @@
 </div>
 <security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
 	<acme:link href="vehicle/register.do" code="vehicle.create" type="success" image="car"/>
+	<acme:link href="travel/menu.do" code="notification.goBack"/>
 </security:authorize>
 
 

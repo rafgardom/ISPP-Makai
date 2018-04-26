@@ -32,6 +32,16 @@
 		</div>
 	</div>
 	</div>
+	<security:authorize access="hasRole('CUSTOMER')">
+		<div class="col-lg-4 mt-lg-0 mt-3">
+			<div class="card bg-primary pt-3 shadow">
+				<div class="center-div py-2">
+					<img alt="Go to travels" src="images/travel-pet.png"  height="128" width="128">
+				</div>
+				<div class="card-body"> <acme:link  href="travel/menu.do" code="welcome.go.to.travel" type=" btn-outline-light" /></div>
+			</div>
+		</div>
+	</security:authorize>
 	
 	<security:authorize access="isAnonymous()">
 		<div class="col-lg-4 mt-lg-0 mt-3">

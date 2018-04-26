@@ -46,4 +46,10 @@
 		<put-attribute name="body" value="/views/travel/register.jsp" />
 	</definition>
 	
+	<definition name="travel/menu" extends="master.page">
+		<put-attribute name="title" value="Menu viajes" />
+		<put-attribute name="body" value="/views/travel/menu.jsp" />
+	</definition>
+	
+	
 </tiles-definitions>

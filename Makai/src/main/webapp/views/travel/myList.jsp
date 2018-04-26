@@ -7,7 +7,15 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
+<h1 class="text-center">
+	<jstl:if test="${!pastList}">
+		<spring:message code="welcome.travel.my.travels"/>
+	</jstl:if>
+	<jstl:if test="${pastList}">
+		<spring:message code="welcome.travel.past"/>
+	</jstl:if>
+</h1>
+
 <div class="table-responsive">
 <display:table name="travels" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 
@@ -54,6 +62,6 @@
 </div>
 	<br>
 	<acme:link href="travel/create.do" code="travel.create" type="success"/>
+	<acme:link href="travel/menu.do" code="notification.goBack"/>
 
-</security:authorize>
 

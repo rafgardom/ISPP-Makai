@@ -137,6 +137,7 @@
 		<security:intercept-url pattern="/animal/display.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER','TRAINER')" />
 		
 		<security:intercept-url pattern="/travel/create.do" access="hasAnyRole('CUSTOMER')" />
+		<security:intercept-url pattern="/travel/menu.do" access="hasAnyRole('CUSTOMER')" />
 <!-- 		<security:intercept-url pattern="/travel/create.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')" /> -->
 		<security:intercept-url pattern="/travel/myList.do" access="hasAnyRole('CUSTOMER')"  />
 <!-- 		<security:intercept-url pattern="/travel/myList.do" access="hasAnyRole('CUSTOMER','PROFESSIONAL')"  /> -->

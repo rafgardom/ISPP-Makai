@@ -321,6 +321,8 @@ public class TravelController extends AbstractController {
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/myList");
+			
+			result.addObject("pastList", false);
 			result.addObject("principal", principal);
 			result.addObject("travels", travels);
 			result.addObject("numberNoti", numberNoti);
@@ -374,6 +376,8 @@ public class TravelController extends AbstractController {
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/myList");
+
+			result.addObject("pastList", true);
 			result.addObject("travels", travels);
 			result.addObject("principalRatings", principalRatings);
 			result.addObject("principal", principal);
@@ -417,6 +421,31 @@ public class TravelController extends AbstractController {
 			result.addObject("travel", travel);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/display.do?travelId=" + travel.getId());
+
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
+		return result;
+	}
+	
+	// Menu -------------------------------------------------------		
+	@RequestMapping(value = "/menu", method = RequestMethod.GET)
+	public ModelAndView menu() {
+		ModelAndView result;
+		final Integer numberNoti;
+
+		try {
+			numberNoti = this.notificationService.findNotificationWithoutRead();
+
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+
+			result = new ModelAndView("travel/menu");
+			result.addObject("numberNoti", numberNoti);
 
 			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
