@@ -191,7 +191,7 @@ public class TrainerService {
 
 		result.setCoordinates(trainerForm.getCoordinates());
 
-		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$");
+		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑá-úA-Z]+(?:[\\s-][a-zñÑá-úA-Z]+)*$");
 		if (!result.getCoordinates().getState().isEmpty())
 			if (!coordinatePattern.matcher(result.getCoordinates().getState()).matches()) {
 				FieldError fieldError;

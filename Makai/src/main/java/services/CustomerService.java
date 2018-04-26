@@ -188,7 +188,8 @@ public class CustomerService {
 			result = this.findOne(customerForm.getId());
 
 		result.setCoordinates(customerForm.getCoordinates());
-		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$");
+		//		Pattern coordinatePattern = Pattern.compile("^[a-záéíóúÁÉÍÓÚñÑA-Z]+(?:[\\s-][a-záéíóúÁÉÍÓÚñÑA-Z]+)*$");
+		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑá-úA-Z]+(?:[\\s-][a-zñÑá-úA-Z]+)*$");
 		if (!result.getCoordinates().getState().isEmpty())
 			if (!coordinatePattern.matcher(result.getCoordinates().getState()).matches()) {
 				FieldError fieldError;
