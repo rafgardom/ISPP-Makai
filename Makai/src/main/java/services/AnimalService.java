@@ -237,7 +237,7 @@ public class AnimalService {
 		if (result.getName().isEmpty())
 			result.setName(null);
 		result.setChipNumber(animalForm.getChipNumber());
-		result.setAge(animalForm.getAge());
+		result.setBirthday(animalForm.getBirthday());
 		result.setSex(animalForm.getSex());
 		result.setBreeds(animalForm.getBreeds());
 
@@ -289,7 +289,7 @@ public class AnimalService {
 		result.setId(animal.getId());
 		result.setName(animal.getName());
 		result.setChipNumber(animal.getChipNumber());
-		result.setAge(animal.getAge());
+		result.setBirthday(animal.getBirthday());
 		result.setSex(animal.getSex());
 		result.setPicture(animal.getPicture());
 		result.setBreeds(animal.getBreeds());

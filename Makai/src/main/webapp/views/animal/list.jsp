@@ -16,7 +16,7 @@
 	
 	<acme:column code="animal.name" property="name" />
 	<acme:column code="animal.chipNumber" property="chipNumber" sortable="true"/>
-	<acme:column code="animal.age" property="age" sortable="true"/>
+	<acme:column code="animal.birthday" property="birthday" sortable="true" format="{0,date,dd/MM/yyyy}"/>
 <%--	
 	<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
 	<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>

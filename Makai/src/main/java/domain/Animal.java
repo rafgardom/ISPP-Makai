@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -35,7 +34,7 @@ public class Animal extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private String	name;
 	private String	chipNumber;
-	private Integer	age;
+	private Date	birthday;
 	private Sex		sex;
 	private byte[]	picture;
 	private Boolean	isHidden;
@@ -76,14 +75,15 @@ public class Animal extends DomainEntity {
 	public void setChipNumber(final String chipNumber) {
 		this.chipNumber = chipNumber;
 	}
-
 	@NotNull
-	@Min(0)
-	public Integer getAge() {
-		return this.age;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public Date getBirthday() {
+		return this.birthday;
 	}
-	public void setAge(final Integer age) {
-		this.age = age;
+
+	public void setBirthday(final Date birthday) {
+		this.birthday = birthday;
 	}
 
 	@NotNull

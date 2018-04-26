@@ -21,9 +21,10 @@
 	<div class="col-md-5">
 			<acme:textbox code="animal.name" path="name" mandatory="true"/>
 			<acme:input code="animal.chipNumber" path="chipNumber" mandatory="false" image="chip" />
-			<acme:input code="animal.age" path="age" type="number" min="0" mandatory="true"/>
 			
 			<acme:radioSex/> 
+			
+			<acme:input id="datepicker" image="calendar" code="animal.birthday" path="birthday" mandatory="true" placeholder="dd/MM/yyyy"/>
 	
 	<%-- <acme:selectNotEntity items="${sexs}" lang="${lang}" code="animal.sex" path="sex" mandatory="true"/>  --%>
 	</div>

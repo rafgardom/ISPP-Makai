@@ -23,8 +23,8 @@
 	  		<p><b><spring:message code="animal.chipNumber" />:</b> <jstl:out
 				value="${animal.chipNumber}" /></p>
 					
-			<p><b><spring:message code="animal.age" />:</b> <jstl:out
-				value="${animal.age}" /></p>
+			<p><b><spring:message code="animal.birthday" />:</b> <jstl:out
+				value="${animal.birthday}" /></p>
 				
 			<p>
 				<b><spring:message code="animal.sex" />:</b>

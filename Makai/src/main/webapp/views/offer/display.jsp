@@ -16,6 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="card-deck">
 	<div class="card">
@@ -87,7 +88,7 @@
 			
 			<p>
 				<b><spring:message code="offer.animal.age" />:</b>
-				<jstl:out value="${offer.animal.age}" />
+				<fmt:formatDate pattern = "dd-MM-yyyy" value="${offer.animal.birthday}" />
 			</p>
 			
 			<p>

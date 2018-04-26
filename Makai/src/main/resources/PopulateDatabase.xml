@@ -1139,7 +1139,7 @@
 	<bean id="animal1" class="domain.Animal">
 		<property name="name" value="Kika" />
 		<property name="chipNumber" value="554784P" />
-		<property name="age" value="2" />
+		<property name="birthday" value="11/24/2016" />
 		<property name="sex" value="MALE" />
 		<property name="isHidden" value="false" />
 		<property name="picture">
@@ -1160,7 +1160,7 @@
 	<bean id="animal2" class="domain.Animal">
 		<property name="name" value="Nymeria" />
 		<property name="chipNumber" value="550084P" />
-		<property name="age" value="5" />
+		<property name="birthday" value="10/11/2011" />
 		<property name="sex" value="FEMALE" />
 		<property name="isHidden" value="false" />
 		<property name="picture">
@@ -1180,7 +1180,7 @@
 	<bean id="animal3" class="domain.Animal">
 		<property name="name" value="Pepe" />
 		<property name="chipNumber" value="554711P" />
-		<property name="age" value="8" />
+		<property name="birthday" value="05/14/2012" />
 		<property name="sex" value="MALE" />
 		<property name="isHidden" value="false" />
 		<property name="finishTraining" value="12/18/2018 6:00" />

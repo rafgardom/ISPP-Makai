@@ -2,12 +2,16 @@
 package forms;
 
 import java.util.Collection;
+import java.util.Date;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import domain.Breed;
@@ -21,7 +25,7 @@ public class AnimalForm {
 	private int					id;
 	private String				name;
 	private String				chipNumber;
-	private Integer				age;
+	private Date				birthday;
 	private Sex					sex;
 	private byte[]				picture;
 	private MultipartFile		animalImage;
@@ -65,12 +69,15 @@ public class AnimalForm {
 		this.chipNumber = chipNumber;
 	}
 
-	public Integer getAge() {
-		return this.age;
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public Date getBirthday() {
+		return this.birthday;
 	}
 
-	public void setAge(final Integer age) {
-		this.age = age;
+	public void setBirthday(final Date birthday) {
+		this.birthday = birthday;
 	}
 
 	@Valid
