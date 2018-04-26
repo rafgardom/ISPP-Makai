@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -23,8 +23,7 @@
 	  		<p><b><spring:message code="animal.chipNumber" />:</b> <jstl:out
 				value="${animal.chipNumber}" /></p>
 					
-			<p><b><spring:message code="animal.birthday" />:</b> <jstl:out
-				value="${animal.birthday}" /></p>
+			<p><b><spring:message code="animal.birthday" />:</b> <fmt:formatDate pattern = "dd-MM-yyyy" value="${animal.birthday}" /></p>
 				
 			<p>
 				<b><spring:message code="animal.sex" />:</b>

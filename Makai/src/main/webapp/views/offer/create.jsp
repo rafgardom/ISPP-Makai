@@ -46,7 +46,7 @@
 				</form:label>	
 				<form:select size="4" id="animalSelect" path="animal" class="form-control" onchange="${onchange}">
 					<jstl:forEach var="aux" items="${animals}">	
-					<form:option value="${aux.id}"><p>Nombre:<jstl:out value="${aux.name}"/></p>	<p>Edad:<jstl:out value="${aux.age}"/></p>	<p>Refugio:<jstl:out value="${aux.animalShelter.name}"/></p></form:option>
+					<form:option value="${aux.id}"><p>Nombre:<jstl:out value="${aux.name}"/></p>	<p>Edad:<jstl:out value="${aux.birthday}"/></p>	<p>Refugio:<jstl:out value="${aux.animalShelter.name}"/></p></form:option>
 					</jstl:forEach>
 				</form:select>
 				<form:errors path="animal" cssClass="alert alert-danger form-control" />
@@ -65,7 +65,7 @@
 				<div class="card text-center" style="position:relative; z-index:1; margin-top:-2.5rem">
     				<div class="card-body" style="margin-top:1.5rem">	
 						<h3 class="card-title"><jstl:out value="${offerForm.request.animal.name}"/></h3>
-						<h6 class="card-body text-muted"><jstl:out value="${offerForm.request.animal.age} ,${offerForm.request.animal.sex}"/><br>
+						<h6 class="card-body text-muted"><jstl:out value="${offerForm.request.animal.birthday} ,${offerForm.request.animal.sex}"/><br>
 						<jstl:out value="${offerForm.request.animal.customer.name} , ${offerForm.request.animal.customer.coordinates.city}"/></h6>
 					</div>
 					
