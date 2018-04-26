@@ -42,6 +42,9 @@
 <jstl:if test="${mandatory == null}">
 	<jstl:set var="mandatory" value="false" />
 </jstl:if>
+<jstl:if test="${mandatory == true}">
+	<jstl:set var="required" value="required" />
+</jstl:if>
 
 <%-- Definition --%>
 
@@ -52,7 +55,7 @@
 				<img src="images/asterisk.png"	width="16"/> 
 		</jstl:if>
 	</form:label>	
-	<form:select size="${size}" id="${id}" path="${path}" class="form-control" onchange="${onchange}">
+	<form:select size="${size}" id="${id}" path="${path}" class="form-control" onchange="${onchange}" required="${required}">
 		<form:option value="0" label="----" selected="selected" disabled="${disabled}"/>		
 		<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
 	</form:select>

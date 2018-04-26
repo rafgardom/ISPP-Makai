@@ -32,6 +32,7 @@
 		</div>
 	</div>
 	</div>
+	
 	<security:authorize access="hasRole('CUSTOMER')">
 		<div class="col-lg-4 mt-lg-0 mt-3">
 			<div class="card bg-primary pt-3 shadow">
@@ -39,6 +40,17 @@
 					<img alt="Go to travels" src="images/travel-pet.png"  height="128" width="128">
 				</div>
 				<div class="card-body"> <acme:link  href="travel/menu.do" code="welcome.go.to.travel" type=" btn-outline-light" /></div>
+			</div>
+		</div>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('ANIMALSHELTER')">
+		<div class="col-lg-4 mt-lg-0 mt-3">
+			<div class="card bg-warning pt-3 shadow">
+				<div class="center-div py-2">
+					<img alt="Go to animals" src="images/pet-xl.png"  height="128" width="128">
+				</div>
+				<div class="card-body"> <acme:link  href="animal/menu.do" code="welcome.go.to.animals" type=" btn-outline-light" /></div>
 			</div>
 		</div>
 	</security:authorize>
@@ -61,7 +73,24 @@
 	
 </div>
 <br>
-<div class="card-deck text-light text-center pb-5">
+<div class="card-deck text-light text-center pb-2">
+
+	<security:authorize access="hasRole('CUSTOMER')">
+			<div class="card bg-info shadow">
+				<div class="center-div py-2">
+					<img alt="Go to animals" src="images/request-xl.png"  height="128" width="128">
+				</div>
+				<div class="card-body"> <acme:link  href="request/customer/menu.do" code="welcome.go.to.request" type=" btn-outline-light" /></div>
+			</div>
+			<div class="card bg-warning shadow">
+				<div class="center-div py-2">
+					<img alt="Go to animals" src="images/pet-xl.png"  height="128" width="128">
+				</div>
+				<div class="card-body"> <acme:link  href="animal/menu.do" code="welcome.go.to.animals" type=" btn-outline-light" /></div>
+			</div>
+		
+	</security:authorize>
+
 	<security:authorize access="isAnonymous()">
 			<div class="card bg-secondary shadow">
 				<div class="center-div py-2">

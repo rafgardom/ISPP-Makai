@@ -26,7 +26,7 @@
 	</div>
 	<div class="col-md-2 center-div my-2">
 		<a href="https://twitter.com/Makai_official" target="_blank" class="mx-2"><img src="images/twitter.png" onmouseover="this.src='images/twitter-black.png'" onmouseout="this.src='images/twitter.png'"/></a>
-		<a href="#" target="_blank"><img src="images/facebook.png" onmouseover="this.src='images/facebook-black.png'" onmouseout="this.src='images/facebook.png'"/></a>
+		<a href="https://www.facebook.com/OficialMakai/" target="_blank"><img src="images/facebook.png" onmouseover="this.src='images/facebook-black.png'" onmouseout="this.src='images/facebook.png'"/></a>
 	</div>
 	<div class="col-md-5 text-md-right">
 		<a href="misc/privacyPolicy.do?sc=true"><spring:message code="master.page.privacyPolicy" /></a>&nbsp;&nbsp;&#124;

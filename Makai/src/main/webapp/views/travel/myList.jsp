@@ -53,7 +53,6 @@
 </display:table>
 </div>
 	<br>
-	<acme:link href="travel/create.do" code="travel.create" type="success"/>
 	<acme:link href="travel/menu.do" code="notification.goBack"/>
 
 

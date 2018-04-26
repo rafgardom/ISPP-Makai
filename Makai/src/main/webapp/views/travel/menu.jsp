@@ -1,5 +1,4 @@
 <%--
- * action-1.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 

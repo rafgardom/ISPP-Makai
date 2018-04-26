@@ -57,7 +57,7 @@
 				<img src="images/asterisk.png"	width="16"/> 
 			</jstl:if>
 		</form:label>
-		<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" required="${required}"/>	
+		<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" maxlength="100" required="${required}"/>	
 		<form:errors path="${path}" cssClass="alert alert-danger form-control-sm d-block" />
 	</div>
 </spring:bind>

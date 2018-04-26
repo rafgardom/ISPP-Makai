@@ -25,7 +25,7 @@
 <div style="display: flex; justify-content:center; position:relative; z-index:2;">
 		<img src="images/user3.png" alt="Login user"/>
 </div>
-<div class="card" style="position:relative; z-index:1; margin-top:-2.5rem">
+<div class="card shadow" style="position:relative; z-index:1; margin-top:-2.5rem">
     <div class="card-body" style="margin-top:1.5rem">	
 	    
 	    <jstl:if test="${showError == true && bannedTrue == false}">

@@ -68,7 +68,7 @@
 		</div>
 	</jstl:if>
 	
-	<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}" required="${required}"/>
+	<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}" maxlength="100" required="${required}"/>
 
 <jstl:if test="${image == null}">
 	<form:errors cssClass="alert alert-danger form-control-sm d-block" path="${path}" />

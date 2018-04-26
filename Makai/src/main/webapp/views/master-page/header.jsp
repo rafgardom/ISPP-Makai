@@ -32,7 +32,14 @@
 
 			<security:authorize access="hasAnyRole('CUSTOMER')">
 
-				<li class="nav-item dropdown">
+				<li class="nav-item">
+					<a class="nav-link" href="request/customer/menu.do">
+						<img src="images/request.png" class="img-menu" height="32" width="32"/>
+						<spring:message code="master.page.request" />
+					</a>
+				</li>
+				
+				<%-- <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
 						<img src="images/request.png" class="img-menu"/><spring:message code="master.page.requests" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -40,7 +47,7 @@
 				 		<spring:message code="master.page.request.create" /></a> 
 						<a class="dropdown-item" href="request/customer/myList.do">
 							<spring:message code="master.page.request.list" /></a>
-					</div></li>
+					</div></li> --%>
 
 			</security:authorize>
 
@@ -58,7 +65,12 @@
 			</security:authorize>
 			
 			<security:authorize access="hasAnyRole('CUSTOMER,ANIMALSHELTER')">
-				<li class="nav-item dropdown"> 
+			<li class="nav-item"> 
+				<a class="nav-link" href="animal/menu.do">
+						<img src="images/animals.png" class="img-menu" height="32" width="32"/>
+						<spring:message code="master.page.animal" />
+				</a>
+<%-- 				<li class="nav-item dropdown"> 
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
 						<img src="images/animals.png" class="img-menu"/><spring:message	code="master.page.animal" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -73,7 +85,7 @@
 							<spring:message code="master.page.animal.listNotAdopted" /></a>
 						</security:authorize>
 					</div>
-				</li>
+				</li> --%>
 			</security:authorize>
 
 			<security:authorize access="hasRole('TRAINER')">

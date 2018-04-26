@@ -60,6 +60,7 @@
 		
 		<security:intercept-url pattern="/offer/customer/accept.do" access="hasRole('CUSTOMER')" />
 		
+		<security:intercept-url pattern="/request/customer/menu.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/request/customer/create.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/request/customer/edit.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/request/customer/delete.do" access="hasRole('CUSTOMER')" />
@@ -135,6 +136,7 @@
 		<security:intercept-url pattern="/animal/listAdopted.do" access="hasRole('ANIMALSHELTER')" />
 		<security:intercept-url pattern="/animal/listNotAdopted.do" access="hasRole('ANIMALSHELTER')" />
 		<security:intercept-url pattern="/animal/display.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER','TRAINER')" />
+		<security:intercept-url pattern="/animal/menu.do" access="hasAnyRole('CUSTOMER','ANIMALSHELTER')" />
 		
 		<security:intercept-url pattern="/travel/create.do" access="hasAnyRole('CUSTOMER')" />
 		<security:intercept-url pattern="/travel/menu.do" access="hasAnyRole('CUSTOMER')" />

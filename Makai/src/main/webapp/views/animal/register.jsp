@@ -21,17 +21,18 @@
 	<div class="col-md-5">
 			<acme:textbox code="animal.name" path="name" mandatory="true"/>
 			<acme:input code="animal.chipNumber" path="chipNumber" mandatory="false" image="chip" />
+			<acme:input id="datepicker" image="calendar" code="animal.birthday" path="birthday" mandatory="true" placeholder="dd/MM/yyyy"/>
 			
 			<acme:radioSex/> 
 			
-			<acme:input id="datepicker" image="calendar" code="animal.birthday" path="birthday" mandatory="true" placeholder="dd/MM/yyyy"/>
-	
+				
 	<%-- <acme:selectNotEntity items="${sexs}" lang="${lang}" code="animal.sex" path="sex" mandatory="true"/>  --%>
 	</div>
 	
 	<div class="offset-md-1 col-md-6">
 			<acme:select id="specie" items="${species }" itemLabel="type" code="animal.specie" path="specie" onchange="getBreeds();" mandatory="true" />
-	
+			<small>*<spring:message code="animal.specie.advice"/></small>
+			<br><br>
 			<jstl:set var="json" value="${jsonBreeds }" />
 			<acme:select size="9" id="breed" items="${breeds }" itemLabel="name" code="animal.breed" path="breeds" mandatory="true"/>
 
@@ -49,6 +50,16 @@
 	<acme:cancel url="./animal/list.do" code="animal.cancel" />
 		
 </form:form>
+
+<script>
+$( function() {
+    $( "#datepicker" ).datepicker({ 
+    	dateFormat: 'dd/mm/yy', 
+    	minDate: 0,
+    	firstDay: 1
+    	});
+  } );
+</script>
 
 <script type="text/javascript">
 	var specieVal = document.getElementById("specie").selectedOptions[0].value;

@@ -64,8 +64,7 @@
 		<tiles:insertAttribute name="header" />
 	</div>
 
-	<!-- CAROUSEL -->
-<%-- 	<acme:carousel/> --%>
+
 		<br>
 		<h1 class="text-center mt-3">
 			<tiles:insertAttribute name="title" />
@@ -77,8 +76,8 @@
 			<br />
 			<span class="message"><spring:message code="${message}" /></span>
 		</jstl:if>	
-	
-<!-- 	<div> -->
+		<br>
+
 		<tiles:insertAttribute name="footer" />
 
 </body>

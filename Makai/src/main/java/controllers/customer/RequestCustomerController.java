@@ -167,6 +167,32 @@ public class RequestCustomerController extends AbstractController {
 		return result;
 
 	}
+	
+	@RequestMapping(value = "/menu", method = RequestMethod.GET)
+	public ModelAndView menu() {
+		ModelAndView result;
+
+		final Integer numberNoti;
+		try {
+
+			numberNoti = this.notificationService.findNotificationWithoutRead();
+
+			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+
+			result = new ModelAndView("request/menu");
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("imagesRight", imagesRight);
+
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
+		return result;
+	}
+	
 
 	// Ancillary methods ------------------------------------------------------
 

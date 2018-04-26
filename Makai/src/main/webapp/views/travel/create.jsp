@@ -62,14 +62,14 @@
 	<h3><spring:message code="travel.details" /></h3>
 	<div class="row">
 
-			<div class="col-lg-2 col-sm-6 col-12">
+			<div class="col-lg-3 col-sm-6 col-12">
 				<acme:input code="travel.animalSeats" path="animalSeats" type="number" min="0" />
 				<acme:input code="travel.humanSeats" path="humanSeats" type="number" min="0" />
 			</div>
-			<div class="col-lg-3 col-sm-6 col-12">
+			<div class="col-lg-5 col-sm-6 col-12">
 				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" mandatory="true"/>
 			</div>
-			<div class="offset-lg-1 col-md-3 col-12">
+			<div class="col-md-3 col-12">
 				<acme:input code="travel.startMoment" path="startDate" mandatory="true" image="calendar" placeholder="dd/MM/yyyy" id="datepicker"/>
 				<acme:input code="travel.startTime" path="startTime" mandatory="true" image="clock" placeholder="HH:mm"/>
 			</div>
