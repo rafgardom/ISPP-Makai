@@ -59,7 +59,7 @@
 		<form:option value="0" label="----" selected="selected" disabled="${disabled}"/>		
 		<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
 	</form:select>
-	<form:errors path="${path}" cssClass="alert alert-danger form-control" />
+	<form:errors path="${path}" cssClass="alert alert-danger form-control-sm" />
 </div>
 
 

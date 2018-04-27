@@ -94,6 +94,6 @@
 <security:authorize access="hasRole('CUSTOMER')">
 	<br>
 	<acme:link href="request/customer/create.do" code="request.create" type="success"/>
-	<acme:link href="request/menu.do" code="notification.goBack"/>
+	<acme:link href="request/customer/menu.do" code="notification.goBack"/>
 </security:authorize>
 

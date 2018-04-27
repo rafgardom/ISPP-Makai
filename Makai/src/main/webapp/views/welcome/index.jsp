@@ -59,7 +59,7 @@
 		<div class="col-lg-4 mt-lg-0 mt-3">
 		<div class="card bg-info pt-3 shadow">
 			<div class="center-div py-2">
-				<img alt="ad" src="images/ad2.png"  height="128" width="128">
+				<img alt="image" src="images/image2.png"  height="128" width="128">
 			</div>
 			<div class="card-footer mt-3">
 				<button type="button" data-toggle="modal" data-target="#advertisingModal" class="btn btn-lg btn-outline-light" >

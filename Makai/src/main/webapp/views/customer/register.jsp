@@ -66,7 +66,7 @@
 	</div>
 	
 	<div class="offset-md-1 col-md-5">
-		<acme:inputImage path="userImage" imageError="${imageError}"  mandatory="true"/>
+		<acme:inputImage path="userImage" imageError="${imageError}" />
 	</div>
 	
 	<div class="col-md-12">

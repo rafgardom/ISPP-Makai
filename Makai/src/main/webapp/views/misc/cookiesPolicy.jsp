@@ -8,24 +8,24 @@
 
 <jstl:set value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort }${pageContext.request.contextPath }" var="url" />
 
-<p>
-	<spring:message code="cookiesPolicy.domain" />
-	<jstl:out value="${url }" />
-	<spring:message code="cookiesPolicy.info" />
-<p>
+<div class="card">
+	<p class="card-body p-5">
+		<spring:message code="cookiesPolicy.domain" />
+		<jstl:out value="${url }" />
+		<spring:message code="cookiesPolicy.info" />
+	</p>
+</div>
+<div class="card mt-3">	
+	<h2 class="card-title pt-5" style="margin-left:2%;"><spring:message code="cookiesPolicy.cookies" /></h2>
+	<p class="card-body px-5"><spring:message code="cookiesPolicy.cookies.definition1" /></p>	
+	<p class="card-body px-5"><spring:message code="cookiesPolicy.cookies.definition2" /></p>
 
-<h4 style="margin-left:2%;"><spring:message code="cookiesPolicy.cookies" /></h4>
-<p><spring:message code="cookiesPolicy.cookies.definition1" /><p>
-<p><spring:message code="cookiesPolicy.cookies.definition2" /><p>
+	<h4 class="card-title pt-5" style="margin-left:2%;"><spring:message code="cookiesPolicy.type" /></h4>
+	<p class="card-body px-5"><spring:message code="cookiesPolicy.type.definition" /></p>
 
-<h4 style="margin-left:2%;"><spring:message code="cookiesPolicy.type" /></h4>
-<ul>
-  <li><spring:message code="cookiesPolicy.type.definition" /></li>
-</ul>
-
-<h4 style="margin-left:2%;"><spring:message code="cookiesPolicy.consent" /></h4>
-
-<p><spring:message code="cookiesPolicy.config" /><p>
-
-<p><spring:message code="cookiesPolicy.acceptance" /><p>
-
+</div>	
+<div class="card mt-3">	
+	<h2 class="card-title pt-5" style="margin-left:2%;"><spring:message code="cookiesPolicy.consent" /></h2>
+	<p class="card-body px-5"><spring:message code="cookiesPolicy.config" /></p>
+	<p  class="card-body px-5"><spring:message code="cookiesPolicy.acceptance" /></p>
+</div>
