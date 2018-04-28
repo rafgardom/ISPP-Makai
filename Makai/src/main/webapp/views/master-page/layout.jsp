@@ -35,6 +35,7 @@
 <!-- <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>  -->
 <script type="text/javascript" src="scripts/bootstrap.js"></script>
+<script type="text/javascript" src="scripts/datepickerES.js"></script>
 
 
 

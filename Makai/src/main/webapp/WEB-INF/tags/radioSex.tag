@@ -36,11 +36,11 @@
 		<img src="images/asterisk.png"	width="16"/> 
 	</label>
     <div class="form-group d-flex">
-	    <div class="custom-control custom-radio mx-5">
+	    <div class="custom-control custom-radio mx-2">
 	     	<input type="radio" class="custom-control-input" name="sex" id="customRadio1" value="MALE">
 			<label class="custom-control-label" for="customRadio1"><img src="images/male.png"/></label>
 	   	</div>
-	   	<div class="custom-control custom-radio mx-5">
+	   	<div class="custom-control custom-radio mx-2">
 	      <input type="radio" class="custom-control-input" name="sex" id="customRadio2" value="FEMALE">
 	      <label class="custom-control-label" for="customRadio2"><img src="images/femenine.png"/></label>
 	    </div>

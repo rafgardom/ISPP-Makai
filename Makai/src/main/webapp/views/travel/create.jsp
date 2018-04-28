@@ -87,6 +87,14 @@
 </form:form>
 
  <!-- Datepicker -->
+<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+<jstl:if test="${lang =='es'}">
+	<script>
+		$.datepicker.setDefaults($.datepicker.regional['es']);
+	</script>
+</jstl:if>
+
 <script>
 $( function() {
     $( "#datepicker" ).datepicker({ 
