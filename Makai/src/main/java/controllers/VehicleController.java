@@ -131,7 +131,7 @@ public class VehicleController extends AbstractController {
 		} else
 			try {
 
-				if (vehicleForm.getUserImage().getSize() > 2097152 || !vehicleForm.getUserImage().getContentType().contains("image")) {
+				if (vehicleForm.getUserImage().getSize() > 2097152) {
 					pictureTooLong = true;
 					throw new IllegalArgumentException();
 				}
@@ -143,7 +143,7 @@ public class VehicleController extends AbstractController {
 			} catch (final Throwable oops) {
 				System.out.println(oops);
 				if (pictureTooLong == false)
-					result = this.createModelAndView(vehicleForm, "advertising.register.error");
+					result = this.createModelAndView(vehicleForm, "vehicle.pictureSize.error");
 				else
 					result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
 
