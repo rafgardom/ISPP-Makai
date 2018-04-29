@@ -87,7 +87,7 @@
 			</p>
 			
 			<p>
-				<b><spring:message code="offer.animal.age" />:</b>
+				<b><spring:message code="offer.animal.birthday" />:</b>
 				<fmt:formatDate pattern = "dd-MM-yyyy" value="${offer.animal.birthday}" />
 			</p>
 			

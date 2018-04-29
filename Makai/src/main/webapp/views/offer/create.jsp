@@ -46,7 +46,9 @@
 				</form:label>	
 				<form:select size="4" id="animalSelect" path="animal" class="form-control" onchange="${onchange}">
 					<jstl:forEach var="aux" items="${animals}">	
-					<form:option value="${aux.id}"><p>Nombre:<jstl:out value="${aux.name}"/></p>	<p>Edad:<jstl:out value="${aux.birthday}"/></p>	<p>Refugio:<jstl:out value="${aux.animalShelter.name}"/></p></form:option>
+					<form:option value="${aux.id}"><p><spring:message code="offer.animal.name" />: <jstl:out value="${aux.name}"/></p>
+						<p >&nbsp;&nbsp;&nbsp;<spring:message code="offer.animal.birthday" />: <jstl:out value="${aux.birthday}"/></p>
+						<p>&nbsp;&nbsp;&nbsp;<spring:message code="offer.animal.animalshelter" />: <jstl:out value="${aux.animalShelter.name}"/></p></form:option>
 					</jstl:forEach>
 				</form:select>
 				<form:errors path="animal" cssClass="alert alert-danger form-control" />
