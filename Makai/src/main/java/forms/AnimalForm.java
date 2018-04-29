@@ -51,7 +51,6 @@ public class AnimalForm {
 		this.id = id;
 	}
 
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return this.name;
 	}
@@ -60,7 +59,6 @@ public class AnimalForm {
 		this.name = name;
 	}
 
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getChipNumber() {
 		return this.chipNumber;
 	}
