@@ -4,10 +4,10 @@ package services;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -347,7 +347,7 @@ public class BannerService {
 		else if (potentialBanners.size() == 1)
 			result = banners.get(0);
 		else {
-			final Random random = new Random();
+			final SecureRandom random = new SecureRandom();
 			final int index = random.nextInt(banners.size());
 			result = banners.get(index);
 		}
