@@ -20,8 +20,8 @@
 <div class="row mx-5 ">
 
 	<div class="col-md-5">
-		<a href="javascript:setParam('language', 'en');">English</a> | <a
-		href="javascript:setParam('language', 'es');">Español</a>
+		<a href="javascript:setParamComprobar('language', 'en');">English</a> | <a
+		href="javascript:setParamComprobar('language', 'es');">Español</a>
 		<h6><b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b></h6>
 	</div>
 	<div class="col-md-2 center-div my-2">
@@ -119,4 +119,24 @@ function PonerCookie(){
 		/* execute search */
 		l.search = search;
 	}
+	
+	function setParamComprobar(name, value) {
+		var url = window.location.href;
+		var urlAdicional = window.location.origin + window.location.pathname;
+		
+		if(url.indexOf("create")>-1 ||  url.indexOf("edit")>-1 || url.indexOf("register")>-1){
+			if(value=='en'){
+				location.href =window.location.origin + "/Makai?language=en";
+			}
+			if(value=='es'){
+				location.href =window.location.origin + "/Makai?language=es";
+			}
+		}
+		
+		if(url.indexOf('create')==-1 &&  url.indexOf('edit')==-1 && url.indexOf('register')==-1){
+			setParam(name, value);
+		}
+		
+	}
+	
 </script>
