@@ -34,6 +34,7 @@
 			</security:authorize>
 			<security:authorize access="hasRole('CUSTOMER')">
 				<jstl:if test="${row.isAccepted==false}">
+					<a href="misc/privacyPolicy.do?sc=false" target="_blank" data-load-url="misc/privacyPolicy.do?sc=false" data-toggle="modal" data-target="#myModal"><spring:message code="offer.accept" /></a>
 					<acme:link image="paypal4" href="offer/customer/accept.do?offerId=${row.id}" type="warning"  code="offer.accept"/>
 					
 				</jstl:if>
@@ -59,3 +60,41 @@
 
 </display:table>
 </div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+		
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h3 class="modal-title"></h3>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+		
+			<!-- Modal body -->
+			<div class="modal-body">
+			</div>
+			
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="window.location='offer/customer/accept.do?offerId=${row.id}'"><spring:message code="request.save"/></button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal"><spring:message code="request.cancel"/></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('#myModal').on('show.bs.modal', function (e) {
+	    var loadurl = $(e.relatedTarget).data('load-url');
+	    $modalTitle = $(this).find('.modal-title');
+	    $modalTitle.load(loadurl+" .jumbotron h1", function(){
+	            $modalTitle.find('h1').replaceWith(function(){
+	                return $(this).text();
+	            });
+	        });
+	    $(this).find('.modal-body').load(loadurl+" #privacyPolicy");
+	});
+</script>
+
