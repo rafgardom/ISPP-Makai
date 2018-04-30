@@ -184,6 +184,7 @@ public class AnimalController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int animalId) {
 		ModelAndView result;
+		Actor actor;
 		Animal animal;
 		Breed[] breeds;
 		String specie;
@@ -191,6 +192,7 @@ public class AnimalController extends AbstractController {
 		//		AnimalForm animalForm;
 		final Integer numberNoti;
 		try {
+			actor = this.actorService.findByPrincipal();
 			animal = this.animalService.findOne(animalId);
 			Assert.isTrue(animal.getIsHidden() == false);
 			//			animalForm = this.animalService.animalToFormObject(animal);
@@ -205,6 +207,7 @@ public class AnimalController extends AbstractController {
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
+			result.addObject("principal", actor);
 			result.addObject("animal", animal);
 			result.addObject("specie", specie);
 			result.addObject("animalImage", image);
@@ -372,11 +375,11 @@ public class AnimalController extends AbstractController {
 		return result;
 
 	}
-	
+
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	public ModelAndView menu() {
 		ModelAndView result;
-	
+
 		final Integer numberNoti;
 		try {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
@@ -386,7 +389,7 @@ public class AnimalController extends AbstractController {
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("animal/menu");
-			
+
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);

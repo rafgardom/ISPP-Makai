@@ -78,34 +78,7 @@
 	  	<div class="card-body">
 	  		<p>
 				<b><spring:message code="offer.animal.name" />:</b>
-				<jstl:out value="${offer.animal.name}" />
-			</p>
-			
-			<p>
-				<b><spring:message code="offer.animal.chipNumber" />:</b>
-				<jstl:out value="${offer.animal.chipNumber}" />
-			</p>
-			
-			<p>
-				<b><spring:message code="offer.animal.birthday" />:</b>
-				<fmt:formatDate pattern = "dd-MM-yyyy" value="${offer.animal.birthday}" />
-			</p>
-			
-			<p>
-				<b><spring:message code="offer.animal.sex" />:</b>
-				<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
-				<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
-				<jstl:if test="${lang == 'es'}">
-					<jstl:out value="${offer.animal.sex.spanishName}"  />
-				</jstl:if>
-				<jstl:if test="${lang == 'en'}">
-					<jstl:out value="${offer.animal.sex.name}"  />
-				</jstl:if>
-			</p>
-			
-			<p>
-				<b><spring:message code="offer.animal.picture" />:</b>
-				<img src="${animalImage}" class="rounded-circle" alt="<spring:message code='offer.no.picture' />" width="200px" height="200px" >
+				<a href="animal/display.do?animalId=${offer.animal.id}"><jstl:out value="${offer.animal.name}"/></a>
 			</p>
 	  	
 	  	</div>

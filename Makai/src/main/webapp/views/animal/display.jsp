@@ -20,8 +20,19 @@
 			<p><b><spring:message code="animal.name" />:</b> <jstl:out
 				value="${animal.name}" /></p>
 	  	
-	  		<p><b><spring:message code="animal.chipNumber" />:</b> <jstl:out
-				value="${animal.chipNumber}" /></p>
+	  		<jstl:if test="${animal.customer!=null}">
+	  			<jstl:if test="${animal.customer.id == principal.id}">
+	  				<p><b><spring:message code="animal.chipNumber" />:</b> <jstl:out
+					value="${animal.chipNumber}" /></p>
+	  			</jstl:if>
+	  		</jstl:if>
+	  		<jstl:if test="${animal.animalShelter!=null}">
+	  			<jstl:if test="${animal.animalShelter.id == principal.id}">
+	  				<p><b><spring:message code="animal.chipNumber" />:</b> <jstl:out
+					value="${animal.chipNumber}" /></p>
+	  			</jstl:if>
+	  		
+	  		</jstl:if>
 					
 			<p><b><spring:message code="animal.birthday" />:</b> <fmt:formatDate pattern = "dd-MM-yyyy" value="${animal.birthday}" /></p>
 				
