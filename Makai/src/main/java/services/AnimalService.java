@@ -237,7 +237,14 @@ public class AnimalService {
 		if (result.getName().isEmpty())
 			result.setName(null);
 		result.setChipNumber(animalForm.getChipNumber());
+
+		// En el edit no salta el error del binding detectado por la fecha
+		// por lo que le obligo pasar el error por el form en vez del dominio
+		final Date fechaAnterior = result.getBirthday();
 		result.setBirthday(animalForm.getBirthday());
+		if ((animalForm.getBirthday() == null || animalForm.getBirthday().after(Calendar.getInstance().getTime())) && animalForm.getId() != 0)
+			result.setBirthday(fechaAnterior);
+
 		result.setSex(animalForm.getSex());
 		result.setBreeds(animalForm.getBreeds());
 

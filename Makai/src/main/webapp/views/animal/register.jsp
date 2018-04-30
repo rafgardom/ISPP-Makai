@@ -64,7 +64,7 @@
 $( function() {
     $( "#datepicker" ).datepicker({ 
     	dateFormat: 'dd/mm/yy', 
-    	maxDate: 0,
+    	minDate: 0,
     	firstDay: 1
     	});
   } );
