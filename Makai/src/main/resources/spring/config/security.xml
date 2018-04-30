@@ -41,6 +41,7 @@
 		<security:intercept-url pattern="/misc/privacyPolicy.do" access="permitAll" /> 
   		<security:intercept-url pattern="/misc/cookiesPolicy.do" access="permitAll" /> 
   		<security:intercept-url pattern="/misc/faq.do" access="permitAll" /> 
+  		<security:intercept-url pattern="/misc/conditions.do" access="permitAll" /> 
 		
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 

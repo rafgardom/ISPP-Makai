@@ -83,4 +83,17 @@ public class MiscController extends AbstractController {
 
 		return result;
 	}
+
+	// Conditions ----------------------------------------------------------
+
+	@RequestMapping(value = "/conditions", method = RequestMethod.GET)
+	public ModelAndView conditions() {
+		ModelAndView result;
+
+		result = new ModelAndView("conditions");
+		result.addObject("requestURI", "misc/conditions.do");
+
+		return result;
+	}
+
 }

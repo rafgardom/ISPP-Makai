@@ -34,9 +34,10 @@
 			</security:authorize>
 			<security:authorize access="hasRole('CUSTOMER')">
 				<jstl:if test="${row.isAccepted==false}">
-					<a href="misc/privacyPolicy.do?sc=false" target="_blank" data-load-url="misc/privacyPolicy.do?sc=false" data-toggle="modal" data-target="#myModal"><spring:message code="offer.accept" /></a>
-					<acme:link image="paypal4" href="offer/customer/accept.do?offerId=${row.id}" type="warning"  code="offer.accept"/>
-					
+					<a class="btn btn-warning btn-lg" href="misc/conditions.do" target="_blank" data-load-url="misc/conditions.do" data-toggle="modal" data-target="#myModal">
+						<img class="icon-button" src="images/paypal4.png"/>
+						<spring:message code="offer.accept" />
+					</a>
 				</jstl:if>
 				<jstl:if test="${row.isAccepted==true}">
 					<acme:link image="star-white-32" href="rating/customer/createRequest.do?requestId=${row.request.id}" type="info" code="offer.rating"/>
@@ -78,8 +79,8 @@
 			
 			<!-- Modal footer -->
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="window.location='offer/customer/accept.do?offerId=${row.id}'"><spring:message code="request.save"/></button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal"><spring:message code="request.cancel"/></button>
+				<button type="button" class="btn btn-primary" onclick="window.location='offer/customer/accept.do?offerId=${row.id}'"><spring:message code="offer.accept"/></button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal"><spring:message code="offer.cancel"/></button>
 			</div>
 		</div>
 	</div>
@@ -94,7 +95,7 @@
 	                return $(this).text();
 	            });
 	        });
-	    $(this).find('.modal-body').load(loadurl+" #privacyPolicy");
+	    $(this).find('.modal-body').load(loadurl+" #conditions");
 	});
 </script>
 
