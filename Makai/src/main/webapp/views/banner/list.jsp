@@ -66,13 +66,14 @@
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">	
-			<acme:link image="eye" href="banner/actor/display.do?bannerId=${row.id}"/>
-			
+		<%-- 	<acme:link image="eye" href="banner/actor/display.do?bannerId=${row.id}"/> --%>
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalImage${row.id }">
+			   	<img class="icon-button" src="images/picture.png"/>
+			</button>
 			<jstl:if test="${principalUserAccount.id == row.actor.userAccount.id }">
 				<jstl:if test="${row.totalViews==row.currentViews }">
 					<acme:link image="edit" href="banner/actor/edit.do?bannerId=${row.id}" type="warning"/>
 				</jstl:if>
-				
 				<acme:delete href="banner/actor/delete.do?bannerId=${row.id}" id="${row.id}"/>
 			</jstl:if>
 			
@@ -81,8 +82,20 @@
 			</security:authorize>
 			
 		</div>
+		
+		<!-- The Modal -->
+		  <div class="modal fade" id="modalImage${row.id}">
+		    <div class="modal-dialog modal-dialog-centered no-width">
+		      <div class="modal-content">
+		        <div class="modal-body">
+		         	<img src="${row.stringImage}" alt="<spring:message code='profile.no.picture'  />" class="img-responsive">
+		        </div>
+		        
+		      </div>
+		    </div>
+		  </div>
+		  
 	</display:column>
-	
 		
 </display:table>
 </div>
