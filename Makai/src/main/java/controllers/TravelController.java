@@ -394,7 +394,7 @@ public class TravelController extends AbstractController {
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
-			result = new ModelAndView("travel/myList");
+			result = new ModelAndView("travel/myPastList");
 
 			result.addObject("pastList", true);
 			result.addObject("travels", travels);
@@ -422,9 +422,11 @@ public class TravelController extends AbstractController {
 		final Integer numberNoti;
 		Collection<Transporter> passengers;
 		Collection<Animal> animals;
+		Collection<Animal> customerAnimals;
 		Collection<Specie> species;
 		Calendar today;
 		boolean noPermission = false;
+		boolean animalsInTravel = false;
 		Transporter principal;
 
 		try {
@@ -435,9 +437,14 @@ public class TravelController extends AbstractController {
 			animals = travel.getAnimals();
 			species = travel.getSpecies();
 			principal = this.transporterService.findByPrincipal();
+			customerAnimals = this.animalService.findByActorId(principal.getId());
+
+			for (final Animal a : customerAnimals)
+				if (animals.contains(a))
+					animalsInTravel = true;
 
 			today = Calendar.getInstance();
-			if (today.getTime().after(travel.getStartMoment()) && (travel.getTransporterOwner().getId() != principal.getId() && !passengers.contains(principal))) {
+			if (today.getTime().after(travel.getStartMoment()) && (travel.getTransporterOwner().getId() != principal.getId() && !passengers.contains(principal)) && !animalsInTravel) {
 				noPermission = true;
 				throw new IllegalArgumentException();
 			}
@@ -467,7 +474,6 @@ public class TravelController extends AbstractController {
 		}
 		return result;
 	}
-
 	// Menu -------------------------------------------------------		
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	public ModelAndView menu() {

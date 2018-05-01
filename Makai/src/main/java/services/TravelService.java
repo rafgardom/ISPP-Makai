@@ -46,9 +46,6 @@ public class TravelService {
 	private AnimalService		animalService;
 
 	@Autowired
-	private ProfessionalService	professionalService;
-
-	@Autowired
 	private ActorService		actorService;
 
 	@Autowired
