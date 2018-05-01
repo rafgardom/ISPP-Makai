@@ -29,13 +29,15 @@
 <meta name="viewport" content="width=device-width, user-scalable=no">
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
+<!-- <script type="text/javascript" src="scripts/jquery.js"></script> -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- <script type="text/javascript" src="scripts/common.js"></script> -->
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>  -->
-<script type="text/javascript" src="scripts/bootstrap.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="scripts/datepickerES.js"></script>
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 
 
 
@@ -46,6 +48,7 @@
 <link rel="stylesheet" href="styles/minty.css" type="text/css"> 
 <!-- <link rel="stylesheet" href="styles/jmenu.css" media="screen" type="text/css" /> -->
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
+<link rel="stylesheet" href="styles/tooltip.css" type="text/css">
 
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>

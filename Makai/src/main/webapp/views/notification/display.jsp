@@ -19,23 +19,28 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<div class="card-deck my-1">
-	<div class="card">
-	  	<div class="card-body"> 	
-		<p><b><spring:message code="notification.moment" />:</b> <jstl:out
-				value="${notification.moment}" /></p>
-
-		<p><b><spring:message code="notification.reason" />:</b> <jstl:out
-				value="${notification.reason}" /></p>
-		</div>
-	</div>
+<div class="row my-1">
+	<div class="offset-md-4 col-md-4">
 		<div class="card">
-	  	<div class="card-body"> 	
-		<p><b><spring:message code="notification.description" />:</b> <jstl:out
-				value="${notification.description}" /></p>
+		  	<div class="card-body"> 	
+			<p><b><spring:message code="notification.moment" />:</b> <jstl:out
+					value="${notification.moment}" /></p>
+	
+			<p><b><spring:message code="notification.reason" />:</b> <jstl:out
+					value="${notification.reason}" /></p>
+			</div>
 		</div>
 	</div>
-</div>	
-	<acme:link href="notification/actor/list.do" code="notification.goBack"/>
-
+	<div class="offset-md-3 col-md-6 my-3 text-center">
+		<div class="card">
+		  	<div class="card-body"> 	
+			<p><b><spring:message code="notification.description" />:</b> <jstl:out
+					value="${notification.description}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 d-flex justify-content-center">
+		<acme:link href="notification/actor/list.do" code="notification.goBack"/>
+	</div>
+</div>
 

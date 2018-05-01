@@ -61,9 +61,10 @@
 	  	</div>
 	</div>
 </div>
-<br>
 
-<jstl:if test="${ratings!=null }">
+
+<jstl:if test="${!empty ratings }">
+<br>
 	<h3>
 		<b><spring:message code="profile.ratings" />:</b>
 	</h3>

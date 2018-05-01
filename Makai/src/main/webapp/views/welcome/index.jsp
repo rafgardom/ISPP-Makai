@@ -55,6 +55,17 @@
 		</div>
 	</security:authorize>
 	
+	<security:authorize access="hasRole('TRAINER')">
+		<div class="col-lg-4 mt-lg-0 mt-3">
+			<div class="card bg-info pt-3 shadow">
+				<div class="center-div py-2">
+					<img alt="Go to Request" src="images/request-xl.png"  height="128" width="128">
+				</div>
+				<div class="card-body"> <acme:link  href="request/trainer/list.do" code="welcome.go.to.request" type=" btn-outline-light" /></div>
+			</div>
+		</div>
+	</security:authorize>
+	
 	<security:authorize access="isAnonymous()">
 		<div class="col-lg-4 mt-lg-0 mt-3">
 		<div class="card bg-info pt-3 shadow">

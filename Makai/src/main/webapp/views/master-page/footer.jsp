@@ -33,6 +33,10 @@
 		<a href="misc/cookiesPolicy.do"><spring:message code="master.page.cookiesPolicy" /></a>&nbsp;&nbsp;&#124;
 		<a href="misc/faq.do"><spring:message code="master.page.faq" /></a>
 		<br/>
+		<div class="tooltip">
+			<img src="images/mail.png">
+			<span class="tooltiptext">makai_oficial@gmail.com</span>
+		</div>
 		<small><i><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i></small>
 	</div>
 </div>
