@@ -291,6 +291,39 @@ public class OfferTrainerController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveEdit(@Valid final OfferForm offerForm, final BindingResult binding) throws IOException {
+
+		ModelAndView result;
+		Offer offer = null;
+
+		if (binding.hasErrors())
+			if (offerForm.getRequest() == null)
+				result = this.createEditModelAndView(offerForm, "offer.commit.error.no.request");
+			else
+				result = this.createEditModelAndView(offerForm);
+		else
+			try {
+				offer = this.offerService.reconstruct(offerForm, binding);
+				offer = this.offerService.save(offer);
+				result = new ModelAndView("redirect:list.do");
+
+			} catch (final Throwable oops) {
+				System.out.println(oops);
+				if (offer != null)
+					if (offer.getIsAccepted() == true)
+						result = this.createEditModelAndView(offerForm, "offer.commit.error.is.accepted");
+				if (this.requestService.tieneOfferAceptadaUnRequest(offerForm.getRequest()))
+					result = this.createEditModelAndView(offerForm, "offer.commit.error.request.accept");
+				if (!this.offerService.elAnimalNoHaSidoAdoptado(offerForm.getAnimal()))
+					result = this.createEditModelAndView(offerForm, "offer.commit.error.animal.adoptado");
+				else
+					result = this.createEditModelAndView(offerForm, "offer.commit.error.no.exist.offer");
+			}
+		return result;
+
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final OfferForm offerForm) {
@@ -307,10 +340,10 @@ public class OfferTrainerController extends AbstractController {
 
 		if (offerForm.getId() == 0) {
 			result = new ModelAndView("offer/create");
-			result.addObject("RequestURI", "offer/trainer/create.do");
+			result.addObject("RequestURI", "offer/trainer/create.do?requestId=" + offerForm.getRequest().getId());
 		} else {
 			result = new ModelAndView("offer/edit");
-			result.addObject("RequestURI", "offer/trainer/create.do");
+			result.addObject("RequestURI", "offer/trainer/edit.do?offerId=" + offerForm.getId());
 		}
 
 		//final Collection<Animal> animals = this.animalService.findAnimalWithoutAdopted();

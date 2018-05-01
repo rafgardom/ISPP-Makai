@@ -394,7 +394,7 @@ public class TravelController extends AbstractController {
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
-			result = new ModelAndView("travel/myList");
+			result = new ModelAndView("travel/myPastList");
 
 			result.addObject("pastList", true);
 			result.addObject("travels", travels);
