@@ -108,13 +108,26 @@ public class VehicleController extends AbstractController {
 		ModelAndView result;
 		final Vehicle vehicle;
 		VehicleForm vehicleForm;
+		Transporter principal;
+		boolean noPermission = false;
+
+		principal = this.transporterService.findByPrincipal();
+
 		try {
 			vehicle = this.vehicleService.findOne(vehicleId);
 			vehicleForm = this.vehicleService.toFormObject(vehicle);
 
+			if (principal.getId() != vehicle.getTransporter().getId()) {
+				noPermission = true;
+				throw new IllegalArgumentException();
+			}
+
 			result = this.createModelAndView(vehicleForm);
 		} catch (final Throwable e) {
-			result = new ModelAndView("error");
+			if (noPermission)
+				result = new ModelAndView("redirect:travel/menu.do");
+			else
+				result = new ModelAndView("error");
 		}
 		return result;
 	}

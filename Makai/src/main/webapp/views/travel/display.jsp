@@ -17,7 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">	
+<security:authorize access="hasAnyRole('CUSTOMER')">	
 
 <div class="card-deck">
 	<div class="card">
@@ -122,7 +122,7 @@
 	 	<br><h3 class="card-title"><spring:message code="travel.passengers" /></h3>
 	  		<div class="card-body">
 	  		<b><spring:message code="travel.persons" />:</b>
-	  		<jstl:if test="${passengers.isEmpty()}"></br></jstl:if>
+	  		<jstl:if test="${passengers.isEmpty()}"><br></jstl:if>
 	  		<jstl:forEach var="passenger" items="${passengers}">
 		  		<p>
 					<jstl:out value="${passenger.name}"/>
@@ -132,6 +132,7 @@
 			<jstl:forEach var="animal" items="${animals}">
 		  		<p>
 					<jstl:out value="${animal.name}"/>
+					
 				</p>
 			</jstl:forEach>
 	  		</div>

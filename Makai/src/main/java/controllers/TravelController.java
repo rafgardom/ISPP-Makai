@@ -177,13 +177,26 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Travel travel;
 		TravelForm travelForm;
+		Transporter principal;
+		boolean noPermission = false;
+
+		principal = this.transporterService.findByPrincipal();
 
 		try {
 			travel = this.travelService.findOne(travelId);
 			travelForm = this.travelService.toFormObject(travel);
+
+			if (principal.getId() != travel.getTransporterOwner().getId()) {
+				noPermission = true;
+				throw new IllegalArgumentException();
+			}
+
 			result = this.createModelAndView(travelForm);
 		} catch (final Throwable e) {
-			result = new ModelAndView("error");
+			if (noPermission)
+				result = new ModelAndView("redirect:menu.do");
+			else
+				result = new ModelAndView("error");
 		}
 		return result;
 	}
@@ -321,7 +334,7 @@ public class TravelController extends AbstractController {
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/myList");
-			
+
 			result.addObject("pastList", false);
 			result.addObject("principal", principal);
 			result.addObject("travels", travels);
@@ -345,6 +358,7 @@ public class TravelController extends AbstractController {
 		final Collection<Travel> travels = new ArrayList<Travel>();
 		Transporter principal;
 		final Integer numberNoti;
+
 		try {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 			Collection<Rating> principalRatings;
@@ -387,6 +401,7 @@ public class TravelController extends AbstractController {
 			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
 			result.addObject("imagesRight", imagesRight);
+
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -402,6 +417,9 @@ public class TravelController extends AbstractController {
 		final Integer numberNoti;
 		Collection<Transporter> passengers;
 		Collection<Animal> animals;
+		Calendar today;
+		boolean noPermission = false;
+		Transporter principal;
 
 		try {
 			travel = this.travelService.findOne(travelId);
@@ -409,6 +427,13 @@ public class TravelController extends AbstractController {
 			vehicle = travel.getVehicle();
 			passengers = this.transporterService.findPassengersByTravel(travelId);
 			animals = travel.getAnimals();
+			principal = this.transporterService.findByPrincipal();
+
+			today = Calendar.getInstance();
+			if (today.getTime().after(travel.getStartMoment()) && (travel.getTransporterOwner().getId() != principal.getId() && !passengers.contains(principal))) {
+				noPermission = true;
+				throw new IllegalArgumentException();
+			}
 
 			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
@@ -425,12 +450,16 @@ public class TravelController extends AbstractController {
 			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
 			result.addObject("imagesRight", imagesRight);
+
 		} catch (final Throwable e) {
-			result = new ModelAndView("error");
+			if (noPermission)
+				result = new ModelAndView("redirect:menu.do");
+			else
+				result = new ModelAndView("error");
 		}
 		return result;
 	}
-	
+
 	// Menu -------------------------------------------------------		
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	public ModelAndView menu() {
