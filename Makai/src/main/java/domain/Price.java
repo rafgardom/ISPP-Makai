@@ -22,8 +22,6 @@ public class Price extends DomainEntity {
 	private Double	bannerPrice;
 	private Double	adoptionFee;
 	private Double	travelFee;
-	private Integer	bannersCreated;
-	private Double	bannersTotalBenefit;
 
 
 	@NotNull
@@ -51,26 +49,6 @@ public class Price extends DomainEntity {
 	}
 	public void setTravelFee(final Double travelFee) {
 		this.travelFee = travelFee;
-	}
-
-	@NotNull
-	@Min(0)
-	public Integer getBannersCreated() {
-		return this.bannersCreated;
-	}
-
-	public void setBannersCreated(final Integer bannersCreated) {
-		this.bannersCreated = bannersCreated;
-	}
-
-	@NotNull
-	@Min(0)
-	public Double getBannersTotalBenefit() {
-		return this.bannersTotalBenefit;
-	}
-
-	public void setBannersTotalBenefit(final Double bannersTotalBenefit) {
-		this.bannersTotalBenefit = bannersTotalBenefit;
 	}
 
 }

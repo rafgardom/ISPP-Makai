@@ -547,10 +547,13 @@
 		<property name="currentViews" value="198" />
 		<property name="price" value="2.5" />
 		<property name="zone" value="izquierda" />
+		<property name="url" value="http://makaiapp.jelastic.cloudhosted.es/makai/" />
 		<property name="validated" value="true" />
 		<property name="paid" value="true" />
 		<property name="paidMoment" value="04/11/2018 10:20" />
 		<property name="clicksNumber" value="94" />
+		<property name="editionsNumber" value="0" />
+		<property name="totalBenefit" value="2.5" />
 		<property name="actor" ref="animalshelter1" />
 	</bean>
 	
@@ -565,10 +568,13 @@
 		<property name="currentViews" value="125" />
 		<property name="price" value="1.25" />
 		<property name="zone" value="derecha" />
+		<property name="url" value="http://makaiapp.jelastic.cloudhosted.es/makai/images/logo.png" />
 		<property name="validated" value="true" />
 		<property name="paid" value="true" />
 		<property name="paidMoment" value="03/07/2018 20:10" />
 		<property name="clicksNumber" value="42" />
+		<property name="editionsNumber" value="2" />
+		<property name="totalBenefit" value="3.75" />
 		<property name="actor" ref="advertising1" />
 	</bean>
 	
@@ -583,10 +589,13 @@
 		<property name="currentViews" value="6" />
 		<property name="price" value="0.1" />
 		<property name="zone" value="abajo" />
+		<property name="url" value="http://makaiapp.jelastic.cloudhosted.es/makai/misc/faq.do" />
 		<property name="validated" value="true" />
 		<property name="paid" value="true" />
 		<property name="paidMoment" value="04/01/2018 15:30" />
 		<property name="clicksNumber" value="2" />
+		<property name="editionsNumber" value="0" />
+		<property name="totalBenefit" value="0.1" />
 		<property name="actor" ref="trainer1" />
 	</bean>
 	
@@ -595,8 +604,6 @@
 		<property name="bannerPrice" value="0.01" />
 		<property name="adoptionFee" value="15" />
 		<property name="travelFee" value="10" />
-		<property name="bannersCreated" value="3" />
-		<property name="bannersTotalBenefit" value="3.85" />
 	</bean>
 	
 	<!-- Duration -->	

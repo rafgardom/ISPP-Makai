@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -34,10 +35,13 @@ public class Banner extends DomainEntity {
 	private Integer	currentViews;
 	private Double	price;
 	private String	zone;
+	private String	url;
 	private boolean	validated;
 	private boolean	paid;
 	private Date	paidMoment;
 	private Integer	clicksNumber;
+	private Integer	editionsNumber;
+	private Double	totalBenefit;
 
 
 	@Lob
@@ -85,6 +89,15 @@ public class Banner extends DomainEntity {
 		this.zone = zone;
 	}
 
+	@NotBlank
+	@URL
+	public String getUrl() {
+		return this.url;
+	}
+
+	public void setUrl(final String url) {
+		this.url = url;
+	}
 	@NotNull
 	public boolean isPaid() {
 		return this.paid;
@@ -119,6 +132,26 @@ public class Banner extends DomainEntity {
 
 	public void setClicksNumber(final Integer clicksNumber) {
 		this.clicksNumber = clicksNumber;
+	}
+
+	@NotNull
+	@Min(0)
+	public Integer getEditionsNumber() {
+		return this.editionsNumber;
+	}
+
+	public void setEditionsNumber(final Integer editionsNumber) {
+		this.editionsNumber = editionsNumber;
+	}
+
+	@NotNull
+	@Min(0)
+	public Double getTotalBenefit() {
+		return this.totalBenefit;
+	}
+
+	public void setTotalBenefit(final Double totalBenefit) {
+		this.totalBenefit = totalBenefit;
 	}
 
 

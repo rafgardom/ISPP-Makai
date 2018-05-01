@@ -28,6 +28,7 @@ public class BannerForm {
 	private double			dailyViews;
 	private double			monthlyViews;
 	private Integer			clicksNumber;
+	private String			url;
 
 
 	// Constructor ------------------------------------------------------------
@@ -184,6 +185,14 @@ public class BannerForm {
 
 	public void setClicksNumber(final Integer clicksNumber) {
 		this.clicksNumber = clicksNumber;
+	}
+
+	public String getUrl() {
+		return this.url;
+	}
+
+	public void setUrl(final String url) {
+		this.url = url;
 	}
 
 }

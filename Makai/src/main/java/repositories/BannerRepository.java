@@ -38,8 +38,14 @@ public interface BannerRepository extends JpaRepository<Banner, Integer> {
 	@Query("select " + "new forms.BannerForm(b)" + " from " + "Banner b where b.clicksNumber <= ALL (select b1.clicksNumber from Banner b1)")
 	Collection<BannerForm> findLessClicks();
 
-	@Query("select sum(b.price) from Banner b where b.paid = true")
+	@Query("select COALESCE(sum(b.totalBenefit),0) from Banner b where b.paid = true")
 	Double findSumPricesPaid();
+
+	@Query("select COALESCE(sum(b.totalBenefit)/sum(b.editionsNumber+1),0) from Banner b where b.paid = true")
+	Double findAvgPricesPaid();
+
+	@Query("select COALESCE(sum(b.totalBenefit)/(1+TIMESTAMPDIFF(month, min(b.paidMoment), CURRENT_TIMESTAMP)), 0) from Banner b where b.paid = true")
+	Double findMonthlyBenefitsPaid();
 
 	@Query("select b.picture from Banner b where b.zone = ?1 and b.paid = true and b.validated = true")
 	Collection<byte[]> getBannerByZone(String zone);

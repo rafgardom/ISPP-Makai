@@ -33,6 +33,7 @@
 				<spring:message code="banner.price" />:
 				<font id="divPrice">0</font> &euro;
 			</p>
+			<acme:textarea code="banner.url" path="url" />
 			
 		</div>
 		<div class="col-md-5 offset-md-1">

@@ -91,6 +91,8 @@ public class BannerService {
 		result.setValidated(false);
 		result.setPaid(false);
 		result.setClicksNumber(0);
+		result.setEditionsNumber(0);
+		result.setTotalBenefit(0.0);
 
 		return result;
 	}
@@ -105,11 +107,16 @@ public class BannerService {
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(banner.getActor().equals(actor));
 
-		if (banner.getId() != 0)
-			//Solo se puede modificar si el current y el total view son iguales
-			Assert.isTrue(banner.getCurrentViews().equals(banner.getTotalViews()));
-
 		Assert.isTrue(banner.getZone().equals("izquierda") || banner.getZone().equals("derecha") || banner.getZone().equals("abajo"));
+
+		if (banner.getId() != 0) {
+			banner.setEditionsNumber(banner.getEditionsNumber() + 1);
+			banner.setCurrentViews(0);
+			banner.setPaid(false);
+			banner.setValidated(false);
+			banner.setClicksNumber(0);
+			banner.setPaidMoment(null);
+		}
 
 		price = this.priceService.findOne();
 		bannerPriceVal = price.getBannerPrice() * banner.getTotalViews();
@@ -205,8 +212,11 @@ public class BannerService {
 
 		if (bannerForm.getId() == 0)
 			result = this.create();
-		else
+		else {
 			result = this.findOne(bannerForm.getId());
+			//Solo se puede modificar si el current y el total view son iguales
+			Assert.isTrue(result.getCurrentViews().equals(result.getTotalViews()));
+		}
 
 		result.setTotalViews(bannerForm.getTotalViews());
 		result.setCurrentViews(bannerForm.getCurrentViews());
@@ -214,6 +224,7 @@ public class BannerService {
 		result.setZone(bannerForm.getZone());
 		result.setPaid(bannerForm.isPaid());
 		result.setValidated(bannerForm.isValidated());
+		result.setUrl(bannerForm.getUrl());
 
 		if (bannerForm.getPicture() != null)
 			result.setPicture(bannerForm.getPicture());
@@ -246,6 +257,7 @@ public class BannerService {
 		result.setPaid(banner.isPaid());
 		result.setValidated(banner.isValidated());
 		result.setActor(banner.getActor());
+		result.setUrl(banner.getUrl());
 
 		return result;
 	}
@@ -312,6 +324,22 @@ public class BannerService {
 		result = this.bannerRepository.findSumPricesPaid();
 
 		return result;
+	}
+
+	public Double findAvgPricesPaid() {
+		Double result;
+
+		result = this.bannerRepository.findAvgPricesPaid();
+
+		return 1.0 * Math.round(result * 100) / 100;
+	}
+
+	public Double findMonthlyBenefitsPaid() {
+		Double result;
+
+		result = this.bannerRepository.findMonthlyBenefitsPaid();
+
+		return 1.0 * Math.round(result * 100) / 100;
 	}
 
 	public Banner validate(final Banner banner) {

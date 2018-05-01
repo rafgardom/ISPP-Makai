@@ -218,17 +218,13 @@ public class BannerActorController extends AbstractController {
 	@RequestMapping(value = "/payment/done", method = RequestMethod.GET)
 	public ModelAndView paymentFirstStep(@RequestParam(required = false) final int bannerId) {
 		ModelAndView result;
-		Price price;
 
 		result = new ModelAndView();
-		price = this.priceService.findOne();
 		try {
 			final Banner banner = this.bannerService.findOne(bannerId);
 			banner.setPaid(true);
+			banner.setTotalBenefit(banner.getTotalBenefit() + banner.getPrice());
 			this.bannerService.simpleSave(banner);
-			price.setBannersTotalBenefit(price.getBannersTotalBenefit() + banner.getPrice());
-			price.setBannersCreated(price.getBannersCreated() + 1);
-			price = this.priceService.save(price);
 			result = new ModelAndView("banner/actor/payment/successful");
 
 		} catch (final Throwable oops) {

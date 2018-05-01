@@ -17,7 +17,7 @@
 		<p><spring:message code="banner.avg.views" />: <jstl:out value="${bannersAvgBenefit }" /><p>
 	</li>
 	<li>
-		<p><spring:message code="banner.monthly.earnings" />: <jstl:out value="${bannersTotalBenefit }" /><p>
+		<p><spring:message code="banner.monthly.earnings" />: <jstl:out value="${bannersMonthlyBenefit }" /><p>
 	</li>
 	<li>
 		<p><spring:message code="banner.more.views" /><p>

@@ -15,7 +15,6 @@ import services.NotificationService;
 import services.PriceService;
 import controllers.AbstractController;
 import domain.Banner;
-import domain.Price;
 import forms.BannerForm;
 
 @Controller
@@ -62,15 +61,19 @@ public class BannerAdministratorController extends AbstractController {
 		Collection<BannerForm> bannerLessViews;
 		Collection<BannerForm> bannerMoreClicks;
 		Collection<BannerForm> bannerLessClicks;
-		Price price;
-		Integer numberNoti;
+		Double bannersTotalBenefit;
+		Double bannersAvgBenefit;
+		Double bannersMonthlyBenefit;
+		final Integer numberNoti;
 
 		try {
 			bannerMoreViews = this.bannerService.findMoreViews();
 			bannerLessViews = this.bannerService.findLessViews();
 			bannerMoreClicks = this.bannerService.findMoreClicks();
 			bannerLessClicks = this.bannerService.findLessClicks();
-			price = this.priceService.findOne();
+			bannersTotalBenefit = this.bannerService.findSumPricesPaid();
+			bannersAvgBenefit = this.bannerService.findAvgPricesPaid();
+			bannersMonthlyBenefit = this.bannerService.findMonthlyBenefitsPaid();
 
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
@@ -81,8 +84,9 @@ public class BannerAdministratorController extends AbstractController {
 			result.addObject("bannerLessViews", bannerLessViews);
 			result.addObject("bannerMoreClicks", bannerMoreClicks);
 			result.addObject("bannerLessClicks", bannerLessClicks);
-			result.addObject("bannersTotalBenefit", price.getBannersTotalBenefit());
-			result.addObject("bannersAvgBenefit", 1.0 * Math.round(price.getBannersTotalBenefit() / price.getBannersCreated() * 100) / 100);
+			result.addObject("bannersTotalBenefit", bannersTotalBenefit);
+			result.addObject("bannersAvgBenefit", bannersAvgBenefit);
+			result.addObject("bannersMonthlyBenefit", bannersMonthlyBenefit);
 		} catch (final Throwable oops) {
 			result = new ModelAndView("error");
 		}
