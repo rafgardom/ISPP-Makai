@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BannerService;
 import services.NotificationService;
 import services.OfferService;
+import services.RatingService;
 import services.RequestService;
 import domain.Offer;
 import domain.Request;
@@ -37,6 +38,9 @@ public class OfferController extends AbstractController {
 	@Autowired
 	private BannerService		bannerService;
 
+	@Autowired
+	private RatingService		ratingService;
+
 
 	//Listing request's offers
 	@RequestMapping(value = "/customer/list", method = RequestMethod.GET)
@@ -50,6 +54,13 @@ public class OfferController extends AbstractController {
 			final Collection<Offer> offers = this.offerService.findOfferByRequest(request);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
+			final Boolean tieneRating[] = new Boolean[offers.size()];
+			int cont = 0;
+			for (final Offer aux : offers) {
+				tieneRating[cont] = (this.ratingService.getFindByRequestId(aux.getRequest().getId()));
+				cont++;
+			}
+
 			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
@@ -57,6 +68,7 @@ public class OfferController extends AbstractController {
 			result = new ModelAndView("offer/customer/list");
 			result.addObject("offers", offers);
 			result.addObject("numberNoti", numberNoti);
+			result.addObject("tieneRating", tieneRating);
 			result.addObject("RequestURI", "offer/customer/list.do");
 
 			result.addObject("imagesLeft", imagesLeft);

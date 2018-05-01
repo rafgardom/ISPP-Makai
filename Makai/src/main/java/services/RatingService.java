@@ -243,4 +243,9 @@ public class RatingService {
 
 		return result;
 	}
+
+	public Boolean getFindByRequestId(final int requestId) {
+		final Rating rating = this.ratingRepository.findByRequestId(requestId);
+		return rating == null ? false : true;
+	}
 }

@@ -8,6 +8,8 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <div class="table-responsive">
+<jstl:set var = "count" value ="${0}"></jstl:set>
+
 <display:table name="offers" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
 	<acme:column code="offer.startMoment" property="startMoment" sortable="true" format="{0,date,dd/MM/yyyy}"/>
@@ -39,7 +41,7 @@
 						<spring:message code="offer.accept" />
 					</a>
 				</jstl:if>
-				<jstl:if test="${row.isAccepted==true}">
+				<jstl:if test="${row.isAccepted==true and !tieneRating[count]}">
 					<acme:link image="star-white-32" href="rating/customer/createRequest.do?requestId=${row.request.id}" type="info" code="offer.rating"/>
 				</jstl:if>
 			</security:authorize>
@@ -58,7 +60,7 @@
 		</jstl:if>
 	</display:column>
 	
-
+<jstl:set var = "count" value ="${count + 1}"></jstl:set>
 </display:table>
 </div>
 

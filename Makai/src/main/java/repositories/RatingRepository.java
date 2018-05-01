@@ -32,4 +32,7 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
 	@Query("select avg(r.stars) from Rating r where r.trainer.id=?1")
 	public Double getAvgByTrainerId(int trainerId);
+
+	@Query("select r from Rating r where r.request.id=?1")
+	public Rating findByRequestId(int requestId);
 }
