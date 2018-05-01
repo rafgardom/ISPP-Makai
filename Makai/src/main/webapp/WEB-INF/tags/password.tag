@@ -39,6 +39,7 @@
 	<jstl:set var="required" value="required" />
 </jstl:if>
 
+<spring:message code="tag.password" var="tagPassword"/>
 
 <%-- Definition --%>
 
@@ -55,7 +56,7 @@
 			<div class="input-group-prepend">
 				<span class="input-group-text btn-light"><img src="images/${image}.png"/></span>
 			</div>
-			<form:password path="${path}" class="form-control" placeholder="${placeholder}" id="${id }" required="required"/>
+			<form:password path="${path}" class="form-control" placeholder="${placeholder}" id="${id }" required="required" title="${tagPassword }"/>
 		</div>
 		<jstl:if test="${id != null}">
 			<h6 id="${id}message" class="text-center mt-1"></h6>
