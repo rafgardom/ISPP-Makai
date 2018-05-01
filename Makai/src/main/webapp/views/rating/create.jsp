@@ -99,7 +99,14 @@
 	<br/>
 	
 		<acme:submit code="rating.save" name="save" />
-		<acme:cancel code="rating.cancel" url="travel/myPastList.do" />
+		
+		<jstl:if test="${RequestURI == 'rating/customer/createRequest.do'}">
+			<acme:cancel code="rating.cancel" url="offer/customer/list.do?requestId=${rating.request.id }" />
+		</jstl:if>
+		
+		<jstl:if test="${RequestURI == 'rating/customer/createTravel.do'}">
+			<acme:cancel code="rating.cancel" url="travel/myPastList.do" />
+		</jstl:if>
 	<br/>
 	
 </form:form>

@@ -164,7 +164,7 @@ public class AnimalService {
 
 		for (final Offer o : ofertasRelacionadas) {
 			notification = this.notificationService.create(o.getTrainer());
-			notification.setReason("Lo sentimos, pero " + animal.getName() + " ya no estÃ¡ disponible");
+			notification.setReason("Lo sentimos, pero " + animal.getName() + " ya no está disponible");
 			notification.setDescription("El animal que intentaba solicitar ya no se encuentra disponible");
 			notification.setType(NotificationType.GENERAL);
 			this.notificationService.save(notification);

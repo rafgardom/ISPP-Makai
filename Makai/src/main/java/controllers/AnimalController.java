@@ -428,7 +428,7 @@ public class AnimalController extends AbstractController {
 		if (animalForm.getId() == 0)
 			result.addObject("requestURI", "animal/register.do");
 		else
-			result.addObject("requestURI", "animal/edit.do");
+			result.addObject("requestURI", "animal/edit.do?animalId=" + animalForm.getId());
 		result.addObject("animalForm", animalForm);
 		result.addObject("sexs", sexs);
 		result.addObject("species", species);

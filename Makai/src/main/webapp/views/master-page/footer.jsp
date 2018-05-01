@@ -20,8 +20,8 @@
 <div class="row mx-5 ">
 
 	<div class="col-md-5">
-		<a href="javascript:setParamComprobar('language', 'en');">English</a> | <a
-		href="javascript:setParamComprobar('language', 'es');">Español</a>
+		<a href="javascript:setParam('language', 'en');">English</a> | <a
+		href="javascript:setParam('language', 'es');">Español</a>
 		<h6><b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b></h6>
 	</div>
 	<div class="col-md-2 center-div my-2">
