@@ -100,11 +100,11 @@
 	<div class="center-div">
 		<acme:submit code="rating.save" name="save" />
 		
-		<jstl:if test="${RequestURI == 'rating/customer/createRequest.do'}">
+		<jstl:if test="${RequestURI.contains('rating/customer/createRequest.do')}">
 			<acme:cancel code="rating.cancel" url="offer/customer/list.do?requestId=${rating.request.id }" />
 		</jstl:if>
 		
-		<jstl:if test="${RequestURI == 'rating/customer/createTravel.do'}">
+		<jstl:if test="${RequestURI.contains('rating/customer/createTravel.do')}">
 			<acme:cancel code="rating.cancel" url="travel/myPastList.do" />
 		</jstl:if>
 	<br/>

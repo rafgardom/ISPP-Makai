@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CustomerService;
 import services.NotificationService;
 import services.RatingService;
 import services.RequestService;
 import services.TravelService;
 import controllers.AbstractController;
+import domain.Customer;
 import domain.Rating;
 import domain.Request;
 import domain.Travel;
@@ -37,6 +39,9 @@ public class RatingCustomerController extends AbstractController {
 
 	@Autowired
 	private NotificationService	notificationService;
+
+	@Autowired
+	private CustomerService		customerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -88,7 +93,10 @@ public class RatingCustomerController extends AbstractController {
 		ModelAndView result;
 		final Rating rating;
 		Travel travel;
+		Customer customer;
 		try {
+			customer = this.customerService.findByPrincipal();
+			//Assert.isNull(this.ratingService.findRatingByCustomerFromTravel(travelId, customer.getId()));
 			travel = this.travelService.findOne(travelId);
 			rating = this.ratingService.createToTravel(travel);
 
@@ -108,6 +116,7 @@ public class RatingCustomerController extends AbstractController {
 			result = this.createModelAndView(rating);
 		else
 			try {
+
 				rating = this.ratingService.save(rating);
 
 				result = new ModelAndView("redirect:/travel/myPastList.do");
@@ -134,11 +143,11 @@ public class RatingCustomerController extends AbstractController {
 
 		if (rating.getTravel() == null) {
 			result = new ModelAndView("rating/createRequest");
-			result.addObject("RequestURI", "rating/customer/createRequest.do");
+			result.addObject("RequestURI", "rating/customer/createRequest.do?requestId=" + rating.getRequest().getId());
 
 		} else {
 			result = new ModelAndView("rating/createTravel");
-			result.addObject("RequestURI", "rating/customer/createTravel.do");
+			result.addObject("RequestURI", "rating/customer/createTravel.do?travelId=" + rating.getTravel().getId());
 		}
 
 		result.addObject("numberNoti", numberNoti);

@@ -35,4 +35,5 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
 	@Query("select r from Rating r where r.request.id=?1")
 	public Rating findByRequestId(int requestId);
+
 }

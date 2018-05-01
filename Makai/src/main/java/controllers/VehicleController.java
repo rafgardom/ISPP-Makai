@@ -253,7 +253,7 @@ public class VehicleController extends AbstractController {
 			result.addObject("RequestURI", "vehicle/register.do");
 		} else {
 			result = new ModelAndView("vehicle/edit");
-			result.addObject("RequestURI", "vehicle/edit.do");
+			result.addObject("RequestURI", "vehicle/edit.do?vehicleId=" + vehicleForm.getId());
 		}
 
 		result.addObject("vehicleForm", vehicleForm);
