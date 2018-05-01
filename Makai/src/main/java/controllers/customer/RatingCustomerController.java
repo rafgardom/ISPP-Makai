@@ -73,6 +73,7 @@ public class RatingCustomerController extends AbstractController {
 			result = this.createModelAndView(rating);
 		else
 			try {
+				Assert.isTrue(!this.ratingService.getFindByRequestId(rating.getRequest().getId()));
 				this.ratingService.save(rating);
 				result = new ModelAndView("redirect:../../offer/customer/list.do?requestId=" + rating.getRequest().getId());
 
