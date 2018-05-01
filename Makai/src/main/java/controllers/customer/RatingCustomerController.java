@@ -83,7 +83,10 @@ public class RatingCustomerController extends AbstractController {
 				result = new ModelAndView("redirect:../../offer/customer/list.do?requestId=" + rating.getRequest().getId());
 
 			} catch (final Throwable oops) {
-				result = this.createModelAndView(rating, "rating.commit.error");
+				if (oops.getMessage().equals("only whiteSpaces"))
+					result = this.createModelAndView(rating, "rating.whiteSpaces.error");
+				else
+					result = this.createModelAndView(rating, "rating.commit.error");
 			}
 		return result;
 	}
@@ -122,7 +125,10 @@ public class RatingCustomerController extends AbstractController {
 				result = new ModelAndView("redirect:/travel/myPastList.do");
 
 			} catch (final Throwable oops) {
-				result = this.createModelAndView(rating, "rating.commit.error");
+				if (oops.getMessage().equals("only whiteSpaces"))
+					result = this.createModelAndView(rating, "rating.whiteSpaces.error");
+				else
+					result = this.createModelAndView(rating, "rating.commit.error");
 			}
 		return result;
 	}

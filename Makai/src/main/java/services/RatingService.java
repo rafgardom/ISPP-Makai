@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.RatingRepository;
 import repositories.RequestRepository;
+import domain.Administrator;
 import domain.Animal;
 import domain.Customer;
 import domain.Notification;
@@ -140,6 +141,9 @@ public class RatingService {
 		Assert.notNull(principal);
 		Assert.isTrue(rating.getCustomer().getId() == principal.getId());
 
+		if (rating.getComment().trim().length() == 0)
+			throw new IllegalArgumentException("only whiteSpaces");
+
 		result = this.ratingRepository.save(rating);
 
 		if (result.getTrainer() != null) {
@@ -166,8 +170,8 @@ public class RatingService {
 			// comprobamos si tiene alguno mas a 1, y si es asi, se crea una notificacion al admin
 			if (count >= 2) {
 				Notification notification;
-
-				notification = this.notificationService.create(this.administratorService.findOne());
+				final Administrator admin = this.administratorService.findOne();
+				notification = this.notificationService.create(admin);
 				notification.setType(NotificationType.RATING);
 				notification.setReason("Demasiadas puntuaciones negativas.");
 				notification.setDescription(message);

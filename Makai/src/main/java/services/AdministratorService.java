@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +45,14 @@ public class AdministratorService {
 
 		return result;
 	}
-	
+
 	public Administrator findOne() {
 		Collection<Administrator> administrators;
-		Administrator[] result;
 
 		administrators = this.administratorRepository.findAll();
-		result = (Administrator[]) administrators.toArray();
+		final ArrayList<Administrator> admins = new ArrayList<>(administrators);
 
-		return result[0];
+		return admins.get(0);
 	}
 
 	public Collection<Administrator> findAll() {
