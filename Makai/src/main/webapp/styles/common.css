@@ -55,7 +55,7 @@
 */
 
 .icon-star-o{
-    background:url(../images/star-o.png) left top; 
+    background:url(../images/star-o.png); 
 	width:64px; 
 	height:64px;
 	display: block;
@@ -64,7 +64,7 @@
 }
 
 .icon-star{
-    background:url(../images/star.png) left top; 
+    background:url(../images/star.png); 
 	width:64px; 
 	height:64px;
 	display: block;

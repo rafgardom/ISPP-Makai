@@ -33,70 +33,68 @@
 	<form:hidden path="trainer" />
 	<form:hidden path="moment" />
 	<form:hidden path="travel" />
-		
-	<fieldset>
-		<acme:textarea code="rating.comment" path="comment" />
-		<br />
-		
-		<div class="col-sm-3">
-			<form:label path="stars">
-				<spring:message code="rating.stars" />
-				<img src="images/asterisk.png"	width="16"/> 
-			</form:label><br />
-			<div class="rating">
-				<label>
-					<input type="radio" name="stars" value="1" />
-					<span class="icon-star-o"></span>
-				</label>
-				<label>
-					<input type="radio" name="stars" value="2" />
-					<span id="star1" class="star icon-star-o"></span>
-					<span class="icon-star-o"></span>
-				</label>
-				<label>
-					<input type="radio" name="stars" value="3" />
-					<span class="icon-star-o"></span>
-					<span id="star2" class="star icon-star-o"></span>
-					<span class="icon-star-o"></span>   
-				</label>
-				<label>
-					<input type="radio" name="stars" value="4" />
-					<span class="icon-star-o"></span>
-					<span class="icon-star-o"></span>
-					<span id="star3" class="star icon-star-o"></span>
-					<span class="icon-star-o"></span>
-				</label>
-				<label>
-					<input type="radio" name="stars" value="5" />
-					<span class="icon-star-o"></span>
-					<span class="icon-star-o"></span>
-					<span class="icon-star-o"></span>
-					<span id="star4" class="star icon-star-o"></span>
-					<span class="icon-star-o"></span>
-				</label>
-				<label>
-					<input type="radio" name="stars" value="5" />
-					<span class="icon-star-o"></span>
-					<span class="icon-star-o"></span>
-					<span class="icon-star-o"></span>
-					<span class="icon-star-o"></span>
-					<span id="star5" class="star icon-star-o"></span>
-				</label>
-			</div>
-			<form:hidden path="stars" id="starsHidden" /><br />
-			<form:errors path="stars" cssClass="alert alert-danger form-control" />
-		</div>
-		
-		
-	</fieldset>
-	
-	<br/>
-	
+	<br>
 	<jstl:if test="${errorMessage != null}">
-		<spring:message code="${errorMessage}" var="error" />
-		<font size="4" color="red"><jstl:out value="${error}"></jstl:out></font>
+		<acme:error code="${errorMessage}"/>
 	</jstl:if>
-	<br/>
+		
+	<div class="row">
+		<div class="col-12 d-flex justify-content-center">
+				<form:label path="stars">
+					<spring:message code="rating.stars" />
+					<img src="images/asterisk.png"	width="16"/> 
+				</form:label><br />
+				<div class="rating">
+					<label>
+						<input type="radio" name="stars" value="1" />
+						<span class="icon-star-o"></span>
+					</label>
+					<label>
+						<input type="radio" name="stars" value="2" />
+						<span id="star1" class="star icon-star-o"></span>
+						<span class="icon-star-o"></span>
+					</label>
+					<label>
+						<input type="radio" name="stars" value="3" />
+						<span class="icon-star-o"></span>
+						<span id="star2" class="star icon-star-o"></span>
+						<span class="icon-star-o"></span>   
+					</label>
+					<label>
+						<input type="radio" name="stars" value="4" />
+						<span class="icon-star-o"></span>
+						<span class="icon-star-o"></span>
+						<span id="star3" class="star icon-star-o"></span>
+						<span class="icon-star-o"></span>
+					</label>
+					<label>
+						<input type="radio" name="stars" value="5" />
+						<span class="icon-star-o"></span>
+						<span class="icon-star-o"></span>
+						<span class="icon-star-o"></span>
+						<span id="star4" class="star icon-star-o"></span>
+						<span class="icon-star-o"></span>
+					</label>
+					<label>
+						<input type="radio" name="stars" value="5" />
+						<span class="icon-star-o"></span>
+						<span class="icon-star-o"></span>
+						<span class="icon-star-o"></span>
+						<span class="icon-star-o"></span>
+						<span id="star5" class="star icon-star-o"></span>
+					</label>
+					</div>
+		
+					
+				<form:hidden path="stars" id="starsHidden" /><br />
+				<form:errors path="stars" cssClass="alert alert-danger form-control" />
+			</div>
+			
+			<div class="offset-md-3 col-md-6">
+						<acme:textarea code="rating.comment" path="comment" rows="6"/>
+			</div>
+		</div>
+	
 	
 		<acme:submit code="rating.save" name="save" />
 		

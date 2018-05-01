@@ -69,6 +69,7 @@
 		<b><spring:message code="profile.ratings" />:</b>
 	</h3>
 	
+	<div class="table-responsive">
 	<display:table name="ratings" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag w-100 d-table">
 		<acme:column code="profile.rating.moment" property="moment" format="{0,date,dd/MM/yyyy}"/>
 		<acme:column code="profile.rating.customer" property="customer.name" />
@@ -81,6 +82,7 @@
 		</display:column>
 		<acme:column code="profile.rating.comment" property="comment" />
 	</display:table>
+	</div>
 </jstl:if>
 <br />
 
