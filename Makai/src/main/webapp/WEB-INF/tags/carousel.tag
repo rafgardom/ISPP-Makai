@@ -24,15 +24,24 @@
  
 <%-- Definition --%>
 
-
+<jstl:if test="${imagesBottom != null}">
+	<jstl:if test="${!empty imagesBottom}">
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	  <div class="carousel-inner" role="listbox">
-	    <div class="carousel-item active">
-	      	<img class="d-block w-100" src="https://23k8dv4brsbv18vf5lh7gb21-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/banner-web-development.png" data-src="holder.js/900x400?theme=social" alt="First slide">
-	    </div>
-	    <div class="carousel-item">
-	      	<img class="d-block w-100" src="https://crearpaginawebpanama.com/wp-content/uploads/2016/07/banner.jpg" data-src="holder.js/900x400?theme=industrial" alt="Second slide">
-	    </div>
+	  	
+	  	<jstl:set value="true" var="first"/>
+	   	<jstl:forEach var = "image" items="${imagesBottom }">
+		   	<jstl:if test="${first}">
+		   		<jstl:set value="active" var="active"/>
+		   		<jstl:set value="false" var="first"/>
+		   	</jstl:if>
+		   	
+         	<div class="carousel-item ${active}">
+	      		<img class="d-block w-100" src="data:image/png;base64,${image }" data-src="holder.js/900x400?theme=industrial" alt="Image slide">
+	   		</div>
+	   		<jstl:set value="" var="active"/>
+      	</jstl:forEach>
+	 
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -43,6 +52,7 @@
 		    <span class="sr-only">Next</span>
 		</a>
 	</div>
-
+	</jstl:if>
+</jstl:if>
 <%-- Notes --%>
 
