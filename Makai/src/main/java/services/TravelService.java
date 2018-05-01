@@ -17,9 +17,11 @@ import org.springframework.validation.Validator;
 import repositories.TravelRepository;
 import domain.Actor;
 import domain.Animal;
+import domain.Breed;
 import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
+import domain.Specie;
 import domain.Transporter;
 import domain.Travel;
 import domain.Vehicle;
@@ -168,6 +170,9 @@ public class TravelService {
 		Integer animalCount;
 		Notification notification = null;
 		Travel travel;
+		Breed[] breeds;
+		Specie specie;
+		Collection<Specie> species;
 
 		travel = this.findOne(travelForm.getId());
 
@@ -193,6 +198,7 @@ public class TravelService {
 		}
 
 		animalsForm = travelForm.getAnimals();
+		species = travelForm.getSpecies();
 
 		animals = new ArrayList<Animal>();
 		animalsAux = travel.getAnimals();
@@ -207,6 +213,13 @@ public class TravelService {
 			Assert.isTrue((travel.getAnimalSeats() - animalCount) >= 0);
 			travel.setAnimalSeats(travel.getAnimalSeats() - animalCount);
 		}
+
+		for (final Animal a : animals) {
+			breeds = a.getBreeds().toArray(new Breed[a.getBreeds().size()]);
+			specie = breeds[0].getSpecie();
+			Assert.isTrue(species.contains(specie));
+		}
+
 		travel.setAnimals(animals);
 		this.travelRepository.save(travel);
 
@@ -233,6 +246,7 @@ public class TravelService {
 		result.setAnimalSeats(travelForm.getAnimalSeats());
 		result.setVehicle(travelForm.getVehicle());
 		result.setHumanSeats(travelForm.getHumanSeats());
+		result.setSpecies(travelForm.getSpecies());
 
 		this.validator.validate(result, binding);
 
@@ -262,6 +276,7 @@ public class TravelService {
 		result.setVehicle(travel.getVehicle());
 		result.setId(travel.getId());
 		result.setAnimals(animals);
+		result.setSpecies(travel.getSpecies());
 
 		if (principal.getTravelPassengers().contains(travel))
 			result.setPrincipalPassenger(true);

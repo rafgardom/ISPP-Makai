@@ -119,6 +119,16 @@
 	  	</div>
 	 </div>
 	 <div class="card my-3">
+	 	<br><h3 class="card-title"><spring:message code="travel.species" /></h3>
+	  		<div class="card-body">
+	  		<jstl:forEach var="specie" items="${species}">
+		  		<p>
+					<jstl:out value="${specie.type}"/>
+				</p>
+			</jstl:forEach>
+	  		</div>
+	  </div>
+	 <div class="card my-3">
 	 	<br><h3 class="card-title"><spring:message code="travel.passengers" /></h3>
 	  		<div class="card-body">
 	  		<b><spring:message code="travel.persons" />:</b>

@@ -66,6 +66,16 @@
 				<acme:input code="travel.animalSeats" path="animalSeats" type="number" min="0" />
 				<acme:input code="travel.humanSeats" path="humanSeats" type="number" min="0" />
 			</div>
+			<div class="col-md-11">
+				<form:label path="species">
+					<spring:message code="travel.species"/>
+				</form:label>
+				<br>
+				<jstl:forEach var="specie" items="${species}">
+					<form:checkbox path ="species" value="${specie}"/><jstl:out value="${specie.type}"/>
+				</jstl:forEach>
+			</div>
+			<br>
 			<div class="col-lg-5 col-sm-6 col-12">
 				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" mandatory="true"/>
 			</div>

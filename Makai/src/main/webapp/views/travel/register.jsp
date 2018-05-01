@@ -34,6 +34,7 @@
 <form:hidden path="startTime"/>
 <form:hidden path="duration"/>
 <form:hidden path="vehicle"/>
+<form:hidden path="species"/>
 
 <form:hidden path="origin.country"/>
 <form:hidden path="origin.state"/>

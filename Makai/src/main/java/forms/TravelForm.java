@@ -15,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import domain.Animal;
 import domain.Coordinates;
+import domain.Specie;
 import domain.Vehicle;
 
 public class TravelForm {
@@ -32,6 +33,7 @@ public class TravelForm {
 	private Vehicle				vehicle;
 	private boolean				principalPassenger;
 	private Collection<Animal>	animals;
+	private Collection<Specie>	species;
 
 
 	//Constructor
@@ -131,6 +133,14 @@ public class TravelForm {
 	}
 	public void setDuration(final int duration) {
 		this.duration = duration;
+	}
+
+	@NotNull
+	public Collection<Specie> getSpecies() {
+		return this.species;
+	}
+	public void setSpecies(final Collection<Specie> species) {
+		this.species = species;
 	}
 
 }

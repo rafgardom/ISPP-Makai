@@ -20,11 +20,13 @@ import services.AnimalService;
 import services.BannerService;
 import services.NotificationService;
 import services.RatingService;
+import services.SpecieService;
 import services.TransporterService;
 import services.TravelService;
 import services.VehicleService;
 import domain.Animal;
 import domain.Rating;
+import domain.Specie;
 import domain.Transporter;
 import domain.Travel;
 import domain.Vehicle;
@@ -55,6 +57,9 @@ public class TravelController extends AbstractController {
 
 	@Autowired
 	private BannerService		bannerService;
+
+	@Autowired
+	private SpecieService		specieService;
 
 
 	//Constructor
@@ -417,6 +422,7 @@ public class TravelController extends AbstractController {
 		final Integer numberNoti;
 		Collection<Transporter> passengers;
 		Collection<Animal> animals;
+		Collection<Specie> species;
 		Calendar today;
 		boolean noPermission = false;
 		Transporter principal;
@@ -427,6 +433,7 @@ public class TravelController extends AbstractController {
 			vehicle = travel.getVehicle();
 			passengers = this.transporterService.findPassengersByTravel(travelId);
 			animals = travel.getAnimals();
+			species = travel.getSpecies();
 			principal = this.transporterService.findByPrincipal();
 
 			today = Calendar.getInstance();
@@ -440,6 +447,7 @@ public class TravelController extends AbstractController {
 			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/display");
+			result.addObject("species", species);
 			result.addObject("animals", animals);
 			result.addObject("vehicle", vehicle);
 			result.addObject("passengers", passengers);
@@ -495,13 +503,16 @@ public class TravelController extends AbstractController {
 		Collection<Vehicle> vehicles;
 		Transporter principal;
 		final Integer numberNoti;
+		Collection<Specie> species;
 
+		species = this.specieService.findAll();
 		principal = this.transporterService.findByPrincipal();
 		vehicles = this.vehicleService.findVehicleByTransporterId(principal.getId());
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		final ModelAndView result = new ModelAndView("travel/create");
 		result.addObject("travelForm", travelForm);
+		result.addObject("species", species);
 		result.addObject("vehicles", vehicles);
 		result.addObject("RequestURI", "travel/create.do");
 		result.addObject("numberNoti", numberNoti);

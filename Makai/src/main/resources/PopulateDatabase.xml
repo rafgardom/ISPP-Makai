@@ -1315,6 +1315,12 @@
 				<ref bean="animal1"/>
 			</list>
 		</property>
+		<property name="species">
+			<list>
+				<ref bean="specie1" />
+				<ref bean="specie2" />
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="travel2" class="domain.Travel">
@@ -1329,6 +1335,11 @@
 		<property name="animals">
 			<list>
 				<ref bean="animal2"/>
+			</list>
+		</property>
+		<property name="species">
+			<list>
+				<ref bean="specie6" />
 			</list>
 		</property>
 	</bean>
@@ -1347,6 +1358,12 @@
 				<ref bean="animal1"/>
 			</list>
 		</property>
+		<property name="species">
+			<list>
+				<ref bean="specie2" />
+				<ref bean="specie3" />
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="travel4" class="domain.Travel">
@@ -1360,6 +1377,12 @@
 		<property name="transporterOwner" ref="professional1" />
 		<property name="animals">
 			<list>
+			</list>
+		</property>
+		<property name="species">
+			<list>
+				<ref bean="specie4" />
+				<ref bean="specie5" />
 			</list>
 		</property>
 	</bean>

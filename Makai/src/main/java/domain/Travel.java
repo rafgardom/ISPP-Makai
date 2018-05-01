@@ -106,6 +106,7 @@ public class Travel extends DomainEntity {
 	private Transporter			transporterOwner;
 	private Vehicle				vehicle;
 	private Collection<Animal>	animals;
+	private Collection<Specie>	species;
 
 
 	@Valid
@@ -137,6 +138,15 @@ public class Travel extends DomainEntity {
 
 	public void setAnimals(final Collection<Animal> animals) {
 		this.animals = animals;
+	}
+
+	@NotNull
+	@ManyToMany()
+	public Collection<Specie> getSpecies() {
+		return this.species;
+	}
+	public void setSpecies(final Collection<Specie> species) {
+		this.species = species;
 	}
 
 }
