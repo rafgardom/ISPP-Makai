@@ -25,6 +25,7 @@ import services.TransporterService;
 import services.TravelService;
 import services.VehicleService;
 import domain.Animal;
+import domain.Breed;
 import domain.Rating;
 import domain.Specie;
 import domain.Transporter;
@@ -83,6 +84,7 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Travel travel;
 		boolean wrongSeats = false;
+		boolean tooManySeats = false;
 		boolean wrongTime = false;
 		boolean notPrincipal = false;
 		boolean passengers = false;
@@ -97,22 +99,31 @@ public class TravelController extends AbstractController {
 			result = this.createModelAndView(travelForm, "travel.commit.error");
 		else
 			try {
-				travel = this.travelService.reconstruct(travelForm, binding);
-				final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
+
 				if ((travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() < 1) && (travelForm.getHumanSeats() == null || travelForm.getHumanSeats() < 1)) {
 					wrongSeats = true;
 					throw new IllegalArgumentException();
-				} else if (transporters.size() > 0) {
-					passengers = true;
+				}
+
+				if (travelForm.getAnimalSeats() + travelForm.getAnimalSeats() > travelForm.getVehicle().getSeats()) {
+					tooManySeats = true;
 					throw new IllegalArgumentException();
 				}
 
-				else if (!today.getTime().before(travel.getStartMoment())) {
+				travel = this.travelService.reconstruct(travelForm, binding);
+				final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
+
+				if (!today.getTime().before(travel.getStartMoment())) {
 					wrongTime = true;
 					throw new IllegalArgumentException();
 				}
 
-				else if (travel.getTransporterOwner().getId() != principal.getId()) {
+				if (transporters.size() > 0) {
+					passengers = true;
+					throw new IllegalArgumentException();
+				}
+
+				if (travel.getTransporterOwner().getId() != principal.getId()) {
 					notPrincipal = true;
 					throw new IllegalArgumentException();
 				}
@@ -121,14 +132,16 @@ public class TravelController extends AbstractController {
 				result = new ModelAndView("redirect:myList.do");
 
 			} catch (final Throwable oops) {
-				if (wrongSeats == true)
+				if (wrongSeats)
 					result = this.createModelAndView(travelForm, "travel.seats.error");
-				else if (passengers == true)
+				if (passengers)
 					result = this.createModelAndView(travelForm, "travel.edit.error");
-				else if (wrongTime == true)
+				if (wrongTime)
 					result = this.createModelAndView(travelForm, "travel.time.error");
-				else if (notPrincipal == true)
+				if (notPrincipal)
 					result = this.createModelAndView(travelForm, "travel.principal.error");
+				if (tooManySeats)
+					result = this.createModelAndView(travelForm, "travel.tooManySeats.error");
 				else
 					result = this.createModelAndView(travelForm, "travel.register.error");
 
@@ -156,25 +169,41 @@ public class TravelController extends AbstractController {
 	public ModelAndView register(@Valid final TravelForm travelForm, final BindingResult binding) {
 
 		ModelAndView result;
+		boolean speciesError = false;
+		Breed[] breeds;
+		Specie specie;
+		Collection<Specie> species;
+		Collection<Animal> animalsForm;
 
-		if (binding.hasErrors()) {
-			System.out.println(binding.toString());
+		if (binding.hasErrors())
+			//System.out.println(binding.toString());
 			result = this.registerModelAndView(travelForm);
-
-		} else
+		else
 			try {
-				this.travelService.registerTravel(travelForm);
-				this.registerModelAndView(travelForm);
+				animalsForm = travelForm.getAnimals();
+				species = travelForm.getSpecies();
 
+				for (final Animal a : animalsForm) {
+					breeds = a.getBreeds().toArray(new Breed[a.getBreeds().size()]);
+					specie = breeds[0].getSpecie();
+					if (!species.contains(specie)) {
+						speciesError = true;
+						throw new IllegalArgumentException();
+					}
+				}
+
+				this.travelService.registerTravel(travelForm);
+
+				this.registerModelAndView(travelForm);
 				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				System.out.println(oops);
-				result = this.registerModelAndView(travelForm, "travel.commit.error");
-
+				if (speciesError)
+					result = this.registerModelAndView(travelForm, "travel.species.error");
+				else
+					result = this.registerModelAndView(travelForm, "travel.commit.error");
 			}
 		return result;
-
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

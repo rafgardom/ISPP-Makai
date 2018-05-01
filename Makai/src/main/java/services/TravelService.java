@@ -107,6 +107,9 @@ public class TravelService {
 		Travel result;
 		Transporter principal;
 		Calendar today;
+		Vehicle vehicle;
+
+		vehicle = travel.getVehicle();
 
 		principal = this.transporterService.findByPrincipal();
 		Assert.notNull(principal);
@@ -116,6 +119,7 @@ public class TravelService {
 		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
 
 		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
+		Assert.isTrue(travel.getAnimalSeats() + travel.getAnimalSeats() <= vehicle.getSeats());
 
 		result = this.travelRepository.save(travel);
 
@@ -128,6 +132,7 @@ public class TravelService {
 		Collection<Travel> travels_participated;
 		Collection<Transporter> transporters;
 		Customer customer;
+		Notification notification;
 
 		Assert.notNull(travel);
 		Assert.isTrue(travel.getId() != 0);
@@ -139,6 +144,9 @@ public class TravelService {
 
 		transporters = this.transporterService.findPassengersByTravel(travel.getId());
 
+		today = Calendar.getInstance();
+		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
+
 		if (transporters.size() != 0)
 			for (final Transporter t : transporters) {
 				travels_participated = t.getTravelPassengers();
@@ -147,12 +155,14 @@ public class TravelService {
 					customer = this.customerService.findOne(t.getId());
 					customer.setTravelPassengers(travels_participated);
 					this.customerService.save(customer);
+					notification = this.notificationService.create(customer);
+					notification.setReason("Viaje eliminado");
+					notification.setDescription("Se ha eliminado un viaje en el que estabas apuntado");
+					notification.setType(NotificationType.TRAVEL);
+					this.notificationService.save(notification);
 				}
 
 			}
-
-		today = Calendar.getInstance();
-		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
 
 		this.travelRepository.delete(travel);
 	}
