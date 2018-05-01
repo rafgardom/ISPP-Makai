@@ -39,6 +39,9 @@
 	<jstl:set var="required" value="required" />
 </jstl:if>
 
+<spring:message code="tag.noselectentry" var="tagSelectNoEntry"/>
+<spring:message code="tag.noOneSelected" var="tagNoOneSelected"/>
+
 <%-- Definition --%>
 <jstl:set var="language" value="spanishName"/>
 <jstl:if test="${lang == 'en'}">
@@ -52,8 +55,8 @@
 					<img src="images/asterisk.png"	width="16"/> 
 		</jstl:if>
 	</form:label>	
-	<form:select class="form-control" id="${id}" path="${path}"  required="${required }">
-		<form:option value="${null }" label="----" selected="selected" disabled="true"/>
+	<form:select class="form-control" id="${id}" path="${path}"  required="${required }" title="${tagSelectNoEntry }">
+		<form:option value="${null }" label="${tagNoOneSelected }" selected="selected" disabled="true"/>
 		<form:options items="${items }" itemLabel="${language}"/>
 	</form:select>
 	<form:errors path="${path}" cssClass="alert alert-danger form-control-sm" />

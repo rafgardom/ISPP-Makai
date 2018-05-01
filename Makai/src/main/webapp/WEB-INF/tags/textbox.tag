@@ -46,6 +46,8 @@
 	<jstl:set var="style" value=" " />
 </jstl:if>
 
+<spring:message code="tag.textbox.title" var="textBoxTitle"/>
+<spring:message code="tag.textbox.year" var="textBoxYear"/>
 
 <%-- Definition --%>
 
@@ -57,7 +59,12 @@
 				<img src="images/asterisk.png"	width="16"/> 
 			</jstl:if>
 		</form:label>
-		<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" maxlength="100" required="${required}"/>	
+		<jstl:if test="${path == 'year' }">
+			<form:input path="${path}" pattern="\d{4}$" readonly="${readonly}" class="form-control" placeholder="${placeholder}" maxlength="100" required="${required}" title="${textBoxYear }"/>	
+		</jstl:if>
+		<jstl:if test="${path != 'year' }">
+			<form:input path="${path}" readonly="${readonly}" class="form-control" placeholder="${placeholder}" maxlength="100" required="${required}" title="${textBoxTitle }"/>	
+		</jstl:if>
 		<form:errors path="${path}" cssClass="alert alert-danger form-control-sm d-block" />
 	</div>
 </spring:bind>

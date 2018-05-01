@@ -49,7 +49,7 @@
 			<acme:textbox code="vehicle.license" path="license" mandatory="true" />
 		</div>
 		<div class="col-12">
-			<acme:inputImage path="userImage" mandatory="true"/>
+			<acme:inputImage path="userImage" mandatory="false"/>
 		</div>
 	</div>		
 

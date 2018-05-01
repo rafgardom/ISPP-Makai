@@ -41,8 +41,11 @@
 	<jstl:set var="type" value="text" />
 </jstl:if>
 
-
-
+<spring:message code="tag.input.phone" var="tagPhone"/>
+<spring:message code="tag.input.email" var="tagEmail"/>
+<spring:message code="tag.input.username" var="tagUsername"/>
+<spring:message code="tag.datepicker" var="tagDatepicker"/>
+<spring:message code="tag.seats" var="tagSeat"/>
 
 <%-- Definition --%>
 
@@ -68,8 +71,28 @@
 		</div>
 	</jstl:if>
 	
-	<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}" maxlength="100" required="${required}"/>
-
+	<jstl:if test="${path == 'phone' }">
+		<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="((\+|00)\d{2,4}(\s)?)?\d{9,13}" value="${value}" maxlength="100" required="${required}" title="${tagPhone }"/>
+	</jstl:if>
+	<jstl:if test="${path == 'email' }">
+		<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}" maxlength="100" required="${required}" title="${tagEmail }"/>
+	</jstl:if>
+	<jstl:if test="${path == 'username' }">
+		<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}" maxlength="100" required="${required}" title="${tagUsername }"/>
+	</jstl:if>
+	
+	<jstl:if test="${id == 'datepicker' }">
+		<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}" maxlength="100" required="${required}" title="${tagDatepicker }"/>
+	</jstl:if>
+	
+	<jstl:if test="${path == 'seats' }">
+		<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}" maxlength="100" required="${required}" title="${tagSeat }"/>
+	</jstl:if>
+	
+	<jstl:if test="${path != 'phone' && path != 'email' && path != 'username' && id != 'datepicker' && path != 'seats'}">
+		<form:input class="form-control ${style}" path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" id="${id }" pattern="${pattern }" value="${value}" maxlength="100" required="${required}"/>
+	</jstl:if>
+	
 <jstl:if test="${image == null}">
 	<form:errors cssClass="alert alert-danger form-control-sm d-block" path="${path}" />
 </jstl:if>
