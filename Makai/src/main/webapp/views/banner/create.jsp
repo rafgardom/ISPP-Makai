@@ -33,7 +33,7 @@
 				<spring:message code="banner.price" />:
 				<font id="divPrice">0</font> &euro;
 			</p>
-			<acme:textarea code="banner.url" path="url" />
+			<acme:textarea code="banner.url" path="url" mandatory="true" placeholder="http://www.makai.es/"/>
 			
 		</div>
 		<div class="col-md-5 offset-md-1">
@@ -51,7 +51,7 @@
 				<form:errors path="zone" cssClass="alert alert-danger form-control" />
 			</div>
 			<br>
-			<acme:inputImage path="bannerImage"/>
+			<acme:inputImage path="bannerImage" mandatory="true"/>
 		</div>
 	</div>
 	<br><br>

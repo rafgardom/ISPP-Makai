@@ -62,7 +62,7 @@ public class WelcomeController extends AbstractController {
 		result.addObject("moment", moment);
 
 		result.addObject("imagesLeft", imagesLeft);
-		result.addObject("imagesBottom", imagesBottom);
+		result.addObject("imagesBottom", null);
 		result.addObject("imagesRight", imagesRight);
 		try {
 			numberNoti = this.notificationService.findNotificationWithoutRead();

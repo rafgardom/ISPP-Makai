@@ -40,10 +40,10 @@
 		
 	<div class="row">
 		<div class="col-12 d-flex justify-content-center">
-				<form:label path="stars">
+			<%-- 	<form:label path="stars">
 					<spring:message code="rating.stars" />
 					<img src="images/asterisk.png"	width="16"/> 
-				</form:label><br />
+				</form:label><br /> --%>
 				<div class="rating">
 					<label>
 						<input type="radio" name="stars" value="1" />
@@ -87,15 +87,17 @@
 		
 					
 				<form:hidden path="stars" id="starsHidden" /><br />
-				<form:errors path="stars" cssClass="alert alert-danger form-control" />
+
 			</div>
-			
+			<div class="offset-md-3 col-md-6">
+			<form:errors path="stars" cssClass="alert alert-danger form-control" />
+			</div>
 			<div class="offset-md-3 col-md-6">
 						<acme:textarea code="rating.comment" path="comment" rows="6"/>
 			</div>
 		</div>
 	
-	
+	<div class="center-div">
 		<acme:submit code="rating.save" name="save" />
 		
 		<jstl:if test="${RequestURI == 'rating/customer/createRequest.do'}">
@@ -106,6 +108,7 @@
 			<acme:cancel code="rating.cancel" url="travel/myPastList.do" />
 		</jstl:if>
 	<br/>
+	</div>
 	
 </form:form>
 

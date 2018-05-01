@@ -81,6 +81,11 @@
 			<span class="message"><spring:message code="${message}" /></span>
 		</jstl:if>	
 		<br>
+		<div class="row">
+		<div class="offset-lg-2 offset-sm-1 col-lg-8 col-sm-10">
+			<acme:carousel/>
+		</div>
+		</div>
 
 		<tiles:insertAttribute name="footer" />
 

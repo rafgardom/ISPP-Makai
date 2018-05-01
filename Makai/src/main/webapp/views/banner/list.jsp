@@ -17,7 +17,7 @@
 	
 	<acme:column code="banner.totalViews" property="totalViews" sortable="true" />
 	<acme:column code="banner.currentViews" property="currentViews" sortable="true"/>
-	<acme:column code="banner.price" property="price" sortable="true" format="{0,number, ,0.00}&euro;"/>
+	<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
 	
 	<spring:message code="banner.zone" var="zoneHeader" />
 	<display:column class="text-center" title="${zoneHeader}" sortable="true">
