@@ -10,13 +10,19 @@
 
 <div class="card">
 	
-	<h4 class="card-title" style="margin-left:2%;"><spring:message code="conditions.borrar" /></h4>
-	<p class="card-body px-5"><spring:message code="conditions.borrar2" /></p>
+	<h4 class="card-title" style="margin-left:2%;"><spring:message code="conditions.title" /></h4>
+	<p class="card-body px-5"><spring:message code="conditions.paragraph1" /></p>
+	<p class="card-body px-5"><spring:message code="conditions.paragraph2" /></p>
+	<p class="card-body px-5"><spring:message code="conditions.paragraph3" /></p>
 	
 	<ul class="mx-5">
-		<li ><spring:message code="conditions.borrar.lista1" /></li>
-		<li ><spring:message code="conditions.borrar.lista2" /></li>
+		<li ><spring:message code="conditions.list1" /></li>
+		<li ><spring:message code="conditions.list2" /></li>
+		<li ><spring:message code="conditions.list3" /></li>
+		<li ><spring:message code="conditions.list4" /></li>
 	</ul>
+	
+	<p class="card-body px-5"><spring:message code="conditions.paragraph4" /></p>
 
 </div>
 </div>

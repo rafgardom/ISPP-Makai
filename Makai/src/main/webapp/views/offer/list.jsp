@@ -82,7 +82,7 @@
 			<!-- Modal footer -->
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" onclick="window.location='offer/customer/accept.do?offerId=${row.id}'"><spring:message code="offer.accept"/></button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal"><spring:message code="offer.cancel"/></button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal"><spring:message code="offer.cancel"/></button>
 			</div>
 		</div>
 	</div>
