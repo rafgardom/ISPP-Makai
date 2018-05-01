@@ -19,10 +19,10 @@
 	<acme:column code="banner.currentViews" property="currentViews" sortable="true"/>
 	<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
 	
-	<spring:message code="banner.zone" var="zoneHeader" />
-	<display:column class="text-center" title="${zoneHeader}" sortable="true">
-		<spring:message code="banner.zone.${row.zone}"  />
-	</display:column>
+<%-- 	<spring:message code="banner.zone" var="zoneHeader" /> --%>
+<%-- 	<display:column class="text-center" title="${zoneHeader}" sortable="true"> --%>
+<%-- 		<spring:message code="banner.zone.${row.zone}"  /> --%>
+<%-- 	</display:column> --%>
 	
 	<spring:message code="banner.validated" var="validatedHeader" />
 	<display:column class="text-center" title="${validatedHeader}" sortable="true">

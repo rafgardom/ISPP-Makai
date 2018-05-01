@@ -47,6 +47,6 @@ public interface BannerRepository extends JpaRepository<Banner, Integer> {
 	@Query("select COALESCE(sum(b.totalBenefit)/(1+TIMESTAMPDIFF(month, min(b.paidMoment), CURRENT_TIMESTAMP)), 0) from Banner b where b.paid = true")
 	Double findMonthlyBenefitsPaid();
 
-	@Query("select b.picture from Banner b where b.zone = ?1 and b.paid = true and b.validated = true")
-	Collection<byte[]> getBannerByZone(String zone);
+	@Query("select b from Banner b where b.zone = ?1 and b.paid = true and b.validated = true and b.totalViews > b.currentViews")
+	Collection<Banner> getBannerByZone(String zone);
 }

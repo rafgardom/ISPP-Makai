@@ -4,7 +4,6 @@ package services;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -93,6 +92,8 @@ public class BannerService {
 		result.setClicksNumber(0);
 		result.setEditionsNumber(0);
 		result.setTotalBenefit(0.0);
+		//Por dejecto todos son en la zona baja
+		result.setZone("abajo");
 
 		return result;
 	}
@@ -165,7 +166,7 @@ public class BannerService {
 	public Banner reconstruct(final BannerForm bannerForm, final BindingResult binding) throws IOException {
 
 		Assert.notNull(bannerForm);
-
+		bannerForm.setZone("abajo");
 		Banner result;
 
 		if (bannerForm.getId() == 0 && bannerForm.getBannerImage().getSize() == 0) {
@@ -176,7 +177,7 @@ public class BannerService {
 			fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
 			binding.addError(fieldError);
 
-		} else if (bannerForm.getBannerImage().getSize() > 5242880) {
+		} else if (bannerForm.getBannerImage().getSize() > 2097152) {
 			FieldError fieldError;
 			final String[] codes = {
 				"banner.picture.tooLong.error"
@@ -197,8 +198,23 @@ public class BannerService {
 
 			bufferedImage = ImageIO.read(bannerForm.getBannerImage().getInputStream());
 			// Esto me vale para controlar el tamaño de los bannners
-			System.out.println(bufferedImage.getWidth());
-			System.out.println(bufferedImage.getHeight());
+			if (bufferedImage.getWidth() > 3000 || bufferedImage.getWidth() < 900) {
+				FieldError fieldError;
+				final String[] codes = {
+					"banner.picture.width.error"
+				};
+				fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
+				binding.addError(fieldError);
+
+			}
+			if (bufferedImage.getHeight() > 150 || bufferedImage.getHeight() < 100) {
+				FieldError fieldError;
+				final String[] codes = {
+					"banner.picture.height.error"
+				};
+				fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
 		}
 
 		if (!bannerForm.getZone().equals("izquierda") && !bannerForm.getZone().equals("derecha") && !bannerForm.getZone().equals("abajo")) {
@@ -365,34 +381,44 @@ public class BannerService {
 		return result;
 	}
 
-	public Banner randomBannerGenerator() {
-		Banner result;
-		final Collection<Banner> potentialBanners = this.bannerRepository.getValidatedAndPaid();
-		final ArrayList<Banner> banners = new ArrayList<Banner>(potentialBanners);
-
-		if (banners.size() == 0)
-			result = null;
-		else if (potentialBanners.size() == 1)
-			result = banners.get(0);
-		else {
-			final SecureRandom random = new SecureRandom();
-			final int index = random.nextInt(banners.size());
-			result = banners.get(index);
-		}
-		return result;
-	}
+	//	public Banner randomBannerGenerator() {
+	//		Banner result;
+	//		final Collection<Banner> potentialBanners = this.bannerRepository.getValidatedAndPaid();
+	//		final ArrayList<Banner> banners = new ArrayList<Banner>(potentialBanners);
+	//
+	//		if (banners.size() == 0)
+	//			result = null;
+	//		else if (potentialBanners.size() == 1)
+	//			result = banners.get(0);
+	//		else {
+	//			final SecureRandom random = new SecureRandom();
+	//			final int index = random.nextInt(banners.size());
+	//			result = banners.get(index);
+	//		}
+	//		return result;
+	//	}
 
 	public ArrayList<String> getBannerByZone(final String zone) throws UnsupportedEncodingException {
-		final Collection<byte[]> banners = this.bannerRepository.getBannerByZone(zone);
-		final ArrayList<byte[]> arrayListBanner = new ArrayList<byte[]>(banners);
-		Collections.shuffle(arrayListBanner);
-		final ArrayList<String> result = new ArrayList<>();
-		for (final byte[] i : arrayListBanner) {
-			final String banner = new String(Base64.encode(i), "UTF-8");
-			result.add(banner);
+		final Collection<Banner> banners = this.bannerRepository.getBannerByZone(zone);
+		final ArrayList<Banner> arrayListBanner = new ArrayList<Banner>(banners);
+		ArrayList<Banner> subList = null;
+		ArrayList<String> result = null;
+
+		if (arrayListBanner != null) {
+			result = new ArrayList<>();
+			Collections.shuffle(arrayListBanner);
+			if (arrayListBanner.size() <= 3)
+				subList = new ArrayList<Banner>(arrayListBanner);
+			else
+				subList = new ArrayList<Banner>(arrayListBanner.subList(0, 2));
+			for (final Banner banner : subList) {
+				banner.setCurrentViews(banner.getCurrentViews() + 1);
+				this.bannerRepository.save(banner);
+				final String image = new String(Base64.encode(banner.getPicture()), "UTF-8");
+				result.add(image);
+			}
 		}
 
 		return result;
 	}
-
 }

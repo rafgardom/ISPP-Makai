@@ -26,10 +26,10 @@
 			<p><b><spring:message code="banner.price" />:</b> <jstl:out
 				value="${banner.price}" /></p>
 				
-			<p>
-				<b><spring:message code="banner.zone" />:</b>
-				<spring:message code="banner.zone.${banner.zone}" />
-			</p>
+<!-- 			<p> -->
+<%-- 				<b><spring:message code="banner.zone" />:</b> --%>
+<%-- 				<spring:message code="banner.zone.${banner.zone}" /> --%>
+<!-- 			</p> -->
 			
 			<security:authorize access="hasRole('ADMIN')">
 				<p>

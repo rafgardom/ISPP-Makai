@@ -3,7 +3,6 @@ package forms;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
 import utilities.Utilities;
@@ -130,7 +129,6 @@ public class BannerForm {
 		this.price = price;
 	}
 
-	@NotBlank
 	public String getZone() {
 		return this.zone;
 	}
