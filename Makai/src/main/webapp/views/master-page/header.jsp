@@ -98,7 +98,7 @@
 					href="offer/trainer/list.do">
 					<img src="images/deal1.png" class="img-menu"/><spring:message code="master.page.offer" /> </a></li>
 				 -->	
-				<li class="nav-item dropdown">
+			<%-- 	<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown">
 								<img src="images/deal1.png" class="img-menu"/><spring:message code="master.page.offer" />
 						</a>
@@ -108,7 +108,7 @@
 							<a class="dropdown-item" href="offer/trainer/listPassed.do">
 								<spring:message code="master.page.offer.passed" /></a>
 						</div>
-					</li>
+					</li> --%>
 						
 					
 				<%-- <li class="nav-item dropdown"><a
@@ -195,7 +195,7 @@
 					href="notification/actor/list.do">
 							<img src="images/bell.png" class="img-menu"/>
 							<span class="badge badge-default badge-pill bg-secondary pill-menu"><jstl:if test="${numberNoti > 0}" >${numberNoti}</jstl:if></span> 
-							<span class="d-lg-none d-md-none"><spring:message code="master.page.notification.list" /></span>
+							<span><spring:message code="master.page.notification.list" /></span>
 				</a></li>
 				
 				<li class="nav-item dropdown"><a

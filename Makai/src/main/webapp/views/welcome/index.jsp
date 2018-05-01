@@ -57,11 +57,13 @@
 	
 	<security:authorize access="hasRole('TRAINER')">
 		<div class="col-lg-4 mt-lg-0 mt-3">
-			<div class="card bg-info pt-3 shadow">
+			<div class="card bg-secondary pt-3 shadow">
+			
 				<div class="center-div py-2">
-					<img alt="Go to Request" src="images/request-xl.png"  height="128" width="128">
+					<img alt="My offerts" src="images/handshake-xl.png"  height="128" width="128">
 				</div>
-				<div class="card-body"> <acme:link  href="request/trainer/list.do" code="welcome.go.to.request" type=" btn-outline-light" /></div>
+				<div class="card-body"> <acme:link  href="offer/trainer/list.do" code="master.page.offer" type=" btn-outline-light" /></div>
+			
 			</div>
 		</div>
 	</security:authorize>
@@ -138,6 +140,31 @@
 			</div>
 	</security:authorize>
 </div>
+	<security:authorize access="hasRole('TRAINER')">
+	
+		<div class="row pb-2 text-light text-center">
+			<div class="col-lg-8">
+				<div class="card bg-info shadow">
+					<div class="center-div py-2">
+						<img alt="Go to Request" src="images/request-xl.png"  height="128" width="128">
+					</div>
+					<div class="card-body"> <acme:link  href="request/trainer/list.do" code="welcome.go.to.request" type=" btn-outline-light" /></div>
+				</div>
+			</div>
+			<div class="col-lg-4 pt-4 pt-lg-0">
+				<div class="card bg-secondary shadow">
+				<div class="center-div py-2">
+				
+					<img alt="My past offerts" src="images/handshake-xl.png"  height="128" width="128">
+					<img alt="My past offerts" src="images/calendar-xl.png"  height="80" width="80" style="margin: 50px 0px 0px -55px;">
+				</div>
+				<div class="card-body"> <acme:link  href="offer/trainer/listPassed.do" code="master.page.offer.passed" type=" btn-outline-light" /></div>
+			</div>
+			</div>
+		</div>
+		
+	</security:authorize>
+
 
 
 
