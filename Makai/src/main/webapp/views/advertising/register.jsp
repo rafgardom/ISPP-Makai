@@ -90,16 +90,19 @@
 			if(pass1.toLowerCase() == pass1){
 				message1.html('<spring:message code="password.no.capital" />').css('color', 'red');
 			} else
-			  if (!(/\d/.test(pass1))) {
-				  message1.html('<spring:message code="password.no.number" />').css('color', 'red');
-			  } else
-				if(pass1.length < 6){
-				  message1.html('<spring:message code="password.6.character" />').css('color', 'red');
-				}else
-					if(pass1.length > 30){
-					  message1.html('<spring:message code="password.30.character" />').css('color', 'red');
+				if(pass1.toUpperCase() == pass1){
+		    		message1.html('<spring:message code="password.no.lower.case" />').css('color', 'red');
+				} else
+				  if (!(/\d/.test(pass1))) {
+					  message1.html('<spring:message code="password.no.number" />').css('color', 'red');
+				  } else
+					if(pass1.length < 6){
+					  message1.html('<spring:message code="password.6.character" />').css('color', 'red');
 					}else
-					  message1.html('<spring:message code="password.correct" />').css('color', 'green');
+						if(pass1.length > 30){
+						  message1.html('<spring:message code="password.30.character" />').css('color', 'red');
+						}else
+						  message1.html('<spring:message code="password.correct" />').css('color', 'green');
 	});
 </script>
 
@@ -115,18 +118,21 @@
 			if(pass2.toLowerCase() == pass2){
 				message2.html('<spring:message code="password.no.capital" />').css('color', 'red');
 			} else
-			  if (!(/\d/.test(pass2))) {
-				  message2.html('<spring:message code="password.no.number" />').css('color', 'red');
-			  } else 
-				  if(pass2.length < 6){
-					  message2.html('<spring:message code="password.6.character" />').css('color', 'red');
-					}else
-						if(pass2.length > 30){
-						  message2.html('<spring:message code="password.30.character" />').css('color', 'red');
+				if(pass2.toUpperCase() == pass2){
+		    		message2.html('<spring:message code="password.no.lower.case" />').css('color', 'red');
+				} else
+				  if (!(/\d/.test(pass2))) {
+					  message2.html('<spring:message code="password.no.number" />').css('color', 'red');
+				  } else 
+					  if(pass2.length < 6){
+						  message2.html('<spring:message code="password.6.character" />').css('color', 'red');
 						}else
-						  if (pass1 != pass2) {
-							  message2.html('<spring:message code="password.same" />').css('color', 'red');
-						  } else 
-							  message2.html('<spring:message code="password.correct" />').css('color', 'green');
+							if(pass2.length > 30){
+							  message2.html('<spring:message code="password.30.character" />').css('color', 'red');
+							}else
+							  if (pass1 != pass2) {
+								  message2.html('<spring:message code="password.same" />').css('color', 'red');
+							  } else 
+								  message2.html('<spring:message code="password.correct" />').css('color', 'green');
 	});
 </script>
