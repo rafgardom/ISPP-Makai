@@ -182,7 +182,7 @@ public class AnimalService {
 	public CommonsMultipartResolver getCommonsMultipartResolver() {
 		final CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		multipartResolver.setMaxUploadSize(20971520);   // 20MB
-		multipartResolver.setMaxInMemorySize(1048576);  // 1MB
+		multipartResolver.setMaxInMemorySize(2097152);  // 1MB
 		return multipartResolver;
 	}
 
@@ -191,21 +191,6 @@ public class AnimalService {
 		Assert.notNull(animalForm);
 
 		Animal result;
-
-		if (!animalForm.getChipNumber().isEmpty()) {
-			Animal aux;
-
-			aux = this.findAnimalByChipNumber(animalForm.getChipNumber());
-
-			if (aux != null && animalForm.getId() != aux.getId()) {
-				FieldError fieldError;
-				final String[] codes = {
-					"animal.chipNumber.extension.error"
-				};
-				fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
-				binding.addError(fieldError);
-			}
-		}
 
 		if (animalForm.getAnimalImage().getSize() > 5242880) {
 			FieldError fieldError;
@@ -435,11 +420,4 @@ public class AnimalService {
 		return animals;
 	}
 
-	public Animal findByChipNumber(final String chipNumber) {
-		Animal animal;
-
-		animal = this.animalRepository.findByChipNumber(chipNumber);
-
-		return animal;
-	}
 }

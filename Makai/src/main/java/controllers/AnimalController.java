@@ -262,6 +262,7 @@ public class AnimalController extends AbstractController {
 		Animal animal;
 		byte[] savedFile;
 		animal = this.animalService.reconstruct(animalForm, binding);
+		boolean imageError = false;
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -275,6 +276,9 @@ public class AnimalController extends AbstractController {
 					savedFile = animalForm.getAnimalImage().getBytes();
 					animal.setPicture(savedFile);
 
+				} else {
+					imageError = true;
+					throw new IllegalArgumentException("error en la imagen");
 				}
 
 				animal = this.animalService.save(animal);
@@ -282,16 +286,24 @@ public class AnimalController extends AbstractController {
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-
-				if (oops.getCause() != null)
-					if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
-						FieldError fieldError;
-						final String[] codes = {
-							"animal.chipNumber.extension.error"
-						};
-						fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
-						binding.addError(fieldError);
-					}
+			if (oops.getCause() != null){
+				if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
+					FieldError fieldError;
+					final String[] codes = {
+						"animal.chipNumber.extension.error"
+					};
+					fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+					binding.addError(fieldError);
+				}
+			}
+				if (imageError) {
+					FieldError fieldError;
+					final String[] codes = {
+						"animal.picture.tooLong.error"
+					};
+					fieldError = new FieldError("animalForm", "animalImage", animalForm.getAnimalImage(), false, codes, null, "");
+					binding.addError(fieldError);
+				}
 
 				result = this.createEditModelAndView(animalForm, "animal.commit.error");
 
@@ -325,29 +337,39 @@ public class AnimalController extends AbstractController {
 		ModelAndView result;
 		Animal animal;
 		byte[] savedFile;
-		animal = this.animalService.reconstruct(animalForm, binding);
+		boolean imageError = false;
+		try {
 
-		if (binding.hasErrors()) {
-			System.out.println(binding.toString());
-			result = this.createEditModelAndView(animalForm);
+			if (animalForm.getAnimalImage().getSize() > 2097152) {
+				imageError = true;
+				throw new IllegalArgumentException();
+			}
 
-		} else
-			try {
+			animal = this.animalService.reconstruct(animalForm, binding);
 
-				if (animalForm.getAnimalImage().getSize() > 0 && animalForm.getAnimalImage().getSize() <= 2097152 && animalForm.getAnimalImage().getContentType().contains("image")) {
+			if (binding.hasErrors()) {
+				System.out.println(binding.toString());
+				result = this.createEditModelAndView(animalForm);
 
-					savedFile = animalForm.getAnimalImage().getBytes();
-					animal.setPicture(savedFile);
+			} else
+				try {
 
-				}
+					if (animalForm.getAnimalImage().getSize() > 0 && animalForm.getAnimalImage().getSize() <= 2097152 && animalForm.getAnimalImage().getContentType().contains("image")) {
 
-				animal = this.animalService.save(animal);
-				result = new ModelAndView("redirect:list.do");
+						savedFile = animalForm.getAnimalImage().getBytes();
+						animal.setPicture(savedFile);
 
-			} catch (final Throwable oops) {
-				System.out.println(oops);
+					} else {
+						imageError = true;
+						throw new IllegalArgumentException("error en la imagen");
+					}
 
-				if (oops.getCause() != null)
+					animal = this.animalService.save(animal);
+					result = new ModelAndView("redirect:list.do");
+
+				} catch (final Throwable oops) {
+					System.out.println(oops);
+
 					if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
 						FieldError fieldError;
 						final String[] codes = {
@@ -357,9 +379,29 @@ public class AnimalController extends AbstractController {
 						binding.addError(fieldError);
 					}
 
-				result = this.createEditModelAndView(animalForm, "animal.commit.error");
+					if (imageError) {
+						FieldError fieldError;
+						final String[] codes = {
+							"animal.picture.tooLong.error"
+						};
+						fieldError = new FieldError("animalForm", "animalImage", animalForm.getAnimalImage(), false, codes, null, "");
+						binding.addError(fieldError);
+					}
 
+					result = this.createEditModelAndView(animalForm, "animal.commit.error");
+
+				}
+		} catch (final Throwable e) {
+			if (imageError) {
+				FieldError fieldError;
+				final String[] codes = {
+					"animal.picture.tooLong.error"
+				};
+				fieldError = new FieldError("animalForm", "animalImage", animalForm.getAnimalImage(), false, codes, null, "");
+				binding.addError(fieldError);
 			}
+			result = this.createEditModelAndView(animalForm, "animal.commit.error");
+		}
 		return result;
 
 	}
