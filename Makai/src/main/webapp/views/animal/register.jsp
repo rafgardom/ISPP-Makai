@@ -30,11 +30,11 @@
 	</div>
 	
 	<div class="offset-md-1 col-md-6">
-			<acme:select id="specie" items="${species }" itemLabel="type" code="animal.specie" path="specie" onchange="getBreeds();" mandatory="true" />
+			<acme:select id="specie" firstLabel="animal.choose.specie" items="${species }" itemLabel="type" code="animal.specie" path="specie" onchange="getBreeds();" mandatory="true" />
 			<small>*<spring:message code="animal.specie.advice"/></small>
 			<br><br>
 			<jstl:set var="json" value="${jsonBreeds }" />
-			<acme:select size="9" id="breed" items="${breeds }" itemLabel="name" code="animal.breed" path="breeds" mandatory="true"/>
+			<acme:select firstLabel="animal.choose.breed" size="9" id="breed" items="${breeds }" itemLabel="name" code="animal.breed" path="breeds" mandatory="true"/>
 
 	</div>
 	<div class="col-md-6">
@@ -99,7 +99,7 @@ $( function() {
 	    var obj = JSON.parse(breeds);
 	    
 	    if(obj.length != selectBreeds.length){
-	    	html ='<option value=0 selected="selected" disabled="true">----</option>';
+	    	html ='<option value=0 selected="selected" disabled="true"><spring:message code="animal.choose.breed"/></option>';
 	    	for(var i = 0; i < obj.length; i++) {
 	    		var e = obj[i];
 	            html += "<option value=" + e["id"]  + ">" +e["name"] + "</option>";

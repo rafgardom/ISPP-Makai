@@ -283,14 +283,15 @@ public class AnimalController extends AbstractController {
 			} catch (final Throwable oops) {
 				System.out.println(oops);
 
-				if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
-					FieldError fieldError;
-					final String[] codes = {
-						"animal.chipNumber.extension.error"
-					};
-					fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
-					binding.addError(fieldError);
-				}
+				if (oops.getCause() != null)
+					if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
+						FieldError fieldError;
+						final String[] codes = {
+							"animal.chipNumber.extension.error"
+						};
+						fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+						binding.addError(fieldError);
+					}
 
 				result = this.createEditModelAndView(animalForm, "animal.commit.error");
 
@@ -346,14 +347,15 @@ public class AnimalController extends AbstractController {
 			} catch (final Throwable oops) {
 				System.out.println(oops);
 
-				if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
-					FieldError fieldError;
-					final String[] codes = {
-						"animal.chipNumber.extension.error"
-					};
-					fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
-					binding.addError(fieldError);
-				}
+				if (oops.getCause() != null)
+					if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
+						FieldError fieldError;
+						final String[] codes = {
+							"animal.chipNumber.extension.error"
+						};
+						fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+						binding.addError(fieldError);
+					}
 
 				result = this.createEditModelAndView(animalForm, "animal.commit.error");
 
