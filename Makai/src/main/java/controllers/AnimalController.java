@@ -286,16 +286,15 @@ public class AnimalController extends AbstractController {
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-			if (oops.getCause() != null){
-				if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
-					FieldError fieldError;
-					final String[] codes = {
-						"animal.chipNumber.extension.error"
-					};
-					fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
-					binding.addError(fieldError);
-				}
-			}
+				if (oops.getCause() != null)
+					if (oops.getCause().getCause().getMessage().contains("Duplicate")) {
+						FieldError fieldError;
+						final String[] codes = {
+							"animal.chipNumber.extension.error"
+						};
+						fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+						binding.addError(fieldError);
+					}
 				if (imageError) {
 					FieldError fieldError;
 					final String[] codes = {
@@ -338,13 +337,43 @@ public class AnimalController extends AbstractController {
 		Animal animal;
 		byte[] savedFile;
 		boolean imageError = false;
+		boolean errors = false;
 		try {
-
-			if (animalForm.getAnimalImage().getSize() > 2097152) {
-				imageError = true;
-				throw new IllegalArgumentException();
+			animal = this.animalService.findOne(animalForm.getId());
+			if (animalForm.getChipNumber().length() != 0 && animalForm.getChipNumber().trim().length() == 0) {
+				animalForm.setChipNumber(animal.getChipNumber());
+				FieldError fieldError;
+				final String[] codes = {
+					"animal.chipnumber.error"
+				};
+				fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+				binding.addError(fieldError);
+				errors = true;
+			}
+			if (animalForm.getName().trim().length() == 0) {
+				animalForm.setName(animal.getName());
+				FieldError fieldError;
+				final String[] codes = {
+					"animal.name.error"
+				};
+				fieldError = new FieldError("animalForm", "name", animalForm.getName(), false, codes, null, "");
+				binding.addError(fieldError);
+				errors = true;
 			}
 
+			if (animalForm.getAnimalImage().getSize() > 2097152) {
+				animalForm.setAnimalImage(null);
+				FieldError fieldError;
+				final String[] codes = {
+					"animal.picture.tooLong.error"
+				};
+				fieldError = new FieldError("animalForm", "animalImage", animalForm.getAnimalImage(), false, codes, null, "");
+				binding.addError(fieldError);
+				errors = true;
+			}
+
+			if (errors == true)
+				throw new IllegalArgumentException();
 			animal = this.animalService.reconstruct(animalForm, binding);
 
 			if (binding.hasErrors()) {

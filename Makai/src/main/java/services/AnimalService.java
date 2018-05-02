@@ -275,6 +275,15 @@ public class AnimalService {
 		if (result.getBreeds() == null)
 			result.setBreeds(breeds);
 
+		if (animalForm.getName().trim().length() == 0)
+			result.setName(null);
+		else
+			result.setName(animalForm.getName());
+		if (animalForm.getChipNumber().trim().length() == 0)
+			result.setChipNumber(null);
+		else
+			result.setChipNumber(animalForm.getChipNumber());
+
 		this.validator.validate(result, binding);
 
 		return result;
