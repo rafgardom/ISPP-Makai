@@ -84,17 +84,17 @@ public class SpecieAdministratorController extends AbstractController {
 				i++;
 			}
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("specie/list");
 			result.addObject("requestURI", "specie/admin/list.do");
 			result.addObject("species", species);
 			result.addObject("canDelete", canDelete);
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

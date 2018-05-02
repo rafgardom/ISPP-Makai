@@ -86,18 +86,18 @@ public class AnimalController extends AbstractController {
 				animals.add(animalForm);
 			}
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("animal/list");
 			result.addObject("requestURI", "animal/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("animals", animals);
 
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -124,18 +124,18 @@ public class AnimalController extends AbstractController {
 				animals.add(animalForm);
 			}
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("animal/listAdopted");
 			result.addObject("requestURI", "animal/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("animals", animals);
 
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -163,17 +163,17 @@ public class AnimalController extends AbstractController {
 				animals.add(animalForm);
 			}
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("animal/listNotAdopted");
 			result.addObject("requestURI", "animal/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("animals", animals);
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -203,9 +203,9 @@ public class AnimalController extends AbstractController {
 			result = new ModelAndView("animal/display");
 			//			result.addObject("animal", animalForm);
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result.addObject("principal", actor);
 			result.addObject("animal", animal);
@@ -213,9 +213,9 @@ public class AnimalController extends AbstractController {
 			result.addObject("animalImage", image);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "animal/display.do");
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -457,16 +457,16 @@ public class AnimalController extends AbstractController {
 		try {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("animal/menu");
 
 			result.addObject("numberNoti", numberNoti);
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

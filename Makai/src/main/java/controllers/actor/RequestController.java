@@ -55,9 +55,9 @@ public class RequestController extends AbstractController {
 			request = this.requestService.findOne(requestId);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			principal = this.actorService.findByPrincipal();
 			if (this.actorService.checkAuthority(principal, "CUSTOMER"))
@@ -71,9 +71,9 @@ public class RequestController extends AbstractController {
 				result.addObject("request", request);
 				result.addObject("numberNoti", numberNoti);
 				result.addObject("requestURI", "request/trainer/display.do?requestId=" + request.getId());
-				result.addObject("imagesLeft", imagesLeft);
+				//				result.addObject("imagesLeft", imagesLeft);
 				result.addObject("imagesBottom", imagesBottom);
-				result.addObject("imagesRight", imagesRight);
+				//				result.addObject("imagesRight", imagesRight);
 			}
 		} catch (final Throwable oops) {
 			result = new ModelAndView("error");

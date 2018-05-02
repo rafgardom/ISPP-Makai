@@ -214,18 +214,18 @@ public class VehicleController extends AbstractController {
 
 				vehicles.add(vehicleForm);
 			}
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("vehicle/list");
 			result.addObject("vehicles", vehicles);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "vehicle/list.do");
 
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

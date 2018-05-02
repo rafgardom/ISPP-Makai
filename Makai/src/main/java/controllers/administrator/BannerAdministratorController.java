@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BannerService;
 import services.NotificationService;
-import services.PriceService;
 import controllers.AbstractController;
 import domain.Banner;
 import forms.BannerForm;
@@ -24,9 +23,6 @@ public class BannerAdministratorController extends AbstractController {
 	// Services ---------------------------------------------------------------
 	@Autowired
 	private BannerService		bannerService;
-
-	@Autowired
-	private PriceService		priceService;
 
 	@Autowired
 	private NotificationService	notificationService;

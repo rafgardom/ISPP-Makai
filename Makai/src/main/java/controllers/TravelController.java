@@ -322,9 +322,9 @@ public class TravelController extends AbstractController {
 				if (today.getTime().before(aux.getStartMoment()))
 					travels.add(aux);
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/list");
 			result.addObject("principal", principal);
@@ -334,9 +334,9 @@ public class TravelController extends AbstractController {
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/list.do");
 
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -375,9 +375,9 @@ public class TravelController extends AbstractController {
 				if (today.getTime().before(aux.getStartMoment()) && !travels.contains(aux))
 					travels.add(aux);
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/myList");
 
@@ -387,9 +387,9 @@ public class TravelController extends AbstractController {
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/myList.do");
 
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -431,9 +431,9 @@ public class TravelController extends AbstractController {
 				if (today.getTime().after(aux.getStartMoment()) && !travels.contains(aux))
 					travels.add(aux);
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/myPastList");
 
@@ -444,9 +444,9 @@ public class TravelController extends AbstractController {
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/myPastList.do");
 
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
@@ -490,9 +490,9 @@ public class TravelController extends AbstractController {
 				throw new IllegalArgumentException();
 			}
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/display");
 			result.addObject("species", species);
@@ -503,9 +503,9 @@ public class TravelController extends AbstractController {
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/display.do?travelId=" + travel.getId());
 
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 
 		} catch (final Throwable e) {
 			if (noPermission)
@@ -524,16 +524,16 @@ public class TravelController extends AbstractController {
 		try {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/menu");
 			result.addObject("numberNoti", numberNoti);
 
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

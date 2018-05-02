@@ -67,9 +67,9 @@ public class OfferController extends AbstractController {
 				cont++;
 			}
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("offer/customer/list");
 			result.addObject("offers", offers);
@@ -77,9 +77,9 @@ public class OfferController extends AbstractController {
 			result.addObject("tieneRating", tieneRating);
 			result.addObject("RequestURI", "offer/customer/list.do");
 
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 			result.addObject("today", today);
 
 		} catch (final Throwable oops) {

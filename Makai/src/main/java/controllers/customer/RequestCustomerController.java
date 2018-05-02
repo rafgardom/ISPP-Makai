@@ -78,9 +78,9 @@ public class RequestCustomerController extends AbstractController {
 			offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
 			requestsWithOffer = this.requestService.findRequestsWithOffer();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("request/myList");
 			result.addObject("requestURI", "request/customer/myList.do");
@@ -88,9 +88,9 @@ public class RequestCustomerController extends AbstractController {
 			result.addObject("requests", requests);
 			result.addObject("offersAcepted", offersAcepted);
 			result.addObject("requestsWithOffer", requestsWithOffer);
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
@@ -197,15 +197,15 @@ public class RequestCustomerController extends AbstractController {
 
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("request/menu");
 			result.addObject("numberNoti", numberNoti);
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");

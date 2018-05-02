@@ -48,17 +48,17 @@ public class RequestTrainerController extends AbstractController {
 			requests = this.requestService.findRequestsNotAccepted();
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("request/list");
 			result.addObject("requestURI", "request/trainer/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requests", requests);
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
