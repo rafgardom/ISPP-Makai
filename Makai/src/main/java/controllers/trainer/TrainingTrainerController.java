@@ -159,13 +159,12 @@ public class TrainingTrainerController extends AbstractController {
 			result = new ModelAndView("training/edit");
 			result.addObject("training", training);
 			result.addObject("numberNoti", numberNoti);
-			result.addObject("requestURI", "training/trainer/edit.do");
+			result.addObject("requestURI", "training/trainer/edit.do?trainingId=" + trainingId);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Training training, final BindingResult binding) throws IOException {
 		ModelAndView result;
@@ -206,7 +205,7 @@ public class TrainingTrainerController extends AbstractController {
 			result.addObject("requestURI", "training/trainer/create.do");
 		} else {
 			result = new ModelAndView("training/edit");
-			result.addObject("requestURI", "training/trainer/edit.do");
+			result.addObject("requestURI", "training/trainer/edit.do?trainingId=" + training.getId());
 		}
 
 		result.addObject("training", training);

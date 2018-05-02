@@ -112,6 +112,26 @@ public class RequestCustomerController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveCreate(@Valid final RequestForm requestForm, final BindingResult binding) {
+
+		ModelAndView result;
+		Request request;
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(requestForm);
+		else
+			try {
+				request = this.requestService.reconstruct(requestForm, binding);
+				this.requestService.save(request);
+				result = new ModelAndView("redirect:myList.do");
+
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(requestForm, "request.commit.error");
+			}
+		return result;
+	}
+
 	// Edit ---------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -129,7 +149,7 @@ public class RequestCustomerController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView saveEdit(@Valid final RequestForm requestForm, final BindingResult binding) {
 
 		ModelAndView result;
@@ -167,7 +187,7 @@ public class RequestCustomerController extends AbstractController {
 		return result;
 
 	}
-	
+
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	public ModelAndView menu() {
 		ModelAndView result;
@@ -192,7 +212,6 @@ public class RequestCustomerController extends AbstractController {
 		}
 		return result;
 	}
-	
 
 	// Ancillary methods ------------------------------------------------------
 
@@ -223,7 +242,7 @@ public class RequestCustomerController extends AbstractController {
 			result.addObject("RequestURI", "request/customer/create.do");
 		} else {
 			result = new ModelAndView("request/edit");
-			result.addObject("RequestURI", "request/customer/edit.do");
+			result.addObject("RequestURI", "request/customer/edit.do?requestId=" + requestForm.getId());
 		}
 		result.addObject("requestForm", requestForm);
 		result.addObject("animals", animals);

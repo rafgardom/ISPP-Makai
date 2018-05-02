@@ -561,7 +561,10 @@ public class TravelController extends AbstractController {
 		result.addObject("travelForm", travelForm);
 		result.addObject("species", species);
 		result.addObject("vehicles", vehicles);
-		result.addObject("RequestURI", "travel/create.do");
+		if (travelForm.getId() == 0)
+			result.addObject("RequestURI", "travel/create.do");
+		else
+			result.addObject("RequestURI", "travel/edit.do?travelId=" + travelForm.getId());
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("errorMessage", message);
 
@@ -586,7 +589,7 @@ public class TravelController extends AbstractController {
 		result.addObject("travelForm", travelForm);
 		result.addObject("animals", animals);
 		result.addObject("principal", principal);
-		result.addObject("RequestURI", "travel/register.do");
+		result.addObject("RequestURI", "travel/register.do?travelId=" + travelForm.getId());
 		result.addObject("numberNoti", numberNoti);
 		result.addObject("errorMessage", message);
 

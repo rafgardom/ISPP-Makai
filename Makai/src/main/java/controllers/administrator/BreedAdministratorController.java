@@ -58,7 +58,7 @@ public class BreedAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Breed breed, final BindingResult binding) {
+	public ModelAndView saveCreate(@Valid final Breed breed, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -142,6 +142,23 @@ public class BreedAdministratorController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveEdit(@Valid final Breed breed, final BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			System.out.println(binding.toString());
+			result = this.createEditModelAndView(breed);
+		} else
+			try {
+				this.breedService.save(breed);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(breed, "breed.commit.error");
+			}
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final Breed breed) {
@@ -159,6 +176,10 @@ public class BreedAdministratorController extends AbstractController {
 		species = this.specieService.findAll();
 
 		result = new ModelAndView("breed/create");
+		if (breed.getId() == 0)
+			result.addObject("RequestURI", "breed/admin/create.do");
+		else
+			result.addObject("RequestURI", "breed/admin/edit.do?breedId=" + breed.getId());
 		result.addObject("breed", breed);
 		result.addObject("species", species);
 		result.addObject("errorMessage", message);

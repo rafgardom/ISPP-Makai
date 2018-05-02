@@ -20,7 +20,7 @@
 <%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
 <jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
 
-<form:form  action="breed/admin/create.do" modelAttribute="breed">
+<form:form  action="${RequestURI}" modelAttribute="breed">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	

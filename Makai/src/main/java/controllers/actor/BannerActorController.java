@@ -159,6 +159,43 @@ public class BannerActorController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveCreate(@Valid final BannerForm bannerForm, final BindingResult binding) throws IOException {
+
+		ModelAndView result;
+		Banner banner;
+		byte[] savedFile;
+
+		banner = this.bannerService.reconstruct(bannerForm, binding);
+
+		if (binding.hasErrors()) {
+			System.out.println(binding.toString());
+			result = this.createEditModelAndView(bannerForm);
+
+		} else
+			try {
+
+				if (bannerForm.getBannerImage().getSize() > 0) {
+
+					savedFile = bannerForm.getBannerImage().getBytes();
+					banner.setPicture(savedFile);
+
+				}
+				banner.setPaid(false);
+				banner.setValidated(false);
+				banner = this.bannerService.save(banner);
+				result = new ModelAndView("redirect:list.do");
+
+			} catch (final Throwable oops) {
+				System.out.println(oops);
+
+				result = this.createEditModelAndView(bannerForm, "banner.commit.error");
+
+			}
+		return result;
+
+	}
+
 	// Edition ----------------------------------------------------------------		
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -178,8 +215,8 @@ public class BannerActorController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final BannerForm bannerForm, final BindingResult binding) throws IOException {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveEdit(@Valid final BannerForm bannerForm, final BindingResult binding) throws IOException {
 
 		ModelAndView result;
 		Banner banner;
@@ -287,7 +324,10 @@ public class BannerActorController extends AbstractController {
 		result = new ModelAndView("banner/create");
 		result.addObject("bannerForm", bannerForm);
 		result.addObject("bannerPrice", price.getBannerPrice());
-		result.addObject("requestURI", "banner/actor/create.do");
+		if (bannerForm.getId() == 0)
+			result.addObject("requestURI", "banner/actor/create.do");
+		else
+			result.addObject("requestURI", "banner/actor/edit.do?bannerId=" + bannerForm.getId());
 		result.addObject("errorMessage", message);
 
 		return result;
