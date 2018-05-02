@@ -19,7 +19,7 @@
 <br>
 <div class="card-deck">
 
-	<div class="card">
+	<div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="profile.personal.info" /></h3>
 	  	<div class="card-body"> 	
 			<p><b><spring:message code="profile.name" />:</b> 
@@ -41,7 +41,7 @@
 	  	
 	  	</div>
 	</div>
-	<div class="card">
+	<div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="profile.coordinates" /></h3>
 	  	<div class="card-body"> 	
 				<p><b><spring:message code="coordinates.country" />:</b> <jstl:out

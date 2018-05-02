@@ -18,6 +18,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%-- Attributes --%> 
  
@@ -34,4 +35,4 @@
 <%-- Definition --%>
 
 <spring:message code="${code}" var="titleHeader" />
-<display:column property="${property}" class="text-center" title="${titleHeader}" sortable="${sortable}" format="${format}"  />
+<display:column property="${property}" class="text-center" title="${titleHeader}" sortable="${sortable}" format="${format}" maxLength="30" />

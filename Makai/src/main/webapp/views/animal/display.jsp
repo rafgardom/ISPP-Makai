@@ -12,10 +12,12 @@
  <img src="${animalImage}" class="rounded-circle" alt="<spring:message code='animal.no.picture' />" width="200px" height="200px">
 </div>
 <br>
+
+<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
 <div class="card-deck">
 
-	<div class="card">
-	 	<br><h3 class="card-title"><spring:message code="animal.info" /></h3>
+	<div class="card shadow">
+	 	<h3 class="card-title mt-5"><spring:message code="animal.info" /></h3>
 	  	<div class="card-body"> 	
 			<p><b><spring:message code="animal.name" />:</b> <jstl:out
 				value="${animal.name}" /></p>
@@ -64,10 +66,15 @@
 	</div>
 	
 	<jstl:if test="${animal.customer!=null}">
-		<div class="card">
-		 	<br><h3 class="card-title"><spring:message code="animal.owner.info" /></h3>
+		
+		
+		<div class="card shadow">
+		<div class="center-div">
+			<img src="${util.showImage(animal.getCustomer().getPicture())} " class="rounded-circle" width="200px" height="200px">	
+		</div>
+		 	<br><h3 class="card-title mt-3"><spring:message code="animal.owner.info" /></h3>
 		  	<div class="card-body"> 	
-				<p><b><spring:message code="animal.name" />:</b> 
+		  		<p><b><spring:message code="animal.name" />:</b> 
 					<jstl:out value="${animal.customer.name}" /></p>
 				
 				<p><b><spring:message code="animal.owner.username" />:</b> 
@@ -86,9 +93,13 @@
 		</div>
 	</jstl:if>
 	<jstl:if test="${animal.animalShelter!=null}">
-		<div class="card">
-		 	<br><h3 class="card-title"><spring:message code="animal.owner.info" /></h3>
-		  	<div class="card-body"> 	
+		
+		<div class="card shadow">
+			<div class="center-div">
+				<img src="${util.showImage(animal.getAnimalShelter().getPicture())} " class="rounded-circle" width="200px" height="200px">	
+			</div>
+		 	<br><h3 class="card-title mt-3"><spring:message code="animal.owner.info" /></h3>
+		  	<div class="card-body"> 		
 				<p><b><spring:message code="animal.name" />:</b> 
 					<jstl:out value="${animal.animalShelter.name}" /></p>
 					
@@ -108,7 +119,7 @@
 </div>
 <br>
 
-	
+<div class="center-div">
 	<acme:link href="animal/list.do" code="animal.goBack"/>
-
+</div>
 

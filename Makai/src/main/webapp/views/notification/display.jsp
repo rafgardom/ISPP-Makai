@@ -21,7 +21,7 @@
 
 <div class="row my-1">
 	<div class="offset-md-4 col-md-4">
-		<div class="card">
+		<div class="card shadow">
 		  	<div class="card-body"> 	
 			<p><b><spring:message code="notification.moment" />:</b> <jstl:out
 					value="${notification.moment}" /></p>
@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	<div class="offset-md-3 col-md-6 my-3 text-center">
-		<div class="card">
+		<div class="card shadow">
 		  	<div class="card-body"> 	
 			<p><b><spring:message code="notification.description" />:</b> <jstl:out
 					value="${notification.description}" /></p>

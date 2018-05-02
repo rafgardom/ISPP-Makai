@@ -19,7 +19,7 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="card-deck">
-	<div class="card">
+	<div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="offer.destination" /></h3>
 	  	<div class="card-body">
 		  	 <p>
@@ -48,7 +48,7 @@
 			</p>
 	  	</div>
 	</div>
-	<div class="card">
+	<div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="offer.duration" /></h3>
 	  	<div class="card-body">
 			<p>
@@ -73,7 +73,7 @@
 	</div>
 	</div>
 <div class="card-deck my-3">
-	<div class="card">
+	<div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="offer.animal" /></h3>
 	  	<div class="card-body">
 	  		<p>
@@ -83,7 +83,7 @@
 	  	
 	  	</div>
 	</div>
-	<div class="card">
+	<div class="card shadow">
 	 	<div class="card-body">
 		 	<p>
 				<b><spring:message code="offer.price" />:</b>

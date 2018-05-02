@@ -20,7 +20,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <div class="card-deck my-1">
-	<div class="card">
+	<div class="card shadow">
 	  	<div class="card-body"> 	
 		<p><b><spring:message code="notification.moment" />:</b> <jstl:out
 				value="${notification.moment}" /></p>
@@ -29,7 +29,7 @@
 				value="${notification.reason}" /></p>
 		</div>
 	</div>
-		<div class="card">
+		<div class="card shadow">
 	  	<div class="card-body"> 	
 		<p><b><spring:message code="notification.description" />:</b> <jstl:out
 				value="${notification.description}" /></p>

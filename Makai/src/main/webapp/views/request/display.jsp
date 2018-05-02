@@ -18,7 +18,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <div class="card-deck">
-	<div class="card">
+	<div class="card shadow">
  		<div class="card-body">
 		<p>
 			<b><spring:message code="request.tags" />:</b>
@@ -43,7 +43,7 @@
 	</div>
 	</div>
 	<jstl:if test="${request.animal != null }">
-	<div class="card">
+	<div class="card shadow">
  		<br><h3 class="card-title"><spring:message code="request.animal" /></h3>
   		<div class="card-body">
 			<p>
@@ -54,7 +54,7 @@
 		</div>
 	</div>
 	</jstl:if>
-	<div class="card">
+	<div class="card shadow">
  		<br><h3 class="card-title"><spring:message code="request.customer" /></h3>
   		<div class="card-body">
 			<p>

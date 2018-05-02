@@ -20,7 +20,7 @@
 <security:authorize access="hasAnyRole('CUSTOMER')">	
 
 <div class="card-deck">
-	<div class="card">
+	<div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="travel.origin" /></h3>
 	  	<div class="card-body">
 	  			<p>
@@ -53,7 +53,7 @@
 			</p>
 	  	</div>
 	</div>
-	<div class="card">
+	<div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="travel.destination" /></h3>
 	  	<div class="card-body">
 	  		<p>
@@ -80,7 +80,7 @@
 	 </div>
 
 </div>
-	 <div class="card my-3">
+	 <div class="card shadow my-3">
 	 	<br><h3 class="card-title"><spring:message code="travel.seats" /></h3>
 	  	<div class="card-body">
 		  	<p>
@@ -93,7 +93,7 @@
 			</p>
 	  	</div>
 	 </div>
-	 <div class="card my-3">
+	 <div class="card shadow my-3">
 	 	<br><h3 class="card-title"><spring:message code="travel.vehicle" /></h3>
 	  	<div class="card-body">
 		  	<p>
@@ -118,7 +118,7 @@
 			</p>
 	  	</div>
 	 </div>
-	 <div class="card my-3">
+	 <div class="card shadow my-3">
 	 	<br><h3 class="card-title"><spring:message code="travel.species" /></h3>
 	  		<div class="card-body">
 	  		<jstl:forEach var="specie" items="${species}">
@@ -128,7 +128,7 @@
 			</jstl:forEach>
 	  		</div>
 	  </div>
-	 <div class="card my-3">
+	 <div class="card shadow my-3">
 	 	<br><h3 class="card-title"><spring:message code="travel.passengers" /></h3>
 	  		<div class="card-body">
 	  		<b><spring:message code="travel.persons" />:</b>
