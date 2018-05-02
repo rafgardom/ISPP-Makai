@@ -200,7 +200,7 @@ public class ActorService {
 			fieldError = new FieldError("profileForm", "userImage", profileForm.getUserImage(), false, codes, null, "");
 			binding.addError(fieldError);
 		}
-		if (profileForm.getPicture() != null && !profileForm.getUserImage().getContentType().contains("image")) {
+		if (profileForm.getUserImage().getSize() > 0 && !profileForm.getUserImage().getContentType().contains("image")) {
 			FieldError fieldError;
 			final String[] codes = {
 				"profile.picture.extension.error"
@@ -228,6 +228,16 @@ public class ActorService {
 				fieldError = new FieldError("profileForm", "coordinates.province", profileForm.getCoordinates().getProvince(), false, codes, null, "");
 				binding.addError(fieldError);
 			}
+		// comprobamos que no hayan espacios en el name
+		if (profileForm.getName().replace(" ", "").isEmpty()) {
+			FieldError fieldError;
+			final String[] codes = {
+				"org.hibernate.validator.constraints.NotBlank.message"
+			};
+			fieldError = new FieldError("profileForm", "name", profileForm.getName(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
+		Assert.isTrue(!profileForm.getName().replace(" ", "").isEmpty());
 
 		if (this.checkAuthority(principal, "CUSTOMER")) {
 			Customer customer;

@@ -155,13 +155,13 @@ public class ProfileActorController extends AbstractController {
 		Actor actor;
 		byte[] savedFile;
 
-		actor = this.actorService.reconstructEdit(profileForm, binding);
+		try {
+			actor = this.actorService.reconstructEdit(profileForm, binding);
 
-		if (binding.hasErrors()) {
-			System.out.println(binding.toString());
-			result = this.createModelAndView(profileForm, "profile.register.error");
-		} else
-			try {
+			if (binding.hasErrors()) {
+				System.out.println(binding.toString());
+				result = this.createModelAndView(profileForm, "profile.register.error");
+			} else {
 
 				if (profileForm.getUserImage().getSize() > 0 && profileForm.getUserImage().getSize() <= 2097152) {
 
@@ -172,12 +172,12 @@ public class ProfileActorController extends AbstractController {
 
 				this.actorService.save(actor);
 				result = new ModelAndView("redirect:display.do");
-
-			} catch (final Throwable oops) {
-				System.out.println(oops.toString());
-				result = this.createModelAndView(profileForm, "profile.register.error");
-
 			}
+		} catch (final Throwable oops) {
+			System.out.println(oops.toString());
+			result = this.createModelAndView(profileForm, "profile.register.error");
+		}
+
 		return result;
 	}
 
