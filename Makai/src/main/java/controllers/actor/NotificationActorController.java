@@ -128,7 +128,7 @@ public class NotificationActorController extends AbstractController {
 
 	//Borrar todas las notificaciones de un actor
 	@RequestMapping(value = "/deleteAll", method = RequestMethod.GET)
-	public ModelAndView deleteAll(@RequestParam final int notificationId) {
+	public ModelAndView deleteAll() {
 		ModelAndView result;
 
 		try {

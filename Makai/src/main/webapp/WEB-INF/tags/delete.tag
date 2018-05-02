@@ -59,7 +59,7 @@
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="location='${href}'"><spring:message code="delete"/></button>
-          <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="cancel"/></button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal"><spring:message code="cancel"/></button>
         </div>
         
       </div>

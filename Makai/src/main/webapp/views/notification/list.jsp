@@ -31,10 +31,46 @@
 	
 </display:table>
 </div>
+
+<div class="center-div">
 	<jstl:if test="${!empty notifications}">
-		<acme:delete href="notification/actor/deleteAll.do?notificationId=${row.id}" id="${row.id}" code="notification.deleteall" cuestioncode="notification.deleteall.cuestion"/>
-	</jstl:if>
+		<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalRemoveNotification">
+		   	<img class="icon-button" src="images/trash.png"/>
+				<spring:message code="notification.deleteall" />
+		</button>
+		
+		<%-- <acme:delete href="notification/actor/deleteAll.do?notificationId=${row.id}" id="${row.id}" code="notification.deleteall" cuestioncode="notification.deleteall.cuestion"/>
+ --%>	</jstl:if>
 	
 <security:authorize access="hasRole('ADMIN')">
-	<acme:link href="notification/admin/create.do" code="notification.create" type="success"/>
+	<acme:link href="notification/admin/create.do" image="megaphone" code="notification.create" type="success mx-3"/>
 </security:authorize>
+
+</div>
+
+
+
+  <!-- The Modal -->
+  <div class="modal fade" id="modalRemoveNotification">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><spring:message code="delete"/></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+         	<spring:message code="notification.deleteall.cuestion"/>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="location='notification/actor/deleteAll.do'"><spring:message code="delete"/></button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal"><spring:message code="cancel"/></button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
