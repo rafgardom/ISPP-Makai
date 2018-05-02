@@ -7,6 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+
 <div class="table-responsive">
 <jstl:set var = "count" value ="${0}"></jstl:set>
 
@@ -26,6 +27,7 @@
 	
 	
 	<display:column>
+		
 		<div class="btn-group">
 			<acme:link image="eye" href="offer/trainer/display.do?offerId=${row.id}"/>
 			<security:authorize access="hasRole('TRAINER')">
@@ -34,18 +36,35 @@
 					<acme:delete href="offer/trainer/delete.do?offerId=${row.id}" id="${row.id}"/>
 				</jstl:if>
 			</security:authorize>
+			<jstl:if test="${row.startMoment lt today}">
 			<security:authorize access="hasRole('CUSTOMER')">
 				<jstl:if test="${row.isAccepted==false}">
-					<a class="btn btn-warning btn-lg" href="misc/conditions.do" target="_blank" data-load-url="misc/conditions.do" data-toggle="modal" data-target="#myModal">
+					<a class="btn btn-warning btn-lg disabled" href="misc/conditions.do" target="_blank" data-load-url="misc/conditions.do" data-toggle="modal" data-target="#myModal">
 						<img class="icon-button" src="images/paypal4.png"/>
 						<spring:message code="offer.accept" />
 					</a>
 				</jstl:if>
 				<jstl:if test="${row.isAccepted==true and !tieneRating[count]}">
-					<acme:link image="star-white-32" href="rating/customer/createRequest.do?requestId=${row.request.id}" type="info" code="offer.rating"/>
+					<acme:link image="star-white-32" href="rating/customer/createRequest.do?requestId=${row.request.id}" type="info" code="offer.rating" disabled="true"/>
 				</jstl:if>
 			</security:authorize>
+			</jstl:if>
+			<jstl:if test="${row.startMoment gt today}">
+				<jstl:out value="${row.startMoment }"></jstl:out>
+				<security:authorize access="hasRole('CUSTOMER')">
+					<jstl:if test="${row.isAccepted==false}">
+						<a class="btn btn-warning btn-lg" href="misc/conditions.do" target="_blank" data-load-url="misc/conditions.do" data-toggle="modal" data-target="#myModal">
+							<img class="icon-button" src="images/paypal4.png"/>
+							<spring:message code="offer.accept" />
+						</a>
+					</jstl:if>
+					<jstl:if test="${row.isAccepted==true and !tieneRating[count]}">
+						<acme:link image="star-white-32" href="rating/customer/createRequest.do?requestId=${row.request.id}" type="info" code="offer.rating"/>
+					</jstl:if>
+				</security:authorize>
+			</jstl:if>
 		</div>
+		
 	<security:authorize access="hasRole('CUSTOMER')">
 		<display:column>
 			<jstl:if test="${row.isAccepted==false}">

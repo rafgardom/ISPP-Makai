@@ -2,7 +2,9 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +51,10 @@ public class OfferController extends AbstractController {
 		final Integer numberNoti;
 
 		try {
+			final Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DATE, -1);
+			final Date today = new Date(calendar.getTimeInMillis());
+
 			final Request request = this.requestService.findOne(requestId);
 			Assert.notNull(request);
 			final Collection<Offer> offers = this.offerService.findOfferByRequest(request);
@@ -74,6 +80,7 @@ public class OfferController extends AbstractController {
 			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
 			result.addObject("imagesRight", imagesRight);
+			result.addObject("today", today);
 
 		} catch (final Throwable oops) {
 			result = new ModelAndView("error");

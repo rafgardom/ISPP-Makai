@@ -1,6 +1,8 @@
 
 package controllers.customer;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,7 +58,13 @@ public class OfferCustomerController extends AbstractController {
 		final Price priceObject = this.priceService.findOne();
 
 		try {
+			final Date today = new Date();
+
 			offer = this.offerService.findOne(offerId);
+
+			if (offer.getStartMoment().before(today))
+				throw new IllegalArgumentException();
+
 			request = offer.getRequest();
 			Assert.isTrue(!this.requestService.tieneOfferAceptadaUnRequest(request));
 			final PaypalEnvironment paypalEnvironment = new PaypalEnvironment();
@@ -86,7 +94,6 @@ public class OfferCustomerController extends AbstractController {
 
 		return result;
 	}
-
 	@RequestMapping(value = "/payment/done", method = RequestMethod.GET)
 	public ModelAndView paymentFirstStep(@RequestParam(required = false) final int offerId) {
 		ModelAndView result;
