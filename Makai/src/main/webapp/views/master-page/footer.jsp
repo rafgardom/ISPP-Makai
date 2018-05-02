@@ -35,7 +35,7 @@
 		<br/>
 		<div class="tooltip">
 			<img src="images/mail.png">
-			<span class="tooltiptext">makai_oficial@gmail.com</span>
+			<span class="tooltiptext">Ispp.makai.1718@gmail.com</span>
 		</div>
 		<small><i><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i></small>
 	</div>

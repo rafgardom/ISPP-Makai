@@ -26,6 +26,7 @@
 
 <jstl:if test="${imagesBottom != null}">
 	<jstl:if test="${!empty imagesBottom}">
+	<small class="text-muted text-center" style="font-size: 60%;"><i>*<spring:message code="advertising"/></i></small>
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	  <div class="carousel-inner" role="listbox">
 	  	
@@ -37,20 +38,21 @@
 		   	</jstl:if>
 		   	
          	<div class="carousel-item ${active}">
-	      		<img class="d-block w-100" src="data:image/png;base64,${image }" data-src="holder.js/900x400?theme=industrial" alt="Image slide">
+	      		<a href="../www.google.es" target="_blank"><img class="d-block w-100" src="data:image/png;base64,${image }" data-src="holder.js/900x400?theme=industrial" alt="Image slide">
+	   		</a>
 	   		</div>
 	   		<jstl:set value="" var="active"/>
       	</jstl:forEach>
 	 
 		</div>
-		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+<!-- 		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 		    <span class="sr-only">Previous</span>
 		</a>
 		<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
 		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 		    <span class="sr-only">Next</span>
-		</a>
+		</a> -->
 	</div>
 	</jstl:if>
 </jstl:if>

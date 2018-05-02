@@ -27,13 +27,13 @@
 	
 	<div class="row">
 		<div class="col-md-6">
-			<acme:input type="number" code="banner.totalViews" path="totalViews" mandatory="true" id="totalViews" />
+			<acme:input type="number" code="banner.totalViews" path="totalViews" min="1" max="5000000" mandatory="true" id="totalViews" />
 			
 			<p>
 				<spring:message code="banner.price" />:
 				<font id="divPrice">0</font> &euro;
 			</p>
-			<acme:textarea code="banner.url" path="url" mandatory="true" placeholder="http://www.makai.es/"/>
+			<acme:input type="url" code="banner.url" path="url" mandatory="true" placeholder="http://www.makai.es/"/>
 			
 		</div>
 		<div class="col-md-5 offset-md-1">

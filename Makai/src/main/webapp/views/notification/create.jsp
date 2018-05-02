@@ -33,11 +33,11 @@
 	
 	<div class="row">
 		<div class="col-md-6">
-			<acme:selectNotEntity items="${notificationTypes}" lang="${lang}" code="notification.type" path="type" />
-			<acme:textbox code="notification.reason" path="reason" />
+			<acme:selectNotEntity mandatory="true" items="${notificationTypes}" lang="${lang}" code="notification.type" path="type" />
+			<acme:textbox mandatory="true" code="notification.reason" path="reason" />
 		</div>
 		<div class="col-md-6">
-			<acme:textarea code="notification.description" path="description" rows="5" maxlength="256"/>
+			<acme:textarea mandatory="true" code="notification.description" path="description" rows="5" maxlength="256"/>
 		</div>
 	</div>
 	<acme:submit name="save" code="notification.save" />

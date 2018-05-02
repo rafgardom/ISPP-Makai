@@ -157,13 +157,7 @@
 					href="security/login.do"> <spring:message
 							code="master.page.sign.in" />
 				</a></li>
-				
-			
-			<%-- 		<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#advertisingModal"
-						href="banner/create.do"> 
-						<!-- <img src="images/ad.png" class="img-menu"/> -->
-						<spring:message code="master.page.banner.advertise" />
-					</a></li> --%>
+
 			</security:authorize>
 			
 			<security:authorize access="hasAnyRole('ADMIN,ADVERTISING')">
