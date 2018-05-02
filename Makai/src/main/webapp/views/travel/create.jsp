@@ -68,7 +68,7 @@
 			</div>
 			<div class="col-md-11">
 				<form:label path="species">
-					<spring:message code="travel.species"/>
+					<spring:message code="travel.species"/> <img src="images/asterisk.png"	width="16"/>
 				</form:label>
 				<br>
 				<jstl:forEach var="specie" items="${species}">

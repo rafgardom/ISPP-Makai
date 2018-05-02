@@ -38,7 +38,7 @@ public class Coordinates {
 
 	@NotBlank
 	@Size(max = 100)
-	@Pattern(regexp = "^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$")
+	@Pattern(regexp = "^[a-zñÑá-úÁ-ÚA-Z]+(?:[\\s-][a-zñÑá-úÁ-ÚA-Z]+)*$")
 	public String getCountry() {
 		return this.country;
 	}
@@ -64,7 +64,7 @@ public class Coordinates {
 
 	@NotBlank
 	@Size(max = 100)
-	@Pattern(regexp = "^[a-zñÑA-Z]+(?:[\\s-][a-zñÑA-Z]+)*$")
+	@Pattern(regexp = "^[a-zñÑá-úÁ-ÚA-Z]+(?:[\\s-][a-zñÑá-úÁ-ÚA-Z]+)*$")
 	public String getCity() {
 		return this.city;
 	}

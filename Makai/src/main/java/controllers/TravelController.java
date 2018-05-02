@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -127,6 +128,11 @@ public class TravelController extends AbstractController {
 					notPrincipal = true;
 					throw new IllegalArgumentException();
 				}
+				if (travel.getHumanSeats() == 0 && travel.getAnimalSeats() == 0 || travel.getHumanSeats() == null && travel.getAnimalSeats() == null || travel.getHumanSeats() == 0 && travel.getAnimalSeats() == null || travel.getHumanSeats() == null
+					&& travel.getAnimalSeats() == 0) {
+					wrongSeats = true;
+					throw new IllegalArgumentException();
+				}
 
 				this.travelService.save(travel);
 				result = new ModelAndView("redirect:myList.do");
@@ -134,6 +140,12 @@ public class TravelController extends AbstractController {
 			} catch (final Throwable oops) {
 				if (wrongSeats)
 					result = this.createModelAndView(travelForm, "travel.seats.error");
+				FieldError fieldError;
+				final String[] codes = {
+					"travel.seats.error"
+				};
+				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+				binding.addError(fieldError);
 				if (passengers)
 					result = this.createModelAndView(travelForm, "travel.edit.error");
 				if (wrongTime)
