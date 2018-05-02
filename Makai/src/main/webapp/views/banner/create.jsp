@@ -59,7 +59,11 @@
 			</small>
 		</div>
 	</div>
-	<br><br>
+	<br>
+	<small class="form-text text-muted">
+		*&nbsp;<spring:message code="banner.advice.edit"/>
+	</small>
+	<br>
 	<acme:submit code="banner.create" name="save" />
 	<acme:cancel code="banner.cancel" url="" />
 	

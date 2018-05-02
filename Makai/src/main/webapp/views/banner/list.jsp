@@ -99,3 +99,6 @@
 		
 </display:table>
 </div>
+<small class="form-text text-muted text-center">
+	*&nbsp;<spring:message code="banner.advice.edit"/>
+</small>
