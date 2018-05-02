@@ -78,17 +78,17 @@ public class OfferTrainerController extends AbstractController {
 			offers = this.offerService.findOffersByTrainer(trainer);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("offer/list");
 			result.addObject("offers", offers);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "offer/trainer/list.do");
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -106,17 +106,17 @@ public class OfferTrainerController extends AbstractController {
 			offers = this.offerService.findOffersByTrainerPassed(trainer);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("offer/listPast");
 			result.addObject("offers", offers);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "offer/trainer/listPassed.do");
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -140,9 +140,9 @@ public class OfferTrainerController extends AbstractController {
 
 			image = Utilities.showImage(offer.getAnimal().getPicture());
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			if (this.actorService.checkAuthority(actor, "CUSTOMER"))
 				if (offer.getRequest().getCustomer().getId() != actor.getId())
@@ -161,9 +161,9 @@ public class OfferTrainerController extends AbstractController {
 				result.addObject("animalImage", image);
 				result.addObject("numberNoti", numberNoti);
 				result.addObject("requestURI", "offer/trainer/display.do?" + offer.getId());
-				result.addObject("imagesLeft", imagesLeft);
+				//				result.addObject("imagesLeft", imagesLeft);
 				result.addObject("imagesBottom", imagesBottom);
-				result.addObject("imagesRight", imagesRight);
+				//				result.addObject("imagesRight", imagesRight);
 			}
 		} catch (final Throwable oops) {
 			result = new ModelAndView("error");

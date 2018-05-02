@@ -71,9 +71,9 @@ public class ProfileActorController extends AbstractController {
 			else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
 				ratings = this.ratingService.findByTransporterId(actor.getId());
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("profile/display");
 			result.addObject("actor", actor);
@@ -81,9 +81,9 @@ public class ProfileActorController extends AbstractController {
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("ratings", ratings);
 			result.addObject("requestURI", "profile/display.do");
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -109,9 +109,9 @@ public class ProfileActorController extends AbstractController {
 			else if (this.actorService.checkAuthority(actor, "PROFESSIONAL") || this.actorService.checkAuthority(actor, "CUSTOMER"))
 				ratings = this.ratingService.findByTransporterId(actor.getId());
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("profile/display");
 			result.addObject("actor", actor);
@@ -119,9 +119,9 @@ public class ProfileActorController extends AbstractController {
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("ratings", ratings);
 			result.addObject("requestURI", "profile/display.do");
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

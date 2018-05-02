@@ -71,17 +71,17 @@ public class BannerActorController extends AbstractController {
 				bannerForms = this.bannerService.findBannerFormsByActorId(actor.getId());
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("banner/list");
 			result.addObject("requestURI", "banner/actor/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("bannerForms", bannerForms);
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
@@ -102,17 +102,17 @@ public class BannerActorController extends AbstractController {
 			bannerForm = this.bannerService.bannerToFormObject(banner);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("banner/display");
 			result.addObject("requestURI", "banner/actor/display.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("banner", bannerForm);
-			result.addObject("imagesLeft", imagesLeft);
+			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("imagesRight", imagesRight);
+			//			result.addObject("imagesRight", imagesRight);
 
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
