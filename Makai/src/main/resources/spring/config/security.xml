@@ -95,8 +95,8 @@
 		<security:intercept-url pattern="/offer/customer/payment/done.do" access="hasRole('CUSTOMER')" />
 		
 		<!-- Offer pilot plan --> 
-		<security:intercept-url pattern="/offer/customer/pilotPlan.do" access="hasRole('CUSTOMER')" />
-		<security:intercept-url pattern="/offer/customer/pilotPlan/successful.do" access="hasRole('CUSTOMER')" />
+<!-- 		<security:intercept-url pattern="/offer/customer/pilotPlan.do" access="hasRole('CUSTOMER')" /> -->
+<!-- 		<security:intercept-url pattern="/offer/customer/pilotPlan/successful.do" access="hasRole('CUSTOMER')" /> -->
 		
 		
 		<security:intercept-url pattern="/training/trainer/list.do" access="hasRole('TRAINER')" />

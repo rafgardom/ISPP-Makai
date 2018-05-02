@@ -50,7 +50,6 @@
 			</security:authorize>
 			</jstl:if>
 			<jstl:if test="${row.startMoment gt today}">
-				<jstl:out value="${row.startMoment }"></jstl:out>
 				<security:authorize access="hasRole('CUSTOMER')">
 					<jstl:if test="${row.isAccepted==false}">
 						<a class="btn btn-warning btn-lg" href="misc/conditions.do" target="_blank" data-load-url="misc/conditions.do" data-toggle="modal" data-target="#myModal">
@@ -65,15 +64,15 @@
 			</jstl:if>
 		</div>
 		
-	<security:authorize access="hasRole('CUSTOMER')">
-		<display:column>
-			<jstl:if test="${row.isAccepted==false}">
-				<div class="btn-group">	
-					<acme:link image="paypal4" href="offer/customer/pilotPlan.do?offerId=${row.id}" type="warning" code="offer.pilotPlanAccept"/>
-				</div>
-			</jstl:if>
-		</display:column>
-	</security:authorize>
+<%-- 	<security:authorize access="hasRole('CUSTOMER')"> --%>
+<%-- 		<display:column> --%>
+<%-- 			<jstl:if test="${row.isAccepted==false}"> --%>
+<!-- 				<div class="btn-group">	 -->
+<%-- 					<acme:link image="paypal4" href="offer/customer/pilotPlan.do?offerId=${row.id}" type="warning" code="offer.pilotPlanAccept"/> --%>
+<!-- 				</div> -->
+<%-- 			</jstl:if> --%>
+<%-- 		</display:column> --%>
+<%-- 	</security:authorize> --%>
 		<jstl:if test="${row.isAccepted==true}">
 			<h6><spring:message code="offer.isAccepted" /></h6>
 		</jstl:if>
