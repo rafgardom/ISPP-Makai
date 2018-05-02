@@ -169,6 +169,15 @@ public class BannerService {
 		bannerForm.setZone("abajo");
 		Banner result;
 
+		if (bannerForm.getTotalViews() < 1) {
+			FieldError fieldError;
+			final String[] codes = {
+				"banner.totalViews.error"
+			};
+			fieldError = new FieldError("bannerForm", "totalViews", bannerForm.getTotalViews(), false, codes, null, "");
+			binding.addError(fieldError);
+
+		}
 		if (bannerForm.getId() == 0 && bannerForm.getBannerImage().getSize() == 0) {
 			FieldError fieldError;
 			final String[] codes = {
