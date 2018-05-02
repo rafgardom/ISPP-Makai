@@ -192,17 +192,19 @@ public class AnimalService {
 
 		Animal result;
 
-		Animal aux;
+		if (!animalForm.getChipNumber().isEmpty()) {
+			Animal aux;
 
-		aux = this.findAnimalByChipNumber(animalForm.getChipNumber());
+			aux = this.findAnimalByChipNumber(animalForm.getChipNumber());
 
-		if (aux != null && !animalForm.getChipNumber().isEmpty()) {
-			FieldError fieldError;
-			final String[] codes = {
-				"animal.chipNumber.extension.error"
-			};
-			fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
-			binding.addError(fieldError);
+			if (aux != null && animalForm.getId() != aux.getId()) {
+				FieldError fieldError;
+				final String[] codes = {
+					"animal.chipNumber.extension.error"
+				};
+				fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
 		}
 
 		if (animalForm.getAnimalImage().getSize() > 5242880) {
