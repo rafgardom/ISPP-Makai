@@ -146,12 +146,14 @@ public class BannerActorController extends AbstractController {
 		ModelAndView result;
 		Banner banner;
 		BannerForm bannerForm;
+
 		try {
 			banner = this.bannerService.create();
 			bannerForm = this.bannerService.bannerToFormObject(banner);
 			bannerForm.setPrice(0.0);
 
 			result = this.createEditModelAndView(bannerForm);
+
 		} catch (final Throwable e) {
 			System.out.println(e.toString());
 			result = new ModelAndView("error");
@@ -318,12 +320,14 @@ public class BannerActorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final BannerForm bannerForm, final String message) {
 		ModelAndView result;
 		Price price;
-
+		Integer numberNoti;
 		price = this.priceService.findOne();
 
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 		result = new ModelAndView("banner/create");
 		result.addObject("bannerForm", bannerForm);
 		result.addObject("bannerPrice", price.getBannerPrice());
+		result.addObject("numberNoti", numberNoti);
 		if (bannerForm.getId() == 0)
 			result.addObject("requestURI", "banner/actor/create.do");
 		else

@@ -46,7 +46,7 @@
 	<display:column class="text-center" title="${titleHeader}" sortable="true">
 		<jstl:choose>
 			<jstl:when test="${row.paid == false && principalUserAccount.id == row.actor.userAccount.id && row.validated == true }">
-				<acme:link href="banner/actor/pay.do?bannerId=${row.id}" code="banner.pay" type="success"/>
+				<acme:link href="banner/actor/pay.do?bannerId=${row.id}" code="banner.pay" type="success" image="paypal4"/>
 			</jstl:when>
 			<jstl:otherwise>
 				<img src="images/${row.paid}.png" title="<spring:message code='banner.paid.${row.paid}' />" >

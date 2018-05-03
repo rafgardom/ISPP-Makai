@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BannerService;
+import services.NotificationService;
 import services.SpecieService;
 import controllers.AbstractController;
 import domain.Banner;
@@ -27,10 +28,13 @@ public class SpecieAdministratorController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private SpecieService	specieService;
+	private SpecieService		specieService;
 
 	@Autowired
-	private BannerService	bannerService;
+	private BannerService		bannerService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -75,9 +79,10 @@ public class SpecieAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Specie> species;
+		Integer numberNoti;
 		try {
 			species = this.specieService.findAll();
-
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 			final Boolean canDelete[] = new Boolean[species.size()];
 			int i = 0;
 			for (final Specie s : species) {
@@ -91,6 +96,7 @@ public class SpecieAdministratorController extends AbstractController {
 
 			result = new ModelAndView("specie/list");
 			result.addObject("requestURI", "specie/admin/list.do");
+			result.addObject("numberNoti", numberNoti);
 			result.addObject("species", species);
 			result.addObject("canDelete", canDelete);
 			//			result.addObject("imagesLeft", imagesLeft);
@@ -164,13 +170,15 @@ public class SpecieAdministratorController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Specie specie, final String message) {
 		ModelAndView result;
-
+		Integer numberNoti;
 		result = new ModelAndView("specie/create");
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 		if (specie.getId() == 0)
 			result.addObject("RequestURI", "specie/admin/create.do");
 		else
 			result.addObject("RequestURI", "specie/admin/edit.do?specieId=" + specie.getId());
 		result.addObject("errorMessage", message);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("specie", specie);
 
 		return result;

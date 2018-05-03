@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BannerService;
 import services.BreedService;
+import services.NotificationService;
 import services.SpecieService;
 import controllers.AbstractController;
 import domain.Banner;
@@ -29,13 +30,16 @@ public class BreedAdministratorController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private BreedService	breedService;
+	private BreedService		breedService;
 
 	@Autowired
-	private SpecieService	specieService;
+	private SpecieService		specieService;
 
 	@Autowired
-	private BannerService	bannerService;
+	private BannerService		bannerService;
+
+	@Autowired
+	private NotificationService	notificationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -48,13 +52,15 @@ public class BreedAdministratorController extends AbstractController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
-		final ModelAndView result;
+		ModelAndView result;
 		Breed breed;
+		try {
+			breed = this.breedService.create();
 
-		breed = this.breedService.create();
-
-		result = this.createEditModelAndView(breed);
-
+			result = this.createEditModelAndView(breed);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
 		return result;
 	}
 
@@ -80,10 +86,10 @@ public class BreedAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Breed> breeds;
-
+		Integer numberNoti;
 		try {
 			breeds = this.breedService.findAll();
-
+			numberNoti = this.notificationService.findNotificationWithoutRead();
 			final Boolean canDelete[] = new Boolean[breeds.size()];
 			int i = 0;
 			for (final Breed b : breeds) {
@@ -97,6 +103,7 @@ public class BreedAdministratorController extends AbstractController {
 
 			result = new ModelAndView("breed/list");
 			result.addObject("requestURI", "breed/admin/list.do");
+			result.addObject("numberNoti", numberNoti);
 			result.addObject("breeds", breeds);
 			result.addObject("canDelete", canDelete);
 			//			result.addObject("imagesLeft", imagesLeft);
@@ -173,15 +180,17 @@ public class BreedAdministratorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Breed breed, final String message) {
 		ModelAndView result;
 		Collection<Specie> species;
-
+		Integer numberNoti;
 		species = this.specieService.findAll();
 
 		result = new ModelAndView("breed/create");
+		numberNoti = this.notificationService.findNotificationWithoutRead();
 		if (breed.getId() == 0)
 			result.addObject("RequestURI", "breed/admin/create.do");
 		else
 			result.addObject("RequestURI", "breed/admin/edit.do?breedId=" + breed.getId());
 		result.addObject("breed", breed);
+		result.addObject("numberNoti", numberNoti);
 		result.addObject("species", species);
 		result.addObject("errorMessage", message);
 

@@ -11,7 +11,6 @@ import java.util.Collections;
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -410,22 +409,22 @@ public class BannerService {
 	public ArrayList<Banner> getBannerByZone(final String zone) throws UnsupportedEncodingException {
 		final Collection<Banner> banners = this.bannerRepository.getBannerByZone(zone);
 		final ArrayList<Banner> arrayListBanner = new ArrayList<Banner>(banners);
-		ArrayList<Banner> subList = null;
+		//		final ArrayList<Banner> subList = null;
 		ArrayList<Banner> result = null;
 
 		if (arrayListBanner != null) {
-//			result = new ArrayList<Banner>();
+			//			result = new ArrayList<Banner>();
 			Collections.shuffle(arrayListBanner);
 			if (arrayListBanner.size() <= 3)
 				result = new ArrayList<Banner>(arrayListBanner);
 			else
 				result = new ArrayList<Banner>(arrayListBanner.subList(0, 2));
-//			for (final Banner banner : subList) {
-//				banner.setCurrentViews(banner.getCurrentViews() + 1);
-//				this.bannerRepository.save(banner);
-//				final String image = new String(Base64.encode(banner.getPicture()), "UTF-8");
-//				result.add(image);
-//			}
+			for (final Banner banner : result) {
+				banner.setCurrentViews(banner.getCurrentViews() + 1);
+				this.bannerRepository.save(banner);
+				//				final String image = new String(Base64.encode(banner.getPicture()), "UTF-8");
+				//				result.add(image);
+			}
 		}
 
 		return result;
