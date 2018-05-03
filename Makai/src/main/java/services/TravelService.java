@@ -140,7 +140,7 @@ public class TravelService {
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
 		Assert.isTrue(this.actorService.checkAuthority(principal, "ADMIN") || this.actorService.checkAuthority(principal, "CUSTOMER") || this.actorService.checkAuthority(principal, "PROFESSIONAL"));
-		Assert.isTrue(travel.getTransporterOwner().getId() == principal.getId());
+		//		Assert.isTrue(travel.getTransporterOwner().getId() == principal.getId());
 
 		transporters = this.transporterService.findPassengersByTravel(travel.getId());
 
