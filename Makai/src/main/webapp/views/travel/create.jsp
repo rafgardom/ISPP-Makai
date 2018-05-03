@@ -63,7 +63,7 @@
 	<div class="row">
 
 			<div class="col-lg-3 col-sm-6 col-12">
-				<acme:input code="travel.animalSeats" path="animalSeats" type="number" min="0" />
+				<acme:input code="travel.animalSeats" path="animalSeats" type="number" min="1" mandatory="true"/>
 				<acme:input code="travel.humanSeats" path="humanSeats" type="number" min="0" />
 			</div>
 			<div class="col-md-11">

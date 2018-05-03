@@ -90,6 +90,7 @@ public class TravelController extends AbstractController {
 		boolean wrongTime = false;
 		boolean notPrincipal = false;
 		boolean passengers = false;
+		boolean speciesError = false;
 
 		Calendar today;
 		Transporter principal;
@@ -101,6 +102,18 @@ public class TravelController extends AbstractController {
 			result = this.createModelAndView(travelForm, "travel.commit.error");
 		else
 			try {
+				if (travelForm.getHumanSeats() == null)
+					travelForm.setHumanSeats(0);
+
+				if (travelForm.getSpecies() == null || travelForm.getSpecies().isEmpty()) {
+					speciesError = true;
+					FieldError fieldError;
+					final String[] codes = {
+						"travel.species.error"
+					};
+					fieldError = new FieldError("travelForm", "species", travelForm.getSpecies(), false, codes, null, "");
+					binding.addError(fieldError);
+				}
 
 				if ((travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() < 1) && (travelForm.getHumanSeats() == null || travelForm.getHumanSeats() < 1)) {
 					wrongSeats = true;
@@ -139,21 +152,24 @@ public class TravelController extends AbstractController {
 				result = new ModelAndView("redirect:myList.do");
 
 			} catch (final Throwable oops) {
-				if (wrongSeats)
+				if (wrongSeats) {
 					result = this.createModelAndView(travelForm, "travel.seats.error");
-				FieldError fieldError;
-				final String[] codes = {
-					"travel.seats.error"
-				};
-				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
-				binding.addError(fieldError);
+					FieldError fieldError;
+					final String[] codes = {
+						"travel.seats.error"
+					};
+					fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+					binding.addError(fieldError);
+				}
 				if (passengers)
 					result = this.createModelAndView(travelForm, "travel.edit.error");
-				if (wrongTime)
+				else if (wrongTime)
 					result = this.createModelAndView(travelForm, "travel.time.error");
-				if (notPrincipal)
+				else if (notPrincipal)
 					result = this.createModelAndView(travelForm, "travel.principal.error");
-				if (tooManySeats)
+				else if (speciesError)
+					result = this.createModelAndView(travelForm, "travel.species.error");
+				else if (tooManySeats)
 					result = this.createModelAndView(travelForm, "travel.tooManySeats.error");
 				else
 					result = this.createModelAndView(travelForm, "travel.register.error");

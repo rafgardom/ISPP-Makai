@@ -133,7 +133,6 @@ public class TravelForm {
 		this.duration = duration;
 	}
 
-	@NotNull
 	public Collection<Specie> getSpecies() {
 		return this.species;
 	}
