@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="travel/create" extends="master.page">
-		<put-attribute name="title" value="Create a travel" />
+		<put-attribute name="title" value="Publish travel" />
 		<put-attribute name="body" value="/views/travel/create.jsp" />
 	</definition>
 	

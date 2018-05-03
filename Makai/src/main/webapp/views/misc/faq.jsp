@@ -9,8 +9,8 @@
 <!-- OFFER -->
 <div class="row">
 	<div class="col-md-4">
-	<div class="card">
-		<h2 class="card-header"><spring:message code="master.page.offer" /></h2>
+	<div class="card shadow">
+		<h3 class="card-header"><spring:message code="master.page.offer" /></h3>
 		<h4 class="card-title pt-3"><spring:message code="faq.q1.offer" /></h4>
 		<p  class="card-body"><spring:message code="faq.a1.offer" /></p>
 		
@@ -20,7 +20,7 @@
 	</div>
 	
 	<div class="col-md-4">
-	<div class="card">
+	<div class="card shadow">
 		<!-- REQUEST -->
 		<h2 class="card-header"><spring:message code="master.page.request" /></h2>
 		<h4 class="card-title pt-3"><spring:message code="faq.q3.request" /></h4>
@@ -32,7 +32,7 @@
 	</div>
 	
 	<div class="col-md-4">
-	<div class="card">
+	<div class="card shadow">
 	<!-- TRAVEL -->
 		<h2 class="card-header"><spring:message code="master.page.travel" /></h2>
 		<h4 class="card-title pt-3"><spring:message code="faq.q5.travel" /></h4>

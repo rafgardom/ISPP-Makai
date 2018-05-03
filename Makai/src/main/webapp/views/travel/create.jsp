@@ -62,24 +62,26 @@
 	<h3><spring:message code="travel.details" /></h3>
 	<div class="row">
 
-			<div class="col-lg-3 col-sm-6 col-12">
+			<div class="col-md-4 col-12">
 				<acme:input code="travel.animalSeats" path="animalSeats" type="number" min="1" mandatory="true"/>
 				<acme:input code="travel.humanSeats" path="humanSeats" type="number" min="0" />
 			</div>
-			<div class="col-md-11">
+			<br>
+			<div class="col-lg-5 col-md-8 col-12">
 				<form:label path="species">
 					<spring:message code="travel.species"/> <img src="images/asterisk.png"	width="16"/>
 				</form:label>
 				<br>
 				<jstl:forEach var="specie" items="${species}">
-					<form:checkbox path ="species" value="${specie}"/><jstl:out value="${specie.type}"/>
+				<label class="form-check-label">
+					  <form:checkbox cssClass="mx-1" path ="species" value="${specie}"/><jstl:out value="${specie.type}"/>
+				</label>
 				</jstl:forEach>
-			</div>
-			<br>
-			<div class="col-lg-5 col-sm-6 col-12">
+				
+				<br><br>
 				<acme:select code="travel.vehicle" path="vehicle" items="${vehicles}" itemLabel="license" mandatory="true"/>
 			</div>
-			<div class="col-md-3 col-12">
+			<div class="col-lg-3 col-12">
 				<acme:input code="travel.startMoment" path="startDate" mandatory="true" image="calendar" placeholder="dd/MM/yyyy" id="datepicker"/>
 				<acme:input code="travel.startTime" path="startTime" mandatory="true" image="clock" placeholder="HH:mm"/>
 			</div>

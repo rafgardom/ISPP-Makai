@@ -27,6 +27,7 @@
 <%@ attribute name="type" required="false" %>
 <%@ attribute name="disabled" required="false" %>
 <%@ attribute name="image" required="false" %>
+<%@ attribute name="image2" required="false" %>
 
 <jstl:if test="${type == null}">
 	<jstl:set var="type" value="primary" />
@@ -42,6 +43,9 @@
 <button type="button" class="btn btn-${type} btn-lg" onclick="location='${href}'">
 	<jstl:if test="${image != null}">
 		<img class="icon-button" src="images/${image}.png"/>
+	</jstl:if>
+	<jstl:if test="${image2 != null}">
+		<img class="icon-button" src="images/${image2}.png"/>
 	</jstl:if>
 	<jstl:if test="${code != null}">
 		<spring:message code="${code}" />

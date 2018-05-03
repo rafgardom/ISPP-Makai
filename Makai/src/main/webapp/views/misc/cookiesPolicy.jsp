@@ -8,14 +8,14 @@
 
 <jstl:set value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort }${pageContext.request.contextPath }" var="url" />
 
-<div class="card">
+<div class="card shadow">
 	<p class="card-body p-5">
 		<spring:message code="cookiesPolicy.domain" />
 		<jstl:out value="${url }" />
 		<spring:message code="cookiesPolicy.info" />
 	</p>
 </div>
-<div class="card mt-3">	
+<div class="card mt-3 shadow">	
 	<h2 class="card-title pt-5" style="margin-left:2%;"><spring:message code="cookiesPolicy.cookies" /></h2>
 	<p class="card-body px-5"><spring:message code="cookiesPolicy.cookies.definition1" /></p>	
 	<p class="card-body px-5"><spring:message code="cookiesPolicy.cookies.definition2" /></p>
@@ -24,7 +24,7 @@
 	<p class="card-body px-5"><spring:message code="cookiesPolicy.type.definition" /></p>
 
 </div>	
-<div class="card mt-3">	
+<div class="card mt-3 shadow">	
 	<h2 class="card-title pt-5" style="margin-left:2%;"><spring:message code="cookiesPolicy.consent" /></h2>
 	<p class="card-body px-5"><spring:message code="cookiesPolicy.config" /></p>
 	<p  class="card-body px-5"><spring:message code="cookiesPolicy.acceptance" /></p>

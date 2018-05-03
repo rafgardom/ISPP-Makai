@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="error" extends="master.page">
-		<put-attribute name="title" value="Error" />
+		<put-attribute name="title" value="" />
 		<put-attribute name="body" value="/views/generalError/globalError.jsp" />
 	</definition>
 	

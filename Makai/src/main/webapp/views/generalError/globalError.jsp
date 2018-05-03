@@ -20,9 +20,16 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<h1><spring:message code="globalError.message" /> </h1>
-
-<jstl:if test="${errorOffer != null}">
+<div class="card">
+	<div class="center-div pt-5">
+		<img src="images/warning.png"/>
+	</div>
+	<h1 class="text-center pb-5">ERROR</h1>
+	<h3 class="text-center pb-5"><spring:message code="globalError.message" /> </h3>
+	
+	<jstl:if test="${errorOffer != null}">
 			<br />
-			<h1><spring:message code="${errorOffer}" /></h1>
-</jstl:if>
+			<h5><spring:message code="${errorOffer}" /></h5>
+	</jstl:if>
+</div>
+
