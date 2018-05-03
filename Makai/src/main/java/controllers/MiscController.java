@@ -38,11 +38,21 @@ public class MiscController extends AbstractController {
 	public ModelAndView privacyPolicy(@RequestParam final boolean sc) {
 		ModelAndView result;
 		Integer numberNoti;
+		Actor actor;
+		boolean userLogueado = false;
 		try {
+			try {
+				actor = this.actorService.findByPrincipal();
+				userLogueado = true;
 
-			numberNoti = this.notificationService.findNotificationWithoutRead();
+			} catch (final Throwable e) {
+
+			}
 			result = new ModelAndView("privacyPolicy");
-			result.addObject("numberNoti", numberNoti);
+			if (userLogueado) {
+				numberNoti = this.notificationService.findNotificationWithoutRead();
+				result.addObject("numberNoti", numberNoti);
+			}
 			result.addObject("requestURI", "misc/privacyPolicy.do");
 			result.addObject("sc", sc);
 		} catch (final Throwable e) {
