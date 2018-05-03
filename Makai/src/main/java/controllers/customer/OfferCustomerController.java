@@ -102,6 +102,9 @@ public class OfferCustomerController extends AbstractController {
 			final Offer offer = this.offerService.findOne(offerId);
 			this.offerService.acceptedOffer(offer);
 			result = new ModelAndView("offer/customer/payment/successful");
+			result.addObject("requestId", offer.getRequest().getId());
+			result.addObject("offerId", true);
+			result.addObject("requestId", offer.getRequest().getId());
 
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/");

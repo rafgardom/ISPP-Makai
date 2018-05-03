@@ -23,6 +23,7 @@
 	</ul>
 	
 	<p class="card-body px-5"><spring:message code="conditions.paragraph4" /></p>
+	<p class="card-body px-5"><spring:message code="conditions.paragraph5" /></p>
 
 </div>
 </div>

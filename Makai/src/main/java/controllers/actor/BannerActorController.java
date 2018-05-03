@@ -265,6 +265,7 @@ public class BannerActorController extends AbstractController {
 			banner.setTotalBenefit(banner.getTotalBenefit() + banner.getPrice());
 			this.bannerService.simpleSave(banner);
 			result = new ModelAndView("banner/actor/payment/successful");
+			result.addObject("banner", true);
 
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/");
