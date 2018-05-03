@@ -77,7 +77,8 @@
 </div>
 <security:authorize access="hasRole('CUSTOMER')">
 	<br>
-	<acme:link href="request/customer/create.do" code="request.create" type="success"/>
-	<acme:link href="request/customer/menu.do" code="notification.goBack"/>
+	<div class="center-div">
+		<acme:link href="request/customer/menu.do" code="notification.goBack" image="arrow_left"/>
+	</div>
 </security:authorize>
 

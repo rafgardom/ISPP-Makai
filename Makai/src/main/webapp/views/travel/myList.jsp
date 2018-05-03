@@ -53,6 +53,7 @@
 </display:table>
 </div>
 	<br>
-	<acme:link href="travel/menu.do" code="notification.goBack"/>
-
+<div class="center-div">
+	<acme:link href="travel/menu.do" code="notification.goBack" image="arrow_left"/>
+</div>
 

@@ -47,7 +47,7 @@
 	<br>
 	<acme:submit name="save" code="animal.save" />
 	
-	<acme:cancel url="./animal/list.do" code="animal.cancel" />
+	<acme:cancel url="animal/menu.do" code="animal.cancel" />
 		
 </form:form>
 

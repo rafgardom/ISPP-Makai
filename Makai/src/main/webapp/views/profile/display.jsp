@@ -63,10 +63,16 @@
 </div>
 
 
+<jstl:if test="${principalUserAccount.id == actor.userAccount.id }">
+<div class="center-div pt-5">
+	<acme:link href="profile/edit.do" code="profile.edit" type="warning" image="edit"/>
+</div>
+</jstl:if>
+
+
 <jstl:if test="${!empty ratings }">
-<br>
 	<h3>
-		<b><spring:message code="profile.ratings" />:</b>
+		<b><spring:message code="profile.ratings" /></b>
 	</h3>
 	
 	<div class="table-responsive">
@@ -84,9 +90,3 @@
 	</display:table>
 	</div>
 </jstl:if>
-<br />
-
-<jstl:if test="${principalUserAccount.id == actor.userAccount.id }">
-	<acme:link href="profile/edit.do" code="profile.edit" type="warning btn-block"/>
-</jstl:if>
-

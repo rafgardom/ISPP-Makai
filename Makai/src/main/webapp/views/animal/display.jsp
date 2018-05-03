@@ -18,7 +18,7 @@
 
 	<div class="card shadow">
 	 	<h3 class="card-title mt-5"><spring:message code="animal.info" /></h3>
-	  	<div class="card-body"> 	
+	  	<div class="card-body ml-3"> 	
 			<p><b><spring:message code="animal.name" />:</b> <jstl:out
 				value="${animal.name}" /></p>
 	  	
@@ -72,8 +72,8 @@
 		<div class="center-div">
 			<img src="${util.showImage(animal.getCustomer().getPicture())} " class="rounded-circle" width="200px" height="200px">	
 		</div>
-		 	<br><h3 class="card-title mt-3"><spring:message code="animal.owner.info" /></h3>
-		  	<div class="card-body"> 	
+		 	<br><h3 class="card-title m-3"><spring:message code="animal.owner.info" /></h3>
+		  	<div class="card-body ml-3"> 	
 		  		<p><b><spring:message code="animal.name" />:</b> 
 					<jstl:out value="${animal.customer.name}" /></p>
 				
@@ -88,7 +88,7 @@
 		  		<p><b><spring:message code="animal.owner.city" />:</b> <jstl:out
 						value="${animal.customer.coordinates.city}" /></p>
 						
-		  		<acme:link href="profile/displayProfile.do?actorId=${animal.customer.id}" code="animal.view.profile"/>
+		  		<acme:link href="profile/displayProfile.do?actorId=${animal.customer.id}" code="animal.view.profile" image="user-white"/>
 		  	</div>
 		</div>
 	</jstl:if>
@@ -112,7 +112,7 @@
 		  		<p><b><spring:message code="animal.owner.city" />:</b> <jstl:out
 						value="${animal.animalShelter.coordinates.city}" /></p>
 		  		
-		  		<acme:link href="profile/displayProfile.do?actorId=${animal.animalShelter.id}" code="animal.view.profile"/>
+		  		<acme:link href="profile/displayProfile.do?actorId=${animal.animalShelter.id}" code="animal.view.profile" image="user-white" />
 		  	</div>
 		</div>
 	</jstl:if>
@@ -120,6 +120,6 @@
 <br>
 
 <div class="center-div">
-	<acme:link href="animal/list.do" code="animal.goBack"/>
+	<acme:link href="animal/list.do" code="animal.goBack" image="arrow_left"/>
 </div>
 

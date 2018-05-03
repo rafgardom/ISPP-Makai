@@ -26,7 +26,7 @@
 
 <jstl:if test="${imagesBottom != null}">
 	<jstl:if test="${!empty imagesBottom}">
-	<small class="text-muted text-center" style="font-size: 60%;"><i>*<spring:message code="advertising"/></i></small>
+	<small class="text-muted" style="font-size: 60%;"><i>*<spring:message code="advertising"/></i></small>
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	  <div class="carousel-inner" role="listbox">
 	  	

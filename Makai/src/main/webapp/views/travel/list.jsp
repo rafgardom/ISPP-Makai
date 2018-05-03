@@ -48,6 +48,8 @@
 	
 </display:table>
 </div>
-	<acme:link href="travel/create.do" code="travel.create" type="success"/>
-	<acme:link href="travel/menu.do" code="notification.goBack"/>
 
+<div class="center-div">
+	<acme:link href="travel/create.do" code="travel.create" type="success mx-2" image="add1"/>
+	<acme:link href="travel/menu.do" code="notification.goBack" image="arrow_left"/>
+</div>

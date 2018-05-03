@@ -44,4 +44,6 @@
 </display:table>
 </div>
 
-	<acme:link href="animal/menu.do" code="notification.goBack"/>
+<div class="center-div">
+	<acme:link href="animal/menu.do" code="notification.goBack" image="arrow_left"/>
+</div>
