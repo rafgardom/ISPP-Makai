@@ -190,11 +190,18 @@ public class AnimalController extends AbstractController {
 		Breed[] breeds;
 		String specie;
 		String image;
+		Boolean checkA;
 		//		AnimalForm animalForm;
 		final Integer numberNoti;
 		try {
 			actor = this.actorService.findByPrincipal();
 			animal = this.animalService.findOne(animalId);
+			checkA = false;
+			if (animal.getCustomer() != null)
+				checkA = animal.getCustomer().getId() == actor.getId();
+			if (animal.getAnimalShelter() != null)
+				checkA = (animal.getAnimalShelter().getId() == actor.getId()) || checkA;
+			Assert.isTrue(checkA || this.actorService.checkAuthority(actor, "TRAINER"));
 			Assert.isTrue(animal.getIsHidden() == false);
 			//			animalForm = this.animalService.animalToFormObject(animal);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
