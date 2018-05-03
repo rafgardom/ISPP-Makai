@@ -19,6 +19,7 @@ import services.NotificationService;
 import services.OfferService;
 import services.RatingService;
 import services.RequestService;
+import domain.Banner;
 import domain.Offer;
 import domain.Request;
 
@@ -68,7 +69,7 @@ public class OfferController extends AbstractController {
 			}
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("offer/customer/list");

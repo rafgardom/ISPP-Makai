@@ -17,6 +17,7 @@ import services.BannerService;
 import services.NotificationService;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Banner;
 import domain.Notification;
 
 @Controller
@@ -55,7 +56,7 @@ public class NotificationActorController extends AbstractController {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("notification/list");
@@ -91,7 +92,7 @@ public class NotificationActorController extends AbstractController {
 			this.notificationService.notificationViewed(notification);
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("notification/display");

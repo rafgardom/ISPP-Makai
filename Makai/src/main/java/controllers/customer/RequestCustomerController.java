@@ -22,6 +22,7 @@ import services.OfferService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Animal;
+import domain.Banner;
 import domain.Category;
 import domain.Customer;
 import domain.Offer;
@@ -79,7 +80,7 @@ public class RequestCustomerController extends AbstractController {
 			requestsWithOffer = this.requestService.findRequestsWithOffer();
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("request/myList");
@@ -198,7 +199,7 @@ public class RequestCustomerController extends AbstractController {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("request/menu");

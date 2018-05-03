@@ -21,6 +21,7 @@ import services.BannerService;
 import services.NotificationService;
 import services.TransporterService;
 import services.VehicleService;
+import domain.Banner;
 import domain.Brand;
 import domain.CarType;
 import domain.Transporter;
@@ -215,7 +216,7 @@ public class VehicleController extends AbstractController {
 				vehicles.add(vehicleForm);
 			}
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("vehicle/list");

@@ -407,25 +407,25 @@ public class BannerService {
 	//		return result;
 	//	}
 
-	public ArrayList<String> getBannerByZone(final String zone) throws UnsupportedEncodingException {
+	public ArrayList<Banner> getBannerByZone(final String zone) throws UnsupportedEncodingException {
 		final Collection<Banner> banners = this.bannerRepository.getBannerByZone(zone);
 		final ArrayList<Banner> arrayListBanner = new ArrayList<Banner>(banners);
 		ArrayList<Banner> subList = null;
-		ArrayList<String> result = null;
+		ArrayList<Banner> result = null;
 
 		if (arrayListBanner != null) {
-			result = new ArrayList<>();
+//			result = new ArrayList<Banner>();
 			Collections.shuffle(arrayListBanner);
 			if (arrayListBanner.size() <= 3)
-				subList = new ArrayList<Banner>(arrayListBanner);
+				result = new ArrayList<Banner>(arrayListBanner);
 			else
-				subList = new ArrayList<Banner>(arrayListBanner.subList(0, 2));
-			for (final Banner banner : subList) {
-				banner.setCurrentViews(banner.getCurrentViews() + 1);
-				this.bannerRepository.save(banner);
-				final String image = new String(Base64.encode(banner.getPicture()), "UTF-8");
-				result.add(image);
-			}
+				result = new ArrayList<Banner>(arrayListBanner.subList(0, 2));
+//			for (final Banner banner : subList) {
+//				banner.setCurrentViews(banner.getCurrentViews() + 1);
+//				this.bannerRepository.save(banner);
+//				final String image = new String(Base64.encode(banner.getPicture()), "UTF-8");
+//				result.add(image);
+//			}
 		}
 
 		return result;

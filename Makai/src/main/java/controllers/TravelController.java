@@ -26,6 +26,7 @@ import services.TransporterService;
 import services.TravelService;
 import services.VehicleService;
 import domain.Animal;
+import domain.Banner;
 import domain.Breed;
 import domain.Rating;
 import domain.Specie;
@@ -323,7 +324,7 @@ public class TravelController extends AbstractController {
 					travels.add(aux);
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/list");
@@ -376,7 +377,7 @@ public class TravelController extends AbstractController {
 					travels.add(aux);
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/myList");
@@ -432,7 +433,7 @@ public class TravelController extends AbstractController {
 					travels.add(aux);
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/myPastList");
@@ -491,7 +492,7 @@ public class TravelController extends AbstractController {
 			}
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/display");
@@ -525,7 +526,7 @@ public class TravelController extends AbstractController {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("travel/menu");

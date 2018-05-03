@@ -14,6 +14,7 @@ import services.BannerService;
 import services.NotificationService;
 import services.RequestService;
 import controllers.AbstractController;
+import domain.Banner;
 import domain.Request;
 
 @Controller
@@ -49,7 +50,7 @@ public class RequestTrainerController extends AbstractController {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("request/list");

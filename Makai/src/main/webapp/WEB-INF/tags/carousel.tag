@@ -30,15 +30,16 @@
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	  <div class="carousel-inner" role="listbox">
 	  	
+	  	<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
 	  	<jstl:set value="true" var="first"/>
-	   	<jstl:forEach var = "image" items="${imagesBottom }">
+	   	<jstl:forEach var = "banner" items="${imagesBottom }">
 		   	<jstl:if test="${first}">
 		   		<jstl:set value="active" var="active"/>
 		   		<jstl:set value="false" var="first"/>
 		   	</jstl:if>
 		   	
          	<div class="carousel-item ${active}">
-	      		<a href="../www.google.es" target="_blank"><img class="d-block w-100" src="data:image/png;base64,${image }" data-src="holder.js/900x400?theme=industrial" alt="Image slide">
+	      		<a href="${banner.url}" target="_blank"><img class="d-block w-100" src="${util.showImage(banner.getPicture())}" data-src="holder.js/900x400?theme=industrial">
 	   		</a>
 	   		</div>
 	   		<jstl:set value="" var="active"/>

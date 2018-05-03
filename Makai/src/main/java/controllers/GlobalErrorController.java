@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Banner;
+
 import services.BannerService;
 
 @Controller
@@ -25,7 +27,7 @@ public class GlobalErrorController extends AbstractController {
 		ModelAndView result;
 
 		//		final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-		final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+		final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 		//		final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 		result = new ModelAndView("error");

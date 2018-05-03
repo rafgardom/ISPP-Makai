@@ -27,6 +27,7 @@ import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Animal;
+import domain.Banner;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
@@ -79,7 +80,7 @@ public class OfferTrainerController extends AbstractController {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("offer/list");
@@ -107,7 +108,7 @@ public class OfferTrainerController extends AbstractController {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("offer/listPast");
@@ -141,7 +142,7 @@ public class OfferTrainerController extends AbstractController {
 			image = Utilities.showImage(offer.getAnimal().getPicture());
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			if (this.actorService.checkAuthority(actor, "CUSTOMER"))

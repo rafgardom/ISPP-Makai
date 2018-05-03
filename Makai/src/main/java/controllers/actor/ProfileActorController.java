@@ -22,6 +22,7 @@ import services.RatingService;
 import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Banner;
 import domain.Rating;
 import forms.ProfileForm;
 
@@ -72,7 +73,7 @@ public class ProfileActorController extends AbstractController {
 				ratings = this.ratingService.findByTransporterId(actor.getId());
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("profile/display");
@@ -110,7 +111,7 @@ public class ProfileActorController extends AbstractController {
 				ratings = this.ratingService.findByTransporterId(actor.getId());
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result = new ModelAndView("profile/display");

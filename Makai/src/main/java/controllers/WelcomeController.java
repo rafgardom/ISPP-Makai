@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Banner;
+
 import services.BannerService;
 import services.NotificationService;
 
@@ -53,17 +55,17 @@ public class WelcomeController extends AbstractController {
 
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
-		final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-		final ArrayList<String> imagesBottom = this.bannerService.getBannerByZone("abajo");
-		final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
+		//final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
+		final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+		//final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("name", name);
 		result.addObject("moment", moment);
 
-		result.addObject("imagesLeft", imagesLeft);
+		//result.addObject("imagesLeft", imagesLeft);
 		result.addObject("imagesBottom", imagesBottom);
-		result.addObject("imagesRight", imagesRight);
+		//result.addObject("imagesRight", imagesRight);
 		try {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 			result.addObject("numberNoti", numberNoti);
