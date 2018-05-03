@@ -9,169 +9,159 @@
 
 <security:authentication var="principalUserAccount" property="principal" />
 
-<ul>
-	<li>
-		<p><spring:message code="banner.sum.price" />: <jstl:out value="${bannersTotalBenefit }" /><p>
-	</li>
-	<li>
-		<p><spring:message code="banner.avg.views" />: <jstl:out value="${bannersAvgBenefit }" /><p>
-	</li>
-	<li>
-		<p><spring:message code="banner.monthly.earnings" />: <jstl:out value="${bannersMonthlyBenefit }" /><p>
-	</li>
-	<li>
-		<p><spring:message code="banner.more.views" /><p>
-		<div class="table-responsive">
-		<display:table name="bannerMoreViews" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
-			
-			<display:column>
-				<img src="${row.stringImage}" class="rounded-circle" alt="<spring:message code='profile.no.picture' />" width="125px" height="125px">
-			</display:column>
-			
-			<acme:column code="banner.price" property="price" sortable="true" format="{0,number, ,0.00}&euro;"/>
-			
-			<spring:message code="banner.zone" var="zoneHeader" />
-			<display:column class="text-center" title="${zoneHeader}" sortable="true">
-				<spring:message code="banner.zone.${row.zone}"  />
-			</display:column>
-			
-			<spring:message code="banner.validated" var="validatedHeader" />
-			<display:column class="text-center" title="${validatedHeader}" sortable="true">
-				<img src="images/${row.validated}.png" title="<spring:message code='banner.validated.${row.validated}' />" >
-			</display:column>
-			
-			<spring:message code="banner.paid" var="titleHeader" />
-			<display:column class="text-center" title="${titleHeader}" sortable="true">
-				<img src="images/${row.paid}.png" title="<spring:message code='banner.paid.${row.paid}' />" >
-			</display:column>
-			
-			<security:authorize access="hasRole('ADMIN')">
+<div class="card shadow">
+	<div class="card-body text-center">
+		<p><spring:message code="banner.sum.price" />: <jstl:out value="${bannersTotalBenefit }" />&euro;<p>
+		<p><spring:message code="banner.avg.views" />: <jstl:out value="${bannersAvgBenefit }" />&euro;<p>
+		<p><spring:message code="banner.monthly.earnings" />: <jstl:out value="${bannersMonthlyBenefit }" />&euro;<p>
+	</div>
+</div>
+
+<div class="card-deck">
+	<div class="card shadow mt-3 py-3">
+		<h3 class="card-title"><spring:message code="banner.more.views" /></h3>
+			<div class="table-responsive">
+			<display:table name="bannerMoreViews" id="row" pagesize="2" requestURI="${requestURI}" class="displaytag">
+				
+				<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
+				
 				<display:column>
 					<a href="profile/displayProfile.do?actorId=${row.actor.id}">${row.actor.name}</a>
 				</display:column>
-			</security:authorize>
-			
-			<acme:column code="banner.currentViews" property="currentViews" sortable="true" />
-			<acme:column code="banner.clicksNumber" property="clicksNumber" sortable="true" />
-			
-		</display:table>
+				
+				<acme:column code="banner.currentViews" property="currentViews" sortable="true" />
+				<acme:column code="banner.clicksNumber" property="clicksNumber" sortable="true" />
+				
+				<display:column>
+					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalImage${row.id }">
+			   			<img class="icon-button" src="images/picture.png"/>
+					</button>
+					<!-- The Modal -->
+					  <div class="modal fade" id="modalImage${row.id}">
+					    <div class="modal-dialog modal-dialog-centered no-width">
+					      <div class="modal-content">
+					        <div class="modal-body">
+					         	<img src="${row.stringImage}" alt="<spring:message code='profile.no.picture'  />" class="img-responsive">
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
+				</display:column>
+			</display:table>
+			</div>
 		</div>
-	</li>
-	<li>
-		<p><spring:message code="banner.less.views" /><p>
-		<div class="table-responsive">
-		<display:table name="bannerLessViews" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
-			
-			<display:column>
-				<img src="${row.stringImage}" class="rounded-circle" alt="<spring:message code='profile.no.picture' />" width="125px" height="125px">
-			</display:column>
-			
-			<acme:column code="banner.price" property="price" sortable="true" format="{0,number, ,0.00}&euro;"/>
-			
-			<spring:message code="banner.zone" var="zoneHeader" />
-			<display:column class="text-center" title="${zoneHeader}" sortable="true">
-				<spring:message code="banner.zone.${row.zone}"  />
-			</display:column>
-			
-			<spring:message code="banner.validated" var="validatedHeader" />
-			<display:column class="text-center" title="${validatedHeader}" sortable="true">
-				<img src="images/${row.validated}.png" title="<spring:message code='banner.validated.${row.validated}' />" >
-			</display:column>
-			
-			<spring:message code="banner.paid" var="titleHeader" />
-			<display:column class="text-center" title="${titleHeader}" sortable="true">
-				<img src="images/${row.paid}.png" title="<spring:message code='banner.paid.${row.paid}' />" >
-			</display:column>
-			
-			<security:authorize access="hasRole('ADMIN')">
+		
+	
+		<div class="card shadow mt-3 py-3">
+		<h3 class="card-title"><spring:message code="banner.less.views" /></h3>
+			<div class="table-responsive">
+			<display:table name="bannerLessViews" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
+				
+				<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
+				
 				<display:column>
 					<a href="profile/displayProfile.do?actorId=${row.actor.id}">${row.actor.name}</a>
 				</display:column>
-			</security:authorize>
-			
-			<acme:column code="banner.currentViews" property="currentViews" sortable="true" />
-			<acme:column code="banner.clicksNumber" property="clicksNumber" sortable="true" />
-			
-		</display:table>
+				
+				<acme:column code="banner.currentViews" property="currentViews" sortable="true" />
+				<acme:column code="banner.clicksNumber" property="clicksNumber" sortable="true" />
+				
+				<display:column>
+					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalImage${row.id }">
+			   			<img class="icon-button" src="images/picture.png"/>
+					</button>
+					<!-- The Modal -->
+					  <div class="modal fade" id="modalImage${row.id}">
+					    <div class="modal-dialog modal-dialog-centered no-width">
+					      <div class="modal-content">
+					        <div class="modal-body">
+					         	<img src="${row.stringImage}" alt="<spring:message code='profile.no.picture'  />" class="img-responsive">
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
+				</display:column>
+			</display:table>
+			</div>
 		</div>
-	</li>
-	<li>
-		<p><spring:message code="banner.more.clicks" /><p>
-		<div class="table-responsive">
-		<display:table name="bannerMoreClicks" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
-			
-			<display:column>
-				<img src="${row.stringImage}" class="rounded-circle" alt="<spring:message code='profile.no.picture' />" width="125px" height="125px">
-			</display:column>
-			
-			<acme:column code="banner.price" property="price" sortable="true" format="{0,number, ,0.00}&euro;"/>
-			
-			<spring:message code="banner.zone" var="zoneHeader" />
-			<display:column class="text-center" title="${zoneHeader}" sortable="true">
-				<spring:message code="banner.zone.${row.zone}"  />
-			</display:column>
-			
-			<spring:message code="banner.validated" var="validatedHeader" />
-			<display:column class="text-center" title="${validatedHeader}" sortable="true">
-				<img src="images/${row.validated}.png" title="<spring:message code='banner.validated.${row.validated}' />" >
-			</display:column>
-			
-			<spring:message code="banner.paid" var="titleHeader" />
-			<display:column class="text-center" title="${titleHeader}" sortable="true">
-				<img src="images/${row.paid}.png" title="<spring:message code='banner.paid.${row.paid}' />" >
-			</display:column>
-			
-			<security:authorize access="hasRole('ADMIN')">
+		
+</div>	
+
+<div class="card-deck">
+	<div class="card shadow mt-3 py-3">
+		<h3 class="card-title"><spring:message code="banner.more.clicks" /></h3>
+			<div class="table-responsive">
+			<display:table name="bannerMoreClicks" id="row" pagesize="2" requestURI="${requestURI}" class="displaytag">
+				
+				<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
+				
 				<display:column>
 					<a href="profile/displayProfile.do?actorId=${row.actor.id}">${row.actor.name}</a>
 				</display:column>
-			</security:authorize>
-			
-			<acme:column code="banner.currentViews" property="currentViews" sortable="true" />
-			<acme:column code="banner.clicksNumber" property="clicksNumber" sortable="true" />
-			
-		</display:table>
+				
+				<acme:column code="banner.currentViews" property="currentViews" sortable="true" />
+				<acme:column code="banner.clicksNumber" property="clicksNumber" sortable="true" />
+				
+				<display:column>
+					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalImage${row.id }">
+			   			<img class="icon-button" src="images/picture.png"/>
+					</button>
+					<!-- The Modal -->
+					  <div class="modal fade" id="modalImage${row.id}">
+					    <div class="modal-dialog modal-dialog-centered no-width">
+					      <div class="modal-content">
+					        <div class="modal-body">
+					         	<img src="${row.stringImage}" alt="<spring:message code='profile.no.picture'  />" class="img-responsive">
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
+				</display:column>
+			</display:table>
+			</div>
 		</div>
-	</li>
-	<li>
-		<p><spring:message code="banner.less.clicks" /><p>
-		<div class="table-responsive">
-		<display:table name="bannerLessClicks" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
-			
-			<display:column>
-				<img src="${row.stringImage}" class="rounded-circle" alt="<spring:message code='profile.no.picture' />" width="125px" height="125px">
-			</display:column>
-			
-			<acme:column code="banner.price" property="price" sortable="true" format="{0,number, ,0.00}&euro;"/>
-			
-			<spring:message code="banner.zone" var="zoneHeader" />
-			<display:column class="text-center" title="${zoneHeader}" sortable="true">
-				<spring:message code="banner.zone.${row.zone}"  />
-			</display:column>
-			
-			<spring:message code="banner.validated" var="validatedHeader" />
-			<display:column class="text-center" title="${validatedHeader}" sortable="true">
-				<img src="images/${row.validated}.png" title="<spring:message code='banner.validated.${row.validated}' />" >
-			</display:column>
-			
-			<spring:message code="banner.paid" var="titleHeader" />
-			<display:column class="text-center" title="${titleHeader}" sortable="true">
-				<img src="images/${row.paid}.png" title="<spring:message code='banner.paid.${row.paid}' />" >
-			</display:column>
-			
-			<security:authorize access="hasRole('ADMIN')">
+		
+	
+		<div class="card shadow mt-3 py-3">
+		<h3 class="card-title"><spring:message code="banner.less.clicks" /></h3>
+			<div class="table-responsive">
+			<display:table name="bannerLessClicks" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
+				
+				<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
+				
 				<display:column>
 					<a href="profile/displayProfile.do?actorId=${row.actor.id}">${row.actor.name}</a>
 				</display:column>
-			</security:authorize>
-			
-			<acme:column code="banner.currentViews" property="currentViews" sortable="true" />
-			<acme:column code="banner.clicksNumber" property="clicksNumber" sortable="true" />
-			
-		</display:table>
+				
+				<acme:column code="banner.currentViews" property="currentViews" sortable="true" />
+				<acme:column code="banner.clicksNumber" property="clicksNumber" sortable="true" />
+				
+				<display:column>
+					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalImage${row.id }">
+			   			<img class="icon-button" src="images/picture.png"/>
+					</button>
+					<!-- The Modal -->
+					  <div class="modal fade" id="modalImage${row.id}">
+					    <div class="modal-dialog modal-dialog-centered no-width">
+					      <div class="modal-content">
+					        <div class="modal-body">
+					         	<img src="${row.stringImage}" alt="<spring:message code='profile.no.picture'  />" class="img-responsive">
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
+				</display:column>
+			</display:table>
+			</div>
 		</div>
-	</li>
-</ul>
+		
+</div>	
+		
+
 
 
 
