@@ -192,6 +192,21 @@ public class AnimalService {
 
 		Animal result;
 
+		if (!animalForm.getChipNumber().isEmpty()) {
+			Animal aux;
+
+			aux = this.findAnimalByChipNumber(animalForm.getChipNumber());
+
+			if (aux != null && animalForm.getId() != aux.getId()) {
+				FieldError fieldError;
+				final String[] codes = {
+					"animal.chipNumber.extension.error"
+				};
+				fieldError = new FieldError("animalForm", "chipNumber", animalForm.getChipNumber(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
+		}
+
 		if (animalForm.getAnimalImage().getSize() > 5242880) {
 			FieldError fieldError;
 			final String[] codes = {
@@ -248,7 +263,7 @@ public class AnimalService {
 		result.setSex(animalForm.getSex());
 		result.setBreeds(animalForm.getBreeds());
 
-		if (animalForm.getAnimalImage().getSize() > 0)
+		if (animalForm.getAnimalImage().getSize() > 0 && animalForm.getAnimalImage().getSize() <= 2097152 && animalForm.getAnimalImage().getContentType().contains("image"))
 			result.setPicture(animalForm.getAnimalImage().getBytes());
 
 		if (animalForm.getPicture() != null)
@@ -429,4 +444,11 @@ public class AnimalService {
 		return animals;
 	}
 
+	public Animal findByChipNumber(final String chipNumber) {
+		Animal animal;
+
+		animal = this.animalRepository.findByChipNumber(chipNumber);
+
+		return animal;
+	}
 }

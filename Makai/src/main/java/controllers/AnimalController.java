@@ -337,7 +337,7 @@ public class AnimalController extends AbstractController {
 		ModelAndView result;
 		Animal animal;
 		byte[] savedFile;
-		boolean imageError = false;
+		final boolean imageError = false;
 		boolean errors = false;
 		try {
 			animal = this.animalService.findOne(animalForm.getId());
@@ -389,11 +389,7 @@ public class AnimalController extends AbstractController {
 						savedFile = animalForm.getAnimalImage().getBytes();
 						animal.setPicture(savedFile);
 
-					} else {
-						imageError = true;
-						throw new IllegalArgumentException("error en la imagen");
 					}
-
 					animal = this.animalService.save(animal);
 					result = new ModelAndView("redirect:list.do");
 
