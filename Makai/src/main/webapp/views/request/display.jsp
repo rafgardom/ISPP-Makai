@@ -66,3 +66,6 @@
 	</div>
 
 </div>
+<div class="center-div my-3">
+	<acme:link href="request/customer/menu.do" code="notification.goBack" image="arrow_left"/>
+</div>

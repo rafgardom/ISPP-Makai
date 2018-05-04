@@ -75,7 +75,11 @@ public class BannerActorController extends AbstractController {
 			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
-			result = new ModelAndView("banner/list");
+			if (this.actorService.checkAuthority(actor, "ADMIN"))
+				result = new ModelAndView("banner/listAdmin");
+			else
+				result = new ModelAndView("banner/list");
+			
 			result.addObject("requestURI", "banner/actor/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("bannerForms", bannerForms);

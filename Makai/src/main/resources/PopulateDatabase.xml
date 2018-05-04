@@ -1313,7 +1313,7 @@
 		<property name="destination" ref="coordinates18" />
 		<property name="startMoment" value="04/20/2018 9:00" />
 		<property name="duration" value="90" />
-		<property name="animalSeats" value="0" />
+		<property name="animalSeats" value="1" />
 		<property name="humanSeats" value="2" />
 		<property name="vehicle" ref="vehicle1" />
 		<property name="transporterOwner" ref="professional1" />

@@ -47,11 +47,10 @@
 	
 </display:table>
 </div>
-<security:authorize access="hasAnyRole('PROFESSIONAL','CUSTOMER')">
-	<acme:link href="vehicle/register.do" code="vehicle.create" type="success" image="car"/>
-	<acme:link href="travel/menu.do" code="notification.goBack"/>
-</security:authorize>
-
+<div class="center-div">
+	<acme:link href="vehicle/register.do" code="vehicle.create" type="success mx-3" image="car"/>
+	<acme:link href="travel/menu.do" code="notification.goBack" image="arrow_left"/>
+</div>
 
 
 

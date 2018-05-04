@@ -9,19 +9,20 @@
 
 <security:authentication var="principalUserAccount" property="principal" />
 
-<div class="card shadow">
+<div class="card col-md-6 offset-md-3 shadow">
 	<div class="card-body text-center">
 		<p><spring:message code="banner.sum.price" />: <jstl:out value="${bannersTotalBenefit }" />&euro;<p>
 		<p><spring:message code="banner.avg.views" />: <jstl:out value="${bannersAvgBenefit }" />&euro;<p>
 		<p><spring:message code="banner.monthly.earnings" />: <jstl:out value="${bannersMonthlyBenefit }" />&euro;<p>
+		<p id="example"></p>
 	</div>
 </div>
 
-<div class="card-deck">
+<div class="card-deck text-center">
 	<div class="card shadow mt-3 py-3">
 		<h3 class="card-title"><spring:message code="banner.more.views" /></h3>
 			<div class="table-responsive">
-			<display:table name="bannerMoreViews" id="row" pagesize="2" requestURI="${requestURI}" class="displaytag">
+			<display:table name="bannerMoreViews" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 				
 				<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
 				
@@ -56,7 +57,7 @@
 		<div class="card shadow mt-3 py-3">
 		<h3 class="card-title"><spring:message code="banner.less.views" /></h3>
 			<div class="table-responsive">
-			<display:table name="bannerLessViews" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
+			<display:table name="bannerLessViews" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 				
 				<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
 				
@@ -89,11 +90,11 @@
 		
 </div>	
 
-<div class="card-deck">
+<div class="card-deck text-center">
 	<div class="card shadow mt-3 py-3">
 		<h3 class="card-title"><spring:message code="banner.more.clicks" /></h3>
 			<div class="table-responsive">
-			<display:table name="bannerMoreClicks" id="row" pagesize="2" requestURI="${requestURI}" class="displaytag">
+			<display:table name="bannerMoreClicks" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 				
 				<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
 				
@@ -128,7 +129,7 @@
 		<div class="card shadow mt-3 py-3">
 		<h3 class="card-title"><spring:message code="banner.less.clicks" /></h3>
 			<div class="table-responsive">
-			<display:table name="bannerLessClicks" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
+			<display:table name="bannerLessClicks" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 				
 				<acme:column code="banner.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
 				

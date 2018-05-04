@@ -55,6 +55,20 @@
 		</div>
 	</security:authorize>
 	
+		<security:authorize access="hasRole('ADMIN')">
+		<div class="col-lg-4 mt-lg-0 mt-3">
+			<div class="card bg-info pt-3 shadow">
+			
+				<div class="center-div py-2">
+					<img alt="Statistics" src="images/statistics.png"  height="128" width="128">
+				</div>
+				<div class="card-body"> <acme:link  href="banner/admin/dashboard.do" code="welcome.go.to.statistics" type=" btn-outline-light" /></div>
+			
+			</div>
+		</div>
+	</security:authorize>
+	
+	
 	<security:authorize access="hasRole('TRAINER')">
 		<div class="col-lg-4 mt-lg-0 mt-3">
 			<div class="card bg-secondary pt-3 shadow">

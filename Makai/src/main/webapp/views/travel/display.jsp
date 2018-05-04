@@ -16,8 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-
-<security:authorize access="hasAnyRole('CUSTOMER')">	
+	
 
 <div class="card-deck">
 	<div class="card shadow">
@@ -80,7 +79,8 @@
 	 </div>
 
 </div>
-	 <div class="card shadow my-3">
+<div class="card-deck text-center m-md-5">
+	 <div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="travel.seats" /></h3>
 	  	<div class="card-body">
 		  	<p>
@@ -93,9 +93,25 @@
 			</p>
 	  	</div>
 	 </div>
-	 <div class="card shadow my-3">
+	 <div class="card shadow">
+	 	<br><h3 class="card-title"><spring:message code="travel.species" /></h3>
+	  		<div class="card-body">
+	  		<jstl:forEach var="specie" items="${species}">
+		  		<p>
+					<jstl:out value="${specie.type}"/>
+				</p>
+			</jstl:forEach>
+	  		</div>
+	  </div>
+</div>
+<div class="card-deck m-3 text-center">
+	 <div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="travel.vehicle" /></h3>
 	  	<div class="card-body">
+	  		  	<jstl:if test="${vehicle.picture != null}">
+	  		<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
+				<img src="${util.showImage(vehicle.getPicture())} " class="rounded-circle" width="200px" height="200px">
+	  	</jstl:if>
 		  	<p>
 		  		<b><spring:message code="travel.vehicle.carType" />:</b>
 				<jstl:out value="${vehicle.carType}"  />
@@ -118,26 +134,20 @@
 			</p>
 	  	</div>
 	 </div>
-	 <div class="card shadow my-3">
-	 	<br><h3 class="card-title"><spring:message code="travel.species" /></h3>
-	  		<div class="card-body">
-	  		<jstl:forEach var="specie" items="${species}">
-		  		<p>
-					<jstl:out value="${specie.type}"/>
-				</p>
-			</jstl:forEach>
-	  		</div>
-	  </div>
-	 <div class="card shadow my-3">
+	 
+	 <jstl:if test="${!empty passengers or !empty animals}">
+	 <div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="travel.passengers" /></h3>
 	  		<div class="card-body">
 	  		<b><spring:message code="travel.persons" />:</b>
-	  		<jstl:if test="${passengers.isEmpty()}"><br></jstl:if>
+	  		<jstl:if test="${!empty passengers}">
 	  		<jstl:forEach var="passenger" items="${passengers}">
 		  		<p>
 					<jstl:out value="${passenger.name}"/>
 				</p>
 			</jstl:forEach>
+			</jstl:if>
+			<jstl:if test="${!empty animals}">
 			<b><spring:message code="travel.animals" />:</b>
 			<jstl:forEach var="animal" items="${animals}">
 		  		<p>
@@ -145,7 +155,11 @@
 					
 				</p>
 			</jstl:forEach>
+			</jstl:if>
 	  		</div>
 	  	</div>
-	  
-</security:authorize>
+	  	</jstl:if>
+</div>
+<div class="center-div">
+	<acme:link href="travel/list.do" code="notification.goBack" image="arrow_left"/>
+</div>

@@ -126,6 +126,7 @@
 			<security:authorize access="hasRole('ADMIN')">
 				<li class="nav-item"><a class="nav-link"
 					href="administrator/listActors.do">
+					<img src="images/users.png" class="img-menu"/>
 					<spring:message code="master.page.administrator.actors" /> </a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
@@ -160,7 +161,7 @@
 
 			</security:authorize>
 			
-			<security:authorize access="hasAnyRole('ADMIN,ADVERTISING')">
+			<security:authorize access="hasAnyRole('ADVERTISING')">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown">
 							<img src="images/image.png" class="img-menu"/><spring:message code="master.page.banners" />
@@ -172,11 +173,15 @@
 							<a class="dropdown-item" href="banner/actor/create.do">
 				 				<spring:message code="master.page.banner.create" /></a> 
 						</security:authorize>
-						<security:authorize access="hasRole('ADMIN')">
-							<a class="dropdown-item" href="banner/admin/dashboard.do">
-								<spring:message code="master.page.banner.dahsboard" /></a>
-						</security:authorize>
 					</div>
+				</li>
+			</security:authorize>
+			<security:authorize access="hasAnyRole('ADMIN')">
+				<li class="nav-item">
+					<a class="nav-link" href="banner/actor/list.do">
+							<img src="images/image.png" class="img-menu"/><spring:message code="master.page.banners" />
+					</a>
+
 				</li>
 			</security:authorize>
 		</ul>

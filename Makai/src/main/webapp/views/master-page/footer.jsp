@@ -34,8 +34,8 @@
 		<a href="misc/faq.do"><spring:message code="master.page.faq" /></a>
 		<br/>
 		<div class="tooltip">
-			<img src="images/mail.png">
-			<span class="tooltiptext">Ispp.makai.1718@gmail.com</span>
+			<img src="images/email.png"  onmouseover="this.src='images/email (1).png';" onmouseout="this.src='images/email.png';" > 
+			<p class="my-0"><span class="tooltiptext">Ispp.makai.1718@gmail.com</span></p>
 		</div>
 		<small><i><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i></small>
 	</div>
