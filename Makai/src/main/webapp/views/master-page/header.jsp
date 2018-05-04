@@ -93,11 +93,11 @@
 					href="request/trainer/list.do">
 					<img src="images/request.png" class="img-menu"/><spring:message code="master.page.requests" /> </a></li>
 				
-				<!-- 
+				
 				<li class="nav-item"><a class="nav-link"
 					href="offer/trainer/list.do">
 					<img src="images/deal1.png" class="img-menu"/><spring:message code="master.page.offer" /> </a></li>
-				 -->	
+	
 			<%-- 	<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown">
 								<img src="images/deal1.png" class="img-menu"/><spring:message code="master.page.offer" />

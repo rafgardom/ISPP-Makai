@@ -17,10 +17,11 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 	
+	<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
 
 <div class="card-deck">
 	<div class="card shadow">
-	 	<br><h3 class="card-title"><spring:message code="travel.origin" /></h3>
+	 	<br><h3 class="card-title my-3"><spring:message code="travel.origin" /></h3>
 	  	<div class="card-body">
 	  			<p>
 			<b><spring:message code="travel.country" />:</b>
@@ -53,7 +54,7 @@
 	  	</div>
 	</div>
 	<div class="card shadow">
-	 	<br><h3 class="card-title"><spring:message code="travel.destination" /></h3>
+	 	<br><h3 class="card-title my-3"><spring:message code="travel.destination" /></h3>
 	  	<div class="card-body">
 	  		<p>
 			<b><spring:message code="travel.country" />:</b>
@@ -79,7 +80,7 @@
 	 </div>
 
 </div>
-<div class="card-deck text-center m-md-5">
+<div class="card-deck text-center m-md-5 mt-5">
 	 <div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="travel.seats" /></h3>
 	  	<div class="card-body">
@@ -104,14 +105,13 @@
 	  		</div>
 	  </div>
 </div>
-<div class="card-deck m-3 text-center">
+<div class="card-deck m-md-5 mt-5 text-center">
 	 <div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="travel.vehicle" /></h3>
 	  	<div class="card-body">
 	  		  	<jstl:if test="${vehicle.picture != null}">
-	  		<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
-				<img src="${util.showImage(vehicle.getPicture())} " class="rounded-circle" width="200px" height="200px">
-	  	</jstl:if>
+					<img src="${util.showImage(vehicle.getPicture())} " class="rounded-circle" width="200px" height="200px">
+	  			</jstl:if>
 		  	<p>
 		  		<b><spring:message code="travel.vehicle.carType" />:</b>
 				<jstl:out value="${vehicle.carType}"  />
@@ -139,21 +139,29 @@
 	 <div class="card shadow">
 	 	<br><h3 class="card-title"><spring:message code="travel.passengers" /></h3>
 	  		<div class="card-body">
-	  		<b><spring:message code="travel.persons" />:</b>
 	  		<jstl:if test="${!empty passengers}">
+	  		<h5><b><spring:message code="travel.persons" />:</b></h5>
+	  		
 	  		<jstl:forEach var="passenger" items="${passengers}">
+	  			<div class="center-div">
+			  		<img src="${util.showImage(passenger.getPicture())} " class="rounded-circle" width="200px" height="200px">
+		  		</div>
 		  		<p>
 					<jstl:out value="${passenger.name}"/>
 				</p>
+				
 			</jstl:forEach>
 			</jstl:if>
 			<jstl:if test="${!empty animals}">
-			<b><spring:message code="travel.animals" />:</b>
+			<h5><b><spring:message code="travel.animals" />:</b></h5>
 			<jstl:forEach var="animal" items="${animals}">
+				<div class="center-div">
+			  		<img src="${util.showImage(animal.getPicture())} " class="rounded-circle" width="200px" height="200px">
+		  		</div>
 		  		<p>
 					<jstl:out value="${animal.name}"/>
-					
 				</p>
+			
 			</jstl:forEach>
 			</jstl:if>
 	  		</div>

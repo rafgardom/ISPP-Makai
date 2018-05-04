@@ -51,8 +51,8 @@
 <jstl:if test="${errorMessage != null}">
 			<acme:error code="${errorMessage}"/>
 </jstl:if>
-<div class="card-deck">
-	<div class="card">
+
+	<div class="card text-center offset-md-4 col-md-4 my-5">
 		 	<br><h3 class="card-title"><spring:message code="travel.seats" /></h3>
 		  	<div class="card-body">
 		  		<p><b><spring:message code="travel.animalSeats" />:</b>
@@ -62,31 +62,39 @@
 		  	</div>
 	</div>
 	
+	<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
 	
-	<div class="card">
+	<div class="card text-center">
 		 	<br><h3 class="card-title"><spring:message code="travel.join" /></h3>
 		  	<div class="card-body">
-		  		<form:label path="principalPassenger">
+		  		<h3 class="mt-5">
 					<b><spring:message code="travel.customer"/></b>
-				</form:label>	
+				</h3>	
 				<br>
+				<div class="center-div">
+					<img src="${util.showImage(principal.getPicture())} " class="rounded-circle" width="200px" height="200px">
+				</div>
 				<form:checkbox id="principal" path ="principalPassenger" value="${principalPassenger}"/><jstl:out value="${principal.name}"/>
 				
 				<br>
 				
-		  		<form:label path="animals">
-					<b><spring:message code="travel.animals"/></b>
-				</form:label>
-				<br>
-				<jstl:forEach var="animal" items="${animals}">
-					<form:checkbox path ="animals" value="${animal}"/><jstl:out value="${animal.name}"/>
-				</jstl:forEach>
-				<br>
+				<jstl:if test="${!empty animals}">
+			  		<h3 class="mt-5">
+						<b><spring:message code="travel.animals"/></b>
+					</h3>
+					<br>
+					<jstl:forEach var="animal" items="${animals}">
+						<div class="center-div">
+							<img src="${util.showImage(animal.getPicture())} " class="rounded-circle" width="200px" height="200px">
+						</div>
+						<form:checkbox path ="animals" value="${animal}"/><jstl:out value="${animal.name}"/>
+					</jstl:forEach>
+					<br>
+				</jstl:if>
 
 		  	</div>
 	</div>
 
-</div>
 
 		<br>
 		<acme:submit code="travel.save" name="save" />
