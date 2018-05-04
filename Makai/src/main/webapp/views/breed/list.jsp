@@ -8,6 +8,10 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<div class="center-div">
+	<acme:link href="breed/admin/create.do" type="success" code="breed.create" image="add1"/>
+</div>
+
 <jstl:set var="i" value="${0}"></jstl:set>
 <div class="table-responsive">
 <display:table name="breeds" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">

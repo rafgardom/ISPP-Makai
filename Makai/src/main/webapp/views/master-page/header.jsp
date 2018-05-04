@@ -128,7 +128,11 @@
 					href="administrator/listActors.do">
 					<img src="images/users.png" class="img-menu"/>
 					<spring:message code="master.page.administrator.actors" /> </a></li>
-				<li class="nav-item dropdown"><a
+				<li class="nav-item"><a
+					class="nav-link" href="specie/admin/list.do"><spring:message
+							code="master.page.administrator.species" /></a>
+				</li>
+				<%-- <li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
 							code="master.page.administrator.species" /></a>
 					<div class="dropdown-menu" x-placement="bottom-start"
@@ -138,18 +142,18 @@
 						<a class="dropdown-item" href="specie/admin/create.do"><spring:message
 								code="master.page.administrator.createSpecie" /></a>
 					</div>
-				</li>
+				</li> --%>
 				
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><spring:message
+				<li class="nav-item"><a
+					class="nav-link" href="breed/admin/list.do"><spring:message
 							code="master.page.administrator.breeds" /></a>
-					<div class="dropdown-menu" x-placement="bottom-start"
+					<%-- <div class="dropdown-menu" x-placement="bottom-start"
 						style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 						<a class="dropdown-item" href="breed/admin/list.do"><spring:message
 								code="master.page.administrator.listBreed" /></a>
 						<a class="dropdown-item" href="breed/admin/create.do"><spring:message
 								code="master.page.administrator.createBreed" /></a>
-					</div>
+					</div> --%>
 				</li>
 			</security:authorize>
 

@@ -50,6 +50,9 @@
 		<jstl:if test="${mandatory == true}">
 			<img src="images/asterisk.png"	width="16"/>
 		</jstl:if>
+		<jstl:if test="${mandatory == false}">
+			<small class="text-muted">(<spring:message code="optional"/>)</small>
+		</jstl:if>
 	</form:label>
 	<form:textarea path="${path}" placeholder="${placeholder}" maxlength="${maxlength}" readonly="${readonly}" class="form-control" rows="${rows}" id="text_${path}" name="text" required="${required}"/>
 	<jstl:if test="${maxCharacters != null}">

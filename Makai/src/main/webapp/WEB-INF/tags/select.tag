@@ -58,6 +58,9 @@
     <jstl:if test="${mandatory == true}">
         <img src="images/asterisk.png"  width="16"/> 
     </jstl:if>
+    <jstl:if test="${mandatory == false}">
+		<small class="text-muted">(<spring:message code="optional"/>)</small>
+	</jstl:if>
   </form:label>  
   <form:select size="${size}" id="${id}" path="${path}" class="form-control" onchange="${onchange}" required="${required}">
     <form:option value="0" selected="selected" disabled="${disabled}"><spring:message code="${firstLabel }" /></form:option>    

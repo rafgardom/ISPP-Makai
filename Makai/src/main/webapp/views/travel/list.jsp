@@ -50,6 +50,6 @@
 </div>
 
 <div class="center-div">
-	<acme:link href="travel/create.do" code="travel.create" type="success mx-2" image="add1" image2="car1"/>
 	<acme:link href="travel/menu.do" code="notification.goBack" image="arrow_left"/>
+	<acme:link href="travel/create.do" code="travel.create" type="success mx-2" image="add1" image2="car1"/>
 </div>

@@ -15,7 +15,16 @@
 	</display:column>
 	
 	<acme:column code="animal.name" property="name" />
-	<acme:column code="animal.chipNumber" property="chipNumber" sortable="true"/>
+	
+	<spring:message code="animal.chipNumber" var="titleHeader" />
+	<display:column class="text-center" title="${titleHeader}" sortable="true"  maxLength="30" >
+		<jstl:if test="${row.chipNumber != null}">
+		<jstl:out value="${row.chipNumber}"/>
+		</jstl:if>
+		<jstl:if test="${row.chipNumber == null }">
+		<small><i>NO CHIP</i></small>
+		</jstl:if>
+	</display:column>
 	<acme:column code="animal.birthday" property="birthday" sortable="true" format="{0,date,dd/MM/yyyy}"/>
 <%--	
 	<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>

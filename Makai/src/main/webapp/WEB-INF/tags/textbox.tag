@@ -58,6 +58,9 @@
 			<jstl:if test="${mandatory == true}">
 				<img src="images/asterisk.png"	width="16"/> 
 			</jstl:if>
+			<jstl:if test="${mandatory == false}">
+				<small class="text-muted">(<spring:message code="optional"/>)</small>
+			</jstl:if>
 		</form:label>
 		<jstl:if test="${path == 'year' }">
 			<form:input path="${path}" pattern="\d{4}$" readonly="${readonly}" class="form-control" placeholder="${placeholder}" maxlength="100" required="${required}" title="${textBoxYear }"/>	
