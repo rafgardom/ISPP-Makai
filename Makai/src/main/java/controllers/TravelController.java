@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -113,6 +114,7 @@ public class TravelController extends AbstractController {
 					};
 					fieldError = new FieldError("travelForm", "species", travelForm.getSpecies(), false, codes, null, "");
 					binding.addError(fieldError);
+					throw new IllegalArgumentException();
 				}
 
 				if ((travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() < 1) && (travelForm.getHumanSeats() == null || travelForm.getHumanSeats() < 1)) {
@@ -242,6 +244,7 @@ public class TravelController extends AbstractController {
 		TravelForm travelForm;
 		Transporter principal;
 		boolean noPermission = false;
+		final Date now = new Date();
 
 		principal = this.transporterService.findByPrincipal();
 
@@ -253,6 +256,9 @@ public class TravelController extends AbstractController {
 				noPermission = true;
 				throw new IllegalArgumentException();
 			}
+
+			if (travel.getStartMoment().before(now))
+				throw new IllegalArgumentException();
 
 			result = this.createModelAndView(travelForm);
 		} catch (final Throwable e) {
@@ -268,21 +274,39 @@ public class TravelController extends AbstractController {
 	public ModelAndView save(@Valid final TravelForm travelForm, final BindingResult binding) throws IOException {
 
 		ModelAndView result;
-		Travel travel;
+		Travel travel = new Travel();
+		final Date now = new Date();
 
-		if (binding.hasErrors()) {
-			System.out.println(binding.toString());
-			result = this.createModelAndView(travelForm);
+		try {
 
-		} else
-			try {
-				travel = this.travelService.reconstruct(travelForm, binding);
-				travel = this.travelService.save(travel);
-				result = new ModelAndView("master.page");
+			if (travelForm.getStartDate().before(now)) {
+				FieldError fieldError;
+				final String[] codes = {
+					"travel.time.error"
+				};
+				fieldError = new FieldError("travelForm", "startDate", travel.getStartMoment(), false, codes, null, "");
+				binding.addError(fieldError);
 
-			} catch (final Throwable oops) {
-				result = this.createModelAndView(travelForm, "travel.commit.error");
+				throw new IllegalArgumentException();
 			}
+
+			travel = this.travelService.reconstruct(travelForm, binding);
+
+			if (binding.hasErrors()) {
+				System.out.println(binding.toString());
+				result = this.createModelAndView(travelForm);
+
+			} else
+				try {
+					travel = this.travelService.save(travel);
+					result = new ModelAndView("redirect:/travel/myList.do");
+
+				} catch (final Throwable oops) {
+					result = this.createModelAndView(travelForm, "travel.commit.error");
+				}
+		} catch (final Throwable e) {
+			result = this.createModelAndView(travelForm, "travel.commit.error");
+		}
 		return result;
 
 	}

@@ -916,7 +916,7 @@
 	</bean>
 	
 	<bean id="specie6" class="domain.Specie">
-		<property name="type" value="Establo" />
+		<property name="type" value="Equino" />
 	</bean>
 	
 	

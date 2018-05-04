@@ -87,7 +87,7 @@
 			</div>
 			<div class="col-md-11">
 				<h3><spring:message code="travel.duration" /></h3>
-			  	<acme:input path="duration" type="range" code="travel.duration" min="0" max="1439" style="slider" id="myRange"  /> 
+			  	<acme:input path="duration" type="range" code="travel.duration" min="0" max="1439" style="slider" id="myRange"  mandatory="true"/> 
   				<h6 class="text-center" id="total"></h6>
   			</div>
 			<form:errors cssClass="alert alert-danger form-control" path="duration" />
