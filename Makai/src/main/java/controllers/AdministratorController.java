@@ -21,10 +21,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.AdvertisingService;
+import services.AnimalShelterService;
 import services.BannerService;
+import services.CustomerService;
 import services.NotificationService;
+import services.TrainerService;
 import domain.Actor;
+import domain.Advertising;
+import domain.AnimalShelter;
 import domain.Banner;
+import domain.Customer;
+import domain.Trainer;
 
 @Controller
 @RequestMapping("/administrator")
@@ -32,13 +40,25 @@ public class AdministratorController extends AbstractController {
 
 	//Related services
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private NotificationService	notificationService;
+	private CustomerService			customerService;
 
 	@Autowired
-	private BannerService		bannerService;
+	private TrainerService			trainerService;
+
+	@Autowired
+	private AnimalShelterService	animalShelterService;
+
+	@Autowired
+	private AdvertisingService		advertisingService;
+
+	@Autowired
+	private NotificationService		notificationService;
+
+	@Autowired
+	private BannerService			bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -51,10 +71,16 @@ public class AdministratorController extends AbstractController {
 	@RequestMapping(value = "/listActors", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Actor> actors;
+		final Collection<Customer> customers;
+		final Collection<Trainer> trainers;
+		final Collection<AnimalShelter> animalShelters;
+		final Collection<Advertising> advertisings;
 		final Integer numberNoti;
 		try {
-			actors = this.actorService.findAllActorsWithoutAdmin();
+			customers = this.customerService.findAll();
+			trainers = this.trainerService.findAll();
+			animalShelters = this.animalShelterService.findAll();
+			advertisings = this.advertisingService.findAll();
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
@@ -64,7 +90,10 @@ public class AdministratorController extends AbstractController {
 			result = new ModelAndView("administrator/listActors");
 			result.addObject("requestURI", "administrator/listActors.do");
 			result.addObject("numberNoti", numberNoti);
-			result.addObject("actors", actors);
+			result.addObject("customers", customers);
+			result.addObject("trainers", trainers);
+			result.addObject("animalShelters", animalShelters);
+			result.addObject("advertisings", advertisings);
 
 			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);

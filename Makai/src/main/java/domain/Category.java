@@ -7,7 +7,8 @@ public enum Category {
 	ABUSE("ABUSE", "ABUSO"),
 	ADDICTION("ADDICTION", "ADICCION"),
 	GERENTOLOGY("GERENTOLOGY", "GERONTOLOGIA"),
-	DISEASES("DISEASES", "DOLENCIA"); 
+	DISEASES("DISEASES", "DOLENCIA"),
+	BEHAVIOR("ANIMAL_BEHAVIOR", "CONDUCTA_ANIMAL"); 
 	
 	private final String  name;
 	private final String  spanishName;
@@ -18,11 +19,11 @@ public enum Category {
 		  }
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public String getSpanishName() {
-		return spanishName;
+		return this.spanishName;
 	}
 	
 }
