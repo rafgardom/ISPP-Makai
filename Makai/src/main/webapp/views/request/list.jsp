@@ -8,6 +8,13 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<security:authorize access="hasRole('CUSTOMER')">
+	<div class="center-div mb-3">
+		<acme:link href="request/customer/menu.do" code="notification.goBack" image="arrow_left"/>
+		<acme:link href="request/customer/create.do" code="master.page.request.create" image="add1" type="success mx-3"/>
+	</div>
+</security:authorize>
+
 <div class="table-responsive">
 <display:table name="requests" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 
@@ -59,7 +66,7 @@
 				<jstl:forEach var="offer" items="${offersAcepted}">
 					<jstl:if test="${offer.request.id == row.id}">
 						<jstl:set var="showDelete" value="${false}"/>
-					</jstl:if>
+					</jstl:if> 
 				</jstl:forEach>
 				<jstl:if test="${showDelete == true}">
 					<%-- <acme:link href="request/customer/edit.do?requestId=${row.id}" code="request.edit"/> --%>
@@ -75,10 +82,12 @@
 
 </display:table>
 </div>
-<security:authorize access="hasRole('CUSTOMER')">
+
+<acme:pagination/>
+
+<%-- <jstl:forEach items = "${requests}"  var = "row">
+	${row.description}
+   <a href="profile/displayProfile.do?actorId=${row.customer.id}"><jstl:out value="${row.customer.name}"/></a>
 	<br>
-	<div class="center-div">
-		<acme:link href="request/customer/menu.do" code="notification.goBack" image="arrow_left"/>
-	</div>
-</security:authorize>
+</jstl:forEach> --%>
 

@@ -20,9 +20,9 @@
 <div class="row mx-5 ">
 
 	<div class="col-md-5">
-		<a href="javascript:setParam('language', 'en');">English</a> | <a
-		href="javascript:setParam('language', 'es');">Español</a>
-		<h6><b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai</b></h6>
+		<a href="javascript:setParam('language', 'en');"><img src="images/uk.png"/>&nbsp;English</a> | <a
+		href="javascript:setParam('language', 'es');"><img src="images/spain.png"/>&nbsp;Español</a>
+		<h6 class="mt-3"><b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> team Makai&trade;</b></h6>
 	</div>
 	<div class="col-md-2 center-div my-2">
 		<a href="https://twitter.com/Makai_official" target="_blank" class="mx-2"><img src="images/twitter.png" onmouseover="this.src='images/twitter-black.png'" onmouseout="this.src='images/twitter.png'"/></a>
@@ -31,13 +31,13 @@
 	<div class="col-md-5 text-md-right">
 		<a href="misc/privacyPolicy.do?sc=true"><spring:message code="master.page.privacyPolicy" /></a>&nbsp;&nbsp;&#124;
 		<a href="misc/cookiesPolicy.do"><spring:message code="master.page.cookiesPolicy" /></a>&nbsp;&nbsp;&#124;
-		<a href="misc/faq.do"><spring:message code="master.page.faq" /></a>
+		<a href="misc/faq.do"><img src="images/info.png"/>&nbsp;<spring:message code="master.page.faq" /></a>
 		<br/>
-		<div class="tooltip">
+		<div class="tooltip mt-3">
 			<img src="images/email.png"  onmouseover="this.src='images/email (1).png';" onmouseout="this.src='images/email.png';" > 
 			<p class="my-0"><span class="tooltiptext">Ispp.makai.1718@gmail.com</span></p>
 		</div>
-		<small><i><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i></small>
+		<small class="mt-3"><i><spring:message code="master.page.time" /><fmt:formatDate value="${date}" pattern="dd/MM HH:mm:ss" /></i></small>
 	</div>
 </div>
 
@@ -144,3 +144,20 @@ function PonerCookie(){
 	}
 	
 </script>
+
+<!-- <script>
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+</script> -->
