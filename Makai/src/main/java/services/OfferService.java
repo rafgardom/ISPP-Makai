@@ -339,4 +339,15 @@ public class OfferService {
 		}
 	}
 
+	public Collection<Offer> findOffersAcceptByTrainer(final Trainer trainer) {
+		final Collection<Offer> result = new ArrayList<Offer>();
+
+		for (final Offer aux : trainer.getOffers())
+			if (aux.getIsAccepted())
+				result.add(aux);
+
+		return result;
+
+	}
+
 }

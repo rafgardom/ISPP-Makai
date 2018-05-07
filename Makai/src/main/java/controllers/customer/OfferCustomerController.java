@@ -1,6 +1,8 @@
 
 package controllers.customer;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,16 +17,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import paypal.PaypalEnvironment;
+import services.BannerService;
+import services.NotificationService;
 import services.OfferService;
 import services.PriceService;
 import services.RequestService;
+import services.TrainerService;
 
 import com.paypal.api.payments.Payment;
 
 import controllers.AbstractController;
+import domain.Banner;
 import domain.Offer;
 import domain.Price;
+import domain.Rating;
 import domain.Request;
+import domain.Trainer;
 
 @Controller
 @RequestMapping("/offer/customer")
@@ -33,13 +41,22 @@ public class OfferCustomerController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private OfferService	offerService;
+	private OfferService		offerService;
 
 	@Autowired
-	private RequestService	requestService;
+	private RequestService		requestService;
 
 	@Autowired
-	private PriceService	priceService;
+	private PriceService		priceService;
+
+	@Autowired
+	private TrainerService		trainerService;
+
+	@Autowired
+	private NotificationService	notificationService;
+
+	@Autowired
+	private BannerService		bannerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -156,5 +173,33 @@ public class OfferCustomerController extends AbstractController {
 	//		}
 	//		return result;
 	//	}
+
+	// List -------------------------------------------------------------------		
+
+	@RequestMapping(value = "/listTrainer", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam final int trainerId) {
+		ModelAndView result;
+		Trainer trainer;
+		Collection<Offer> offers;
+		final Collection<Rating> ratings;
+
+		final Integer numberNoti;
+		try {
+			trainer = this.trainerService.findOne(trainerId);
+			offers = this.offerService.findOffersAcceptByTrainer(trainer);
+			numberNoti = this.notificationService.findNotificationWithoutRead();
+
+			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
+
+			result = new ModelAndView("offer/customer/listTrainer");
+			result.addObject("offers", offers);
+			result.addObject("numberNoti", numberNoti);
+			result.addObject("requestURI", "offer/customer/listTrainer.do");
+			result.addObject("imagesBottom", imagesBottom);
+		} catch (final Throwable e) {
+			result = new ModelAndView("error");
+		}
+		return result;
+	}
 
 }

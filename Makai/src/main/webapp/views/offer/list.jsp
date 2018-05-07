@@ -19,9 +19,15 @@
 	<acme:column code="offer.animal" property="animal.name" />
 	<acme:column code="offer.request.owner" property="request.customer.name" />
 	
-	<display:column>
+	<%-- <display:column>
 		<security:authorize access="hasRole('CUSTOMER')">
 			<a href="profile/displayProfile.do?actorId=${row.trainer.id}">${row.trainer.name}</a>
+		</security:authorize>
+	</display:column> --%>
+	
+	<display:column>
+		<security:authorize access="hasRole('CUSTOMER')">
+			<a href="offer/customer/listTrainer.do?trainerId=${row.trainer.id}">${row.trainer.name}</a>
 		</security:authorize>
 	</display:column>
 	
