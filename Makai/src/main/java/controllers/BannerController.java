@@ -45,7 +45,6 @@ public class BannerController extends AbstractController {
 
 		banner = this.bannerService.create();
 		bannerForm = this.bannerService.bannerToFormObject(banner);
-		bannerForm.setPrice(0.0);
 
 		result = this.createEditModelAndView(bannerForm);
 

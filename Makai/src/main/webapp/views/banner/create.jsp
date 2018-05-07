@@ -80,6 +80,10 @@
 	
 	$("#totalViews").on("input", function() {
 		var totalViews = $("#totalViews").val();
-		$('#divPrice').text(Math.round((price*totalViews * 100 )) / 100);
+		if(totalViews.length>7){
+			$("#totalViews").val((totalViews-totalViews%10)/10);
+		}else{
+			$('#divPrice').text(Math.round((price*totalViews * 100 )) / 100);	
+		}
 	});
 </script>

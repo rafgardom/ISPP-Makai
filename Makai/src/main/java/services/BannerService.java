@@ -91,6 +91,7 @@ public class BannerService {
 		result.setClicksNumber(0);
 		result.setEditionsNumber(0);
 		result.setTotalBenefit(0.0);
+		result.setPrice(0.0);
 		//Por dejecto todos son en la zona baja
 		result.setZone("abajo");
 
@@ -282,6 +283,7 @@ public class BannerService {
 		result.setValidated(banner.isValidated());
 		result.setActor(banner.getActor());
 		result.setUrl(banner.getUrl());
+		result.setPrice(banner.getPrice());
 
 		return result;
 	}
