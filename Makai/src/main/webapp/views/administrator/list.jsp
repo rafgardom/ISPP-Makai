@@ -43,6 +43,8 @@
 			
 	</display:column>  
 	
+	<acme:column code="administrator.actor.rating" property="avgRating"/>
+	
 	<spring:message code="administrator.actor.profile" var="profileHeader" />
 	<display:column title="${profileHeader}" sortable="false">
 		<acme:link image="eye" href="profile/displayProfile.do?actorId=${row.id}"/>
