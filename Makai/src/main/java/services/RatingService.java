@@ -252,4 +252,9 @@ public class RatingService {
 		final Rating rating = this.ratingRepository.findByRequestId(requestId);
 		return rating == null ? false : true;
 	}
+
+	public int getFindByRequestIdNumber(final int requestId) {
+		final Rating rating = this.ratingRepository.findByRequestId(requestId);
+		return rating != null ? rating.getStars() : 0;
+	}
 }

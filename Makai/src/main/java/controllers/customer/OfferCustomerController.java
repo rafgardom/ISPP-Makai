@@ -21,6 +21,7 @@ import services.BannerService;
 import services.NotificationService;
 import services.OfferService;
 import services.PriceService;
+import services.RatingService;
 import services.RequestService;
 import services.TrainerService;
 
@@ -57,6 +58,9 @@ public class OfferCustomerController extends AbstractController {
 
 	@Autowired
 	private BannerService		bannerService;
+
+	@Autowired
+	private RatingService		ratingService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -189,9 +193,17 @@ public class OfferCustomerController extends AbstractController {
 			offers = this.offerService.findOffersAcceptByTrainer(trainer);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
+			final int puntuacionRating[] = new int[offers.size()];
+			int cont = 0;
+			for (final Offer aux : offers) {
+				puntuacionRating[cont] = (this.ratingService.getFindByRequestIdNumber(aux.getRequest().getId()));
+				cont++;
+			}
+
 			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 
 			result = new ModelAndView("offer/customer/listTrainer");
+			result.addObject("puntuacionRating", puntuacionRating);
 			result.addObject("offers", offers);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "offer/customer/listTrainer.do");

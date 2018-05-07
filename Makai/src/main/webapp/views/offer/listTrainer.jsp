@@ -17,7 +17,16 @@
 	<acme:column code="offer.animal" property="animal.name" />
 	<acme:column code="offer.request.category" property="request.category" />
 	<acme:column code="offer.request.tags" property="request.tags" />
+	
+	<spring:message code="offer.request.rating" var="customerHeader"/>
+	<display:column title="${customerHeader}">
+			<a>${puntuacionRating[count]}</a>
+	</display:column>
+	
+	
+	
 
+<jstl:set var = "count" value ="${count + 1}"></jstl:set>
 </display:table>
 </div>
 
