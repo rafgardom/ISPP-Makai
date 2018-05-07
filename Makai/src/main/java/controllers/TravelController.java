@@ -89,9 +89,10 @@ public class TravelController extends AbstractController {
 		boolean wrongSeats = false;
 		boolean tooManySeats = false;
 		boolean wrongTime = false;
-		boolean notPrincipal = false;
-		boolean passengers = false;
+		final boolean notPrincipal = false;
+		final boolean passengers = false;
 		boolean speciesError = false;
+		boolean error = false;
 
 		Calendar today;
 		Transporter principal;
@@ -114,42 +115,68 @@ public class TravelController extends AbstractController {
 					};
 					fieldError = new FieldError("travelForm", "species", travelForm.getSpecies(), false, codes, null, "");
 					binding.addError(fieldError);
-					throw new IllegalArgumentException();
+					error = true;
 				}
 
 				if ((travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() < 1) && (travelForm.getHumanSeats() == null || travelForm.getHumanSeats() < 1)) {
-					wrongSeats = true;
-					throw new IllegalArgumentException();
+					FieldError fieldError;
+					final String[] codes = {
+						"travel.seats.error"
+					};
+					fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
 				}
 
 				if (travelForm.getAnimalSeats() + travelForm.getAnimalSeats() > travelForm.getVehicle().getSeats()) {
 					tooManySeats = true;
-					throw new IllegalArgumentException();
+					FieldError fieldError;
+					final String[] codes = {
+						"travel.tooManySeats.error"
+					};
+					fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
 				}
+
+				//				final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
+
+				if (!today.getTime().before(travelForm.getStartDate())) {
+					wrongTime = true;
+					FieldError fieldError;
+					final String[] codes = {
+						"travel.time.error"
+					};
+					fieldError = new FieldError("travelForm", "startDate", travelForm.getStartDate(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
+				}
+
+				//				if (transporters.size() > 0) {
+				//					passengers = true;
+				//					throw new IllegalArgumentException();
+				//				}
+
+				//				if (travel.getTransporterOwner().getId() != principal.getId()) {
+				//					notPrincipal = true;
+				//					throw new IllegalArgumentException();
+				//				}
+				if (travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == 0 || travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == null || travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == null
+					|| travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == 0) {
+					FieldError fieldError;
+					wrongSeats = true;
+					final String[] codes = {
+						"travel.seats.error"
+					};
+					fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
+				}
+
+				if (error)
+					throw new IllegalArgumentException();
 
 				travel = this.travelService.reconstruct(travelForm, binding);
-				final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
-
-				if (!today.getTime().before(travel.getStartMoment())) {
-					wrongTime = true;
-					throw new IllegalArgumentException();
-				}
-
-				if (transporters.size() > 0) {
-					passengers = true;
-					throw new IllegalArgumentException();
-				}
-
-				if (travel.getTransporterOwner().getId() != principal.getId()) {
-					notPrincipal = true;
-					throw new IllegalArgumentException();
-				}
-				if (travel.getHumanSeats() == 0 && travel.getAnimalSeats() == 0 || travel.getHumanSeats() == null && travel.getAnimalSeats() == null || travel.getHumanSeats() == 0 && travel.getAnimalSeats() == null || travel.getHumanSeats() == null
-					&& travel.getAnimalSeats() == 0) {
-					wrongSeats = true;
-					throw new IllegalArgumentException();
-				}
-
 				this.travelService.save(travel);
 				result = new ModelAndView("redirect:myList.do");
 
@@ -276,8 +303,41 @@ public class TravelController extends AbstractController {
 		ModelAndView result;
 		Travel travel = new Travel();
 		final Date now = new Date();
-
+		boolean error = false;
+		boolean wrongTime = false;
+		boolean speciesError = false;
 		try {
+
+			if (travelForm.getSpecies() == null || travelForm.getSpecies().isEmpty()) {
+				speciesError = true;
+				FieldError fieldError;
+				final String[] codes = {
+					"travel.species.error"
+				};
+				fieldError = new FieldError("travelForm", "species", travelForm.getSpecies(), false, codes, null, "");
+				binding.addError(fieldError);
+				error = true;
+			}
+
+			if ((travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() < 1) && (travelForm.getHumanSeats() == null || travelForm.getHumanSeats() < 1)) {
+				FieldError fieldError;
+				final String[] codes = {
+					"travel.seats.error"
+				};
+				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+				binding.addError(fieldError);
+				error = true;
+			}
+
+			if (travelForm.getAnimalSeats() + travelForm.getAnimalSeats() > travelForm.getVehicle().getSeats()) {
+				FieldError fieldError;
+				final String[] codes = {
+					"travel.tooManySeats.error"
+				};
+				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+				binding.addError(fieldError);
+				error = true;
+			}
 
 			if (travelForm.getStartDate().before(now)) {
 				FieldError fieldError;
@@ -286,9 +346,23 @@ public class TravelController extends AbstractController {
 				};
 				fieldError = new FieldError("travelForm", "startDate", travel.getStartMoment(), false, codes, null, "");
 				binding.addError(fieldError);
-
-				throw new IllegalArgumentException();
+				wrongTime = true;
+				error = true;
 			}
+
+			if (travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == 0 || travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == null || travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == null
+				|| travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == 0) {
+				FieldError fieldError;
+				final String[] codes = {
+					"travel.seats.error"
+				};
+				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+				binding.addError(fieldError);
+				error = true;
+			}
+
+			if (error)
+				throw new IllegalArgumentException();
 
 			travel = this.travelService.reconstruct(travelForm, binding);
 
@@ -305,7 +379,12 @@ public class TravelController extends AbstractController {
 					result = this.createModelAndView(travelForm, "travel.commit.error");
 				}
 		} catch (final Throwable e) {
-			result = this.createModelAndView(travelForm, "travel.commit.error");
+			if (wrongTime)
+				result = this.createModelAndView(travelForm, "travel.time.error");
+			else if (speciesError)
+				result = this.createModelAndView(travelForm, "travel.species.error");
+			else
+				result = this.createModelAndView(travelForm, "travel.commit.error");
 		}
 		return result;
 

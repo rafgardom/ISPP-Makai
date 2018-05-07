@@ -4,6 +4,7 @@ package services;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -124,26 +125,9 @@ public class VehicleService {
 	public Vehicle reconstruct(final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
 		Assert.notNull(vehicleForm);
 		Vehicle result;
-		FieldError fieldError;
 
-		if (vehicleForm.getUserImage().getSize() == 0) {
-			final String[] codes = {
-				"vehicle.picture.register.error"
-			};
-			fieldError = new FieldError("vehicleForm", "userImage", vehicleForm.getUserImage(), false, codes, null, "");
-			binding.addError(fieldError);
-
-		} else if (vehicleForm.getUserImage().getSize() > 5242880) {
-
-			final String[] codes = {
-				"vehicle.picture.register.error"
-			};
-			fieldError = new FieldError("vehicleForm", "userImage", vehicleForm.getUserImage(), false, codes, null, "");
-			binding.addError(fieldError);
-		}
-
-		if (!vehicleForm.getUserImage().getContentType().contains("image")) {
-
+		if (vehicleForm.getUserImage().getSize() != 0 && (!vehicleForm.getUserImage().getContentType().contains("image")) || vehicleForm.getUserImage().getSize() > 2097152) {
+			FieldError fieldError;
 			final String[] codes = {
 				"vehicle.picture.register.error"
 			};
@@ -163,6 +147,18 @@ public class VehicleService {
 		result.setYear(vehicleForm.getYear());
 		result.setDescription(vehicleForm.getDescription());
 		result.setColor(vehicleForm.getColor());
+
+		final Pattern newLicensePatter = Pattern.compile("^\\d{4}[A-Z]{3}");
+		final Pattern oldLicensePattern = Pattern.compile("^([A-Z]{1})?([A-Z]{2})?\\d{4}[A-Z]{2}");
+		newLicensePatter.matcher(vehicleForm.getLicense());
+		if (!newLicensePatter.matcher(vehicleForm.getLicense()).matches() && !oldLicensePattern.matcher(vehicleForm.getLicense()).matches()) {
+			FieldError fieldError;
+			final String[] codes = {
+				"vehicle.license.error"
+			};
+			fieldError = new FieldError("vehicleForm", "license", vehicleForm.getLicense(), false, codes, null, "");
+			binding.addError(fieldError);
+		}
 		result.setLicense(vehicleForm.getLicense());
 
 		if (vehicleForm.getUserImage().getSize() > 0)

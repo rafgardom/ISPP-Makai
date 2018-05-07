@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.regex.Pattern;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,7 +66,7 @@ public class VehicleController extends AbstractController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
 	public ModelAndView saveRegister(@Valid final VehicleForm vehicleForm, final BindingResult binding) throws IOException {
 
-		ModelAndView result;
+		ModelAndView result = new ModelAndView();
 		Vehicle vehicle;
 		Calendar today;
 		boolean yearError = false;
@@ -72,13 +74,16 @@ public class VehicleController extends AbstractController {
 
 		today = Calendar.getInstance();
 
+		vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
+			if (binding.toString().contains("userImage"))
+				result.addObject("imageError", "vehicle.license.error");
 			result = this.createModelAndView(vehicleForm);
 
 		} else
 			try {
-				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
+
 				if (today.get(Calendar.YEAR) <= vehicle.getYear()) {
 					yearError = true;
 					throw new IllegalArgumentException();
@@ -137,6 +142,7 @@ public class VehicleController extends AbstractController {
 
 		ModelAndView result;
 		Vehicle vehicle;
+		boolean error = false;
 		boolean pictureTooLong = false;
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -145,18 +151,40 @@ public class VehicleController extends AbstractController {
 		} else
 			try {
 
-				if (vehicleForm.getUserImage().getSize() > 2097152) {
+				if (vehicleForm.getUserImage().getSize() != 0 && (!vehicleForm.getUserImage().getContentType().contains("image")) || vehicleForm.getUserImage().getSize() > 2097152) {
+					FieldError fieldError;
+					final String[] codes = {
+						"vehicle.picture.register.error"
+					};
+					fieldError = new FieldError("vehicleForm", "userImage", vehicleForm.getUserImage(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
 					pictureTooLong = true;
-					throw new IllegalArgumentException();
 				}
 
+				final Pattern newLicensePatter = Pattern.compile("^\\d{4}[A-Z]{3}");
+				final Pattern oldLicensePattern = Pattern.compile("^([A-Z]{1})?([A-Z]{2})?\\d{4}[A-Z]{2}");
+				newLicensePatter.matcher(vehicleForm.getLicense());
+
+				if (!newLicensePatter.matcher(vehicleForm.getLicense()).matches() && !oldLicensePattern.matcher(vehicleForm.getLicense()).matches()) {
+					FieldError fieldError;
+					final String[] codes = {
+						"vehicle.license.error"
+					};
+					fieldError = new FieldError("vehicleForm", "license", vehicleForm.getLicense(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
+				}
+
+				if (error)
+					throw new IllegalArgumentException();
 				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
 				vehicle = this.vehicleService.save(vehicle);
 				result = new ModelAndView("redirect:/vehicle/list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-				if (pictureTooLong == false)
+				if (pictureTooLong == true)
 					result = this.createModelAndView(vehicleForm, "vehicle.pictureSize.error");
 				else
 					result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
