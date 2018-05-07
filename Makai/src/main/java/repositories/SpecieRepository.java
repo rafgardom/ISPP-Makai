@@ -13,7 +13,7 @@ import domain.Specie;
 @Repository
 public interface SpecieRepository extends JpaRepository<Specie, Integer> {
 
-	@Query("select b from Breed b where b.specie.type=?1")
+	@Query("select b from Breed b where b.specie.typeSpa=?1")
 	Collection<Breed> findBreedWithThisSpecie(String specie);
 
 }

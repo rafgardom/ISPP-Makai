@@ -896,218 +896,262 @@
 	
 	<!-- Specie -->
 	<bean id="specie1" class="domain.Specie">
-		<property name="type" value="Perro" />
+		<property name="typeSpa" value="Perro" />
+		<property name="typeEng" value="Dog" />
 	</bean>
 	
 	<bean id="specie2" class="domain.Specie">
-		<property name="type" value="Gato" />
+		<property name="typeSpa" value="Gato" />
+		<property name="typeEng" value="Cat" />
 	</bean>
 	
 	<bean id="specie3" class="domain.Specie">
-		<property name="type" value="Reptil" />
+		<property name="typeSpa" value="Reptil" />
+		<property name="typeEng" value="Reptile" />
 	</bean>
 	
 	<bean id="specie4" class="domain.Specie">
-		<property name="type" value="Roedor" />
+		<property name="typeSpa" value="Roedor" />
+		<property name="typeEng" value="Rodent" />
 	</bean>
 	
 	<bean id="specie5" class="domain.Specie">
-		<property name="type" value="Pájaro" />
+		<property name="typeSpa" value="Pájaro" />
+		<property name="typeEng" value="Bird" />
 	</bean>
 	
 	<bean id="specie6" class="domain.Specie">
-		<property name="type" value="Equino" />
+		<property name="typeSpa" value="Equino" />
+		<property name="typeEng" value="Equine" />
 	</bean>
 	
 	
 	<!-- Breed -->
 	<bean id="breed1" class="domain.Breed">
-		<property name="name" value="Mastin" />
+		<property name="nameSpa" value="Mastin" />
+		<property name="nameEng" value="Mastiff" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed2" class="domain.Breed">
-		<property name="name" value="Siames" />
+		<property name="nameSpa" value="Siames" />
+		<property name="nameEng" value="Siamese" />
 		<property name="specie" ref="specie2" />
 	</bean>
 	
 	<bean id="breed3" class="domain.Breed">
-		<property name="name" value="Lagarto" />
+		<property name="nameSpa" value="Lagarto" />
+		<property name="nameEng" value="Alligator" />
 		<property name="specie" ref="specie3" />
 	</bean>
 	
 	<bean id="breed4" class="domain.Breed">
-		<property name="name" value="Bulldog" />
+		<property name="nameSpa" value="Bulldog" />
+		<property name="nameEng" value="Bulldog" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed5" class="domain.Breed">
-		<property name="name" value="Labrador" />
+		<property name="nameSpa" value="Labrador" />
+		<property name="nameEng" value="Labrador" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed6" class="domain.Breed">
-		<property name="name" value="Pastor alemán" />
+		<property name="nameSpa" value="Pastor alemán" />
+		<property name="nameEng" value="German Shepherd" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed7" class="domain.Breed">
-		<property name="name" value="Yorkshire" />
+		<property name="nameSpa" value="Yorkshire" />
+		<property name="nameEng" value="Yorkshire" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed8" class="domain.Breed">
-		<property name="name" value="Beagle" />
+		<property name="nameSpa" value="Beagle" />
+		<property name="nameEng" value="Beagle" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed9" class="domain.Breed">
-		<property name="name" value="Golden" />
+		<property name="nameSpa" value="Golden" />
+		<property name="nameEng" value="Golden" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed10" class="domain.Breed">
-		<property name="name" value="Bóxer" />
+		<property name="nameSpa" value="Bóxer" />
+		<property name="nameEng" value="Boxer" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed11" class="domain.Breed">
-		<property name="name" value="Perro salchicha" />
+		<property name="nameSpa" value="Perro salchicha" />
+		<property name="nameEng" value="Dachshund" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed12" class="domain.Breed">
-		<property name="name" value="Poodle" />
+		<property name="nameSpa" value="Caniche" />
+		<property name="nameEng" value="Poodle" />
 		<property name="specie" ref="specie1" />
 	</bean>
 	
 	<bean id="breed13" class="domain.Breed">
-		<property name="name" value="Persa" />
+		<property name="nameSpa" value="Persa" />
+		<property name="nameEng" value="Persian" />
 		<property name="specie" ref="specie2" />
 	</bean>
 	
 	<bean id="breed14" class="domain.Breed">
-		<property name="name" value="Maine Coon" />
+		<property name="nameSpa" value="Maine Coon" />
+		<property name="nameEng" value="Maine Coon" />
 		<property name="specie" ref="specie2" />
 	</bean>
 	
 	<bean id="breed15" class="domain.Breed">
-		<property name="name" value="Siberiano" />
+		<property name="nameSpa" value="Siberiano" />
+		<property name="nameEng" value="Siberian" />
 		<property name="specie" ref="specie2" />
 	</bean>
 	
 	<bean id="breed16" class="domain.Breed">
-		<property name="name" value="Radgoll" />
+		<property name="nameSpa" value="Radgoll" />
+		<property name="nameEng" value="Radgoll" />
 		<property name="specie" ref="specie2" />
 	</bean>
 	
 	<bean id="breed17" class="domain.Breed">
-		<property name="name" value="Somalí" />
+		<property name="nameSpa" value="Somalí" />
+		<property name="nameEng" value="Somalian" />
 		<property name="specie" ref="specie2" />
 	</bean>
 	
 	<bean id="breed18" class="domain.Breed">
-		<property name="name" value="Azul ruso" />
+		<property name="nameSpa" value="Azul ruso" />
+		<property name="nameEng" value="Russian blue" />
 		<property name="specie" ref="specie2" />
 	</bean>
 	
 	<bean id="breed19" class="domain.Breed">
-		<property name="name" value="Tortuga" />
+		<property name="nameSpa" value="Tortuga" />
+		<property name="nameEng" value="Turtle" />
 		<property name="specie" ref="specie3" />
 	</bean>
 	
 	<bean id="breed20" class="domain.Breed">
-		<property name="name" value="Serpiente" />
+		<property name="nameSpa" value="Serpiente" />
+		<property name="nameEng" value="Snake" />
 		<property name="specie" ref="specie3" />
 	</bean>
 	
 	<bean id="breed21" class="domain.Breed">
-		<property name="name" value="Hámster" />
+		<property name="nameSpa" value="Hámster" />
+		<property name="nameEng" value="Hamster" />
 		<property name="specie" ref="specie4" />
 	</bean>
 	
 	<bean id="breed22" class="domain.Breed">
-		<property name="name" value="Cobaya" />
+		<property name="nameSpa" value="Cobaya" />
+		<property name="nameEng" value="Guinea pig" />
 		<property name="specie" ref="specie4" />
 	</bean>
 	
 	<bean id="breed23" class="domain.Breed">
-		<property name="name" value="Jerbo" />
+		<property name="nameSpa" value="Jerbo" />
+		<property name="nameEng" value="Jerboa" />
 		<property name="specie" ref="specie4" />
 	</bean>
 	
 	<bean id="breed24" class="domain.Breed">
-		<property name="name" value="Chinchilla" />
+		<property name="nameSpa" value="Chinchilla" />
+		<property name="nameEng" value="Chinchilla" />
 		<property name="specie" ref="specie4" />
 	</bean>
 	
 	<bean id="breed25" class="domain.Breed">
-		<property name="name" value="Ratón" />
+		<property name="nameSpa" value="Ratón" />
+		<property name="nameEng" value="Mouse" />
 		<property name="specie" ref="specie4" />
 	</bean>
 	
 	<bean id="breed26" class="domain.Breed">
-		<property name="name" value="Rata" />
+		<property name="nameSpa" value="Rata" />
+		<property name="nameEng" value="Rat" />
 		<property name="specie" ref="specie4" />
 	</bean>
 	
 	<bean id="breed27" class="domain.Breed">
-		<property name="name" value="Periquito" />
+		<property name="nameSpa" value="Periquito" />
+		<property name="nameEng" value="Parakeet" />
 		<property name="specie" ref="specie5" />
 	</bean>
 	
 	<bean id="breed28" class="domain.Breed">
-		<property name="name" value="Canario" />
+		<property name="nameSpa" value="Canario" />
+		<property name="nameEng" value="Canary" />
 		<property name="specie" ref="specie5" />
 	</bean>
 	
 	<bean id="breed29" class="domain.Breed">
-		<property name="name" value="Jilguero" />
+		<property name="nameSpa" value="Jilguero" />
+		<property name="nameEng" value="Goldfinch" />
 		<property name="specie" ref="specie5" />
 	</bean>
 	
 	<bean id="breed30" class="domain.Breed">
-		<property name="name" value="Loro" />
+		<property name="nameSpa" value="Loro" />
+		<property name="nameEng" value="Parrot" />
 		<property name="specie" ref="specie5" />
 	</bean>
 	
 	<bean id="breed31" class="domain.Breed">
-		<property name="name" value="Cacatúa" />
+		<property name="nameSpa" value="Cacatúa" />
+		<property name="nameEng" value="Cockatoo" />
 		<property name="specie" ref="specie5" />
 	</bean>
 	
 	<bean id="breed32" class="domain.Breed">
-		<property name="name" value="Ninfa" />
+		<property name="nameSpa" value="Ninfa" />
+		<property name="nameEng" value="Cockatiel" />
 		<property name="specie" ref="specie5" />
 	</bean>
 	
 	<bean id="breed33" class="domain.Breed">
-		<property name="name" value="Agaporni" />
+		<property name="nameSpa" value="Agaporni" />
+		<property name="nameEng" value="Lovebird" />
 		<property name="specie" ref="specie5" />
 	</bean>
 	
 	<bean id="breed34" class="domain.Breed">
-		<property name="name" value="Paloma" />
+		<property name="nameSpa" value="Paloma" />
+		<property name="nameEng" value="Pigeon" />
 		<property name="specie" ref="specie5" />
 	</bean>
 	
 	<bean id="breed35" class="domain.Breed">
-		<property name="name" value="Gorrión" />
+		<property name="nameSpa" value="Gorrión" />
+		<property name="nameEng" value="Sparrow" />
 		<property name="specie" ref="specie5" />
 	</bean>
 	
 	<bean id="breed36" class="domain.Breed">
-		<property name="name" value="Caballo" />
+		<property name="nameSpa" value="Caballo" />
+		<property name="nameEng" value="Horse" />
 		<property name="specie" ref="specie6" />
 	</bean>
 	
 	<bean id="breed37" class="domain.Breed">
-		<property name="name" value="Poni" />
+		<property name="nameSpa" value="Poni" />
+		<property name="nameEng" value="Pony" />
 		<property name="specie" ref="specie6" />
 	</bean>
 	
 	<bean id="breed38" class="domain.Breed">
-		<property name="name" value="Burro" />
+		<property name="nameSpa" value="Burro" />
+		<property name="nameEng" value="Donkey" />
 		<property name="specie" ref="specie6" />
 	</bean>
 	

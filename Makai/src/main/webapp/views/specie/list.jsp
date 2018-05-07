@@ -8,6 +8,9 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+
 <div class="center-div">
 	<acme:link href="specie/admin/create.do" type="success" code="specie.create" image="add1"/>
 </div>
@@ -15,7 +18,12 @@
 <div class="table-responsive">
 <display:table name="species" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 	
-	<acme:column code="specie.type" property="type" sortable="true"/>
+	<jstl:if test="${lang == 'es'}">
+		<acme:column code="specie.type" property="typeSpa" sortable="true"/>
+	</jstl:if>
+	<jstl:if test="${lang == 'en'}">
+		<acme:column code="specie.type" property="typeEng" sortable="true"/>
+	</jstl:if>
 	
 	<display:column>
 

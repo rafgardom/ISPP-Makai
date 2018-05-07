@@ -108,7 +108,7 @@ public class BreedService {
 	public Boolean tieneBreedUnAnimal(final Breed breed) {
 		Boolean res = true;
 
-		if (this.breedRepository.findAnimalWithThisBreed(breed.getName()).isEmpty())
+		if (this.breedRepository.findAnimalWithThisBreed(breed.getNameSpa()).isEmpty())
 			res = false;
 
 		return res;

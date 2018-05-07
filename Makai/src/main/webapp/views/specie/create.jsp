@@ -30,7 +30,8 @@
 	
 	<div class="row">
 		<div class="col-md-6">
-			<acme:input code="specie.type" path="type" mandatory="true" />
+			<acme:input code="specie.typeSpa" path="typeSpa" mandatory="true" />
+			<acme:input code="specie.typeEng" path="typeEng" mandatory="true" />
 		</div>
 	</div>
 	

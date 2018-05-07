@@ -58,10 +58,15 @@
 			<jstl:if test="${row.startMoment gt today}">
 				<security:authorize access="hasRole('CUSTOMER')">
 					<jstl:if test="${row.isAccepted==false}">
-						<a class="btn btn-warning btn-lg" href="misc/conditions.do" target="_blank" data-load-url="misc/conditions.do" data-toggle="modal" data-target="#myModal">
-							<img class="icon-button" src="images/paypal4.png"/>
-							<spring:message code="offer.accept" />
-						</a>
+						<jstl:if test="${row.animal.customer == null}">
+							<a class="btn btn-warning btn-lg" href="misc/conditions.do" target="_blank" data-load-url="misc/conditions.do" data-toggle="modal" data-target="#myModal">
+								<img class="icon-button" src="images/paypal4.png"/>
+								<spring:message code="offer.accept" />
+							</a>
+						</jstl:if>
+						<jstl:if test="${row.animal.customer != null}">
+							<acme:link image="paypal4" href="offer/customer/accept.do?offerId=${row.id}" type="warning"  code="offer.accept"/>
+						</jstl:if>
 					</jstl:if>
 					<jstl:if test="${row.isAccepted==true and !tieneRating[count]}">
 						<acme:link image="star-white-32" href="rating/customer/createRequest.do?requestId=${row.request.id}" type="info" code="offer.rating"/>

@@ -30,8 +30,14 @@
 	
 	<div class="row">
 		<div class="col-md-6">
-			<acme:select items="${species }" itemLabel="type" code="breed.specie" path="specie"  mandatory="true" />
-			<acme:input code="breed.name" path="name" mandatory="true" />
+			<jstl:if test="${lang == 'es'}">
+				<acme:select items="${species }" itemLabel="typeSpa" code="breed.specie" path="specie"  mandatory="true" />
+			</jstl:if>
+			<jstl:if test="${lang == 'en'}">
+				<acme:select items="${species }" itemLabel="typeEng" code="breed.specie" path="specie"  mandatory="true" />
+			</jstl:if>
+			<acme:input code="breed.nameSpa" path="nameSpa" mandatory="true" />
+			<acme:input code="breed.nameEng" path="nameEng" mandatory="true" />
 		</div>
 	</div>
 	

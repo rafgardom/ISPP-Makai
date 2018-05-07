@@ -19,16 +19,26 @@ public class Specie extends DomainEntity {
 
 
 	// Attributes -------------------------------------------------------------
-	private String	type;
+	private String	typeSpa;
+	private String	typeEng;
 
 
 	@Column(unique = true)
 	@NotBlank
-	public String getType() {
-		return this.type;
+	public String getTypeSpa() {
+		return this.typeSpa;
 	}
-	public void setType(final String type) {
-		this.type = type;
+	public void setTypeSpa(final String typeSpa) {
+		this.typeSpa = typeSpa;
+	}
+
+	@Column(unique = true)
+	@NotBlank
+	public String getTypeEng() {
+		return this.typeEng;
+	}
+	public void setTypeEng(final String typeEng) {
+		this.typeEng = typeEng;
 	}
 
 	// Relationships ----------------------------------------------------------

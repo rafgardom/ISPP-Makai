@@ -74,7 +74,12 @@
 				<br>
 				<jstl:forEach var="specie" items="${species}">
 				<label class="form-check-label">
-					  <form:checkbox cssClass="mx-1" path ="species" value="${specie}"/><jstl:out value="${specie.type}"/>
+					<jstl:if test="${lang == 'es'}">
+						<form:checkbox cssClass="mx-1" path ="species" value="${specie}"/><jstl:out value="${specie.typeSpa}"/>
+					</jstl:if>
+					<jstl:if test="${lang == 'en'}">
+						<form:checkbox cssClass="mx-1" path ="species" value="${specie}"/><jstl:out value="${specie.typeEng}"/>
+					</jstl:if>
 				</label>
 				</jstl:forEach>
 				

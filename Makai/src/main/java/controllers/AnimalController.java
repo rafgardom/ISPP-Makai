@@ -188,7 +188,7 @@ public class AnimalController extends AbstractController {
 		Actor actor;
 		Animal animal;
 		Breed[] breeds;
-		String specie;
+		Specie specie;
 		String image;
 		Boolean checkA;
 		//		AnimalForm animalForm;
@@ -206,7 +206,7 @@ public class AnimalController extends AbstractController {
 			//			animalForm = this.animalService.animalToFormObject(animal);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 			breeds = animal.getBreeds().toArray(new Breed[animal.getBreeds().size()]);
-			specie = breeds[0].getSpecie().getType();
+			specie = breeds[0].getSpecie();
 			image = Utilities.showImage(animal.getPicture());
 			result = new ModelAndView("animal/display");
 			//			result.addObject("animal", animalForm);

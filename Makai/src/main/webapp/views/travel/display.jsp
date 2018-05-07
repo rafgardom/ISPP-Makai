@@ -16,6 +16,9 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
+<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
 	
 	<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
 
@@ -98,9 +101,12 @@
 	 	<br><h3 class="card-title"><spring:message code="travel.species" /></h3>
 	  		<div class="card-body">
 	  		<jstl:forEach var="specie" items="${species}">
-		  		<p>
-					<jstl:out value="${specie.type}"/>
-				</p>
+	  			<jstl:if test="${lang == 'es'}">
+					<p><jstl:out value="${specie.typeSpa}"/></p>
+				</jstl:if>
+				<jstl:if test="${lang == 'en'}">
+					<p><jstl:out value="${specie.typeEng}"/></p>
+				</jstl:if>
 			</jstl:forEach>
 	  		</div>
 	  </div>

@@ -8,6 +8,10 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
+<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
+<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
+
 <div class="center-div">
  <img src="${animalImage}" class="rounded-circle" alt="<spring:message code='animal.no.picture' />" width="200px" height="200px">
 </div>
@@ -50,15 +54,24 @@
 					<jstl:out value="${animal.sex.name}"  />
 				</jstl:if> --%>
 			</p>
-				
-			<p><b><spring:message code="animal.specie" />:</b> <jstl:out
-				value="${specie}" /></p>
-				
+			
+			<jstl:if test="${r != null}">
+					<jstl:if test="${lang == 'es'}">
+						<p><b><spring:message code="animal.specie" />:</b> <jstl:out value="${specie.typeSpa}" /></p>
+					</jstl:if>
+					<jstl:if test="${lang == 'en'}">
+						<p><b><spring:message code="animal.specie" />:</b> <jstl:out value="${specie.typeEng}" /></p>
+					</jstl:if>
+			</jstl:if>
 			
 			<jstl:forEach var="r" items="${animal.breeds}">
 				<jstl:if test="${r != null}">
-					<p><b><spring:message code="animal.breed" />:</b> <jstl:out
-				value="${r.name}" /></p>
+					<jstl:if test="${lang == 'es'}">
+						<p><b><spring:message code="animal.breed" />:</b> <jstl:out value="${r.nameSpa}" /></p>
+					</jstl:if>
+					<jstl:if test="${lang == 'en'}">
+						<p><b><spring:message code="animal.breed" />:</b> <jstl:out value="${r.nameEng}" /></p>
+					</jstl:if>
 				</jstl:if>
 			</jstl:forEach>
 	  	

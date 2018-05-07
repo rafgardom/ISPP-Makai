@@ -30,11 +30,21 @@
 	</div>
 	
 	<div class="offset-md-1 col-md-6">
-			<acme:select id="specie" firstLabel="animal.choose.specie" items="${species }" itemLabel="type" code="animal.specie" path="specie" onchange="getBreeds();" mandatory="true" />
+			<jstl:if test="${lang == 'es'}">
+				<acme:select id="specie" firstLabel="animal.choose.specie" items="${species }" itemLabel="typeSpa" code="animal.specie" path="specie" onchange="getBreeds('nameSpa');" mandatory="true" />
+			</jstl:if>
+			<jstl:if test="${lang == 'en'}">
+				<acme:select id="specie" firstLabel="animal.choose.specie" items="${species }" itemLabel="typeEng" code="animal.specie" path="specie" onchange="getBreeds('nameEng');" mandatory="true" />
+			</jstl:if>
 			<small>*<spring:message code="animal.specie.advice"/></small>
 			<br><br>
 			<jstl:set var="json" value="${jsonBreeds }" />
-			<acme:select firstLabel="animal.choose.breed" size="9" id="breed" items="${breeds }" itemLabel="name" code="animal.breed" path="breeds" mandatory="true"/>
+			<jstl:if test="${lang == 'es'}">
+				<acme:select firstLabel="animal.choose.breed" size="9" id="breed" items="${breeds }" itemLabel="nameSpa" code="animal.breed" path="breeds" mandatory="true"/>
+			</jstl:if>
+			<jstl:if test="${lang == 'en'}">
+				<acme:select firstLabel="animal.choose.breed" size="9" id="breed" items="${breeds }" itemLabel="nameEng" code="animal.breed" path="breeds" mandatory="true"/>
+			</jstl:if>
 
 	</div>
 	<div class="col-md-6">
@@ -90,7 +100,7 @@ $( function() {
         }
     }
 
-	function getBreeds(){
+	function getBreeds(languague){
 	    var specieVal = document.getElementById("specie").selectedOptions[0].value;
 	    var selectBreeds = document.getElementById("breed");
 	    
@@ -102,7 +112,7 @@ $( function() {
 	    	html ='<option value=0 selected="selected" disabled="true"><spring:message code="animal.choose.breed"/></option>';
 	    	for(var i = 0; i < obj.length; i++) {
 	    		var e = obj[i];
-	            html += "<option value=" + e["id"]  + ">" +e["name"] + "</option>";
+	            html += "<option value=" + e["id"]  + ">" +e[languague] + "</option>";
 	        }
 	    	selectBreeds.innerHTML = html;
 	    }

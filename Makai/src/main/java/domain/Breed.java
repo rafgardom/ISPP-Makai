@@ -22,16 +22,26 @@ public class Breed extends DomainEntity {
 
 
 	// Attributes -------------------------------------------------------------
-	private String	name;
+	private String	nameSpa;
+	private String	nameEng;
 
 
 	@Column(unique = true)
 	@NotBlank
-	public String getName() {
-		return this.name;
+	public String getNameSpa() {
+		return this.nameSpa;
 	}
-	public void setName(final String name) {
-		this.name = name;
+	public void setNameSpa(final String nameSpa) {
+		this.nameSpa = nameSpa;
+	}
+
+	@Column(unique = true)
+	@NotBlank
+	public String getNameEng() {
+		return this.nameEng;
+	}
+	public void setNameEng(final String nameEng) {
+		this.nameEng = nameEng;
 	}
 
 
