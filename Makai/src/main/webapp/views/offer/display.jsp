@@ -83,6 +83,27 @@
 	  	
 	  	</div>
 	</div>
+	
+	<div class="card shadow">
+	 	<br><h3 class="card-title"><spring:message code="offer.trainer" /></h3>
+	  	<div class="card-body">
+	  		<p>
+				<b><spring:message code="offer.trainer.name" />:</b>
+				<a href="offer/customer/listTrainer.do?trainerId=${offer.trainer.id}"><jstl:out value="${offer.trainer.name}"/></a>
+			</p>
+			<jstl:if test="${offer.isAccepted }">
+				<p>
+					<b><spring:message code="offer.trainer.phone" />:</b>
+					<jstl:out value="${offer.trainer.phone}"/>
+				</p>
+				<p>
+					<b><spring:message code="offer.trainer.email" />:</b>
+					<jstl:out value="${offer.trainer.email}"/>
+				</p>
+			</jstl:if>
+	  	
+	  	</div>
+	</div>
 	<div class="card shadow">
 	 	<div class="card-body">
 		 	<p>
