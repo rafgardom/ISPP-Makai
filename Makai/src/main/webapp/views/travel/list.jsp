@@ -39,8 +39,7 @@
 	<display:column>
 	<div class="btn-group">
 		<acme:link href="travel/display.do?travelId=${row.id}" image="eye"/>
-		<jstl:if test="${((row.transporterOwner.id != principal.id) && (row.humanSeats > 0 || row.animalSeats > 0)) || (estilo == 'participo')}">
-			<jstl:set var="show" value="${true}"/>
+		<jstl:if test="${((row.transporterOwner.id != principal.id) && row.animalSeats > 0) || (estilo == 'participo')}">
 			<acme:link href="travel/register.do?travelId=${row.id}" code="travel.register" type="dark" image="map"/>
 		</jstl:if>
 	</div>
