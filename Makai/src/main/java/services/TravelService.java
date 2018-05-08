@@ -120,6 +120,7 @@ public class TravelService {
 
 		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
 		Assert.isTrue(travel.getAnimalSeats() + travel.getAnimalSeats() <= vehicle.getSeats());
+		Assert.isTrue(travel.getAnimalSeats() > travel.getHumanSeats());
 
 		result = this.travelRepository.save(travel);
 
@@ -183,7 +184,7 @@ public class TravelService {
 
 		travel = this.findOne(travelForm.getId());
 
-		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
+		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0));
 		customer = this.customerService.findByPrincipal();
 		Assert.isTrue(travel.getTransporterOwner().getId() != customer.getId());
 
@@ -206,6 +207,8 @@ public class TravelService {
 
 		animalsForm = travelForm.getAnimals();
 		species = travelForm.getSpecies();
+
+		Assert.isTrue(animalsForm.size() >= 1);
 
 		animals = new ArrayList<Animal>();
 		animalsAux = travel.getAnimals();
