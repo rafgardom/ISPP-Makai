@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -114,6 +116,16 @@ public class RequestService {
 	}
 
 	// Other business methods -------------------------------------------------
+	
+	public Page<Request> findRequestPaged(final Customer customer, final int pageNumber, final int pageSize) {
+		PageRequest request;
+		Page<Request> result;
+		
+		request = new PageRequest(pageNumber, pageSize);
+		result = this.requestRepository.findRequestPaged(customer.getId(),request);
+		
+		return result;
+	}
 
 	public Boolean tieneOfferUnRequest(final Request request) {
 		Boolean res = true;
@@ -133,13 +145,12 @@ public class RequestService {
 		return res;
 	}
 
-	public Collection<Request> findRequestsNotAccepted() {
-		Collection<Request> result;
-		Collection<Request> aceptedRequests;
+	public Page<Request> findRequestsNotAcceptedPaged(int pageNumber, int pageSize) {
+		Page<Request> result;
+		PageRequest request;
 
-		result = this.findAll();
-		aceptedRequests = this.requestRepository.findRequestsAccepted();
-		result.removeAll(aceptedRequests);
+		request = new PageRequest(pageNumber, pageSize);
+		result = this.requestRepository.findRequestsNotAcceptedPaged(request);
 
 		return result;
 	}

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BannerService;
@@ -41,25 +43,25 @@ public class RequestTrainerController extends AbstractController {
 	// List -------------------------------------------------------------------		
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(defaultValue="1") final int page, @RequestParam(defaultValue="5") final int nElem) {
 		ModelAndView result;
-		Collection<Request> requests;
+		Page<Request> requests;
 		final Integer numberNoti;
+		final ArrayList<Banner> imagesBottom;
 		try {
-			requests = this.requestService.findRequestsNotAccepted();
+			requests = this.requestService.findRequestsNotAcceptedPaged(page-1,nElem);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
-
+			imagesBottom = this.bannerService.getBannerByZone("abajo");
+		
 			result = new ModelAndView("request/list");
 			result.addObject("requestURI", "request/trainer/list.do");
 			result.addObject("numberNoti", numberNoti);
-			result.addObject("requests", requests);
-			//			result.addObject("imagesLeft", imagesLeft);
+			result.addObject("requests", requests.getContent());
 			result.addObject("imagesBottom", imagesBottom);
-			//			result.addObject("imagesRight", imagesRight);
+			result.addObject("nElem", nElem);
+			result.addObject("pageNumbers", requests.getTotalPages());
+			result.addObject("page", page);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}

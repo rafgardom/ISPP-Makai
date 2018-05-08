@@ -3,6 +3,8 @@ package repositories;
 
 import java.util.Collection;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -24,8 +26,14 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
 	@Query("select o.request from Offer o where o.isAccepted=true")
 	Collection<Request> findRequestsAccepted();
+	
+	@Query("select o.request from Offer o where o.isAccepted=false")
+	Page<Request> findRequestsNotAcceptedPaged(Pageable pageRequest);
 
 	@Query("select distinct o.request from Offer o")
 	Collection<Request> findRequestsWithOffer();
+	
+	@Query("select r from Request r where r.customer.id=?1")
+	Page<Request> findRequestPaged(int customer,Pageable pageRequest);
 
 }

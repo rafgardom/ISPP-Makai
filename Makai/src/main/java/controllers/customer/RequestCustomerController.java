@@ -7,6 +7,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,36 +63,34 @@ public class RequestCustomerController extends AbstractController {
 	// List ---------------------------------------------------------------
 
 	@RequestMapping(value = "/myList", method = RequestMethod.GET)
-	public ModelAndView listByCustomer() {
+	public ModelAndView listByCustomer(@RequestParam(defaultValue="1") final int page, @RequestParam(defaultValue="5") int nElem) {
 		ModelAndView result;
-		Collection<Request> requests;
+		Page<Request> requests;
 		Customer customer;
 		Collection<Offer> offersAcepted;
 		Collection<Request> requestsWithOffer;
 		final Integer numberNoti;
+		final ArrayList<Banner> imagesBottom;
+		
 		try {
 
 			numberNoti = this.notificationService.findNotificationWithoutRead();
-
 			customer = this.customerService.findByPrincipal();
-
-			requests = this.requestService.findRequestByCustomer(customer);
+			requests = this.requestService.findRequestPaged(customer, page-1, nElem);
 			offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
 			requestsWithOffer = this.requestService.findRequestsWithOffer();
-
-			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
-			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
-
+			imagesBottom = this.bannerService.getBannerByZone("abajo");
+			
 			result = new ModelAndView("request/myList");
 			result.addObject("requestURI", "request/customer/myList.do");
 			result.addObject("numberNoti", numberNoti);
-			result.addObject("requests", requests);
+			result.addObject("requests", requests.getContent());
 			result.addObject("offersAcepted", offersAcepted);
 			result.addObject("requestsWithOffer", requestsWithOffer);
-			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);
-			//			result.addObject("imagesRight", imagesRight);
+			result.addObject("nElem", nElem);
+			result.addObject("pageNumbers", requests.getTotalPages());
+			result.addObject("page", page);
 
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
