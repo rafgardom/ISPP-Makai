@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import domain.Animal;
 import domain.Offer;
+import domain.Trainer;
 
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, Integer> {
@@ -33,5 +34,8 @@ public interface OfferRepository extends JpaRepository<Offer, Integer> {
 
 	@Query("select o from Offer o where o.animal.id=?1 and o.isAccepted=false")
 	public Collection<Offer> findNotAcceptedOffersByAnimalId(int animalId);
+
+	@Query("select o.trainer from Offer o where o.id = ?1")
+	public Trainer findTrainerByOfferId(int offerId);
 
 }

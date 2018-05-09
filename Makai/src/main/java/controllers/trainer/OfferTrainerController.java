@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AnimalService;
 import services.BannerService;
+import services.MilestoneService;
 import services.NotificationService;
 import services.OfferService;
 import services.RequestService;
@@ -28,6 +29,7 @@ import controllers.AbstractController;
 import domain.Actor;
 import domain.Animal;
 import domain.Banner;
+import domain.Milestone;
 import domain.Offer;
 import domain.Request;
 import domain.Trainer;
@@ -59,6 +61,9 @@ public class OfferTrainerController extends AbstractController {
 
 	@Autowired
 	private BannerService		bannerService;
+
+	@Autowired
+	private MilestoneService	milestoneService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -156,6 +161,8 @@ public class OfferTrainerController extends AbstractController {
 				result = new ModelAndView("redirect:../../");
 			else {
 
+				final Collection<Milestone> milestones = this.milestoneService.findAllByOffer(offerId);
+
 				result = new ModelAndView("offer/display");
 				result.addObject("offer", offer);
 				result.addObject("principal", actor);
@@ -165,6 +172,11 @@ public class OfferTrainerController extends AbstractController {
 				//				result.addObject("imagesLeft", imagesLeft);
 				result.addObject("imagesBottom", imagesBottom);
 				//				result.addObject("imagesRight", imagesRight);
+
+				if (milestones.size() > 0)
+					result.addObject("hasMilestones", true);
+				else
+					result.addObject("hasMilestones", false);
 			}
 		} catch (final Throwable oops) {
 			result = new ModelAndView("error");
@@ -182,7 +194,10 @@ public class OfferTrainerController extends AbstractController {
 
 		try {
 			offer = this.offerService.findOne(offerId);
+			final Collection<Milestone> milestones = this.milestoneService.findAllByOffer(offerId);
+			this.milestoneService.deleteAll(milestones);
 			this.offerService.delete(offer);
+
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 			result = new ModelAndView("error");

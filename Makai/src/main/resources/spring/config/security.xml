@@ -106,6 +106,14 @@
 		<security:intercept-url pattern="/training/trainer/edit.do" access="hasRole('TRAINER')" />
 		<security:intercept-url pattern="/training/trainer/delete.do" access="hasRole('TRAINER')" />
 		
+		<security:intercept-url pattern="/milestone/list.do" access="hasAnyRole('TRAINER','CUSTOMER')" />
+		<security:intercept-url pattern="/milestone/display.do" access="hasAnyRole('TRAINER','CUSTOMER')" />
+		<security:intercept-url pattern="/milestone/create.do" access="hasRole('TRAINER')" />
+		<security:intercept-url pattern="/milestone/edit.do" access="hasRole('TRAINER')" />
+		<security:intercept-url pattern="/milestone/save.do" access="hasRole('TRAINER')" />
+		<security:intercept-url pattern="/milestone/delete.do" access="hasRole('TRAINER')" />
+		<security:intercept-url pattern="/milestone/complete.do" access="hasRole('TRAINER')" />
+		
 		<security:intercept-url pattern="/notification/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/notification/actor/display.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/notification/actor/delete.do" access="isAuthenticated()" /> 

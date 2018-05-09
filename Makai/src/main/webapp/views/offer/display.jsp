@@ -154,6 +154,15 @@
 	</div>
 
 <div class="center-div">
+	<jstl:if test="${hasMilestones }">
+		<acme:link href="milestone/list.do?offerId=${offer.id}" code="milestone.display" image="eye"/>
+	</jstl:if>
+	<security:authorize access="hasAnyRole('TRAINER')">
+		<jstl:if test="${hasMilestones == false}">
+		<acme:link href="milestone/create.do?offerId=${offer.id }" code="milestone.create" type="success mx-2"  image="target"/>
+	</jstl:if>
+	</security:authorize>
+
 	<security:authorize access="hasAnyRole('CUSTOMER')">
 		<acme:link href="request/customer/myList.do" code="welcome.go.to.request" image="arrow_left"/>
 	</security:authorize>

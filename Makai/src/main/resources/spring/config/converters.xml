@@ -31,6 +31,7 @@
 		<bean class="converters.BannerToStringConverter" />
 		<bean class="converters.BreedToStringConverter" />
 		<bean class="converters.CustomerToStringConverter" />
+		<bean class="converters.MilestoneToStringConverter" />
 		<bean class="converters.NotificationToStringConverter" />
 		<bean class="converters.OfferToStringConverter" />
 		<bean class="converters.PriceToStringConverter" />
@@ -52,6 +53,7 @@
 		<bean class="converters.StringToBannerConverter" />
 		<bean class="converters.StringToBreedConverter" />
 		<bean class="converters.StringToCustomerConverter" />
+		<bean class="converters.StringToMilestoneConverter" />
 		<bean class="converters.StringToNotificationConverter" />
 		<bean class="converters.StringToOfferConverter" />
 		<bean class="converters.StringToPriceConverter" />

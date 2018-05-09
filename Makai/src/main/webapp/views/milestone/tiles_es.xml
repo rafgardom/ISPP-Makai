@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="milestone/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de hitos" />
+		<put-attribute name="body" value="/views/milestone/list.jsp" />
+	</definition>
+	
+	<definition name="milestone/save" extends="master.page">	
+		<put-attribute name="title" value="Formulario de hito" />
+		<put-attribute name="body" value="/views/milestone/register.jsp" />
+	</definition>
+	
+	<definition name="milestone/display" extends="master.page">	
+		<put-attribute name="title" value="Hito" />
+		<put-attribute name="body" value="/views/milestone/display.jsp" />
+	</definition>
+	
+</tiles-definitions>

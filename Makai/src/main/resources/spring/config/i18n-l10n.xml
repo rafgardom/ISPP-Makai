@@ -31,6 +31,7 @@
 		<value>/views/breed/messages</value> 
 		<value>/views/customer/messages</value>
 		<value>/views/generalError/messages</value>
+		<value>/views/milestone/messages</value>
 		<value>/views/notification/messages</value>
 		<value>/views/paypal/messages</value>
 		<value>/views/profile/messages</value>

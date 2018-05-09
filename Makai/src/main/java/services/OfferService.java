@@ -18,6 +18,7 @@ import repositories.OfferRepository;
 import domain.Actor;
 import domain.Animal;
 import domain.Customer;
+import domain.Milestone;
 import domain.Notification;
 import domain.NotificationType;
 import domain.Offer;
@@ -52,6 +53,9 @@ public class OfferService {
 
 	@Autowired
 	private AnimalService		animalService;
+
+	@Autowired
+	private MilestoneService	milestoneService;
 
 
 	// Constructors------------------------------------------------------------
@@ -202,8 +206,15 @@ public class OfferService {
 		Assert.notNull(acceptedOffer);
 
 		final Collection<Offer> nonAcceptedOffers = this.findNonAcceptedOffers(request);
-		if (!nonAcceptedOffers.isEmpty())
+		if (!nonAcceptedOffers.isEmpty()) {
+			// Eliminamos todas las milestone de las offers que van a ser eliminadas
+			for (final Offer offer : nonAcceptedOffers) {
+				final Collection<Milestone> milestones = this.milestoneService.findAllByOffer(offer.getId());
+				this.milestoneService.deleteAll(milestones);
+			}
+
 			this.offerRepository.delete(nonAcceptedOffers);
+		}
 
 	}
 
@@ -237,6 +248,7 @@ public class OfferService {
 
 		/* Modificamos la fecha de finalizacion del entrenamiento en la entidad Animal */
 		this.animalService.editFinishTraining(offer);
+
 	}
 
 	public Offer reconstruct(final OfferForm offerForm, final BindingResult binding) throws IOException {
@@ -348,6 +360,10 @@ public class OfferService {
 
 		return result;
 
+	}
+
+	public Trainer findTrainerByOfferId(final int offerId) {
+		return this.offerRepository.findTrainerByOfferId(offerId);
 	}
 
 }

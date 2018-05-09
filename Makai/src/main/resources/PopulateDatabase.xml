@@ -1299,6 +1299,51 @@
 		<property name="animal" ref="animal3" />
 	</bean>
 	
+	<!-- Milestones -->
+	<bean id="milestone1" class="domain.Milestone">
+		<property name="targetDate" value="2/10/2019 00:00" />
+		<property name="realMoment"><null/></property>
+		<property name="title" value="Identificación del entorno" />
+		<property name="comment"><null/></property>
+		<property name="description" value="Se va a comprobar cómo responde el animal al nuevo entorno" />
+		<property name="problem"><null/></property>
+		<property name="importance" value="5" />
+		<property name="offer" ref="offer1" />
+	</bean>
+	
+	<bean id="milestone2" class="domain.Milestone">
+		<property name="targetDate" value="4/10/2019 00:00" />
+		<property name="realMoment"><null/></property>
+		<property name="title" value="Asimilación de conducta" />
+		<property name="description" value="El animal debe adquirir la nueva conducta de perro guía, vital para su entrenamiento" />
+		<property name="comment"><null/></property>
+		<property name="problem"><null/></property>
+		<property name="importance" value="5" />
+		<property name="offer" ref="offer1" />
+	</bean>
+	
+	<bean id="milestone3" class="domain.Milestone">
+		<property name="targetDate" value="7/10/2019 00:00" />
+		<property name="realMoment"><null/></property>
+		<property name="title" value="Validación de conducta" />
+		<property name="description" value="El animal será puesto a prueba para comprobar la asimilación de conducta" />
+		<property name="comment"><null/></property>
+		<property name="problem"><null/></property>
+		<property name="importance" value="5" />
+		<property name="offer" ref="offer1" />
+	</bean>
+	
+	<bean id="milestone4" class="domain.Milestone">
+		<property name="targetDate" value="12/26/2018 00:00" />
+		<property name="realMoment"><null/></property>
+		<property name="title" value="Dar la pata" />
+		<property name="description" value="El animal será entrenado para que mediante un estímulo externo realice la acción de dar la pata" />
+		<property name="comment"><null/></property>
+		<property name="problem"><null/></property>
+		<property name="importance" value="3" />
+		<property name="offer" ref="offer2" />
+	</bean>
+	
 	<!-- Vehicle -->
 	<bean id="vehicle1" class="domain.Vehicle">
 		<property name="brand" value="SEAT" />
