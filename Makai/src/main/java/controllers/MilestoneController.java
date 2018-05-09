@@ -153,31 +153,31 @@ public class MilestoneController extends AbstractController {
 		ModelAndView result;
 		Milestone milestone;
 
-		//		try {
-		if (binding.hasErrors())
-			result = this.createEditModelAndView(milestoneForm, "milestone.validation.error");
-		else {
-			milestone = this.milestoneService.reconstruct(milestoneForm, binding);
+		try {
 			if (binding.hasErrors())
 				result = this.createEditModelAndView(milestoneForm, "milestone.validation.error");
-			else
-				try {
-					final Trainer trainer = this.trainerService.findByPrincipal();
-					final Offer offer = this.offerService.findOne(milestoneForm.getOfferId());
+			else {
+				milestone = this.milestoneService.reconstruct(milestoneForm, binding);
+				if (binding.hasErrors())
+					result = this.createEditModelAndView(milestoneForm, "milestone.validation.error");
+				else
+					try {
+						final Trainer trainer = this.trainerService.findByPrincipal();
+						final Offer offer = this.offerService.findOne(milestoneForm.getOfferId());
 
-					Assert.isTrue(offer.getTrainer().equals(trainer));
+						Assert.isTrue(offer.getTrainer().equals(trainer));
 
-					milestone.setOffer(offer);
-					this.milestoneService.save(milestone);
-					result = new ModelAndView("redirect:/milestone/list.do?offerId=" + milestoneForm.getOfferId());
+						milestone.setOffer(offer);
+						this.milestoneService.save(milestone);
+						result = new ModelAndView("redirect:/milestone/list.do?offerId=" + milestoneForm.getOfferId());
 
-				} catch (final Throwable e) {
-					result = this.createEditModelAndView(milestoneForm, "milestone.save.error");
-				}
+					} catch (final Throwable e) {
+						result = this.createEditModelAndView(milestoneForm, "milestone.save.error");
+					}
+			}
+		} catch (final Throwable e) {
+			result = this.createEditModelAndView(milestoneForm, "milestone.validation.error");
 		}
-		//		} catch (final Throwable e) {
-		//			result = this.createEditModelAndView(milestoneForm, "milestone.validation.error");
-		//		}
 		return result;
 	}
 
