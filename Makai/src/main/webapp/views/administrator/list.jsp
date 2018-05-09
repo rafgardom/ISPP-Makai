@@ -10,8 +10,23 @@
 
 <security:authentication var="principalUserAccount" property="principal" />
 
+
+
 <spring:message code="administrator.actor.customers" var="customersHeader" />
-<h3><jstl:out value="${customersHeader}"/></h3>
+<spring:message code="administrator.actor.trainers" var="trainersHeader" />
+<spring:message code="administrator.actor.animalShelters" var="animalSheltersHeader" />
+<spring:message code="administrator.actor.advertisings" var="advertisingsHeader" />
+
+<div class="center-div my-3">
+	<button onclick="tableCustomer()" class="btn btn-lg btn-primary mx-3" id="button1">${customersHeader}</button>
+	<button onclick="tableTrainers()" class="btn btn-lg btn-primary mx-3" id="button2">${trainersHeader}</button>
+	<button onclick="tableAnimalshelters()" class="btn btn-lg btn-primary mx-3" id="button3">${animalSheltersHeader}</button>
+	<button onclick="tableAdvertisings()" class="btn btn-lg btn-primary mx-3" id="button4">${advertisingsHeader}</button>
+</div>
+
+
+<div id='tableCustomers'>
+<h2 class="text-center"><jstl:out value="${customersHeader}"/></h2>
 <div class="table-responsive">
 <display:table name="customers" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
 	
@@ -27,18 +42,18 @@
 			
 			
 			<jstl:if test="${not empty row.coordinates.state }">
-				</br>
+				<br>
 					<spring:message code="administrator.actor.state" />: <jstl:out value="${row.coordinates.state }"></jstl:out>
 				
 			</jstl:if>
 			
 			<jstl:if test="${not empty row.coordinates.province }">
-				</br>
+				<br>
 					<spring:message code="administrator.actor.provice" />: <jstl:out value="${row.coordinates.province }"></jstl:out>
 				
 			</jstl:if>
 			
-			</br>
+			<br>
 				<spring:message code="administrator.actor.city" />: <jstl:out value="${row.coordinates.city }"></jstl:out> 
 			
 	</display:column>  
@@ -67,9 +82,10 @@
 </display:table>
 </div>
 
+</div>
 
-<spring:message code="administrator.actor.trainers" var="trainersHeader" />
-<h3><jstl:out value="${trainersHeader}"/></h3>
+<div id='tableTrainers'>
+<h2 class="text-center"><jstl:out value="${trainersHeader}"/></h2>
 <div class="table-responsive">
 <display:table name="trainers" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
 	
@@ -85,18 +101,18 @@
 			
 			
 			<jstl:if test="${not empty row.coordinates.state }">
-				</br>
+				<br>
 					<spring:message code="administrator.actor.state" />: <jstl:out value="${row.coordinates.state }"></jstl:out>
 				
 			</jstl:if>
 			
 			<jstl:if test="${not empty row.coordinates.province }">
-				</br>
+				<br>
 					<spring:message code="administrator.actor.provice" />: <jstl:out value="${row.coordinates.province }"></jstl:out>
 				
 			</jstl:if>
 			
-			</br>
+			<br>
 				<spring:message code="administrator.actor.city" />: <jstl:out value="${row.coordinates.city }"></jstl:out> 
 			
 	</display:column>  
@@ -126,8 +142,10 @@
 </div>
 
 
-<spring:message code="administrator.actor.animalShelters" var="animalSheltersHeader" />
-<h3><jstl:out value="${animalSheltersHeader}"/></h3>
+</div>
+
+<div id='tableAnimalshelters'>
+<h2 class="text-center"><jstl:out value="${animalSheltersHeader}"/></h2>
 <div class="table-responsive">
 <display:table name="animalShelters" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
 	
@@ -143,18 +161,18 @@
 			
 			
 			<jstl:if test="${not empty row.coordinates.state }">
-				</br>
+				<br>
 					<spring:message code="administrator.actor.state" />: <jstl:out value="${row.coordinates.state }"></jstl:out>
 				
 			</jstl:if>
 			
 			<jstl:if test="${not empty row.coordinates.province }">
-				</br>
+				<br>
 					<spring:message code="administrator.actor.provice" />: <jstl:out value="${row.coordinates.province }"></jstl:out>
 				
 			</jstl:if>
 			
-			</br>
+			<br>
 				<spring:message code="administrator.actor.city" />: <jstl:out value="${row.coordinates.city }"></jstl:out> 
 			
 	</display:column>  
@@ -181,9 +199,11 @@
 </display:table>
 </div>
 
+</div>
 
-<spring:message code="administrator.actor.advertisings" var="advertisingsHeader" />
-<h3><jstl:out value="${advertisingsHeader}"/></h3>
+
+<div id='tableAdvertisings'>
+<h2 class="text-center"><jstl:out value="${advertisingsHeader}"/></h2>
 <div class="table-responsive">
 <display:table name="advertisings" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
 	
@@ -199,18 +219,18 @@
 			
 			
 			<jstl:if test="${not empty row.coordinates.state }">
-				</br>
+				<br>
 					<spring:message code="administrator.actor.state" />: <jstl:out value="${row.coordinates.state }"></jstl:out>
 				
 			</jstl:if>
 			
 			<jstl:if test="${not empty row.coordinates.province }">
-				</br>
+				<br>
 					<spring:message code="administrator.actor.provice" />: <jstl:out value="${row.coordinates.province }"></jstl:out>
 				
 			</jstl:if>
 			
-			</br>
+			<br>
 				<spring:message code="administrator.actor.city" />: <jstl:out value="${row.coordinates.city }"></jstl:out> 
 			
 	</display:column>   
@@ -236,3 +256,50 @@
 	</display:column> 
 </display:table>
 </div>
+
+</div>
+
+<script>
+function tableCustomer(){
+	document.getElementById("button1").classList.add('disabled');
+	document.getElementById("button2").classList.remove('disabled');
+	document.getElementById("button3").classList.remove('disabled');
+	document.getElementById("button4").classList.remove('disabled');
+	document.getElementById("tableTrainers").classList.add('d-none');
+	document.getElementById("tableAdvertisings").classList.add('d-none');
+	document.getElementById("tableAnimalshelters").classList.add('d-none');
+	document.getElementById("tableCustomers").classList.remove('d-none');
+}
+function tableTrainers(){
+	document.getElementById("button1").classList.remove('disabled');
+	document.getElementById("button2").classList.add('disabled');
+	document.getElementById("button3").classList.remove('disabled');
+	document.getElementById("button4").classList.remove('disabled');
+	document.getElementById("tableTrainers").classList.remove('d-none');
+	document.getElementById("tableAdvertisings").classList.add('d-none');
+	document.getElementById("tableAnimalshelters").classList.add('d-none');
+	document.getElementById("tableCustomers").classList.add('d-none');
+}
+function tableAdvertisings(){
+	document.getElementById("button1").classList.remove('disabled');
+	document.getElementById("button2").classList.remove('disabled');
+	document.getElementById("button3").classList.remove('disabled');
+	document.getElementById("button4").classList.add('disabled');
+	document.getElementById("tableTrainers").classList.add('d-none');
+	document.getElementById("tableAdvertisings").classList.remove('d-none');
+	document.getElementById("tableAnimalshelters").classList.add('d-none');
+	document.getElementById("tableCustomers").classList.add('d-none');
+}
+function tableAnimalshelters(){
+	document.getElementById("button1").classList.remove('disabled');
+	document.getElementById("button2").classList.remove('disabled');
+	document.getElementById("button3").classList.add('disabled');
+	document.getElementById("button4").classList.remove('disabled');
+	document.getElementById("tableTrainers").classList.add('d-none');
+	document.getElementById("tableAdvertisings").classList.add('d-none');
+	document.getElementById("tableAnimalshelters").classList.remove('d-none');
+	document.getElementById("tableCustomers").classList.add('d-none');
+}
+
+
+</script>
