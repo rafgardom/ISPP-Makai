@@ -93,9 +93,17 @@
 </display:table>
 </div>
 
-<div class="center-div">
-	<acme:link href="request/customer/myList.do" code="notification.goBack" image="arrow_left"/>
-</div>
+<security:authorize access="hasAnyRole('CUSTOMER')">
+	<div class="center-div">
+		<acme:link href="request/customer/myList.do" code="notification.goBack" image="arrow_left"/>
+	</div>
+</security:authorize>
+
+<security:authorize access="hasAnyRole('TRAINER')">
+	<div class="center-div">
+		<acme:link href="" code="notification.goBack" image="arrow_left"/>
+	</div>
+</security:authorize>
 
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
