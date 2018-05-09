@@ -836,6 +836,7 @@
 	<bean id="trainer1" class="domain.Trainer">
 		<property name="name" value="Marta" />
 		<property name="surname" value="Carmona" />
+		<property name="certifyingCompany" value="Junta de Andalucía" />
 		<property name="nid" value="116598T" />
 		<property name="email" value="marta@gmail.com" />
 		<property name="phone" value="+34 632144487" />
@@ -857,6 +858,7 @@
 	<bean id="trainer2" class="domain.Trainer">
 		<property name="name" value="Shelu" />
 		<property name="surname" value="Martinez" />
+		<property name="certifyingCompany" value="Junta de Andalucía" />
 		<property name="nid" value="116698T" />
 		<property name="email" value="shelu@gmail.com" />
 		<property name="phone" value="+34 632144487" />
@@ -877,6 +879,7 @@
 	<bean id="trainer3" class="domain.Trainer">
 		<property name="name" value="Diego" />
 		<property name="surname" value="Rodríguez" />
+		<property name="certifyingCompany" value="Junta de Andalucía" />
 		<property name="nid" value="886598T" />
 		<property name="email" value="diego@gmail.com" />
 		<property name="phone" value="+34 632144487" />

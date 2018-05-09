@@ -41,6 +41,7 @@
 	
 			<acme:textbox code="trainer.name" path="name" mandatory="true" />
 			<acme:textbox code="trainer.surname" path="surname" mandatory="true" />
+			<acme:textbox code="trainer.certifyingCompany" path="certifyingCompany" mandatory="false" />
 			<acme:input image="phone" code="trainer.phone" path="phone" mandatory="true" />
 			<acme:input image="at" code="trainer.email" path="email" mandatory="true" />
 			<acme:textbox code="trainer.nid" path="nid" mandatory="true" />

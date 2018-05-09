@@ -217,6 +217,7 @@ public class TrainerService {
 		result.setPhone(trainerForm.getPhone());
 		result.setPicture(trainerForm.getPicture());
 		result.setSurname(trainerForm.getSurname());
+		result.setCertifyingCompany(trainerForm.getCertifyingCompany());
 
 		final MultipartFile userImage = trainerForm.getUserImage();
 		result.setPicture(userImage.getBytes());
@@ -249,6 +250,7 @@ public class TrainerService {
 		result.setSurname(trainer.getSurname());
 		result.setOffers(result.getOffers());
 		result.setAvgRating(trainer.getAvgRating());
+		result.setCertifyingCompany(trainer.getCertifyingCompany());
 
 		return result;
 	}

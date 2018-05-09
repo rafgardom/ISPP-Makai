@@ -29,6 +29,7 @@ public class Trainer extends Actor {
 	private String	surname;
 	private String	nid;
 	private Double	avgRating;
+	private String	certifyingCompany;
 
 
 	@NotBlank
@@ -55,6 +56,15 @@ public class Trainer extends Actor {
 	}
 	public void setAvgRating(final Double avgRating) {
 		this.avgRating = avgRating;
+	}
+
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getCertifyingCompany() {
+		return this.certifyingCompany;
+	}
+
+	public void setCertifyingCompany(final String certifyingCompany) {
+		this.certifyingCompany = certifyingCompany;
 	}
 
 

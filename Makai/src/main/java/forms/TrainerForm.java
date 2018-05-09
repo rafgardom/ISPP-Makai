@@ -38,6 +38,7 @@ public class TrainerForm {
 	private MultipartFile		userImage;
 	private double				avgRating;
 	private UserAccount			userAccount;
+	private String				certifyingCompany;
 
 
 	//Constructor
@@ -185,6 +186,14 @@ public class TrainerForm {
 
 	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
+	}
+
+	public String getCertifyingCompany() {
+		return this.certifyingCompany;
+	}
+
+	public void setCertifyingCompany(final String certifyingCompany) {
+		this.certifyingCompany = certifyingCompany;
 	}
 
 }
