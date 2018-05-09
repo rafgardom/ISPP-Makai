@@ -9,32 +9,24 @@
 
 <div class="table-responsive">
 <display:table name="milestones" id="row" pagesize="10" requestURI="${RequestURI}" class="displaytag">
-
-<%-- 	<jstl:set var="estilo" value="normal" /> --%>
-<%-- 	<jstl:if test="${principal.id == row.transporterOwner.id}"> --%>
-<%-- 		<jstl:set var="estilo" value="propietario" /> --%>
-<%-- 	</jstl:if> --%>
-<%-- 	<jstl:if test="${principal.travelPassengers.contains(row)}"> --%>
-<%-- 		<jstl:set var="estilo" value="participo" /> --%>
-<%-- 	</jstl:if> --%>
-<%-- 	<jstl:forEach var="animal" items="${myAnimals}"> --%>
-<%-- 		<jstl:if test="${row.animals.contains(animal)}"> --%>
-<%-- 			<jstl:set var="estilo" value="participo" /> --%>
-<%-- 		</jstl:if> --%>
-<%-- 	</jstl:forEach> --%>
 	
 
 	<acme:column code="milestone.title" property="title" sortable="true"/>
-<%-- 	<acme:column code="milestone.description" property="description" sortable="true"/> --%>
-	<acme:column code="milestone.targetDate" property="targetDate" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true"/>
-	<acme:column code="milestone.importance" property="importance" sortable="true"/>
+	<acme:column code="milestone.targetDate" property="targetDate" format="{0,date,dd/MM/yyyy}" sortable="true"/>
+	
+	<spring:message code="milestone.importance" var="milestoneHeader" />
+	<display:column class="text-center" title="${milestoneHeader}" sortable="true">
+		<jstl:forEach var = "i" begin = "1" end = "${row.importance}" >
+			<img src="images/star-32.png">
+		</jstl:forEach>
+	</display:column>
 	<spring:message code="milestone.isComplete" var="titleHeader" />
 	<display:column class="text-center" title="${titleHeader}" sortable="true" maxLength="30">
 		<jstl:if test="${row.realMoment != null}">
-			<img class="icon-button" src="images/thumbs-up.png"/>
+			<img src="images/true.png"/>
 		</jstl:if>
 		<jstl:if test="${row.realMoment == null}">
-		<img class="icon-button" src="images/thumb-down.png"/>
+		<img src="images/false.png"/>
 		</jstl:if>
 	</display:column>
 	

@@ -31,7 +31,11 @@
 				<b><spring:message code="offer.request" />:</b>
 				<jstl:out value="${offer.request.tags}" />
 			</p>
-
+			<div class="center-div">
+				<jstl:if test="${hasMilestones }">
+					<acme:link href="milestone/list.do?offerId=${offer.id}" code="milestone.display" image="hito" type="primary mb-3"/>
+				</jstl:if>
+			</div>
 	  	</div>
 </div>
 
@@ -140,8 +144,6 @@
 	</div>
 </div>
 
-
-
 <div class="card shadow text-center mb-3">
 		<br><h3 class="card-title mt-4"><spring:message code="offer.comment" /></h3>
 	 	<div class="card-body">	
@@ -154,9 +156,7 @@
 	</div>
 
 <div class="center-div">
-	<jstl:if test="${hasMilestones }">
-		<acme:link href="milestone/list.do?offerId=${offer.id}" code="milestone.display" image="eye"/>
-	</jstl:if>
+	
 	<security:authorize access="hasAnyRole('TRAINER')">
 		<jstl:if test="${hasMilestones == false}">
 		<acme:link href="milestone/create.do?offerId=${offer.id }" code="milestone.create" type="success mx-2"  image="target"/>
@@ -169,5 +169,6 @@
 	<jstl:if test="${(offer.trainer.id==principal.id) && (offer.isAccepted==false)}">
 		<acme:link href="offer/trainer/edit.do?offerId=${offer.id}" code="offer.edit" type="warning" image="edit"/>
 	</jstl:if>
+
 </div>
 
