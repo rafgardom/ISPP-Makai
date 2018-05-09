@@ -93,6 +93,10 @@
 </display:table>
 </div>
 
+<div class="center-div">
+	<acme:link href="request/customer/myList.do" code="notification.goBack" image="arrow_left"/>
+</div>
+
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
 	<div class="modal-dialog modal-dialog-centered modal-lg">

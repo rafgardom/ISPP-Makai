@@ -18,9 +18,71 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<div class="card-deck">
+<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
+
+<div class="card shadow text-center mb-3 offset-md-4 col-md-4">
+	 	<div class="card-body">
+		 	<p>
+				<b><spring:message code="offer.price" />:</b>
+				<jstl:out value="${offer.price}" />&euro;
+			</p>
+			
+			<p>
+				<b><spring:message code="offer.request" />:</b>
+				<jstl:out value="${offer.request.tags}" />
+			</p>
+
+	  	</div>
+</div>
+
+<div class="card-deck text-center my-3">
+	
 	<div class="card shadow">
-	 	<br><h3 class="card-title"><spring:message code="offer.destination" /></h3>
+	 	<br><h3 class="card-title mt-4"><spring:message code="offer.animal" /></h3>
+	  	<div class="card-body">
+	  	
+		  	<div class="center-div">
+				<img src="${util.showImage(offer.getAnimal().getPicture())} " class="rounded-circle" width="200px" height="200px">	
+			</div>
+	  		<p>
+				<b><spring:message code="offer.animal.name" />:</b>
+				<a href="animal/display.do?animalId=${offer.animal.id}"><jstl:out value="${offer.animal.name}"/></a>
+			</p>
+			
+			<acme:link href="animal/display.do?animalId=${offer.animal.id}" code="view.animal" image="print"/>
+	
+	  	</div>
+	</div>
+	<div class="card shadow">
+	 	<br><h3 class="card-title mt-4"><spring:message code="offer.trainer" /></h3>
+	  	<div class="card-body">
+	  	
+	  		<div class="center-div">
+				<img src="${util.showImage(offer.getTrainer().getPicture())} " class="rounded-circle" width="200px" height="200px">	
+			</div>
+	  		<p>
+				<b><spring:message code="offer.trainer.name" />:</b>
+				<a href="offer/customer/listTrainer.do?trainerId=${offer.trainer.id}"><jstl:out value="${offer.trainer.name}"/></a>
+			</p>
+			<jstl:if test="${offer.isAccepted }">
+				<p>
+					<b><spring:message code="offer.trainer.phone" />:</b>
+					<jstl:out value="${offer.trainer.phone}"/>
+				</p>
+				<p>
+					<b><spring:message code="offer.trainer.email" />:</b>
+					<jstl:out value="${offer.trainer.email}"/>
+				</p>
+			</jstl:if>	
+			<acme:link href="profile/displayProfile.do?actorId=${offer.trainer.id}" code="view.profile" image="user-white"/>	
+	  	</div>
+	</div>
+	
+</div>
+
+<div class="card-deck mb-3 ">
+	<div class="card shadow">
+	 	<br><h3 class="card-title mt-4"><spring:message code="offer.destination" /></h3>
 	  	<div class="card-body">
 		  	 <p>
 				<b><spring:message code="offer.coordinates.country" />:</b>
@@ -49,85 +111,54 @@
 	  	</div>
 	</div>
 	<div class="card shadow">
-	 	<br><h3 class="card-title"><spring:message code="offer.duration" /></h3>
+	 	<br><h3 class="card-title mt-4"><spring:message code="offer.duration" /></h3>
 	  	<div class="card-body">
 			<p>
 				<b><spring:message code="offer.startMoment" />:</b>
-				<jstl:out value="${offer.startMoment}"  />
+				<fmt:formatDate value="${offer.startMoment}" pattern="dd/MM/yyyy" />
 			</p>
-			<p>
-				<b><spring:message code="offer.duration.year" />:</b>
-				<jstl:out value="${offer.duration.year}" />
-			</p>
-			
-			<p>
-				<b><spring:message code="offer.duration.month" />:</b>
-				<jstl:out value="${offer.duration.month}" />
-			</p>
-			
-			<p>
-				<b><spring:message code="offer.duration.day" />:</b>
-				<jstl:out value="${offer.duration.day}" />
-			</p>
-		</div>
-	</div>
-	</div>
-<div class="card-deck my-3">
-	<div class="card shadow">
-	 	<br><h3 class="card-title"><spring:message code="offer.animal" /></h3>
-	  	<div class="card-body">
-	  		<p>
-				<b><spring:message code="offer.animal.name" />:</b>
-				<a href="animal/display.do?animalId=${offer.animal.id}"><jstl:out value="${offer.animal.name}"/></a>
-			</p>
-	  	
-	  	</div>
-	</div>
-	
-	<div class="card shadow">
-	 	<br><h3 class="card-title"><spring:message code="offer.trainer" /></h3>
-	  	<div class="card-body">
-	  		<p>
-				<b><spring:message code="offer.trainer.name" />:</b>
-				<a href="offer/customer/listTrainer.do?trainerId=${offer.trainer.id}"><jstl:out value="${offer.trainer.name}"/></a>
-			</p>
-			<jstl:if test="${offer.isAccepted }">
+			<jstl:if test="${offer.duration.year !=0}">
 				<p>
-					<b><spring:message code="offer.trainer.phone" />:</b>
-					<jstl:out value="${offer.trainer.phone}"/>
-				</p>
-				<p>
-					<b><spring:message code="offer.trainer.email" />:</b>
-					<jstl:out value="${offer.trainer.email}"/>
+					<b><spring:message code="offer.duration.year" />:</b>
+					<jstl:out value="${offer.duration.year}" />
 				</p>
 			</jstl:if>
-	  	
-	  	</div>
+			
+			<jstl:if test="${offer.duration.month !=0}">
+				<p>
+					<b><spring:message code="offer.duration.month" />:</b>
+					<jstl:out value="${offer.duration.month}" />
+				</p>
+			</jstl:if>
+			<jstl:if test="${offer.duration.day !=0}">
+				<p>
+					<b><spring:message code="offer.duration.day" />:</b>
+					<jstl:out value="${offer.duration.day}" />
+				</p>
+			</jstl:if>
+		</div>
 	</div>
-	<div class="card shadow">
-	 	<div class="card-body">
-		 	<p>
-				<b><spring:message code="offer.price" />:</b>
-				<jstl:out value="${offer.price}" />
-			</p>
-			
+</div>
+
+
+
+<div class="card shadow text-center mb-3">
+		<br><h3 class="card-title mt-4"><spring:message code="offer.comment" /></h3>
+	 	<div class="card-body">	
 			<p>
-				<b><spring:message code="offer.request" />:</b>
-				<jstl:out value="${offer.request.tags}" />
-			</p>
-			
-			<p>
-				<b><spring:message code="offer.comment" />:</b>
 				<jstl:out value="${offer.comment}" />
 			</p>
 			
 
 	  	</div>
 	</div>
-</div>
 
+<div class="center-div">
+	<security:authorize access="hasAnyRole('CUSTOMER')">
+		<acme:link href="request/customer/myList.do" code="welcome.go.to.request" image="arrow_left"/>
+	</security:authorize>
 	<jstl:if test="${(offer.trainer.id==principal.id) && (offer.isAccepted==false)}">
 		<acme:link href="offer/trainer/edit.do?offerId=${offer.id}" code="offer.edit" type="warning" image="edit"/>
 	</jstl:if>
-	
+</div>
 
