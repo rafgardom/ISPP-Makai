@@ -34,13 +34,21 @@
 	<display:column>
 	<div class="btn-group">
 		<acme:link href="milestone/display.do?milestoneId=${row.id}" image="eye"/>
-		<acme:link image="edit" href="milestone/edit.do?milestoneId=${row.id}" type="warning"/>
+		
+		<security:authorize access="hasAnyRole('TRAINER')">
+			<acme:link image="edit" href="milestone/edit.do?milestoneId=${row.id}" type="warning"/>
+		</security:authorize>
+		
 		<jstl:if test="${row.offer.isAccepted and row.realMoment == null}">
 			<acme:confirm href="milestone/complete.do?milestoneId=${row.id}" id="${row.id}" image="trophy"/>
 		</jstl:if>
-		<jstl:if test="${row.offer.isAccepted == false }">
+		
+		<security:authorize access="hasAnyRole('TRAINER')">
+			<jstl:if test="${row.offer.isAccepted == false }">
 				<acme:delete href="milestone/delete.do?milestoneId=${row.id}" id="${row.id}"/>
-		</jstl:if>
+			</jstl:if>
+		</security:authorize>
+		
 	</div>
 	</display:column>
 	
