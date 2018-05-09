@@ -134,9 +134,15 @@ public class MilestoneService {
 				calendar.add(Calendar.MONTH, offer.getDuration().getYear());
 			final Date endTraining = calendar.getTime();
 
-			Assert.isTrue(milestoneForm.getTargetDate().after(now));
-			Assert.isTrue(milestoneForm.getTargetDate().before(endTraining));
+			boolean skip = false;
+			if (milestoneForm.getId() != 0)
+				if (milestoneForm.getTargetDate().equals(result.getTargetDate()))
+					skip = true;
 
+			if (skip = false) {
+				Assert.isTrue(milestoneForm.getTargetDate().after(now));
+				Assert.isTrue(milestoneForm.getTargetDate().before(endTraining));
+			}
 			result.setTargetDate(milestoneForm.getTargetDate());
 		} catch (final Throwable e) {
 			result.setTargetDate(new Date());

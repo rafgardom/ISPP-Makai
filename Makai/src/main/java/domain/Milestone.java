@@ -11,6 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
@@ -61,6 +62,7 @@ public class Milestone extends DomainEntity {
 	}
 
 	@NotBlank
+	@Size(max = 100)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getTitle() {
 		return this.title;
@@ -70,6 +72,7 @@ public class Milestone extends DomainEntity {
 		this.title = title;
 	}
 
+	@Size(max = 500)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getComment() {
 		return this.comment;
@@ -79,6 +82,7 @@ public class Milestone extends DomainEntity {
 		this.comment = comment;
 	}
 
+	@Size(max = 500)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getProblem() {
 		return this.problem;
@@ -98,6 +102,7 @@ public class Milestone extends DomainEntity {
 	}
 
 	@NotBlank
+	@Size(max = 500)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDescription() {
 		return this.description;
