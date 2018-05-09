@@ -139,8 +139,6 @@ public class TravelController extends AbstractController {
 					error = true;
 				}
 
-				//				final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
-
 				if (!today.getTime().before(travelForm.getStartDate())) {
 					wrongTime = true;
 					FieldError fieldError;
@@ -152,15 +150,6 @@ public class TravelController extends AbstractController {
 					error = true;
 				}
 
-				//				if (transporters.size() > 0) {
-				//					passengers = true;
-				//					throw new IllegalArgumentException();
-				//				}
-
-				//				if (travel.getTransporterOwner().getId() != principal.getId()) {
-				//					notPrincipal = true;
-				//					throw new IllegalArgumentException();
-				//				}
 				if (travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == 0 || travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == null || travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == null
 					|| travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == 0) {
 					FieldError fieldError;
@@ -228,27 +217,33 @@ public class TravelController extends AbstractController {
 
 		ModelAndView result;
 		boolean speciesError = false;
+		boolean animalsQuantityError = false;
 		Breed[] breeds;
 		Specie specie;
 		Collection<Specie> species;
 		Collection<Animal> animalsForm;
 
 		if (binding.hasErrors())
-			//System.out.println(binding.toString());
 			result = this.registerModelAndView(travelForm);
 		else
 			try {
 				animalsForm = travelForm.getAnimals();
 				species = travelForm.getSpecies();
 
-				for (final Animal a : animalsForm) {
-					breeds = a.getBreeds().toArray(new Breed[a.getBreeds().size()]);
-					specie = breeds[0].getSpecie();
-					if (!species.contains(specie)) {
-						speciesError = true;
-						throw new IllegalArgumentException();
-					}
+				if (travelForm.isPrincipalPassenger() && animalsForm == null) {
+					animalsQuantityError = true;
+					throw new IllegalArgumentException();
 				}
+
+				if (animalsForm != null)
+					for (final Animal a : animalsForm) {
+						breeds = a.getBreeds().toArray(new Breed[a.getBreeds().size()]);
+						specie = breeds[0].getSpecie();
+						if (!species.contains(specie)) {
+							speciesError = true;
+							throw new IllegalArgumentException();
+						}
+					}
 
 				this.travelService.registerTravel(travelForm);
 
@@ -256,8 +251,10 @@ public class TravelController extends AbstractController {
 				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				if (speciesError)
-					result = this.registerModelAndView(travelForm, "travel.species.error");
+				if (animalsQuantityError)
+					result = this.registerModelAndView(travelForm, "travel.animalsQuantityError.error");
+				else if (speciesError)
+					result = this.registerModelAndView(travelForm, "travel.wrongSpecies.error");
 				else
 					result = this.registerModelAndView(travelForm, "travel.commit.error");
 			}
@@ -306,7 +303,15 @@ public class TravelController extends AbstractController {
 		boolean error = false;
 		boolean wrongTime = false;
 		boolean speciesError = false;
+		boolean passengers = false;
+		final Transporter principal;
+		final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
+
 		try {
+			if (transporters != null || travelForm.getAnimals() != null) {
+				passengers = true;
+				throw new IllegalArgumentException();
+			}
 
 			if (travelForm.getSpecies() == null || travelForm.getSpecies().isEmpty()) {
 				speciesError = true;
@@ -383,6 +388,8 @@ public class TravelController extends AbstractController {
 				result = this.createModelAndView(travelForm, "travel.time.error");
 			else if (speciesError)
 				result = this.createModelAndView(travelForm, "travel.species.error");
+			else if (passengers)
+				result = this.createModelAndView(travelForm, "travel.passengers.error");
 			else
 				result = this.createModelAndView(travelForm, "travel.commit.error");
 		}

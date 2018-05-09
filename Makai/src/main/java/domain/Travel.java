@@ -85,7 +85,7 @@ public class Travel extends DomainEntity {
 		this.duration = duration;
 	}
 
-	@Min(1)
+	@Min(0)
 	public Integer getAnimalSeats() {
 		return this.animalSeats;
 	}
