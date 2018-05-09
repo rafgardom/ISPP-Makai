@@ -27,7 +27,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select o.request from Offer o where o.isAccepted=true")
 	Collection<Request> findRequestsAccepted();
 
-	@Query("select o.request from Offer o where o.isAccepted=false")
+	@Query("select distinct r from Request r where r not in((select o.request from Offer o where o.isAccepted=true))")
 	Page<Request> findRequestsNotAcceptedPaged(Pageable pageRequest);
 
 	@Query("select distinct o.request from Offer o")
