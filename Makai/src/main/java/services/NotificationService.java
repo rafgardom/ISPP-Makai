@@ -177,7 +177,7 @@ public class NotificationService {
 		customer = request.getCustomer();
 		notification = this.create(customer);
 		notification.setReason("#OC0");
-		notification.setDescription(request.getCategory().getSpanishName() + "(" + request.getCategory().getName() + ")" + " " + request.getTags());
+		notification.setDescription(": " + request.getTags());
 		notification.setType(NotificationType.REQUEST);
 
 		this.save(notification);
@@ -208,7 +208,7 @@ public class NotificationService {
 		for (final Trainer t : trainers) {
 			notification = this.create(t);
 			notification.setReason("#RC0" + request.getCategory());
-			notification.setDescription(" " + request.getTags());
+			notification.setDescription(": " + request.getTags());
 			notification.setType(NotificationType.REQUEST);
 			this.save(notification);
 		}
