@@ -29,6 +29,7 @@
 	<jstl:set value="disabled" var="disabled2"/>
 </jstl:if>
 
+<jstl:if test="${pageNumbers>0}">
 <div class="center-div mt-4">
   <ul class="pagination">
 	  <jstl:forEach var = "i" begin="0" end="${pageNumbers-1}">
@@ -61,3 +62,4 @@
    
   </ul>
 </div>
+</jstl:if>
