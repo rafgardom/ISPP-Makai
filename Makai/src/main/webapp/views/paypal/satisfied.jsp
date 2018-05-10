@@ -15,11 +15,11 @@
 	<img src="images/shield.png" style="margin-right: -2rem;"/>
 	<img src="images/paypal.png" />
 	<jstl:if test="${offerId}">
-		<meta http-equiv="refresh" content="3;url=offer/customer/list.do?requestId=${requestId }" />
+		<meta http-equiv="refresh" content="3;url=/makai/offer/customer/list.do?requestId=${requestId }" />
 		<spring:message code="payment.redirecting"/> <img src="images/Loading_icon.gif" />
 	</jstl:if>
 	<jstl:if test="${banner}">
-		<meta http-equiv="refresh" content="3;url=banner/actor/list.do" />
+		<meta http-equiv="refresh" content="3;url=/makai/banner/actor/list.do" />
 		<spring:message code="payment.redirecting"/> <img src="images/Loading_icon.gif" />
 	</jstl:if>
 </div>

@@ -71,6 +71,7 @@ public class VehicleController extends AbstractController {
 		Calendar today;
 		boolean yearError = false;
 		boolean pictureTooLong = false;
+		boolean error = false;
 
 		today = Calendar.getInstance();
 
@@ -84,23 +85,40 @@ public class VehicleController extends AbstractController {
 		} else
 			try {
 
-				if (today.get(Calendar.YEAR) <= vehicle.getYear()) {
+				if (today.get(Calendar.YEAR) < vehicle.getYear()) {
 					yearError = true;
-					throw new IllegalArgumentException();
+					FieldError fieldError;
+					final String[] codes = {
+						"vehicle.year.error"
+					};
+					fieldError = new FieldError("vehicleForm", "year", vehicleForm.getYear(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
 				}
 				if (vehicleForm.getUserImage().getSize() > 2097152) {
 					pictureTooLong = true;
-					throw new IllegalArgumentException();
+					FieldError fieldError;
+					final String[] codes = {
+						"vehicle.pictureSize.error"
+					};
+					fieldError = new FieldError("vehicleForm", "userImage", vehicleForm.getUserImage(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
 				}
+
+				if (error)
+					throw new IllegalArgumentException();
 
 				vehicle = this.vehicleService.save(vehicle);
 				result = new ModelAndView("redirect:/vehicle/list.do");
 
 			} catch (final Throwable oops) {
-				if (yearError = true)
-					result = this.createModelAndView(vehicleForm, "vehicle.year.error");
-				if (pictureTooLong == true)
-					result = this.createModelAndView(vehicleForm, "vehicle.pictureSize.error");
+				//				if (yearError = true)
+				//					result = this.createModelAndView(vehicleForm, "vehicle.year.error");
+				//				if (pictureTooLong == true)
+				//					result = this.createModelAndView(vehicleForm, "vehicle.pictureSize.error");
+				if (error)
+					result = this.createModelAndView(vehicleForm, "vehicle.validation.error");
 				else
 					result = this.createModelAndView(vehicleForm, "vehicle.commit.error");
 			}
@@ -144,6 +162,7 @@ public class VehicleController extends AbstractController {
 		Vehicle vehicle;
 		boolean error = false;
 		boolean pictureTooLong = false;
+		final Calendar today = Calendar.getInstance();
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
 			result = this.createModelAndView(vehicleForm);
@@ -160,6 +179,16 @@ public class VehicleController extends AbstractController {
 					binding.addError(fieldError);
 					error = true;
 					pictureTooLong = true;
+				}
+
+				if (today.get(Calendar.YEAR) < vehicleForm.getYear()) {
+					FieldError fieldError;
+					final String[] codes = {
+						"vehicle.year.error"
+					};
+					fieldError = new FieldError("vehicleForm", "year", vehicleForm.getYear(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
 				}
 
 				final Pattern newLicensePatter = Pattern.compile("^\\d{4}[A-Z]{3}");
