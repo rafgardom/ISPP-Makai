@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="offer/list" extends="master.page">
-		<put-attribute name="title" value="Mis ofertas pendientes" />
+		<put-attribute name="title" value="Mis ofertas activas" />
 		<put-attribute name="body" value="/views/offer/list.jsp" />
 	</definition>
 
