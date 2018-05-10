@@ -144,10 +144,14 @@ public class TravelService {
 
 		transporters = this.transporterService.findPassengersByTravel(travel.getId());
 
+		for (final Animal aux : travel.getAnimals())
+			if (!transporters.contains(aux.getCustomer()))
+				transporters.add(aux.getCustomer());
+
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
 
-		if (transporters.size() != 0)
+		if (transporters.size() != 0 || !travel.getAnimals().isEmpty())
 			for (final Transporter t : transporters) {
 				travels_participated = t.getTravelPassengers();
 				if (travels_participated.contains(travel)) {

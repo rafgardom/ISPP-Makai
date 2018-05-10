@@ -789,7 +789,6 @@
 		<property name="avgRating" value="15.4" />
 		<property name="travelPassengers">
 			<list>
-				<ref bean="travel2"/>
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount2" />
