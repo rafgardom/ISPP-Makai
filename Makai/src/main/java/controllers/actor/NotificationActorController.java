@@ -91,6 +91,9 @@ public class NotificationActorController extends AbstractController {
 
 			this.notificationService.notificationViewed(notification);
 
+			//if (notification.getReason().substring(0, 4).equals("Camb"))
+			//	notification.setReason("Camb" + notification.getReason());
+
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");

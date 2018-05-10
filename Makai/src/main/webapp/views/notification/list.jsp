@@ -18,8 +18,40 @@
 	</display:column>
 	
 	<acme:column code="notification.moment" property="moment" format="{0,date,HH:mm:ss dd/MM/yyyy}" sortable="true"/>
-	<acme:column code="notification.reason" property="reason" sortable="true"/>
 	
+	<spring:message code="notification.reason" var="reasonHeader" />
+	<display:column title="${reasonHeader}" class="text-center" sortable="true">
+		<jstl:if test="${!row.reason.substring(0,1).equals('#')}">
+			<jstl:out value="${row.reason}" />
+		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,4).equals('#TD0')}">
+			<spring:message code="notification.info.reason.travelDelete" />
+		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,4).equals('#TR0')}">
+			<spring:message code="notification.info.reason.travelRegister" />
+		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,4).equals('#RC0')}">
+			<spring:message code="notification.info.reason.requestCreate" />
+		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,4).equals('#RN0')}">
+			<spring:message code="notification.info.reason.ratingNegative" />
+		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,4).equals('#OC0')}">
+			<spring:message code="notification.info.reason.offerCreate" />
+		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,4).equals('#OA0')}">
+			<spring:message code="notification.info.reason.offerAccept" />
+		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,4).equals('#OP0')}">
+			<spring:message code="notification.info.reason.offerPet" />
+		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,4).equals('#BC0')}">
+			<spring:message code="notification.info.reason.bannerCreate" />
+		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,4).equals('#BA0')}">
+			<spring:message code="notification.info.reason.bannerAccept" />
+		</jstl:if>
+	</display:column>
 	<display:column>
 
 		<div class="btn-group">	

@@ -161,10 +161,10 @@ public class RatingService {
 
 			if (result.getTrainer() != null) {
 				count = this.count0starsByTrainerId(result.getTrainer().getId());
-				message = "El entrenador " + result.getTrainer().getName() + ", tiene " + count + " voto(s) negativo(s).";
+				message = "trainer#RN0" + result.getTrainer().getName() + "#RN0" + count;
 			} else {
 				count = this.count0starsByTravelId(result.getTravel().getId());
-				message = "El viaje " + result.getTravel().getId() + ", tiene " + count + " voto(s) negativo(s).";
+				message = "travel#RN0" + result.getTravel().getId() + "#RN0" + count;
 			}
 
 			// comprobamos si tiene alguno mas a 1, y si es asi, se crea una notificacion al admin
@@ -173,7 +173,7 @@ public class RatingService {
 				final Administrator admin = this.administratorService.findOne();
 				notification = this.notificationService.create(admin);
 				notification.setType(NotificationType.RATING);
-				notification.setReason("Demasiadas puntuaciones negativas.");
+				notification.setReason("#RN0");
 				notification.setDescription(message);
 
 				this.notificationService.save(notification);

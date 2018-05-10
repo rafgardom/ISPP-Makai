@@ -176,8 +176,8 @@ public class NotificationService {
 
 		customer = request.getCustomer();
 		notification = this.create(customer);
-		notification.setReason("Nueva oferta en su solicitud: " + request.getTags());
-		notification.setDescription("A un entrenador le interesa su solicitud: " + request.getTags());
+		notification.setReason("#OC0");
+		notification.setDescription(" " + request.getTags());
 		notification.setType(NotificationType.REQUEST);
 
 		this.save(notification);
@@ -191,8 +191,8 @@ public class NotificationService {
 
 		trainer = offer.getTrainer();
 		notification = this.create(trainer);
-		notification.setReason("Oferta aceptada");
-		notification.setDescription("La oferta" + offer.getComment() + "ha sido aceptada.");
+		notification.setReason("#OA0");
+		notification.setDescription(".");
 		notification.setType(NotificationType.OFFER);
 
 		this.save(notification);
@@ -207,8 +207,8 @@ public class NotificationService {
 		trainers = this.trainerService.findTrainerSameCategory(request.getCategory());
 		for (final Trainer t : trainers) {
 			notification = this.create(t);
-			notification.setReason("Nueva solicitud con su misma categoría: " + request.getCategory());
-			notification.setDescription("Podría interesarle crear una oferta a dicha solicitud: " + request.getTags());
+			notification.setReason("#RC0" + request.getCategory());
+			notification.setDescription(" " + request.getTags());
 			notification.setType(NotificationType.REQUEST);
 			this.save(notification);
 		}

@@ -156,8 +156,8 @@ public class TravelService {
 					customer.setTravelPassengers(travels_participated);
 					this.customerService.save(customer);
 					notification = this.notificationService.create(customer);
-					notification.setReason("Viaje eliminado");
-					notification.setDescription("Se ha eliminado un viaje en el que estabas apuntado");
+					notification.setReason("#TD0");
+					notification.setDescription(".");
 					notification.setType(NotificationType.TRAVEL);
 					this.notificationService.save(notification);
 				}
@@ -232,8 +232,8 @@ public class TravelService {
 		this.travelRepository.save(travel);
 
 		notification = this.notificationService.create(travel.getTransporterOwner());
-		notification.setReason("Nueva inscripcion a su viaje");
-		notification.setDescription("Un usuario se ha apuntado a un viaje creado por usted");
+		notification.setReason("#TR0");
+		notification.setDescription(".");
 		notification.setType(NotificationType.TRAVEL);
 		this.notificationService.save(notification);
 

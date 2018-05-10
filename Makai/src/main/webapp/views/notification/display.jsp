@@ -27,16 +27,98 @@
 			<p><b><spring:message code="notification.moment" />:</b> 
 			<fmt:formatDate value="${notification.moment}" pattern="dd/MM/yyyy HH:mm:ss" />
 	
-			<p><b><spring:message code="notification.reason" />:</b> <jstl:out
-					value="${notification.reason}" /></p>
+			<p><b><spring:message code="notification.reason" />:</b>
+			
+				<jstl:if test="${!notification.reason.substring(0,1).equals('#')}">
+					<jstl:out value="${notification.reason}" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#TD0')}">
+					<spring:message code="notification.info.reason.travelDelete" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#TR0')}">
+					<spring:message code="notification.info.reason.travelRegister" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#RC0')}">
+					<spring:message code="notification.info.reason.requestCreate" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#RN0')}">
+					<spring:message code="notification.info.reason.ratingNegative" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#OC0')}">
+					<spring:message code="notification.info.reason.offerCreate" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#OA0')}">
+					<spring:message code="notification.info.reason.offerAccept" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#OP0')}">
+					<spring:message code="notification.info.reason.offerPet" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#BC0')}">
+					<spring:message code="notification.info.reason.bannerCreate" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#BA0')}">
+					<spring:message code="notification.info.reason.bannerAccept" />
+				</jstl:if>
+			</p>
 			</div>
 		</div>
 	</div>
 	<div class="offset-md-3 col-md-6 my-3 text-center">
 		<div class="card shadow">
 		  	<div class="card-body"> 	
-			<p><b><spring:message code="notification.description" />:</b> <jstl:out
-					value="${notification.description}" /></p>
+			<p><b><spring:message code="notification.description" />:</b>
+				<jstl:if test="${!notification.reason.substring(0,1).equals('#')}">
+					<jstl:out value="${notification.description}" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#TD0')}">
+					<spring:message code="notification.info.description.travelDelete" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#TR0')}">
+					<spring:message code="notification.info.description.travelRegister" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#RC0')}">
+					<spring:message code="notification.info.description.requestCreate1" />
+					<jstl:out value="${notification.description}" />
+					<spring:message code="notification.info.description.requestCreate2" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#RN0')}">
+					<jstl:set var="text" value="${notification.description.split('#RN0')}" />
+					<jstl:if test="${text[0].equals('trainer')}">
+						<spring:message code="notification.info.description.ratingNegative1.1" />
+					</jstl:if>
+					<jstl:if test="${text[0].equals('travel')}">
+						<spring:message code="notification.info.description.ratingNegative1.2" />
+					</jstl:if>
+					<jstl:out value="${text[1]}" />
+					<spring:message code="notification.info.description.ratingNegative2" />
+					<jstl:out value="${text[2]}" />
+					<spring:message code="notification.info.description.ratingNegative3" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#OC0')}">
+					<spring:message code="notification.info.description.offerCreate" />
+					<jstl:out value="${notification.description}" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#OA0')}">
+					<spring:message code="notification.info.description.offerAccept" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#OP0')}">
+					<spring:message code="notification.info.description.offerPet1" />
+					<jstl:out value="${notification.description}" />
+					<spring:message code="notification.info.description.offerPet1" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#BC0')}">
+					<jstl:set var="text" value="${notification.description.split('#BC0')}" />
+					<spring:message code="notification.info.description.bannerCreate1" />
+					<jstl:out value="${text[0]}" />
+					<spring:message code="notification.info.description.bannerCreate2" />
+					<jstl:out value="${text[1]}" />
+					<spring:message code="notification.info.description.bannerCreate3" />
+					<jstl:out value="${text[2]}" />
+				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,4).equals('#BA0')}">
+					<spring:message code="notification.info.description.bannerAccept" />
+				</jstl:if>
+			</p>
 			</div>
 		</div>
 	</div>

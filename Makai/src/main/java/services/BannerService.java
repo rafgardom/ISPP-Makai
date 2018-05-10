@@ -134,8 +134,8 @@ public class BannerService {
 
 			notification = this.notificationService.createForBanner();
 
-			notification.setReason("Banner creado");
-			notification.setDescription("Se ha creado un anuncio por parte de " + banner.getActor().getName() + " con correco electrónico " + banner.getActor().getEmail() + " y teléfono " + banner.getActor().getPhone());
+			notification.setReason("#BC0");
+			notification.setDescription(banner.getActor().getName() + "#BC0" + banner.getActor().getEmail() + "#BC0" + banner.getActor().getPhone());
 
 			this.notificationService.save(notification);
 		}
@@ -466,8 +466,8 @@ public class BannerService {
 		notification = this.notificationService.create(banner.getActor());
 
 		notification.setType(NotificationType.BANNER);
-		notification.setReason("Banner aceptado");
-		notification.setDescription("Un banner que usted ha registrado ha sido aceptado.");
+		notification.setReason("#BA0");
+		notification.setDescription(".");
 
 		this.notificationService.save(notification);
 
