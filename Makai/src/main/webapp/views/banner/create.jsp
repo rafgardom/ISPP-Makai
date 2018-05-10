@@ -64,7 +64,12 @@
 		*&nbsp;<spring:message code="banner.advice.edit"/>
 	</small>
 	<br>
-	<acme:submit code="banner.create" name="save" />
+	<jstl:if test="${bannerForm.id == 0 }">
+		<acme:submit code="banner.create" name="save" />
+	</jstl:if>
+	<jstl:if test="${bannerForm.id != 0 }">
+		<acme:submit code="banner.edit" name="save" />
+	</jstl:if>
 	<acme:cancel code="banner.cancel" url="" />
 	
 </form:form>

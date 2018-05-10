@@ -163,6 +163,89 @@ public class BannerService {
 
 	// Other business methods -------------------------------------------------
 
+	public boolean validate(final Banner banner, final BannerForm bannerForm, final BindingResult binding) throws IOException {
+		boolean result = false;
+
+		if (bannerForm.getTotalViews() < 1) {
+			FieldError fieldError;
+			final String[] codes = {
+				"banner.totalViews.error"
+			};
+			fieldError = new FieldError("bannerForm", "totalViews", bannerForm.getTotalViews(), false, codes, null, "");
+			binding.addError(fieldError);
+			result = true;
+
+		}
+		if (bannerForm.getId() == 0 && bannerForm.getBannerImage().getSize() == 0) {
+			FieldError fieldError;
+			final String[] codes = {
+				"banner.picture.empty.error"
+			};
+			fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
+			binding.addError(fieldError);
+			result = true;
+
+		} else if (bannerForm.getBannerImage().getSize() > 2097152) {
+			FieldError fieldError;
+			final String[] codes = {
+				"banner.picture.tooLong.error"
+			};
+			fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
+			binding.addError(fieldError);
+			result = true;
+		}
+
+		if (bannerForm.getBannerImage().getSize() != 0 && !bannerForm.getBannerImage().getContentType().contains("image")) {
+			FieldError fieldError;
+			final String[] codes = {
+				"banner.picture.extension.error"
+			};
+			fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
+			binding.addError(fieldError);
+			result = true;
+
+		} else if (bannerForm.getBannerImage().getSize() != 0) {
+			BufferedImage bufferedImage;
+
+			bufferedImage = ImageIO.read(bannerForm.getBannerImage().getInputStream());
+			// Esto me vale para controlar el tamaño de los bannners
+			if (bufferedImage.getWidth() > 3000 || bufferedImage.getWidth() < 900) {
+				FieldError fieldError;
+				final String[] codes = {
+					"banner.picture.width.error"
+				};
+				fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
+				binding.addError(fieldError);
+				result = true;
+
+			}
+			if (bufferedImage.getHeight() > 150 || bufferedImage.getHeight() < 100) {
+				FieldError fieldError;
+				final String[] codes = {
+					"banner.picture.height.error"
+				};
+				fieldError = new FieldError("bannerForm", "bannerImage", bannerForm.getBannerImage(), false, codes, null, "");
+				binding.addError(fieldError);
+				result = true;
+			}
+		}
+
+		if (!bannerForm.getZone().equals("izquierda") && !bannerForm.getZone().equals("derecha") && !bannerForm.getZone().equals("abajo")) {
+			FieldError fieldError;
+			final String[] codes = {
+				"banner.zone.error"
+			};
+			fieldError = new FieldError("bannerForm", "zone", bannerForm.getZone(), false, codes, null, "");
+			binding.addError(fieldError);
+			result = true;
+		}
+
+		if (!banner.getCurrentViews().equals(bannerForm.getTotalViews()))
+			result = true;
+
+		return result;
+	}
+
 	public Banner reconstruct(final BannerForm bannerForm, final BindingResult binding) throws IOException {
 
 		Assert.notNull(bannerForm);

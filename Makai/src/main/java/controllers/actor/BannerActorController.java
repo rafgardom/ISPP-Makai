@@ -79,7 +79,7 @@ public class BannerActorController extends AbstractController {
 				result = new ModelAndView("banner/listAdmin");
 			else
 				result = new ModelAndView("banner/list");
-			
+
 			result.addObject("requestURI", "banner/actor/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("bannerForms", bannerForms);
@@ -227,33 +227,50 @@ public class BannerActorController extends AbstractController {
 		ModelAndView result;
 		Banner banner;
 		byte[] savedFile;
+		boolean error = false;
 
-		banner = this.bannerService.reconstruct(bannerForm, binding);
+		try {
+			bannerForm.setZone("abajo");
+			final Banner bannerAux = this.bannerService.findOne(bannerForm.getId());
+			error = this.bannerService.validate(bannerAux, bannerForm, binding);
 
-		if (binding.hasErrors()) {
-			System.out.println(binding.toString());
-			result = this.createEditModelAndView(bannerForm);
+			if (error)
+				throw new IllegalArgumentException();
 
-		} else
-			try {
+			banner = this.bannerService.reconstruct(bannerForm, binding);
 
-				if (bannerForm.getBannerImage().getSize() > 0) {
+			if (binding.hasErrors()) {
+				System.out.println(binding.toString());
+				result = this.createEditModelAndView(bannerForm);
 
-					savedFile = bannerForm.getBannerImage().getBytes();
-					banner.setPicture(savedFile);
+			} else
+				try {
+
+					if (bannerForm.getBannerImage().getSize() > 0) {
+
+						savedFile = bannerForm.getBannerImage().getBytes();
+						banner.setPicture(savedFile);
+
+					}
+					banner.setPaid(false);
+					banner.setValidated(false);
+					banner = this.bannerService.save(banner);
+					result = new ModelAndView("redirect:list.do");
+
+				} catch (final Throwable oops) {
+					System.out.println(oops);
+
+					result = this.createEditModelAndView(bannerForm, "banner.commit.error");
 
 				}
-				banner.setPaid(false);
-				banner.setValidated(false);
-				banner = this.bannerService.save(banner);
-				result = new ModelAndView("redirect:list.do");
 
-			} catch (final Throwable oops) {
-				System.out.println(oops);
-
+		} catch (final Throwable e) {
+			if (error)
+				result = this.createEditModelAndView(bannerForm, "banner.validation.error");
+			else
 				result = this.createEditModelAndView(bannerForm, "banner.commit.error");
+		}
 
-			}
 		return result;
 
 	}
