@@ -104,7 +104,7 @@
 				<jstl:if test="${notification.reason.substring(0,4).equals('#OP0')}">
 					<spring:message code="notification.info.description.offerPet1" />
 					<jstl:out value="${notification.description}" />
-					<spring:message code="notification.info.description.offerPet1" />
+					<spring:message code="notification.info.description.offerPet2" />
 				</jstl:if>
 				<jstl:if test="${notification.reason.substring(0,4).equals('#BC0')}">
 					<jstl:set var="text" value="${notification.description.split('#BC0')}" />

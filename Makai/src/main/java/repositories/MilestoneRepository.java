@@ -14,4 +14,5 @@ public interface MilestoneRepository extends JpaRepository<Milestone, Integer> {
 
 	@Query("select m from Milestone m where m.offer.id = ?1")
 	public Collection<Milestone> findAllByOffer(int offerId);
+
 }

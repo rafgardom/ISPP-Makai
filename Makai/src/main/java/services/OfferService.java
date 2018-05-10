@@ -159,6 +159,10 @@ public class OfferService {
 
 		Assert.isTrue(!offer.getIsAccepted());
 
+		final Collection<Milestone> milestones = this.milestoneService.findAllByOffer(offer.getId());
+		for (final Milestone aux : milestones)
+			this.milestoneService.delete(aux);
+
 		this.offerRepository.delete(offer);
 	}
 
