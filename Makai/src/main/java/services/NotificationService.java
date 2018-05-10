@@ -177,7 +177,7 @@ public class NotificationService {
 		customer = request.getCustomer();
 		notification = this.create(customer);
 		notification.setReason("#OC0");
-		notification.setDescription(" " + request.getTags());
+		notification.setDescription(request.getCategory().getSpanishName() + "(" + request.getCategory().getName() + ")" + " " + request.getTags());
 		notification.setType(NotificationType.REQUEST);
 
 		this.save(notification);
