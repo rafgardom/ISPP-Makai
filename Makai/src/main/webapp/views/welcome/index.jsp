@@ -144,7 +144,7 @@
 			</div>
 			<div class="card bg-warning shadow">
 				<div class="center-div py-2">
-					<img alt="dog-training" src="images/medical-report (1).png" height="128" width="128">
+					<img alt="dog-training" src="images/animalshelter.png" height="128" width="200">
 				</div>
 				<h4 class="card-title"><spring:message code="welcome.animalshelter.title"/></h4>
 				<h5 class="card-body card-text"><spring:message code="welcome.animalshelters.card"/></h5>

@@ -18,7 +18,7 @@
 <spring:message code="administrator.actor.advertisings" var="advertisingsHeader" />
 
 <div class="center-div my-3">
-	<button onclick="tableCustomer()" class="btn btn-lg btn-primary mx-3" id="button1">${customersHeader}</button>
+	<button onclick="tableCustomer()" class="btn btn-lg btn-primary mx-3 disabled" id="button1">${customersHeader}</button>
 	<button onclick="tableTrainers()" class="btn btn-lg btn-primary mx-3" id="button2">${trainersHeader}</button>
 	<button onclick="tableAnimalshelters()" class="btn btn-lg btn-primary mx-3" id="button3">${animalSheltersHeader}</button>
 	<button onclick="tableAdvertisings()" class="btn btn-lg btn-primary mx-3" id="button4">${advertisingsHeader}</button>
@@ -28,7 +28,7 @@
 <div id='tableCustomers'>
 <h2 class="text-center"><jstl:out value="${customersHeader}"/></h2>
 <div class="table-responsive">
-<display:table name="customers" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
+<display:table name="customers" id="row" requestURI="${requestURI }" pagesize="10" class="displaytag">
 	
 	<acme:column code="administrator.actor.username" property="userAccount.username" sortable="true"/>
 	<acme:column code="administrator.actor.name" property="name"/>	
@@ -68,9 +68,33 @@
 	<display:column>
 		<jstl:choose>
 			<jstl:when test="${row.userAccount.enabled }">
-				<form:form action="administrator/ban.do?actorId=${row.id}" modelAttribute="actor">
-					<acme:submit image="ban" type="danger" name="ban" code="administrator.actor.ban" />
-				</form:form>
+				<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalban-${row.id }">
+						<img class="icon-button" src="images/ban.png" height="25px"/>
+						<spring:message code="administrator.actor.ban" />
+					</button>
+					  <div class="modal fade" id="modalban-${row.id}">
+					    <div class="modal-dialog modal-dialog-centered modal-sm">
+					      <div class="modal-content">
+					
+					        <!-- Modal Header -->
+					        <div class="modal-header">
+					          <h4 class="modal-title"><spring:message code="administrator.actor.ban"/></h4>
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        </div>
+					        
+					        <!-- Modal body -->
+					        <div class="modal-body">
+					         	<spring:message code="cuestion.ban"/>
+					        </div>
+					        <!-- Modal footer -->
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="location='administrator/ban.do?actorId=${row.id}'"><spring:message code="confirm"/></button>
+					          <button type="button" class="btn btn-dark" data-dismiss="modal"><spring:message code="cancel"/></button>
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
 			</jstl:when>
 			<jstl:otherwise>
 				<form:form action="administrator/unban.do?actorId=${row.id}" modelAttribute="actor">
@@ -84,10 +108,10 @@
 
 </div>
 
-<div id='tableTrainers'>
+<div id='tableTrainers' class="d-none">
 <h2 class="text-center"><jstl:out value="${trainersHeader}"/></h2>
 <div class="table-responsive">
-<display:table name="trainers" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
+<display:table name="trainers" id="row" requestURI="${requestURI }" pagesize="10" class="displaytag">
 	
 	<acme:column code="administrator.actor.username" property="userAccount.username" sortable="true"/>
 	<acme:column code="administrator.actor.name" property="name"/>	
@@ -127,9 +151,33 @@
 	<display:column>
 		<jstl:choose>
 			<jstl:when test="${row.userAccount.enabled }">
-				<form:form action="administrator/ban.do?actorId=${row.id}" modelAttribute="actor">
-					<acme:submit image="ban" type="danger" name="ban" code="administrator.actor.ban" />
-				</form:form>
+				<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalban-${row.id }">
+						<img class="icon-button" src="images/ban.png" height="25px"/>
+						<spring:message code="administrator.actor.ban" />
+					</button>
+					  <div class="modal fade" id="modalban-${row.id}">
+					    <div class="modal-dialog modal-dialog-centered modal-sm">
+					      <div class="modal-content">
+					
+					        <!-- Modal Header -->
+					        <div class="modal-header">
+					          <h4 class="modal-title"><spring:message code="administrator.actor.ban"/></h4>
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        </div>
+					        
+					        <!-- Modal body -->
+					        <div class="modal-body">
+					         	<spring:message code="cuestion.ban"/>
+					        </div>
+					        <!-- Modal footer -->
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="location='administrator/ban.do?actorId=${row.id}'"><spring:message code="confirm"/></button>
+					          <button type="button" class="btn btn-dark" data-dismiss="modal"><spring:message code="cancel"/></button>
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
 			</jstl:when>
 			<jstl:otherwise>
 				<form:form action="administrator/unban.do?actorId=${row.id}" modelAttribute="actor">
@@ -144,10 +192,10 @@
 
 </div>
 
-<div id='tableAnimalshelters'>
+<div id='tableAnimalshelters' class="d-none">
 <h2 class="text-center"><jstl:out value="${animalSheltersHeader}"/></h2>
 <div class="table-responsive">
-<display:table name="animalShelters" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
+<display:table name="animalShelters" id="row" requestURI="${requestURI }" pagesize="10" class="displaytag">
 	
 	<acme:column code="administrator.actor.username" property="userAccount.username" sortable="true"/>
 	<acme:column code="administrator.actor.name" property="name"/>	
@@ -185,9 +233,33 @@
 	<display:column>
 		<jstl:choose>
 			<jstl:when test="${row.userAccount.enabled }">
-				<form:form action="administrator/ban.do?actorId=${row.id}" modelAttribute="actor">
-					<acme:submit image="ban" type="danger" name="ban" code="administrator.actor.ban" />
-				</form:form>
+					<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalban-${row.id }">
+						<img class="icon-button" src="images/ban.png" height="25px"/>
+						<spring:message code="administrator.actor.ban" />
+					</button>
+					  <div class="modal fade" id="modalban-${row.id}">
+					    <div class="modal-dialog modal-dialog-centered modal-sm">
+					      <div class="modal-content">
+					
+					        <!-- Modal Header -->
+					        <div class="modal-header">
+					          <h4 class="modal-title"><spring:message code="administrator.actor.ban"/></h4>
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        </div>
+					        
+					        <!-- Modal body -->
+					        <div class="modal-body">
+					         	<spring:message code="cuestion.ban"/>
+					        </div>
+					        <!-- Modal footer -->
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="location='administrator/ban.do?actorId=${row.id}'"><spring:message code="confirm"/></button>
+					          <button type="button" class="btn btn-dark" data-dismiss="modal"><spring:message code="cancel"/></button>
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
 			</jstl:when>
 			<jstl:otherwise>
 				<form:form action="administrator/unban.do?actorId=${row.id}" modelAttribute="actor">
@@ -202,10 +274,10 @@
 </div>
 
 
-<div id='tableAdvertisings'>
+<div id='tableAdvertisings' class="d-none">
 <h2 class="text-center"><jstl:out value="${advertisingsHeader}"/></h2>
 <div class="table-responsive">
-<display:table name="advertisings" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
+<display:table name="advertisings" id="row" requestURI="${requestURI }" pagesize="10" class="displaytag">
 	
 	<acme:column code="administrator.actor.username" property="userAccount.username" sortable="true"/>
 	<acme:column code="administrator.actor.name" property="name"/>	
@@ -243,9 +315,33 @@
 	<display:column>
 		<jstl:choose>
 			<jstl:when test="${row.userAccount.enabled }">
-				<form:form action="administrator/ban.do?actorId=${row.id}" modelAttribute="actor">
-					<acme:submit image="ban" type="danger" name="ban" code="administrator.actor.ban" />
-				</form:form>
+				<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalban-${row.id }">
+						<img class="icon-button" src="images/ban.png" height="25px"/>
+						<spring:message code="administrator.actor.ban" />
+					</button>
+					  <div class="modal fade" id="modalban-${row.id}">
+					    <div class="modal-dialog modal-dialog-centered modal-sm">
+					      <div class="modal-content">
+					
+					        <!-- Modal Header -->
+					        <div class="modal-header">
+					          <h4 class="modal-title"><spring:message code="administrator.actor.ban"/></h4>
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        </div>
+					        
+					        <!-- Modal body -->
+					        <div class="modal-body">
+					         	<spring:message code="cuestion.ban"/>
+					        </div>
+					        <!-- Modal footer -->
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="location='administrator/ban.do?actorId=${row.id}'"><spring:message code="confirm"/></button>
+					          <button type="button" class="btn btn-dark" data-dismiss="modal"><spring:message code="cancel"/></button>
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
 			</jstl:when>
 			<jstl:otherwise>
 				<form:form action="administrator/unban.do?actorId=${row.id}" modelAttribute="actor">

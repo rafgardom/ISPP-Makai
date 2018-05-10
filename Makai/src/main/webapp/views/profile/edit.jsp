@@ -27,13 +27,13 @@
 			<h3><spring:message code="profile.personalDetails" /></h3>
 			<br />
 			
-			<acme:textbox code="profile.name" path="name" mandatory="true" />
+			<acme:input image="user-xs" code="profile.name" path="name" mandatory="true" />
 			
 			<security:authorize access="hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')">
-				<acme:textbox code="profile.surname" path="surname" mandatory="true" />
+				<acme:input image="user-xs" code="profile.surname" path="surname" mandatory="true" />
 			</security:authorize>
 			<security:authorize access="hasAnyRole('ADMIN', 'TRAINER')">
-				<acme:textbox code="profile.nid" path="nid" mandatory="true" />
+				<acme:input image="id-card" code="profile.nid" path="nid" mandatory="true" />
 			</security:authorize>
 	
 			<acme:input code="profile.phone" path="phone" mandatory="true" image="phone" pattern="((\+|00)\d{2,4}(\s)?)?\d{9,13}" />
@@ -44,11 +44,11 @@
 			
 			<h3><spring:message code="profile.coordinates" /></h3>
 			<br />
-			<acme:textbox code="coordinates.country" path="coordinates.country" mandatory="true" />
-			<acme:textbox code="coordinates.state" path="coordinates.state" />
-			<acme:textbox code="coordinates.province" path="coordinates.province" />
-			<acme:textbox code="coordinates.city" path="coordinates.city" mandatory="true" />
-			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
+			<acme:input image="location" code="coordinates.country" path="coordinates.country" mandatory="true" />
+			<acme:input image="location" code="coordinates.state" path="coordinates.state" />
+			<acme:input image="location" code="coordinates.province" path="coordinates.province" />
+			<acme:input image="city" code="coordinates.city" path="coordinates.city" mandatory="true" />
+			<acme:input image="post" code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
 		
 		</div>	
 		<div class="col-md-5">

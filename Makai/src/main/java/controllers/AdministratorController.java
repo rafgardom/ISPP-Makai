@@ -106,7 +106,7 @@ public class AdministratorController extends AbstractController {
 
 	// Ban --------------------------------------------------------------------		
 
-	@RequestMapping(value = "/ban", method = RequestMethod.POST, params = "ban")
+	@RequestMapping(value = "/ban", method = RequestMethod.GET)
 	public ModelAndView ban(@RequestParam final int actorId) {
 		ModelAndView result;
 		Actor actor;
