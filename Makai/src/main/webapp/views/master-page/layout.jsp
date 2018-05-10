@@ -30,7 +30,7 @@
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
 <!-- <script type="text/javascript" src="scripts/jquery.js"></script> -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- <script type="text/javascript" src="scripts/common.js"></script> -->
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->

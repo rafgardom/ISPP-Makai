@@ -23,14 +23,21 @@
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>
 	</jstl:if>
-		<jstl:if test="${create }">
-			<acme:textbox code="milestone.title" path="title" mandatory="true" />
-			<acme:textarea code="milestone.description" path="description" mandatory="true" />
-		</jstl:if>
-			<acme:textarea code="milestone.comment" path="comment" mandatory="false" />
-			<acme:textarea code="milestone.problem" path="problem" mandatory="false" />
+	
+	<div class="row">
+	<jstl:if test="${create }">
+		<div class="col-md-5">
+				<acme:textbox code="milestone.title" path="title" mandatory="true" />
+				<br>
+				<acme:textarea code="milestone.description" path="description" mandatory="true" rows="7" maxCharacters="500" maxlength="500"/>
+		</div>
+	</jstl:if>
+		<div class="offset-md-1 col-md-5">
 			<acme:input code="milestone.targetDate" path="targetDate" mandatory="true" image="calendar" placeholder="dd/MM/yyyy" id="datepicker"/>
-			
+			<acme:textarea code="milestone.comment" path="comment" mandatory="false" rows="5" maxCharacters="500" maxlength="500"/>
+			<acme:textarea code="milestone.problem" path="problem" mandatory="false" maxCharacters="500" maxlength="500"/>
+		</div>
+	</div>		
 		<jstl:if test="${create }">
 			<div class="col-12 d-flex justify-content-center">
 					<spring:message code="milestone.importance" />

@@ -20,13 +20,7 @@
 
 <div class="card shadow my-5 text-center offset-md-4 col-md-4">
  		<div class="card-body">
- 		<jstl:if test="${request.tags != null}">
-		<p>
-			<b><spring:message code="request.tags" />:</b>
-			<jstl:out value="${request.tags}"  />
-		</p>
-		</jstl:if>
-		<p>
+ 		<p>
 			<b><spring:message code="request.category" />:</b>
 			<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
 			<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
@@ -38,6 +32,14 @@
 			</jstl:if>
 			
 		</p>
+ 		
+ 		<jstl:if test="${request.tags != null}">
+		<p>
+			<b><spring:message code="request.tags" />:</b>
+			<jstl:out value="${request.tags}"  />
+		</p>
+		</jstl:if>
+
 
 	</div>
 </div>

@@ -30,7 +30,8 @@
 		<div class="row align-items-center py-lg-5">
 			<div class="offset-lg-2 col-lg-3 py-lg-5">
 				<div class="center-div py-lg-4">
-					<img src="images/pet-xl.png" alt="animals"  height="128" width="128" />
+					<img alt="Go to animals" src="images/dog.png"  height="128" width="128" style="margin-right: -45px;">
+					<img alt="Go to animals" src="images/cat.png"  height="128" width="128">
 				</div>
 			</div>
 			<div class="col-lg-7">
@@ -46,7 +47,7 @@
 			<div class="col-md-6">
 				<div class="card bg-warning mt-4 shadow">
 					<div class="center-div">
-						<img src="images/add.png" alt="Add animal" class="mt-5" height="64" width="64" />
+						<img src="images/add.png" alt="Add animal" class="mt-5" height="64" width="64" style="margin-right: -30px;"/>
 						<img src="images/dog.png" alt="Add animal" class="mt-2" height="128" width="128" />
 					</div>
 					<div class="card-body"> <acme:link  href="animal/register.do" code="master.page.animal.register" type=" btn-outline-light" /></div>

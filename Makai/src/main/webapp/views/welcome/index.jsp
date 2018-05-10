@@ -111,7 +111,8 @@
 			</div>
 			<div class="card bg-warning shadow">
 				<div class="center-div py-2">
-					<img alt="Go to animals" src="images/pet-xl.png"  height="128" width="128">
+					<img alt="Go to animals" src="images/dog.png"  height="128" width="128" style="margin-right: -45px;">
+					<img alt="Go to animals" src="images/cat.png"  height="128" width="128">
 				</div>
 				<div class="card-body"> <acme:link  href="animal/menu.do" code="welcome.go.to.animals" type=" btn-outline-light" /></div>
 			</div>

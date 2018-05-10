@@ -35,7 +35,13 @@
 				<jstl:if test="${hasMilestones }">
 					<acme:link href="milestone/list.do?offerId=${offer.id}" code="milestone.display" image="hito" type="primary mb-3"/>
 				</jstl:if>
+				<security:authorize access="hasAnyRole('TRAINER')">
+					<jstl:if test="${hasMilestones == false}">
+						<acme:link href="milestone/create.do?offerId=${offer.id }" code="milestone.create" type="success mx-2"  image="target"/>
+					</jstl:if>
+				</security:authorize>
 			</div>
+			
 	  	</div>
 </div>
 
@@ -84,7 +90,7 @@
 	
 </div>
 
-<div class="card-deck mb-3 ">
+<div class="card-deck text-center mb-3 ">
 	<div class="card shadow">
 	 	<br><h3 class="card-title mt-4"><spring:message code="offer.destination" /></h3>
 	  	<div class="card-body">
@@ -93,16 +99,18 @@
 				<jstl:out value="${offer.destination.country}" />
 			</p>
 			
+			<jstl:if test="${not empty offer.destination.state}"></jstl:if>
 			<p>
 				<b><spring:message code="offer.coordinates.state" />:</b>
 				<jstl:out value="${offer.destination.state}" />
 			</p>
 			
+			<jstl:if test="${not empty offer.destination.province}">
 			<p>
 				<b><spring:message code="offer.coordinates.province" />:</b>
 				<jstl:out value="${offer.destination.province}" />
 			</p>
-			
+			</jstl:if>
 			<p>
 				<b><spring:message code="offer.coordinates.city" />:</b>
 				<jstl:out value="${offer.destination.city}" />
@@ -157,11 +165,7 @@
 
 <div class="center-div">
 	
-	<security:authorize access="hasAnyRole('TRAINER')">
-		<jstl:if test="${hasMilestones == false}">
-		<acme:link href="milestone/create.do?offerId=${offer.id }" code="milestone.create" type="success mx-2"  image="target"/>
-	</jstl:if>
-	</security:authorize>
+
 
 	<security:authorize access="hasAnyRole('CUSTOMER')">
 		<acme:link href="request/customer/myList.do" code="welcome.go.to.request" image="arrow_left"/>

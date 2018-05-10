@@ -39,23 +39,23 @@
 				<spring:message code="trainer.personalDetails" />
 			</h3>
 	
-			<acme:textbox code="trainer.name" path="name" mandatory="true" />
-			<acme:textbox code="trainer.surname" path="surname" mandatory="true" />
-			<acme:textbox code="trainer.certifyingCompany" path="certifyingCompany" mandatory="false" />
+			<acme:input image="user-xs" code="trainer.name" path="name" mandatory="true" />
+			<acme:input image="user-xs"  code="trainer.surname" path="surname" mandatory="true" />
+			<acme:input image="id" code="trainer.certifyingCompany" path="certifyingCompany" mandatory="false" />
 			<acme:input image="phone" code="trainer.phone" path="phone" mandatory="true" />
 			<acme:input image="at" code="trainer.email" path="email" mandatory="true" />
-			<acme:textbox code="trainer.nid" path="nid" mandatory="true" />
+			<acme:input image="id-card" code="trainer.nid" path="nid" mandatory="true" />
 		</div>
 		<div class="offset-md-1 col-md-5">
 			<h3>
 				<spring:message code="trainer.coordinates" />
 			</h3>
 	
-			<acme:textbox code="coordinates.country" path="coordinates.country" mandatory="true" />
-			<acme:textbox code="coordinates.state" path="coordinates.state" />
-			<acme:textbox code="coordinates.province" path="coordinates.province" />
-			<acme:textbox code="coordinates.city" path="coordinates.city" mandatory="true" />
-			<acme:textbox code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
+			<acme:input image="location" code="coordinates.country" path="coordinates.country" mandatory="true" />
+			<acme:input image="location" code="coordinates.state" path="coordinates.state" />
+			<acme:input image="location" code="coordinates.province" path="coordinates.province" />
+			<acme:input image="city" code="coordinates.city" path="coordinates.city" mandatory="true" />
+			<acme:input image="post" code="coordinates.zipCode" path="coordinates.zip_code" mandatory="true" />
 		</div>
 
 		<security:authorize access="isAnonymous()">

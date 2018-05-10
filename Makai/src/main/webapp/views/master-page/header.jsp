@@ -67,7 +67,9 @@
 			<security:authorize access="hasAnyRole('CUSTOMER,ANIMALSHELTER')">
 			<li class="nav-item"> 
 				<a class="nav-link" href="animal/menu.do">
-						<img src="images/animals.png" class="img-menu" height="32" width="32"/>
+					<!-- 	<img src="images/animals.png" class="img-menu" height="32" width="32"/> -->
+						<img class="img-menu" src="images/dog-xs.png" style="margin-right: -20px;">
+						<img class="img-menu" src="images/cat-xs.png" >
 						<spring:message code="master.page.animal" />
 				</a>
 <%-- 				<li class="nav-item dropdown"> 
