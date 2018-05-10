@@ -255,12 +255,15 @@ public class TravelController extends AbstractController {
 					result = this.registerModelAndView(travelForm, "travel.animalsQuantityError.error");
 				else if (speciesError)
 					result = this.registerModelAndView(travelForm, "travel.wrongSpecies.error");
+				else if ((travelForm.getAnimalSeats() - travelForm.getAnimals().size()) < 0)
+					result = this.registerModelAndView(travelForm, "travel.capacityAnimals.error");
+				else if ((travelForm.getHumanSeats() == 0) && (travelForm.isPrincipalPassenger()))
+					result = this.registerModelAndView(travelForm, "travel.capacityPassengers.error");
 				else
 					result = this.registerModelAndView(travelForm, "travel.commit.error");
 			}
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int travelId) {
 		ModelAndView result;
