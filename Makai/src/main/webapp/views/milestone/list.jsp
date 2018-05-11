@@ -39,9 +39,11 @@
 			<acme:link image="edit" href="milestone/edit.do?milestoneId=${row.id}" type="warning"/>
 		</security:authorize>
 		
-		<jstl:if test="${row.offer.isAccepted and row.realMoment == null}">
-			<acme:confirm href="milestone/complete.do?milestoneId=${row.id}" id="${row.id}" image="trophy"/>
-		</jstl:if>
+		<security:authorize access="hasAnyRole('TRAINER')">
+			<jstl:if test="${row.offer.isAccepted and row.realMoment == null}">
+				<acme:confirm href="milestone/complete.do?milestoneId=${row.id}" id="${row.id}" image="trophy"/>
+			</jstl:if>
+		</security:authorize>
 		
 		<security:authorize access="hasAnyRole('TRAINER')">
 			<jstl:if test="${row.offer.isAccepted == false }">
