@@ -24,6 +24,9 @@
 		<jstl:if test="${!row.reason.substring(0,1).equals('#')}">
 			<jstl:out value="${row.reason}" />
 		</jstl:if>
+		<jstl:if test="${row.reason.substring(0,2).equals('##')}">
+			<jstl:out value="${row.reason.substring(1)}" />
+		</jstl:if>
 		<jstl:if test="${row.reason.substring(0,4).equals('#TD0')}">
 			<spring:message code="notification.info.reason.travelDelete" />
 		</jstl:if>

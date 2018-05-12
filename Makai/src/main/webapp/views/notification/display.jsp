@@ -32,6 +32,9 @@
 				<jstl:if test="${!notification.reason.substring(0,1).equals('#')}">
 					<jstl:out value="${notification.reason}" />
 				</jstl:if>
+				<jstl:if test="${notification.reason.substring(0,2).equals('##')}">
+					<jstl:out value="${notification.reason.substring(1)}" />
+				</jstl:if>
 				<jstl:if test="${notification.reason.substring(0,4).equals('#TD0')}">
 					<spring:message code="notification.info.reason.travelDelete" />
 				</jstl:if>
@@ -67,7 +70,7 @@
 		<div class="card shadow">
 		  	<div class="card-body"> 	
 			<p><b><spring:message code="notification.description" />:</b>
-				<jstl:if test="${!notification.reason.substring(0,1).equals('#')}">
+				<jstl:if test="${!notification.reason.substring(0,1).equals('#') || notification.reason.substring(0,2).equals('##')}">
 					<jstl:out value="${notification.description}" />
 				</jstl:if>
 				<jstl:if test="${notification.reason.substring(0,4).equals('#TD0')}">

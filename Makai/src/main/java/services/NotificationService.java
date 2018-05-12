@@ -123,6 +123,9 @@ public class NotificationService {
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
 
+		if (notification.getReason().substring(0, 1).equals("#"))
+			notification.setReason("#" + notification.getReason());
+
 		actors = this.actorService.findAllNotAdmin();
 		for (final Actor a : actors) {
 			notification.setActor(a);
