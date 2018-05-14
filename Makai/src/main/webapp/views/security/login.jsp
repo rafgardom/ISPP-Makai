@@ -39,7 +39,7 @@
 		<acme:input image="user-xs" code="security.username" path="username" mandatory="true"/>
 		<acme:password image="lock1" code="security.password" path="password" mandatory="true"/>
 		</div>
-	    <div class="card-footer"><acme:submit name=" " code="security.login" type="primary" image="login32" style="btn-block"/></div>
+	    <div class="card-footer"><acme:submit name=" " code="master.page.sign.in" type="primary" image="login32" style="btn-block"/></div>
 
 	
 	</div>

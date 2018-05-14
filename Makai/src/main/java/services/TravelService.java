@@ -119,7 +119,7 @@ public class TravelService {
 		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
 
 		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
-		Assert.isTrue(travel.getAnimalSeats() + travel.getAnimalSeats() <= vehicle.getSeats());
+		Assert.isTrue(travel.getAnimalSeats() + travel.getHumanSeats() <= vehicle.getSeats());
 		Assert.isTrue(travel.getAnimalSeats() >= travel.getHumanSeats());
 
 		result = this.travelRepository.save(travel);

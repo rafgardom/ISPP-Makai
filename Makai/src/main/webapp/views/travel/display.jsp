@@ -16,6 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
 <jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>
@@ -48,11 +49,29 @@
 			</p>
 			<p>
 				<b><spring:message code="travel.startMoment" />:</b>
-				<jstl:out value="${travel.startMoment}"  />
+				<fmt:formatDate value="${travel.startMoment}" pattern="dd/MM/yyyy hh:mm" />
 			</p>
 			<p>
 				<b><spring:message code="travel.duration" />:</b>
-				<jstl:out value="${travel.duration}" />
+				<jstl:if test="${horas > 0}">
+					<jstl:out value="${horas} " />
+					<jstl:if test="${horas == 1}">
+						<spring:message code="travel.hour" />
+					</jstl:if>
+					<jstl:if test="${horas > 1}">
+						<spring:message code="travel.hours" />
+					</jstl:if>
+				</jstl:if>
+				<jstl:if test="${minutos > 0}">
+					<jstl:out value="${minutos} " />
+					<jstl:if test="${minutos == 1}">
+						<spring:message code="travel.minute" />
+					</jstl:if>
+					<jstl:if test="${minutos > 1}">
+						<spring:message code="travel.minutes" />
+					</jstl:if>
+				</jstl:if>
+				
 			</p>
 	  	</div>
 	</div>

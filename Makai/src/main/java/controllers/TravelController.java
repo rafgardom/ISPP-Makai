@@ -118,17 +118,7 @@ public class TravelController extends AbstractController {
 					error = true;
 				}
 
-				if ((travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() < 1) && (travelForm.getHumanSeats() == null || travelForm.getHumanSeats() < 1)) {
-					FieldError fieldError;
-					final String[] codes = {
-						"travel.seats.error"
-					};
-					fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
-					binding.addError(fieldError);
-					error = true;
-				}
-
-				if (travelForm.getAnimalSeats() + travelForm.getAnimalSeats() > travelForm.getVehicle().getSeats()) {
+				if (travelForm.getAnimalSeats() + travelForm.getHumanSeats() > travelForm.getVehicle().getSeats()) {
 					tooManySeats = true;
 					FieldError fieldError;
 					final String[] codes = {
@@ -150,14 +140,23 @@ public class TravelController extends AbstractController {
 					error = true;
 				}
 
-				if (travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == 0 || travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == null || travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == null
-					|| travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == 0) {
+				if ((travelForm.getHumanSeats() == 0 || travelForm.getHumanSeats() == null) && (travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() == 0)) {
 					FieldError fieldError;
 					wrongSeats = true;
 					final String[] codes = {
 						"travel.seats.error"
 					};
 					fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
+				}
+
+				if (travelForm.getDuration() < 5) {
+					FieldError fieldError;
+					final String[] codes = {
+						"travel.duration.error"
+					};
+					fieldError = new FieldError("travelForm", "duration", travelForm.getDuration(), false, codes, null, "");
 					binding.addError(fieldError);
 					error = true;
 				}
@@ -170,15 +169,7 @@ public class TravelController extends AbstractController {
 				result = new ModelAndView("redirect:myList.do");
 
 			} catch (final Throwable oops) {
-				if (wrongSeats) {
-					result = this.createModelAndView(travelForm, "travel.seats.error");
-					FieldError fieldError;
-					final String[] codes = {
-						"travel.seats.error"
-					};
-					fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
-					binding.addError(fieldError);
-				}
+
 				if (passengers)
 					result = this.createModelAndView(travelForm, "travel.edit.error");
 				else if (wrongTime)
@@ -599,6 +590,7 @@ public class TravelController extends AbstractController {
 		boolean noPermission = false;
 		boolean animalsInTravel = false;
 		Transporter principal;
+		Integer horas, minutos;
 
 		try {
 			travel = this.travelService.findOne(travelId);
@@ -620,6 +612,9 @@ public class TravelController extends AbstractController {
 				throw new IllegalArgumentException();
 			}
 
+			minutos = travel.getDuration() % 60;
+			horas = (travel.getDuration() - minutos) / 60;
+
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
@@ -630,6 +625,8 @@ public class TravelController extends AbstractController {
 			result.addObject("vehicle", vehicle);
 			result.addObject("passengers", passengers);
 			result.addObject("travel", travel);
+			result.addObject("horas", horas);
+			result.addObject("minutos", minutos);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "travel/display.do?travelId=" + travel.getId());
 

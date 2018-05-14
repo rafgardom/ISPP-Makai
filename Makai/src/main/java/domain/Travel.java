@@ -77,7 +77,7 @@ public class Travel extends DomainEntity {
 		this.startMoment = startMoment;
 	}
 
-	@Min(0)
+	@Min(5)
 	public int getDuration() {
 		return this.duration;
 	}

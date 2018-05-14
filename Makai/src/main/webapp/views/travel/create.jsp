@@ -95,7 +95,6 @@
 			  	<acme:input path="duration" type="range" code="travel.duration" min="0" max="1439" style="slider" id="myRange"  mandatory="true"/> 
   				<h6 class="text-center" id="total"></h6>
   			</div>
-			<form:errors cssClass="alert alert-danger form-control" path="duration" />
 	</div>
 	<br/>
 	

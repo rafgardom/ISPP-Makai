@@ -34,7 +34,12 @@
 	
 
 	<display:column>
-		<img src="${row.stringImage}" class="rounded-circle" alt="<spring:message code='vehicle.no.picture' />" width="100px" height="100px">
+		<jstl:if test="${row.picture != null}">
+			<img src="${row.stringImage}" class="rounded-circle" alt="<spring:message code='vehicle.no.picture' />" width="100px" height="100px">
+		</jstl:if>
+		<jstl:if test="${row.picture == null}">
+			<spring:message code='vehicle.no.picture' />
+		</jstl:if>
 	</display:column>
 	
 	
