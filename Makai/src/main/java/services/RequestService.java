@@ -14,7 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.RequestRepository;
+import domain.Animal;
 import domain.Customer;
+import domain.Offer;
 import domain.Request;
 import forms.RequestForm;
 
@@ -115,15 +117,28 @@ public class RequestService {
 
 	}
 
+	public void deleteWithAnimal(final Request request) {
+
+		Assert.notNull(request);
+		Assert.isTrue(request.getId() != 0);
+
+		//Comprobar de que no tiene ninguna oferta aceptada
+		if (this.offerService.findOfferAccepted(request) == null) {
+			this.offerService.eraseOffersWhenRequestIsDeleted(request);
+			this.requestRepository.delete(request);
+		}
+
+	}
+
 	// Other business methods -------------------------------------------------
-	
+
 	public Page<Request> findRequestPaged(final Customer customer, final int pageNumber, final int pageSize) {
 		PageRequest request;
 		Page<Request> result;
-		
+
 		request = new PageRequest(pageNumber, pageSize);
-		result = this.requestRepository.findRequestPaged(customer.getId(),request);
-		
+		result = this.requestRepository.findRequestPaged(customer.getId(), request);
+
 		return result;
 	}
 
@@ -145,7 +160,7 @@ public class RequestService {
 		return res;
 	}
 
-	public Page<Request> findRequestsNotAcceptedPaged(int pageNumber, int pageSize) {
+	public Page<Request> findRequestsNotAcceptedPaged(final int pageNumber, final int pageSize) {
 		Page<Request> result;
 		PageRequest request;
 
@@ -161,6 +176,20 @@ public class RequestService {
 
 	public Collection<Request> findRequestsWithOffer() {
 		return this.requestRepository.findRequestsWithOffer();
+	}
+
+	public Collection<Request> findRequestNoAcceptedByAnimal(final Animal animal) {
+		Assert.notNull(animal);
+		Collection<Request> requestRelacionadas;
+		Collection<Offer> ofertasRelacionadas;
+		requestRelacionadas = this.requestRepository.findRequestsByAnimal(animal.getId());
+		ofertasRelacionadas = this.offerService.findAcceptedOffersByAnimalId(animal);
+
+		for (final Offer aux : ofertasRelacionadas)
+			if (requestRelacionadas.contains(aux.getRequest()))
+				requestRelacionadas.remove(aux);
+
+		return requestRelacionadas;
 	}
 
 	public Request reconstruct(final RequestForm requestForm, final BindingResult binding) throws IOException {

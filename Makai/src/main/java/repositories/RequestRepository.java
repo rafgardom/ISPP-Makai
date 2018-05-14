@@ -39,4 +39,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select distinct r from Request r where (r!=(select o.request.id from Offer o where o.isAccepted=true))")
 	Collection<Request> findRequestNotAccept();
 
+	@Query("select r from Request r where r.animal.id=?1")
+	Collection<Request> findRequestsByAnimal(int animal);
+
 }

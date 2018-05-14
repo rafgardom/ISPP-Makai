@@ -28,6 +28,7 @@ import domain.Customer;
 import domain.Notification;
 import domain.NotificationType;
 import domain.Offer;
+import domain.Request;
 import forms.AnimalForm;
 
 @Service
@@ -53,6 +54,9 @@ public class AnimalService {
 
 	@Autowired
 	private NotificationService		notificationService;
+
+	@Autowired
+	private RequestService			requestService;
 
 	@Autowired
 	private Validator				validator;
@@ -141,6 +145,7 @@ public class AnimalService {
 		AnimalShelter animalShelter;
 		Customer customer;
 		Collection<Offer> ofertasRelacionadas;
+		Collection<Request> requestRelacionadas;
 		Notification notification;
 
 		Assert.isTrue(animal.getIsHidden() == false);
@@ -148,6 +153,7 @@ public class AnimalService {
 		Assert.isTrue(animal.getId() != 0);
 
 		ofertasRelacionadas = this.offerService.findNotAcceptedOffersByAnimalId(animal.getId());
+		requestRelacionadas = this.requestService.findRequestNoAcceptedByAnimal(animal);
 
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
@@ -169,6 +175,16 @@ public class AnimalService {
 			notification.setType(NotificationType.GENERAL);
 			this.notificationService.save(notification);
 			this.offerService.delete(o);
+		}
+
+		/* Eliminamos las request asociadas a dicho animal cuando el customer selecciona un animal en la request */
+		for (final Request r : requestRelacionadas) {
+			notification = this.notificationService.create(r.getCustomer());
+			notification.setReason("#OP0");
+			notification.setDescription(" " + animal.getName());
+			notification.setType(NotificationType.GENERAL);
+			this.notificationService.save(notification);
+			this.requestService.deleteWithAnimal(r);
 		}
 
 		//Cambiamos el atributo isHidden a true cuando el animal es eliminado

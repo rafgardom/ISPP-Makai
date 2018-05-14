@@ -370,4 +370,10 @@ public class OfferService {
 		return this.offerRepository.findTrainerByOfferId(offerId);
 	}
 
+	public Collection<Offer> findAcceptedOffersByAnimalId(final Animal animal) {
+		Assert.notNull(animal);
+		return this.offerRepository.findAcceptedOffersByAnimalId(animal.getId());
+
+	}
+
 }
