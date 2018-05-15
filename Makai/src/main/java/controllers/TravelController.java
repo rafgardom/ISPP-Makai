@@ -297,13 +297,32 @@ public class TravelController extends AbstractController {
 		boolean error = false;
 		boolean wrongTime = false;
 		boolean speciesError = false;
-		boolean passengers = false;
+		final boolean passengers = false;
+		boolean extraPassengers = false;
 		final Transporter principal;
+		boolean vehicleSeats = false;
 		final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
 
 		try {
-			if (transporters != null || travelForm.getAnimals() != null) {
-				passengers = true;
+			final Travel auxTravel = this.travelService.findOne(travelForm.getId());
+			principal = this.transporterService.findByPrincipal();
+			if (!auxTravel.getTransporterOwner().equals(principal))
+				throw new IllegalArgumentException();
+
+			if (auxTravel.getHumanSeats() > travelForm.getHumanSeats() || auxTravel.getAnimalSeats() > travelForm.getAnimalSeats()) {
+				extraPassengers = true;
+				travelForm.setAnimalSeats(auxTravel.getAnimalSeats());
+				travelForm.setHumanSeats(auxTravel.getHumanSeats());
+				throw new IllegalArgumentException();
+				//			if (transporters != null || travelForm.getAnimals() != null) {
+				//				passengers = true;
+				//				throw new IllegalArgumentException();
+			}
+
+			if (auxTravel.getVehicle().getSeats() < (travelForm.getHumanSeats() + travelForm.getAnimalSeats())) {
+				vehicleSeats = true;
+				travelForm.setAnimalSeats(auxTravel.getAnimalSeats());
+				travelForm.setHumanSeats(auxTravel.getHumanSeats());
 				throw new IllegalArgumentException();
 			}
 
@@ -384,6 +403,10 @@ public class TravelController extends AbstractController {
 				result = this.createModelAndView(travelForm, "travel.species.error");
 			else if (passengers)
 				result = this.createModelAndView(travelForm, "travel.passengers.error");
+			else if (extraPassengers)
+				result = this.createModelAndView(travelForm, "travel.extraPassengers.error");
+			else if (vehicleSeats)
+				result = this.createModelAndView(travelForm, "travel.vehicleSeats.error");
 			else
 				result = this.createModelAndView(travelForm, "travel.commit.error");
 		}
