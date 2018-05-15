@@ -141,7 +141,7 @@ public class RatingService {
 		Assert.notNull(principal);
 		Assert.isTrue(rating.getCustomer().getId() == principal.getId());
 
-		if (rating.getComment().trim().length() == 0)
+		if (rating.getComment().length() > 0 && rating.getComment().trim().length() == 0)
 			throw new IllegalArgumentException("only whiteSpaces");
 
 		result = this.ratingRepository.save(rating);

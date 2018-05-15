@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,9 +84,15 @@ public class RatingCustomerController extends AbstractController {
 				result = new ModelAndView("redirect:../../offer/customer/list.do?requestId=" + rating.getRequest().getId());
 
 			} catch (final Throwable oops) {
-				if (oops.getMessage().equals("only whiteSpaces"))
-					result = this.createModelAndView(rating, "rating.whiteSpaces.error");
-				else
+				if (oops.getMessage().equals("only whiteSpaces")) {
+					result = this.createModelAndView(rating);
+					FieldError fieldError;
+					final String[] codes = {
+						"rating.whiteSpaces.error"
+					};
+					fieldError = new FieldError("rating", "comment", rating.getComment(), false, codes, null, "");
+					binding.addError(fieldError);
+				} else
 					result = this.createModelAndView(rating, "rating.commit.error");
 			}
 		return result;
@@ -125,9 +132,15 @@ public class RatingCustomerController extends AbstractController {
 				result = new ModelAndView("redirect:/travel/myPastList.do");
 
 			} catch (final Throwable oops) {
-				if (oops.getMessage().equals("only whiteSpaces"))
-					result = this.createModelAndView(rating, "rating.whiteSpaces.error");
-				else
+				if (oops.getMessage().equals("only whiteSpaces")) {
+					result = this.createModelAndView(rating);
+					FieldError fieldError;
+					final String[] codes = {
+						"rating.whiteSpaces.error"
+					};
+					fieldError = new FieldError("rating", "comment", rating.getComment(), false, codes, null, "");
+					binding.addError(fieldError);
+				} else
 					result = this.createModelAndView(rating, "rating.commit.error");
 			}
 		return result;
