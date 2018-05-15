@@ -17,10 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BannerService;
 import services.NotificationService;
 import services.OfferService;
+import services.PriceService;
 import services.RatingService;
 import services.RequestService;
 import domain.Banner;
 import domain.Offer;
+import domain.Price;
 import domain.Request;
 
 @Controller
@@ -43,6 +45,9 @@ public class OfferController extends AbstractController {
 
 	@Autowired
 	private RatingService		ratingService;
+
+	@Autowired
+	private PriceService		priceService;
 
 
 	//Listing request's offers
@@ -72,11 +77,14 @@ public class OfferController extends AbstractController {
 			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
 			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
+			final Price trainingCommission = this.priceService.findOne();
+
 			result = new ModelAndView("offer/customer/list");
 			result.addObject("offers", offers);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("tieneRating", tieneRating);
 			result.addObject("RequestURI", "offer/customer/list.do");
+			result.addObject("trainingPrice", trainingCommission.getAdoptionFee());
 
 			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);

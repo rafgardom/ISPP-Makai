@@ -114,10 +114,12 @@ public class MiscController extends AbstractController {
 	// Conditions ----------------------------------------------------------
 
 	@RequestMapping(value = "/conditions", method = RequestMethod.GET)
-	public ModelAndView conditions() {
+	public ModelAndView conditions(@RequestParam(required = false) final boolean animal) {
 		ModelAndView result;
 
 		result = new ModelAndView("conditions");
+		if (animal)
+			result.addObject("animal", animal);
 		result.addObject("requestURI", "misc/conditions.do");
 
 		return result;

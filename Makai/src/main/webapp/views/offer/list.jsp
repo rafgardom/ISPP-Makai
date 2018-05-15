@@ -46,7 +46,7 @@
 			<security:authorize access="hasRole('CUSTOMER')">
 				<jstl:if test="${row.isAccepted==false}">
 					<a class="btn btn-warning btn-lg disabled" href="misc/conditions.do" target="_blank" data-load-url="misc/conditions.do" data-toggle="modal" data-target="#myModal">
-						<img class="icon-button" src="images/paypal4.png"/>
+						sdfsdfsdfsdf
 						<spring:message code="offer.accept" />
 					</a>
 				</jstl:if>
@@ -59,13 +59,25 @@
 				<security:authorize access="hasRole('CUSTOMER')">
 					<jstl:if test="${row.isAccepted==false}">
 						<jstl:if test="${row.animal.customer == null}">
-							<a class="btn btn-warning btn-lg" href="misc/conditions.do" target="_blank" data-load-url="misc/conditions.do" data-toggle="modal" data-target="#myModal">
+							<a class="btn btn-warning btn-lg" href="misc/conditions.do?animal=false" target="_blank" data-load-url="misc/conditions.do?animal=false" data-toggle="modal" data-target="#myModal">
 								<img class="icon-button" src="images/paypal4.png"/>
 								<spring:message code="offer.accept" />
+								<br/>
+							<spring:message code="offer.transcationPrice" />
+							<jstl:out value="${row.price*(trainingPrice*0.01)}"></jstl:out>
+							<spring:message code="offer.euros" />
+							
 							</a>
 						</jstl:if>
 						<jstl:if test="${row.animal.customer != null}">
-							<acme:link image="paypal4" href="offer/customer/accept.do?offerId=${row.id}" type="warning"  code="offer.accept"/>
+							<a class="btn btn-warning btn-lg" href="misc/conditions.do?animal=true" target="_blank" data-load-url="misc/conditions.do?animal=true" data-toggle="modal" data-target="#myModal">
+								<img class="icon-button" src="images/paypal4.png"/>
+								<spring:message code="offer.accept" />
+								<br/>
+							<spring:message code="offer.transcationPrice" />
+							<jstl:out value="${row.price*(trainingPrice*0.01)}"></jstl:out>
+							<spring:message code="offer.euros" />
+							</a>
 						</jstl:if>
 					</jstl:if>
 					<jstl:if test="${row.isAccepted==true and !tieneRating[count]}">
