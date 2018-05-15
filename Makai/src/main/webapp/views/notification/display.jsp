@@ -94,8 +94,6 @@
 					</jstl:if>
 					<jstl:out value="${text[1]}" />
 					<spring:message code="notification.info.description.ratingNegative2" />
-					<jstl:out value="${text[2]}" />
-					<spring:message code="notification.info.description.ratingNegative3" />
 				</jstl:if>
 				<jstl:if test="${notification.reason.substring(0,4).equals('#OC0')}">
 					<spring:message code="notification.info.description.offerCreate" />

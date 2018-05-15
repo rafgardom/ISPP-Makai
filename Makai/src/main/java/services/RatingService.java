@@ -146,43 +146,44 @@ public class RatingService {
 
 		result = this.ratingRepository.save(rating);
 
-		if (result.getTrainer() != null) {
-			Double avgRating;
+		Double avgRating, oldAvgRating;
 
+		if (result.getTrainer() != null) {
+
+			oldAvgRating = result.getTrainer().getAvgRating();
 			avgRating = this.getAvgByTrainerId(result.getTrainer().getId());
 
 			result.getTrainer().setAvgRating(avgRating);
 			this.trainerService.save(result.getTrainer());
+		} else {
+			oldAvgRating = result.getTravel().getTransporterOwner().getAvgRating();
+			avgRating = this.getAvgByCustomerId(result.getTravel().getTransporterOwner().getId());
+
+			result.getTravel().getTransporterOwner().setAvgRating(avgRating);
+			this.customerService.save((Customer) result.getTravel().getTransporterOwner());
 		}
 
-		if (result.getStars() == 1) {
-			Integer count;
+		if ((oldAvgRating >= 3.0 || oldAvgRating == 0.0) && avgRating < 3.0) {
 			String message;
 
-			if (result.getTrainer() != null) {
-				count = this.count0starsByTrainerId(result.getTrainer().getId());
-				message = "trainer#RN0" + result.getTrainer().getName() + "#RN0" + count;
-			} else {
-				count = this.count0starsByTravelId(result.getTravel().getId());
-				message = "travel#RN0" + result.getTravel().getId() + "#RN0" + count;
-			}
+			if (result.getTrainer() != null)
+				message = "trainer#RN0" + result.getTrainer().getName();
+			else
+				message = "travel#RN0" + result.getTravel().getTransporterOwner().getName();
 
-			// comprobamos si tiene alguno mas a 1, y si es asi, se crea una notificacion al admin
-			if (count >= 2) {
-				Notification notification;
-				final Administrator admin = this.administratorService.findOne();
-				notification = this.notificationService.create(admin);
-				notification.setType(NotificationType.RATING);
-				notification.setReason("#RN0");
-				notification.setDescription(message);
+			Notification notification;
+			final Administrator admin = this.administratorService.findOne();
+			notification = this.notificationService.create(admin);
+			notification.setType(NotificationType.RATING);
+			notification.setReason("#RN0");
+			notification.setDescription(message);
 
-				this.notificationService.save(notification);
-			}
+			this.notificationService.save(notification);
+
 		}
 
 		return result;
 	}
-
 	public void delete(final Rating rating) {
 		Customer principal;
 
@@ -244,6 +245,14 @@ public class RatingService {
 		Double result;
 
 		result = this.ratingRepository.getAvgByTrainerId(trainerId);
+
+		return result;
+	}
+
+	public Double getAvgByCustomerId(final int customerId) {
+		Double result;
+
+		result = this.ratingRepository.getAvgByCustomerId(customerId);
 
 		return result;
 	}
