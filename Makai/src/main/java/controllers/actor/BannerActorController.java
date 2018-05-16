@@ -23,6 +23,7 @@ import services.ActorService;
 import services.BannerService;
 import services.NotificationService;
 import services.PriceService;
+import utilities.Utilities;
 
 import com.paypal.api.payments.Payment;
 
@@ -156,7 +157,7 @@ public class BannerActorController extends AbstractController {
 			bannerForm = this.bannerService.bannerToFormObject(banner);
 			bannerForm.setPrice(0.0);
 
-			result = this.createEditModelAndView(bannerForm);
+			result = this.createEditModelAndView(bannerForm, false);
 
 		} catch (final Throwable e) {
 			System.out.println(e.toString());
@@ -176,7 +177,7 @@ public class BannerActorController extends AbstractController {
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
-			result = this.createEditModelAndView(bannerForm);
+			result = this.createEditModelAndView(bannerForm, false);
 
 		} else
 			try {
@@ -195,7 +196,7 @@ public class BannerActorController extends AbstractController {
 			} catch (final Throwable oops) {
 				System.out.println(oops);
 
-				result = this.createEditModelAndView(bannerForm, "banner.commit.error");
+				result = this.createEditModelAndView(bannerForm, "banner.commit.error", false);
 
 			}
 		return result;
@@ -214,7 +215,7 @@ public class BannerActorController extends AbstractController {
 			banner = this.bannerService.findOne(bannerId);
 			bannerForm = this.bannerService.bannerToFormObject(banner);
 
-			result = this.createEditModelAndView(bannerForm);
+			result = this.createEditModelAndView(bannerForm, true);
 		} catch (final Throwable e) {
 			result = new ModelAndView("error");
 		}
@@ -232,7 +233,10 @@ public class BannerActorController extends AbstractController {
 		try {
 			bannerForm.setZone("abajo");
 			final Banner bannerAux = this.bannerService.findOne(bannerForm.getId());
-			error = this.bannerService.validate(bannerAux, bannerForm, binding);
+			if (bannerForm.getBannerImage().getSize() == 0)
+				error = this.bannerService.validate(bannerAux, bannerForm, binding, true);
+			else
+				error = this.bannerService.validate(bannerAux, bannerForm, binding, false);
 
 			if (error)
 				throw new IllegalArgumentException();
@@ -241,7 +245,7 @@ public class BannerActorController extends AbstractController {
 
 			if (binding.hasErrors()) {
 				System.out.println(binding.toString());
-				result = this.createEditModelAndView(bannerForm);
+				result = this.createEditModelAndView(bannerForm, true);
 
 			} else
 				try {
@@ -251,7 +255,9 @@ public class BannerActorController extends AbstractController {
 						savedFile = bannerForm.getBannerImage().getBytes();
 						banner.setPicture(savedFile);
 
-					}
+					} else
+						banner.setPicture(bannerAux.getPicture());
+
 					banner.setPaid(false);
 					banner.setValidated(false);
 					banner = this.bannerService.save(banner);
@@ -260,15 +266,15 @@ public class BannerActorController extends AbstractController {
 				} catch (final Throwable oops) {
 					System.out.println(oops);
 
-					result = this.createEditModelAndView(bannerForm, "banner.commit.error");
+					result = this.createEditModelAndView(bannerForm, "banner.commit.error", true);
 
 				}
 
 		} catch (final Throwable e) {
 			if (error)
-				result = this.createEditModelAndView(bannerForm, "banner.validation.error");
+				result = this.createEditModelAndView(bannerForm, "banner.validation.error", true);
 			else
-				result = this.createEditModelAndView(bannerForm, "banner.commit.error");
+				result = this.createEditModelAndView(bannerForm, "banner.commit.error", true);
 		}
 
 		return result;
@@ -331,15 +337,15 @@ public class BannerActorController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final BannerForm bannerForm) {
+	protected ModelAndView createEditModelAndView(final BannerForm bannerForm, final boolean edit) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(bannerForm, null);
+		result = this.createEditModelAndView(bannerForm, null, edit);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final BannerForm bannerForm, final String message) {
+	protected ModelAndView createEditModelAndView(final BannerForm bannerForm, final String message, final boolean edit) {
 		ModelAndView result;
 		Price price;
 		Integer numberNoti;
@@ -355,6 +361,12 @@ public class BannerActorController extends AbstractController {
 		else
 			result.addObject("requestURI", "banner/actor/edit.do?bannerId=" + bannerForm.getId());
 		result.addObject("errorMessage", message);
+
+		if (edit) {
+			final Banner banner = this.bannerService.findOne(bannerForm.getId());
+			final String image = Utilities.showImage(banner.getPicture());
+			bannerForm.setStringImage(image);
+		}
 
 		return result;
 	}

@@ -164,7 +164,7 @@ public class BannerService {
 
 	// Other business methods -------------------------------------------------
 
-	public boolean validate(final Banner banner, final BannerForm bannerForm, final BindingResult binding) throws IOException {
+	public boolean validate(final Banner banner, final BannerForm bannerForm, final BindingResult binding, final boolean samePicture) throws IOException {
 		boolean result = false;
 
 		if (bannerForm.getTotalViews() < 1) {
@@ -177,7 +177,7 @@ public class BannerService {
 			result = true;
 
 		}
-		if (bannerForm.getId() == 0 && bannerForm.getBannerImage().getSize() == 0) {
+		if (!samePicture && bannerForm.getId() == 0 && bannerForm.getBannerImage().getSize() == 0) {
 			FieldError fieldError;
 			final String[] codes = {
 				"banner.picture.empty.error"
@@ -186,7 +186,7 @@ public class BannerService {
 			binding.addError(fieldError);
 			result = true;
 
-		} else if (bannerForm.getBannerImage().getSize() > 2097152) {
+		} else if (!samePicture && bannerForm.getBannerImage().getSize() > 2097152) {
 			FieldError fieldError;
 			final String[] codes = {
 				"banner.picture.tooLong.error"
@@ -196,7 +196,7 @@ public class BannerService {
 			result = true;
 		}
 
-		if (bannerForm.getBannerImage().getSize() != 0 && !bannerForm.getBannerImage().getContentType().contains("image")) {
+		if (!samePicture && bannerForm.getBannerImage().getSize() != 0 && !bannerForm.getBannerImage().getContentType().contains("image")) {
 			FieldError fieldError;
 			final String[] codes = {
 				"banner.picture.extension.error"
@@ -205,7 +205,7 @@ public class BannerService {
 			binding.addError(fieldError);
 			result = true;
 
-		} else if (bannerForm.getBannerImage().getSize() != 0) {
+		} else if (!samePicture && bannerForm.getBannerImage().getSize() != 0) {
 			BufferedImage bufferedImage;
 
 			bufferedImage = ImageIO.read(bannerForm.getBannerImage().getInputStream());
@@ -220,7 +220,7 @@ public class BannerService {
 				result = true;
 
 			}
-			if (bufferedImage.getHeight() > 150 || bufferedImage.getHeight() < 100) {
+			if (!samePicture && bufferedImage.getHeight() > 150 || bufferedImage.getHeight() < 100) {
 				FieldError fieldError;
 				final String[] codes = {
 					"banner.picture.height.error"
@@ -231,7 +231,7 @@ public class BannerService {
 			}
 		}
 
-		if (!bannerForm.getZone().equals("izquierda") && !bannerForm.getZone().equals("derecha") && !bannerForm.getZone().equals("abajo")) {
+		if (!samePicture && !bannerForm.getZone().equals("izquierda") && !bannerForm.getZone().equals("derecha") && !bannerForm.getZone().equals("abajo")) {
 			FieldError fieldError;
 			final String[] codes = {
 				"banner.zone.error"
@@ -241,7 +241,7 @@ public class BannerService {
 			result = true;
 		}
 
-		if (!banner.getCurrentViews().equals(bannerForm.getTotalViews()))
+		if (!banner.getCurrentViews().equals(bannerForm.getCurrentViews()))
 			result = true;
 
 		return result;
