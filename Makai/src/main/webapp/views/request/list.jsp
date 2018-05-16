@@ -43,8 +43,11 @@
 	<spring:message code="request.animal" var="animalHeader" />
 	<spring:message code="request.none" var="none"/>
 	<display:column title="${animalHeader}" >
-		<jstl:if test="${row.animal != null}">
+		<jstl:if test="${row.animal != null and row.animal.isHidden==false}">
 			<a href="animal/display.do?animalId=${row.animal.id}"><jstl:out value="${row.animal.name}"/></a>
+		</jstl:if>
+		<jstl:if test="${row.animal != null and row.animal.isHidden==true}">
+			<a><jstl:out value="${row.animal.name}"/></a>
 		</jstl:if>
 		<jstl:if test="${row.animal == null}">
 			<jstl:out value="${none}" />
