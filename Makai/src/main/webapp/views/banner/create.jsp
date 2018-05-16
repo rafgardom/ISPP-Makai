@@ -58,8 +58,15 @@
 				<spring:message code="banner.image.height"/>
 			</small>
 		</div>
+		
 	</div>
-	<br>
+	
+	<jstl:if test="${bannerForm.stringImage != null}">
+		<p><spring:message code="banner.miniature"/></p>
+		<div class="row">
+				<img src="${bannerForm.stringImage}" alt="<spring:message code='animal.no.picture' />" width="1200" height="200px">
+		</div>
+	</jstl:if>
 	<small class="form-text text-muted">
 		*&nbsp;<spring:message code="banner.advice.edit"/>
 	</small>

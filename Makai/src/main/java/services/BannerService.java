@@ -19,6 +19,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
 
 import repositories.BannerRepository;
+import utilities.CustomMultipartFile;
 import utilities.Utilities;
 import domain.Actor;
 import domain.Administrator;
@@ -350,9 +351,11 @@ public class BannerService {
 
 		result = new BannerForm();
 
-		if (banner.getPicture() != null)
+		if (banner.getPicture() != null) {
 			image = Utilities.showImage(banner.getPicture());
-		else
+			final CustomMultipartFile cmf = new CustomMultipartFile(banner.getPicture());
+			result.setBannerImage(cmf);
+		} else
 			image = null;
 
 		result.setId(banner.getId());
