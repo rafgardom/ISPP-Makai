@@ -50,11 +50,22 @@ public class BannerForm {
 		this.clicksNumber = banner.getClicksNumber();
 	}
 
-	public BannerForm(final Banner banner, double dailyViews, final double monthlyViews) {
+	public BannerForm(final Banner banner, double dailyViews, double monthlyViews) {
 		double aux;
 
-		aux = 1.0 * Math.round(dailyViews * 100);
-		dailyViews = aux / 100;
+		if (dailyViews < 0)
+			dailyViews = 0.0;
+		else {
+			aux = 1.0 * Math.round(dailyViews * 100);
+			dailyViews = aux / 100;
+		}
+
+		if (monthlyViews < 0)
+			monthlyViews = 0.0;
+		else {
+			aux = 1.0 * Math.round(monthlyViews * 100);
+			monthlyViews = aux / 100;
+		}
 
 		this.id = banner.getId();
 		this.picture = banner.getPicture();
