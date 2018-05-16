@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BannerService;
@@ -90,6 +91,21 @@ public class BannerController extends AbstractController {
 			}
 		return result;
 
+	}
+
+	// Creation ---------------------------------------------------------------		
+	@RequestMapping(value = "/bannerClick", method = RequestMethod.GET)
+	public ModelAndView bannerClick(@RequestParam final int bannerId) {
+		ModelAndView result;
+		Banner banner;
+
+		banner = this.bannerService.findOne(bannerId);
+		banner.setClicksNumber(banner.getClicksNumber() + 1);
+		this.bannerService.simpleSave(banner);
+
+		result = new ModelAndView("redirect:" + banner.getUrl());
+
+		return result;
 	}
 
 	// Ancillary methods ------------------------------------------------------
