@@ -34,7 +34,7 @@
 		</jstl:if>
 		<jstl:if test="${fn:contains('TRAINER',actor.userAccount.authorities[0].authority) }">
 			<p><b><spring:message code="trainer.certifyingCompany" />:</b> 
-					<jstl:out value="${certifyingCompany}" /></p>
+					<jstl:out value="${actor.certifyingCompany}" /></p>
 		</jstl:if>
 		
 	  	<jstl:if test="${actor.userAccount.id==principalUserAccount.id || fn:contains('ADMIN',principalUserAccount.authorities[0].authority) }">

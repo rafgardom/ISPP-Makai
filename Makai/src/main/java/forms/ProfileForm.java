@@ -21,6 +21,7 @@ public class ProfileForm {
 	private String			password;
 	private String			repeatPassword;
 	private MultipartFile	userImage;
+	private String			certifyingCompany;
 
 
 	// Constructor ------------------------------------------------------------
@@ -110,6 +111,14 @@ public class ProfileForm {
 
 	public void setUserImage(final MultipartFile userImage) {
 		this.userImage = userImage;
+	}
+
+	public String getCertifyingCompany() {
+		return this.certifyingCompany;
+	}
+
+	public void setCertifyingCompany(final String certifyingCompany) {
+		this.certifyingCompany = certifyingCompany;
 	}
 
 }

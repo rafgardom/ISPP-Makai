@@ -25,7 +25,6 @@ import controllers.AbstractController;
 import domain.Actor;
 import domain.Banner;
 import domain.Rating;
-import domain.Trainer;
 import forms.ProfileForm;
 
 @Controller
@@ -103,18 +102,12 @@ public class ProfileActorController extends AbstractController {
 		String image;
 		final Integer numberNoti;
 		Collection<Rating> ratings;
-		String certifyingCompany = null;
 
 		try {
 			ratings = null;
 			actor = this.actorService.findOne(actorId);
 			image = Utilities.showImage(actor.getPicture());
 			numberNoti = this.notificationService.findNotificationWithoutRead();
-
-			if (actor instanceof Trainer) {
-				final Trainer trainer = this.trainerService.findOne(actorId);
-				certifyingCompany = trainer.getCertifyingCompany();
-			}
 
 			if (this.actorService.checkAuthority(actor, "TRAINER"))
 				ratings = this.ratingService.findByTrainerId(actor.getId());
@@ -130,7 +123,6 @@ public class ProfileActorController extends AbstractController {
 			result.addObject("pictureImage", image);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("ratings", ratings);
-			result.addObject("certifyingCompany", certifyingCompany);
 			result.addObject("requestURI", "profile/display.do");
 			//			result.addObject("imagesLeft", imagesLeft);
 			result.addObject("imagesBottom", imagesBottom);

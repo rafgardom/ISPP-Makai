@@ -260,6 +260,7 @@ public class ActorService {
 			trainer = this.trainerService.findByPrincipal();
 			trainer.setSurname(profileForm.getSurname());
 			trainer.setNid(profileForm.getNid());
+			trainer.setCertifyingCompany(profileForm.getCertifyingCompany());
 			result = trainer;
 		} else
 			result = this.findByPrincipal();
@@ -325,6 +326,7 @@ public class ActorService {
 			trainer = this.trainerService.findByPrincipal();
 			result.setSurname(trainer.getSurname());
 			result.setNid(trainer.getNid());
+			result.setCertifyingCompany(trainer.getCertifyingCompany());
 		}
 
 		result.setCoordinates(actor.getCoordinates());

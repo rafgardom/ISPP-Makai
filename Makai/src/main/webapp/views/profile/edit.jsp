@@ -35,6 +35,9 @@
 			<security:authorize access="hasAnyRole('ADMIN', 'TRAINER')">
 				<acme:input image="id-card" code="profile.nid" path="nid" mandatory="true" />
 			</security:authorize>
+			<security:authorize access="hasRole('TRAINER')">
+				<acme:input code="trainer.certifyingCompany" path="certifyingCompany" mandatory="true" />
+			</security:authorize>
 	
 			<acme:input code="profile.phone" path="phone" mandatory="true" image="phone" pattern="((\+|00)\d{2,4}(\s)?)?\d{9,13}" />
 			<acme:input code="profile.email" path="email" mandatory="true" image="at" type="email" />
