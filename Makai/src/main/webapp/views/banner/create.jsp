@@ -63,8 +63,10 @@
 	
 	<jstl:if test="${bannerForm.stringImage != null}">
 		<p><spring:message code="banner.miniature"/></p>
-		<div class="row">
-				<img src="${bannerForm.stringImage}" alt="<spring:message code='animal.no.picture' />" width="1200" height="200px">
+		<div class="col-lg-10  col-12">
+			<div class="row">
+					<img src="${bannerForm.stringImage}" alt="<spring:message code='animal.no.picture' />" width="100%" height="100%">
+			</div>
 		</div>
 	</jstl:if>
 	<small class="form-text text-muted">
