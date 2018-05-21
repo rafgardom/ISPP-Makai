@@ -133,6 +133,11 @@
 <br>
 
 <div class="center-div">
-	<acme:link href="animal/list.do" code="animal.goBack" image="arrow_left"/>
+	<jstl:if test="${isTrainer}">
+		<acme:link href="request/trainer/list.do" code="animal.goBack" image="arrow_left"/>
+	</jstl:if>
+	<jstl:if test="${!isTrainer}">
+		<acme:link href="animal/list.do" code="animal.goBack" image="arrow_left"/>
+	</jstl:if>
 </div>
 
