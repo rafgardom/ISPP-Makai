@@ -111,7 +111,7 @@
 			<div class="center-div">
 				<img src="${util.showImage(animal.getAnimalShelter().getPicture())} " class="rounded-circle" width="200px" height="200px">	
 			</div>
-		 	<br><h3 class="card-title mt-3"><spring:message code="animal.owner.info" /></h3>
+		 	<br><h3 class="card-title mt-3"><spring:message code="animal.owner.info.animalShelter" /></h3>
 		  	<div class="card-body"> 		
 				<p><b><spring:message code="animal.name" />:</b> 
 					<jstl:out value="${animal.animalShelter.name}" /></p>
