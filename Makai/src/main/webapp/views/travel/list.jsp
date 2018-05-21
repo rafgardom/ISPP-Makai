@@ -27,7 +27,31 @@
 	<acme:column code="travel.origin" property="origin.city" sortable="true"/>
 	<acme:column code="travel.destination" property="destination.city" sortable="true"/>
 	<acme:column code="travel.startMoment" property="startMoment" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true"/>
-	<acme:column code="travel.duration" property="duration"/>
+	
+	<jstl:set var="minutos" value="${row.duration%60}"/>
+	<jstl:set var="horas" value="${((row.duration-minutos)/60).intValue()}"/>
+	<spring:message code="travel.duration" var="durationHeader" />
+	<display:column title="${durationHeader}" class="text-center">
+		<jstl:if test="${horas > 0}">
+			<jstl:out value="${horas} " />
+			<jstl:if test="${horas == 1}">
+				<spring:message code="travel.hour" />
+			</jstl:if>
+			<jstl:if test="${horas > 1}">
+				<spring:message code="travel.hours" />
+			</jstl:if>
+		</jstl:if>
+		<jstl:if test="${minutos > 0}">
+			<jstl:out value="${minutos} " />
+			<jstl:if test="${minutos == 1}">
+				<spring:message code="travel.minute" />
+			</jstl:if>
+			<jstl:if test="${minutos > 1}">
+				<spring:message code="travel.minutes" />
+			</jstl:if>
+		</jstl:if>
+	</display:column>
+	
 	<acme:column code="travel.animalSeats" property="animalSeats" />
 	<acme:column code="travel.humanSeats" property="humanSeats" />
 	
