@@ -61,7 +61,7 @@ public class Vehicle extends DomainEntity {
 		this.brand = brand;
 	}
 
-	@Min(1)
+	@Min(0)
 	public Integer getSeats() {
 		return this.seats;
 	}
