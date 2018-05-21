@@ -172,33 +172,36 @@ public class BannerActorController extends AbstractController {
 		ModelAndView result;
 		Banner banner;
 		byte[] savedFile;
+		try {
+			banner = this.bannerService.reconstruct(bannerForm, binding);
 
-		banner = this.bannerService.reconstruct(bannerForm, binding);
+			if (binding.hasErrors()) {
+				System.out.println(binding.toString());
+				result = this.createEditModelAndView(bannerForm, false);
 
-		if (binding.hasErrors()) {
-			System.out.println(binding.toString());
-			result = this.createEditModelAndView(bannerForm, false);
+			} else
+				try {
 
-		} else
-			try {
+					if (bannerForm.getBannerImage().getSize() > 0) {
 
-				if (bannerForm.getBannerImage().getSize() > 0) {
+						savedFile = bannerForm.getBannerImage().getBytes();
+						banner.setPicture(savedFile);
 
-					savedFile = bannerForm.getBannerImage().getBytes();
-					banner.setPicture(savedFile);
+					}
+					banner.setPaid(false);
+					banner.setValidated(false);
+					banner = this.bannerService.save(banner);
+					result = new ModelAndView("redirect:list.do");
+
+				} catch (final Throwable oops) {
+					System.out.println(oops);
+
+					result = this.createEditModelAndView(bannerForm, "banner.commit.error", false);
 
 				}
-				banner.setPaid(false);
-				banner.setValidated(false);
-				banner = this.bannerService.save(banner);
-				result = new ModelAndView("redirect:list.do");
-
-			} catch (final Throwable oops) {
-				System.out.println(oops);
-
-				result = this.createEditModelAndView(bannerForm, "banner.commit.error", false);
-
-			}
+		} catch (final Throwable e) {
+			result = this.createEditModelAndView(bannerForm, false);
+		}
 		return result;
 
 	}
@@ -213,6 +216,8 @@ public class BannerActorController extends AbstractController {
 
 		try {
 			banner = this.bannerService.findOne(bannerId);
+			final Actor actor = this.actorService.findByPrincipal();
+			Assert.isTrue(banner.getActor().equals(actor));
 			bannerForm = this.bannerService.bannerToFormObject(banner);
 
 			result = this.createEditModelAndView(bannerForm, true);

@@ -116,6 +116,7 @@ public class BannerForm {
 		this.bannerImage = bannerImage;
 	}
 
+	@NotNull
 	public Integer getTotalViews() {
 		return this.totalViews;
 	}
