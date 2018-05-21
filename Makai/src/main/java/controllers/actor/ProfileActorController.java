@@ -159,8 +159,13 @@ public class ProfileActorController extends AbstractController {
 		ModelAndView result;
 		Actor actor;
 		byte[] savedFile;
+		boolean errors = false;
 
 		try {
+			errors = this.actorService.validateForm(profileForm, binding);
+			if (errors)
+				throw new IllegalArgumentException();
+
 			actor = this.actorService.reconstructEdit(profileForm, binding);
 
 			if (binding.hasErrors()) {
@@ -201,6 +206,10 @@ public class ProfileActorController extends AbstractController {
 		result.addObject("profileForm", profileForm);
 		result.addObject("RequestURI", "profile/edit.do");
 		result.addObject("errorMessage", message);
+
+		final Actor actor = this.actorService.findOne(profileForm.getId());
+		final String image = Utilities.showImage(actor.getPicture());
+		profileForm.setStringImage(image);
 
 		return result;
 	}

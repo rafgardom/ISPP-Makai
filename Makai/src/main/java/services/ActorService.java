@@ -23,6 +23,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import utilities.UserNamePasswordValidator;
+import utilities.Utilities;
 import domain.Actor;
 import domain.Administrator;
 import domain.Customer;
@@ -183,6 +184,91 @@ public class ActorService {
 		return multipartResolver;
 	}
 
+	public boolean validateForm(final ProfileForm profileForm, final BindingResult binding) {
+		boolean result = false;
+		final Actor principal = this.findByPrincipal();
+		final UserNamePasswordValidator accountValidator = new UserNamePasswordValidator();
+		boolean passwordValidator = false;
+
+		if (profileForm.getUserImage().getSize() > 2097152) {
+			FieldError fieldError;
+			final String[] codes = {
+				"profile.register.picture.tooLong.error"
+			};
+			fieldError = new FieldError("profileForm", "userImage", profileForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+			result = true;
+		}
+		if (profileForm.getUserImage().getSize() > 0 && !profileForm.getUserImage().getContentType().contains("image")) {
+			FieldError fieldError;
+			final String[] codes = {
+				"profile.picture.extension.error"
+			};
+			fieldError = new FieldError("profileForm", "userImage", profileForm.getUserImage(), false, codes, null, "");
+			binding.addError(fieldError);
+			result = true;
+		}
+
+		final Pattern coordinatePattern = Pattern.compile("^[a-zñÑá-úÁ-ÚA-Z]+(?:[\\s-][a-zñÑá-úÁ-ÚA-Z]+)*$");
+		if (!profileForm.getCoordinates().getState().isEmpty())
+			if (!coordinatePattern.matcher(profileForm.getCoordinates().getState()).matches()) {
+				FieldError fieldError;
+				final String[] codes = {
+					"general.coordinates.state.error"
+				};
+				fieldError = new FieldError("profileForm", "coordinates.state", profileForm.getCoordinates().getState(), false, codes, null, "");
+				binding.addError(fieldError);
+				result = true;
+			}
+		if (!profileForm.getCoordinates().getProvince().isEmpty())
+			if (!coordinatePattern.matcher(profileForm.getCoordinates().getProvince()).matches()) {
+				FieldError fieldError;
+				final String[] codes = {
+					"general.coordinates.province.error"
+				};
+				fieldError = new FieldError("profileForm", "coordinates.province", profileForm.getCoordinates().getProvince(), false, codes, null, "");
+				binding.addError(fieldError);
+				result = true;
+			}
+		// comprobamos que no hayan espacios en el name
+		if (profileForm.getName().replace(" ", "").isEmpty()) {
+			FieldError fieldError;
+			final String[] codes = {
+				"org.hibernate.validator.constraints.NotBlank.message"
+			};
+			fieldError = new FieldError("profileForm", "name", profileForm.getName(), false, codes, null, "");
+			binding.addError(fieldError);
+			result = true;
+		}
+		Assert.isTrue(!profileForm.getName().replace(" ", "").isEmpty());
+
+		if (profileForm.getPassword() != null && !profileForm.getPassword().isEmpty()) {
+			if (accountValidator.passwordValidate(profileForm.getPassword()))
+				passwordValidator = true;
+
+			if (!profileForm.getPassword().equals(profileForm.getRepeatPassword())) {
+
+				FieldError fieldError;
+				final String[] codes = {
+					"profile.repeatPasword.error"
+				};
+				fieldError = new FieldError("profileForm", "repeatPassword", profileForm.getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
+				result = true;
+
+			} else if (profileForm.getPassword().contains(" ") || !passwordValidator) {
+				FieldError fieldError;
+				final String[] codes = {
+					"profile.password.error"
+				};
+				fieldError = new FieldError("profileForm", "password", profileForm.getPassword(), false, codes, null, "");
+				binding.addError(fieldError);
+				result = true;
+			}
+		}
+		return result;
+	}
+
 	public Actor reconstructEdit(final ProfileForm profileForm, final BindingResult binding) throws IOException {
 		Assert.notNull(profileForm);
 		final Actor principal;
@@ -335,6 +421,10 @@ public class ActorService {
 		result.setPhone(actor.getPhone());
 		result.setPicture(actor.getPicture());
 		result.setUserImage(null);
+		result.setId(actor.getId());
+
+		final String image = Utilities.showImage(actor.getPicture());
+		result.setStringImage(image);
 
 		return result;
 	}

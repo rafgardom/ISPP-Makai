@@ -16,7 +16,7 @@
 </jstl:if>
 
 <form:form action="${RequestURI}" modelAttribute="profileForm" enctype="multipart/form-data">
-	
+	<form:hidden path="id"/>
 	<br>
 	<jstl:if test="${errorMessage != null}">
 		<acme:error code="${errorMessage}"/>
@@ -36,7 +36,7 @@
 				<acme:input image="id-card" code="profile.nid" path="nid" mandatory="true" />
 			</security:authorize>
 			<security:authorize access="hasRole('TRAINER')">
-				<acme:input code="trainer.certifyingCompany" path="certifyingCompany" mandatory="true" />
+				<acme:input image="id" code="trainer.certifyingCompany" path="certifyingCompany" mandatory="false" />
 			</security:authorize>
 	
 			<acme:input code="profile.phone" path="phone" mandatory="true" image="phone" pattern="((\+|00)\d{2,4}(\s)?)?\d{9,13}" />
@@ -75,7 +75,17 @@
 		</div>
 		<div class="offset-md-1 col-md-5">
 			<acme:inputImage path="userImage"/>
+			
+		<jstl:if test="${profileForm.stringImage != null}">
+			<br/>
+			<br/>
+			<p><spring:message code="banner.miniature"/></p>
+			<div class="row">
+				<img src="${profileForm.stringImage}" class="rounded-circle" alt="<spring:message code='animal.no.picture' />" width="200px" height="200px"><br>
+			</div>
+		</jstl:if>
 		</div>
+		
 	</div>
 	<br>	
 		
