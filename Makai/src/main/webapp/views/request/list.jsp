@@ -25,18 +25,20 @@
 <jstl:forEach items = "${requests}"  var = "row">
 	<br>
 	<div class="row">
-		<div class="offset-md-1 col-md-3 col-4">
+	<div class="offset-md-1 col-md-10 col-12">
+	<div class="row">
+		<div class="col-4">
 		<div class="center-div">
 				<img src="${util.showImage(row.getCustomer().getPicture(),'user')} " class="rounded-circle img-fluid" width="200px" height="200px">
 		</div>
 		</div>
-		<div class="col-md-3 col-4">
+		<div class="col-4">
 		<br>
 		<div class="center-div">
 				<img src="${util.showImage(row.getAnimal().getPicture(),'interrogation')} " class="rounded-circle img-fluid" width="128px" height="128px">
 		</div>
 		</div>
-		<div class="col-md-3 col-4">
+		<div class="col-4">
 				<div class="center-div">
 				<jstl:if test="${trainers.get(count) != null}">
 					<img src="${util.showImage(trainers.get(count).getPicture(),'user')} " class="rounded-circle img-fluid" width="200px" height="200px">
@@ -46,9 +48,10 @@
 				</jstl:if>
 				</div>
 		</div>
+		</div>
+	</div>	
 		
-		
-   	<div class="offset-md-1 col-md-9 col-12 text-center" style="margin-top: -40px;">
+   	<div class="offset-md-1 col-md-10 col-12 text-center" style="margin-top: -40px;">
 	   	<div class="card shadow">
 	   		<div class="row mt-5">
 		   		<div class="col-4">
@@ -114,7 +117,6 @@
 	   	</div>
    	</div>
    	</div>
-   
 	
 	<jstl:set var="count" value="${count+1}"/>
 </jstl:forEach>
