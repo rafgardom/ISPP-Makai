@@ -118,8 +118,8 @@ public class TravelService {
 		today = Calendar.getInstance();
 		Assert.isTrue(today.getTime().before(travel.getStartMoment()));
 
-		if (travel.getId() != 0)
-			Assert.isTrue(travel.getAnimals().size() == 0 && this.transporterService.findPassengersByTravel(travel.getId()).size() == 0);
+		//if (travel.getId() != 0)
+		//Assert.isTrue(travel.getAnimals().size() == 0 && this.transporterService.findPassengersByTravel(travel.getId()).size() == 0);
 
 		Assert.isTrue((travel.getAnimalSeats() != null || travel.getAnimalSeats() > 0) || (travel.getHumanSeats() != null || travel.getHumanSeats() > 0));
 		Assert.isTrue(travel.getAnimalSeats() + travel.getHumanSeats() <= vehicle.getSeats());
