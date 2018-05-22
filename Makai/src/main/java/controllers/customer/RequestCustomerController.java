@@ -3,6 +3,7 @@ package controllers.customer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -21,6 +22,7 @@ import services.CustomerService;
 import services.NotificationService;
 import services.OfferService;
 import services.RequestService;
+import services.TrainerService;
 import controllers.AbstractController;
 import domain.Animal;
 import domain.Banner;
@@ -28,6 +30,7 @@ import domain.Category;
 import domain.Customer;
 import domain.Offer;
 import domain.Request;
+import domain.Trainer;
 import forms.RequestForm;
 
 @Controller
@@ -40,6 +43,9 @@ public class RequestCustomerController extends AbstractController {
 
 	@Autowired
 	private CustomerService		customerService;
+	
+	@Autowired
+	private TrainerService		trainerService;
 
 	@Autowired
 	private AnimalService		animalService;
@@ -71,6 +77,8 @@ public class RequestCustomerController extends AbstractController {
 		Collection<Request> requestsWithOffer;
 		final Integer numberNoti;
 		final ArrayList<Banner> imagesBottom;
+		List<Trainer> trainers = new ArrayList<Trainer>();
+	
 		
 		try {
 
@@ -81,6 +89,10 @@ public class RequestCustomerController extends AbstractController {
 			requestsWithOffer = this.requestService.findRequestsWithOffer();
 			imagesBottom = this.bannerService.getBannerByZone("abajo");
 			
+			if(requests.getContent().size()>0){
+				trainers = trainerService.findTrainersByAcceptedsRequests(requests.getContent());
+			}
+			
 			result = new ModelAndView("request/myList");
 			result.addObject("requestURI", "request/customer/myList.do");
 			result.addObject("numberNoti", numberNoti);
@@ -88,6 +100,7 @@ public class RequestCustomerController extends AbstractController {
 			result.addObject("offersAcepted", offersAcepted);
 			result.addObject("requestsWithOffer", requestsWithOffer);
 			result.addObject("imagesBottom", imagesBottom);
+			result.addObject("trainers", trainers);
 			result.addObject("nElem", nElem);
 			result.addObject("pageNumbers", requests.getTotalPages());
 			result.addObject("page", page);

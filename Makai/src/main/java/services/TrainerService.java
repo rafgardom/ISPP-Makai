@@ -4,6 +4,7 @@ package services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import utilities.UserNamePasswordValidator;
 import domain.Actor;
 import domain.Category;
 import domain.Offer;
+import domain.Request;
 import domain.Trainer;
 import forms.TrainerForm;
 
@@ -257,5 +259,13 @@ public class TrainerService {
 
 	public Collection<Trainer> findTrainerSameCategory(final Category category) {
 		return this.trainerRepository.findTrainerSameCategory(category);
+	}
+	
+	public List<Trainer> findTrainersByAcceptedsRequests(List<Request> requests) {
+		ArrayList<Trainer> res = new ArrayList<Trainer>();
+		for (Request r: requests) {
+			res.add(trainerRepository.findTrainerByAcceptedRequest(r.getId()));
+		}
+		return res;
 	}
 }

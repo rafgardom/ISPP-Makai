@@ -650,10 +650,6 @@
 		<property name="email" value="ispp.makai.1718@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates1" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="surname" value="ISPP" />
 		<property name="nid" value="98698525D" />
 		<property name="userAccount" ref="userAccount1" />
@@ -796,10 +792,6 @@
 		<property name="email" value="santiago@gmail.com" />
 		<property name="phone" value="+39632144487" />
 		<property name="coordinates" ref="coordinates9" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="avgRating" value="0.0" />
 		<property name="travelPassengers">
 			<list>
@@ -815,10 +807,6 @@
 		<property name="email" value="elena@gmail.com" />
 		<property name="phone" value="+34 699655654" />
 		<property name="coordinates" ref="coordinates10" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="avgRating" value="0.0" />
 		<property name="travelPassengers">
 			<list>
@@ -836,10 +824,6 @@
 		<property name="email" value="marta@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates11" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="avgRating" value="0.0" />
 		<property name="offers">
 			<list>
@@ -858,10 +842,6 @@
 		<property name="email" value="shelu@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates12" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="avgRating" value="4.0" />
 		<property name="offers">
 			<list>
@@ -879,10 +859,6 @@
 		<property name="email" value="diego@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates13" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="avgRating" value="0.0" />
 		<property name="offers">
 			<list>
@@ -1351,10 +1327,6 @@
 		<property name="year" value="2012" />
 		<property name="description" value="Climatizado" />
 		<property name="isActived" value="true" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="color" value="ROJO" />
 		<property name="transporter" ref="professional1" />
 		<property name="license" value="1234BCD" />
@@ -1368,10 +1340,6 @@
 		<property name="year" value="2016" />
 		<property name="description" value="Climatizado" />
 		<property name="isActived" value="true" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="color" value="VERDE" />
 		<property name="transporter" ref="professional1" />
 		<property name="license" value="1234BCR" />
@@ -1385,10 +1353,6 @@
 		<property name="year" value="2015" />
 		<property name="description" value="Climatizado" />
 		<property name="isActived" value="true" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="color" value="BLANCO" />
 		<property name="transporter" ref="customer1" />
 		<property name="license" value="1254BCD" />

@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<div class="card">
+<div class="card shadow">
 	<div class="center-div pt-5">
 		<img src="images/warning.png"/>
 	</div>

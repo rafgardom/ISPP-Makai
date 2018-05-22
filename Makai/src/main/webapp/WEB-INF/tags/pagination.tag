@@ -31,7 +31,7 @@
 
 <jstl:if test="${pageNumbers>0}">
 <div class="center-div mt-4">
-  <ul class="pagination">
+  <ul class="pagination pagination-lg">
 	  <jstl:forEach var = "i" begin="0" end="${pageNumbers-1}">
 	    
 	    <jstl:if test="${i==0}">
