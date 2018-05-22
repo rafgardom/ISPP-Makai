@@ -55,23 +55,21 @@
 				</jstl:if> --%>
 			</p>
 			
-			<jstl:if test="${r != null}">
-					<jstl:if test="${lang == 'es'}">
-						<p><b><spring:message code="animal.specie" />:</b> <jstl:out value="${specie.typeSpa}" /></p>
-					</jstl:if>
-					<jstl:if test="${lang == 'en'}">
-						<p><b><spring:message code="animal.specie" />:</b> <jstl:out value="${specie.typeEng}" /></p>
-					</jstl:if>
+			
+			<jstl:if test="${lang == 'es'}">
+				<p><b><spring:message code="animal.specie" />:</b> <jstl:out value="${specie.typeSpa}" /></p>
+			</jstl:if>
+			<jstl:if test="${lang == 'en'}">
+				<p><b><spring:message code="animal.specie" />:</b> <jstl:out value="${specie.typeEng}" /></p>
 			</jstl:if>
 			
+			
 			<jstl:forEach var="r" items="${animal.breeds}">
-				<jstl:if test="${r != null}">
-					<jstl:if test="${lang == 'es'}">
-						<p><b><spring:message code="animal.breed" />:</b> <jstl:out value="${r.nameSpa}" /></p>
-					</jstl:if>
-					<jstl:if test="${lang == 'en'}">
-						<p><b><spring:message code="animal.breed" />:</b> <jstl:out value="${r.nameEng}" /></p>
-					</jstl:if>
+				<jstl:if test="${lang == 'es'}">
+					<p><b><spring:message code="animal.breed" />:</b> <jstl:out value="${r.nameSpa}" /></p>
+				</jstl:if>
+				<jstl:if test="${lang == 'en'}">
+					<p><b><spring:message code="animal.breed" />:</b> <jstl:out value="${r.nameEng}" /></p>
 				</jstl:if>
 			</jstl:forEach>
 	  	
@@ -88,9 +86,6 @@
 		  	<div class="card-body "> 	
 		  		<p><b><spring:message code="animal.name" />:</b> 
 					<jstl:out value="${animal.customer.name}" /></p>
-				
-				<p><b><spring:message code="animal.owner.username" />:</b> 
-					<jstl:out value="${animal.customer.userAccount.username}" /></p>
 					
 			<jstl:if test="${ratings!=null }">
 				<p><b><spring:message code="profile.rating.stars" />:</b> <jstl:out
@@ -114,9 +109,6 @@
 		  	<div class="card-body"> 		
 				<p><b><spring:message code="animal.name" />:</b> 
 					<jstl:out value="${animal.animalShelter.name}" /></p>
-					
-				<p><b><spring:message code="animal.owner.username" />:</b> 
-					<jstl:out value="${animal.animalShelter.userAccount.username}" /></p>
 		  	
 		  		<p><b><spring:message code="animal.owner.phone" />:</b> <jstl:out
 						value="${animal.animalShelter.phone}" /></p>
@@ -132,6 +124,11 @@
 <br>
 
 <div class="center-div">
-	<acme:link href="animal/list.do" code="animal.goBack" image="arrow_left"/>
+	<jstl:if test="${isTrainer}">
+		<acme:link href="request/trainer/list.do" code="animal.goBack" image="arrow_left"/>
+	</jstl:if>
+	<jstl:if test="${!isTrainer}">
+		<acme:link href="animal/list.do" code="animal.goBack" image="arrow_left"/>
+	</jstl:if>
 </div>
 

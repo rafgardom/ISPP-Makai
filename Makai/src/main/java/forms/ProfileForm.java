@@ -11,6 +11,7 @@ public class ProfileForm {
 
 	// Attributes -------------------------------------------------------------
 
+	private int				id;
 	private String			name;
 	private String			email;
 	private String			phone;
@@ -22,6 +23,7 @@ public class ProfileForm {
 	private String			repeatPassword;
 	private MultipartFile	userImage;
 	private String			certifyingCompany;
+	private String			stringImage;
 
 
 	// Constructor ------------------------------------------------------------
@@ -34,6 +36,14 @@ public class ProfileForm {
 
 	public String getName() {
 		return this.name;
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(final int id) {
+		this.id = id;
 	}
 
 	public void setName(final String name) {
@@ -119,6 +129,14 @@ public class ProfileForm {
 
 	public void setCertifyingCompany(final String certifyingCompany) {
 		this.certifyingCompany = certifyingCompany;
+	}
+
+	public String getStringImage() {
+		return this.stringImage;
+	}
+
+	public void setStringImage(final String stringImage) {
+		this.stringImage = stringImage;
 	}
 
 }

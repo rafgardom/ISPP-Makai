@@ -16,7 +16,17 @@
 	<acme:column code="offer.startMoment" property="startMoment" sortable="true" format="{0,date,dd/MM/yyyy}"/>
 	<acme:column code="offer.coordinates.city" property="destination.city" sortable="true"/>
 	<acme:column code="offer.price" property="price" sortable="true" format="{0,number, 0.00}&euro;"/>
-	<acme:column code="offer.animal" property="animal.name" />
+	
+	<spring:message code="offer.animal" var="animalHeader" />
+	<display:column title="${animalHeader}" >
+		<jstl:if test="${row.animal != null and row.animal.isHidden==false}">
+			<a href="animal/display.do?animalId=${row.animal.id}"><jstl:out value="${row.animal.name}"/></a>
+		</jstl:if>
+		<jstl:if test="${row.animal != null and row.animal.isHidden==true}">
+			<a><jstl:out value="${row.animal.name}"/></a>
+		</jstl:if>
+	</display:column>
+	
 	<acme:column code="offer.request.owner" property="request.customer.name" />
 	
 	<%-- <display:column>

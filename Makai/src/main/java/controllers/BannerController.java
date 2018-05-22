@@ -61,34 +61,38 @@ public class BannerController extends AbstractController {
 		Banner banner;
 		byte[] savedFile;
 		boolean pictureTooLong = false;
-		banner = this.bannerService.reconstruct(bannerForm, binding);
+		try {
+			banner = this.bannerService.reconstruct(bannerForm, binding);
 
-		if (binding.hasErrors()) {
-			System.out.println(binding.toString());
-			result = this.createEditModelAndView(bannerForm);
+			if (binding.hasErrors()) {
+				System.out.println(binding.toString());
+				result = this.createEditModelAndView(bannerForm);
 
-		} else
-			try {
+			} else
+				try {
 
-				if (bannerForm.getBannerImage().getSize() > 2097152 || !bannerForm.getBannerImage().getContentType().contains("image")) {
-					pictureTooLong = true;
-					throw new IllegalArgumentException();
+					if (bannerForm.getBannerImage().getSize() > 2097152 || !bannerForm.getBannerImage().getContentType().contains("image")) {
+						pictureTooLong = true;
+						throw new IllegalArgumentException();
 
-				} else {
-					savedFile = bannerForm.getBannerImage().getBytes();
-					banner.setPicture(savedFile);
-					this.bannerService.save(banner);
+					} else {
+						savedFile = bannerForm.getBannerImage().getBytes();
+						banner.setPicture(savedFile);
+						this.bannerService.save(banner);
+					}
+
+					result = new ModelAndView("redirect:../");
+
+				} catch (final Throwable oops) {
+					System.out.println(oops);
+					if (pictureTooLong == false)
+						result = this.createEditModelAndView(bannerForm, "advertising.register.error");
+					else
+						result = this.createEditModelAndView(bannerForm, "banner.commit.error");
 				}
-
-				result = new ModelAndView("redirect:../");
-
-			} catch (final Throwable oops) {
-				System.out.println(oops);
-				if (pictureTooLong == false)
-					result = this.createEditModelAndView(bannerForm, "advertising.register.error");
-				else
-					result = this.createEditModelAndView(bannerForm, "banner.commit.error");
-			}
+		} catch (final Throwable e) {
+			result = this.createEditModelAndView(bannerForm, "banner.commit.error");
+		}
 		return result;
 
 	}
