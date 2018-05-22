@@ -248,19 +248,22 @@ public class TravelService {
 	public Travel reconstruct(final TravelForm travelForm, final BindingResult binding) throws IOException {
 		Assert.notNull(travelForm);
 		Travel result;
+		Integer passenger = 0;
 
 		if (travelForm.getId() == 0)
 			result = this.create();
-		else
+		else {
 			result = this.findOne(travelForm.getId());
+			passenger = this.transporterService.findPassengersByTravel(result.getId()).size();
+		}
 
 		result.setDestination(travelForm.getDestination());
 		result.setOrigin(travelForm.getOrigin());
 		result.setStartMoment(this.sumDates(travelForm.getStartDate(), travelForm.getStartTime()));
 		result.setDuration(travelForm.getDuration());
-		result.setAnimalSeats(travelForm.getAnimalSeats());
+		result.setAnimalSeats(travelForm.getAnimalSeats() - result.getAnimals().size());
 		result.setVehicle(travelForm.getVehicle());
-		result.setHumanSeats(travelForm.getHumanSeats());
+		result.setHumanSeats(travelForm.getHumanSeats() - passenger);
 		result.setSpecies(travelForm.getSpecies());
 
 		this.validator.validate(result, binding);
@@ -286,8 +289,8 @@ public class TravelService {
 		result.setStartDate(travel.getStartMoment());
 		result.setStartTime(travel.getStartMoment());
 		result.setDuration(travel.getDuration());
-		result.setAnimalSeats(travel.getAnimalSeats());
-		result.setHumanSeats(travel.getHumanSeats());
+		result.setAnimalSeats(travel.getAnimalSeats() + travel.getAnimals().size());
+		result.setHumanSeats(travel.getHumanSeats() + this.transporterService.findPassengersByTravel(travel.getId()).size());
 		result.setVehicle(travel.getVehicle());
 		result.setId(travel.getId());
 		result.setAnimals(animals);
