@@ -54,7 +54,7 @@
   		<div class="card-body">
   		
   			<div class="center-div">
-					<img src="${util.showImage(request.getAnimal().getPicture())} " class="rounded-circle" width="200px" height="200px">
+					<img src="${util.showImage(request.getAnimal().getPicture(),'noImage')} " class="rounded-circle" width="200px" height="200px">
 			</div>
 			<p>
 				<b><spring:message code="request.animal.name" />:</b>
@@ -69,7 +69,7 @@
   		<div class="card-body">
 	  		
 			<div class="center-div">
-					<img src="${util.showImage(request.getCustomer().getPicture())} " class="rounded-circle" width="200px" height="200px">
+					<img src="${util.showImage(request.getCustomer().getPicture(),'user')} " class="rounded-circle" width="200px" height="200px">
 			</div>
 			<p>
 				<b><spring:message code="request.animal.name" />:</b>

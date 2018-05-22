@@ -19,7 +19,6 @@ import services.ActorService;
 import services.BannerService;
 import services.NotificationService;
 import services.RatingService;
-import services.TrainerService;
 import utilities.Utilities;
 import controllers.AbstractController;
 import domain.Actor;
@@ -45,8 +44,7 @@ public class ProfileActorController extends AbstractController {
 	@Autowired
 	private BannerService		bannerService;
 
-	@Autowired
-	private TrainerService		trainerService;
+
 
 
 	// Constructors -----------------------------------------------------------
@@ -68,7 +66,7 @@ public class ProfileActorController extends AbstractController {
 		try {
 			ratings = null;
 			actor = this.actorService.findByPrincipal();
-			image = Utilities.showImage(actor.getPicture());
+			image = Utilities.showImage(actor.getPicture(),"user");
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			if (this.actorService.checkAuthority(actor, "TRAINER"))
@@ -106,7 +104,7 @@ public class ProfileActorController extends AbstractController {
 		try {
 			ratings = null;
 			actor = this.actorService.findOne(actorId);
-			image = Utilities.showImage(actor.getPicture());
+			image = Utilities.showImage(actor.getPicture(),"user");
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			if (this.actorService.checkAuthority(actor, "TRAINER"))

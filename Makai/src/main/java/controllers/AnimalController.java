@@ -203,17 +203,13 @@ public class AnimalController extends AbstractController {
 				checkA = (animal.getAnimalShelter().getId() == actor.getId()) || checkA;
 			Assert.isTrue(checkA || this.actorService.checkAuthority(actor, "TRAINER"));
 			Assert.isTrue(animal.getIsHidden() == false);
-			//			animalForm = this.animalService.animalToFormObject(animal);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 			breeds = animal.getBreeds().toArray(new Breed[animal.getBreeds().size()]);
 			specie = breeds[0].getSpecie();
-			image = Utilities.showImage(animal.getPicture());
+			image = Utilities.showImage(animal.getPicture(),"noImage");
 			result = new ModelAndView("animal/display");
-			//			result.addObject("animal", animalForm);
 
-			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
-			//			final ArrayList<String> imagesRight = this.bannerService.getBannerByZone("derecha");
 
 			result.addObject("principal", actor);
 			result.addObject("animal", animal);

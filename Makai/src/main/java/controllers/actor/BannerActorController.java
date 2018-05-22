@@ -364,7 +364,7 @@ public class BannerActorController extends AbstractController {
 
 		if (edit) {
 			final Banner banner = this.bannerService.findOne(bannerForm.getId());
-			final String image = Utilities.showImage(banner.getPicture());
+			final String image = Utilities.showImage(banner.getPicture(),"noImage");
 			bannerForm.setStringImage(image);
 		}
 

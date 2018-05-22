@@ -17,7 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<div class="row text-center">
+<div class="row text-center mt-3">
 	<div class="col-lg-8">
 	<div class="card py-3 shadow" style="background-color: rgba(248, 249, 250, 0.58);">
 		<div class="row align-items-center">

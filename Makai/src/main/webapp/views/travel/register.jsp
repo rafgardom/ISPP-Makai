@@ -72,7 +72,7 @@
 				</h3>	
 				<br>
 				<div class="center-div">
-					<img src="${util.showImage(principal.getPicture())} " class="rounded-circle" width="200px" height="200px">
+					<img src="${util.showImage(principal.getPicture(),'user')} " class="rounded-circle" width="200px" height="200px">
 				</div>
 				<form:checkbox id="principal" path ="principalPassenger" value="${principalPassenger}"/><jstl:out value="${principal.name}"/>
 				
@@ -85,7 +85,7 @@
 					<br>
 					<jstl:forEach var="animal" items="${animals}">
 						<div class="center-div">
-							<img src="${util.showImage(animal.getPicture())} " class="rounded-circle" width="200px" height="200px">
+							<img src="${util.showImage(animal.getPicture(),'user')} " class="rounded-circle" width="200px" height="200px">
 						</div>
 						<form:checkbox path ="animals" value="${animal}"/><jstl:out value="${animal.name}"/>
 					</jstl:forEach>

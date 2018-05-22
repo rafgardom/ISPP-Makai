@@ -39,7 +39,7 @@ public class BannerForm {
 	public BannerForm(final Banner banner) {
 		this.id = banner.getId();
 		this.picture = banner.getPicture();
-		this.stringImage = Utilities.showImage(banner.getPicture());
+		this.stringImage = Utilities.showImage(banner.getPicture(),"noImage");
 		this.totalViews = banner.getTotalViews();
 		this.currentViews = banner.getCurrentViews();
 		this.price = banner.getPrice();
@@ -69,7 +69,7 @@ public class BannerForm {
 
 		this.id = banner.getId();
 		this.picture = banner.getPicture();
-		this.stringImage = Utilities.showImage(banner.getPicture());
+		this.stringImage = Utilities.showImage(banner.getPicture(),"noImage");
 		this.totalViews = banner.getTotalViews();
 		this.currentViews = banner.getCurrentViews();
 		this.price = banner.getPrice();

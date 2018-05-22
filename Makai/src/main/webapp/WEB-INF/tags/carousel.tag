@@ -39,7 +39,7 @@
 		   	</jstl:if>
 		   	
          	<div class="carousel-item ${active}">
-	      		<a href="banner/bannerClick.do?bannerId=${banner.id }" target="_blank" ><img class="d-block w-100" src="${util.showImage(banner.getPicture())}" data-src="holder.js/900x400?theme=industrial">
+	      		<a href="banner/bannerClick.do?bannerId=${banner.id }" target="_blank" ><img class="d-block w-100" src="${util.showImage(banner.getPicture(),'noImage')}" data-src="holder.js/900x400?theme=industrial">
 	   		</a>
 	   		</div>
 	   		<jstl:set value="" var="active"/>

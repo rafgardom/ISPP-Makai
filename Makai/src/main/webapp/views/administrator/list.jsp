@@ -17,11 +17,13 @@
 <spring:message code="administrator.actor.animalShelters" var="animalSheltersHeader" />
 <spring:message code="administrator.actor.advertisings" var="advertisingsHeader" />
 
-<div class="center-div my-3">
+<div class="col-12">
+<div class="my-3">
 	<button onclick="tableCustomer()" class="btn btn-lg btn-primary mx-3 disabled" id="button1">${customersHeader}</button>
 	<button onclick="tableTrainers()" class="btn btn-lg btn-primary mx-3" id="button2">${trainersHeader}</button>
 	<button onclick="tableAnimalshelters()" class="btn btn-lg btn-primary mx-3" id="button3">${animalSheltersHeader}</button>
 	<button onclick="tableAdvertisings()" class="btn btn-lg btn-primary mx-3" id="button4">${advertisingsHeader}</button>
+</div>
 </div>
 
 

@@ -328,10 +328,7 @@ public class AnimalService {
 
 		result = new AnimalForm();
 
-		if (animal.getPicture() != null)
-			image = Utilities.showImage(animal.getPicture());
-		else
-			image = null;
+		image = Utilities.showImage(animal.getPicture(),"noImage");
 
 		result.setId(animal.getId());
 		result.setName(animal.getName());

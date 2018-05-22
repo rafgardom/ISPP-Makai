@@ -782,10 +782,6 @@
 		<property name="email" value="jesus@gmail.com" />
 		<property name="phone" value="+34 632144487" />
 		<property name="coordinates" ref="coordinates8" />
-		<property name="picture">
-			<list>
-			</list>
-		</property>
 		<property name="avgRating" value="5.0" />
 		<property name="travelPassengers">
 			<list>

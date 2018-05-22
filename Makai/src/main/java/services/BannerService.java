@@ -352,7 +352,7 @@ public class BannerService {
 		result = new BannerForm();
 
 		if (banner.getPicture() != null) {
-			image = Utilities.showImage(banner.getPicture());
+			image = Utilities.showImage(banner.getPicture(),"noImage");
 			final CustomMultipartFile cmf = new CustomMultipartFile(banner.getPicture());
 			result.setBannerImage(cmf);
 		} else

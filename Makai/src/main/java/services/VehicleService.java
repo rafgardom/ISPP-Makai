@@ -175,10 +175,7 @@ public class VehicleService {
 		final byte[] picture;
 		picture = vehicle.getPicture();
 
-		if (picture != null)
-			image = Utilities.showImage(picture);
-		else
-			image = null;
+		image = Utilities.showImage(picture,"vehicle");
 
 		result.setAccommodation(vehicle.getAccommodation());
 		result.setBrand(vehicle.getBrand());

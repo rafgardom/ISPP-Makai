@@ -62,7 +62,7 @@
 				<jsp:useBean id="util" class="utilities.Utilities" scope="page" />
 			
 				<div style="display: flex; justify-content:center; position:relative; z-index:2;">
-					<img src="${util.showImage(offerForm.getRequest().getAnimal().getPicture())} " class="rounded-circle" width="200px" height="200px">
+					<img src="${util.showImage(offerForm.getRequest().getAnimal().getPicture(),'noImage')} " class="rounded-circle" width="200px" height="200px">
 				</div>
 				<div class="card text-center" style="position:relative; z-index:1; margin-top:-2.5rem">
     				<div class="card-body" style="margin-top:1.5rem">	

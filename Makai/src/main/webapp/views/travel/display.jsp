@@ -135,7 +135,7 @@
 	 	<br><h3 class="card-title"><spring:message code="travel.vehicle" /></h3>
 	  	<div class="card-body">
 	  		  	<jstl:if test="${vehicle.picture != null}">
-					<img src="${util.showImage(vehicle.getPicture())} " class="rounded-circle" width="200px" height="200px">
+					<img src="${util.showImage(vehicle.getPicture(),'vehicle')} " class="rounded-circle" width="200px" height="200px">
 	  			</jstl:if>
 		  	<p>
 		  		<b><spring:message code="travel.vehicle.carType" />:</b>
@@ -169,7 +169,7 @@
 	  		
 	  		<jstl:forEach var="passenger" items="${passengers}">
 	  			<div class="center-div">
-			  		<img src="${util.showImage(passenger.getPicture())} " class="rounded-circle" width="200px" height="200px">
+			  		<img src="${util.showImage(passenger.getPicture(),'user')} " class="rounded-circle" width="200px" height="200px">
 		  		</div>
 		  		<p>
 					<jstl:out value="${passenger.name}"/>
@@ -181,7 +181,7 @@
 			<h5><b><spring:message code="travel.animals" />:</b></h5>
 			<jstl:forEach var="animal" items="${animals}">
 				<div class="center-div">
-			  		<img src="${util.showImage(animal.getPicture())} " class="rounded-circle" width="200px" height="200px">
+			  		<img src="${util.showImage(animal.getPicture(),'noImage')} " class="rounded-circle" width="200px" height="200px">
 		  		</div>
 		  		<p>
 					<jstl:out value="${animal.name}"/>

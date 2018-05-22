@@ -80,13 +80,12 @@
 	
 	<jstl:if test="${animal.customer!=null}">
 		
-		
-		<div class="card shadow">
+		<div class="card shadow text-center">
 		<div class="center-div">
-			<img src="${util.showImage(animal.getCustomer().getPicture())} " class="rounded-circle" width="200px" height="200px">	
+			<img src="${util.showImage(animal.getCustomer().getPicture(),'user')} " class="rounded-circle" width="200px" height="200px">	
 		</div>
 		 	<br><h3 class="card-title m-3"><spring:message code="animal.owner.info" /></h3>
-		  	<div class="card-body ml-3"> 	
+		  	<div class="card-body "> 	
 		  		<p><b><spring:message code="animal.name" />:</b> 
 					<jstl:out value="${animal.customer.name}" /></p>
 				
@@ -109,7 +108,7 @@
 		
 		<div class="card shadow">
 			<div class="center-div">
-				<img src="${util.showImage(animal.getAnimalShelter().getPicture())} " class="rounded-circle" width="200px" height="200px">	
+				<img src="${util.showImage(animal.getAnimalShelter().getPicture(),'user')} " class="rounded-circle" width="200px" height="200px">	
 			</div>
 		 	<br><h3 class="card-title mt-3"><spring:message code="animal.owner.info.animalShelter" /></h3>
 		  	<div class="card-body"> 		

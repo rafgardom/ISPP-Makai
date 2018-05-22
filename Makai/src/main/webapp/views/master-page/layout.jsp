@@ -69,8 +69,8 @@
 	</div>
 
 
-		<br>
-		<h1 class="text-center mt-3">
+		<!-- <br> -->
+		<h1 class="text-center mt-2">
 			<tiles:insertAttribute name="title" />
 		</h1> 
 		<div class="mx-5">

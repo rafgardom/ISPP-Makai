@@ -144,7 +144,7 @@ public class OfferTrainerController extends AbstractController {
 			offer = this.offerService.findOne(offerId);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
-			image = Utilities.showImage(offer.getAnimal().getPicture());
+			image = Utilities.showImage(offer.getAnimal().getPicture(),"user");
 
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
