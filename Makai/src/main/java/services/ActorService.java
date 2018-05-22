@@ -423,7 +423,7 @@ public class ActorService {
 		result.setUserImage(null);
 		result.setId(actor.getId());
 
-		final String image = Utilities.showImage(actor.getPicture());
+		final String image = Utilities.showImage(actor.getPicture(),"user");
 		result.setStringImage(image);
 
 		return result;

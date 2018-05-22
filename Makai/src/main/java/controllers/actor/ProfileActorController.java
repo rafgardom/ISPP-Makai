@@ -206,7 +206,7 @@ public class ProfileActorController extends AbstractController {
 		result.addObject("errorMessage", message);
 
 		final Actor actor = this.actorService.findOne(profileForm.getId());
-		final String image = Utilities.showImage(actor.getPicture());
+		final String image = Utilities.showImage(actor.getPicture(),"user");
 		profileForm.setStringImage(image);
 
 		return result;
