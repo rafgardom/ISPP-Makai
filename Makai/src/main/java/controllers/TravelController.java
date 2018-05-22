@@ -301,18 +301,24 @@ public class TravelController extends AbstractController {
 		boolean extraPassengers = false;
 		final Transporter principal;
 		boolean vehicleSeats = false;
+		Integer freeSeatsAnimalForm, freeSeatsHumanForm;
 		final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
+		freeSeatsAnimalForm = travelForm.getAnimalSeats() - travelForm.getAnimals().size();
+		freeSeatsHumanForm = travelForm.getHumanSeats() - this.transporterService.findPassengersByTravel(travelForm.getId()).size();
 
 		try {
+			final Integer totalSeatsAnimal, totalSeatsHuman;
 			final Travel auxTravel = this.travelService.findOne(travelForm.getId());
+			totalSeatsAnimal = auxTravel.getAnimalSeats() + auxTravel.getAnimals().size();
+			totalSeatsHuman = auxTravel.getHumanSeats() + this.transporterService.findPassengersByTravel(auxTravel.getId()).size();
 			principal = this.transporterService.findByPrincipal();
 			if (!auxTravel.getTransporterOwner().equals(principal))
 				throw new IllegalArgumentException();
 
-			if (auxTravel.getHumanSeats() > travelForm.getHumanSeats() || auxTravel.getAnimalSeats() > travelForm.getAnimalSeats()) {
+			if (auxTravel.getHumanSeats() > freeSeatsHumanForm || auxTravel.getAnimalSeats() > freeSeatsAnimalForm) {
 				extraPassengers = true;
-				travelForm.setAnimalSeats(auxTravel.getAnimalSeats());
-				travelForm.setHumanSeats(auxTravel.getHumanSeats());
+				travelForm.setAnimalSeats(totalSeatsAnimal);
+				travelForm.setHumanSeats(totalSeatsHuman);
 				throw new IllegalArgumentException();
 				//			if (transporters != null || travelForm.getAnimals() != null) {
 				//				passengers = true;
@@ -321,8 +327,8 @@ public class TravelController extends AbstractController {
 
 			if (auxTravel.getVehicle().getSeats() < (travelForm.getHumanSeats() + travelForm.getAnimalSeats())) {
 				vehicleSeats = true;
-				travelForm.setAnimalSeats(auxTravel.getAnimalSeats());
-				travelForm.setHumanSeats(auxTravel.getHumanSeats());
+				travelForm.setAnimalSeats(totalSeatsAnimal);
+				travelForm.setHumanSeats(totalSeatsHuman);
 				throw new IllegalArgumentException();
 			}
 
@@ -347,7 +353,7 @@ public class TravelController extends AbstractController {
 				error = true;
 			}
 
-			if (travelForm.getAnimalSeats() + travelForm.getAnimalSeats() > travelForm.getVehicle().getSeats()) {
+			if (travelForm.getAnimalSeats() + travelForm.getHumanSeats() > travelForm.getVehicle().getSeats()) {
 				FieldError fieldError;
 				final String[] codes = {
 					"travel.tooManySeats.error"
