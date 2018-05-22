@@ -704,7 +704,7 @@ public class TravelController extends AbstractController {
 
 		species = this.specieService.findAll();
 		principal = this.transporterService.findByPrincipal();
-		vehicles = this.vehicleService.findVehicleByTransporterId(principal.getId());
+		vehicles = this.vehicleService.findActivatedVehicles(principal);
 		numberNoti = this.notificationService.findNotificationWithoutRead();
 
 		final ModelAndView result = new ModelAndView("travel/create");

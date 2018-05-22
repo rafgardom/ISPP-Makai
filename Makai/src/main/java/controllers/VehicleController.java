@@ -22,11 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BannerService;
 import services.NotificationService;
 import services.TransporterService;
+import services.TravelService;
 import services.VehicleService;
 import domain.Banner;
 import domain.Brand;
 import domain.CarType;
 import domain.Transporter;
+import domain.Travel;
 import domain.Vehicle;
 import forms.VehicleForm;
 
@@ -46,6 +48,9 @@ public class VehicleController extends AbstractController {
 
 	@Autowired
 	private BannerService		bannerService;
+
+	@Autowired
+	private TravelService		travelService;
 
 
 	//Constructor
@@ -258,19 +263,29 @@ public class VehicleController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<VehicleForm> vehicles;
+		Collection<Vehicle> vehiclesAux;
 		Transporter principal;
 		final Integer numberNoti;
+		final Boolean[] canDelete;
+		Collection<Travel> travels;
+		int i = 0;
 
 		principal = this.transporterService.findByPrincipal();
 		vehicles = new HashSet<VehicleForm>();
 		numberNoti = this.notificationService.findNotificationWithoutRead();
+		vehiclesAux = this.vehicleService.findActivatedVehicles(principal);
+		canDelete = new Boolean[vehiclesAux.size()];
 		try {
-			for (final Vehicle a : this.vehicleService.findActivatedVehicles(principal)) {
+			for (final Vehicle a : vehiclesAux) {
 				VehicleForm vehicleForm;
 
 				vehicleForm = this.vehicleService.toFormObject(a);
 
 				vehicles.add(vehicleForm);
+
+				travels = this.travelService.findTravelByVehicleId(a);
+				canDelete[i] = !this.vehicleService.checkTravelActive(travels);
+				i++;
 			}
 			//			final ArrayList<String> imagesLeft = this.bannerService.getBannerByZone("izquierda");
 			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
@@ -278,6 +293,7 @@ public class VehicleController extends AbstractController {
 
 			result = new ModelAndView("vehicle/list");
 			result.addObject("vehicles", vehicles);
+			result.addObject("canDelete", canDelete);
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requestURI", "vehicle/list.do");
 

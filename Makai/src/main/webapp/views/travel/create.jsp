@@ -99,7 +99,12 @@
 	<br/>
 	
 		<acme:submit code="travel.save" name="save" />
-		<acme:cancel code="travel.cancel" url="travel/list.do" />
+		<jstl:if test="${travelForm.id == 0}">
+			<acme:cancel code="travel.cancel" url="travel/list.do" />
+		</jstl:if>
+		<jstl:if test="${travelForm.id != 0}">
+			<acme:cancel code="travel.cancel" url="travel/myList.do" />
+		</jstl:if>
 </form:form>
 
  <!-- Datepicker -->

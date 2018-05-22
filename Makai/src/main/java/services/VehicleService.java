@@ -4,6 +4,7 @@ package services;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +107,7 @@ public class VehicleService {
 		Assert.notNull(vehicle);
 		Transporter principal;
 		Collection<Travel> travels;
+		Boolean hasTravelActive = false;
 
 		principal = this.transporterService.findByPrincipal();
 		Assert.notNull(principal);
@@ -117,6 +119,8 @@ public class VehicleService {
 		if (travels.isEmpty())
 			this.vehicleRepository.delete(vehicle);
 		else {
+			hasTravelActive = this.checkTravelActive(travels);
+			Assert.isTrue(!hasTravelActive);	// comprueba de que no tenga ningún viaje sin comenzar
 			vehicle.setIsActived(false);
 			this.vehicleRepository.save(vehicle);
 		}
@@ -175,7 +179,7 @@ public class VehicleService {
 		final byte[] picture;
 		picture = vehicle.getPicture();
 
-		image = Utilities.showImage(picture,"vehicle");
+		image = Utilities.showImage(picture, "vehicle");
 
 		result.setAccommodation(vehicle.getAccommodation());
 		result.setBrand(vehicle.getBrand());
@@ -198,6 +202,18 @@ public class VehicleService {
 
 	public Collection<Vehicle> findActivatedVehicles(final Transporter transporter) {
 		return this.vehicleRepository.findActivatedVehicles(transporter.getId());
+	}
+
+	public Boolean checkTravelActive(final Collection<Travel> travels) {
+		Boolean res = false;
+
+		for (final Travel travel : travels)
+			if (travel.getStartMoment().after(new Date())) {
+				res = true;
+				break;
+			}
+
+		return res;
 	}
 
 }

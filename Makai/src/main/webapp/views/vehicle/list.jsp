@@ -7,6 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jstl:set var="i" value="0"/>
 <div class="table-responsive">
 <display:table name="vehicles" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	
@@ -46,10 +47,13 @@
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">
 			<acme:link image="edit" href="vehicle/edit.do?vehicleId=${row.id}" type="warning"/>
-			<acme:delete href="vehicle/delete.do?vehicleId=${row.id}" id="${row.id}"/>
+			<jstl:if test="${canDelete[i]}">
+				<acme:delete href="vehicle/delete.do?vehicleId=${row.id}" id="${row.id}"/>
+			</jstl:if>
 		</div>
 	</display:column>
 	
+	<jstl:set var="i" value="${i+1}"/>
 </display:table>
 </div>
 <div class="center-div">

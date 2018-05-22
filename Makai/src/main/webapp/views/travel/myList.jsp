@@ -56,7 +56,7 @@
 					<acme:delete href="travel/delete.do?travelId=${row.id}" id="${row.id}"/>
 				</jstl:if>
 				<jstl:if test="${row.transporterOwner.id != principal.id}">
-					<acme:link href="travel/register.do?travelId=${row.id}" type="warning" image="edit"/>
+					<acme:link href="travel/register.do?travelId=${row.id}" type="dark" image="map"/>
 				</jstl:if>
 			</jstl:if>
 			<jstl:if test="${requestURI == 'travel/myPastList.do' && row.transporterOwner.id != principal.id}">
