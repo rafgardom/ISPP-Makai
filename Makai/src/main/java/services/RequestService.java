@@ -230,4 +230,16 @@ public class RequestService {
 		return result;
 	}
 
+	public void deleteRequestsInAcceptedOffer(final Animal animal, final Request request) {
+		Collection<Request> requests;
+
+		requests = this.findRequestNoAcceptedByAnimal(animal);
+		requests.remove(request);
+		for (final Request r : requests) {
+			for (final Offer offer : this.offerService.findOfferByRequest(r))
+				this.offerService.deleteFromCustomer(offer);
+			this.requestRepository.delete(r);
+		}
+	}
+
 }

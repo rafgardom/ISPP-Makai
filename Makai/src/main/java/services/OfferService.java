@@ -223,19 +223,25 @@ public class OfferService {
 	}
 
 	public void eraseOffersWhenRequestIsDeleted(final Request request) {
+		Collection<Milestone> milestones;
+
 		Assert.notNull(request);
 		final Offer acceptedOffer = this.findOfferAccepted(request);
 		Assert.isNull(acceptedOffer);
 
 		final Collection<Offer> nonAcceptedOffers = this.findNonAcceptedOffers(request);
-		if (!nonAcceptedOffers.isEmpty())
-			this.offerRepository.delete(nonAcceptedOffers);
+		for (final Offer offer : nonAcceptedOffers) {
+			milestones = this.milestoneService.findAllByOffer(offer.getId());
+			for (final Milestone aux : milestones)
+				this.milestoneService.delete(aux);
+			this.offerRepository.delete(offer);
+		}
 
 	}
-
 	public void acceptedOffer(Offer offer) {
 		Assert.notNull(offer);
 		Customer customer;
+		Animal animal;
 
 		customer = this.customerService.findByPrincipal();
 		Assert.isTrue(customer.getId() == offer.getRequest().getCustomer().getId());
@@ -249,6 +255,11 @@ public class OfferService {
 
 		/* Eliminamos las ofertas no aceptadas que tengan el animal */
 		this.eliminatedOffersWithThisAnimal(offer);
+
+		/* Eliminamos las solicitudes que no tengan una oferta aceptada con el mismo animal */
+		animal = offer.getRequest().getAnimal();
+		if (animal != null)
+			this.requestService.deleteRequestsInAcceptedOffer(animal, offer.getRequest());
 
 		/* Modificamos la fecha de finalizacion del entrenamiento en la entidad Animal */
 		this.animalService.editFinishTraining(offer);
@@ -374,6 +385,21 @@ public class OfferService {
 		Assert.notNull(animal);
 		return this.offerRepository.findAcceptedOffersByAnimalId(animal.getId());
 
+	}
+
+	public void deleteFromCustomer(final Offer offer) {
+		Customer principal;
+
+		principal = this.customerService.findByPrincipal();
+		Assert.notNull(principal);
+
+		Assert.isTrue(!offer.getIsAccepted());
+
+		final Collection<Milestone> milestones = this.milestoneService.findAllByOffer(offer.getId());
+		for (final Milestone aux : milestones)
+			this.milestoneService.delete(aux);
+
+		this.offerRepository.delete(offer);
 	}
 
 }

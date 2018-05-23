@@ -201,12 +201,12 @@ public class AnimalController extends AbstractController {
 				checkA = animal.getCustomer().getId() == actor.getId();
 			if (animal.getAnimalShelter() != null)
 				checkA = (animal.getAnimalShelter().getId() == actor.getId()) || checkA;
-			Assert.isTrue(checkA || this.actorService.checkAuthority(actor, "TRAINER"));
+			Assert.isTrue(checkA || this.actorService.checkAuthority(actor, "TRAINER") || (animal.getCustomer() == null && animal.getAnimalShelter() != null));
 			Assert.isTrue(animal.getIsHidden() == false);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 			breeds = animal.getBreeds().toArray(new Breed[animal.getBreeds().size()]);
 			specie = breeds[0].getSpecie();
-			image = Utilities.showImage(animal.getPicture(),"noImage");
+			image = Utilities.showImage(animal.getPicture(), "noImage");
 			result = new ModelAndView("animal/display");
 
 			final ArrayList<Banner> imagesBottom = this.bannerService.getBannerByZone("abajo");
