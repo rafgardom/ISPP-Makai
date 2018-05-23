@@ -121,6 +121,7 @@ public class VehicleService {
 		else {
 			hasTravelActive = this.checkTravelActive(travels);
 			Assert.isTrue(!hasTravelActive);	// comprueba de que no tenga ningún viaje sin comenzar
+			
 			vehicle.setIsActived(false);
 			this.vehicleRepository.save(vehicle);
 		}

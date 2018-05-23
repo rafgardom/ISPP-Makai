@@ -153,10 +153,10 @@ public class VehicleController extends AbstractController {
 
 			result = this.createModelAndView(vehicleForm);
 		} catch (final Throwable e) {
-			if (noPermission)
-				result = new ModelAndView("redirect:travel/menu.do");
-			else
-				result = new ModelAndView("error");
+			//			if (noPermission)
+			//				result = new ModelAndView("redirect:travel/menu.do");
+			//			else
+			result = new ModelAndView("error");
 		}
 		return result;
 	}
