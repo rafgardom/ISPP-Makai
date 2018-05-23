@@ -56,9 +56,9 @@
 		 	<br><h3 class="card-title"><spring:message code="travel.seats" /></h3>
 		  	<div class="card-body">
 		  		<p><b><spring:message code="travel.animalSeats" />:</b>
-				<jstl:out value="${travelForm.animalSeats}"  /></p>
+				<jstl:out value="${travelForm.animalSeats - animalsInTravel}"  /></p>
 				<p><b><spring:message code="travel.humanSeats" />:</b>
-				<jstl:out value="${travelForm.humanSeats}"  /></p>
+				<jstl:out value="${travelForm.humanSeats - humansInTravel}"  /></p>
 		  	</div>
 	</div>
 	

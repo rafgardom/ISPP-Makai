@@ -151,6 +151,16 @@ public class TravelController extends AbstractController {
 					error = true;
 				}
 
+				if (travelForm.getHumanSeats() > travelForm.getAnimalSeats()) {
+					FieldError fieldError;
+					final String[] codes = {
+						"travel.tooManyHumanSeats.error"
+					};
+					fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+					binding.addError(fieldError);
+					error = true;
+				}
+
 				if (travelForm.getDuration() < 5) {
 					FieldError fieldError;
 					final String[] codes = {
@@ -248,7 +258,7 @@ public class TravelController extends AbstractController {
 					result = this.registerModelAndView(travelForm, "travel.wrongSpecies.error");
 				else if ((travelForm.getAnimalSeats() - travelForm.getAnimals().size()) < 0)
 					result = this.registerModelAndView(travelForm, "travel.capacityAnimals.error");
-				else if ((travelForm.getHumanSeats() == 0) && (travelForm.isPrincipalPassenger()))
+				else if ((travelForm.getHumanSeats() - this.transporterService.findPassengersByTravel(travelForm.getId()).size() == 0) && (travelForm.isPrincipalPassenger()))
 					result = this.registerModelAndView(travelForm, "travel.capacityPassengers.error");
 				else
 					result = this.registerModelAndView(travelForm, "travel.commit.error");
@@ -303,12 +313,12 @@ public class TravelController extends AbstractController {
 		boolean vehicleSeats = false;
 		Integer freeSeatsAnimalForm, freeSeatsHumanForm;
 		final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
-		freeSeatsAnimalForm = travelForm.getAnimalSeats() - travelForm.getAnimals().size();
-		freeSeatsHumanForm = travelForm.getHumanSeats() - this.transporterService.findPassengersByTravel(travelForm.getId()).size();
 
 		try {
 			final Integer totalSeatsAnimal, totalSeatsHuman;
 			final Travel auxTravel = this.travelService.findOne(travelForm.getId());
+			freeSeatsAnimalForm = travelForm.getAnimalSeats() - auxTravel.getAnimals().size();
+			freeSeatsHumanForm = travelForm.getHumanSeats() - this.transporterService.findPassengersByTravel(travelForm.getId()).size();
 			totalSeatsAnimal = auxTravel.getAnimalSeats() + auxTravel.getAnimals().size();
 			totalSeatsHuman = auxTravel.getHumanSeats() + this.transporterService.findPassengersByTravel(auxTravel.getId()).size();
 			principal = this.transporterService.findByPrincipal();
@@ -343,20 +353,30 @@ public class TravelController extends AbstractController {
 				error = true;
 			}
 
-			if ((travelForm.getAnimalSeats() == null || travelForm.getAnimalSeats() < 1) && (travelForm.getHumanSeats() == null || travelForm.getHumanSeats() < 1)) {
+			//			if ((travelForm.getAnimalSeats() == null || freeSeatsAnimalForm < 1) && (travelForm.getHumanSeats() == null || freeSeatsHumanForm < 1)) {
+			//				FieldError fieldError;
+			//				final String[] codes = {
+			//					"travel.seats.error"
+			//				};
+			//				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+			//				binding.addError(fieldError);
+			//				error = true;
+			//			}
+
+			if (travelForm.getAnimalSeats() + travelForm.getHumanSeats() > travelForm.getVehicle().getSeats()) {
 				FieldError fieldError;
 				final String[] codes = {
-					"travel.seats.error"
+					"travel.tooManySeats.error"
 				};
 				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
 				binding.addError(fieldError);
 				error = true;
 			}
 
-			if (travelForm.getAnimalSeats() + travelForm.getHumanSeats() > travelForm.getVehicle().getSeats()) {
+			if (travelForm.getHumanSeats() > travelForm.getAnimalSeats()) {
 				FieldError fieldError;
 				final String[] codes = {
-					"travel.tooManySeats.error"
+					"travel.tooManyHumanSeats.error"
 				};
 				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
 				binding.addError(fieldError);
@@ -374,16 +394,15 @@ public class TravelController extends AbstractController {
 				error = true;
 			}
 
-			if (travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == 0 || travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == null || travelForm.getHumanSeats() == 0 && travelForm.getAnimalSeats() == null
-				|| travelForm.getHumanSeats() == null && travelForm.getAnimalSeats() == 0) {
-				FieldError fieldError;
-				final String[] codes = {
-					"travel.seats.error"
-				};
-				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
-				binding.addError(fieldError);
-				error = true;
-			}
+			//			if ((freeSeatsHumanForm == 0 || travelForm.getHumanSeats() == null) && (travelForm.getAnimalSeats() == null || freeSeatsAnimalForm == 0)) {
+			//				FieldError fieldError;
+			//				final String[] codes = {
+			//					"travel.seats.error"
+			//				};
+			//				fieldError = new FieldError("travelForm", "humanSeats", travelForm.getHumanSeats(), false, codes, null, "");
+			//				binding.addError(fieldError);
+			//				error = true;
+			//			}
 
 			if (error)
 				throw new IllegalArgumentException();
@@ -736,6 +755,12 @@ public class TravelController extends AbstractController {
 		Collection<Animal> animals;
 		Transporter principal;
 		final Integer numberNoti;
+		final Integer animalsInTravel, humansInTravel;
+		Travel travel;
+
+		travel = this.travelService.findOne(travelForm.getId());
+		animalsInTravel = travel.getAnimals().size();
+		humansInTravel = this.transporterService.findPassengersByTravel(travelForm.getId()).size();
 
 		principal = this.transporterService.findByPrincipal();
 		animals = this.animalService.findByActorId(principal.getId());
@@ -744,6 +769,8 @@ public class TravelController extends AbstractController {
 		final ModelAndView result = new ModelAndView("travel/register");
 		result.addObject("travelForm", travelForm);
 		result.addObject("animals", animals);
+		result.addObject("animalsInTravel", animalsInTravel);
+		result.addObject("humansInTravel", humansInTravel);
 		result.addObject("principal", principal);
 		result.addObject("RequestURI", "travel/register.do?travelId=" + travelForm.getId());
 		result.addObject("numberNoti", numberNoti);
