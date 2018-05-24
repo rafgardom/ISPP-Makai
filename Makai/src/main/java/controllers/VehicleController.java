@@ -167,6 +167,7 @@ public class VehicleController extends AbstractController {
 		Vehicle vehicle;
 		boolean error = false;
 		boolean pictureTooLong = false;
+		boolean tripWithCar = false;
 		final Calendar today = Calendar.getInstance();
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
@@ -174,6 +175,12 @@ public class VehicleController extends AbstractController {
 
 		} else
 			try {
+
+				Vehicle aux = this.vehicleService.findVehicleInTravel(vehicleForm.getId());
+				if (aux != null) {
+					tripWithCar = true;
+					throw new IllegalArgumentException();
+				}
 
 				if (vehicleForm.getUserImage().getSize() != 0 && (!vehicleForm.getUserImage().getContentType().contains("image")) || vehicleForm.getUserImage().getSize() > 2097152) {
 					FieldError fieldError;
@@ -210,6 +217,10 @@ public class VehicleController extends AbstractController {
 					error = true;
 				}
 
+				aux = this.vehicleService.findOne(vehicleForm.getId());
+				if (!aux.getIsActived())
+					throw new IllegalArgumentException();
+
 				if (error)
 					throw new IllegalArgumentException();
 				vehicle = this.vehicleService.reconstruct(vehicleForm, binding);
@@ -217,7 +228,8 @@ public class VehicleController extends AbstractController {
 				result = new ModelAndView("redirect:/vehicle/list.do");
 
 			} catch (final Throwable oops) {
-				System.out.println(oops);
+				if (tripWithCar)
+					result = this.createModelAndView(vehicleForm, "vehicle.travel.error");
 				if (pictureTooLong == true)
 					result = this.createModelAndView(vehicleForm, "vehicle.pictureSize.error");
 				else
@@ -280,6 +292,10 @@ public class VehicleController extends AbstractController {
 				VehicleForm vehicleForm;
 
 				vehicleForm = this.vehicleService.toFormObject(a);
+
+				final Vehicle b = this.vehicleService.findVehicleInTravel(a.getId());
+				if (b != null)
+					vehicleForm.setHasNonStartedTrip(true);
 
 				vehicles.add(vehicleForm);
 

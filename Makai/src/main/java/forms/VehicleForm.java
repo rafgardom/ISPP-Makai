@@ -28,6 +28,7 @@ public class VehicleForm {
 	private String			license;
 	private MultipartFile	userImage;
 	private String			stringImage;
+	private boolean			hasNonStartedTrip;
 
 
 	//Constructor
@@ -134,6 +135,14 @@ public class VehicleForm {
 
 	public void setStringImage(final String stringImage) {
 		this.stringImage = stringImage;
+	}
+
+	public boolean isHasNonStartedTrip() {
+		return this.hasNonStartedTrip;
+	}
+
+	public void setHasNonStartedTrip(final boolean hasNonStartedTrip) {
+		this.hasNonStartedTrip = hasNonStartedTrip;
 	}
 
 }

@@ -121,7 +121,7 @@ public class VehicleService {
 		else {
 			hasTravelActive = this.checkTravelActive(travels);
 			Assert.isTrue(!hasTravelActive);	// comprueba de que no tenga ningún viaje sin comenzar
-			
+
 			vehicle.setIsActived(false);
 			this.vehicleRepository.save(vehicle);
 		}
@@ -215,6 +215,10 @@ public class VehicleService {
 			}
 
 		return res;
+	}
+
+	public Vehicle findVehicleInTravel(final int id) {
+		return this.vehicleRepository.findVehicleInTravel(id);
 	}
 
 }

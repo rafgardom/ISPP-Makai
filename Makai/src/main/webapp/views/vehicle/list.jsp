@@ -46,7 +46,9 @@
 	
 	<display:column>
 		<div class="btn-group" data-toggle="buttons">
-			<acme:link image="edit" href="vehicle/edit.do?vehicleId=${row.id}" type="warning"/>
+			<jstl:if test="${row.hasNonStartedTrip == false }">
+				<acme:link image="edit" href="vehicle/edit.do?vehicleId=${row.id}" type="warning"/>
+			</jstl:if>
 			<jstl:if test="${canDelete[i]}">
 				<acme:delete href="vehicle/delete.do?vehicleId=${row.id}" id="${row.id}"/>
 			</jstl:if>
