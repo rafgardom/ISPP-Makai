@@ -58,7 +58,7 @@
 			</div>
 			<p>
 				<b><spring:message code="request.animal.name" />:</b>
-				<a href="animal/display.do?animalId=${request.animal.id}"><jstl:out value="${request.animal.name}"/></a>
+				<jstl:out value="${request.animal.name}"/>
 			</p>
 			<acme:link href="animal/display.do?animalId=${request.animal.id}" code="animal.view.profile" image="print" />
 		</div>
@@ -73,7 +73,7 @@
 			</div>
 			<p>
 				<b><spring:message code="request.animal.name" />:</b>
-				<a href="profile/displayProfile.do?actorId=${request.customer.id}"><jstl:out value="${request.customer.name}"/></a>
+				<jstl:out value="${request.customer.name}"/>
 			</p>
 			<acme:link href="profile/displayProfile.do?actorId=${request.customer.id}" code="animal.view.profile" image="user-white" />
 		

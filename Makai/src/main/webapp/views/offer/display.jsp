@@ -56,7 +56,7 @@
 			</div>
 	  		<p>
 				<b><spring:message code="offer.animal.name" />:</b>
-				<a href="animal/display.do?animalId=${offer.animal.id}"><jstl:out value="${offer.animal.name}"/></a>
+				<jstl:out value="${offer.animal.name}"/>
 			</p>
 			
 			<acme:link href="animal/display.do?animalId=${offer.animal.id}" code="view.animal" image="print"/>

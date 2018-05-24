@@ -77,11 +77,16 @@ public class MilestoneService {
 
 	public Milestone save(final Milestone milestone) {
 		Milestone result;
+		final Date date = milestone.getTargetDate();
+		final Date start = milestone.getOffer().getStartMoment();
+		final Date finish = Offer.getFinishMoment(milestone.getOffer());
 
 		Assert.notNull(milestone.getOffer());
 		final Trainer trainer = this.offerService.findTrainerByOfferId(milestone.getOffer().getId());
 		final Trainer principal = this.trainerService.findByPrincipal();
 		Assert.isTrue(trainer.equals(principal));
+
+		Assert.isTrue(date.before(finish) && date.after(start));
 
 		result = this.milestoneRepository.save(milestone);
 		return result;

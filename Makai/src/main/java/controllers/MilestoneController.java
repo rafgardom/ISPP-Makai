@@ -3,6 +3,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -154,6 +156,18 @@ public class MilestoneController extends AbstractController {
 		Milestone milestone;
 
 		try {
+			final Offer offer = this.offerService.findOne(milestoneForm.getOfferId());
+			final Date date = milestoneForm.getTargetDate();
+			final Date start = offer.getStartMoment();
+			final Date finish = Offer.getFinishMoment(offer);
+			if (date.after(finish) || date.before(start)) {
+				FieldError fieldError;
+				final String[] codes = {
+					"milestone.targetDate.error"
+				};
+				fieldError = new FieldError("milestoneForm", "targetDate", milestoneForm.getTargetDate(), false, codes, null, "");
+				binding.addError(fieldError);
+			}
 			if (binding.hasErrors())
 				result = this.createEditModelAndView(milestoneForm, "milestone.validation.error");
 			else {
@@ -163,7 +177,6 @@ public class MilestoneController extends AbstractController {
 				else
 					try {
 						final Trainer trainer = this.trainerService.findByPrincipal();
-						final Offer offer = this.offerService.findOne(milestoneForm.getOfferId());
 
 						Assert.isTrue(offer.getTrainer().equals(trainer));
 

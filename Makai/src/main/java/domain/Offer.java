@@ -133,4 +133,17 @@ public class Offer extends DomainEntity {
 		this.animal = animal;
 	}
 
+	static public Date getFinishMoment(final Offer offer) {
+		long ratio = 1000l * 60l * 60l * 24l;	// Un día
+		long time = offer.getStartMoment().getTime();
+
+		time += ratio * offer.getDuration().getDay();
+		ratio *= 30l;	// Un mes
+		time += ratio * offer.getDuration().getMonth();
+		ratio = ratio * 12l + 5l;	// Un año
+		time += ratio * offer.getDuration().getYear();
+
+		return new Date(time);
+	}
+
 }

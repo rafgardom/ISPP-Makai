@@ -20,7 +20,8 @@
 	
 	<spring:message code="offer.request.rating" var="customerHeader"/>
 	<display:column title="${customerHeader}">
-			<a>${puntuacionRating[count]}</a>
+		<jstl:if test="${puntuacionRating[count] == 0}">-</jstl:if>
+		<jstl:if test="${puntuacionRating[count] > 0}">${puntuacionRating[count]}</jstl:if>
 	</display:column>
 	
 	
