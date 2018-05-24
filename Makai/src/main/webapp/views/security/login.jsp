@@ -20,7 +20,7 @@
 <form:form action="j_spring_security_check" modelAttribute="credentials">
 
 
-<div class="offset-md-4 col-md-4">
+<div class="offset-lg-4 col-lg-4 offset-md-3 col-md-6">
 	
 <div style="display: flex; justify-content:center; position:relative; z-index:2;">
 		<img src="images/user3.png" alt="Login user"/>

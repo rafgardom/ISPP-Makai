@@ -73,7 +73,7 @@
 		<h1 class="text-center mt-2">
 			<tiles:insertAttribute name="title" />
 		</h1> 
-		<div class="mx-5">
+		<div class="mx-md-5 mx-2">
 		<tiles:insertAttribute name="body" />	
 		</div>
 		<jstl:if test="${message != null}">

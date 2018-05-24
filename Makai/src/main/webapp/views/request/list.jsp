@@ -29,22 +29,22 @@
 	<div class="row">
 		<div class="col-4">
 		<div class="center-div">
-				<img src="${util.showImage(row.getCustomer().getPicture(),'user')} " class="rounded-circle img-fluid" width="200px" height="200px">
+				<img src="${util.showImage(row.getCustomer().getPicture(),'user')} " class="rounded-circle border border-primary" width="200px" height="200px">
 		</div>
 		</div>
 		<div class="col-4">
 		<br>
 		<div class="center-div">
-				<img src="${util.showImage(row.getAnimal().getPicture(),'interrogation')} " class="rounded-circle img-fluid" width="128px" height="128px">
+				<img src="${util.showImage(row.getAnimal().getPicture(),'interrogation')} " class="rounded-circle border border-primary" width="128px" height="128px">
 		</div>
 		</div>
 		<div class="col-4">
 				<div class="center-div">
 				<jstl:if test="${trainers.get(count) != null}">
-					<img src="${util.showImage(trainers.get(count).getPicture(),'user')} " class="rounded-circle img-fluid" width="200px" height="200px">
+					<img src="${util.showImage(trainers.get(count).getPicture(),'user')} " class="rounded-circle border border-primary" width="200px" height="200px">
 				</jstl:if>
 				<jstl:if test="${trainers.get(count) == null}">
-					<img src="${util.showImage(trainers.get(count).getPicture(),'interrogation')} " class="rounded-circle img-fluid" width="200px" height="200px">
+					<img src="${util.showImage(trainers.get(count).getPicture(),'interrogation')} " class="rounded-circle border border-primary" width="200px" height="200px">
 				</jstl:if>
 				</div>
 		</div>
@@ -55,11 +55,11 @@
 	   	<div class="card shadow">
 	   		<div class="row mt-5">
 		   		<div class="col-4">
-		   			<h6><spring:message code="request.customer"/></h6>
+		   			<h6><b><spring:message code="request.customer"/></b></h6>
 		   			<a href="profile/displayProfile.do?actorId=${row.customer.id}"><jstl:out value="${row.customer.name}"/></a>
 		   		</div>
 		   		<div class="col-4">
-		   			<h6><spring:message code="request.animal"/></h6>
+		   			<h6><b><spring:message code="request.animal"/></b></h6>
 		   			<jstl:if test="${row.animal != null and row.animal.isHidden==false}">
 						<a href="animal/display.do?animalId=${row.animal.id}"><jstl:out value="${row.animal.name}"/></a>
 					</jstl:if>
@@ -67,15 +67,20 @@
 						<a><jstl:out value="${row.animal.name}"/></a>
 					</jstl:if>
 					<jstl:if test="${row.animal == null}">
-						<jstl:out value="${none}" />
+						<h6 class="text-muted font-italic"><spring:message code="request.pending"/></h6>
 					</jstl:if>
 		   		</div>
 		   		<div class="col-4">
-		   			<h6><spring:message code="request.trainer"/></h6>
-		   			<a href="profile/displayProfile.do?actorId=${trainers.get(count).getId}"><jstl:out value="${trainers.get(count).getName()}"/></a>
+		   			<h6><b><spring:message code="request.trainer"/></b></h6>
+		   			<jstl:if test="${trainers.get(count) == null}">
+						<h6 class="text-muted font-italic"><spring:message code="request.pending"/></h6>
+					</jstl:if>
+					<jstl:if test="${trainers.get(count) != null}">
+		   				<a href="profile/displayProfile.do?actorId=${trainers.get(count).getId()}"><jstl:out value="${trainers.get(count).getName()}"/></a>
+		   			</jstl:if>
 		   		</div>
 	   		</div>
-	   		<p class="card-body">
+	   		<h5 class="card-body" style="padding-bottom: 0.5rem">
 		   		<jstl:if test="${lang == 'en'}">
 					${row.category.name }
 				</jstl:if>
@@ -83,14 +88,21 @@
 					${row.category.spanishName }
 				</jstl:if>
 				<br>
-		   		<jstl:out value="${row.tags}"/>	<br>
+		   		<jstl:out value="${row.tags}"/>
+		   	</h5>
+		   	
+	   		<div class="card-body collapse" id="collapse${count}">
 				<jstl:out value="${row.description}"></jstl:out>
-			</p>
-			<div class="card-body">
+			</div>
+
+			<div class="card-body" style="padding-top: 0">
 			   		<div class="btn-group">
 				
 					<acme:link image="eye" href="request/actor/display.do?requestId=${row.id}"/>
-					
+					<a class="btn btn-info btn-lg" data-toggle="collapse" href="#collapse${count}" role="button" aria-expanded="false" aria-controls="collapse${count}">
+					    <img class="icon-button" src="images/add1.png"/>
+					    Info
+					</a>
 					<security:authorize access="hasRole('CUSTOMER')">
 <%-- 						<acme:link href="request/customer/edit.do?requestId=${row.id}" code="offer.edit"/> --%>
 						<jstl:if test="${requestsWithOffer.contains(row)}">
@@ -98,13 +110,10 @@
 						</jstl:if>
 						
 						<jstl:set var="showDelete" value="${true}"/>
-						<jstl:forEach var="offer" items="${offersAcepted}">
-							<jstl:if test="${offer.request.id == row.id}">
+						<jstl:if test="${trainers.get(count) != null}">
 								<jstl:set var="showDelete" value="${false}"/>
-							</jstl:if> 
-						</jstl:forEach> 
+						</jstl:if>
 						<jstl:if test="${showDelete == true}">
-							<acme:link image="edit" href="request/customer/edit.do?requestId=${row.id}" type="warning"/>
 							<acme:delete href="request/customer/delete.do?requestId=${row.id}" id="${row.id}"/>
 						</jstl:if>
 					</security:authorize>
@@ -113,6 +122,7 @@
 						<acme:link href="offer/trainer/create.do?requestId=${row.id}" code="offer.create" image="deal" type="dark"/>
 					</security:authorize>
 				</div>
+			
 	   		</div>
 	   	</div>
    	</div>

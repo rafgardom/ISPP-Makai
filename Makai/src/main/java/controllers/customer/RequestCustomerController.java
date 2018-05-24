@@ -73,7 +73,7 @@ public class RequestCustomerController extends AbstractController {
 		ModelAndView result;
 		Page<Request> requests;
 		Customer customer;
-		Collection<Offer> offersAcepted;
+//		Collection<Offer> offersAcepted;
 		Collection<Request> requestsWithOffer;
 		final Integer numberNoti;
 		final ArrayList<Banner> imagesBottom;
@@ -85,7 +85,7 @@ public class RequestCustomerController extends AbstractController {
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 			customer = this.customerService.findByPrincipal();
 			requests = this.requestService.findRequestPaged(customer, page-1, nElem);
-			offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
+//			offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
 			requestsWithOffer = this.requestService.findRequestsWithOffer();
 			imagesBottom = this.bannerService.getBannerByZone("abajo");
 			
@@ -97,7 +97,7 @@ public class RequestCustomerController extends AbstractController {
 			result.addObject("requestURI", "request/customer/myList.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requests", requests.getContent());
-			result.addObject("offersAcepted", offersAcepted);
+//			result.addObject("offersAcepted", offersAcepted);
 			result.addObject("requestsWithOffer", requestsWithOffer);
 			result.addObject("imagesBottom", imagesBottom);
 			result.addObject("trainers", trainers);
