@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -133,17 +134,18 @@ public class Offer extends DomainEntity {
 		this.animal = animal;
 	}
 
+	@SuppressWarnings("deprecation")
 	static public Date getFinishMoment(final Offer offer) {
-		long ratio = 1000l * 60l * 60l * 24l;	// Un día
-		long time = offer.getStartMoment().getTime();
+		Calendar calendar;
 
-		time += ratio * offer.getDuration().getDay();
-		ratio *= 30l;	// Un mes
-		time += ratio * offer.getDuration().getMonth() + (offer.getDuration().getMonth() / 2);
-		ratio = ratio * 12l + 5l;	// Un año
-		time += ratio * offer.getDuration().getYear();
+		calendar = Calendar.getInstance();
+		calendar.setTime(offer.getStartMoment());
 
-		return new Date(time);
+		calendar.add(Calendar.DAY_OF_MONTH, offer.getDuration().getDay());
+		calendar.add(Calendar.MONTH, offer.getDuration().getMonth());
+		calendar.add(Calendar.YEAR, offer.getDuration().getYear());
+
+		return calendar.getTime();
 	}
 
 }
