@@ -78,6 +78,11 @@ public class RequestService {
 		return result;
 	}
 
+	public void simpleSave(final Request request) {
+		Assert.notNull(request);
+		this.requestRepository.save(request);
+	}
+
 	public Request save(final Request request) {
 		Assert.notNull(request);
 		Request result;

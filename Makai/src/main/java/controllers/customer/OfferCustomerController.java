@@ -127,6 +127,12 @@ public class OfferCustomerController extends AbstractController {
 			result.addObject("offerId", true);
 			result.addObject("requestId", offer.getRequest().getId());
 
+			if (offer.getRequest().getAnimal() == null && offer.getAnimal() != null) {
+				final Request request = offer.getRequest();
+				request.setAnimal(offer.getAnimal());
+				this.requestService.simpleSave(request);
+			}
+
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/");
 			result.addObject("errorMessage", "offer.pay.error");
