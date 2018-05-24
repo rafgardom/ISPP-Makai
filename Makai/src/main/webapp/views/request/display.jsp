@@ -60,7 +60,9 @@
 				<b><spring:message code="request.animal.name" />:</b>
 				<jstl:out value="${request.animal.name}"/>
 			</p>
-			<acme:link href="animal/display.do?animalId=${request.animal.id}" code="animal.view.profile" image="print" />
+			<jstl:if test="${request.animal.isHidden==false}">
+				<acme:link href="animal/display.do?animalId=${request.animal.id}" code="animal.view.profile" image="print" />
+			</jstl:if>
 		</div>
 	</div>
 	</jstl:if>

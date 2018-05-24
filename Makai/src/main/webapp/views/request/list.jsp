@@ -35,16 +35,26 @@
 		<div class="col-4">
 		<br>
 		<div class="center-div">
+			<jstl:if test="${row.getAnimal().getPicture() != null}">
 				<img src="${util.showImage(row.getAnimal().getPicture(),'interrogation')} " class="rounded-circle border border-primary" width="128px" height="128px">
+			</jstl:if>
+			<jstl:if test="${row.getAnimal().getPicture() == null}">
+				<jstl:if test="${offers.get(count).getTrainer() == null}">
+					<img src="${util.showImage(row.getAnimal().getPicture(),'interrogation')} " class="rounded-circle border border-primary" width="128px" height="128px">
+				</jstl:if>
+				<jstl:if test="${offers.get(count).getTrainer() != null}">
+					<img src="${util.showImage(offers.get(count).getAnimal().getPicture(),'interrogation')} " class="rounded-circle border border-primary" width="128px" height="128px">
+				</jstl:if>
+			</jstl:if>
 		</div>
 		</div>
 		<div class="col-4">
 				<div class="center-div">
-				<jstl:if test="${trainers.get(count) != null}">
-					<img src="${util.showImage(trainers.get(count).getPicture(),'user')} " class="rounded-circle border border-primary" width="200px" height="200px">
+				<jstl:if test="${offers.get(count) != null}">
+					<img src="${util.showImage(offers.get(count).getTrainer().getPicture(),'user')} " class="rounded-circle border border-primary" width="200px" height="200px">
 				</jstl:if>
-				<jstl:if test="${trainers.get(count) == null}">
-					<img src="${util.showImage(trainers.get(count).getPicture(),'interrogation')} " class="rounded-circle border border-primary" width="200px" height="200px">
+				<jstl:if test="${offers.get(count) == null}">
+					<img src="${util.showImage(offers.get(count).getTrainer().getPicture(),'interrogation')} " class="rounded-circle border border-primary" width="200px" height="200px">
 				</jstl:if>
 				</div>
 		</div>
@@ -67,16 +77,21 @@
 						<a><jstl:out value="${row.animal.name}"/></a>
 					</jstl:if>
 					<jstl:if test="${row.animal == null}">
-						<h6 class="text-muted font-italic"><spring:message code="request.pending"/></h6>
+						<jstl:if test="${offers.get(count).getTrainer() == null}">
+							<h6 class="text-muted font-italic"><spring:message code="request.pending"/></h6>
+						</jstl:if>
+						<jstl:if test="${offers.get(count).getTrainer() != null}">
+							<a>${offers.get(count).getAnimal().getName()}</a>
+						</jstl:if>
 					</jstl:if>
 		   		</div>
 		   		<div class="col-4">
 		   			<h6><b><spring:message code="request.trainer"/></b></h6>
-		   			<jstl:if test="${trainers.get(count) == null}">
+		   			<jstl:if test="${offers.get(count) == null}">
 						<h6 class="text-muted font-italic"><spring:message code="request.pending"/></h6>
 					</jstl:if>
-					<jstl:if test="${trainers.get(count) != null}">
-		   				<a href="profile/displayProfile.do?actorId=${trainers.get(count).getId()}"><jstl:out value="${trainers.get(count).getName()}"/></a>
+					<jstl:if test="${offers.get(count) != null}">
+		   				<a href="profile/displayProfile.do?actorId=${offers.get(count).getTrainer().getId()}"><jstl:out value="${offers.get(count).getTrainer().getName()}"/></a>
 		   			</jstl:if>
 		   		</div>
 	   		</div>
@@ -110,7 +125,7 @@
 						</jstl:if>
 						
 						<jstl:set var="showDelete" value="${true}"/>
-						<jstl:if test="${trainers.get(count) != null}">
+						<jstl:if test="${offers.get(count) != null}">
 								<jstl:set var="showDelete" value="${false}"/>
 						</jstl:if>
 						<jstl:if test="${showDelete == true}">

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Category;
+import domain.Offer;
 import domain.Trainer;
 
 @Repository
@@ -19,6 +20,6 @@ public interface TrainerRepository extends JpaRepository<Trainer, Integer> {
 	@Query("select t.trainer from Training t where t.category = ?1")
 	Collection<Trainer> findTrainerSameCategory(Category category);
 
-	@Query("select o.trainer from Offer o where o.isAccepted = true and o.request.id = ?1")
-	Trainer findTrainerByAcceptedRequest(int RequestId);
+	@Query("select o from Offer o where o.isAccepted = true and o.request.id = ?1")
+	Offer findTrainerByAcceptedRequest(int RequestId);
 }

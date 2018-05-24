@@ -2,7 +2,6 @@
 package controllers.trainer;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,8 @@ import services.RequestService;
 import services.TrainerService;
 import controllers.AbstractController;
 import domain.Banner;
+import domain.Offer;
 import domain.Request;
-import domain.Trainer;
 
 @Controller
 @RequestMapping("/request/trainer")
@@ -36,7 +35,7 @@ public class RequestTrainerController extends AbstractController {
 
 	@Autowired
 	private BannerService		bannerService;
-	
+
 	@Autowired
 	private TrainerService		trainerService;
 
@@ -49,28 +48,27 @@ public class RequestTrainerController extends AbstractController {
 	// List -------------------------------------------------------------------		
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(defaultValue="1") final int page, @RequestParam(defaultValue="5") final int nElem) {
+	public ModelAndView list(@RequestParam(defaultValue = "1") final int page, @RequestParam(defaultValue = "5") final int nElem) {
 		ModelAndView result;
 		Page<Request> requests;
 		final Integer numberNoti;
 		final ArrayList<Banner> imagesBottom;
-		List<Trainer> trainers = new ArrayList<Trainer>();
+		List<Offer> offers = new ArrayList<Offer>();
 		try {
-			requests = this.requestService.findRequestsNotAcceptedPaged(page-1,nElem);
+			requests = this.requestService.findRequestsNotAcceptedPaged(page - 1, nElem);
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 
 			imagesBottom = this.bannerService.getBannerByZone("abajo");
-			
-			if(requests.getContent().size()>0){
-				trainers = trainerService.findTrainersByAcceptedsRequests(requests.getContent());
-			}
-		
+
+			if (requests.getContent().size() > 0)
+				offers = this.trainerService.findTrainersByAcceptedsRequests(requests.getContent());
+
 			result = new ModelAndView("request/list");
 			result.addObject("requestURI", "request/trainer/list.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requests", requests.getContent());
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("trainers", trainers);
+			result.addObject("offers", offers);
 			result.addObject("nElem", nElem);
 			result.addObject("pageNumbers", requests.getTotalPages());
 			result.addObject("page", page);

@@ -30,7 +30,6 @@ import domain.Category;
 import domain.Customer;
 import domain.Offer;
 import domain.Request;
-import domain.Trainer;
 import forms.RequestForm;
 
 @Controller
@@ -43,7 +42,7 @@ public class RequestCustomerController extends AbstractController {
 
 	@Autowired
 	private CustomerService		customerService;
-	
+
 	@Autowired
 	private TrainerService		trainerService;
 
@@ -69,38 +68,36 @@ public class RequestCustomerController extends AbstractController {
 	// List ---------------------------------------------------------------
 
 	@RequestMapping(value = "/myList", method = RequestMethod.GET)
-	public ModelAndView listByCustomer(@RequestParam(defaultValue="1") final int page, @RequestParam(defaultValue="5") int nElem) {
+	public ModelAndView listByCustomer(@RequestParam(defaultValue = "1") final int page, @RequestParam(defaultValue = "5") final int nElem) {
 		ModelAndView result;
 		Page<Request> requests;
 		Customer customer;
-//		Collection<Offer> offersAcepted;
+		//		Collection<Offer> offersAcepted;
 		Collection<Request> requestsWithOffer;
 		final Integer numberNoti;
 		final ArrayList<Banner> imagesBottom;
-		List<Trainer> trainers = new ArrayList<Trainer>();
-	
-		
+		List<Offer> offers = new ArrayList<Offer>();
+
 		try {
 
 			numberNoti = this.notificationService.findNotificationWithoutRead();
 			customer = this.customerService.findByPrincipal();
-			requests = this.requestService.findRequestPaged(customer, page-1, nElem);
-//			offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
+			requests = this.requestService.findRequestPaged(customer, page - 1, nElem);
+			//			offersAcepted = this.offerService.findAcceptedOffersByCustomer(customer);
 			requestsWithOffer = this.requestService.findRequestsWithOffer();
 			imagesBottom = this.bannerService.getBannerByZone("abajo");
-			
-			if(requests.getContent().size()>0){
-				trainers = trainerService.findTrainersByAcceptedsRequests(requests.getContent());
-			}
-			
+
+			if (requests.getContent().size() > 0)
+				offers = this.trainerService.findTrainersByAcceptedsRequests(requests.getContent());
+
 			result = new ModelAndView("request/myList");
 			result.addObject("requestURI", "request/customer/myList.do");
 			result.addObject("numberNoti", numberNoti);
 			result.addObject("requests", requests.getContent());
-//			result.addObject("offersAcepted", offersAcepted);
+			//			result.addObject("offersAcepted", offersAcepted);
 			result.addObject("requestsWithOffer", requestsWithOffer);
 			result.addObject("imagesBottom", imagesBottom);
-			result.addObject("trainers", trainers);
+			result.addObject("offers", offers);
 			result.addObject("nElem", nElem);
 			result.addObject("pageNumbers", requests.getTotalPages());
 			result.addObject("page", page);

@@ -260,12 +260,11 @@ public class TrainerService {
 	public Collection<Trainer> findTrainerSameCategory(final Category category) {
 		return this.trainerRepository.findTrainerSameCategory(category);
 	}
-	
-	public List<Trainer> findTrainersByAcceptedsRequests(List<Request> requests) {
-		ArrayList<Trainer> res = new ArrayList<Trainer>();
-		for (Request r: requests) {
-			res.add(trainerRepository.findTrainerByAcceptedRequest(r.getId()));
-		}
+
+	public List<Offer> findTrainersByAcceptedsRequests(final List<Request> requests) {
+		final ArrayList<Offer> res = new ArrayList<Offer>();
+		for (final Request r : requests)
+			res.add(this.trainerRepository.findTrainerByAcceptedRequest(r.getId()));
 		return res;
 	}
 }

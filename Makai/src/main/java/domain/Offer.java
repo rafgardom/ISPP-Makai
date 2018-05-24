@@ -139,7 +139,7 @@ public class Offer extends DomainEntity {
 
 		time += ratio * offer.getDuration().getDay();
 		ratio *= 30l;	// Un mes
-		time += ratio * offer.getDuration().getMonth();
+		time += ratio * offer.getDuration().getMonth() + (offer.getDuration().getMonth() / 2);
 		ratio = ratio * 12l + 5l;	// Un año
 		time += ratio * offer.getDuration().getYear();
 

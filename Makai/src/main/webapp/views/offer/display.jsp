@@ -58,9 +58,9 @@
 				<b><spring:message code="offer.animal.name" />:</b>
 				<jstl:out value="${offer.animal.name}"/>
 			</p>
-			
-			<acme:link href="animal/display.do?animalId=${offer.animal.id}" code="view.animal" image="print"/>
-	
+			<jstl:if test="${offer.animal.isHidden==false}">
+				<acme:link href="animal/display.do?animalId=${offer.animal.id}" code="view.animal" image="print"/>
+			</jstl:if>
 	  	</div>
 	</div>
 	<div class="card shadow">
