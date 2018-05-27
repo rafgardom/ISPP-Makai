@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.AnimalService;
 import services.BannerService;
 import services.NotificationService;
@@ -46,6 +48,9 @@ public class TravelController extends AbstractController {
 
 	@Autowired
 	private VehicleService		vehicleService;
+
+	@Autowired
+	private ActorService		actorService;
 
 	@Autowired
 	private AnimalService		animalService;
@@ -310,6 +315,7 @@ public class TravelController extends AbstractController {
 		final boolean passengers = false;
 		boolean extraPassengers = false;
 		final Transporter principal;
+		final boolean coordinateError = false;
 		boolean vehicleSeats = false;
 		Integer freeSeatsAnimalForm, freeSeatsHumanForm;
 		final Collection<Transporter> transporters = this.transporterService.findPassengersByTravel(travel.getId());
@@ -404,6 +410,17 @@ public class TravelController extends AbstractController {
 			//				error = true;
 			//			}
 
+			final Travel aux = this.travelService.findOne(travelForm.getId());
+			Assert.isTrue(aux.getTransporterOwner().equals(this.actorService.findByPrincipal()));
+
+			//			if (aux.getDestination() != travelForm.getDestination() || aux.getOrigin() != travelForm.getOrigin()) {
+			//				coordinateError = true;
+			//				throw new IllegalArgumentException();
+			//			}
+
+			travelForm.setOrigin(aux.getOrigin());
+			travelForm.setDestination(aux.getDestination());
+
 			if (error)
 				throw new IllegalArgumentException();
 
@@ -432,6 +449,8 @@ public class TravelController extends AbstractController {
 				result = this.createModelAndView(travelForm, "travel.extraPassengers.error");
 			else if (vehicleSeats)
 				result = this.createModelAndView(travelForm, "travel.vehicleSeats.error");
+			else if (coordinateError)
+				result = this.createModelAndView(travelForm, "travel.coordinate.error");
 			else
 				result = this.createModelAndView(travelForm, "travel.commit.error");
 		}

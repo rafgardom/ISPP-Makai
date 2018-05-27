@@ -29,35 +29,37 @@
 <form:hidden path="id"/>
 <form:hidden path="principalPassenger"/>
 <form:hidden path="animals"/>
+
 		<br />
 		
 		<jstl:if test="${errorMessage != null}">
 			<acme:error code="${errorMessage}"/>
 		</jstl:if>
-		
-		<div class="row">
-		
-			<div class="col-md-5">
-				<h3><spring:message code="travel.origin" /></h3>
-				<br />
-				<acme:textbox code="travel.country" path="origin.country" mandatory="true" />
-				<acme:textbox code="travel.state" path="origin.state" mandatory="false" />
-				<acme:textbox code="travel.province" path="origin.province" mandatory="false" />
-				<acme:textbox code="travel.city" path="origin.city" mandatory="true" />
-				<acme:textbox code="travel.zipcode" path="origin.zip_code" mandatory="true" />
-
-			</div>
-			<div class="offset-md-1 col-md-5">
-				<h3><spring:message code="travel.destination" /></h3>
-				<br />
-				<acme:textbox code="travel.country" path="destination.country" mandatory="true" />
-				<acme:textbox code="travel.state" path="destination.state" mandatory="false" />
-				<acme:textbox code="travel.province" path="destination.province" mandatory="false" />
-				<acme:textbox code="travel.city" path="destination.city" mandatory="true" />
-				<acme:textbox code="travel.zipcode" path="destination.zip_code" mandatory="true" />
+		<jstl:if test="${travelForm.id == 0 }">
+			<div class="row">
 			
-			</div>
-	</div>
+				<div class="col-md-5">
+					<h3><spring:message code="travel.origin" /></h3>
+					<br />
+					<acme:textbox code="travel.country" path="origin.country" mandatory="true" />
+					<acme:textbox code="travel.state" path="origin.state" mandatory="false" />
+					<acme:textbox code="travel.province" path="origin.province" mandatory="false" />
+					<acme:textbox code="travel.city" path="origin.city" mandatory="true" />
+					<acme:textbox code="travel.zipcode" path="origin.zip_code" mandatory="true" />
+	
+				</div>
+				<div class="offset-md-1 col-md-5">
+					<h3><spring:message code="travel.destination" /></h3>
+					<br />
+					<acme:textbox code="travel.country" path="destination.country" mandatory="true" />
+					<acme:textbox code="travel.state" path="destination.state" mandatory="false" />
+					<acme:textbox code="travel.province" path="destination.province" mandatory="false" />
+					<acme:textbox code="travel.city" path="destination.city" mandatory="true" />
+					<acme:textbox code="travel.zipcode" path="destination.zip_code" mandatory="true" />
+				
+				</div>
+		</div>
+	</jstl:if>
 	<br>
 	<h3><spring:message code="travel.details" /></h3>
 	<div class="row">
