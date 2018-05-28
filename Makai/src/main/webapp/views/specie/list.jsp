@@ -17,6 +17,8 @@
 <jstl:set var="i" value="${0}"></jstl:set>
 <div class="table-responsive">
 <display:table name="species" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
+
+	<acme:emptyMsg/>
 	
 	<jstl:if test="${lang == 'es'}">
 		<acme:column code="specie.type" property="typeSpa" sortable="true"/>

@@ -31,6 +31,8 @@
 <h2 class="text-center"><jstl:out value="${customersHeader}"/></h2>
 <div class="table-responsive">
 <display:table name="customers" id="row" requestURI="${requestURI }" pagesize="10" class="displaytag">
+
+	<acme:emptyMsg/>
 	
 	<acme:column code="administrator.actor.username" property="userAccount.username" sortable="true"/>
 	<acme:column code="administrator.actor.name" property="name"/>	

@@ -11,6 +11,9 @@
 
 <div class="table-responsive">
 <display:table name="notifications" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
+
+	<acme:emptyMsg/>
+	
 	<display:column>
 	<jstl:if test="${!row.isRead}">
 		<img src="images/new.png" height="45rem"/>

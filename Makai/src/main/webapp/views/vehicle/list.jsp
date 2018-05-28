@@ -10,6 +10,8 @@
 <jstl:set var="i" value="0"/>
 <div class="table-responsive">
 <display:table name="vehicles" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
+
+	<acme:emptyMsg/>
 	
 	<%@ page import="org.springframework.context.i18n.LocaleContextHolder" %>
 	<jstl:set var="lang" value="<%=LocaleContextHolder.getLocale()%>"/>

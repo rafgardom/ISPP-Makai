@@ -9,6 +9,8 @@
 
 <div class="table-responsive">
 <display:table name="milestones" id="row" pagesize="10" requestURI="${RequestURI}" class="displaytag">
+
+	<acme:emptyMsg/>
 	
 
 	<acme:column code="milestone.title" property="title" sortable="true"/>

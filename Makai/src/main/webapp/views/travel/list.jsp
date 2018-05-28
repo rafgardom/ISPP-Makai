@@ -10,6 +10,8 @@
 <div class="table-responsive">
 <display:table name="travels" id="row" pagesize="10" requestURI="${requestURI}" class="displaytag">
 
+	<acme:emptyMsg/>
+
 	<jstl:set var="estilo" value="normal" />
 	<jstl:if test="${principal.id == row.transporterOwner.id}">
 		<jstl:set var="estilo" value="propietario" />

@@ -12,6 +12,8 @@
 <jstl:set var = "count" value ="${0}"></jstl:set>
 
 <display:table name="offers" id="row" pagesize="5" requestURI="${requestURI}" class="displaytag">
+
+	<acme:emptyMsg/>
 	
 	<acme:column code="offer.startMoment" property="startMoment" sortable="true" format="{0,date,dd/MM/yyyy}"/>
 	<acme:column code="offer.coordinates.city" property="destination.city" sortable="true"/>
