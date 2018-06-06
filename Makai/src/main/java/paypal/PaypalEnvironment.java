@@ -30,10 +30,10 @@ import com.paypal.base.rest.PayPalResource;
 public class PaypalEnvironment {
 
 	// Replace with your application client ID and secret
-	String						clientId		= "AT2FM6lWhqSaCllksuML3kuqf0ZZgW0sWgcSmAFejFBa-Ysdrw9oAhV6ejngMfeI-PirlCdVyLOGZsN4";
-	String						clientSecret	= "EBHkYjQTtg36crx7aWag7HBi4iYSJJyKcInS27MvbWwFN1SJJOVQuU87AQ4HG3PRCSPw58NO4OpY8bw3";
+	String						clientId		= "AVZo8Ib0q8ErpMgCMefiwlV-hhR6rEEQElLadcJFI5xQlvWa8FRKB96oPbyUEIbotyh6JrRqOURuiyX3";
+	String						clientSecret	= "EHVrZ6zPrmkPR-TnbGObIArMtdTQEvRLGldd8lfG2Kq1QBcYpwknxc62PYI6cLzxbJA10FxLxSONy4Kc";
 
-	APIContext					apiContext		= new APIContext(this.clientId, this.clientSecret, "live");
+	APIContext					apiContext		= new APIContext(this.clientId, this.clientSecret, "sandbox");
 	Map<String, String>			map				= new HashMap<String, String>();
 
 	private static final Logger	LOGGER			= Logger.getLogger(PaypalEnvironment.class);
