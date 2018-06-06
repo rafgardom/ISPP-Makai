@@ -174,7 +174,7 @@ public class PaypalEnvironment {
 
 			// ### Items
 			final Item item = new Item();
-			item.setName("Training/Entrenamiento").setQuantity("1").setCurrency("EUR").setPrice(finalPrice.toString());
+			item.setName("Makai service").setQuantity("1").setCurrency("EUR").setPrice(finalPrice.toString());
 			final ItemList itemList = new ItemList();
 			final List<Item> items = new ArrayList<Item>();
 			items.add(item);
