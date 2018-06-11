@@ -213,7 +213,6 @@ public class AnimalController extends AbstractController {
 
 			result.addObject("principal", actor);
 			result.addObject("animal", animal);
-			result.addObject("isTrainer", !checkA);
 			result.addObject("specie", specie);
 			result.addObject("animalImage", image);
 			result.addObject("numberNoti", numberNoti);

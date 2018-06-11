@@ -124,11 +124,11 @@
 <br>
 
 <div class="center-div">
-	<jstl:if test="${isTrainer}">
+	<security:authorize access="hasRole('TRAINER')">
 		<acme:link href="request/trainer/list.do" code="animal.goBack" image="arrow_left"/>
-	</jstl:if>
-	<jstl:if test="${!isTrainer}">
+	</security:authorize>
+	<security:authorize access="hasAnyRole('CUSTOMER', 'ANIMALSHELTER','ADMIN')">
 		<acme:link href="animal/list.do" code="animal.goBack" image="arrow_left"/>
-	</jstl:if>
+	</security:authorize>
 </div>
 
